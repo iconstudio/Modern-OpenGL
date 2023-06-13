@@ -12,7 +12,7 @@ endif()
 project ("ModernGlut")
 
 # 이 프로젝트의 실행 파일에 소스를 추가합니다.
-add_executable (ModernGlut "OpenGL.cpp" "OpenGL.h")
+add_executable (ModernGlut "test/OpenGL.cpp" "test/OpenGL.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ModernGlut PROPERTY CXX_STANDARD 23)
