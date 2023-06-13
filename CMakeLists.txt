@@ -12,10 +12,11 @@ endif()
 project ("ModernGlut")
 
 # 이 프로젝트의 실행 파일에 소스를 추가합니다.
-add_executable (ModernGlut "test/OpenGL.cpp" "test/OpenGL.h")
+add_executable (ModernGlut "test/OpenGL.cpp" "test/OpenGL.h" "src/_internal.ixx")
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET ModernGlut PROPERTY CXX_STANDARD 23)
-endif()
+set_target_properties(ModernGlut PROPERTIES LINKER_LANGUAGE CXX)
+set_property(TARGET ModernGlut PROPERTY CXX_STANDARD 23)
+set_property(TARGET ModernGlut PROPERTY CXX_EXTENSIONS ON)
+set_property(TARGET ModernGlut PROPERTY CXX_SCAN_FOR_MODULES ON)
 
 # TODO: 필요한 경우 테스트를 추가하고 대상을 설치합니다.

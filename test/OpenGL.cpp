@@ -1,12 +1,9 @@
 ﻿// OpenGL.cpp : 애플리케이션의 진입점을 정의합니다.
 //
-
 #include "OpenGL.h"
-
-using namespace std;
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	std::cout << "Hello CMake." << std::endl;
 	return 0;
 }
