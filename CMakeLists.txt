@@ -12,7 +12,7 @@ endif()
 project ("ModernGlut")
 
 # 이 프로젝트의 실행 파일에 소스를 추가합니다.
-add_executable (ModernGlut "test/OpenGL.cpp" "test/OpenGL.h" "src/_internal.ixx")
+add_executable (ModernGlut "test/OpenGL.cpp" "test/OpenGL.h" "src/_internal.ixx" "src/Callbacks.ixx" "src/Types.ixx" "src/WindowDefinitions.ixx" "src/Commons.ixx")
 
 set_target_properties(ModernGlut PROPERTIES LINKER_LANGUAGE CXX)
 set_property(TARGET ModernGlut PROPERTY CXX_STANDARD 23)
