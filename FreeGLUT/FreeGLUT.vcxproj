@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="FreeGLUT.ixx" />
     <ClCompile Include="Keycodes.ixx" />
     <ClCompile Include="KeyModifiers.ixx" />
     <ClCompile Include="main.cpp" />
