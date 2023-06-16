@@ -20,3 +20,6 @@
 //#pragma comment (lib, "gdi32.lib")
 //#pragma comment (lib, "winmm.lib")
 //#pragma comment (lib, "user32.lib")
+
+#define EXT_C extern "C"
+#define EXT_X extern "C++"
