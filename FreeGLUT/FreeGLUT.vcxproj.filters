@@ -29,4 +29,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\lib\Debug\freeglutd.lib">
+      <Filter>리소스 파일</Filter>
+    </Library>
+    <Library Include="..\lib\Release\freeglut.lib">
+      <Filter>리소스 파일</Filter>
+    </Library>
+  </ItemGroup>
 </Project>
