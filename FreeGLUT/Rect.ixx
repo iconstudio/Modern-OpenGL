@@ -35,8 +35,6 @@ export extern "C" namespace glut
 		int x;
 		int y;
 		int w;
-		int h
+		int h;
 	};
-
-	inline constexpr Rect rr = Rect{ 0, 1, 2, 3 };
 }

@@ -22,4 +22,6 @@ export namespace glut
 	void Initialize(const DisplayModes& mode, const int& x, const int& y, default_resoulution_t) noexcept;
 	void Initialize(const DisplayModes& mode, const int& w, const int& h) noexcept;
 	void Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept;
+
+	void Start();
 }
