@@ -1,6 +1,6 @@
 export module Glut.IO.MouseButtons;
 
-export namespace gl::io
+export namespace glut::io
 {
 	enum class [[nodiscard]] MouseButtons
 	{

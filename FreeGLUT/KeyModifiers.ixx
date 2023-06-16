@@ -1,6 +1,6 @@
 export module Glut.IO.Keycodes:Modifier;
 
-export namespace gl::io
+export namespace glut::io
 {
 	/// <summary>
 	/// glutGetModifiers

@@ -1,7 +1,7 @@
 export module Glut.IO.Keycodes;
 export import :Modifier;
 
-export namespace gl::io
+export namespace glut::io
 {
 	enum class [[nodiscard]] Keycodes : int
 	{
