@@ -2,7 +2,7 @@ export module Glut.Keycodes;
 
 export namespace gl
 {
-	enum class Keycodes : int
+	enum class [[nodiscard]] Keycodes : int
 	{
 		BACKSPACE = 0x0008, TAB = 0x0009,
 		Space = ' ',
