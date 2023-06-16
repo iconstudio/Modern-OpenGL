@@ -6,9 +6,14 @@ export import Glut.DisplayModes;
 
 export namespace glut
 {
-	void glutInit(int* pargc, char** argv);
-	void glutInitWindowPosition(int x, int y);
-	void glutInitWindowSize(int width, int height);
-	void glutInitDisplayMode(DisplayModes displayMode);
-	void glutInitDisplayString(const char* displayMode);
+	struct default_position_t { constexpr default_position_t() noexcept = default; };
+	struct default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
+
+	constexpr default_position_t default_position{};
+	constexpr default_resoulution_t default_resoulution{};
+
+	void Initialize(const DisplayModes& mode, const int& x, const int& y, const int& w, const int& h) noexcept;
+	void Initialize(const DisplayModes& mode, default_position_t, const int& w, const int& h) noexcept;
+	void Initialize(const DisplayModes& mode, const int& x, const int& y, default_resoulution_t) noexcept;
+	void Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept;
 }
