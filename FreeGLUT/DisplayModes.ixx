@@ -1,4 +1,4 @@
-export module Glut.Display:Modes;
+export module Glut.DisplayModes;
 
 export namespace glut::display
 {
