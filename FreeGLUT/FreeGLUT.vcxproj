@@ -180,6 +180,7 @@
   <ItemGroup>
     <ClCompile Include="Keycodes.ixx" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
