@@ -1,6 +1,6 @@
 export module Glut.DisplayModes;
 
-export namespace glut::display
+export namespace glut
 {
 	enum class [[nodiscard]] DisplayModes : int
 	{
