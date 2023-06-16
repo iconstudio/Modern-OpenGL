@@ -23,3 +23,6 @@
 
 #define EXT_C extern "C"
 #define EXT_X extern "C++"
+
+#define IMPORTANT_CLASS(name) class [[nodiscard]] name
+#define IMPORTANT_STRUCT(name) struct [[nodiscard]] name
