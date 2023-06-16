@@ -49,6 +49,9 @@
     <ClCompile Include="FreeGlut.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Rect.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\lib\Debug\freeglutd.lib">

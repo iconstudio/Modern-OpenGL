@@ -186,6 +186,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Rect.ixx" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\lib\Debug\freeglutd.lib" />
