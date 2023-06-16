@@ -40,6 +40,9 @@
     <ClCompile Include="KeyModifiers.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DisplayModes.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\lib\Debug\freeglutd.lib">
