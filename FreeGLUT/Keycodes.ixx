@@ -1,4 +1,5 @@
 export module Glut.IO.Keycodes;
+export import :Modifier;
 
 export namespace gl::io
 {
