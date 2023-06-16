@@ -1,6 +1,6 @@
 export module Glut.Keycodes;
 
-export namespace gl
+export namespace gl::io
 {
 	enum class [[nodiscard]] Keycodes : int
 	{
