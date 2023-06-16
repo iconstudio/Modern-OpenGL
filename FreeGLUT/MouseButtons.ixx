@@ -1,4 +1,4 @@
-export module Glut.MouseButtons;
+export module Glut.IO.MouseButtons;
 
 export namespace gl::io
 {

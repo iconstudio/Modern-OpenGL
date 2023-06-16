@@ -1,4 +1,4 @@
-export module Glut.Keycodes;
+export module Glut.IO.Keycodes;
 
 export namespace gl::io
 {
