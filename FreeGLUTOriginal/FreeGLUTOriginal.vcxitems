@@ -16,12 +16,12 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_callback_macros.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_gl2.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)fg_init.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_init.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal_mswin.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_teapot_data.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_version.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ext.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_std.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ucall.h" />
@@ -41,7 +41,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_gamemode_mswin.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_geometry.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_gl2.c" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)fg_init.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_init.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_init_mswin.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_input_devices.c" />
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_input_devices_mswin.c" />

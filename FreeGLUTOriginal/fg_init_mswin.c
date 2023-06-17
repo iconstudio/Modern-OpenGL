@@ -26,8 +26,8 @@
  */
 
 #define FREEGLUT_BUILDING_LIB
-#include "freeglut.h"
-#include "../fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 
 
 

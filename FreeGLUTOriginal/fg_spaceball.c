@@ -8,8 +8,8 @@
  */
 
 
-#include "freeglut.h"
-#include "fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 
 #if( !_WIN32 || _WIN32_WINNT >= 0x0501)
 

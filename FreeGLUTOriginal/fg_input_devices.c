@@ -28,8 +28,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "freeglut.h"
-#include "fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 
 typedef struct _serialport SERIALPORT;
 

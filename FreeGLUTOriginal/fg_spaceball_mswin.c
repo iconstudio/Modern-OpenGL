@@ -38,9 +38,9 @@
 
 #if(_WIN32_WINNT >= 0x0501)
 
-#include "freeglut.h"
+#include "freeglut.hpp"
 #include <stdlib.h>
-#include "../fg_internal.h"
+#include "fg_internal.hpp"
 
 enum {
     SPNAV_EVENT_ANY,

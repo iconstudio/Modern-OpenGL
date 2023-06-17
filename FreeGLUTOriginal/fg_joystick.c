@@ -31,8 +31,8 @@
  *  Many thanks for Steve Baker for permission to pull from that library.
  */
 
-#include "freeglut.h"
-#include "fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 #ifdef HAVE_SYS_PARAM_H
 #    include <sys/param.h>
 #endif

@@ -23,8 +23,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "freeglut.h"
-#include "fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 #include "fg_gl2.h"
 
 #ifndef GL_ES_VERSION_2_0

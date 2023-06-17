@@ -57,15 +57,12 @@
 /* -- FIXED CONFIGURATION LIMITS ------------------------------------------- */
 #define FREEGLUT_MAX_MENUS            3
 
-import <cstdio>;
-import <cstring>;
-import <cmath>;
-import <cstdio>;
-import <stdlib>;
-import <cstdarg>;
-import <ctime>;
-import <limits>;
-import <numbers>;
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <time.h>
 #define strdup   _strdup
 
 /* M_PI is non-standard (defined by BSD, not ISO-C) */

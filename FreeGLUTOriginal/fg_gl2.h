@@ -26,8 +26,8 @@
 #ifndef  FG_GL2_H
 #define  FG_GL2_H
 
-#include "freeglut.h"
-#include "fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 
 #ifdef GL_ES_VERSION_2_0
 /* Use existing functions on GLES 2.0 */

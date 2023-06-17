@@ -22,8 +22,8 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#include "freeglut.h"
-#include "../fg_internal.h"
+#include "freeglut.hpp"
+#include "fg_internal.hpp"
 
 void fgPlatformSetColor(int idx, float r, float g, float b)
 {
