@@ -14,10 +14,57 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_callback_macros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_gl2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_init.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal_mswin.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_teapot_data.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_version.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ext.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_std.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ucall.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)glut.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_callbacks.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_cmap_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_cursor.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_cursor_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_display.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_display_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_ext.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_ext_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_font.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_font_data.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_gamemode.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_gamemode_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_geometry.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_gl2.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_init.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_init_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_input_devices.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_input_devices_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_joystick.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_joystick_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_main.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_main_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_menu.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_menu_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_misc.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_overlay.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_spaceball.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_spaceball_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_state.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_state_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_stroke_mono_roman.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_stroke_roman.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_structure.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_structure_mswin.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_teapot.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_videoresize.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_window.c" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)fg_window_mswin.c" />
   </ItemGroup>
 </Project>
