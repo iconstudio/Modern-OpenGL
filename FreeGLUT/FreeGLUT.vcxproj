@@ -185,10 +185,6 @@
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="_Internal.ixx" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\lib\Debug\freeglutd.lib" />
-    <Library Include="..\lib\Release\freeglut.lib" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

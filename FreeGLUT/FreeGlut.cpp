@@ -13,11 +13,6 @@ void glut::Initialize(const DisplayModes& mode, const int& x, const int& y, cons
 	window_rect.w = w;
 	window_rect.h = h;
 	window_mode = mode;
-
-	glutInitDisplayMode(static_cast<unsigned int>(mode));
-	glutInitWindowPosition(x, y);
-	glutInitWindowSize(w, h);
-	glutCreateWindow("OpenGL");
 }
 
 void glut::Initialize(const DisplayModes& mode, default_position_t, const int& w, const int& h) noexcept
