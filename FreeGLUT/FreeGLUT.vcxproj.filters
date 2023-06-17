@@ -16,6 +16,15 @@
     <Filter Include="헤더 파일\Original">
       <UniqueIdentifier>{9845822c-52c3-4709-ba74-e85c6673a072}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Device">
+      <UniqueIdentifier>{ebc17173-a354-4a16-8ab3-e146d1825e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Utility">
+      <UniqueIdentifier>{aa861b64-4006-44be-af4b-5a7de359797d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Definitions">
+      <UniqueIdentifier>{15db4f74-cb17-43c3-8ef5-379bcced7713}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stdafx.inl">
@@ -34,15 +43,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Keycodes.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MouseButtons.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyModifiers.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DisplayModes.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -53,16 +53,25 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Rect.ixx">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseButtons.ixx">
+      <Filter>소스 파일\Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyModifiers.ixx">
+      <Filter>소스 파일\Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="Keycodes.ixx">
+      <Filter>소스 파일\Definitions</Filter>
     </ClCompile>
     <ClCompile Include="_Internal.ixx">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Display.ixx">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Window.ixx">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
