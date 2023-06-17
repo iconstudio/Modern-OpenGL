@@ -32,6 +32,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		FreeGLUTOriginal\FreeGLUTOriginal.vcxitems*{4a52c928-093b-497e-9d66-15584d7892c8}*SharedItemsImports = 9
-		FreeGLUTOriginal\FreeGLUTOriginal.vcxitems*{4c8fdd49-f3da-4897-bd44-0d7afec2494d}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
