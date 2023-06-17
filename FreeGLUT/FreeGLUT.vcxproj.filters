@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\Original">
+      <UniqueIdentifier>{9845822c-52c3-4709-ba74-e85c6673a072}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stdafx.inl">
@@ -51,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="Rect.ixx">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="_Internal.ixx">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
