@@ -575,16 +575,14 @@ enum
 	TOTAL_CALLBACKS
 };
 
-
 /* This structure holds the OpenGL rendering context for all the menu windows */
-typedef struct tagSFG_MenuContext SFG_MenuContext;
-struct tagSFG_MenuContext
+typedef struct
 {
 	SFG_WindowContextType MContext;       /* The menu window's WGL context   */
-};
+} SFG_MenuContext;
 
 /* This structure describes a menu */
-struct SFG_Menu
+typedef struct
 {
 	SFG_Node            Node;
 	void* UserData;     /* User data passed back at callback   */
@@ -603,10 +601,10 @@ struct SFG_Menu
 	SFG_MenuEntry* ActiveEntry;  /* Currently active entry in the menu  */
 	SFG_Window* Window;       /* Window for menu                     */
 	SFG_Window* ParentWindow; /* Window in which the menu is invoked */
-};
+} SFG_Menu;
 
 /* This is a menu entry */
-struct SFG_MenuEntry
+typedef struct
 {
 	SFG_Node            Node;
 	int                 ID;                     /* The menu entry ID (local) */
@@ -615,7 +613,7 @@ struct SFG_MenuEntry
 	SFG_Menu* SubMenu;                /* Optional sub-menu tree    */
 	GLboolean           IsActive;               /* Is the entry highlighted? */
 	int                 Width;                  /* Label's width in pixels   */
-};
+} SFG_MenuEntry;
 
 /*
  * A window, making part of freeglut windows hierarchy.
@@ -623,7 +621,7 @@ struct SFG_MenuEntry
  *
  * NOTE that ActiveMenu is set to menu itself if the window is a menu.
  */
-struct SFG_Window
+typedef struct
 {
 	SFG_Node            Node;
 	int                 ID;                     /* Window's ID number        */
@@ -641,17 +639,17 @@ struct SFG_Window
 	SFG_List            Children;               /* The subwindows d.l. list  */
 
 	GLboolean           IsMenu;                 /* Set to 1 if we are a menu */
-};
+} SFG_Window;
 
 /* A linked list structure of windows */
-struct SFG_WindowList
+typedef struct
 {
 	SFG_Node node;
 	SFG_Window* window;
-};
+} SFG_WindowList;
 
 /* This holds information about all the windows, menus etc. */
-struct SFG_Structure
+typedef struct
 {
 	SFG_List        Windows;         /* The global windows list            */
 	SFG_List        Menus;           /* The global menus list              */
@@ -666,7 +664,7 @@ struct SFG_Structure
 
 	int              WindowID;       /* The window ID for the next window to be created */
 	int              MenuID;         /* The menu ID for the next menu to be created */
-};
+} SFG_Structure;
 
 /*
  * This structure is used for the enumeration purposes.
@@ -674,16 +672,17 @@ struct SFG_Structure
  * a structure containing enumerator's contents and custom
  * data, then casting its pointer to (SFG_Enumerator *).
  */
-struct SFG_Enumerator
+typedef struct
 {
 	GLboolean   found;                          /* Used to terminate search  */
 	void* data;                           /* Custom data pointer       */
-};
+} SFG_Enumerator;
+
 typedef void (*FGCBWindowEnumerator)(SFG_Window*, SFG_Enumerator*);
 typedef void (*FGCBMenuEnumerator)(SFG_Menu*, SFG_Enumerator*);
 
 /* The bitmap font structure */
-struct SFG_Font
+typedef struct
 {
 	char* Name;         /* The source font name             */
 	int             Quantity;     /* Number of chars in font          */
@@ -691,35 +690,35 @@ struct SFG_Font
 	const GLubyte** Characters;   /* The characters mapping           */
 
 	float           xorig, yorig; /* Relative origin of the character */
-};
+} SFG_Font;
 
 /* The stroke font structures */
 
-struct SFG_StrokeVertex
+typedef struct
 {
 	GLfloat         X, Y;
-};
+} SFG_StrokeVertex;
 
-struct SFG_StrokeStrip
+typedef struct
 {
 	int             Number;
 	const SFG_StrokeVertex* Vertices;
-};
+} SFG_StrokeStrip;
 
-struct SFG_StrokeChar
+typedef struct
 {
 	GLfloat         Right;
 	int             Number;
 	const SFG_StrokeStrip* Strips;
-};
+} SFG_StrokeChar;
 
-struct SFG_StrokeFont
+typedef struct
 {
 	char* Name;                       /* The source font name      */
 	int             Quantity;                   /* Number of chars in font   */
 	GLfloat         Height;                     /* Height of the characters  */
 	const SFG_StrokeChar** Characters;          /* The characters mapping    */
-};
+} SFG_StrokeFont;
 
 /* -- JOYSTICK-SPECIFIC STRUCTURES AND TYPES ------------------------------- */
 /*
@@ -736,7 +735,7 @@ struct SFG_StrokeFont
  * Definition of "SFG_Joystick" structure -- based on JS's "jsJoystick" object class.
  * See "js.h" lines 80-178.
  */
-struct SFG_Joystick
+typedef struct
 {
 	SFG_PlatformJoystick pJoystick;
 
@@ -751,7 +750,7 @@ struct SFG_Joystick
 	float center[_JS_MAX_AXES];
 	float max[_JS_MAX_AXES];
 	float min[_JS_MAX_AXES];
-};
+} SFG_Joystick;
 
 /* -- GLOBAL VARIABLES EXPORTS --------------------------------------------- */
 
