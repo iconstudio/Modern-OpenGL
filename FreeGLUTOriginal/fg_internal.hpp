@@ -162,25 +162,25 @@ typedef void (*FGWarning)(const char* fmt, va_list ap);
 typedef void (*FGWarningUC)(const char* fmt, va_list ap, FGCBUserData userData);
 
 /* A list structure */
-struct SFG_List
+typedef struct
 {
 	void* First;
 	void* Last;
-};
+} SFG_List;
 
 /* A list node structure */
-struct SFG_Node
+typedef struct
 {
 	void* Next;
 	void* Prev;
-};
+} SFG_Node;
 
 /* A helper structure holding two ints and a boolean */
-struct SFG_XYUse
+typedef struct
 {
 	GLint           X, Y;               /* The two integers...               */
 	GLboolean       Use;                /* ...and a single boolean.          */
-};
+} SFG_XYUse;
 
 /*
  * An enumeration containing the state of the GLUT execution:
@@ -194,7 +194,7 @@ typedef enum
 } fgExecutionState;
 
 /* This structure holds different freeglut settings */
-struct SFG_State
+typedef struct
 {
 	SFG_XYUse        Position;             /* The default windows' position  */
 	SFG_XYUse        Size;                 /* The default windows' size      */
@@ -261,10 +261,10 @@ struct SFG_State
 	FGCBUserData     ErrorFuncData;        /* User defined error handler user data */
 	FGWarningUC      WarningFunc;          /* User defined warning handler  */
 	FGCBUserData     WarningFuncData;      /* User defined warning handler user data */
-};
+} SFG_State;
 
 /* The structure used by display initialization in fg_init.c */
-struct SFG_Display
+typedef struct
 {
 	SFG_PlatformDisplay pDisplay;
 
@@ -272,8 +272,7 @@ struct SFG_Display
 	int             ScreenHeight;       /* The screen's height in pixels     */
 	int             ScreenWidthMM;      /* The screen's width in milimeters  */
 	int             ScreenHeightMM;     /* The screen's height in milimeters */
-};
-
+} SFG_Display;
 
 /* The user can create any number of timer hooks */
 struct SFG_Timer
@@ -643,7 +642,6 @@ struct SFG_Window
 
 	GLboolean           IsMenu;                 /* Set to 1 if we are a menu */
 };
-
 
 /* A linked list structure of windows */
 struct SFG_WindowList
