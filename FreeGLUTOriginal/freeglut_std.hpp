@@ -1,6 +1,3 @@
-#ifndef  __FREEGLUT_STD_H__
-#define  __FREEGLUT_STD_H__
-
 /*
  * freeglut_std.h
  *
@@ -26,20 +23,6 @@
  * PAWEL W. OLSZTA BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-
-#ifdef __cplusplus
-    extern "C" {
-#endif
-
-/*
- * Under windows, we have to differentiate between static and dynamic libraries
- */
-#ifdef _WIN32
-/* #pragma may not be supported by some compilers.
- * Discussion by FreeGLUT developers suggests that
- * Visual C++ specific code involving pragmas may
- * need to move to a separate header.  24th Dec 2003
  */
 
 /* Define FREEGLUT_LIB_PRAGMAS to 1 to include library
@@ -640,14 +623,5 @@ static int FGAPIENTRY FGUNUSED glutCreateWindow_ATEXIT_HACK(const char *title) {
 #define glutCreateWindow glutCreateWindow_ATEXIT_HACK
 static int FGAPIENTRY FGUNUSED glutCreateMenu_ATEXIT_HACK(void (* func)(int)) { return __glutCreateMenuWithExit(func, exit); }
 #define glutCreateMenu glutCreateMenu_ATEXIT_HACK
+
 #endif
-#endif
-
-#ifdef __cplusplus
-    }
-#endif
-
-/*** END OF FILE ***/
-
-#endif /* __FREEGLUT_STD_H__ */
-

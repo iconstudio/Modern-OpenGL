@@ -17,15 +17,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_callback_macros.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_gl2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_init.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_internal_mswin.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_teapot_data.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fg_version.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ext.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_std.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ext.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_std.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)freeglut_ucall.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)glut.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)fg_callbacks.c" />
