@@ -5,7 +5,6 @@ import Glut.Rect;
 inline static int window_handle = -1;
 inline static glut::DisplayModes window_mode{};
 inline static glut::Rect window_rect{};
-inline static glut::DisplayModes window_mode{};
 
 void glut::Initialize(const DisplayModes& mode, const int& x, const int& y, const int& w, const int& h) noexcept
 {

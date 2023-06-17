@@ -172,6 +172,7 @@
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="FreeGlut.cpp" />
     <ClCompile Include="FreeGLUT.ixx" />
@@ -181,6 +182,7 @@
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Rect.ixx" />
+    <ClCompile Include="Window.ixx" />
     <ClCompile Include="_Internal.ixx" />
   </ItemGroup>
   <ItemGroup>
