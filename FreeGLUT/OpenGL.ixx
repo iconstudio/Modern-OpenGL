@@ -1,10 +1,10 @@
 module;
 #include "stdafx.inl"
 
-export module Glut;
-export import Glut.DisplayModes;
+export module Glib;
+export import Glib.DisplayModes;
 
-export namespace glut
+export namespace gl
 {
 	EXT_C struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
 	EXT_C struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };

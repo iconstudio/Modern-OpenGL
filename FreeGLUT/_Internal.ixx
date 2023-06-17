@@ -3,7 +3,7 @@ module;
 #include <windowsx.h>
 #include <mmsystem.h>
 #include <tchar.h>
-export module Glut.Internal;
+export module Glib.Internal;
 
 typedef struct tagSFG_PlatformDisplay SFG_PlatformDisplay;
 struct tagSFG_PlatformDisplay

@@ -1,4 +1,4 @@
-export module Glut.Window;
+export module Glib.Window;
 
 export namespace gl
 {

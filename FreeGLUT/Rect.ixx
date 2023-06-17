@@ -1,6 +1,6 @@
-export module Glut.Rect;
+export module Glib.Rect;
 
-export extern "C" namespace glut
+export extern "C" namespace gl
 {
 	struct [[nodiscard]] Rect
 	{

@@ -1,10 +1,10 @@
 #include "pch.hpp"
 
-import Glut;
+import Glib;
 
 int main(const int& argc, char** argv)
 {
-	glut::Initialize(glut::DisplayModes::DEPTH, glut::default_position, glut::default_resoulution);
+	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
 	return 0;
 }

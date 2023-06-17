@@ -24,6 +24,7 @@
     <ProjectGuid>{4c8fdd49-f3da-4897-bd44-0d7afec2494d}</ProjectGuid>
     <RootNamespace>FreeGLUT</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -174,8 +175,8 @@
   <ItemGroup>
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
-    <ClCompile Include="FreeGlut.cpp" />
-    <ClCompile Include="FreeGLUT.ixx" />
+    <ClCompile Include="OpenGL.cpp" />
+    <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="Keycodes.ixx" />
     <ClCompile Include="KeyModifiers.ixx" />
     <ClCompile Include="main.cpp" />

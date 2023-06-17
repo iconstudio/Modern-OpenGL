@@ -46,10 +46,10 @@
     <ClCompile Include="DisplayModes.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FreeGLUT.ixx">
+    <ClCompile Include="OpenGL.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FreeGlut.cpp">
+    <ClCompile Include="OpenGL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Rect.ixx">
