@@ -183,7 +183,7 @@
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Rect.ixx" />
-    <ClCompile Include="Window.ixx" />
+    <ClCompile Include="Windows.ixx" />
     <ClCompile Include="_Internal.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

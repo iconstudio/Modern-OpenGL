@@ -70,7 +70,7 @@
     <ClCompile Include="Display.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Window.ixx">
+    <ClCompile Include="Windows.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
