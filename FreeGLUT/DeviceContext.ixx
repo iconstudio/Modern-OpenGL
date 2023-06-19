@@ -1,5 +1,6 @@
 module;
-#include <Windows.h>
+#include "Internal.hpp"
+
 export module Glib.Device.Context;
 export import Glib.Device.Handle;
 
