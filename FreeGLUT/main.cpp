@@ -12,5 +12,10 @@ int main(const int& argc, char** argv)
 	auto window = gl::device::ManagedHandle::Create(hinstance, L"class", L"title", 0U, -1, -1, 400, 300);
 
 
+	while (true)
+	{
+
+	}
+
 	return 0;
 }
