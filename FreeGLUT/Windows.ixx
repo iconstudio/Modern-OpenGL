@@ -1,5 +1,6 @@
 module;
 #include <Windows.h>
+
 export module Glib.Windows;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Handle;
@@ -48,7 +49,68 @@ export namespace gl::device
 	class [[nodiscard]] Property
 	{
 	public:
+		constexpr Property() noexcept = default;
+		constexpr ~Property() noexcept = default;
 
+		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		Property(HINSTANCE handle, Procedure procedure
+			, const wchar_t(&class_name)[ClassNameSize]
+			, const wchar_t(&title)[TitleSize]
+			, const int& cmd_show) noexcept
+			: Property(handle, procedure
+							, class_name
+							, title
+							, LoadIconW(nullptr, IDI_APPLICATION)
+							, LoadIconW(nullptr, IDI_APPLICATION)
+							, LoadCursorW(nullptr, IDC_ARROW)
+							, (HBRUSH)(COLOR_WINDOW + 1)
+							, nullptr
+							, cmd_show)
+		{}
+
+		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		constexpr Property(HINSTANCE handle, Procedure procedure
+			, const wchar_t(&class_name)[ClassNameSize]
+			, const wchar_t(&title)[TitleSize]
+			, const ::HICON& icon
+			, const ::HICON& small_icon
+			, const ::HCURSOR& cursor
+			, const ::HBRUSH& background
+			, const wchar_t(&menu_name)[MenuNameSize]
+			, const int& cmd_show) noexcept
+		{
+			myWindowClass.cbSize = sizeof(WNDCLASSEXW);
+			myWindowClass.hInstance = handle;
+			myWindowClass.lpszClassName = class_name;
+			myWindowClass.lpfnWndProc = procedure;
+			myWindowClass.cbClsExtra = 0;
+			myWindowClass.cbWndExtra = 0;
+			myWindowClass.style = CS_HREDRAW | CS_VREDRAW;
+			myWindowClass.hbrBackground = background;
+			myWindowClass.lpszMenuName = menu_name;
+			myWindowClass.hIcon = icon;
+			myWindowClass.hIconSm = small_icon;
+			myWindowClass.hCursor = cursor;
+		}
+
+		[[nodiscard]]
+		constexpr const WNDCLASSEXW& GetHandle() const& noexcept
+		{
+			return myWindowClass;
+		}
+
+		[[nodiscard]]
+		constexpr WNDCLASSEXW&& GetHandle() && noexcept
+		{
+			return static_cast<WNDCLASSEXW&&>(myWindowClass);
+		}
+
+		constexpr Property(const Property&) noexcept = default;
+		constexpr Property& operator=(const Property&) noexcept = default;
+		constexpr Property(Property&&) noexcept = default;
+		constexpr Property& operator=(Property&&) noexcept = default;
+
+	private:
 		WNDCLASSEXW myWindowClass;
 	};
 

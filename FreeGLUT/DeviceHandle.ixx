@@ -76,12 +76,6 @@ export namespace gl::device
 			}
 		}
 
-		inline bool SendCommand(const unsigned int& msg) const
-			noexcept
-		{
-			return SendCommand(myHandle, msg, 0, 0);
-		}
-
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
@@ -93,6 +87,12 @@ export namespace gl::device
 			{
 				return false;
 			}
+		}
+
+		inline bool SendCommand(const unsigned int& msg) const
+			noexcept
+		{
+			return SendCommand(msg, 0, 0);
 		}
 
 		inline bool SetWindowRedraw(const bool& flag) noexcept
@@ -269,9 +269,9 @@ export namespace gl::device
 		}
 
 		DeviceHandle(const DeviceHandle&) = delete;
-		constexpr DeviceHandle(DeviceHandle&&) noexcept = default;
+		constexpr DeviceHandle(DeviceHandle&&) noexcept = delete;
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
-		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
+		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = delete;
 
 		volatile WindowsHandle myHandle;
 		util::atomic_bool isAvailable;
@@ -388,9 +388,9 @@ export namespace gl::device
 		}
 
 		ManagedHandle(const ManagedHandle&) = delete;
-		constexpr ManagedHandle(ManagedHandle&&) noexcept = default;
+		constexpr ManagedHandle(ManagedHandle&&) noexcept = delete;
 		ManagedHandle& operator=(const ManagedHandle&) = delete;
-		constexpr ManagedHandle& operator=(ManagedHandle&&) noexcept = default;
+		constexpr ManagedHandle& operator=(ManagedHandle&&) noexcept = delete;
 
 		::HINSTANCE myInstance;
 		const wchar_t* myClassName;
