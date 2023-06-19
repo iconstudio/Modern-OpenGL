@@ -50,25 +50,7 @@ export namespace gl::device
 #define IsMButtonDown()  (GetKeyState(VK_MBUTTON) < 0)
 
 	[[nodiscard]]
-	inline ProcessInstance GetProcessInstance() noexcept
-	{
-		return ::GetModuleHandle(nullptr);
-	}
-
-	[[nodiscard]]
-	inline bool TryGetProcessInstance(ProcessInstance* &output) noexcept
-	{
-		return 0 != ::GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_PIN, nullptr, output);
-	}
-
-	[[nodiscard]]
-	inline bool TryGetProcessInstance(ProcessInstance& output) noexcept
-	{
-		return 0 != ::GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_PIN, nullptr, &output);
-	}
-
-	[[nodiscard]]
-	inline ProcessInstance GetWindowInstance(WindowsContext handle) noexcept
+	inline ProcessInstance GetWindowInstance(WindowsHandle handle) noexcept
 	{
 		return reinterpret_cast<ProcessInstance>(GetWindowLongPtr(handle, GWLP_HINSTANCE));
 	}

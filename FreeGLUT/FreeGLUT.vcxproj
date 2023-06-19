@@ -173,6 +173,8 @@
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DeviceContext.ixx" />
+    <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="OpenGL.cpp" />
@@ -182,6 +184,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="Windows.ixx" />
     <ClCompile Include="_Internal.ixx" />

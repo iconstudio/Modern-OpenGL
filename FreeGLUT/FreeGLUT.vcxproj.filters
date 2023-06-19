@@ -73,5 +73,14 @@
     <ClCompile Include="Windows.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceContext.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceHandle.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessInstance.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
