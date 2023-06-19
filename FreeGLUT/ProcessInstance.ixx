@@ -1,5 +1,5 @@
 module;
-#include <WinUser.h>
+#include <Windows.h>
 export module Glib.Device.ProcessInstance;
 
 export namespace gl::device
