@@ -236,7 +236,7 @@ export namespace gl::device
 			, const int& y
 			, const int& width
 			, const int& height
-			, const WindowsHandle& parent = nullptr
+			, const WindowsHandle& parent = NULL
 			, const HMENU& menu = nullptr
 			, const LPVOID& uparams = nullptr)
 			noexcept
