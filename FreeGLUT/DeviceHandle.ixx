@@ -369,13 +369,6 @@ export namespace gl::device
 
 		virtual ~ManagedHandle() noexcept
 		{
-			if (myHandle)
-			{
-				::DestroyWindow(myHandle);
-
-				myHandle = nullptr;
-			}
-
 			if (myInstance)
 			{
 				::UnregisterClass(myClassName, myInstance);
