@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="헤더 파일\Original">
-      <UniqueIdentifier>{9845822c-52c3-4709-ba74-e85c6673a072}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Device">
       <UniqueIdentifier>{ebc17173-a354-4a16-8ab3-e146d1825e5d}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Internal.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

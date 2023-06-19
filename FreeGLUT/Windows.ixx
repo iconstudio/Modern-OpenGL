@@ -1,4 +1,25 @@
 module;
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#define NOKERNEL
+#define NONLS
+#define NOSERVICE
+#define NOSOUND
+#define NOCOMM
+#define NODRIVERS
+#define NOLOGERROR
+#define NOPROFILER
+#define NOMEMMGR
+#define NOLFILEIO
+#define NORESOURCE
+#define NOATOM
+#define NOLANGUAGE
+#define NOLSTRING
+#define NODBCS
+#define NOSCALABLEFONT
+#define NOMETAFILE
+#define NOSYSMETRICS
+#define NOSYSTEMPARAMSINFO
 #include <Windows.h>
 
 export module Glib.Windows;
