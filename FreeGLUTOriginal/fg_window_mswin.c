@@ -665,7 +665,7 @@ void fgPlatformOpenWindow( SFG_Window* window, const char* title,
     {
         wchar_t* wstr = fghWstrFromStr(title);
 
-        window->Window.Handle = CreateWindow(
+        window->Window.Context = CreateWindow(
             _T("FREEGLUT"),
             wstr,
             WS_VISIBLE | WS_POPUP,
@@ -678,12 +678,12 @@ void fgPlatformOpenWindow( SFG_Window* window, const char* title,
 
         free(wstr);
 
-        SHFullScreen(window->Window.Handle, SHFS_HIDESTARTICON);
-        SHFullScreen(window->Window.Handle, SHFS_HIDESIPBUTTON);
-        SHFullScreen(window->Window.Handle, SHFS_HIDETASKBAR);
-        MoveWindow(window->Window.Handle, 0, 0, 240, 320, TRUE);
-        ShowWindow(window->Window.Handle, SW_SHOW);
-        UpdateWindow(window->Window.Handle);
+        SHFullScreen(window->Window.Context, SHFS_HIDESTARTICON);
+        SHFullScreen(window->Window.Context, SHFS_HIDESIPBUTTON);
+        SHFullScreen(window->Window.Context, SHFS_HIDETASKBAR);
+        MoveWindow(window->Window.Context, 0, 0, 240, 320, TRUE);
+        ShowWindow(window->Window.Context, SW_SHOW);
+        UpdateWindow(window->Window.Context);
     }
 #else
     window->Window.Handle = CreateWindowEx(
@@ -774,11 +774,11 @@ void fgPlatformOpenWindow( SFG_Window* window, const char* title,
         if (fghRegisterTouchWindow == (pRegisterTouchWindow)0xDEADBEEF)
             fghRegisterTouchWindow = (pRegisterTouchWindow)GetProcAddress(GetModuleHandle("user32"),"RegisterTouchWindow");
         if (fghRegisterTouchWindow)
-             fghRegisterTouchWindow( window->Window.Handle, TWF_FINETOUCH | TWF_WANTPALM );
+             fghRegisterTouchWindow( window->Window.Context, TWF_FINETOUCH | TWF_WANTPALM );
     #endif
 
 #if defined(_WIN32_WCE)
-    ShowWindow( window->Window.Handle, SW_SHOW );
+    ShowWindow( window->Window.Context, SW_SHOW );
 #else
     if (!window->IsMenu)    /* Don't show window after creation if its a menu */
     {
@@ -849,7 +849,7 @@ void fgPlatformGlutSetWindowTitle( const char* title )
 #ifdef _WIN32_WCE
     {
         wchar_t* wstr = fghWstrFromStr(title);
-        SetWindowText( fgStructure.CurrentWindow->Window.Handle, wstr );
+        SetWindowText( fgStructure.CurrentWindow->Window.Context, wstr );
         free(wstr);
     }
 #else

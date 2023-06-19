@@ -62,7 +62,7 @@ void fgPlatformInitializeSpaceball(void)
         fg_sball_initialized = 0;
         return;
     }
-    hwnd = fgStructure.CurrentWindow->Window.Handle;
+    hwnd = fgStructure.CurrentWindow->Window.Context;
 
     {
         BOOL ok;

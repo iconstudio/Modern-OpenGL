@@ -40,7 +40,7 @@ void fgPlatformSetCursor ( SFG_Window *window, int cursorID )
 #       define MAP_CURSOR(a,b)                                   \
         case a:                                                  \
             SetCursor( LoadCursor( NULL, b ) );                  \
-            SetClassLong( window->Window.Handle,                 \
+            SetClassLong( window->Window.Context,                 \
                           GCL_HCURSOR,                           \
                           ( LONG )LoadCursor( NULL, b ) );       \
         break;
@@ -48,7 +48,7 @@ void fgPlatformSetCursor ( SFG_Window *window, int cursorID )
 #       define ZAP_CURSOR(a,b)                                   \
         case a:                                                  \
             SetCursor( NULL );                                   \
-            SetClassLong( window->Window.Handle,                 \
+            SetClassLong( window->Window.Context,                 \
                           GCL_HCURSOR, ( LONG )NULL );           \
         break;
 #else

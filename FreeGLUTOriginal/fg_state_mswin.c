@@ -77,7 +77,7 @@ int fgPlatformGlutGet ( GLenum eWhat )
       glGetIntegerv(WGL_SAMPLES_ARB, &nsamples);
       return nsamples;
 
-    /* Handle the OpenGL inquiries */
+    /* Context the OpenGL inquiries */
     case GLUT_WINDOW_RGBA:
 #if defined(_WIN32_WCE)
       boolValue = (GLboolean)0;  /* WinCE doesn't support this feature */
@@ -187,7 +187,7 @@ int fgPlatformGlutGet ( GLenum eWhat )
         freeglut_return_val_if_fail( fgStructure.CurrentWindow != NULL, 0 );
 
 #if defined(_WIN32_WCE)
-        GetWindowRect( fgStructure.CurrentWindow->Window.Handle, &winRect);
+        GetWindowRect( fgStructure.CurrentWindow->Window.Context, &winRect);
 #else
         ClientToScreen(fgStructure.CurrentWindow->Window.Handle, &topLeft);
 

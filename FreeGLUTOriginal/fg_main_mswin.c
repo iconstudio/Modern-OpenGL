@@ -1518,7 +1518,7 @@ LRESULT CALLBACK fgPlatformWindowProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
         }
 
         if (fghGetTouchInputInfo( (HTOUCHINPUT)lParam, numInputs, ti, sizeof(TOUCHINPUT) )) {
-            /* Handle each contact point */
+            /* Context each contact point */
             for (i = 0; i < numInputs; ++i ) {
 
                 POINT tp;
@@ -1556,7 +1556,7 @@ LRESULT CALLBACK fgPlatformWindowProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
         break;
 #endif
     default:
-        /* Handle unhandled messages */
+        /* Context unhandled messages */
         lRet = DefWindowProc( hWnd, uMsg, wParam, lParam );
         break;
     }
