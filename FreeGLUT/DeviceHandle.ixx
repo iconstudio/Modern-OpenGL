@@ -65,6 +65,8 @@ export namespace gl::device
 			return Create(instance, class_name, title, style, x, y, width, height, parent.GetHandle(), menu, uparams);
 		}
 
+		constexpr DeviceHandle() noexcept = default;
+
 		virtual ~DeviceHandle() noexcept
 		{
 			if (myHandle)
@@ -275,124 +277,5 @@ export namespace gl::device
 
 		volatile WindowsHandle myHandle;
 		util::atomic_bool isAvailable;
-	};
-
-	class [[nodiscard]] ManagedHandle : public DeviceHandle
-	{
-	protected:
-		template<size_t Length>
-		explicit constexpr ManagedHandle(const ::HINSTANCE& instance
-			, WindowsHandle&& handle
-			, _Notnull_ const wchar_t(&class_name)[Length])
-			noexcept
-			: ManagedHandle(instance, static_cast<WindowsHandle&&>(handle), class_name)
-		{}
-
-		explicit constexpr ManagedHandle(const ::HINSTANCE& instance
-			, WindowsHandle&& handle
-			, _Notnull_ const wchar_t* const& class_name)
-			noexcept
-			: DeviceHandle(static_cast<WindowsHandle&&>(handle))
-			, myInstance(instance)
-			, myClassName(class_name)
-		{}
-
-	public:
-		template<size_t ClassLength, size_t TitleLength>
-		[[nodiscard]]
-		static ManagedHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t(&class_name)[ClassLength]
-			, _Notnull_ const wchar_t(&title)[TitleLength]
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const WindowsHandle& parent = NULL
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return ManagedHandle
-			{
-				instance
-				, ::CreateWindowEx(0
-				, class_name, title
-				, style, x, y, width, height
-				, parent
-				, menu
-				, instance, uparams), class_name
-			};
-		}
-
-		template<size_t ClassLength, size_t TitleLength>
-		[[nodiscard]]
-		static ManagedHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t(&class_name)[ClassLength]
-			, _Notnull_ const wchar_t(&title)[TitleLength]
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const DeviceHandle& parent
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return Create(instance, class_name, title, style
-				, x, y, width, height
-				, parent.GetHandle()
-				, menu, uparams);
-		}
-
-		template<size_t ClassLength, size_t TitleLength>
-		[[nodiscard]]
-		static ManagedHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t(&class_name)[ClassLength]
-			, _Notnull_ const wchar_t(&title)[TitleLength]
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const ManagedHandle& parent
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return Create(instance, class_name, title, style
-				, x, y, width, height
-				, parent.GetHandle()
-				, menu, uparams);
-		}
-
-		virtual ~ManagedHandle() noexcept
-		{
-			if (myInstance)
-			{
-				::UnregisterClass(myClassName, myInstance);
-			}
-		}
-
-		[[nodiscard]]
-		inline const ::HINSTANCE& GetInstance() const& noexcept
-		{
-			return myInstance;
-		}
-
-		[[nodiscard]]
-		inline ::HINSTANCE&& GetInstance() && noexcept
-		{
-			return static_cast<::HINSTANCE&&>(myInstance);
-		}
-
-		ManagedHandle(const ManagedHandle&) = delete;
-		constexpr ManagedHandle(ManagedHandle&&) noexcept = delete;
-		ManagedHandle& operator=(const ManagedHandle&) = delete;
-		constexpr ManagedHandle& operator=(ManagedHandle&&) noexcept = delete;
-
-		::HINSTANCE myInstance;
-		const wchar_t* myClassName;
 	};
 }

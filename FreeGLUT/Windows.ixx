@@ -144,14 +144,14 @@ export namespace gl::device
 			myInstance = device_class.hInstance;
 
 			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
-			myHandle = ManagedHandle::Create(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
+			myHandle = DeviceHandle::Create(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
 
 			if (!myHandle.IsAvailable())
 			{
 				throw "Failed to create window.";
 			}
 
-			myContext = ManagedContext{ myHandle };
+			myContext = DeviceContext{ myHandle };
 			if (!myContext)
 			{
 				throw "Failed to get device context.";
@@ -160,7 +160,10 @@ export namespace gl::device
 
 	public:
 		virtual inline ~Window() noexcept
-		{}
+		{
+			::ReleaseDC(myContext, myHandle);
+			::UnregisterClass(myClassName, myInstance);
+		}
 
 		constexpr Window(const Window&) noexcept = delete;
 		constexpr Window& operator=(const Window&) noexcept = delete;
@@ -168,7 +171,9 @@ export namespace gl::device
 		constexpr Window& operator=(Window&&) noexcept = default;
 
 		HINSTANCE myInstance;
-		ManagedHandle myHandle;
-		ManagedContext myContext;
+		DeviceHandle myHandle;
+		DeviceContext myContext;
+
+		const wchar_t* myClassName;
 	};
 }
