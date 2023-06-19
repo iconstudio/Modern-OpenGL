@@ -9,6 +9,8 @@ export import Glib.Device.Context;
 export namespace gl::device
 {
 	using Procedure = ::WNDPROC;
+	using Message = ::MSG;
+	using DeviceClass = ::WNDCLASSEXW;
 
 	using ::GetLastError;
 
@@ -53,23 +55,23 @@ export namespace gl::device
 		constexpr ~Property() noexcept = default;
 
 		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
-		Property(HINSTANCE handle, Procedure procedure
+		explicit Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const wchar_t(&title)[TitleSize]
 			, const int& cmd_show) noexcept
 			: Property(handle, procedure
-							, class_name
-							, title
-							, LoadIconW(nullptr, IDI_APPLICATION)
-							, LoadIconW(nullptr, IDI_APPLICATION)
-							, LoadCursorW(nullptr, IDC_ARROW)
-							, (HBRUSH)(COLOR_WINDOW + 1)
-							, nullptr
-							, cmd_show)
+						, class_name
+						, title
+						, LoadIconW(handle, IDI_APPLICATION)
+						, LoadIconW(handle, IDI_APPLICATION)
+						, LoadCursorW(handle, IDC_ARROW)
+						, (HBRUSH)(COLOR_WINDOW + 1)
+						, nullptr
+						, cmd_show)
 		{}
 
 		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
-		constexpr Property(HINSTANCE handle, Procedure procedure
+		explicit constexpr Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const wchar_t(&title)[TitleSize]
 			, const ::HICON& icon
@@ -77,6 +79,28 @@ export namespace gl::device
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
 			, const wchar_t(&menu_name)[MenuNameSize]
+			, const int& cmd_show) noexcept
+			: Property(handle, procedure
+						, class_name
+						, title
+						, icon
+						, small_icon
+						, cursor
+						, background
+						, menu_name
+						, cmd_show)
+		{}
+
+
+		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		explicit constexpr Property(HINSTANCE handle, Procedure procedure
+			, const wchar_t(&class_name)[ClassNameSize]
+			, const wchar_t(&title)[TitleSize]
+			, const ::HICON& icon
+			, const ::HICON& small_icon
+			, const ::HCURSOR& cursor
+			, const ::HBRUSH& background
+			, const wchar_t* const& menu_name
 			, const int& cmd_show) noexcept
 		{
 			myWindowClass.cbSize = sizeof(WNDCLASSEXW);
@@ -94,15 +118,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const WNDCLASSEXW& GetHandle() const& noexcept
+		constexpr const DeviceClass& GetHandle() const& noexcept
 		{
 			return myWindowClass;
 		}
 
 		[[nodiscard]]
-		constexpr WNDCLASSEXW&& GetHandle() && noexcept
+		constexpr DeviceClass&& GetHandle() && noexcept
 		{
-			return static_cast<WNDCLASSEXW&&>(myWindowClass);
+			return static_cast<DeviceClass&&>(myWindowClass);
 		}
 
 		constexpr Property(const Property&) noexcept = default;
@@ -111,7 +135,7 @@ export namespace gl::device
 		constexpr Property& operator=(Property&&) noexcept = default;
 
 	private:
-		WNDCLASSEXW myWindowClass;
+		DeviceClass myWindowClass;
 	};
 
 	class [[nodiscard]] Window
