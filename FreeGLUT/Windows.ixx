@@ -54,14 +54,12 @@ export namespace gl::device
 		constexpr Property() noexcept = default;
 		constexpr ~Property() noexcept = default;
 
-		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		template<size_t ClassNameSize, size_t MenuNameSize>
 		explicit Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
-			, const wchar_t(&title)[TitleSize]
 		) noexcept
 			: Property(handle, procedure
 						, class_name
-						, title
 						, LoadIconW(handle, IDI_APPLICATION)
 						, LoadIconW(handle, IDI_APPLICATION)
 						, LoadCursorW(handle, IDC_ARROW)
@@ -69,10 +67,9 @@ export namespace gl::device
 						, nullptr)
 		{}
 
-		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		template<size_t ClassNameSize, size_t MenuNameSize>
 		explicit constexpr Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
-			, const wchar_t(&title)[TitleSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
 			, const ::HCURSOR& cursor
@@ -81,7 +78,6 @@ export namespace gl::device
 		) noexcept
 			: Property(handle, procedure
 						, class_name
-						, title
 						, icon
 						, small_icon
 						, cursor
@@ -90,10 +86,9 @@ export namespace gl::device
 		{}
 
 
-		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
+		template<size_t ClassNameSize, size_t MenuNameSize>
 		explicit constexpr Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
-			, const wchar_t(&title)[TitleSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
 			, const ::HCURSOR& cursor
@@ -137,8 +132,43 @@ export namespace gl::device
 
 	class [[nodiscard]] Window
 	{
+	protected:
+		Window(const Property& properties)
+		{
+			if (!RegisterClassExW(&properties.GetHandle()))
+			{
+				throw "Failed to register window class.";
+			}
+
+			const auto& device_class = properties.GetHandle();
+			myInstance = device_class.hInstance;
+
+			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
+			myHandle = ManagedHandle::Create(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
+
+			if (!myHandle.IsAvailable())
+			{
+				throw "Failed to create window.";
+			}
+
+			myContext = ManagedContext{ myHandle };
+			if (!myContext)
+			{
+				throw "Failed to get device context.";
+			}
+		}
+
 	public:
+		virtual inline ~Window() noexcept
+		{}
+
+		constexpr Window(const Window&) noexcept = delete;
+		constexpr Window& operator=(const Window&) noexcept = delete;
+		constexpr Window(Window&&) noexcept = default;
+		constexpr Window& operator=(Window&&) noexcept = default;
+
 		HINSTANCE myInstance;
+		ManagedHandle myHandle;
 		ManagedContext myContext;
 	};
 }
