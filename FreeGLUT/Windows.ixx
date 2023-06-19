@@ -58,7 +58,7 @@ export namespace gl::device
 		explicit Property(HINSTANCE handle, Procedure procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const wchar_t(&title)[TitleSize]
-			, const int& cmd_show) noexcept
+		) noexcept
 			: Property(handle, procedure
 						, class_name
 						, title
@@ -66,8 +66,7 @@ export namespace gl::device
 						, LoadIconW(handle, IDI_APPLICATION)
 						, LoadCursorW(handle, IDC_ARROW)
 						, (HBRUSH)(COLOR_WINDOW + 1)
-						, nullptr
-						, cmd_show)
+						, nullptr)
 		{}
 
 		template<size_t ClassNameSize, size_t TitleSize, size_t MenuNameSize>
@@ -79,7 +78,7 @@ export namespace gl::device
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
 			, const wchar_t(&menu_name)[MenuNameSize]
-			, const int& cmd_show) noexcept
+		) noexcept
 			: Property(handle, procedure
 						, class_name
 						, title
@@ -87,8 +86,7 @@ export namespace gl::device
 						, small_icon
 						, cursor
 						, background
-						, menu_name
-						, cmd_show)
+						, menu_name)
 		{}
 
 
@@ -100,8 +98,7 @@ export namespace gl::device
 			, const ::HICON& small_icon
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
-			, const wchar_t* const& menu_name
-			, const int& cmd_show) noexcept
+			, const wchar_t* const& menu_name) noexcept
 		{
 			myWindowClass.cbSize = sizeof(WNDCLASSEXW);
 			myWindowClass.hInstance = handle;
@@ -141,6 +138,7 @@ export namespace gl::device
 	class [[nodiscard]] Window
 	{
 	public:
-
+		HINSTANCE myInstance;
+		ManagedContext myContext;
 	};
 }
