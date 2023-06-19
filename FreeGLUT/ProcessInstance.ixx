@@ -5,22 +5,21 @@ export module Glib.Device.ProcessInstance;
 export namespace gl::device
 {
 	using ::HINSTANCE;
-	using ProcessInstance = ::HINSTANCE;
 
 	[[nodiscard]]
-	inline ProcessInstance GetProcessInstance() noexcept
+	inline HINSTANCE GetProcessInstance() noexcept
 	{
 		return ::GetModuleHandle(nullptr);
 	}
 
 	[[nodiscard]]
-	inline bool TryGetProcessInstance(ProcessInstance* const& output) noexcept
+	inline bool TryGetProcessInstance(HINSTANCE* const& output) noexcept
 	{
 		return 0 != ::GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_PIN, nullptr, output);
 	}
 
 	[[nodiscard]]
-	inline bool TryGetProcessInstance(ProcessInstance& output) noexcept
+	inline bool TryGetProcessInstance(HINSTANCE& output) noexcept
 	{
 		return 0 != ::GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_PIN, nullptr, &output);
 	}

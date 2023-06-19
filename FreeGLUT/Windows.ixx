@@ -45,12 +45,6 @@ export namespace gl::device
 #define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)
 #define IsMButtonDown()  (GetKeyState(VK_MBUTTON) < 0)
 
-	[[nodiscard]]
-	inline ProcessInstance GetWindowInstance(WindowsHandle handle) noexcept
-	{
-		return reinterpret_cast<ProcessInstance>(GetWindowLongPtr(handle, GWLP_HINSTANCE));
-	}
-
 	class [[nodiscard]] Property
 	{
 	public:

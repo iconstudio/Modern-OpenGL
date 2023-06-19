@@ -1,10 +1,16 @@
 #include "pch.hpp"
 
 import Glib;
+import Glib.Device.ProcessInstance;
+import Glib.Device.Handle;
 
 int main(const int& argc, char** argv)
 {
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
+
+	auto hinstance = gl::device::GetProcessInstance();
+	auto window = gl::device::ManagedHandle::Create(hinstance, L"class", L"title", 0U, -1, -1, 400, 300);
+
 
 	return 0;
 }
