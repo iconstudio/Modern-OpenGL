@@ -1,6 +1,8 @@
 module;
 #include <Windows.h>
+
 export module Glib.Device.Handle;
+import Utility.Atomic;
 
 export namespace gl::device
 {
@@ -15,6 +17,7 @@ export namespace gl::device
 		explicit constexpr DeviceHandle(WindowsHandle&& handle)
 			noexcept
 			: myHandle(static_cast<WindowsHandle&&>(handle))
+			, isAvailable(true)
 		{}
 
 	public:
@@ -66,21 +69,83 @@ export namespace gl::device
 		{
 			if (myHandle)
 			{
-				::DestroyWindow(myHandle);
+				isAvailable = false;
 
+				::DestroyWindow(myHandle);
 				myHandle = nullptr;
 			}
 		}
 
-		LRESULT SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
+		inline bool SendCommand(const unsigned int& msg) const
 			noexcept
 		{
-			return ::SendMessage(myHandle, msg, lhs, rhs);
+			return SendCommand(myHandle, msg, 0, 0);
 		}
 
-		void SetWindowRedraw(const bool& flag) noexcept
+		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
+			noexcept
 		{
-			SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
+			if (IsAvailable())
+			{
+				return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		inline bool SetWindowRedraw(const bool& flag) noexcept
+		{
+			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
+		}
+
+		inline bool Close() noexcept
+		{
+			if (bool result = SendCommand(WM_CLOSE); result)
+			{
+				isAvailable = false;
+				return result;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		inline bool Show(const int& cmd_show) noexcept
+		{
+			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd_show), 0);
+		}
+
+		inline bool Hide() noexcept
+		{
+			return Show(SW_HIDE);
+		}
+
+		inline bool Maximize() noexcept
+		{
+			return Show(SW_MAXIMIZE);
+		}
+
+		inline bool Minimize() noexcept
+		{
+			return Show(SW_MINIMIZE);
+		}
+
+		inline bool Restore() noexcept
+		{
+			return Show(SW_RESTORE);
+		}
+
+		inline bool MakeFocus() noexcept
+		{
+			return SendCommand(WM_SETFOCUS);
+		}
+
+		inline bool MakeForeground() noexcept
+		{
+			return SendCommand(WM_ACTIVATE, WA_ACTIVE, 0);
 		}
 
 		[[nodiscard]]
@@ -99,6 +164,12 @@ export namespace gl::device
 		inline bool IsRestored() const noexcept
 		{
 			return 0L == (GetStyle() & (WS_MINIMIZE | WS_MAXIMIZE));
+		}
+
+		[[nodiscard]]
+		inline bool IsAvailable() const noexcept
+		{
+			return isAvailable.load(util::memory_order_relaxed);
 		}
 
 		[[nodiscard]]
@@ -203,6 +274,7 @@ export namespace gl::device
 		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
 
 		volatile WindowsHandle myHandle;
+		util::atomic_bool isAvailable;
 	};
 
 	class [[nodiscard]] ManagedHandle : public DeviceHandle
