@@ -17,9 +17,9 @@ export namespace gl::device
 			, myHandle(::GetDC(hwnd.myHandle))
 		{}
 
-		explicit constexpr ManagedContext(DeviceHandle& hwnd, DeviceContext&& handle) noexcept
+		explicit constexpr ManagedContext(DeviceHandle& hwnd, ::HDC&& handle) noexcept
 			: myWindow(hwnd)
-			, myHandle(static_cast<DeviceContext&&>(handle))
+			, myHandle(static_cast<::HDC&&>(handle))
 		{}
 
 		inline ~ManagedContext() noexcept
@@ -28,27 +28,27 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline const DeviceContext& GetHandle() const& noexcept
+		inline const ::HDC& GetHandle() const& noexcept
 		{
 			return myHandle;
 		}
 
 		[[nodiscard]]
-		inline DeviceContext&& GetHandle() && noexcept
+		inline ::HDC&& GetHandle() && noexcept
 		{
-			return static_cast<DeviceContext&&>(myHandle);
+			return static_cast<::HDC&&>(myHandle);
 		}
 
 		constexpr ManagedContext(ManagedContext&& other) noexcept
 			: myWindow(other.myWindow)
-			, myHandle(static_cast<DeviceContext&&>(other.myHandle))
+			, myHandle(static_cast<::HDC&&>(other.myHandle))
 		{}
 
 		constexpr ManagedContext& operator=(ManagedContext&& other) & noexcept
 		{
 			if (this != &other && myWindow == other.myWindow)
 			{
-				myHandle = static_cast<DeviceContext&&>(other.myHandle);
+				myHandle = static_cast<::HDC&&>(other.myHandle);
 			}
 			return *this;
 		}
@@ -59,7 +59,7 @@ export namespace gl::device
 		ManagedContext& operator=(const ManagedContext&&) = delete;
 
 		DeviceHandle& myWindow;
-		DeviceContext myHandle;
+		::HDC myHandle;
 	};
 
 	class [[nodiscard]] CompatibleContext
@@ -77,7 +77,7 @@ export namespace gl::device
 			: myHandle(::CreateCompatibleDC(ctx.GetHandle()))
 		{}
 
-		inline ~CompatibleContext() noexcept
+		virtual inline ~CompatibleContext() noexcept
 		{
 			::DeleteDC(myHandle);
 		}
