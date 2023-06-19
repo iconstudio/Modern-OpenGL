@@ -75,7 +75,7 @@ export namespace gl::device
 			, myClassName(class_name)
 		{}
 
-		inline ~WindowHandle() noexcept
+		virtual ~WindowHandle() noexcept
 		{
 			if (myHandle)
 			{
@@ -90,7 +90,7 @@ export namespace gl::device
 			}
 		}
 
-		LRESULT SendMsg(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs)
+		LRESULT SendMsg(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
 			return ::SendMessage(myHandle, msg, lhs, rhs);
