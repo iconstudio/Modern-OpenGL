@@ -9,45 +9,10 @@ export namespace gl::device
 	using GrpContext = ::HGLRC;
 	using GrpDescriptor = ::PIXELFORMATDESCRIPTOR;
 
-	class [[nodiscard]] CompatibleContext
-	{
-	public:
-		CompatibleContext(const DeviceContext& ctx) noexcept
-			: myHandle(::CreateCompatibleDC(ctx))
-		{}
-
-		inline ~CompatibleContext() noexcept
-		{
-			::DeleteDC(myHandle);
-		}
-
-		[[nodiscard]]
-		inline const DeviceContext& GetHandle() const& noexcept
-		{
-			return myHandle;
-		}
-
-		[[nodiscard]]
-		inline DeviceContext&& GetHandle() && noexcept
-		{
-			return static_cast<DeviceContext&&>(myHandle);
-		}
-
-		CompatibleContext(const CompatibleContext&) = delete;
-		CompatibleContext& operator=(const CompatibleContext&) = delete;
-		CompatibleContext(CompatibleContext&&) = default;
-		CompatibleContext& operator=(CompatibleContext&&) = default;
-		CompatibleContext(const CompatibleContext&&) = delete;
-		CompatibleContext& operator=(const CompatibleContext&&) = delete;
-
-		DeviceContext myHandle;
-	};
-
-
 	class [[nodiscard]] ManagedContext
 	{
 	public:
-		explicit ManagedContext(DeviceHandle& hwnd) noexcept
+		explicit inline ManagedContext(DeviceHandle& hwnd) noexcept
 			: myWindow(hwnd)
 			, myHandle(::GetDC(hwnd.myHandle))
 		{}
@@ -94,6 +59,48 @@ export namespace gl::device
 		ManagedContext& operator=(const ManagedContext&&) = delete;
 
 		DeviceHandle& myWindow;
+		DeviceContext myHandle;
+	};
+
+	class [[nodiscard]] CompatibleContext
+	{
+	public:
+		inline CompatibleContext(const DeviceContext& ctx) noexcept
+			: myHandle(::CreateCompatibleDC(ctx))
+		{}
+
+		inline CompatibleContext(DeviceContext&& ctx) noexcept
+			: myHandle(::CreateCompatibleDC(static_cast<DeviceContext&&>(ctx)))
+		{}
+
+		inline CompatibleContext(const ManagedContext& ctx) noexcept
+			: myHandle(::CreateCompatibleDC(ctx.GetHandle()))
+		{}
+
+		inline ~CompatibleContext() noexcept
+		{
+			::DeleteDC(myHandle);
+		}
+
+		[[nodiscard]]
+		inline const DeviceContext& GetHandle() const& noexcept
+		{
+			return myHandle;
+		}
+
+		[[nodiscard]]
+		inline DeviceContext&& GetHandle() && noexcept
+		{
+			return static_cast<DeviceContext&&>(myHandle);
+		}
+
+		CompatibleContext(const CompatibleContext&) = delete;
+		CompatibleContext& operator=(const CompatibleContext&) = delete;
+		CompatibleContext(CompatibleContext&&) = default;
+		CompatibleContext& operator=(CompatibleContext&&) = default;
+		CompatibleContext(const CompatibleContext&&) = delete;
+		CompatibleContext& operator=(const CompatibleContext&&) = delete;
+
 		DeviceContext myHandle;
 	};
 }
