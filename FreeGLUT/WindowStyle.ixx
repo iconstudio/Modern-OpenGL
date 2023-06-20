@@ -4,7 +4,7 @@ export module Glib.Device.Window:Style;
 
 export namespace gl::device
 {
-	enum class WindowStyle : DWORD
+	enum class WindowStyle : unsigned long
 	{
 		Plain = WS_OVERLAPPED,
 		Visible = WS_VISIBLE,
@@ -33,6 +33,18 @@ export namespace gl::device
 	namespace styles
 	{
 		inline constexpr WindowStyle Default = WindowStyle{ WS_OVERLAPPEDWINDOW };
+	}
+
+	[[nodiscard]]
+	constexpr unsigned long Export(const WindowStyle& style) noexcept
+	{
+		return static_cast<unsigned long>(style);
+	}
+
+	[[nodiscard]]
+	constexpr unsigned long Export(WindowStyle&& style) noexcept
+	{
+		return static_cast<unsigned long>(style);
 	}
 
 	[[nodiscard]]
