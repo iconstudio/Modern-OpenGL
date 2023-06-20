@@ -6,6 +6,7 @@ export import Glib.Device.ProcessInstance;
 export import Glib.Device.Handle;
 export import Glib.Device.Context;
 export import :Property;
+export import :Style;
 
 export namespace gl::device
 {

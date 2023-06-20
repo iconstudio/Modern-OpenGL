@@ -2,7 +2,6 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window:Property;
-export import :Style;
 import Utility.Monad;
 
 export namespace gl::device
