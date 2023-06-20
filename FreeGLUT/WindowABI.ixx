@@ -4,7 +4,6 @@ module;
 export module Glib.Device.Window:ABI;
 import <string_view>;
 import Glib.DefaultProperty;
-export import :Property;
 
 export namespace gl::device::detail
 {

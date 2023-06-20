@@ -3,6 +3,7 @@ module;
 
 export module Glib.Device.Window:Property;
 import Glib.Device.ProcessInstance;
+import :ABI;
 
 export namespace gl::device
 {
