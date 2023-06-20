@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window;
+import <string_view>;
 export import Glib.Rect;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
@@ -87,7 +88,7 @@ export namespace gl::device
 	{
 	protected:
 		Window(const WindowProperty& properties
-			, _Notnull_ const wchar_t* const& title
+			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
 			, const int& y
@@ -101,7 +102,7 @@ export namespace gl::device
 
 			myHandle = detail::CreateNativeWindow(device_class.hInstance
 				, device_class.lpszClassName
-				, title
+				, title.data()
 				, Export(style), 0
 				, x, y, width, height);
 		}
@@ -109,7 +110,7 @@ export namespace gl::device
 	public:
 		[[nodiscard]]
 		static inline Window Create(const WindowProperty& properties
-			, _Notnull_ const wchar_t* const& title
+			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
 			, const int& y
@@ -120,8 +121,44 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
+		static inline Window Create(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height)
+		{
+			return Window(static_cast<WindowProperty&&>(properties), title, style, x, y, width, height);
+		}
+
+		[[nodiscard]]
 		static inline Window Create(const WindowProperty& properties
-			, _Notnull_ const wchar_t* const& title
+			, const std::wstring_view& title
+			, WindowStyle&& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height)
+		{
+			return Window(properties, title, static_cast<WindowStyle&&>(style), x, y, width, height);
+		}
+
+		[[nodiscard]]
+		static inline Window Create(WindowProperty&& properties
+			, const std::wstring_view& title
+			, WindowStyle&& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height)
+		{
+			return Window(static_cast<WindowProperty&&>(properties), title, static_cast<WindowStyle&&>(style), x, y, width, height);
+		}
+
+		[[nodiscard]]
+		static inline Window Create(const WindowProperty& properties
+			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const Rect& dimension)
 		{
