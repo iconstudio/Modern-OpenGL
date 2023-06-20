@@ -100,7 +100,7 @@
     <ClCompile Include="WindowProperty.ixx">
       <Filter>소스 파일\Window</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceMessage.ixx">
+    <ClCompile Include="DeviceCommand.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
