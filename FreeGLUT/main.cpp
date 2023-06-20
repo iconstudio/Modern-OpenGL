@@ -20,7 +20,6 @@ int main(const int& argc, char** argv)
 	auto hinstance = gl::device::GetProcessInstance();
 	const int error0 = gl::device::GetLastError();
 
-
 	auto property = gl::device::WindowProperty{ hinstance, WndProc, my_windows_class };
 	const int error1 = gl::device::GetLastError();
 
