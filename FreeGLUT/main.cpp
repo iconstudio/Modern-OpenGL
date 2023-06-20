@@ -1,5 +1,7 @@
 #include "pch.hpp"
 #include "Internal.hpp"
+#undef CreateWindow
+#undef CreateWindowEx
 
 import Glib;
 import Glib.Device.ProcessInstance;
