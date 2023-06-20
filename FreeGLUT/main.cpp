@@ -18,21 +18,17 @@ int main(const int& argc, char** argv)
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
 	auto hinstance = gl::device::GetProcessInstance();
-	const int error0 = gl::device::GetLastError();
 
 	auto property = gl::device::WindowProperty{ hinstance, WndProc, my_windows_class };
-	const int error1 = gl::device::GetLastError();
 
 	property.Register();
-	const int error2 = gl::device::GetLastError();
 
 	auto window = gl::device::Window::Create(property, L"MY_TITLE", gl::device::styles::Default, -1, -1, 400, 300);
-	const int error3 = gl::device::GetLastError();
 
-	window.Show();
-	const int error4 = gl::device::GetLastError();
+	window.Awake();
+	window.Start();
 
-	//while (true)
+	while (true)
 	{
 
 	}

@@ -174,9 +174,14 @@ export namespace gl::device
 
 		constexpr Window() noexcept = default;
 
-		virtual inline ~Window() noexcept
+		inline void Awake() noexcept
 		{
-			::UnregisterClass(myClassName, myInstance);
+			Show();
+		}
+
+		inline void Start() noexcept
+		{
+			::UpdateWindow(myHandle);
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
@@ -359,6 +364,11 @@ export namespace gl::device
 		constexpr const wchar_t*&& GetClass() && noexcept
 		{
 			return static_cast<const wchar_t*&&>(myClassName);
+		}
+
+		virtual inline ~Window() noexcept
+		{
+			::UnregisterClass(myClassName, myInstance);
 		}
 
 		Window(const Window&) = delete;
