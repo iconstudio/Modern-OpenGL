@@ -12,7 +12,8 @@ export namespace gl::device::detail
 	inline HWND CreateNativeWindow(const HINSTANCE& hinst
 		, _Notnull_ const wchar_t* const& class_name
 		, _Notnull_ const wchar_t* const& title
-		, const unsigned long& style
+		, const unsigned long& styles
+		, const unsigned long& options
 		, const int& x
 		, const int& y
 		, const int& width
@@ -22,9 +23,9 @@ export namespace gl::device::detail
 		, const LPVOID& uparams = nullptr)
 		noexcept
 	{
-		return ::CreateWindowEx(0
+		return ::CreateWindowEx(options
 		, class_name, title
-		, style, x, y, width, height
+		, styles, x, y, width, height
 		, parent
 		, menu
 		, hinst, uparams);

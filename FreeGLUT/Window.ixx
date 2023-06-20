@@ -101,7 +101,7 @@ export namespace gl::device
 			myHandle = detail::CreateNativeWindow(device_class.hInstance
 				, device_class.lpszClassName
 				, title
-				, style
+				, style, 0
 				, x, y, width, height);
 		}
 
