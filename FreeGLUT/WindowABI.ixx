@@ -5,11 +5,19 @@ export module Glib.Device.Window:ABI;
 import <string_view>;
 import Glib.DefaultProperty;
 
-export namespace gl::device::detail
+export namespace gl::device
 {
 	using ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
-	using ::WNDCLASSEXW, ::tagWNDCLASSEXW;
 	using ::WNDPROC;
+
+	using ::HWND, ::HWND__;
+
+	using ::WNDCLASSEXW, ::tagWNDCLASSEXW;
+	using RawWindowProperty = ::tagWNDCLASSEXW;
+
+	using ::MSG, ::tagMSG;
+	using RawDeviceMessage = ::tagMSG;
+}
 
 	using Message = ::MSG;
 
