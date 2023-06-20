@@ -5,7 +5,6 @@ export module Glib.Device.Handle;
 
 export namespace gl::device
 {
-	using ::HWND, ::HMENU, ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
 	using RawDeviceHandle = ::HWND;
 
 	using ::GetLastError;

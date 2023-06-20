@@ -7,8 +7,6 @@ import :ABI;
 
 export namespace gl::device
 {
-	using ::WNDPROC, ::WNDCLASSEXW;
-
 	class [[nodiscard]] WindowProperty
 	{
 	public:

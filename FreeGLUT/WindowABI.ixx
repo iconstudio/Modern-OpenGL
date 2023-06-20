@@ -7,8 +7,12 @@ import Glib.DefaultProperty;
 
 export namespace gl::device::detail
 {
+	using ::HWND, ::HMENU, ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
+	using ::HINSTANCE;
+	using ::WNDCLASSEXW;
+	using ::WNDPROC;
+
 	using Message = ::MSG;
-	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
 
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
