@@ -7,17 +7,16 @@ import Utility.Atomic;
 export namespace gl::device
 {
 	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
-	using WindowsHandle = ::HWND;
+	using RawDeviceHandle = ::HWND;
 
 	using ::GetLastError;
 
 	class [[nodiscard]] DeviceHandle
 	{
 	protected:
-		explicit constexpr DeviceHandle(WindowsHandle&& handle)
+		explicit constexpr DeviceHandle(RawDeviceHandle&& handle)
 			noexcept
-			: myHandle(static_cast<WindowsHandle&&>(handle))
-			, isAvailable(true)
+			: myHandle(static_cast<RawDeviceHandle&&>(handle))
 		{}
 
 	public:
@@ -31,7 +30,7 @@ export namespace gl::device
 			, const int& y
 			, const int& width
 			, const int& height
-			, const WindowsHandle& parent = nullptr
+			, const RawDeviceHandle& parent = nullptr
 			, const HMENU& menu = nullptr
 			, const LPVOID& uparams = nullptr)
 			noexcept
@@ -74,7 +73,7 @@ export namespace gl::device
 			, const int& y
 			, const int& width
 			, const int& height
-			, const WindowsHandle& parent = nullptr
+			, const RawDeviceHandle& parent = nullptr
 			, const HMENU& menu = nullptr
 			, const LPVOID& uparams = nullptr)
 			noexcept
@@ -96,8 +95,6 @@ export namespace gl::device
 		{
 			if (myHandle)
 			{
-				isAvailable = false;
-
 				::DestroyWindow(myHandle);
 				myHandle = nullptr;
 			}
@@ -106,14 +103,7 @@ export namespace gl::device
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
-			if (IsAvailable())
-			{
-				return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
-			}
-			else
-			{
-				return false;
-			}
+			return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
 		}
 
 		inline bool SendCommand(const unsigned int& msg) const
@@ -131,7 +121,6 @@ export namespace gl::device
 		{
 			if (bool result = SendCommand(WM_CLOSE); result)
 			{
-				isAvailable = false;
 				return result;
 			}
 			else
@@ -194,12 +183,6 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline bool IsAvailable() const noexcept
-		{
-			return isAvailable.load(util::memory_order_relaxed);
-		}
-
-		[[nodiscard]]
 		inline DWORD GetStyle() const noexcept
 		{
 			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_STYLE));
@@ -218,75 +201,75 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetOwner() const noexcept
+		inline RawDeviceHandle GetOwner() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_OWNER);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetFirstChild() const noexcept
+		inline RawDeviceHandle GetFirstChild() const noexcept
 		{
 			return ::GetTopWindow(myHandle);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetFirstSibling() const noexcept
+		inline RawDeviceHandle GetFirstSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDFIRST);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetLastChild() const noexcept
+		inline RawDeviceHandle GetLastChild() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_CHILD);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetLastSibling() const noexcept
+		inline RawDeviceHandle GetLastSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDLAST);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetNextSibling() const noexcept
+		inline RawDeviceHandle GetNextSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDNEXT);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetPrevSibling() const noexcept
+		inline RawDeviceHandle GetPrevSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDPREV);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetWindowParent() const noexcept
+		inline RawDeviceHandle GetWindowParent() const noexcept
 		{
 			return ::GetParent(myHandle);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetWindowRoot() const noexcept
+		inline RawDeviceHandle GetWindowRoot() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOT);
 		}
 
 		[[nodiscard]]
-		inline WindowsHandle GetWindowRootOwner() const noexcept
+		inline RawDeviceHandle GetWindowRootOwner() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOTOWNER);
 		}
 
 		[[nodiscard]]
-		inline const volatile WindowsHandle& GetHandle() const& noexcept
+		inline const volatile RawDeviceHandle& GetHandle() const& noexcept
 		{
 			return myHandle;
 		}
 
 		[[nodiscard]]
-		inline volatile WindowsHandle&& GetHandle() && noexcept
+		inline volatile RawDeviceHandle&& GetHandle() && noexcept
 		{
-			return static_cast<volatile WindowsHandle&&>(myHandle);
+			return static_cast<volatile RawDeviceHandle&&>(myHandle);
 		}
 
 		[[nodiscard]]
@@ -296,11 +279,45 @@ export namespace gl::device
 		}
 
 		DeviceHandle(const DeviceHandle&) = delete;
-		constexpr DeviceHandle(DeviceHandle&&) noexcept = delete;
+		constexpr DeviceHandle(DeviceHandle&&) noexcept = default;
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
-		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = delete;
+		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
 
-		volatile WindowsHandle myHandle;
-		util::atomic_bool isAvailable;
+		volatile RawDeviceHandle myHandle;
 	};
+
+
+#define     DeletePen(hpen)      DeleteObject((HGDIOBJ)(HPEN)(hpen))
+#define     SelectPen(hdc, hpen)    ((HPEN)SelectObject((hdc), (HGDIOBJ)(HPEN)(hpen)))
+#define     GetStockPen(i)       ((HPEN)GetStockObject(i))
+
+#define     DeleteBrush(hbr)     DeleteObject((HGDIOBJ)(HBRUSH)(hbr))
+#define     SelectBrush(hdc, hbr)   ((HBRUSH)SelectObject((hdc), (HGDIOBJ)(HBRUSH)(hbr)))
+#define     GetStockBrush(i)     ((HBRUSH)GetStockObject(i))
+
+#define     DeleteRgn(hrgn)      DeleteObject((HGDIOBJ)(HRGN)(hrgn))
+
+#define     CopyRgn(hrgnDst, hrgnSrc)               CombineRgn(hrgnDst, hrgnSrc, 0, RGN_COPY)
+#define     IntersectRgn(hrgnResult, hrgnA, hrgnB)  CombineRgn(hrgnResult, hrgnA, hrgnB, RGN_AND)
+#define     SubtractRgn(hrgnResult, hrgnA, hrgnB)   CombineRgn(hrgnResult, hrgnA, hrgnB, RGN_DIFF)
+#define     UnionRgn(hrgnResult, hrgnA, hrgnB)      CombineRgn(hrgnResult, hrgnA, hrgnB, RGN_OR)
+#define     XorRgn(hrgnResult, hrgnA, hrgnB)        CombineRgn(hrgnResult, hrgnA, hrgnB, RGN_XOR)
+
+#define     DeletePalette(hpal)     DeleteObject((HGDIOBJ)(HPALETTE)(hpal))
+
+#define     DeleteFont(hfont)            DeleteObject((HGDIOBJ)(HFONT)(hfont))
+#define     SelectFont(hdc, hfont)  ((HFONT)SelectObject((hdc), (HGDIOBJ)(HFONT)(hfont)))
+#define     GetStockFont(i)      ((HFONT)GetStockObject(i))
+
+#define     DeleteBitmap(hbm)       DeleteObject((HGDIOBJ)(HBITMAP)(hbm))
+#define     SelectBitmap(hdc, hbm)  ((HBITMAP)SelectObject((hdc), (HGDIOBJ)(HBITMAP)(hbm)))
+
+#define     InsetRect(lprc, dx, dy) InflateRect((lprc), -(dx), -(dy))
+
+#define  MapWindowRect(hwndFrom, hwndTo, lprc) \
+                    MapWindowPoints((hwndFrom), (hwndTo), (POINT *)(lprc), 2)
+
+#define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
+#define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)
+#define IsMButtonDown()  (GetKeyState(VK_MBUTTON) < 0)
 }
