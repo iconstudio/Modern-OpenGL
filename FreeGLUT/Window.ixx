@@ -41,9 +41,11 @@ export namespace gl::device
 		}
 
 		Window(const DeviceProperty& properties)
+			: myInstance(properties.GetInstance())
+			, myClassName(properties.GetClass())
+			, myHandle(nullptr)
 		{
 			const auto& device_class = properties.GetHandle();
-			myInstance = device_class.hInstance;
 
 			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
 			myHandle = CreateNativeWindow(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
