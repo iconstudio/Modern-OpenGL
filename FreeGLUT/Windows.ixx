@@ -5,6 +5,7 @@ export module Glib.Windows;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Handle;
 export import Glib.Device.Context;
+import Utility.Monad;
 
 export namespace gl::device
 {
@@ -109,6 +110,18 @@ export namespace gl::device
 			myWindowClass.hCursor = cursor;
 		}
 
+		util::Monad<DeviceClass> Register() const noexcept
+		{
+			if (RegisterClassExW(&myWindowClass))
+			{
+				return myWindowClass;
+			}
+			else
+			{
+				return util::nullopt;
+			}
+		}
+
 		[[nodiscard]]
 		constexpr const DeviceClass& GetHandle() const& noexcept
 		{
@@ -135,11 +148,6 @@ export namespace gl::device
 	protected:
 		Window(const Property& properties)
 		{
-			if (!RegisterClassExW(&properties.GetHandle()))
-			{
-				throw "Failed to register window class.";
-			}
-
 			const auto& device_class = properties.GetHandle();
 			myInstance = device_class.hInstance;
 
