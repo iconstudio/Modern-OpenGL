@@ -76,7 +76,12 @@ export namespace gl::device
 
 		inline bool Register() noexcept
 		{
-			return 0 == RegisterClassExW(&myWindowClass);
+			return detail::RegisterProcess(myWindowClass);
+		}
+
+		inline bool Deregister() noexcept
+		{
+			return detail::UnregisterProcess(myWindowClass.hInstance, myWindowClass.lpszClassName);
 		}
 
 		[[nodiscard]]
