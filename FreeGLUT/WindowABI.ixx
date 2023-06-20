@@ -7,9 +7,8 @@ import Glib.DefaultProperty;
 
 export namespace gl::device::detail
 {
-	using ::HWND, ::HMENU, ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
-	using ::HINSTANCE;
-	using ::WNDCLASSEXW;
+	using ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
+	using ::WNDCLASSEXW, ::tagWNDCLASSEXW;
 	using ::WNDPROC;
 
 	using Message = ::MSG;
@@ -27,7 +26,7 @@ export namespace gl::device::detail
 	}
 
 	[[nodiscard]]
-	inline HWND CreateNativeWindow(const HINSTANCE& hinst
+	inline HWND__* CreateNativeWindow(const HINSTANCE& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles

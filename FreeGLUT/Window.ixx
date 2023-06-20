@@ -216,61 +216,61 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline HWND GetOwner() const noexcept
+		inline RawDeviceHandle GetOwner() const noexcept
 		{
 			return myHandle.GetOwner();
 		}
 
 		[[nodiscard]]
-		inline HWND GetFirstChild() const noexcept
+		inline RawDeviceHandle GetFirstChild() const noexcept
 		{
 			return myHandle.GetFirstChild();
 		}
 
 		[[nodiscard]]
-		inline HWND GetFirstSibling() const noexcept
+		inline RawDeviceHandle GetFirstSibling() const noexcept
 		{
 			return myHandle.GetFirstSibling();
 		}
 
 		[[nodiscard]]
-		inline HWND GetLastChild() const noexcept
+		inline RawDeviceHandle GetLastChild() const noexcept
 		{
 			return myHandle.GetLastChild();
 		}
 
 		[[nodiscard]]
-		inline HWND GetLastSibling() const noexcept
+		inline RawDeviceHandle GetLastSibling() const noexcept
 		{
 			return myHandle.GetLastSibling();
 		}
 
 		[[nodiscard]]
-		inline HWND GetNextSibling() const noexcept
+		inline RawDeviceHandle GetNextSibling() const noexcept
 		{
 			return myHandle.GetNextSibling();
 		}
 
 		[[nodiscard]]
-		inline HWND GetPrevSibling() const noexcept
+		inline RawDeviceHandle GetPrevSibling() const noexcept
 		{
 			return myHandle.GetPrevSibling();
 		}
 
 		[[nodiscard]]
-		inline HWND GetParent() const noexcept
+		inline RawDeviceHandle GetParent() const noexcept
 		{
 			return myHandle.GetParent();
 		}
 
 		[[nodiscard]]
-		inline HWND GetRoot() const noexcept
+		inline RawDeviceHandle GetRoot() const noexcept
 		{
 			return myHandle.GetRoot();
 		}
 
 		[[nodiscard]]
-		inline HWND GetRootOwner() const noexcept
+		inline RawDeviceHandle GetRootOwner() const noexcept
 		{
 			return myHandle.GetRootOwner();
 		}
