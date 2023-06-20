@@ -65,6 +65,31 @@ export namespace gl::device
 			return Create(instance, class_name, title, style, x, y, width, height, parent.GetHandle(), menu, uparams);
 		}
 
+		[[nodiscard]]
+		static DeviceHandle Create(const ::HINSTANCE& instance
+			, _Notnull_ const wchar_t* const& class_name
+			, _Notnull_ const wchar_t* const& title
+			, const unsigned int& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+			, const WindowsHandle& parent = nullptr
+			, const HMENU& menu = nullptr
+			, const LPVOID& uparams = nullptr)
+			noexcept
+		{
+			return DeviceHandle
+			{
+				::CreateWindowEx(0
+				, class_name, title
+				, style, x, y, width, height
+				, parent
+				, menu
+				, instance, uparams)
+			};
+		}
+
 		constexpr DeviceHandle() noexcept = default;
 
 		virtual ~DeviceHandle() noexcept
