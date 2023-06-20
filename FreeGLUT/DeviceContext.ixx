@@ -14,7 +14,7 @@ export namespace gl::device
 	{
 	public:
 		explicit inline DeviceContext(DeviceHandle& hwnd) noexcept
-			: myHandle(::GetDC(hwnd.myHandle))
+			: myHandle(::GetDC(hwnd.GetHandle()))
 		{}
 
 		explicit constexpr DeviceContext(RawDeviceContext&& handle) noexcept
