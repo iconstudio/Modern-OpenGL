@@ -19,9 +19,9 @@ export namespace gl::device
 export namespace gl::device::detail
 {
 	[[nodiscard]]
-	BOOL __GetMessage(RawDeviceMessage& msg) noexcept
+	BOOL __GetMessage(const HWND& hwnd, RawDeviceMessage& msg) noexcept
 	{
-		return GetMessage(&msg, 0, 0, 0);
+		return GetMessage(&msg, hwnd, 0, 0);
 	}
 
 	BOOL __TranslateMessage(const RawDeviceMessage& msg) noexcept
