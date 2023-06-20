@@ -19,7 +19,34 @@ export namespace gl::device
 	using RawDeviceMessage = ::tagMSG;
 }
 
-	using Message = ::MSG;
+export namespace gl::device::detail
+{
+	[[nodiscard]]
+	BOOL __GetMessage(RawDeviceMessage& msg) noexcept
+	{
+		return GetMessage(&msg, 0, 0, 0);
+	}
+
+	BOOL __TranslateMessage(const RawDeviceMessage& msg) noexcept
+	{
+		return TranslateMessage(&msg);
+	}
+
+	LRESULT __DispatchMessage(const RawDeviceMessage& msg) noexcept
+	{
+		return DispatchMessage(&msg);
+	}
+
+	inline void test_msg() noexcept
+	{
+		MSG Message;
+		while (GetMessage(&Message, 0, 0, 0))
+		{
+			TranslateMessage(&Message);
+
+			DispatchMessage(&Message);
+		}
+	}
 
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 

@@ -363,7 +363,7 @@ export extern "C++" namespace gl::device
 		Window& operator=(const Window&) = delete;
 		constexpr Window& operator=(Window&&) noexcept = default;
 
-		HINSTANCE myInstance;
+		ProcessInstance myInstance;
 		DeviceHandle myHandle;
 		const wchar_t* myClassName;
 	};

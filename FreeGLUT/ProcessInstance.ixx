@@ -4,11 +4,12 @@ export module Glib.Device.ProcessInstance;
 
 export namespace gl::device
 {
-	using ::HINSTANCE;
+	using ::HINSTANCE, ::HINSTANCE__;
 	using ::HMODULE;
+	using ProcessInstance = HINSTANCE__*;
 
 	[[nodiscard]]
-	inline HINSTANCE__* GetProcessInstance() noexcept
+	inline ProcessInstance GetProcessInstance() noexcept
 	{
 		return ::GetModuleHandle(NULL);
 	}

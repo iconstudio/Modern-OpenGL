@@ -14,13 +14,13 @@ export namespace gl::device
 		constexpr ~WindowProperty() noexcept = default;
 
 		template<size_t ClassNameSize>
-		explicit WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
 			: WindowProperty(hinst, procedure, class_name)
 		{}
 
-		explicit WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 		) noexcept
 			: WindowProperty(hinst, procedure
@@ -33,7 +33,7 @@ export namespace gl::device
 		{}
 
 		template<size_t ClassNameSize>
-		explicit constexpr WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -50,7 +50,7 @@ export namespace gl::device
 						, menu_name)
 		{}
 
-		explicit constexpr WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -97,15 +97,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const HINSTANCE& GetInstance() const& noexcept
+		constexpr const ProcessInstance& GetInstance() const& noexcept
 		{
 			return myWindowClass.hInstance;
 		}
 
 		[[nodiscard]]
-		constexpr ::HINSTANCE&& GetInstance() && noexcept
+		constexpr ProcessInstance&& GetInstance() && noexcept
 		{
-			return static_cast<HINSTANCE&&>(myWindowClass.hInstance);
+			return static_cast<ProcessInstance&&>(myWindowClass.hInstance);
 		}
 
 		[[nodiscard]]
