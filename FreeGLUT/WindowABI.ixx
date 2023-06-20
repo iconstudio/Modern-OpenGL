@@ -9,15 +9,13 @@ export namespace gl::device
 {
 	using ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
 	using ::WNDPROC;
-
-	using ::HWND, ::HWND__;
-
-	using ::MSG, ::tagMSG;
-	using RawDeviceMessage = ::tagMSG;
 }
 
 export namespace gl::device::detail
 {
+	using ::MSG, ::tagMSG;
+	using RawDeviceMessage = ::tagMSG;
+
 	[[nodiscard]]
 	BOOL __GetMessage(const HWND& hwnd, RawDeviceMessage& msg) noexcept
 	{
