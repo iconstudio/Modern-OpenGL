@@ -7,10 +7,10 @@ export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import :Property;
 export import :Style;
+export import :ABI;
 
 export namespace gl::device
 {
-	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
 	using Message = ::MSG;
 
 	using ::GetLastError;
@@ -85,28 +85,6 @@ export namespace gl::device
 	class [[nodiscard]] Window
 	{
 	protected:
-		[[nodiscard]]
-		static HWND CreateNativeWindow(const HINSTANCE& hinst
-			, _Notnull_ const wchar_t* const& class_name
-			, _Notnull_ const wchar_t* const& title
-			, const unsigned long& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const HWND& parent = nullptr
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return ::CreateWindowEx(0
-			, class_name, title
-			, style, x, y, width, height
-			, parent
-			, menu
-			, hinst, uparams);
-		}
-
 		Window(const WindowProperty& properties
 			, _Notnull_ const wchar_t* const& title
 			, const int& x
@@ -120,7 +98,7 @@ export namespace gl::device
 			const auto& device_class = properties.GetHandle();
 
 			const DWORD style = WS_OVERLAPPEDWINDOW;
-			myHandle = CreateNativeWindow(device_class.hInstance
+			myHandle = detail::CreateNativeWindow(device_class.hInstance
 				, device_class.lpszClassName
 				, title
 				, style
@@ -138,6 +116,8 @@ export namespace gl::device
 		{
 			return Window(properties, title, x, y, width, height);
 		}
+
+		constexpr Window() noexcept = default;
 
 		virtual inline ~Window() noexcept
 		{
@@ -326,9 +306,9 @@ export namespace gl::device
 			return static_cast<const wchar_t*&&>(myClassName);
 		}
 
-		constexpr Window(const Window&) noexcept = delete;
-		constexpr Window& operator=(const Window&) noexcept = delete;
+		Window(const Window&) = delete;
 		constexpr Window(Window&&) noexcept = default;
+		Window& operator=(const Window&) = delete;
 		constexpr Window& operator=(Window&&) noexcept = default;
 
 		HINSTANCE myInstance;

@@ -88,5 +88,8 @@
     <ClCompile Include="WindowStyle.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="WindowABI.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

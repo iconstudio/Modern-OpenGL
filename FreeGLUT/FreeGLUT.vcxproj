@@ -187,6 +187,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
+    <ClCompile Include="WindowABI.ixx" />
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowStyle.ixx" />
