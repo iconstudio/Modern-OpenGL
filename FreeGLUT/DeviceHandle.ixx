@@ -13,83 +13,16 @@ export namespace gl::device
 
 	class [[nodiscard]] DeviceHandle
 	{
-	protected:
-		explicit constexpr DeviceHandle(RawDeviceHandle&& handle)
-			noexcept
+	public:
+		constexpr DeviceHandle() noexcept = default;
+
+		constexpr DeviceHandle(RawDeviceHandle&& handle) noexcept
 			: myHandle(static_cast<RawDeviceHandle&&>(handle))
 		{}
 
-	public:
-		template<size_t ClassLength, size_t TitleLength>
-		[[nodiscard]]
-		static DeviceHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t(&class_name)[ClassLength]
-			, _Notnull_ const wchar_t(&title)[TitleLength]
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const RawDeviceHandle& parent = nullptr
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return DeviceHandle
-			{
-				::CreateWindowEx(0
-				, class_name, title
-				, style, x, y, width, height
-				, parent
-				, menu
-				, instance, uparams)
-			};
-		}
-
-		template<size_t ClassLength, size_t TitleLength>
-		[[nodiscard]]
-		static DeviceHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t(&class_name)[ClassLength]
-			, _Notnull_ const wchar_t(&title)[TitleLength]
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const DeviceHandle& parent
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return Create(instance, class_name, title, style, x, y, width, height, parent.GetHandle(), menu, uparams);
-		}
-
-		[[nodiscard]]
-		static DeviceHandle Create(const ::HINSTANCE& instance
-			, _Notnull_ const wchar_t* const& class_name
-			, _Notnull_ const wchar_t* const& title
-			, const unsigned int& style
-			, const int& x
-			, const int& y
-			, const int& width
-			, const int& height
-			, const RawDeviceHandle& parent = nullptr
-			, const HMENU& menu = nullptr
-			, const LPVOID& uparams = nullptr)
-			noexcept
-		{
-			return DeviceHandle
-			{
-				::CreateWindowEx(0
-				, class_name, title
-				, style, x, y, width, height
-				, parent
-				, menu
-				, instance, uparams)
-			};
-		}
-
-		constexpr DeviceHandle() noexcept = default;
+		constexpr DeviceHandle(volatile RawDeviceHandle&& handle) noexcept
+			: myHandle(static_cast<volatile RawDeviceHandle&&>(handle))
+		{}
 
 		virtual ~DeviceHandle() noexcept
 		{
@@ -98,6 +31,18 @@ export namespace gl::device
 				::DestroyWindow(myHandle);
 				myHandle = nullptr;
 			}
+		}
+
+		constexpr DeviceHandle& operator=(RawDeviceHandle&& handle) noexcept
+		{
+			myHandle = static_cast<RawDeviceHandle&&>(handle);
+			return *this;
+		}
+
+		constexpr DeviceHandle& operator=(volatile RawDeviceHandle&& handle) noexcept
+		{
+			myHandle = static_cast<volatile RawDeviceHandle&&>(handle);
+			return *this;
 		}
 
 		[[nodiscard]]
@@ -116,8 +61,6 @@ export namespace gl::device
 		{
 			return myHandle;
 		}
-
-		[[nodiscard]]
 
 		[[nodiscard]]
 		constexpr bool operator==(const DeviceHandle& rhs) const noexcept

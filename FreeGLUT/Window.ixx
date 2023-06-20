@@ -4,13 +4,13 @@ module;
 export module Glib.Device.Window;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
+export import Glib.Device.Handle;
 export import :Property;
 export import :Style;
 
 export namespace gl::device
 {
 	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
-	using RawDeviceHandle = ::HWND;
 	using Message = ::MSG;
 
 	using ::GetLastError;
@@ -18,15 +18,35 @@ export namespace gl::device
 	class [[nodiscard]] Window
 	{
 	protected:
+		[[nodiscard]]
+		static RawDeviceHandle CreateNativeWindow(const ::HINSTANCE& instance
+			, _Notnull_ const wchar_t* const& class_name
+			, _Notnull_ const wchar_t* const& title
+			, const unsigned long& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+			, const RawDeviceHandle& parent = nullptr
+			, const HMENU& menu = nullptr
+			, const LPVOID& uparams = nullptr)
+			noexcept
+		{
+			return ::CreateWindowEx(0
+			, class_name, title
+			, style, x, y, width, height
+			, parent
+			, menu
+			, instance, uparams);
+		}
+
 		Window(const DeviceProperty& properties)
 		{
 			const auto& device_class = properties.GetHandle();
 			myInstance = device_class.hInstance;
 
 			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
-			myHandle = DeviceHandle::Create(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
-
-
+			myHandle = CreateNativeWindow(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
 		}
 
 	public:
