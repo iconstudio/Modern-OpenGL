@@ -188,11 +188,6 @@ export extern "C++" namespace gl::device
 			return SendCommand(msg, 0, 0);
 		}
 
-		inline bool SetWindowRedraw(const bool& flag) noexcept
-		{
-			return myHandle.SetWindowRedraw(flag);
-		}
-
 		inline bool UICommand(const int& cmd) noexcept
 		{
 			return myHandle.UICommand(cmd);
@@ -236,6 +231,11 @@ export extern "C++" namespace gl::device
 		inline bool MakeForeground() noexcept
 		{
 			return myHandle.MakeForeground();
+		}
+
+		inline bool Redraw(const bool& flag) noexcept
+		{
+			return myHandle.Redraw(flag);
 		}
 
 		[[nodiscard]]

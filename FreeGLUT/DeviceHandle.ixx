@@ -46,11 +46,6 @@ export namespace gl::device
 			return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
 		}
 
-		inline bool SetWindowRedraw(const bool& flag) noexcept
-		{
-			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
-		}
-
 		inline bool UICommand(const int& cmd) noexcept
 		{
 			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd), 0);
@@ -94,6 +89,11 @@ export namespace gl::device
 		inline bool MakeForeground() noexcept
 		{
 			return SendCommand(WM_ACTIVATE, WA_ACTIVE, 0);
+		}
+
+		inline bool Redraw(const bool& flag) noexcept
+		{
+			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
 		}
 
 		[[nodiscard]]
