@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 #include <type_traits>
 export module Glib.Device.Handle;
+import Glib.Device.Command;
 
 export namespace gl::device
 {
@@ -43,7 +44,7 @@ export namespace gl::device
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
-			return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
+			return CommandQueue::Push(myHandle, msg, lhs, rhs);
 		}
 
 		inline bool UICommand(const int& cmd) noexcept
