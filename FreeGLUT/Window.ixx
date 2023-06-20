@@ -87,6 +87,7 @@ export namespace gl::device
 	protected:
 		Window(const WindowProperty& properties
 			, _Notnull_ const wchar_t* const& title
+			, const WindowStyle& style
 			, const int& x
 			, const int& y
 			, const int& width
@@ -97,11 +98,10 @@ export namespace gl::device
 		{
 			const auto& device_class = properties.GetHandle();
 
-			const DWORD style = WS_OVERLAPPEDWINDOW;
 			myHandle = detail::CreateNativeWindow(device_class.hInstance
 				, device_class.lpszClassName
 				, title
-				, style, 0
+				, Export(style), 0
 				, x, y, width, height);
 		}
 
@@ -109,12 +109,13 @@ export namespace gl::device
 		[[nodiscard]]
 		static inline Window Create(const WindowProperty& properties
 			, _Notnull_ const wchar_t* const& title
+			, const WindowStyle& style
 			, const int& x
 			, const int& y
 			, const int& width
 			, const int& height)
 		{
-			return Window(properties, title, x, y, width, height);
+			return Window(properties, title, style, x, y, width, height);
 		}
 
 		constexpr Window() noexcept = default;

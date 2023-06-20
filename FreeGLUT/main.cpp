@@ -27,7 +27,7 @@ int main(const int& argc, char** argv)
 	property.Register();
 	const int error2 = gl::device::GetLastError();
 
-	auto window = gl::device::Window::Create(property, L"MY_TITLE", -1, -1, 400, 300);
+	auto window = gl::device::Window::Create(property, L"MY_TITLE", gl::device::styles::Default, -1, -1, 400, 300);
 	const int error3 = gl::device::GetLastError();
 
 	window.Show();
