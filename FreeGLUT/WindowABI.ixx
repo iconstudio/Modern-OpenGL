@@ -1,17 +1,17 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Window:ABI;
+export module Glib.Window:ABI;
 import <string_view>;
 import Glib.DefaultProperty;
 
-export namespace gl::device
+export namespace gl::window
 {
 	using ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
 	using ::WNDPROC;
 }
 
-export namespace gl::device::detail
+export namespace gl::window::detail
 {
 	using ::MSG, ::tagMSG;
 	using RawDeviceMessage = ::tagMSG;

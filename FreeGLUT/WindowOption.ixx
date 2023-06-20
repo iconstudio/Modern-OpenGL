@@ -1,8 +1,8 @@
 module;
 #include "Internal.hpp"
-export module Glib.Device.Window:Option;
+export module Glib.Window:Option;
 
-export namespace gl::device
+export namespace gl::window
 {
 	enum class WindowOption : unsigned long
 	{

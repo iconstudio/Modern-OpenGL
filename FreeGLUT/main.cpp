@@ -6,7 +6,7 @@
 import Glib;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
-import Glib.Device.Window;
+import Glib.Window;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
@@ -26,11 +26,11 @@ int main(const int& argc, char** argv)
 
 	auto hinstance = gl::device::GetProcessInstance();
 
-	auto property = gl::device::WindowProperty{ hinstance, WndProc, my_windows_class };
+	auto property = gl::window::WindowProperty{ hinstance, WndProc, my_windows_class };
 
 	property.Register();
 
-	auto window = gl::device::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);
+	auto window = gl::window::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);
 
 	window.Awake();
 	window.Start();

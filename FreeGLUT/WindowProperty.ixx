@@ -1,11 +1,11 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Window:Property;
+export module Glib.Window:Property;
 import Glib.Device.ProcessInstance;
 import :ABI;
 
-export namespace gl::device
+export namespace gl::window
 {
 	class [[nodiscard]] WindowProperty
 	{
@@ -16,13 +16,13 @@ export namespace gl::device
 		constexpr ~WindowProperty() noexcept = default;
 
 		template<size_t ClassNameSize>
-		explicit WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
+		explicit WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
 			: WindowProperty(hinst, procedure, class_name)
 		{}
 
-		explicit WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
+		explicit WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 		) noexcept
 			: WindowProperty(hinst, procedure
@@ -35,7 +35,7 @@ export namespace gl::device
 		{}
 
 		template<size_t ClassNameSize>
-		explicit constexpr WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -52,7 +52,7 @@ export namespace gl::device
 						, menu_name)
 		{}
 
-		explicit constexpr WindowProperty(const ProcessInstance& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -99,15 +99,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const ProcessInstance& GetInstance() const& noexcept
+		constexpr const device::ProcessInstance& GetInstance() const& noexcept
 		{
 			return myWindowClass.hInstance;
 		}
 
 		[[nodiscard]]
-		constexpr ProcessInstance&& GetInstance() && noexcept
+		constexpr device::ProcessInstance&& GetInstance() && noexcept
 		{
-			return static_cast<ProcessInstance&&>(myWindowClass.hInstance);
+			return static_cast<device::ProcessInstance&&>(myWindowClass.hInstance);
 		}
 
 		[[nodiscard]]

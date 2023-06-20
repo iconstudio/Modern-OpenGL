@@ -1,8 +1,8 @@
 module;
 #include "Internal.hpp"
-export module Glib.Device.Window:Style;
+export module Glib.Window:Style;
 
-export namespace gl::device
+export namespace gl::window
 {
 	enum class WindowStyle : unsigned long
 	{

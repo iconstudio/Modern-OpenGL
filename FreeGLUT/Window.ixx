@@ -1,5 +1,5 @@
 module;
-export module Glib.Device.Window;
+export module Glib.Window;
 import <string_view>;
 export import Glib.Rect;
 export import Glib.DefaultProperty;
@@ -11,7 +11,7 @@ export import :Style;
 export import :Option;
 export import :ABI;
 
-export extern "C++" namespace gl::device
+export extern "C++" namespace gl::window
 {
 	class [[nodiscard]] Window
 	{
@@ -287,15 +287,15 @@ export extern "C++" namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const DeviceHandle& GetHandle() const& noexcept
+		constexpr const device::DeviceHandle& GetHandle() const& noexcept
 		{
 			return myHandle;
 		}
 
 		[[nodiscard]]
-		constexpr DeviceHandle&& GetHandle() && noexcept
+		constexpr device::DeviceHandle&& GetHandle() && noexcept
 		{
-			return static_cast<DeviceHandle&&>(myHandle);
+			return static_cast<device::DeviceHandle&&>(myHandle);
 		}
 
 		[[nodiscard]]
@@ -315,8 +315,8 @@ export extern "C++" namespace gl::device
 		Window& operator=(const Window&) = delete;
 		constexpr Window& operator=(Window&&) noexcept = default;
 
-		ProcessInstance myInstance;
-		DeviceHandle myHandle;
+		device::ProcessInstance myInstance;
+		device::DeviceHandle myHandle;
 		const wchar_t* myClassName;
 	};
 
