@@ -187,7 +187,8 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
-    <ClCompile Include="Windows.ixx" />
+    <ClCompile Include="WindowProperty.ixx" />
+    <ClCompile Include="Window.ixx" />
     <ClCompile Include="_Internal.ixx" />
   </ItemGroup>
   <ItemGroup>

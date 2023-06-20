@@ -70,7 +70,7 @@
     <ClCompile Include="Display.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Windows.ixx">
+    <ClCompile Include="Window.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceContext.ixx">
@@ -80,6 +80,9 @@
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="ProcessInstance.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowProperty.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
