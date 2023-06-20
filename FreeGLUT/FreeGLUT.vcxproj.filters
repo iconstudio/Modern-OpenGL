@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\Definitions">
       <UniqueIdentifier>{15db4f74-cb17-43c3-8ef5-379bcced7713}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Window">
+      <UniqueIdentifier>{ff87e5b4-6cea-4667-9749-08eb4456f4f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stdafx.inl">
@@ -64,13 +67,7 @@
     <ClCompile Include="Keycodes.ixx">
       <Filter>소스 파일\Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="_Internal.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="Display.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceContext.ixx">
@@ -82,23 +79,26 @@
     <ClCompile Include="ProcessInstance.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="WindowProperty.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowStyle.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowABI.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultProperty.ixx">
       <Filter>소스 파일\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="WindowOption.ixx">
-      <Filter>소스 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="DeviceClass.ixx">
       <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowStyle.ixx">
+      <Filter>소스 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.ixx">
+      <Filter>소스 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowABI.ixx">
+      <Filter>소스 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowOption.ixx">
+      <Filter>소스 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowProperty.ixx">
+      <Filter>소스 파일\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -194,7 +194,6 @@
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowStyle.ixx" />
-    <ClCompile Include="_Internal.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\src\Utility.vcxproj">
