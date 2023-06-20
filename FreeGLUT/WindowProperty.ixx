@@ -2,12 +2,29 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window:Property;
+export import :Style;
 import Utility.Monad;
 
 export namespace gl::device
 {
 	using Procedure = ::WNDPROC;
 	using RawDeviceClass = ::WNDCLASSEXW;
+
+	struct [[nodiscard]] default_property_t
+	{
+		constexpr default_property_t() noexcept = default;
+		constexpr ~default_property_t() noexcept = default;
+
+		[[nodiscard]]
+		constexpr bool operator==(const default_property_t& rhs) const
+		{
+			return false;
+		}
+
+		static constexpr int value = CW_USEDEFAULT;
+	};
+
+	inline constexpr default_property_t default_property{};
 
 	class [[nodiscard]] DeviceProperty
 	{
