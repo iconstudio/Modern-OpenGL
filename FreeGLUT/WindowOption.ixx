@@ -6,6 +6,7 @@ export namespace gl::device
 {
 	enum class WindowOption : unsigned long
 	{
+		None = 0x00000000L,
 		Modal = 0x00000001L,
 		NoParentNotify = 0x00000004L,
 		TopMost = 0x00000008L,

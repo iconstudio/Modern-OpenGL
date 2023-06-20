@@ -8,6 +8,7 @@ export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import :Property;
 export import :Style;
+export import :Option;
 export import :ABI;
 
 export extern "C++" namespace gl::device
@@ -18,6 +19,7 @@ export extern "C++" namespace gl::device
 		Window(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
+			, const WindowOption& option
 			, const int& x
 			, const int& y
 			, const int& width
@@ -30,13 +32,14 @@ export extern "C++" namespace gl::device
 			myHandle = detail::CreateNativeWindow(properties.GetInstance()
 				, properties.GetClass()
 				, title
-				, Export(style), 0
+				, Export(style), Export(option)
 				, x, y, width, height);
 		}
 
 		Window(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
+			, const WindowOption& option
 			, const int& x
 			, const int& y
 			, const int& width
@@ -49,11 +52,49 @@ export extern "C++" namespace gl::device
 			myHandle = detail::CreateNativeWindow(myInstance
 				, myClassName
 				, title
-				, Export(style), 0
+				, Export(style), Export(option)
 				, x, y, width, height);
 		}
 
 	public:
+		[[nodiscard]]
+		friend Window CreateWindow(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		[[nodiscard]]
+		inline friend Window CreateWindow(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const Rect& dimension
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const Rect& dimension
+		) noexcept;
+
 		[[nodiscard]]
 		friend Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
@@ -85,6 +126,36 @@ export extern "C++" namespace gl::device
 		friend Window CreateWindow(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
+			, const Rect& dimension
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		[[nodiscard]]
+		inline friend Window CreateWindow(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const Rect& dimension
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(WindowProperty&& properties
+			, const std::wstring_view& title
 			, const Rect& dimension
 		) noexcept;
 
@@ -297,7 +368,26 @@ export extern "C++" namespace gl::device
 		const wchar_t* myClassName;
 	};
 
-	[[nodiscard]]
+	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const int& x, const int& y, const int& width, const int& height) noexcept
+	{
+		return Window{ properties, title, style, option, x, y, width, height };
+	}
+
+	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const int& x, const int& y, const int& width, const int& height) noexcept
+	{
+		return Window{ static_cast<WindowProperty&&>(properties), title, style, option, x, y, width, height };
+	}
+
+	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const Rect& dimension) noexcept
+	{
+		return Window{ properties, title, style, option, dimension.x, dimension.y, dimension.w, dimension.h };
+	}
+
+	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const Rect& dimension) noexcept
+	{
+		return Window{ static_cast<WindowProperty&&>(properties), title, style, option, dimension.x, dimension.y, dimension.w, dimension.h };
+	}
+
 	inline Window CreateWindow(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
@@ -307,10 +397,9 @@ export extern "C++" namespace gl::device
 		, const int& height
 	) noexcept
 	{
-		return Window{ properties, title, style, x, y, width, height };
+		return Window{ properties, title, style, options::Default, x, y, width, height };
 	}
 
-	[[nodiscard]]
 	inline Window CreateWindow(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
@@ -320,26 +409,44 @@ export extern "C++" namespace gl::device
 		, const int& height
 	) noexcept
 	{
-		return Window{ static_cast<WindowProperty&&>(properties), title, style, x, y, width, height };
+		return Window{ static_cast<WindowProperty&&>(properties), title, style, options::Default, x, y, width, height };
 	}
 
-	[[nodiscard]]
 	inline Window CreateWindow(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
 	) noexcept
 	{
-		return Window{ properties, title, style, dimension.x, dimension.y, dimension.w, dimension.h };
+		return Window{ properties, title, style, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
 	}
 
-	[[nodiscard]]
 	inline Window CreateWindow(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
 	) noexcept
 	{
-		return Window{ static_cast<WindowProperty&&>(properties), title, style, dimension.x, dimension.y, dimension.w, dimension.h };
+		return Window{ static_cast<WindowProperty&&>(properties), title, style, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
+	}
+
+	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const int& x, const int& y, const int& width, const int& height) noexcept
+	{
+		return Window{ properties, title, styles::Default, options::Default, x, y, width, height };
+	}
+
+	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, const int& x, const int& y, const int& width, const int& height) noexcept
+	{
+		return Window{ static_cast<WindowProperty&&>(properties), title, styles::Default, options::Default, x, y, width, height };
+	}
+
+	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const Rect& dimension) noexcept
+	{
+		return Window{ properties, title, styles::Default, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
+	}
+
+	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, const Rect& dimension) noexcept
+	{
+		return Window{ static_cast<WindowProperty&&>(properties), title, styles::Default, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
 	}
 }

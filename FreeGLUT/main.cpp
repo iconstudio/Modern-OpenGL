@@ -25,7 +25,7 @@ int main(const int& argc, char** argv)
 
 	property.Register();
 
-	auto window = gl::device::CreateWindow(property, L"MY_TITLE", gl::device::styles::Default, -1, -1, 400, 300);
+	auto window = gl::device::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);
 
 	window.Awake();
 	window.Start();
