@@ -227,6 +227,7 @@ export namespace gl::device
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
 		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
 
+	private:
 		RawDeviceHandle myHandle = nullptr;
 	};
 
