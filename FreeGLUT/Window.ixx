@@ -19,7 +19,7 @@ export namespace gl::device
 	{
 	protected:
 		[[nodiscard]]
-		static HWND CreateNativeWindow(const ::HINSTANCE& instance
+		static HWND CreateNativeWindow(const HINSTANCE& hinst
 			, _Notnull_ const wchar_t* const& class_name
 			, _Notnull_ const wchar_t* const& title
 			, const unsigned long& style
@@ -37,21 +37,41 @@ export namespace gl::device
 			, style, x, y, width, height
 			, parent
 			, menu
-			, instance, uparams);
+			, hinst, uparams);
 		}
 
-		Window(const DeviceProperty& properties)
+		Window(const DeviceProperty& properties
+			, _Notnull_ const wchar_t* const& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height)
 			: myInstance(properties.GetInstance())
 			, myClassName(properties.GetClass())
 			, myHandle(nullptr)
 		{
 			const auto& device_class = properties.GetHandle();
 
-			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
-			myHandle = CreateNativeWindow(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
+			const DWORD style = WS_OVERLAPPEDWINDOW;
+			myHandle = CreateNativeWindow(device_class.hInstance
+				, device_class.lpszClassName
+				, title
+				, style
+				, x, y, width, height);
 		}
 
 	public:
+		[[nodiscard]]
+		static inline Window Create(const DeviceProperty& properties
+			, _Notnull_ const wchar_t* const& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height)
+		{
+			return Window(properties, title, x, y, width, height);
+		}
+
 		virtual inline ~Window() noexcept
 		{
 			::UnregisterClass(myClassName, myInstance);
