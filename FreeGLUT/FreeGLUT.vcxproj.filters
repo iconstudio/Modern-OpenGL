@@ -91,5 +91,8 @@
     <ClCompile Include="WindowABI.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultProperty.ixx">
+      <Filter>소스 파일\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
