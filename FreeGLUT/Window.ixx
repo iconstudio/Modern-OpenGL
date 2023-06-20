@@ -93,16 +93,15 @@ export namespace gl::device
 			, const int& x
 			, const int& y
 			, const int& width
-			, const int& height)
+			, const int& height
+		) noexcept
 			: myInstance(properties.GetInstance())
 			, myClassName(properties.GetClass())
 			, myHandle(nullptr)
 		{
-			const auto& device_class = properties.GetHandle();
-
-			myHandle = detail::CreateNativeWindow(device_class.hInstance
-				, device_class.lpszClassName
-				, title.data()
+			myHandle = detail::CreateNativeWindow(properties.GetInstance()
+				, properties.GetClass()
+				, title
 				, Export(style), 0
 				, x, y, width, height);
 		}
@@ -115,9 +114,10 @@ export namespace gl::device
 			, const int& x
 			, const int& y
 			, const int& width
-			, const int& height)
+			, const int& height
+		) noexcept
 		{
-			return Window(properties, title, style, x, y, width, height);
+			return Window{ properties, title, style, x, y, width, height };
 		}
 
 		[[nodiscard]]
@@ -127,9 +127,10 @@ export namespace gl::device
 			, const int& x
 			, const int& y
 			, const int& width
-			, const int& height)
+			, const int& height
+		) noexcept
 		{
-			return Window(static_cast<WindowProperty&&>(properties), title, style, x, y, width, height);
+			return Window{ static_cast<WindowProperty&&>(properties), title, style, x, y, width, height };
 		}
 
 		[[nodiscard]]
@@ -139,9 +140,10 @@ export namespace gl::device
 			, const int& x
 			, const int& y
 			, const int& width
-			, const int& height)
+			, const int& height
+		) noexcept
 		{
-			return Window(properties, title, static_cast<WindowStyle&&>(style), x, y, width, height);
+			return Window{ properties, title, static_cast<WindowStyle&&>(style), x, y, width, height };
 		}
 
 		[[nodiscard]]
@@ -151,18 +153,40 @@ export namespace gl::device
 			, const int& x
 			, const int& y
 			, const int& width
-			, const int& height)
+			, const int& height
+		) noexcept
 		{
-			return Window(static_cast<WindowProperty&&>(properties), title, static_cast<WindowStyle&&>(style), x, y, width, height);
+			return Window{ static_cast<WindowProperty&&>(properties), title, static_cast<WindowStyle&&>(style), x, y, width, height };
 		}
 
 		[[nodiscard]]
 		static inline Window Create(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
-			, const Rect& dimension)
+			, const Rect& dimension
+		) noexcept
 		{
-			return Window(properties, title, style, dimension.x, dimension.y, dimension.w, dimension.h);
+			return Window{ properties, title, style, dimension.x, dimension.y, dimension.w, dimension.h };
+		}
+
+		[[nodiscard]]
+		static inline Window Create(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const Rect& dimension
+		) noexcept
+		{
+			return Window{ static_cast<WindowProperty&&>(properties), title, style, dimension.x, dimension.y, dimension.w, dimension.h };
+		}
+
+		[[nodiscard]]
+		static inline Window Create(WindowProperty&& properties
+			, const std::wstring_view& title
+			, WindowStyle&& style
+			, const Rect& dimension
+		) noexcept
+		{
+			return Window{ static_cast<WindowProperty&&>(properties), title, static_cast<WindowStyle&&>(style), dimension.x, dimension.y, dimension.w, dimension.h };
 		}
 
 		constexpr Window() noexcept = default;
