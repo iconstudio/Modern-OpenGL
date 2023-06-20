@@ -76,28 +76,34 @@ export namespace gl::device
 		constexpr ~DeviceProperty() noexcept = default;
 
 		template<size_t ClassNameSize>
-		explicit DeviceProperty(HINSTANCE handle, WNDPROC procedure
+		explicit DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
-			: DeviceProperty(handle, procedure
+			: DeviceProperty(hinst, procedure, class_name)
+		{}
+
+		explicit DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+			, const wchar_t* const& class_name
+		) noexcept
+			: DeviceProperty(hinst, procedure
 						, class_name
-						, LoadIconW(handle, IDI_APPLICATION)
-						, LoadIconW(handle, IDI_APPLICATION)
-						, LoadCursorW(handle, IDC_ARROW)
+						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
+						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
+						, nullptr //, LoadCursorW(hinst, IDC_ARROW)
 						, (HBRUSH)(COLOR_WINDOW + 1)
 						, nullptr)
 		{}
 
-		template<size_t ClassNameSize, size_t MenuNameSize>
-		explicit constexpr DeviceProperty(HINSTANCE handle, WNDPROC procedure
+		template<size_t ClassNameSize>
+		explicit constexpr DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
-			, const wchar_t(&menu_name)[MenuNameSize]
+			, const wchar_t* const& menu_name
 		) noexcept
-			: DeviceProperty(handle, procedure
+			: DeviceProperty(hinst, procedure
 						, class_name
 						, icon
 						, small_icon
@@ -106,23 +112,23 @@ export namespace gl::device
 						, menu_name)
 		{}
 
-
-		template<size_t ClassNameSize>
-		explicit constexpr DeviceProperty(HINSTANCE handle, WNDPROC procedure
-			, const wchar_t(&class_name)[ClassNameSize]
+		explicit constexpr DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+			, const wchar_t* const& class_name
 			, const ::HICON& icon
 			, const ::HICON& small_icon
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
-			, const wchar_t* const& menu_name) noexcept
+			, const wchar_t* const& menu_name
+		) noexcept
+			: myWindowClass()
 		{
 			myWindowClass.cbSize = sizeof(WNDCLASSEXW);
-			myWindowClass.hInstance = handle;
+			myWindowClass.hInstance = hinst;
 			myWindowClass.lpszClassName = class_name;
 			myWindowClass.lpfnWndProc = procedure;
 			myWindowClass.cbClsExtra = 0;
 			myWindowClass.cbWndExtra = 0;
-			myWindowClass.style = CS_HREDRAW | CS_VREDRAW;
+			myWindowClass.style = CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
 			myWindowClass.hbrBackground = background;
 			myWindowClass.lpszMenuName = menu_name;
 			myWindowClass.hIcon = icon;
