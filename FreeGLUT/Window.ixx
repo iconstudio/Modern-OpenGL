@@ -55,7 +55,7 @@ export namespace gl::device
 
 	public:
 		[[nodiscard]]
-		friend inline Window CreateWindow(const WindowProperty& properties
+		inline friend Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
@@ -68,7 +68,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		friend inline Window CreateWindow(WindowProperty&& properties
+		inline friend Window CreateWindow(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
@@ -81,7 +81,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		friend inline Window CreateWindow(const WindowProperty& properties
+		inline friend Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const Rect& dimension
@@ -91,7 +91,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		friend inline Window CreateWindow(WindowProperty&& properties
+		inline friend Window CreateWindow(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const Rect& dimension
@@ -104,7 +104,7 @@ export namespace gl::device
 
 		virtual inline ~Window() noexcept
 		{
-			::UnregisterClass(myClassName, myInstance);
+			detail::UnregisterProcess(myInstance, myClassName);
 		}
 
 		inline void Awake() noexcept
