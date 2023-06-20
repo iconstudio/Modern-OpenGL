@@ -32,9 +32,9 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline bool Peek(const HWND& hwnd, RawDeviceMessage& output, const PeekCmd& cmd = PeekCmd::DontRemov) noexcept
+		static inline bool Peek(const HWND& hwnd, RawDeviceMessage& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
-			return 0 != ::PeekMessage(output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
+			return 0 != ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
 		}
 
 		static inline void Process(const RawDeviceMessage& msg) noexcept
