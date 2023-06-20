@@ -127,7 +127,7 @@ export namespace gl::device
 
 	public:
 		[[nodiscard]]
-		static inline Window Create(const WindowProperty& properties
+		friend inline Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
@@ -140,7 +140,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		static inline Window Create(WindowProperty&& properties
+		friend inline Window CreateWindow(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
@@ -153,7 +153,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		static inline Window Create(const WindowProperty& properties
+		friend inline Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const Rect& dimension
@@ -163,7 +163,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		static inline Window Create(WindowProperty&& properties
+		friend inline Window CreateWindow(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const Rect& dimension
@@ -173,6 +173,11 @@ export namespace gl::device
 		}
 
 		constexpr Window() noexcept = default;
+
+		virtual inline ~Window() noexcept
+		{
+			::UnregisterClass(myClassName, myInstance);
+		}
 
 		inline void Awake() noexcept
 		{
@@ -364,11 +369,6 @@ export namespace gl::device
 		constexpr const wchar_t*&& GetClass() && noexcept
 		{
 			return static_cast<const wchar_t*&&>(myClassName);
-		}
-
-		virtual inline ~Window() noexcept
-		{
-			::UnregisterClass(myClassName, myInstance);
 		}
 
 		Window(const Window&) = delete;
