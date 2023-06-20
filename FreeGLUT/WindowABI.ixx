@@ -16,6 +16,16 @@ export namespace gl::device::detail
 
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
+	inline bool RegisterProcess(const ::WNDCLASSEXW& property)
+	{
+		return 0 == ::RegisterClassEx(&property);
+	}
+
+	inline bool UnregisterProcess(const HINSTANCE& hinst, const std::wstring_view& class_name)
+	{
+		return 0 == ::UnregisterClass(class_name.data(), hinst);
+	}
+
 	[[nodiscard]]
 	inline HWND CreateNativeWindow(const HINSTANCE& hinst
 		, const std::wstring_view& class_name
@@ -39,8 +49,8 @@ export namespace gl::device::detail
 		, hinst, uparams);
 	}
 
-	inline bool DestroyNativeWindow(HWND)
+	inline bool DestroyNativeWindow(const HWND& hwnd) noexcept
 	{
-
+		return 0 != ::DestroyWindow(hwnd);
 	}
 }
