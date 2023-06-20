@@ -33,7 +33,7 @@ export namespace gl::device
 			return value;
 		}
 
-		constexpr operator T&& () && noexcept
+		constexpr operator T && () && noexcept
 		{
 			return static_cast<T&&>(value);
 		}
@@ -173,9 +173,9 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const wchar_t* && GetClass() && noexcept
+		constexpr const wchar_t*&& GetClass() && noexcept
 		{
-			return static_cast<const wchar_t* &&>(myWindowClass.lpszClassName);
+			return static_cast<const wchar_t*&&>(myWindowClass.lpszClassName);
 		}
 
 		constexpr DeviceProperty(const DeviceProperty&) noexcept = default;
