@@ -10,6 +10,8 @@ export namespace gl::device
 	class [[nodiscard]] WindowProperty
 	{
 	public:
+		using RawWindowProperty = ::tagWNDCLASSEXW;
+
 		constexpr WindowProperty() noexcept = default;
 		constexpr ~WindowProperty() noexcept = default;
 

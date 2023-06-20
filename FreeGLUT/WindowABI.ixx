@@ -12,9 +12,6 @@ export namespace gl::device
 
 	using ::HWND, ::HWND__;
 
-	using ::WNDCLASSEXW, ::tagWNDCLASSEXW;
-	using RawWindowProperty = ::tagWNDCLASSEXW;
-
 	using ::MSG, ::tagMSG;
 	using RawDeviceMessage = ::tagMSG;
 }
