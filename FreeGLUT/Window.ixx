@@ -176,6 +176,15 @@ export extern "C++" namespace gl::device
 			myHandle.StartUpdate();
 		}
 
+		inline void UpdateLoop() noexcept
+		{
+		}
+
+		inline void Update() noexcept
+		{
+
+		}
+
 		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const
 			noexcept
 		{
@@ -275,66 +284,6 @@ export extern "C++" namespace gl::device
 		inline int GetID() const noexcept
 		{
 			return myHandle.GetID();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetOwner() const noexcept
-		{
-			return myHandle.GetOwner();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetFirstChild() const noexcept
-		{
-			return myHandle.GetFirstChild();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetFirstSibling() const noexcept
-		{
-			return myHandle.GetFirstSibling();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetLastChild() const noexcept
-		{
-			return myHandle.GetLastChild();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetLastSibling() const noexcept
-		{
-			return myHandle.GetLastSibling();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetNextSibling() const noexcept
-		{
-			return myHandle.GetNextSibling();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetPrevSibling() const noexcept
-		{
-			return myHandle.GetPrevSibling();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetParent() const noexcept
-		{
-			return myHandle.GetParent();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetRoot() const noexcept
-		{
-			return myHandle.GetRoot();
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetRootOwner() const noexcept
-		{
-			return myHandle.GetRootOwner();
 		}
 
 		[[nodiscard]]
