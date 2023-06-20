@@ -26,16 +26,12 @@ export namespace gl::device
 			const DWORD style = WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_ACTIVECAPTION;
 			myHandle = DeviceHandle::Create(device_class.hInstance, device_class.lpszClassName, L"title", device_class.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT);
 
-			if (!myHandle.IsAvailable())
-			{
-				throw "Failed to create window.";
-			}
+
 		}
 
 	public:
 		virtual inline ~Window() noexcept
 		{
-			//::ReleaseDC(myContext, myHandle);
 			::UnregisterClass(myClassName, myInstance);
 		}
 
