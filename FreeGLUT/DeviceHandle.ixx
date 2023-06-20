@@ -193,15 +193,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline const volatile RawDeviceHandle& GetHandle() const& noexcept
+		inline const RawDeviceHandle& GetHandle() const& noexcept
 		{
 			return myHandle;
 		}
 
 		[[nodiscard]]
-		inline volatile RawDeviceHandle&& GetHandle() && noexcept
+		inline RawDeviceHandle&& GetHandle() && noexcept
 		{
-			return static_cast<volatile RawDeviceHandle&&>(myHandle);
+			return static_cast<RawDeviceHandle&&>(myHandle);
 		}
 
 		constexpr operator RawDeviceHandle() const noexcept
@@ -212,12 +212,6 @@ export namespace gl::device
 		constexpr DeviceHandle& operator=(RawDeviceHandle&& handle) noexcept
 		{
 			myHandle = static_cast<RawDeviceHandle&&>(handle);
-			return *this;
-		}
-
-		constexpr DeviceHandle& operator=(volatile RawDeviceHandle&& handle) noexcept
-		{
-			myHandle = static_cast<volatile RawDeviceHandle&&>(handle);
 			return *this;
 		}
 
@@ -232,7 +226,7 @@ export namespace gl::device
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
 		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
 
-		volatile RawDeviceHandle myHandle = nullptr;
+		RawDeviceHandle myHandle = nullptr;
 	};
 
 #define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
