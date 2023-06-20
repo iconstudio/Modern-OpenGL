@@ -179,6 +179,7 @@
     <ClCompile Include="DeviceContext.ixx" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="DeviceCommand.ixx" />
+    <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="OpenGL.cpp" />

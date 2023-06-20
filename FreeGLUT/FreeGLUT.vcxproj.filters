@@ -103,5 +103,8 @@
     <ClCompile Include="DeviceCommand.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceIcon.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
