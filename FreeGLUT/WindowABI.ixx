@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window:ABI;
+import <string_view>;
 export import :Property;
 
 export namespace gl::device::detail
@@ -10,8 +11,8 @@ export namespace gl::device::detail
 
 	[[nodiscard]]
 	inline HWND CreateNativeWindow(const HINSTANCE& hinst
-		, _Notnull_ const wchar_t* const& class_name
-		, _Notnull_ const wchar_t* const& title
+		, const std::wstring_view& class_name
+		, const std::wstring_view& title
 		, const unsigned long& styles
 		, const unsigned long& options
 		, const int& x
@@ -24,7 +25,7 @@ export namespace gl::device::detail
 		noexcept
 	{
 		return ::CreateWindowEx(options
-		, class_name, title
+		, class_name.data(), title.data()
 		, styles, x, y, width, height
 		, parent
 		, menu
