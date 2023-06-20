@@ -8,9 +8,14 @@ import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
 import Glib.Device.Window;
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
-	return DefWindowProc(hWnd, Msg, wParam, lParam);
+	switch (msg)
+	{
+		case WM_DESTROY: return 0;
+	}
+
+	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
 const auto& my_windows_class = L"MY_CLASS";
