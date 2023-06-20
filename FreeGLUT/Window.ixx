@@ -74,39 +74,44 @@ export namespace gl::device
 			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
 		}
 
+		inline bool UICommand(const int& cmd) noexcept
+		{
+			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd), 0);
+		}
+
 		inline bool Close() noexcept
 		{
 			return SendCommand(WM_CLOSE);
 		}
 
-		inline bool Show(const int& cmd_show) noexcept
+		inline bool Show() noexcept
 		{
-			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd_show), 0);
+			return 0 != ::ShowWindow(myHandle, SW_SHOW);
 		}
 
 		inline bool Hide() noexcept
 		{
-			return Show(SW_HIDE);
+			return 0 != ::ShowWindow(myHandle, SW_HIDE);
 		}
 
 		inline bool Maximize() noexcept
 		{
-			return Show(SW_MAXIMIZE);
+			return UICommand(SW_MAXIMIZE);
 		}
 
 		inline bool Minimize() noexcept
 		{
-			return Show(SW_MINIMIZE);
+			return UICommand(SW_MINIMIZE);
 		}
 
 		inline bool Restore() noexcept
 		{
-			return Show(SW_RESTORE);
+			return UICommand(SW_RESTORE);
 		}
 
 		inline bool MakeFocus() noexcept
 		{
-			return SendCommand(WM_SETFOCUS);
+			return UICommand(WM_SETFOCUS);
 		}
 
 		inline bool MakeForeground() noexcept
