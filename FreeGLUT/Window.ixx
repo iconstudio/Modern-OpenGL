@@ -1,6 +1,4 @@
 module;
-#include "Internal.hpp"
-
 export module Glib.Device.Window;
 import <string_view>;
 export import Glib.Rect;
@@ -116,13 +114,13 @@ export namespace gl::device
 
 		inline void Start() noexcept
 		{
-			::UpdateWindow(myHandle);
+			myHandle.StartUpdate();
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
-			return 0 != ::PostMessage(myHandle, msg, lhs, rhs);
+			return myHandle.SendCommand(msg, lhs, rhs);
 		}
 
 		inline bool SendCommand(const unsigned int& msg) const
@@ -133,148 +131,148 @@ export namespace gl::device
 
 		inline bool SetWindowRedraw(const bool& flag) noexcept
 		{
-			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
+			return myHandle.SetWindowRedraw(flag);
 		}
 
 		inline bool UICommand(const int& cmd) noexcept
 		{
-			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd), 0);
+			return myHandle.UICommand(cmd);
 		}
 
 		inline bool Close() noexcept
 		{
-			return SendCommand(WM_CLOSE);
+			return myHandle.Close();
 		}
 
 		inline bool Show() noexcept
 		{
-			return 0 != ::ShowWindow(myHandle, SW_SHOW);
+			return myHandle.Show();
 		}
 
 		inline bool Hide() noexcept
 		{
-			return 0 != ::ShowWindow(myHandle, SW_HIDE);
+			return myHandle.Hide();
 		}
 
 		inline bool Maximize() noexcept
 		{
-			return UICommand(SW_MAXIMIZE);
+			return myHandle.Maximize();
 		}
 
 		inline bool Minimize() noexcept
 		{
-			return UICommand(SW_MINIMIZE);
+			return myHandle.Minimize();
 		}
 
 		inline bool Restore() noexcept
 		{
-			return UICommand(SW_RESTORE);
+			return myHandle.Restore();
 		}
 
 		inline bool MakeFocus() noexcept
 		{
-			return UICommand(WM_SETFOCUS);
+			return myHandle.MakeFocus();
 		}
 
 		inline bool MakeForeground() noexcept
 		{
-			return SendCommand(WM_ACTIVATE, WA_ACTIVE, 0);
+			return myHandle.MakeForeground();
 		}
 
 		[[nodiscard]]
 		inline bool IsMinimized() const noexcept
 		{
-			return 0 != IsIconic(myHandle);
+			return myHandle.IsMinimized();
 		}
 
 		[[nodiscard]]
 		inline bool IsMaximized() const noexcept
 		{
-			return 0 != IsZoomed(myHandle);
+			return myHandle.IsMaximized();
 		}
 
 		[[nodiscard]]
 		inline bool IsRestored() const noexcept
 		{
-			return 0L == (GetStyle() & (WS_MINIMIZE | WS_MAXIMIZE));
+			return myHandle.IsRestored();
 		}
 
 		[[nodiscard]]
 		inline DWORD GetStyle() const noexcept
 		{
-			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_STYLE));
+			return myHandle.GetStyle();
 		}
 
 		[[nodiscard]]
 		inline DWORD GetExStyle() const noexcept
 		{
-			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_EXSTYLE));
+			return myHandle.GetExStyle();
 		}
 
 		[[nodiscard]]
 		inline int GetID() const noexcept
 		{
-			return static_cast<int>(GetWindowLongPtr(myHandle, GWLP_ID));
+			return myHandle.GetID();
 		}
 
 		[[nodiscard]]
 		inline HWND GetOwner() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_OWNER);
+			return myHandle.GetOwner();
 		}
 
 		[[nodiscard]]
 		inline HWND GetFirstChild() const noexcept
 		{
-			return ::GetTopWindow(myHandle);
+			return myHandle.GetFirstChild();
 		}
 
 		[[nodiscard]]
 		inline HWND GetFirstSibling() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_HWNDFIRST);
+			return myHandle.GetFirstSibling();
 		}
 
 		[[nodiscard]]
 		inline HWND GetLastChild() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_CHILD);
+			return myHandle.GetLastChild();
 		}
 
 		[[nodiscard]]
 		inline HWND GetLastSibling() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_HWNDLAST);
+			return myHandle.GetLastSibling();
 		}
 
 		[[nodiscard]]
 		inline HWND GetNextSibling() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_HWNDNEXT);
+			return myHandle.GetNextSibling();
 		}
 
 		[[nodiscard]]
 		inline HWND GetPrevSibling() const noexcept
 		{
-			return ::GetWindow(myHandle, GW_HWNDPREV);
+			return myHandle.GetPrevSibling();
 		}
 
 		[[nodiscard]]
 		inline HWND GetParent() const noexcept
 		{
-			return ::GetParent(myHandle);
+			return myHandle.GetParent();
 		}
 
 		[[nodiscard]]
 		inline HWND GetRoot() const noexcept
 		{
-			return ::GetAncestor(myHandle, GA_ROOT);
+			return myHandle.GetRoot();
 		}
 
 		[[nodiscard]]
 		inline HWND GetRootOwner() const noexcept
 		{
-			return ::GetAncestor(myHandle, GA_ROOTOWNER);
+			return myHandle.GetRootOwner();
 		}
 
 		[[nodiscard]]
