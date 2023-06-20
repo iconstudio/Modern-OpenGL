@@ -69,23 +69,23 @@ export namespace gl::device
 	inline constexpr default_property_t default_property{};
 	inline constexpr int use_default = CW_USEDEFAULT;
 
-	class [[nodiscard]] DeviceProperty
+	class [[nodiscard]] WindowProperty
 	{
 	public:
-		constexpr DeviceProperty() noexcept = default;
-		constexpr ~DeviceProperty() noexcept = default;
+		constexpr WindowProperty() noexcept = default;
+		constexpr ~WindowProperty() noexcept = default;
 
 		template<size_t ClassNameSize>
-		explicit DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
-			: DeviceProperty(hinst, procedure, class_name)
+			: WindowProperty(hinst, procedure, class_name)
 		{}
 
-		explicit DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 		) noexcept
-			: DeviceProperty(hinst, procedure
+			: WindowProperty(hinst, procedure
 						, class_name
 						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
 						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
@@ -95,7 +95,7 @@ export namespace gl::device
 		{}
 
 		template<size_t ClassNameSize>
-		explicit constexpr DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -103,7 +103,7 @@ export namespace gl::device
 			, const ::HBRUSH& background
 			, const wchar_t* const& menu_name
 		) noexcept
-			: DeviceProperty(hinst, procedure
+			: WindowProperty(hinst, procedure
 						, class_name
 						, icon
 						, small_icon
@@ -112,7 +112,7 @@ export namespace gl::device
 						, menu_name)
 		{}
 
-		explicit constexpr DeviceProperty(const HINSTANCE& hinst, WNDPROC procedure
+		explicit constexpr WindowProperty(const HINSTANCE& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -184,10 +184,10 @@ export namespace gl::device
 			return static_cast<const wchar_t*&&>(myWindowClass.lpszClassName);
 		}
 
-		constexpr DeviceProperty(const DeviceProperty&) noexcept = default;
-		constexpr DeviceProperty& operator=(const DeviceProperty&) noexcept = default;
-		constexpr DeviceProperty(DeviceProperty&&) noexcept = default;
-		constexpr DeviceProperty& operator=(DeviceProperty&&) noexcept = default;
+		constexpr WindowProperty(const WindowProperty&) noexcept = default;
+		constexpr WindowProperty& operator=(const WindowProperty&) noexcept = default;
+		constexpr WindowProperty(WindowProperty&&) noexcept = default;
+		constexpr WindowProperty& operator=(WindowProperty&&) noexcept = default;
 
 	private:
 		WNDCLASSEXW myWindowClass;

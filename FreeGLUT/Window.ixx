@@ -40,7 +40,7 @@ export namespace gl::device
 			, hinst, uparams);
 		}
 
-		Window(const DeviceProperty& properties
+		Window(const WindowProperty& properties
 			, _Notnull_ const wchar_t* const& title
 			, const int& x
 			, const int& y
@@ -62,7 +62,7 @@ export namespace gl::device
 
 	public:
 		[[nodiscard]]
-		static inline Window Create(const DeviceProperty& properties
+		static inline Window Create(const WindowProperty& properties
 			, _Notnull_ const wchar_t* const& title
 			, const int& x
 			, const int& y

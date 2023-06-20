@@ -21,7 +21,7 @@ int main(const int& argc, char** argv)
 	const int error0 = gl::device::GetLastError();
 
 
-	auto property = gl::device::DeviceProperty{ hinstance, WndProc, my_windows_class };
+	auto property = gl::device::WindowProperty{ hinstance, WndProc, my_windows_class };
 	const int error1 = gl::device::GetLastError();
 
 	property.Register();
