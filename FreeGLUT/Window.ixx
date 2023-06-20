@@ -176,7 +176,7 @@ export extern "C++" namespace gl::device
 			myHandle.StartUpdate();
 		}
 
-		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
+		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const
 			noexcept
 		{
 			return myHandle.SendCommand(msg, lhs, rhs);
@@ -257,15 +257,18 @@ export extern "C++" namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline DWORD GetStyle() const noexcept
+		inline WindowStyle GetStyle() const noexcept
 		{
-			return myHandle.GetStyle();
+			return WindowStyle{ myHandle.GetStyle() };
 		}
 
+		/// <summary>
+		/// GetExStyle
+		/// </summary>
 		[[nodiscard]]
-		inline DWORD GetExStyle() const noexcept
+		inline WindowOption GetOption() const noexcept
 		{
-			return myHandle.GetExStyle();
+			return WindowOption{ myHandle.GetExStyle() };
 		}
 
 		[[nodiscard]]

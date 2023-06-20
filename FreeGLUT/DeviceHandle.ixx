@@ -115,13 +115,13 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline DWORD GetStyle() const noexcept
+		inline unsigned long GetStyle() const noexcept
 		{
 			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_STYLE));
 		}
 
 		[[nodiscard]]
-		inline DWORD GetExStyle() const noexcept
+		inline unsigned long GetExStyle() const noexcept
 		{
 			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_EXSTYLE));
 		}
