@@ -3,7 +3,6 @@ module;
 
 export module Glib.Device.Window:Property;
 import Glib.Device.ProcessInstance;
-import Utility.Monad;
 
 export namespace gl::device
 {
@@ -76,16 +75,9 @@ export namespace gl::device
 			myWindowClass.hCursor = cursor;
 		}
 
-		util::Monad<WNDCLASSEXW> Register() const noexcept
+		inline bool Register() noexcept
 		{
-			if (RegisterClassExW(&myWindowClass))
-			{
-				return myWindowClass;
-			}
-			else
-			{
-				return util::nullopt;
-			}
+			return 0 == RegisterClassExW(&myWindowClass);
 		}
 
 		[[nodiscard]]
