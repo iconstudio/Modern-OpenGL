@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window:Property;
+import Glib.Device.ProcessInstance;
 import Utility.Monad;
 
 export namespace gl::device
@@ -152,6 +153,30 @@ export namespace gl::device
 		constexpr RawDeviceClass&& GetHandle() && noexcept
 		{
 			return static_cast<RawDeviceClass&&>(myWindowClass);
+		}
+
+		[[nodiscard]]
+		constexpr const HINSTANCE& GetInstance() const& noexcept
+		{
+			return myWindowClass.hInstance;
+		}
+
+		[[nodiscard]]
+		constexpr ::HINSTANCE&& GetInstance() && noexcept
+		{
+			return static_cast<HINSTANCE&&>(myWindowClass.hInstance);
+		}
+
+		[[nodiscard]]
+		constexpr const wchar_t* const& GetClass() const& noexcept
+		{
+			return myWindowClass.lpszClassName;
+		}
+
+		[[nodiscard]]
+		constexpr const wchar_t* && GetClass() && noexcept
+		{
+			return static_cast<const wchar_t* &&>(myWindowClass.lpszClassName);
 		}
 
 		constexpr DeviceProperty(const DeviceProperty&) noexcept = default;
