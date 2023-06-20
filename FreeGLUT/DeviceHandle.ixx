@@ -16,6 +16,10 @@ export namespace gl::device
 	public:
 		constexpr DeviceHandle() noexcept = default;
 
+		constexpr DeviceHandle(nullptr_t) noexcept
+			: myHandle(nullptr)
+		{}
+
 		constexpr DeviceHandle(RawDeviceHandle&& handle) noexcept
 			: myHandle(static_cast<RawDeviceHandle&&>(handle))
 		{}
