@@ -75,7 +75,7 @@ export namespace gl::device
 		constexpr DeviceProperty() noexcept = default;
 		constexpr ~DeviceProperty() noexcept = default;
 
-		template<size_t ClassNameSize, size_t MenuNameSize>
+		template<size_t ClassNameSize>
 		explicit DeviceProperty(HINSTANCE handle, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
@@ -107,7 +107,7 @@ export namespace gl::device
 		{}
 
 
-		template<size_t ClassNameSize, size_t MenuNameSize>
+		template<size_t ClassNameSize>
 		explicit constexpr DeviceProperty(HINSTANCE handle, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
