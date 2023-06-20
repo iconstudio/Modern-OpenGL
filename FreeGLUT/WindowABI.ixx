@@ -3,11 +3,15 @@ module;
 
 export module Glib.Device.Window:ABI;
 import <string_view>;
+import Glib.DefaultProperty;
 export import :Property;
 
 export namespace gl::device::detail
 {
+	using Message = ::MSG;
 	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
+
+	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
 	[[nodiscard]]
 	inline HWND CreateNativeWindow(const HINSTANCE& hinst
@@ -30,5 +34,10 @@ export namespace gl::device::detail
 		, parent
 		, menu
 		, hinst, uparams);
+	}
+
+	inline bool DestroyNativeWindow(HWND)
+	{
+
 	}
 }
