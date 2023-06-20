@@ -5,7 +5,7 @@ export module Glib.Device.Handle;
 
 export namespace gl::device
 {
-	using RawDeviceHandle = ::HWND;
+	using RawDeviceHandle = ::HWND__*;
 
 	using ::GetLastError;
 
@@ -232,7 +232,7 @@ export namespace gl::device
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
 		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
 
-		volatile RawDeviceHandle myHandle;
+		volatile RawDeviceHandle myHandle = nullptr;
 	};
 
 #define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
