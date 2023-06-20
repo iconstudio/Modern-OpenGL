@@ -68,12 +68,19 @@ export namespace gl::device
 		T value;
 	};
 
+	template<>
+	struct [[nodiscard]] default_property_t<void>
+	{
+		constexpr default_property_t() noexcept = default;
+		constexpr ~default_property_t() noexcept = default;
+	};
+
 	template<typename T>
 	default_property_t(T) -> default_property_t<T>;
 
 	template<typename T>
 	inline constexpr default_property_t default_property{};
-	inline constexpr int use_default = CW_USEDEFAULT;
+	inline constexpr default_property_t use_default = default_property_t{ CW_USEDEFAULT };
 
 	class [[nodiscard]] Window
 	{
