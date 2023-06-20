@@ -158,18 +158,12 @@ export namespace gl::device
 			{
 				throw "Failed to create window.";
 			}
-
-			myContext = DeviceContext{ myHandle };
-			if (!myContext)
-			{
-				throw "Failed to get device context.";
-			}
 		}
 
 	public:
 		virtual inline ~Window() noexcept
 		{
-			::ReleaseDC(myContext, myHandle);
+			//::ReleaseDC(myContext, myHandle);
 			::UnregisterClass(myClassName, myInstance);
 		}
 
@@ -180,7 +174,6 @@ export namespace gl::device
 
 		HINSTANCE myInstance;
 		DeviceHandle myHandle;
-		DeviceContext myContext;
 
 		const wchar_t* myClassName;
 	};
