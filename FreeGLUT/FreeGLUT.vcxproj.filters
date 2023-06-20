@@ -97,5 +97,8 @@
     <ClCompile Include="WindowOption.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceClass.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
