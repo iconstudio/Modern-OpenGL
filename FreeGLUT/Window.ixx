@@ -19,7 +19,7 @@ export namespace gl::device
 	{
 	protected:
 		[[nodiscard]]
-		static RawDeviceHandle CreateNativeWindow(const ::HINSTANCE& instance
+		static HWND CreateNativeWindow(const ::HINSTANCE& instance
 			, _Notnull_ const wchar_t* const& class_name
 			, _Notnull_ const wchar_t* const& title
 			, const unsigned long& style
@@ -27,7 +27,7 @@ export namespace gl::device
 			, const int& y
 			, const int& width
 			, const int& height
-			, const RawDeviceHandle& parent = nullptr
+			, const HWND& parent = nullptr
 			, const HMENU& menu = nullptr
 			, const LPVOID& uparams = nullptr)
 			noexcept

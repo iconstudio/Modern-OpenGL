@@ -7,8 +7,7 @@ import Utility.Monad;
 
 export namespace gl::device
 {
-	using Procedure = ::WNDPROC;
-	using RawDeviceClass = ::WNDCLASSEXW;
+	using ::WNDPROC, ::WNDCLASSEXW;
 
 	template<typename T>
 	struct [[nodiscard]] default_property_t;
@@ -77,7 +76,7 @@ export namespace gl::device
 		constexpr ~DeviceProperty() noexcept = default;
 
 		template<size_t ClassNameSize, size_t MenuNameSize>
-		explicit DeviceProperty(HINSTANCE handle, Procedure procedure
+		explicit DeviceProperty(HINSTANCE handle, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 		) noexcept
 			: DeviceProperty(handle, procedure
@@ -90,7 +89,7 @@ export namespace gl::device
 		{}
 
 		template<size_t ClassNameSize, size_t MenuNameSize>
-		explicit constexpr DeviceProperty(HINSTANCE handle, Procedure procedure
+		explicit constexpr DeviceProperty(HINSTANCE handle, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -109,7 +108,7 @@ export namespace gl::device
 
 
 		template<size_t ClassNameSize, size_t MenuNameSize>
-		explicit constexpr DeviceProperty(HINSTANCE handle, Procedure procedure
+		explicit constexpr DeviceProperty(HINSTANCE handle, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
 			, const ::HICON& icon
 			, const ::HICON& small_icon
@@ -131,7 +130,7 @@ export namespace gl::device
 			myWindowClass.hCursor = cursor;
 		}
 
-		util::Monad<RawDeviceClass> Register() const noexcept
+		util::Monad<WNDCLASSEXW> Register() const noexcept
 		{
 			if (RegisterClassExW(&myWindowClass))
 			{
@@ -144,15 +143,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const RawDeviceClass& GetHandle() const& noexcept
+		constexpr const WNDCLASSEXW& GetHandle() const& noexcept
 		{
 			return myWindowClass;
 		}
 
 		[[nodiscard]]
-		constexpr RawDeviceClass&& GetHandle() && noexcept
+		constexpr WNDCLASSEXW&& GetHandle() && noexcept
 		{
-			return static_cast<RawDeviceClass&&>(myWindowClass);
+			return static_cast<WNDCLASSEXW&&>(myWindowClass);
 		}
 
 		[[nodiscard]]
@@ -185,6 +184,6 @@ export namespace gl::device
 		constexpr DeviceProperty& operator=(DeviceProperty&&) noexcept = default;
 
 	private:
-		RawDeviceClass myWindowClass;
+		WNDCLASSEXW myWindowClass;
 	};
 }
