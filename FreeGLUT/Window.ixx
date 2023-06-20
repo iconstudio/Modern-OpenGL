@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Window;
+export import Glib.Rect;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
@@ -116,6 +117,15 @@ export namespace gl::device
 			, const int& height)
 		{
 			return Window(properties, title, style, x, y, width, height);
+		}
+
+		[[nodiscard]]
+		static inline Window Create(const WindowProperty& properties
+			, _Notnull_ const wchar_t* const& title
+			, const WindowStyle& style
+			, const Rect& dimension)
+		{
+			return Window(properties, title, style, dimension.x, dimension.y, dimension.w, dimension.h);
 		}
 
 		constexpr Window() noexcept = default;
