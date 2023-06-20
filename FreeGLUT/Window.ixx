@@ -223,61 +223,61 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetOwner() const noexcept
+		inline HWND GetOwner() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_OWNER);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetFirstChild() const noexcept
+		inline HWND GetFirstChild() const noexcept
 		{
 			return ::GetTopWindow(myHandle);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetFirstSibling() const noexcept
+		inline HWND GetFirstSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDFIRST);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetLastChild() const noexcept
+		inline HWND GetLastChild() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_CHILD);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetLastSibling() const noexcept
+		inline HWND GetLastSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDLAST);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetNextSibling() const noexcept
+		inline HWND GetNextSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDNEXT);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetPrevSibling() const noexcept
+		inline HWND GetPrevSibling() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_HWNDPREV);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetParent() const noexcept
+		inline HWND GetParent() const noexcept
 		{
 			return ::GetParent(myHandle);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetRoot() const noexcept
+		inline HWND GetRoot() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOT);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetRootOwner() const noexcept
+		inline HWND GetRootOwner() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOTOWNER);
 		}
