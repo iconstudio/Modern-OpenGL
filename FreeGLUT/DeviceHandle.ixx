@@ -5,7 +5,7 @@ export module Glib.Device.Handle;
 
 export namespace gl::device
 {
-	using ::HWND, ::HMENU, ::PVOID, ::LPVOID;
+	using ::HWND, ::HMENU, ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
 	using RawDeviceHandle = ::HWND;
 
 	using ::GetLastError;
@@ -176,19 +176,19 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetWindowParent() const noexcept
+		inline RawDeviceHandle GetParent() const noexcept
 		{
 			return ::GetParent(myHandle);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetWindowRoot() const noexcept
+		inline RawDeviceHandle GetRoot() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOT);
 		}
 
 		[[nodiscard]]
-		inline RawDeviceHandle GetWindowRootOwner() const noexcept
+		inline RawDeviceHandle GetRootOwner() const noexcept
 		{
 			return ::GetAncestor(myHandle, GA_ROOTOWNER);
 		}
