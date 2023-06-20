@@ -60,7 +60,7 @@ export namespace gl::device
 		) noexcept
 			: myWindowClass()
 		{
-			myWindowClass.cbSize = sizeof(WNDCLASSEXW);
+			myWindowClass.cbSize = sizeof(RawWindowProperty);
 			myWindowClass.hInstance = hinst;
 			myWindowClass.lpszClassName = class_name;
 			myWindowClass.lpfnWndProc = procedure;
@@ -85,15 +85,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr const WNDCLASSEXW& GetHandle() const& noexcept
+		constexpr const RawWindowProperty& GetHandle() const& noexcept
 		{
 			return myWindowClass;
 		}
 
 		[[nodiscard]]
-		constexpr WNDCLASSEXW&& GetHandle() && noexcept
+		constexpr RawWindowProperty&& GetHandle() && noexcept
 		{
-			return static_cast<WNDCLASSEXW&&>(myWindowClass);
+			return static_cast<RawWindowProperty&&>(myWindowClass);
 		}
 
 		[[nodiscard]]
@@ -126,6 +126,6 @@ export namespace gl::device
 		constexpr WindowProperty& operator=(WindowProperty&&) noexcept = default;
 
 	private:
-		WNDCLASSEXW myWindowClass;
+		RawWindowProperty myWindowClass;
 	};
 }
