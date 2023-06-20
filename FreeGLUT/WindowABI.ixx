@@ -15,7 +15,7 @@ export namespace gl::device::detail
 
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
-	inline bool RegisterProcess(const ::WNDCLASSEXW& property)
+	inline bool RegisterProcess(const tagWNDCLASSEXW& property)
 	{
 		return 0 == ::RegisterClassEx(&property);
 	}
