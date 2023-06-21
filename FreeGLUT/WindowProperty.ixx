@@ -3,6 +3,7 @@ module;
 
 export module Glib.Window:Property;
 import Glib.Device.ProcessInstance;
+export import Glib.Device.Icon;
 import :ABI;
 
 export namespace gl::window
@@ -27,35 +28,36 @@ export namespace gl::window
 		) noexcept
 			: WindowProperty(hinst, procedure
 						, class_name
-						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
-						, nullptr //, LoadIconW(hinst, IDI_APPLICATION)
+						, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
+						, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 						, nullptr //, LoadCursorW(hinst, IDC_ARROW)
 						, (HBRUSH)(COLOR_WINDOW + 1)
 						, nullptr)
 		{}
 
-		template<size_t ClassNameSize>
+		template<size_t ClassNameSize, typename IconType>
 		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t(&class_name)[ClassNameSize]
-			, const ::HICON& icon
-			, const ::HICON& small_icon
+			, IconType&& icon
+			, IconType&& small_icon
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
 			, const wchar_t* const& menu_name
 		) noexcept
 			: WindowProperty(hinst, procedure
 						, class_name
-						, icon
-						, small_icon
+						, static_cast<IconType&&>(icon)
+						, static_cast<IconType&&>(small_icon)
 						, cursor
 						, background
 						, menu_name)
 		{}
 
+		template<typename IconType>
 		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
 			, const wchar_t* const& class_name
-			, const ::HICON& icon
-			, const ::HICON& small_icon
+			, IconType&& icon
+			, IconType&& small_icon
 			, const ::HCURSOR& cursor
 			, const ::HBRUSH& background
 			, const wchar_t* const& menu_name
@@ -71,8 +73,8 @@ export namespace gl::window
 			myWindowClass.style = CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
 			myWindowClass.hbrBackground = background;
 			myWindowClass.lpszMenuName = menu_name;
-			myWindowClass.hIcon = icon;
-			myWindowClass.hIconSm = small_icon;
+			myWindowClass.hIcon = static_cast<IconType&&>(icon).GetHandle();
+			myWindowClass.hIconSm = static_cast<IconType&&>(small_icon).GetHandle();
 			myWindowClass.hCursor = cursor;
 		}
 
