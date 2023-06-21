@@ -145,6 +145,11 @@ export namespace gl::device
 			return 0 != ::DestroyIcon(icon);
 		}
 
+		static bool Draw(const HICON& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
+		{
+			return 0 != ::DrawIcon(hdc, x, y, icon);
+		}
+
 		[[nodiscard]]
 		static unsigned int GetIconsNumber(const FilePath& path) noexcept
 		{
@@ -169,6 +174,7 @@ export namespace gl::device
 	};
 
 #undef LoadIcon
+#undef DrawIcon
 
 	class [[nodiscard]] DeviceIcon
 	{
@@ -206,13 +212,31 @@ export namespace gl::device
 		friend DeviceIcon CopyIcon(const DeviceIcon& icon) noexcept;
 		[[nodiscard]]
 		friend bool TryCopyIcon(const DeviceIcon& icon, DeviceIcon& output) noexcept;
+		friend bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
 
-		virtual ~DeviceIcon() noexcept
+		virtual inline ~DeviceIcon() noexcept
 		{
 			if (nullptr != myIcon)
 			{
 				IconAPI::Destroy(myIcon);
 			}
+		}
+
+		[[nodiscard]]
+		DeviceIcon Copy() const noexcept
+		{
+			return CopyIcon(*this);
+		}
+
+		[[nodiscard]]
+		bool TryCopy(DeviceIcon& output) const noexcept
+		{
+			return TryCopy(*this, output);
+		}
+
+		bool Draw(const ::HDC& hdc, const int& x, const int& y) const noexcept
+		{
+			return DrawIcon(*this, hdc, x, y);
 		}
 
 		[[nodiscard]]
@@ -342,5 +366,10 @@ export namespace gl::device
 		{
 			return false;
 		}
+	}
+
+	bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
+	{
+		return IconAPI::Draw(icon, hdc, x, y);
 	}
 }
