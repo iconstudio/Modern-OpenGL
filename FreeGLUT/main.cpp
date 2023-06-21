@@ -3,6 +3,7 @@
 #undef CreateWindow
 #undef CreateWindowEx
 
+import Utility.Concurrency.Thread;
 import Glib;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
@@ -34,10 +35,8 @@ int main(const int& argc, char** argv)
 	window.Awake();
 	window.Start();
 
-	while (true)
-	{
-
-	}
+	util::CancellationSource cancellation_source{};
+	window.UpdateLoop(cancellation_source.get_token());
 
 	return 0;
 }

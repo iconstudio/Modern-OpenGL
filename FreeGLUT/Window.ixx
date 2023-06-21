@@ -1,6 +1,7 @@
 module;
 export module Glib.Window;
 import <string_view>;
+import Utility.Concurrency.Thread;
 export import Glib.Rect;
 export import Glib.DefaultProperty;
 export import Glib.Device.ProcessInstance;
@@ -176,11 +177,16 @@ export extern "C++" namespace gl::window
 			myHandle.StartUpdate();
 		}
 
-		inline void UpdateLoop() noexcept
+		[[noreturn]]
+		inline void UpdateLoop(util::stop_token canceller) noexcept
 		{
+			while (!canceller.stop_requested())
+			{
+				UpdateOnce();
+			}
 		}
 
-		inline void Update() noexcept
+		inline void UpdateOnce() noexcept
 		{
 
 		}
