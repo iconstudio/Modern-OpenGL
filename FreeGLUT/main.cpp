@@ -13,14 +13,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)
 	{
-		// Started by Alt+F4 or WM_DESTROY
+		// Started by WM_DESTROY
 		case WM_QUIT:
 		{
 			//KillTimer(hwnd, RENDER_TIMER_ID);
 		}
 		break;
 
-		// Started by close button or system menu
+		// Started by close button or system menu or Alt+F4
 		case WM_CLOSE:
 		{
 			::DestroyWindow(hwnd);
