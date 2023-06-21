@@ -68,7 +68,5 @@ int main(const int& argc, char** argv)
 	util::CancellationSource cancellation_source{};
 	window.UpdateLoop(cancellation_source.get_token());
 
-	window.Close();
-
 	return 0;
 }
