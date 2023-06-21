@@ -181,18 +181,30 @@ export extern "C++" namespace gl::window
 		[[noreturn]]
 		inline void UpdateLoop(util::stop_token canceller) noexcept
 		{
-			while (!canceller.stop_requested())
+			while (UpdateOnce())
 			{
-				UpdateOnce();
+				if (canceller.stop_requested())
+					break;
 			}
 		}
 
-		inline void UpdateOnce() noexcept
+		inline bool UpdateOnce() noexcept
 		{
 			device::DeviceCommand cmd{};
-			if (device::CommandQueue::Pop(myHandle, cmd))
+
+			if (int result = device::CommandQueue::Pop(myHandle, cmd); 0 != result)
 			{
+				if (-1 == result)
+				{
+					return false;
+				}
+
 				device::CommandQueue::Process(cmd);
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 
@@ -329,6 +341,9 @@ export extern "C++" namespace gl::window
 		device::ProcessInstance myInstance;
 		device::DeviceHandle myHandle;
 		const wchar_t* myClassName;
+
+		bool isFrameLimited;
+		unsigned int frameLimit;
 	};
 
 	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const int& x, const int& y, const int& width, const int& height) noexcept
