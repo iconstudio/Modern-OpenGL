@@ -26,8 +26,7 @@ int main(const int& argc, char** argv)
 
 	auto hinstance = gl::device::GetProcessInstance();
 
-	auto property = gl::window::WindowProperty{ hinstance, WndProc, my_windows_class };
-
+	auto property = gl::window::CreateProperty(hinstance, WndProc, my_windows_class);
 	property.Register();
 
 	auto window = gl::window::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);

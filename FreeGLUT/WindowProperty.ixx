@@ -10,55 +10,14 @@ export namespace gl::window
 {
 	class [[nodiscard]] WindowProperty
 	{
-	public:
-		using RawWindowProperty = ::tagWNDCLASSEXW;
-
-		constexpr WindowProperty() noexcept = default;
-		constexpr ~WindowProperty() noexcept = default;
-
-		template<size_t ClassNameSize>
-		explicit WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
-			, const wchar_t(&class_name)[ClassNameSize]
-		) noexcept
-			: WindowProperty(hinst, procedure, class_name)
-		{}
-
-		explicit WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
-			, const wchar_t* const& class_name
-		) noexcept
-			: WindowProperty(hinst, procedure
-						, class_name
-						, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
-						, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
-						, nullptr //, LoadCursorW(hinst, IDC_ARROW)
-						, (HBRUSH)(COLOR_WINDOW + 1)
-						, nullptr)
-		{}
-
-		template<size_t ClassNameSize, typename IconType>
-		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
-			, const wchar_t(&class_name)[ClassNameSize]
-			, IconType&& icon
-			, IconType&& small_icon
-			, const ::HCURSOR& cursor
-			, const ::HBRUSH& background
-			, const wchar_t* const& menu_name
-		) noexcept
-			: WindowProperty(hinst, procedure
-						, class_name
-						, static_cast<IconType&&>(icon)
-						, static_cast<IconType&&>(small_icon)
-						, cursor
-						, background
-						, menu_name)
-		{}
-
-		template<typename IconType>
-		explicit constexpr WindowProperty(const device::ProcessInstance& hinst, WNDPROC procedure
+	protected:
+		template<typename IconType, typename CursorType>
+		explicit constexpr WindowProperty(const device::ProcessInstance& hinst
+			, ::WNDPROC procedure
 			, const wchar_t* const& class_name
 			, IconType&& icon
 			, IconType&& small_icon
-			, const ::HCURSOR& cursor
+			, CursorType&& cursor
 			, const ::HBRUSH& background
 			, const wchar_t* const& menu_name
 		) noexcept
@@ -77,6 +36,32 @@ export namespace gl::window
 			myWindowClass.hIconSm = static_cast<IconType&&>(small_icon).GetHandle();
 			myWindowClass.hCursor = cursor;
 		}
+
+	public:
+		using RawWindowProperty = ::tagWNDCLASSEXW;
+
+		constexpr WindowProperty() noexcept = default;
+		constexpr ~WindowProperty() noexcept = default;
+
+		template<size_t ClassNameSize>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t(&class_name)[ClassNameSize]
+		) noexcept;
+
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
+		) noexcept;
+
+		template<size_t ClassNameSize, typename IconType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure
+			, const wchar_t(&class_name)[ClassNameSize]
+			, IconType&& icon
+			, IconType&& small_icon
+			, const ::HCURSOR& cursor
+			, const ::HBRUSH& background
+			, const wchar_t* const& menu_name
+		) noexcept;
 
 		inline bool Register() noexcept
 		{
@@ -132,4 +117,45 @@ export namespace gl::window
 	private:
 		RawWindowProperty myWindowClass;
 	};
+
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
+	) noexcept
+	{
+		static const HBRUSH default_color = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
+			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
+			, nullptr //, LoadCursorW(hinst, IDC_ARROW)
+			, default_color
+			, nullptr
+		};
+	}
+
+	template<typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const ::HBRUSH& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, static_cast<IconType&&>(icon)
+			, static_cast<IconType&&>(small_icon)
+			, static_cast<CursorType&&>(cursor)
+			, background
+			, menu_name
+		};
+	}
 }
