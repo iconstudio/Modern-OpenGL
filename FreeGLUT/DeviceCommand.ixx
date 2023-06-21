@@ -22,9 +22,9 @@ export namespace gl::device
 	{
 	public:
 		[[nodiscard]]
-		static inline bool Pop(const HWND& hwnd, DeviceCommand& output) noexcept
+		static inline int Pop(const HWND& hwnd, DeviceCommand& output) noexcept
 		{
-			return 0 != ::GetMessage(&output, hwnd, 0, 0);
+			return ::GetMessage(&output, hwnd, 0, 0);
 		}
 
 		static inline bool Push(const HWND& hwnd, const UINT& msg, const WPARAM& lhs = 0, const LPARAM& rhs = 0) noexcept
@@ -32,9 +32,9 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline bool Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static inline int Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
-			return 0 != ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
+			return ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
 		}
 
 		static inline void Process(const DeviceCommand& msg) noexcept
