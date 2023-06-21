@@ -231,7 +231,7 @@ export namespace gl::device
 		[[nodiscard]]
 		bool TryCopy(DeviceIcon& output) const noexcept
 		{
-			return TryCopy(*this, output);
+			return TryCopyIcon(*this, output);
 		}
 
 		bool Draw(const ::HDC& hdc, const int& x, const int& y) const noexcept
@@ -368,7 +368,7 @@ export namespace gl::device
 		}
 	}
 
-	bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
+	bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
 	{
 		return IconAPI::Draw(icon, hdc, x, y);
 	}
