@@ -11,18 +11,19 @@ export namespace gl::window
 		Disabled = WS_DISABLED,
 
 		Frame = WS_BORDER,
-		Caption = WS_DLGFRAME,
-		ThickFrame = WS_THICKFRAME,
-		Dialogue = WS_CAPTION,
+		Resizable = WS_THICKFRAME,
+		Caption = WS_CAPTION, // with Frame
+		NoCaption = WS_DLGFRAME,
 
-		Maximize = WS_MAXIMIZE,
-		MaximizeBox = WS_MAXIMIZEBOX,
-		Minimize = WS_MINIMIZE,
-		Iconic = Minimize, // WS_ICONIC == WS_MINIMIZE
-		MinimizeBox = WS_MINIMIZEBOX,
-		Popup = WS_POPUP,
+		MaximizeBox = WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX,
+		MinimizeBox = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		HorizontalScroll = WS_HSCROLL,
 		VerticalScroll = WS_VSCROLL,
+
+		MaximizeAtFirst = WS_MAXIMIZE,
+		MinimizeAtFirst = WS_MINIMIZE,
+		Iconic = MinimizeAtFirst, // WS_ICONIC == WS_MINIMIZE
+		Popup = WS_POPUP,
 
 		Child = WS_CHILD,
 		ClipChildren = WS_CLIPCHILDREN,
