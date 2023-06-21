@@ -3,6 +3,7 @@ module;
 #include <shellapi.h>
 
 export module Glib.Device.Icon;
+export import <string_view>;
 export import <filesystem>;
 
 export namespace gl::device
@@ -31,16 +32,55 @@ export namespace gl::device
 			0xFF, 0xFF, 0xFF, 0xFF,
 		};
 
+		/// <param name="color">Plain color bitmap</param>
+		/// <param name="mask">Should have (1, 2)x resolution of the icon</param>
 		[[nodiscard]]
-		static HICON Load(const FilePath& path) noexcept
+		static ::ICONINFO ConstructMeta(const ::HBITMAP& color, const ::HBITMAP& mask) noexcept
 		{
-			return ::LoadIcon(nullptr, path.c_str());
+			return ::ICONINFO
+			{
+				TRUE // is icon?
+					, 0 // x hotspot for cursor
+					, 0 // y hotspot for cursor
+					, mask // hbmMask
+					, color // hbmColor
+			};
+		}
+
+		[[nodiscard]]
+		static HICON Construct(::ICONINFO meta) noexcept
+		{
+			return ::CreateIconIndirect(&meta);
+		}
+
+		[[nodiscard]]
+		static bool TryConstruct(HICON& output, ::ICONINFO meta) noexcept
+		{
+			return nullptr != (output = ::CreateIconIndirect(&meta));
+		}
+
+		[[nodiscard]]
+		static HICON LoadResource(const std::wstring_view& name) noexcept
+		{
+			return ::LoadIcon(nullptr, name.data());
+		}
+
+		[[nodiscard]]
+		static bool TryLoadResource(HICON& output, const std::wstring_view& name) noexcept
+		{
+			return nullptr != (output = LoadResource(name));
 		}
 
 		[[nodiscard]]
 		static HICON LoadResource(const int& id) noexcept
 		{
 			return ::LoadIcon(nullptr, MAKEINTRESOURCE(id));
+		}
+
+		[[nodiscard]]
+		static bool TryLoadResource(HICON& output, const int& id) noexcept
+		{
+			return nullptr != (output = LoadResource(id));
 		}
 
 		[[nodiscard]]
@@ -128,13 +168,179 @@ export namespace gl::device
 		}
 	};
 
+#undef LoadIcon
+
 	class [[nodiscard]] DeviceIcon
 	{
 	protected:
+		constexpr DeviceIcon(const HICON& icon, const unsigned int& length) noexcept
+			: myIcon(icon)
+			, myLength(length)
+		{}
+
+		constexpr DeviceIcon(HICON&& icon, const unsigned int& length) noexcept
+			: myIcon(static_cast<HICON&&>(icon))
+			, myLength(length)
+		{}
 
 	public:
+		[[nodiscard]]
+		friend DeviceIcon MakeEmptyIcon() noexcept;
+		[[nodiscard]]
+		friend DeviceIcon LoadIcon(const FilePath& path) noexcept;
+		[[nodiscard]]
+		friend bool TryLoadIcon(const FilePath& path, DeviceIcon& output) noexcept;
+		[[nodiscard]]
+		friend DeviceIcon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept;
+		[[nodiscard]]
+		friend bool TryLoadIconAt(const FilePath& path, const unsigned int& index, DeviceIcon& output) noexcept;
+		[[nodiscard]]
+		friend DeviceIcon LoadResource(const std::wstring_view& name) noexcept;
+		[[nodiscard]]
+		friend bool TryLoadResource(const std::wstring_view& name, DeviceIcon& output) noexcept;
+		[[nodiscard]]
+		friend DeviceIcon LoadResource(const int& id) noexcept;
+		[[nodiscard]]
+		friend bool TryLoadResource(const int& id, DeviceIcon& output) noexcept;
+		[[nodiscard]]
+		friend DeviceIcon CopyIcon(const DeviceIcon& icon) noexcept;
+		[[nodiscard]]
+		friend bool TryCopyIcon(const DeviceIcon& icon, DeviceIcon& output) noexcept;
+
+		virtual ~DeviceIcon() noexcept
+		{
+			if (nullptr != myIcon)
+			{
+				IconAPI::Destroy(myIcon);
+			}
+		}
+
+		[[nodiscard]]
+		constexpr const HICON& GetHandle() const& noexcept
+		{
+			return myIcon;
+		}
+
+		[[nodiscard]]
+		constexpr HICON&& GetHandle() && noexcept
+		{
+			return static_cast<HICON&&>(myIcon);
+		}
+
+		[[nodiscard]]
+		constexpr unsigned int GetLength() const noexcept
+		{
+			return myLength;
+		}
+
+		[[nodiscard]]
+		constexpr bool IsEmpty() const noexcept
+		{
+			return nullptr == myIcon;
+		}
+
+		DeviceIcon(const DeviceIcon&) = delete;
+		constexpr DeviceIcon(DeviceIcon&&) noexcept = default;
+		DeviceIcon& operator=(const DeviceIcon&) = delete;
+		constexpr DeviceIcon& operator=(DeviceIcon&&) = default;
 
 	private:
 		HICON myIcon;
+		unsigned int myLength;
 	};
+
+	DeviceIcon MakeEmptyIcon() noexcept
+	{
+		return DeviceIcon(nullptr, 0U);
+	}
+
+	DeviceIcon LoadIcon(const FilePath& path) noexcept
+	{
+		return DeviceIcon(IconAPI::ExtractFrom(path, 0), IconAPI::GetIconsNumber(path));
+	}
+
+	bool TryLoadIcon(const FilePath& path, DeviceIcon& output) noexcept
+	{
+		if (nullptr != IconAPI::ExtractFrom(path, 0))
+		{
+			output.myLength = IconAPI::GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	DeviceIcon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
+	{
+		return DeviceIcon(IconAPI::ExtractFrom(path, index), IconAPI::GetIconsNumber(path));
+	}
+
+	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, DeviceIcon& output) noexcept
+	{
+		if (nullptr != IconAPI::ExtractFrom(path, index))
+		{
+			output.myLength = IconAPI::GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	DeviceIcon LoadResource(const std::wstring_view& name) noexcept
+	{
+		return DeviceIcon(IconAPI::LoadResource(name), 1);
+	}
+
+	bool TryLoadResource(const std::wstring_view& name, DeviceIcon& output) noexcept
+	{
+		if (IconAPI::TryLoadResource(output.myIcon, name))
+		{
+			output.myLength = 1;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	DeviceIcon LoadResource(const int& id) noexcept
+	{
+		return DeviceIcon(IconAPI::LoadResource(id), 1);
+	}
+
+	bool TryLoadResource(const int& id, DeviceIcon& output) noexcept
+	{
+		if (IconAPI::TryLoadResource(output.myIcon, id))
+		{
+			output.myLength = 1;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	DeviceIcon CopyIcon(const DeviceIcon& icon) noexcept
+	{
+		return DeviceIcon(IconAPI::Copy(icon.myIcon), icon.myLength);
+	}
+
+	bool TryCopyIcon(const DeviceIcon& icon, DeviceIcon& output) noexcept
+	{
+		if (IconAPI::TryCopy(icon.myIcon, output.myIcon))
+		{
+			output.myLength = icon.myLength;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
