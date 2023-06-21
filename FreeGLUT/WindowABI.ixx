@@ -9,6 +9,8 @@ export namespace gl::window
 {
 	using ::PVOID, ::LPVOID, ::WPARAM, ::LPARAM;
 	using ::WNDPROC;
+
+	using ::PostQuitMessage;
 }
 
 export namespace gl::window::detail
