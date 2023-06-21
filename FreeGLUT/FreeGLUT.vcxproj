@@ -177,6 +177,7 @@
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="DeviceClass.ixx" />
     <ClCompile Include="DeviceContext.ixx" />
+    <ClCompile Include="DeviceCoroutine.ixx" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="DeviceCommand.ixx" />
     <ClCompile Include="DeviceIcon.ixx" />
