@@ -8,7 +8,7 @@ export namespace gl::device
 	inline constexpr get_result_t get_result{};
 
 	using ::MSG, ::tagMSG;
-	using Trigger = ::tagMSG;
+	using DeviceCommand = ::tagMSG;
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
@@ -22,7 +22,7 @@ export namespace gl::device
 	{
 	public:
 		[[nodiscard]]
-		static inline bool Pop(const HWND& hwnd, Trigger& output) noexcept
+		static inline bool Pop(const HWND& hwnd, DeviceCommand& output) noexcept
 		{
 			return 0 != ::GetMessage(&output, hwnd, 0, 0);
 		}
@@ -32,37 +32,37 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline bool Peek(const HWND& hwnd, Trigger& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static inline bool Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
 			return 0 != ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
 		}
 
-		static inline void Process(const Trigger& msg) noexcept
+		static inline void Process(const DeviceCommand& msg) noexcept
 		{
 			Translate(msg);
 			Dispatch(msg);
 		}
 
 		[[nodiscard]]
-		static inline LRESULT Dispatch(get_result_t, const Trigger& msg) noexcept
+		static inline LRESULT Dispatch(get_result_t, const DeviceCommand& msg) noexcept
 		{
 			return ::DispatchMessage(&msg);
 		}
 
 		[[nodiscard]]
-		static inline bool Translate(get_result_t, const Trigger& msg) noexcept
+		static inline bool Translate(get_result_t, const DeviceCommand& msg) noexcept
 		{
 			return 0 != ::TranslateMessage(&msg);
 		}
 
 		[[noreturn]]
-		static inline void Translate(const Trigger& msg) noexcept
+		static inline void Translate(const DeviceCommand& msg) noexcept
 		{
 			::TranslateMessage(&msg);
 		}
 
 		[[noreturn]]
-		static inline void Dispatch(const Trigger& msg) noexcept
+		static inline void Dispatch(const DeviceCommand& msg) noexcept
 		{
 			::DispatchMessage(&msg);
 		}

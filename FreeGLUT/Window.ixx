@@ -7,6 +7,7 @@ export import Glib.DefaultProperty;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
+export import Glib.Device.Command;
 export import :Property;
 export import :Style;
 export import :Option;
@@ -160,7 +161,7 @@ export extern "C++" namespace gl::window
 			, const Rect& dimension
 		) noexcept;
 
-		constexpr Window() noexcept = default;
+		Window() noexcept = default;
 
 		virtual inline ~Window() noexcept
 		{
@@ -188,7 +189,11 @@ export extern "C++" namespace gl::window
 
 		inline void UpdateOnce() noexcept
 		{
-
+			device::DeviceCommand cmd{};
+			if (device::CommandQueue::Pop(myHandle, cmd))
+			{
+				device::CommandQueue::Process(cmd);
+			}
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const
