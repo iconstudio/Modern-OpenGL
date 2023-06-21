@@ -13,10 +13,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)
 	{
-		case WM_DESTROY: return 0;
-	}
+		case WM_QUIT:
+		{
+		}
+		break;
 
-	return DefWindowProc(hwnd, msg, wparam, lparam);
+		case WM_CLOSE:
+		{
+			::DestroyWindow(hwnd);
+		}
+		break;
+
+		case WM_DESTROY:
+		{
+			//KillTimer(hwnd, RENDER_TIMER_ID);
+			gl::window::PostQuitMessage(0);
+		}
+		break;
+
+		default:
+		{
+			return ::DefWindowProc(hwnd, msg, wparam, lparam);
+		}
+	}
 }
 
 const auto& my_windows_class = L"MY_CLASS";
@@ -37,6 +56,8 @@ int main(const int& argc, char** argv)
 
 	util::CancellationSource cancellation_source{};
 	window.UpdateLoop(cancellation_source.get_token());
+
+	window.Close();
 
 	return 0;
 }
