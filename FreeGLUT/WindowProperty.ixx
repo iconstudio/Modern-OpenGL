@@ -34,7 +34,7 @@ export namespace gl::window
 			myWindowClass.lpszMenuName = menu_name;
 			myWindowClass.hIcon = static_cast<IconType&&>(icon).GetHandle();
 			myWindowClass.hIconSm = static_cast<IconType&&>(small_icon).GetHandle();
-			myWindowClass.hCursor = cursor;
+			myWindowClass.hCursor = static_cast<CursorType&&>(cursor);
 		}
 
 	public:
