@@ -192,9 +192,9 @@ export extern "C++" namespace gl::window
 		{
 			device::DeviceCommand cmd{};
 
-			if (int result = device::CommandQueue::Pop(myHandle, cmd); 0 != result)
+			if (auto result = device::CommandQueue::Pop(myHandle, cmd); device::MsgResult::Quit != result)
 			{
-				if (-1 == result)
+				if (device::MsgResult::Unknown == result)
 				{
 					return false;
 				}

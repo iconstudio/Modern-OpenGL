@@ -18,13 +18,20 @@ export namespace gl::device
 		NoYieldAndDontRemove = PM_NOREMOVE | PM_NOYIELD
 	};
 
+	enum class [[nodiscard]] MsgResult : int
+	{
+		Normal = 1,
+		Quit = 0,
+		Unknown = -1
+	};
+
 	class CommandQueue
 	{
 	public:
 		[[nodiscard]]
-		static inline int Pop(const HWND& hwnd, DeviceCommand& output) noexcept
+		static inline MsgResult Pop(const HWND& hwnd, DeviceCommand& output) noexcept
 		{
-			return ::GetMessage(&output, hwnd, 0, 0);
+			return MsgResult{ ::GetMessage(&output, hwnd, 0, 0) };
 		}
 
 		static inline bool Push(const HWND& hwnd, const UINT& msg, const WPARAM& lhs = 0, const LPARAM& rhs = 0) noexcept
@@ -32,9 +39,9 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline int Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static inline MsgResult Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
-			return ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd));
+			return MsgResult{ ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
 		}
 
 		static inline void Process(const DeviceCommand& msg) noexcept
