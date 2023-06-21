@@ -46,9 +46,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayModes.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceIcon.ixx">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayModes.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
