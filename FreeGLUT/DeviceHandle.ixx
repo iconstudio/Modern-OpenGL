@@ -97,6 +97,16 @@ export namespace gl::device
 			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
 		}
 
+		inline bool EnableInput() noexcept
+		{
+			return 0 != ::EnableWindow(myHandle, TRUE);
+		}
+
+		inline bool DisableInput() noexcept
+		{
+			return 0 != ::EnableWindow(myHandle, FALSE);
+		}
+
 		[[nodiscard]]
 		inline bool IsMinimized() const noexcept
 		{
@@ -113,6 +123,12 @@ export namespace gl::device
 		inline bool IsRestored() const noexcept
 		{
 			return 0L == (GetStyle() & (WS_MINIMIZE | WS_MAXIMIZE));
+		}
+
+		[[nodiscard]]
+		inline bool IsInputEnabled() const noexcept
+		{
+			return 0 != ::IsWindowEnabled(myHandle);
 		}
 
 		[[nodiscard]]

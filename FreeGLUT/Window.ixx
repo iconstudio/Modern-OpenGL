@@ -270,6 +270,16 @@ export extern "C++" namespace gl::window
 			return myHandle.Redraw(flag);
 		}
 
+		inline bool EnableInput() noexcept
+		{
+			return myHandle.EnableInput();
+		}
+
+		inline bool DisableInput() noexcept
+		{
+			return myHandle.DisableInput();
+		}
+
 		[[nodiscard]]
 		inline bool IsMinimized() const noexcept
 		{
@@ -286,6 +296,12 @@ export extern "C++" namespace gl::window
 		inline bool IsRestored() const noexcept
 		{
 			return myHandle.IsRestored();
+		}
+
+		[[nodiscard]]
+		inline bool IsInputEnabled() const noexcept
+		{
+			return myHandle.IsInputEnabled();
 		}
 
 		[[nodiscard]]
