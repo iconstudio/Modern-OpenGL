@@ -52,13 +52,13 @@ export namespace gl::window
 		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
 		) noexcept;
 
-		template<size_t ClassNameSize, typename IconType>
+		template<typename IconType, typename CursorType>
 		[[nodiscard]]
 		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure
-			, const wchar_t(&class_name)[ClassNameSize]
+			, const wchar_t* const& class_name
 			, IconType&& icon
 			, IconType&& small_icon
-			, const ::HCURSOR& cursor
+			, CursorType&& cursor
 			, const ::HBRUSH& background
 			, const wchar_t* const& menu_name
 		) noexcept;
