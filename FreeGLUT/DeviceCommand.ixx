@@ -1,26 +1,25 @@
 module;
 #include "Internal.hpp"
 export module Glib.Device.Command;
+import Utility.Monad;
 
 export namespace gl::device
 {
 	struct get_result_t { constexpr get_result_t() noexcept = default; };
 	inline constexpr get_result_t get_result{};
 
-	using ::MSG, ::tagMSG;
 	using DeviceCommand = ::tagMSG;
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
-		Remove = PM_REMOVE,
 		DontRemove = PM_NOREMOVE,
+		Remove = PM_REMOVE,
+		NoYieldAndDontRemove = PM_NOREMOVE | PM_NOYIELD,
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
-		NoYieldAndDontRemove = PM_NOREMOVE | PM_NOYIELD
 	};
 
 	enum class [[nodiscard]] MsgResult : int
 	{
-		Normal = 1,
 		Quit = 0,
 		Unknown = -1
 	};
@@ -44,6 +43,19 @@ export namespace gl::device
 			return MsgResult{ ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
 		}
 
+		[[nodiscard]]
+		static inline util::Monad<LRESULT> Process(get_result_t, const DeviceCommand& msg) noexcept
+		{
+			if (Translate(get_result, msg))
+			{
+				return Dispatch(get_result, msg);
+			}
+			else
+			{
+				return util::nullopt;
+			}
+		}
+
 		static inline void Process(const DeviceCommand& msg) noexcept
 		{
 			Translate(msg);
@@ -63,15 +75,15 @@ export namespace gl::device
 		}
 
 		[[noreturn]]
-		static inline void Translate(const DeviceCommand& msg) noexcept
-		{
-			::TranslateMessage(&msg);
-		}
-
-		[[noreturn]]
 		static inline void Dispatch(const DeviceCommand& msg) noexcept
 		{
 			::DispatchMessage(&msg);
+		}
+
+		[[noreturn]]
+		static inline void Translate(const DeviceCommand& msg) noexcept
+		{
+			::TranslateMessage(&msg);
 		}
 	};
 }
