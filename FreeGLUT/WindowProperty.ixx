@@ -43,11 +43,6 @@ export namespace gl::window
 		constexpr WindowProperty() noexcept = default;
 		constexpr ~WindowProperty() noexcept = default;
 
-		template<size_t ClassNameSize>
-		[[nodiscard]]
-		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t(&class_name)[ClassNameSize]
-		) noexcept;
-
 		[[nodiscard]]
 		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
 		) noexcept;
