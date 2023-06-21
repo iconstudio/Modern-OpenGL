@@ -19,12 +19,31 @@ export namespace gl::window::detail
 
 	inline bool RegisterProcess(const tagWNDCLASSEXW& property)
 	{
-		return 0 == ::RegisterClassEx(&property);
+		return FALSE == ::RegisterClassEx(&property);
 	}
 
 	inline bool UnregisterProcess(const HINSTANCE& hinst, const std::wstring_view& class_name)
 	{
-		return 0 == ::UnregisterClass(class_name.data(), hinst);
+		return FALSE == ::UnregisterClass(class_name.data(), hinst);
+	}
+
+	inline bool EnablePointingDevice() noexcept
+	{
+		return FALSE != ::EnableMouseInPointer(TRUE);
+	}
+
+	inline bool DisablePointingDevice() noexcept
+	{
+		return FALSE != ::EnableMouseInPointer(FALSE);
+	}
+
+	/// <summary>
+	/// Is support pen or touch input?
+	/// </summary>
+	[[nodiscard]]
+	inline bool IsPointingDeviceEnabled() noexcept
+	{
+		return FALSE != ::IsMouseInPointerEnabled();
 	}
 
 	[[nodiscard]]
@@ -52,6 +71,6 @@ export namespace gl::window::detail
 
 	inline bool DestroyNativeWindow(const HWND& hwnd) noexcept
 	{
-		return 0 != ::DestroyWindow(hwnd);
+		return FALSE != ::DestroyWindow(hwnd);
 	}
 }
