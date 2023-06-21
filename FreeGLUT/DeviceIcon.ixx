@@ -370,6 +370,6 @@ export namespace gl::device
 
 	bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
 	{
-		return IconAPI::Draw(icon, hdc, x, y);
+		return IconAPI::Draw(icon.GetHandle(), hdc, x, y);
 	}
 }
