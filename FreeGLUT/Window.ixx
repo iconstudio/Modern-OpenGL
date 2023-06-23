@@ -210,7 +210,7 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		device::CommandCoroutine CreateQueue() noexcept
+		device::DeviceCommandCoroutine CreateQueue() noexcept
 		{
 
 		}

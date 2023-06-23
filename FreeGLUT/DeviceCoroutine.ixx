@@ -8,7 +8,7 @@ export import Glib.Device.Command;
 
 export namespace gl::device
 {
-	struct [[nodiscard]] CommandCoroutine
+	class [[nodiscard]] DeviceCommandCoroutine
 	{
 	public:
 		static inline
