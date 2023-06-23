@@ -9,8 +9,10 @@ export namespace gl::device
 	struct get_result_t { constexpr get_result_t() noexcept = default; };
 	inline constexpr get_result_t get_result{};
 
-	using ::HWND__, HWND;
-	using ::tagMSG, MSG;
+	using ::HWND__;
+	using ::HWND;
+	using ::tagMSG;
+	using ::MSG;
 	using DeviceCommand = ::tagMSG;
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
