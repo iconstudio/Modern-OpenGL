@@ -1,5 +1,6 @@
 module;
 #include "Internal.hpp"
+
 export module Glib.Device.Command;
 import Utility.Monad;
 
