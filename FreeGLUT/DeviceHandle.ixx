@@ -44,7 +44,7 @@ export namespace gl::device
 		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
-			return CommandQueue::Push(myHandle, msg, lhs, rhs);
+			return DeviceCommandAPI::Push(myHandle, msg, lhs, rhs);
 		}
 
 		inline bool UICommand(const int& cmd) noexcept

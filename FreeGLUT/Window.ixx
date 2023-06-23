@@ -8,6 +8,7 @@ export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import Glib.Device.Command;
+export import Glib.Device.Coroutine;
 export import :Property;
 export import :Style;
 export import :Option;
@@ -192,20 +193,26 @@ export extern "C++" namespace gl::window
 		{
 			device::DeviceCommand cmd{};
 
-			if (auto result = device::CommandQueue::Pop(myHandle, cmd); device::MsgResult::Quit != result)
+			if (auto result = device::DeviceCommandAPI::Pop(myHandle, cmd); device::MsgResult::Quit != result)
 			{
 				if (device::MsgResult::Unknown == result)
 				{
 					return false;
 				}
 
-				device::CommandQueue::Process(cmd);
+				device::DeviceCommandAPI::Process(cmd);
 				return true;
 			}
 			else
 			{
 				return false;
 			}
+		}
+
+		[[nodiscard]]
+		device::CommandCoroutine CreateQueue() noexcept
+		{
+
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const

@@ -25,7 +25,7 @@ export namespace gl::device
 		Unknown = -1
 	};
 
-	class CommandQueue
+	class DeviceCommandAPI final
 	{
 	public:
 		[[nodiscard]]
@@ -86,5 +86,13 @@ export namespace gl::device
 		{
 			::TranslateMessage(&msg);
 		}
+
+	private:
+		DeviceCommandAPI() = delete;
+		~DeviceCommandAPI() = delete;
+		DeviceCommandAPI(const DeviceCommandAPI&) = delete;
+		DeviceCommandAPI(DeviceCommandAPI&&) = delete;
+		DeviceCommandAPI& operator=(const DeviceCommandAPI&) = delete;
+		DeviceCommandAPI& operator=(DeviceCommandAPI&&) = delete;
 	};
 }

@@ -51,14 +51,14 @@ export namespace gl::device
 		{
 			DeviceCommand cmd{};
 
-			if (auto result = CommandQueue::Pop(handle, cmd); MsgResult::Quit != result)
+			if (auto result = DeviceCommandAPI::Pop(handle, cmd); MsgResult::Quit != result)
 			{
 				if (MsgResult::Unknown == result)
 				{
 					return false;
 				}
 
-				CommandQueue::Process(cmd);
+				DeviceCommandAPI::Process(cmd);
 				return true;
 			}
 			else
