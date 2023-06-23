@@ -4,6 +4,7 @@ module;
 export module Glib.Device.Coroutine;
 export import Utility.Coroutine;
 export import Utility.Concurrency.Thread;
+export import Glib.Device.Handle;
 export import Glib.Device.Command;
 
 export namespace gl::device
