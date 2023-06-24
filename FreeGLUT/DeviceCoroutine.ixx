@@ -5,67 +5,56 @@ export module Glib.Device.Coroutine;
 export import Utility.Coroutine;
 export import Utility.Concurrency.Thread;
 export import Glib.Device.Handle;
-export import Glib.Device.Command;
+import Glib.Device.Command;
 
-export namespace gl::device
+namespace gl::device
 {
-	class [[nodiscard]] DeviceCommandCoroutine
+	export inline auto
+		CreateQueue(const HWND& handle, util::stop_token&& canceller)
+		noexcept
 	{
-	public:
-		static inline
-			auto
-			CreateQueue(const HWND& handle, util::stop_token&& canceller)
-			noexcept
+		const auto stopper = [canceller = std::move(canceller)]() noexcept -> bool {
+			return !canceller.stop_requested();
+		};
+
+		return util::corepeat_as_if<util::coexecution::Later>(Process, stopper, handle);
+	}
+
+	export inline auto
+		CreateQueue(const HWND& handle)
+		noexcept
+	{
+		return util::corepeat_as<util::coexecution::Later>(Process, handle);
+	}
+
+	export inline
+		auto
+		CreateQueueAndStart(const ::HWND& handle, util::stop_token&& canceller)
+		noexcept
+	{
+		auto queue = CreateQueue(handle, std::move(canceller));
+		queue();
+
+		return queue;
+	}
+
+	inline bool Process(const ::HWND& handle) noexcept
+	{
+		DeviceCommand cmd{};
+
+		if (auto result = DeviceCommandAPI::Pop(handle, cmd); MsgResult::Quit != result)
 		{
-			const auto getter_result = [&]() noexcept -> bool {
-				if (canceller.stop_requested())
-				{
-
-					return false;
-				}
-			};
-
-			return util::corepeat_as<util::coexecution::Later>(Process, handle);
-		}
-
-		static inline
-			auto
-			CreateQueue(const HWND& handle)
-			noexcept
-		{
-			return util::corepeat_as<util::coexecution::Later>(Process, handle);
-		}
-
-		static inline
-			auto
-			CreateQueueAndStart(const ::HWND& handle, util::stop_token&& canceller)
-			noexcept
-		{
-			auto queue = CreateQueue(handle, std::move(canceller));
-			queue();
-
-			return queue;
-		}
-
-	private:
-		static inline bool Process(const ::HWND& handle) noexcept
-		{
-			DeviceCommand cmd{};
-
-			if (auto result = DeviceCommandAPI::Pop(handle, cmd); MsgResult::Quit != result)
-			{
-				if (MsgResult::Unknown == result)
-				{
-					return false;
-				}
-
-				DeviceCommandAPI::Process(cmd);
-				return true;
-			}
-			else
+			if (MsgResult::Unknown == result)
 			{
 				return false;
 			}
+
+			DeviceCommandAPI::Process(cmd);
+			return true;
 		}
-	};
+		else
+		{
+			return false;
+		}
+	}
 }
