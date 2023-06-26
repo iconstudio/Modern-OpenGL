@@ -13,13 +13,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch (msg)
 	{
-		// Started by WM_DESTROY
-		case WM_QUIT:
-		{
-			//KillTimer(hwnd, RENDER_TIMER_ID);
-		}
-		break;
-
 		// Started by close button or system menu or Alt+F4
 		case WM_CLOSE:
 		{
@@ -34,6 +27,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		}
 		break;
 
+		// Started by WM_DESTROY
+		case WM_QUIT:
+		{
+			//KillTimer(hwnd, RENDER_TIMER_ID);
+		}
+		break;
+
 		// Clean memory up
 		// Started by WM_DESTROY
 		case WM_NCDESTROY:
@@ -41,12 +41,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			// Forced stop code
 			return 0;
 		}
-
-		default:
-		{
-			return ::DefWindowProc(hwnd, msg, wparam, lparam);
-		}
 	}
+
+	return ::DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
 const auto& my_windows_class = L"MY_CLASS";
