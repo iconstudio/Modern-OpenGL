@@ -16,7 +16,7 @@ export namespace gl::window
 	protected:
 		template<typename IconType, typename CursorType>
 		explicit constexpr WindowProperty(const device::ProcessInstance& hinst
-			, ::WNDPROC procedure
+			, WindowProcedure procedure
 			, const wchar_t* const& class_name
 			, IconType&& icon
 			, IconType&& small_icon
@@ -47,12 +47,12 @@ export namespace gl::window
 		constexpr ~WindowProperty() noexcept = default;
 
 		[[nodiscard]]
-		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WindowProcedure procedure, const wchar_t* const& class_name
 		) noexcept;
 
 		template<typename IconType, typename CursorType>
 		[[nodiscard]]
-		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WindowProcedure procedure
 			, const wchar_t* const& class_name
 			, IconType&& icon
 			, IconType&& small_icon
@@ -85,14 +85,17 @@ export namespace gl::window
 
 		[[nodiscard]]
 		constexpr const device::ProcessInstance& GetInstance() const& noexcept
+
+		[[nodiscard]]
+		constexpr const WindowProcedure& GetProcedure() const& noexcept
 		{
-			return myWindowClass.hInstance;
+			return myWindowClass.lpfnWndProc;
 		}
 
 		[[nodiscard]]
-		constexpr device::ProcessInstance&& GetInstance() && noexcept
+		constexpr WindowProcedure&& GetProcedure() && noexcept
 		{
-			return static_cast<device::ProcessInstance&&>(myWindowClass.hInstance);
+			return static_cast<WindowProcedure&&>(myWindowClass.lpfnWndProc);
 		}
 
 		[[nodiscard]]
@@ -116,7 +119,8 @@ export namespace gl::window
 		RawWindowProperty myWindowClass;
 	};
 
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure, const wchar_t* const& class_name
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept
 	{
 		static const HBRUSH default_color = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
@@ -135,7 +139,8 @@ export namespace gl::window
 	}
 
 	template<typename IconType, typename CursorType>
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst, WNDPROC procedure
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
 		, const wchar_t* const& class_name
 		, IconType&& icon
 		, IconType&& small_icon

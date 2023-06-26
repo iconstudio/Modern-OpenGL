@@ -29,7 +29,7 @@ export extern "C++" namespace gl::window
 		) noexcept
 			: myInstance(properties.GetInstance())
 			, myClassName(properties.GetClass())
-			, myHandle(nullptr)
+			, myHandle(nullptr), myProcecure(properties.GetProcedure())
 		{
 			myHandle = detail::CreateNativeWindow(properties.GetInstance()
 				, properties.GetClass()
@@ -397,6 +397,7 @@ export extern "C++" namespace gl::window
 
 		device::ProcessInstance myInstance;
 		device::DeviceHandle myHandle;
+		WindowProcedure myProcecure;
 		const wchar_t* myClassName;
 
 		bool isFrameLimited;
