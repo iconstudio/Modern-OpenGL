@@ -9,7 +9,6 @@ export namespace gl::device
 {
 	using RawDeviceHandle = ::HWND__*;
 	using ::RECT;
-	using ::LPRECT;
 
 	using ::GetLastError;
 
