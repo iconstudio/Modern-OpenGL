@@ -162,6 +162,18 @@ export extern "C++" namespace gl::window
 			, const Rect& dimension
 		) noexcept;
 
+		[[nodiscard]]
+		friend Window CreateWindow(const WindowProperty& properties
+			, const std::wstring_view& title
+			, Rect&& dimension
+		) noexcept;
+
+		[[nodiscard]]
+		friend Window CreateWindow(WindowProperty&& properties
+			, const std::wstring_view& title
+			, Rect&& dimension
+		) noexcept;
+
 		Window() noexcept = default;
 
 		virtual inline ~Window() noexcept
@@ -448,5 +460,29 @@ export extern "C++" namespace gl::window
 	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, const Rect& dimension) noexcept
 	{
 		return Window{ static_cast<WindowProperty&&>(properties), title, styles::Default, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
+	}
+
+	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, Rect&& dimension) noexcept
+	{
+		return Window
+		{
+			properties
+			, title
+			, styles::Default , options::Default
+			, std::move(dimension.x), std::move(dimension.y)
+			, std::move(dimension.w), std::move(dimension.h)
+		};
+	}
+
+	Window CreateWindow(WindowProperty&& properties, const std::wstring_view& title, Rect&& dimension) noexcept
+	{
+		return Window
+		{
+			std::move(properties)
+			, title
+			, styles::Default , options::Default
+			, std::move(dimension.x), std::move(dimension.y)
+			, std::move(dimension.w), std::move(dimension.h)
+		};
 	}
 }
