@@ -508,4 +508,11 @@ export extern "C++" namespace gl::window
 			, std::move(dimension.w), std::move(dimension.h)
 		};
 	}
+
+	using device::PVOID;
+	using device::LPVOID;
+	using device::WPARAM;
+	using device::LPARAM;
+	using device::WNDPROC;
+	using device::PostQuitMessage;
 }
