@@ -175,7 +175,7 @@ export extern "C++" namespace gl::window
 
 		Window() noexcept = default;
 
-		virtual inline ~Window() noexcept
+		inline ~Window() noexcept
 		{
 			detail::UnregisterProcess(myInstance, myClassName);
 		}

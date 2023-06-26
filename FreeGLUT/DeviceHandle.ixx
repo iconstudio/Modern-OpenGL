@@ -1,12 +1,15 @@
 module;
 #include "Internal.hpp"
-#include <type_traits>
+
 export module Glib.Device.Handle;
+import <type_traits>;
 import Glib.Device.Command;
 
 export namespace gl::device
 {
 	using RawDeviceHandle = ::HWND__*;
+	using ::RECT;
+	using ::LPRECT;
 
 	using ::GetLastError;
 
@@ -27,7 +30,7 @@ export namespace gl::device
 			: myHandle(static_cast<volatile RawDeviceHandle&&>(handle))
 		{}
 
-		virtual ~DeviceHandle() noexcept
+		~DeviceHandle() noexcept
 		{
 			if (myHandle)
 			{
