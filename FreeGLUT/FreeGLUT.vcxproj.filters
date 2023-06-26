@@ -112,5 +112,8 @@
     <ClCompile Include="DeviceCoroutine.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="ManagedWindow.ixx">
+      <Filter>소스 파일\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -183,6 +183,7 @@
     <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="ManagedWindow.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="Keycodes.ixx" />
