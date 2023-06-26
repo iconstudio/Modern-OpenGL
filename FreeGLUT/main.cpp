@@ -60,6 +60,7 @@ int main(const int& argc, char** argv)
 	auto property = gl::window::CreateProperty(hinstance, WndProc, my_windows_class);
 	property.Register();
 
+	util::Println("Creating a Window");
 	auto window = gl::window::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);
 
 	auto managed_window = gl::window::ManagedWindow(std::move(window));
