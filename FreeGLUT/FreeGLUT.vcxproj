@@ -194,7 +194,6 @@
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="WindowABI.ixx" />
-    <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowOption.ixx" />
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="Window.ixx" />

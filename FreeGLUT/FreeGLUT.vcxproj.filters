@@ -106,9 +106,6 @@
     <ClCompile Include="DisplayModes.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="WindowCoroutine.ixx">
-      <Filter>소스 파일\Window</Filter>
-    </ClCompile>
     <ClCompile Include="DeviceCoroutine.ixx">
       <Filter>소스 파일\Device</Filter>
     </ClCompile>
