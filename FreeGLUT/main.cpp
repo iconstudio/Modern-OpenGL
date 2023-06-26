@@ -4,10 +4,12 @@
 #undef CreateWindowEx
 
 import Utility.Concurrency.Thread;
+import Utility.Print;
 import Glib;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
 import Glib.Window;
+import Glib.Window.ManagedWindow;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
@@ -50,6 +52,7 @@ const auto& my_windows_class = L"MY_CLASS";
 
 int main(const int& argc, char** argv)
 {
+	util::Println("Program Initiated");
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
 	auto hinstance = gl::device::GetProcessInstance();
@@ -63,6 +66,7 @@ int main(const int& argc, char** argv)
 	window.Start();
 
 	util::CancellationSource cancellation_source{};
+	util::Println("Program Started");
 	window.UpdateLoop(cancellation_source.get_token());
 
 	return 0;
