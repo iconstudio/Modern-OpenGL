@@ -8,6 +8,9 @@ import :ABI;
 
 export namespace gl::window
 {
+	//using ::WNDPROC;
+	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
+
 	class [[nodiscard]] WindowProperty
 	{
 	protected:
