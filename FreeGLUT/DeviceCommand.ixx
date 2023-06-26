@@ -13,7 +13,10 @@ export namespace gl::device
 	using ::HWND;
 	using ::tagMSG;
 	using ::MSG;
+	using UINT = ::UINT;
+
 	using DeviceCommand = ::tagMSG;
+	using DeviceCommandIDType = unsigned int; //decltype(DeviceCommand::message);
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
