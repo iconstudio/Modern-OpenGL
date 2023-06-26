@@ -2,13 +2,16 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Coroutine;
-export import Utility.Coroutine;
+import Utility.Coroutine;
+import Utility.Coroutine.Logic;
 export import Utility.Concurrency.Thread;
 export import Glib.Device.Handle;
 import Glib.Device.Command;
 
 namespace gl::device
 {
+	bool Process(const ::HWND& handle) noexcept;
+
 	export inline auto
 		CreateQueue(const HWND& handle, util::stop_token&& canceller)
 		noexcept
@@ -38,7 +41,7 @@ namespace gl::device
 		return queue;
 	}
 
-	inline bool Process(const ::HWND& handle) noexcept
+	bool Process(const ::HWND& handle) noexcept
 	{
 		DeviceCommand cmd{};
 
