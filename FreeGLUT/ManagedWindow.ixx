@@ -31,13 +31,12 @@ export namespace gl::window
 		static constexpr event_id_t DefaultEventID = device::DeviceCommand::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
 		using event_alert_t = std::atomic<event_id_t>;
-		using event_pool_t = util::Array<event_alert_t, WorkerCount>;
 
 		explicit ManagedWindow(Window&& window) noexcept
 			: underlying(std::move(window)), myDimensions()
 			, optionFullscreen(false)
 			, myEventHandlers()
-			, myWorkers(), cancellationSource(), awaitFlags()
+			, myWorkers(), cancellationSource(), awaitFlag(DefaultEventID)
 			, std::enable_shared_from_this<ManagedWindow>()
 		{
 			myDimensions = underlying.GetDimensions();
@@ -49,14 +48,9 @@ export namespace gl::window
 			size_t index = 0;
 			for (unit_t& worker : myWorkers)
 			{
-				worker = std::make_unique<util::ThreadUnit>(Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlags[index]));
+				worker = std::make_unique<util::ThreadUnit>(Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
 
 				++index;
-			}
-
-			for (event_alert_t& flag : awaitFlags)
-			{
-				flag.store(DefaultEventID);
 			}
 
 			underlying.Awake();
@@ -95,7 +89,7 @@ export namespace gl::window
 		util::CancellationSource cancellationSource;
 		pool_t myWorkers;
 		util::atomic<int> awaitCount = 0;
-		event_pool_t awaitFlags;
+		event_alert_t awaitFlag;
 	};
 
 	void ManagedWindow::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
