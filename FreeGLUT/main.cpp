@@ -62,8 +62,9 @@ int main(const int& argc, char** argv)
 
 	auto window = gl::window::CreateWindow(property, L"MY_TITLE", -1, -1, 400, 300);
 
-	window.Awake();
-	window.Start();
+	auto managed_window = gl::window::ManagedWindow(std::move(window));
+	managed_window.Awake();
+	managed_window.Start();
 
 	util::CancellationSource cancellation_source{};
 	util::Println("Program Started");
