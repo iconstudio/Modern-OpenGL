@@ -88,7 +88,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -98,6 +98,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +107,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -118,6 +119,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -138,6 +140,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,7 +149,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -158,6 +161,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -183,6 +187,16 @@
     <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="ManagedWindow.cpp">
+      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExternalTemplatesDiagnostics>
+      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
+      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExternalTemplatesDiagnostics>
+      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
+      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExternalTemplatesDiagnostics>
+      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
+      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExternalTemplatesDiagnostics>
+      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
+    </ClCompile>
     <ClCompile Include="ManagedWindow.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
