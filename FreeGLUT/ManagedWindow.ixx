@@ -2,7 +2,7 @@ export module Glib.Window.ManagedWindow;
 import <utility>;
 import <memory>;
 import <vector>;
-import Utility;
+import <unordered_map>;
 import Utility.Constraints;
 import Utility.Option;
 import Utility.Concurrency.Thread;
@@ -10,11 +10,10 @@ import Utility.Concurrency.Thread.Unit;
 import Utility.Atomic;
 import Utility.String;
 import Utility.FixedString;
+import Utility.Array;
 import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Coroutine;
-
-void EventHandler() noexcept;
 
 export namespace gl::window
 {
@@ -22,15 +21,56 @@ export namespace gl::window
 		: public ::std::enable_shared_from_this<ManagedWindow>
 	{
 	public:
+		static constexpr size_t WorkerCount = 4;
+
 		using unit_t = std::unique_ptr<util::ThreadUnit>;
-		using pool_t = std::vector<unit_t>;
-		using event_id_t = typename device::DeviceCommandIDType;
-		using event_handler_t = void*;
+		using pool_t = util::Array<unit_t, WorkerCount>;
+
+		using event_id_t = device::DeviceCommand;
+		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
+		static constexpr event_id_t DefaultEventID = device::DeviceCommand::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
+		using event_alert_t = std::atomic<event_id_t>;
+		using event_pool_t = util::Array<event_alert_t, WorkerCount>;
 
-		explicit ManagedWindow(Window&& window) noexcept;
+		explicit ManagedWindow(Window&& window) noexcept
+			: underlying(std::move(window)), myDimensions()
+			, optionFullscreen(false)
+			, myEventHandlers()
+			, myWorkers(), cancellationSource(), awaitFlags()
+			, std::enable_shared_from_this<ManagedWindow>()
+		{
+			myDimensions = underlying.GetDimensions();
+			myEventHandlers.reserve(20);
+		}
 
-		void AddEventHandler(event_id_t id, void* const& procedure) noexcept;
+		void Awake()
+		{
+			size_t index = 0;
+			for (unit_t& worker : myWorkers)
+			{
+				worker = std::make_unique<util::ThreadUnit>(Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlags[index]));
+
+				++index;
+			}
+
+			for (event_alert_t& flag : awaitFlags)
+			{
+				flag.store(DefaultEventID);
+			}
+
+			underlying.Awake();
+		}
+
+		void Start() noexcept
+		{
+			underlying.Start();
+		}
+
+		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept
+		{
+			myEventHandlers.insert(std::make_pair(id, procedure));
+		}
 
 		ManagedWindow(const ManagedWindow&) = delete;
 		ManagedWindow(ManagedWindow&&) noexcept = default;
@@ -38,7 +78,8 @@ export namespace gl::window
 		ManagedWindow& operator=(ManagedWindow&&) noexcept = default;
 
 	private:
-		friend void EventHandler() noexcept;
+		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
+		static void EventHandler(ManagedWindow& self, event_id_t msg, unsigned long long wparam, long long lparam) noexcept;
 
 		Window underlying;
 		Rect myDimensions;
@@ -49,8 +90,41 @@ export namespace gl::window
 		bool isRenderingNow = false;
 
 		// flat map
-		std::vector<event_t> myEventHandlers;
+		std::unordered_map<event_id_t, event_handler_t> myEventHandlers;
+
+		util::CancellationSource cancellationSource;
 		pool_t myWorkers;
-		util::atomic<device::DeviceCommand> awaitFlags;
+		util::atomic<int> awaitCount = 0;
+		event_pool_t awaitFlags;
 	};
+
+	void ManagedWindow::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
+	{
+		while (true)
+		{
+			await_flag.wait(DefaultEventID);
+
+			const auto it = self.myEventHandlers.find(await_flag.load());
+			if (it != self.myEventHandlers.cend())
+			{
+				const auto& handler = it->second;
+
+				handler(self, 0, 0);
+			}
+
+			await_flag.store(DefaultEventID);
+		}
+	}
+
+	void ManagedWindow::EventHandler(ManagedWindow& self, event_id_t msg, unsigned long long wparam, long long lparam) noexcept
+	{
+		const auto handle_pair = self.myEventHandlers.find(msg);
+
+		const auto& handler = handle_pair->second;
+
+		if (handler)
+		{
+			handler(self, wparam, lparam);
+		}
+	}
 }
