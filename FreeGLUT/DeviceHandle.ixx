@@ -275,8 +275,8 @@ export namespace gl::device
 	using ::LPVOID;
 	using ::UINT_PTR;
 	using ::LONG_PTR;
-	using ::WPARAM;
-	using ::LPARAM;
+	using WPARAM = ::WPARAM;
+	using LPARAM = ::WPARAM;
 	using ::WNDPROC;
 	using ::PostQuitMessage;
 	using ::DefWindowProc;

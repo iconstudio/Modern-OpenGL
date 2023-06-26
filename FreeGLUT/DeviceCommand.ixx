@@ -15,8 +15,8 @@ export namespace gl::device
 	using ::MSG;
 	using UINT = ::UINT;
 
-	using DeviceCommand = ::tagMSG;
-	using DeviceCommandIDType = unsigned int; //decltype(DeviceCommand::message);
+	using RawDeviceCommand = ::tagMSG;
+	using DeviceCommandIDType = unsigned int; //decltype(RawDeviceCommand::message);
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
@@ -24,6 +24,27 @@ export namespace gl::device
 		Remove = PM_REMOVE,
 		NoYieldAndDontRemove = PM_NOREMOVE | PM_NOYIELD,
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
+	};
+
+	enum class DeviceCommand : DeviceCommandIDType
+	{
+		None = 0,
+		Quit = WM_QUIT,
+		Create = WM_CREATE,
+		Destroy = WM_DESTROY,
+		Move = WM_MOVE,
+		Size = WM_SIZE,
+		Activate = WM_ACTIVATE,
+		SetFocus = WM_SETFOCUS,
+		KillFocus = WM_KILLFOCUS,
+		Enable = WM_ENABLE,
+		SetRedraw = WM_SETREDRAW,
+		SetText = WM_SETTEXT,
+		GetText = WM_GETTEXT,
+		GetTextLength = WM_GETTEXTLENGTH,
+		Paint = WM_PAINT,
+		Close = WM_CLOSE,
+		QueryEndSession = WM_QUERYENDSESSION,
 	};
 
 	enum class [[nodiscard]] MsgResult : int
@@ -36,7 +57,7 @@ export namespace gl::device
 	{
 	public:
 		[[nodiscard]]
-		static inline MsgResult Pop(const HWND& hwnd, DeviceCommand& output) noexcept
+		static inline MsgResult Pop(const HWND& hwnd, RawDeviceCommand& output) noexcept
 		{
 			return MsgResult{ ::GetMessage(&output, hwnd, 0, 0) };
 		}
@@ -46,13 +67,13 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline MsgResult Peek(const HWND& hwnd, DeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static inline MsgResult Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
 			return MsgResult{ ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
 		}
 
 		[[nodiscard]]
-		static inline util::Monad<LRESULT> Process(get_result_t, const DeviceCommand& msg) noexcept
+		static inline util::Monad<LRESULT> Process(get_result_t, const RawDeviceCommand& msg) noexcept
 		{
 			if (Translate(get_result, msg))
 			{
@@ -64,32 +85,32 @@ export namespace gl::device
 			}
 		}
 
-		static inline void Process(const DeviceCommand& msg) noexcept
+		static inline void Process(const RawDeviceCommand& msg) noexcept
 		{
 			Translate(msg);
 			Dispatch(msg);
 		}
 
 		[[nodiscard]]
-		static inline LRESULT Dispatch(get_result_t, const DeviceCommand& msg) noexcept
+		static inline LRESULT Dispatch(get_result_t, const RawDeviceCommand& msg) noexcept
 		{
 			return ::DispatchMessage(&msg);
 		}
 
 		[[nodiscard]]
-		static inline bool Translate(get_result_t, const DeviceCommand& msg) noexcept
+		static inline bool Translate(get_result_t, const RawDeviceCommand& msg) noexcept
 		{
 			return 0 != ::TranslateMessage(&msg);
 		}
 
 		[[noreturn]]
-		static inline void Dispatch(const DeviceCommand& msg) noexcept
+		static inline void Dispatch(const RawDeviceCommand& msg) noexcept
 		{
 			::DispatchMessage(&msg);
 		}
 
 		[[noreturn]]
-		static inline void Translate(const DeviceCommand& msg) noexcept
+		static inline void Translate(const RawDeviceCommand& msg) noexcept
 		{
 			::TranslateMessage(&msg);
 		}

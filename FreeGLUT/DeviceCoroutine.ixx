@@ -43,7 +43,7 @@ namespace gl::device
 
 	bool Process(const ::HWND& handle) noexcept
 	{
-		DeviceCommand cmd{};
+		RawDeviceCommand cmd{};
 
 		if (auto result = DeviceCommandAPI::Pop(handle, cmd); MsgResult::Quit != result)
 		{
