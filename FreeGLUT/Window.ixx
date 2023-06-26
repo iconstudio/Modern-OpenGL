@@ -338,6 +338,35 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
+		inline Rect GetDimension() const noexcept
+		{
+			auto result = myHandle.GetDimension();
+			return Rect
+			{
+				result.left,
+				result.top,
+				result.right - result.left,
+				result.bottom - result.top
+			};
+		}
+
+		[[nodiscard]]
+		inline bool TryGetDimension(Rect& output) const noexcept
+		{
+			auto result = device::DeviceHandle::MakeNativeRect();
+			const bool ok = myHandle.TryGetDimension(result);
+			if (ok)
+			{
+				output = Rect
+				{
+					result.left, result.top, result.right - result.left, result.bottom - result.top
+				};
+			}
+
+			return ok;
+		}
+
+		[[nodiscard]]
 		constexpr const device::DeviceHandle& GetHandle() const& noexcept
 		{
 			return myHandle;

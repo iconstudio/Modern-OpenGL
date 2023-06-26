@@ -153,6 +153,27 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
+		inline RECT GetDimension() const noexcept
+		{
+			RECT rect;
+			::GetWindowRect(myHandle, &rect);
+			return rect;
+		}
+
+		[[nodiscard]]
+		inline bool TryGetDimension(RECT& output) const noexcept
+		{
+			return 0 != ::GetWindowRect(myHandle, &output);
+		}
+	protected:
+		[[nodiscard]]
+		static constexpr RECT MakeNativeRect() noexcept
+		{
+			return {};
+		}
+
+	public:
+		[[nodiscard]]
 		inline RawDeviceHandle GetOwner() const noexcept
 		{
 			return ::GetWindow(myHandle, GW_OWNER);
