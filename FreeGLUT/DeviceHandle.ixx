@@ -153,7 +153,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline RECT GetDimension() const noexcept
+		inline RECT GetDimensions() const noexcept
 		{
 			RECT rect;
 			::GetWindowRect(myHandle, &rect);
@@ -161,18 +161,11 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline bool TryGetDimension(RECT& output) const noexcept
+		inline bool TryGetDimensions(RECT& output) const noexcept
 		{
 			return 0 != ::GetWindowRect(myHandle, &output);
 		}
-	protected:
-		[[nodiscard]]
-		static constexpr RECT MakeNativeRect() noexcept
-		{
-			return {};
-		}
 
-	public:
 		[[nodiscard]]
 		inline RawDeviceHandle GetOwner() const noexcept
 		{
@@ -270,6 +263,13 @@ export namespace gl::device
 	private:
 		RawDeviceHandle myHandle = nullptr;
 	};
+
+
+	[[nodiscard]]
+	constexpr RECT MakeNativeRect() noexcept
+	{
+		return {};
+	}
 
 #define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
 #define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)

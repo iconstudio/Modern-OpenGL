@@ -338,9 +338,9 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		inline Rect GetDimension() const noexcept
+		inline Rect GetDimensions() const noexcept
 		{
-			auto result = myHandle.GetDimension();
+			auto result = myHandle.GetDimensions();
 			return Rect
 			{
 				result.left,
@@ -351,10 +351,10 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		inline bool TryGetDimension(Rect& output) const noexcept
+		inline bool TryGetDimensions(Rect& output) const noexcept
 		{
-			auto result = device::DeviceHandle::MakeNativeRect();
-			const bool ok = myHandle.TryGetDimension(result);
+			auto result = device::MakeNativeRect();
+			const bool ok = myHandle.TryGetDimensions(result);
 			if (ok)
 			{
 				output = Rect
