@@ -8,7 +8,6 @@ export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import Glib.Device.Command;
-export import Glib.Device.Coroutine;
 export import :Property;
 export import :Style;
 export import :Option;
@@ -219,11 +218,6 @@ export extern "C++" namespace gl::window
 			{
 				return false;
 			}
-		}
-
-		void CreateQueue() noexcept
-		{
-
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const
