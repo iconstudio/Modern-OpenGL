@@ -27,7 +27,7 @@ export namespace gl::window
 			: myWindowClass()
 		{
 			myWindowClass.cbSize = sizeof(RawWindowProperty);
-			myWindowClass.hInstance = hinst;
+			myWindowClass.hInstance = hinst.myHandle;
 			myWindowClass.lpszClassName = class_name;
 			myWindowClass.lpfnWndProc = procedure;
 			myWindowClass.cbClsExtra = 0;
@@ -84,7 +84,16 @@ export namespace gl::window
 		}
 
 		[[nodiscard]]
-		constexpr const device::ProcessInstance& GetInstance() const& noexcept
+		constexpr device::ProcessInstance GetInstance() const& noexcept
+		{
+			return device::ProcessInstance{ myWindowClass.hInstance };
+		}
+
+		[[nodiscard]]
+		constexpr device::ProcessInstance GetInstance() && noexcept
+		{
+			return device::ProcessInstance{ static_cast<device::HINSTANCE&&>(myWindowClass.hInstance) };
+		}
 
 		[[nodiscard]]
 		constexpr const WindowProcedure& GetProcedure() const& noexcept

@@ -31,7 +31,7 @@ export extern "C++" namespace gl::window
 			, myClassName(properties.GetClass())
 			, myHandle(nullptr), myProcecure(properties.GetProcedure())
 		{
-			myHandle = detail::CreateNativeWindow(properties.GetInstance()
+			myHandle = detail::CreateNativeWindow(properties.GetInstance().myHandle
 				, properties.GetClass()
 				, title
 				, Export(style), Export(option)
@@ -51,7 +51,7 @@ export extern "C++" namespace gl::window
 			, myClassName(static_cast<WindowProperty&&>(properties).GetClass())
 			, myHandle(nullptr)
 		{
-			myHandle = detail::CreateNativeWindow(myInstance
+			myHandle = detail::CreateNativeWindow(myInstance.myHandle
 				, myClassName
 				, title
 				, Export(style), Export(option)
@@ -177,7 +177,7 @@ export extern "C++" namespace gl::window
 
 		inline ~Window() noexcept
 		{
-			detail::UnregisterProcess(myInstance, myClassName);
+			detail::UnregisterProcess(myInstance.myHandle, myClassName);
 		}
 
 		inline void Awake() noexcept
