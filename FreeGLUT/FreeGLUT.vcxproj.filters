@@ -112,5 +112,8 @@
     <ClCompile Include="OpenGL.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceIO.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
