@@ -218,6 +218,14 @@ export namespace gl::window
 				return 0;
 			}
 
+			case event_id_t::KeyDown:
+			//[[fallthrough]]
+			case event_id_t::KeyUp:
+			{
+				return 0;
+			}
+			break;
+
 			default:
 			{
 				if (self)
@@ -228,6 +236,6 @@ export namespace gl::window
 			break;
 		}
 
-		return DefWindowProcW(hwnd, id, wparam, lparam);
+		return DefWindowProc(hwnd, id, wparam, lparam);
 	}
 }
