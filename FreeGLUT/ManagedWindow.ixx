@@ -20,8 +20,10 @@ import Glib.Device.Command;
 
 export namespace gl::window
 {
+	template<util::basic_fixed_string Name>
 	class [[nodiscard]] ManagedWindow
-		: public ::std::enable_shared_from_this<ManagedWindow>
+		: public ::std::enable_shared_from_this<ManagedWindow<Name>>
+		, public util::Singleton<ManagedWindow<Name>>
 	{
 	public:
 		static constexpr size_t WorkerCount = 4;
