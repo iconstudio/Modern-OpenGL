@@ -7,7 +7,7 @@ import Utility.Monad;
 export namespace gl::device
 {
 	using RawDeviceCommand = ::tagMSG;
-	using DeviceCommandIDType = unsigned int; //decltype(RawDeviceCommand::message);
+	using DeviceCommandIDType = decltype(RawDeviceCommand::message);
 
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
@@ -36,6 +36,39 @@ export namespace gl::device
 		Paint = WM_PAINT,
 		Close = WM_CLOSE,
 		QueryEndSession = WM_QUERYENDSESSION,
+	};
+
+	struct [[nodiscard]] DeviceCommand final
+	{
+		constexpr DeviceCommand() noexcept = default;
+		constexpr ~DeviceCommand() noexcept = default;
+
+		constexpr DeviceCommand(const RawDeviceCommand& msg) noexcept
+			: id(DeviceCommandID{ msg.message })
+			, wParam(msg.wParam), lParam(msg.lParam)
+			, time(msg.time)
+		{}
+
+		constexpr DeviceCommand(RawDeviceCommand&& msg) noexcept
+			: id(DeviceCommandID{ util::move(msg.message) })
+			, wParam(util::move(msg.wParam)), lParam(util::move(msg.lParam))
+			, time(util::move(msg.time))
+		{}
+
+		constexpr DeviceCommand(const DeviceCommandID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
+			: id(msg), wParam(lhs), lParam(rhs)
+			, time(tick)
+		{}
+
+		constexpr DeviceCommand(const DeviceCommand&) noexcept = default;
+		constexpr DeviceCommand(DeviceCommand&&) noexcept = default;
+		constexpr DeviceCommand& operator=(const DeviceCommand&) noexcept = default;
+		constexpr DeviceCommand& operator=(DeviceCommand&&) noexcept = default;
+
+		DeviceCommandID id;
+		unsigned long long wParam;
+		long long lParam;
+		unsigned long time;
 	};
 
 	enum class [[nodiscard]] MsgResult : int
