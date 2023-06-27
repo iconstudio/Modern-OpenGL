@@ -80,7 +80,7 @@ export namespace gl::window
 
 	private:
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
-		static void EventHandler(ManagedWindow& self, event_id_t msg, unsigned long long wparam, long long lparam) noexcept;
+		static void EventHandler(ManagedWindow& self, const event_id_t& msg, unsigned long long wparam, long long lparam) noexcept;
 
 		void AlertEvent(const event_id_t& event_id) noexcept
 		{
@@ -90,7 +90,7 @@ export namespace gl::window
 
 		util::Monad<event_handler_t> FindEventHandler(const event_id_t& event_id) noexcept
 		{
-			const auto it = myEventHandlers.find(event_id);
+			const event_iterator it = myEventHandlers.find(event_id);
 			if (it == myEventHandlers.cend())
 			{
 				return util::nullopt;
@@ -120,31 +120,35 @@ export namespace gl::window
 
 	void ManagedWindow::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
 	{
+		await_flag.wait(DefaultEventID, util::memory_order_relaxed);
+
 		while (true)
 		{
-			await_flag.wait(DefaultEventID);
+			EventHandler(self, await_flag.load(), 0, 0);
 
-			const auto it = self.myEventHandlers.find(await_flag.load());
+			const event_iterator it = self.myEventHandlers.find(await_flag.load());
 			if (it != self.myEventHandlers.cend())
 			{
-				const auto& handler = it->second;
+				const event_handler_t& handler = it->second;
 
 				handler(self, 0, 0);
 			}
 
-			await_flag.store(DefaultEventID);
+			await_flag.store(DefaultEventID, util::memory_order_acquire);
+			await_flag.wait(DefaultEventID, util::memory_order_release);
 		}
 	}
 
-	void ManagedWindow::EventHandler(ManagedWindow& self, event_id_t msg, unsigned long long wparam, long long lparam) noexcept
+	void ManagedWindow::EventHandler(ManagedWindow& self, const event_id_t& id, unsigned long long wparam, long long lparam) noexcept
 	{
-		const auto handle_pair = self.myEventHandlers.find(msg);
-
-		const auto& handler = handle_pair->second;
-
-		if (handler)
+		const util::Monad<event_handler_t> handle_pair = self.FindEventHandler(id);
+		if (handle_pair)
 		{
-			handler(self, wparam, lparam);
+			const event_handler_t& handler = *handle_pair;
+			if (handler)
+			{
+				handler(self, wparam, lparam);
+			}
 		}
 	}
 }
