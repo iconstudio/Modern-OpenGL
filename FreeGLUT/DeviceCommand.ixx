@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Command;
+import <compare>;
 import Utility;
 import Utility.Monad;
 
@@ -62,30 +63,54 @@ export namespace gl::device
 			, time(tick)
 		{}
 
+		[[nodiscard]]
+		constexpr bool operator==(const DeviceCommand& rhs) const noexcept
+		{
+			return id == rhs.id && wParam == rhs.wParam && lParam == rhs.lParam;
+		}
+
+		[[nodiscard]]
+		constexpr std::strong_ordering operator<=>(const DeviceCommand& rhs) const noexcept
+		{
+			auto comp_id = id <=> rhs.id;
+			if (comp_id != std::strong_ordering::equal)
+			{
+				return comp_id;
+			}
+
+			auto comp_wp = wParam <=> rhs.wParam;
+			if (comp_wp != std::strong_ordering::equal)
+			{
+				return comp_wp;
+			}
+
+			auto comp_lp = lParam <=> rhs.wParam;
+			if (comp_lp != std::strong_ordering::equal)
+			{
+				return comp_lp;
+			}
+
+			return time <=> rhs.time;
+		}
+
 		constexpr DeviceCommand(const DeviceCommand&) noexcept = default;
 		constexpr DeviceCommand(DeviceCommand&&) noexcept = default;
 		constexpr DeviceCommand& operator=(const DeviceCommand&) noexcept = default;
 		constexpr DeviceCommand& operator=(DeviceCommand&&) noexcept = default;
 
-		DeviceCommandID id;
-		unsigned long long wParam;
-		long long lParam;
-		unsigned long time;
-	};
-
-	enum class [[nodiscard]] MsgResult : int
-	{
-		Quit = 0,
-		Unknown = -1
+		DeviceCommandID id = DeviceCommandID::None;
+		unsigned long long wParam = 0;
+		long long lParam = 0;
+		unsigned long time = 0;
 	};
 
 	class DeviceCommandAPI final
 	{
 	public:
 		[[nodiscard]]
-		static MsgResult Pop(const HWND& hwnd, RawDeviceCommand& output) noexcept
+		static bool Pop(const HWND& hwnd, RawDeviceCommand& output) noexcept
 		{
-			return MsgResult{ ::GetMessage(&output, hwnd, 0, 0) };
+			return 0 != ::GetMessage(&output, hwnd, 0, 0);
 		}
 
 		static bool Push(const HWND& hwnd, const DeviceCommandIDType& id, const unsigned long long& lhs, const long long& rhs) noexcept
