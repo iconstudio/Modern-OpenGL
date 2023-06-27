@@ -22,9 +22,9 @@ export namespace gl::device
 	enum class DeviceCommandID : DeviceCommandIDType
 	{
 		None = 0,
-		Quit = WM_QUIT,
 		Create = WM_CREATE,
 		Destroy = WM_DESTROY,
+
 		Move = WM_MOVE,
 		Size = WM_SIZE,
 		Activate = WM_ACTIVATE,
@@ -36,9 +36,36 @@ export namespace gl::device
 		GetText = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
 		Paint = WM_PAINT,
+
 		Close = WM_CLOSE,
-		CleanupMemory = WM_NCDESTROY,
 		QueryEndSession = WM_QUERYENDSESSION,
+		Quit = WM_QUIT,
+		CleanupMemory = WM_NCDESTROY,
+
+		KeyDown = WM_KEYDOWN,
+		KeyUp = WM_KEYUP,
+		Char = WM_CHAR,
+		DeadChar = WM_DEADCHAR,
+
+		SysKeyDown = WM_SYSKEYDOWN,
+		SysKeyUp = WM_SYSKEYUP,
+		SysChar = WM_SYSCHAR,
+		SysDeadChar = WM_SYSDEADCHAR,
+
+		MouseMove = WM_MOUSEMOVE,
+		MouseHover = WM_MOUSEHOVER,
+		MouseLeave = WM_MOUSELEAVE,
+		MouseWheel = WM_MOUSEWHEEL,
+		MouseHWheel = WM_MOUSEHWHEEL,
+		LButtonDown = WM_LBUTTONDOWN,
+		LButtonUp = WM_LBUTTONUP,
+		LButtonDoubleClick = WM_LBUTTONDBLCLK,
+		RButtonDown = WM_RBUTTONDOWN,
+		RButtonUp = WM_RBUTTONUP,
+		RButtonDoubleClick = WM_RBUTTONDBLCLK,
+		MButtonDown = WM_MBUTTONDOWN,
+		MButtonUp = WM_MBUTTONUP,
+		MButtonDoubleClick = WM_MBUTTONDBLCLK,
 	};
 
 	struct [[nodiscard]] DeviceCommand final
