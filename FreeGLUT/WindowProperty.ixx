@@ -125,7 +125,7 @@ export namespace gl::window
 		constexpr WindowProperty& operator=(WindowProperty&&) noexcept = default;
 
 	private:
-		RawWindowProperty myWindowClass;
+		RawWindowProperty myWindowClass{};
 	};
 
 	WindowProperty CreateProperty(const device::ProcessInstance& hinst
@@ -154,7 +154,7 @@ export namespace gl::window
 		, IconType&& icon
 		, IconType&& small_icon
 		, CursorType&& cursor
-		, const ::HBRUSH& background
+		, const HBRUSH& background
 		, const wchar_t* const& menu_name
 	) noexcept
 	{

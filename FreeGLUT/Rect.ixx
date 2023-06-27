@@ -32,9 +32,9 @@ export extern "C" namespace gl
 		constexpr Rect(Rect&& other) noexcept = default;
 		constexpr Rect& operator=(Rect&& other) noexcept = default;
 
-		int x;
-		int y;
-		int w;
-		int h;
+		int x = 0;
+		int y = 0;
+		int w = 0;
+		int h = 0;
 	};
 }
