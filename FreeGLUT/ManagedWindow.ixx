@@ -6,6 +6,7 @@ import <utility>;
 import <memory>;
 import <atomic>;
 import <vector>;
+import <latch>;
 import <unordered_map>;
 import Utility.Constraints;
 import Utility.Singleton;
@@ -69,7 +70,7 @@ export namespace gl::window
 			size_t index = 0;
 			for (unit_t& worker : myWorkers)
 			{
-				worker = std::make_unique<util::jthread>(ManagedWindow::Worker, util::ref(*this), util::ref(awaitFlag));
+				worker = std::make_unique<util::jthread>(ManagedWindow::Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
 
 				++index;
 			}
@@ -105,12 +106,13 @@ export namespace gl::window
 		{
 			if (isRunning)
 			{
-				for (unit_t& worker : myWorkers)
-				{
-					worker->request_stop();
-				}
 				cancellationSource.request_stop();
 				awaitFlag.notify_all();
+
+				for (unit_t& worker : myWorkers)
+				{
+					worker->detach();
+				}
 
 				isRunning = false;
 			}
