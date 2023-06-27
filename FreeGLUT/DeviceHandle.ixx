@@ -261,6 +261,12 @@ export namespace gl::device
 			return myHandle;
 		}
 
+		constexpr DeviceHandle& operator=(nullptr_t) noexcept
+		{
+			myHandle = nullptr;
+			return *this;
+		}
+
 		constexpr DeviceHandle& operator=(RawDeviceHandle&& handle) noexcept
 		{
 			myHandle = static_cast<RawDeviceHandle&&>(handle);

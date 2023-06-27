@@ -1,5 +1,6 @@
 module;
 #include "Internal.hpp"
+#include <type_traits>
 export module Glib.Device.ProcessInstance;
 
 export namespace gl::device
@@ -18,12 +19,18 @@ export namespace gl::device
 			: myHandle(handle)
 		{}
 
-		HINSTANCE__* myHandle = nullptr;
+		constexpr ProcessInstance& operator=(nullptr_t) noexcept
+		{
+			myHandle = nullptr;
+			return *this;
+		}
 
 		ProcessInstance(const ProcessInstance&) = delete;
 		ProcessInstance(ProcessInstance&&) = default;
 		ProcessInstance& operator=(const ProcessInstance&) = delete;
 		ProcessInstance& operator=(ProcessInstance&&) = default;
+
+		HINSTANCE__* myHandle = nullptr;
 	};
 
 	[[nodiscard]]
