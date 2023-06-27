@@ -80,7 +80,7 @@ int main(const int& argc, char** argv)
 
 	util::CancellationSource cancellation_source{};
 	util::Println("Program Started");
-	window.UpdateLoop(cancellation_source.get_token());
+	managed_window.UpdateLoop(cancellation_source.get_token());
 
 	return 0;
 }

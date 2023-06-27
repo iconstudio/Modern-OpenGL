@@ -71,11 +71,21 @@ export namespace gl::window
 			}
 
 			underlying.Awake();
+			underlying.Start();
 		}
 
 		void Start() noexcept
 		{
-			underlying.Start();
+		}
+
+		//[[deprecated("Use Start() instead")]]
+		inline void UpdateLoop(util::stop_token canceller) noexcept
+		{
+			while (underlying.UpdateOnce())
+			{
+				if (canceller.stop_requested())
+					break;
+			}
 		}
 
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept
