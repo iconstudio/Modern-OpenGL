@@ -40,25 +40,4 @@ namespace gl::device
 
 		return queue;
 	}
-
-	bool Process(const ::HWND& handle) noexcept
-	{
-		RawDeviceCommand cmd{};
-
-		if (auto result = DeviceCommandAPI::Pop(handle, cmd); MsgResult::Quit != result)
-		{
-			if (MsgResult::Unknown == result)
-			{
-				return false;
-			}
-
-			//TODO
-			//DeviceCommandAPI::Process(cmd);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 }
