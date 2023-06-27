@@ -60,12 +60,12 @@ export namespace gl::window
 			myEventHandlers.reserve(20);
 		}
 
-		void Awake()
+		void Awake() noexcept
 		{
 			size_t index = 0;
 			for (unit_t& worker : myWorkers)
 			{
-				worker = std::make_unique<util::ThreadUnit>(Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
+				worker = std::make_unique<util::ThreadUnit>(ManagedWindow::Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
 
 				++index;
 			}
@@ -89,8 +89,9 @@ export namespace gl::window
 		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
 
 	private:
+		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
-		static void EventHandler(ManagedWindow& self, const event_id_t& msg, unsigned long long wparam, long long lparam) noexcept;
+		static bool EventHandler(ManagedWindow& self, const event_id_t& msg, unsigned long long wparam, long long lparam) noexcept;
 
 		void AlertEvent(const event_id_t& event_id) noexcept
 		{
@@ -98,7 +99,8 @@ export namespace gl::window
 			awaitFlag.notify_one();
 		}
 
-		util::Monad<event_handler_t> FindEventHandler(const event_id_t& event_id) noexcept
+		util::Monad<event_handler_t> FindEventHandler(const event_id_t& event_id)
+			noexcept
 		{
 			const event_iterator it = myEventHandlers.find(event_id);
 			if (it == myEventHandlers.cend())
@@ -128,7 +130,58 @@ export namespace gl::window
 		event_alert_t awaitFlag;
 	};
 
-	void ManagedWindow::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
+	template<util::basic_fixed_string Name>
+	long long
+		ManagedWindow<Name>::MainWorker(device::HWND hwnd // underlying.myHandle
+	, unsigned int id
+	, unsigned long long wparam, long long lparam)
+		noexcept
+	{
+		const event_id_t msg = static_cast<event_id_t>(id);
+
+		switch (msg)
+		{
+			// Started by close button or system menu or Alt+F4
+			case event_id_t::Close:
+			{
+				DestroyWindow(hwnd);
+			}
+			break;
+
+			// Started by DestroyWindow
+			case event_id_t::Destroy:
+			{
+				PostQuitMessage(0);
+			}
+			break;
+
+			// Started by WM_DESTROY
+			case event_id_t::Quit:
+			{
+				//KillTimer(hwnd, RENDER_TIMER_ID);
+			}
+			break;
+
+			// Clean memory up
+			// Started by WM_DESTROY
+			case event_id_t::CleanupMemory:
+			{
+				// Forced stop code
+				return 0;
+			}
+
+			default:
+			{
+				return DefWindowProcW(hwnd, id, wparam, lparam);
+			}
+		}
+
+		return 0;
+	}
+
+	template<util::basic_fixed_string Name>
+	void
+		ManagedWindow<Name>::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
 	{
 		await_flag.wait(DefaultEventID, util::memory_order_relaxed);
 
@@ -149,7 +202,10 @@ export namespace gl::window
 		}
 	}
 
-	void ManagedWindow::EventHandler(ManagedWindow& self, const event_id_t& id, unsigned long long wparam, long long lparam) noexcept
+	template<util::basic_fixed_string Name>
+	bool
+		ManagedWindow<Name>::EventHandler(ManagedWindow& self, const event_id_t& id, unsigned long long wparam, long long lparam)
+		noexcept
 	{
 		const util::Monad<event_handler_t> handle_pair = self.FindEventHandler(id);
 		if (handle_pair)
@@ -158,7 +214,11 @@ export namespace gl::window
 			if (handler)
 			{
 				handler(self, wparam, lparam);
+
+				return true;
 			}
 		}
+
+		return false;
 	}
 }
