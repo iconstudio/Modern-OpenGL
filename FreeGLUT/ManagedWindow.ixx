@@ -213,6 +213,27 @@ export namespace gl::window
 
 		switch (msg)
 		{
+			case event_id_t::KeyDown:
+			case event_id_t::KeyUp:
+			{
+				return 0;
+			}
+			break;
+
+			case event_id_t::Char:
+			case event_id_t::DeadChar:
+			{
+				return 0;
+			}
+			break;
+
+			case event_id_t::SysKeyDown:
+			case event_id_t::SysKeyUp:
+			{
+				return 0;
+			}
+			break;
+
 			// Started by close button or system menu or Alt+F4
 			case event_id_t::Close:
 			{
@@ -247,14 +268,7 @@ export namespace gl::window
 				return 0;
 			}
 
-			case event_id_t::KeyDown:
 			//[[fallthrough]]
-			case event_id_t::KeyUp:
-			{
-				return 0;
-			}
-			break;
-
 			default:
 			{
 				if (self)
