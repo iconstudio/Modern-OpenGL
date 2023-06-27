@@ -8,7 +8,7 @@ import Glib.Device.Command;
 export namespace gl::device
 {
 	using RawDeviceHandle = ::HWND__*;
-	using ::RECT;
+	using NativeRect = ::tagRECT;
 
 	using ::GetLastError;
 
@@ -152,15 +152,15 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline RECT GetDimensions() const noexcept
+		inline NativeRect GetDimensions() const noexcept
 		{
-			RECT rect;
+			NativeRect rect;
 			::GetWindowRect(myHandle, &rect);
 			return rect;
 		}
 
 		[[nodiscard]]
-		inline bool TryGetDimensions(RECT& output) const noexcept
+		inline bool TryGetDimensions(NativeRect& output) const noexcept
 		{
 			return 0 != ::GetWindowRect(myHandle, &output);
 		}
@@ -263,9 +263,8 @@ export namespace gl::device
 		RawDeviceHandle myHandle = nullptr;
 	};
 
-
 	[[nodiscard]]
-	constexpr RECT MakeNativeRect() noexcept
+	constexpr NativeRect MakeNativeRect() noexcept
 	{
 		return {};
 	}
