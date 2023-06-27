@@ -85,7 +85,7 @@ export namespace gl::window
 		{
 			while (true)
 			{
-
+				underlying.UpdateOnce();
 			}
 		}
 
