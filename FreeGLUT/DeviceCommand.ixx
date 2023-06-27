@@ -6,15 +6,6 @@ import Utility.Monad;
 
 export namespace gl::device
 {
-	struct get_result_t { constexpr get_result_t() noexcept = default; };
-	inline constexpr get_result_t get_result{};
-
-	using ::HWND__;
-	using ::HWND;
-	using ::tagMSG;
-	using ::MSG;
-	using UINT = ::UINT;
-
 	using RawDeviceCommand = ::tagMSG;
 	using DeviceCommandIDType = unsigned int; //decltype(RawDeviceCommand::message);
 
@@ -26,7 +17,7 @@ export namespace gl::device
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
 	};
 
-	enum class DeviceCommand : DeviceCommandIDType
+	enum class DeviceCommandID : DeviceCommandIDType
 	{
 		None = 0,
 		Quit = WM_QUIT,
@@ -57,62 +48,39 @@ export namespace gl::device
 	{
 	public:
 		[[nodiscard]]
-		static inline MsgResult Pop(const HWND& hwnd, RawDeviceCommand& output) noexcept
+		static MsgResult Pop(const HWND& hwnd, RawDeviceCommand& output) noexcept
 		{
 			return MsgResult{ ::GetMessage(&output, hwnd, 0, 0) };
 		}
 
-		static inline bool Push(const HWND& hwnd, const UINT& msg, const WPARAM& lhs = 0, const LPARAM& rhs = 0) noexcept
+		static bool Push(const HWND& hwnd, const DeviceCommandIDType& msg, const unsigned long long& lhs = 0, const long long& rhs = 0) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
 		}
 
-		static inline MsgResult Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static bool Push(const HWND& hwnd, const DeviceCommandID& msg, const unsigned long long& lhs = 0, const long long& rhs = 0) noexcept
+		{
+			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(msg), lhs, rhs);
+		}
+
+		static bool Push(const HWND& hwnd, DeviceCommandID&& msg, const unsigned long long& lhs, const long long& rhs) noexcept
+		{
+			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(msg), lhs, rhs);
+		}
+
+		static MsgResult Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
 			return MsgResult{ ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
 		}
 
-		[[nodiscard]]
-		static inline util::Monad<LRESULT> Process(get_result_t, const RawDeviceCommand& msg) noexcept
-		{
-			if (Translate(get_result, msg))
-			{
-				return Dispatch(get_result, msg);
-			}
-			else
-			{
-				return util::nullopt;
-			}
-		}
-
-		static inline void Process(const RawDeviceCommand& msg) noexcept
-		{
-			Translate(msg);
-			Dispatch(msg);
-		}
-
-		[[nodiscard]]
-		static inline LRESULT Dispatch(get_result_t, const RawDeviceCommand& msg) noexcept
+		static long long Dispatch(const RawDeviceCommand& msg) noexcept
 		{
 			return ::DispatchMessage(&msg);
 		}
 
-		[[nodiscard]]
-		static inline bool Translate(get_result_t, const RawDeviceCommand& msg) noexcept
+		static bool Translate(const RawDeviceCommand& msg) noexcept
 		{
 			return 0 != ::TranslateMessage(&msg);
-		}
-
-		[[noreturn]]
-		static inline void Dispatch(const RawDeviceCommand& msg) noexcept
-		{
-			::DispatchMessage(&msg);
-		}
-
-		[[noreturn]]
-		static inline void Translate(const RawDeviceCommand& msg) noexcept
-		{
-			::TranslateMessage(&msg);
 		}
 
 	private:

@@ -510,10 +510,5 @@ export extern "C++" namespace gl::window
 		};
 	}
 
-	using device::PVOID;
-	using device::LPVOID;
-	using device::WPARAM;
-	using device::LPARAM;
-	using device::WNDPROC;
 	using device::PostQuitMessage;
 }

@@ -270,17 +270,10 @@ export namespace gl::device
 		return {};
 	}
 
-	using ::PVOID;
-	using ::LPVOID;
-	using ::UINT_PTR;
-	using ::LONG_PTR;
-	using WPARAM = ::WPARAM;
-	using LPARAM = ::WPARAM;
-	using ::WNDPROC;
 	using ::PostQuitMessage;
 	using ::DefWindowProc;
 
-#define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
-#define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)
-#define IsMButtonDown()  (GetKeyState(VK_MBUTTON) < 0)
+//#define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
+//#define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)
+//#define IsMButtonDown()  (GetKeyState(VK_MBUTTON) < 0)
 }
