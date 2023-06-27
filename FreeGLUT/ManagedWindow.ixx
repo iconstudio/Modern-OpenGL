@@ -4,12 +4,13 @@ import <memory>;
 import <vector>;
 import <unordered_map>;
 import Utility.Constraints;
-import Utility.Option;
 import Utility.Concurrency.Thread;
 import Utility.Concurrency.Thread.Unit;
 import Utility.Atomic;
 import Utility.String;
 import Utility.FixedString;
+import Utility.Monad;
+import Utility.Option;
 import Utility.Array;
 import Glib.Rect;
 import Glib.Window;
@@ -27,10 +28,15 @@ export namespace gl::window
 		using unit_t = std::unique_ptr<util::ThreadUnit>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
-		using event_id_t = device::DeviceCommandID;
+		using event_id_t = typename device::DeviceCommandID;
+
 		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
 		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
+		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
+		using event_iterator = event_storage_t::iterator;
+		using event_const_iterator = event_storage_t::const_iterator;
+
 		using event_alert_t = std::atomic<event_id_t>;
 
 		explicit ManagedWindow(Window&& window) noexcept
@@ -76,6 +82,25 @@ export namespace gl::window
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
 		static void EventHandler(ManagedWindow& self, event_id_t msg, unsigned long long wparam, long long lparam) noexcept;
 
+		void AlertEvent(const event_id_t& event_id) noexcept
+		{
+			awaitFlag.store(event_id);
+			awaitFlag.notify_one();
+		}
+
+		util::Monad<event_handler_t> FindEventHandler(const event_id_t& event_id) noexcept
+		{
+			const auto it = myEventHandlers.find(event_id);
+			if (it == myEventHandlers.cend())
+			{
+				return util::nullopt;
+			}
+			else
+			{
+				return it->second;
+			}
+		}
+
 		Window underlying;
 		Rect myDimensions;
 
@@ -85,7 +110,7 @@ export namespace gl::window
 		bool isRenderingNow = false;
 
 		// flat map
-		std::unordered_map<event_id_t, event_handler_t> myEventHandlers;
+		event_storage_t myEventHandlers;
 
 		util::CancellationSource cancellationSource;
 		pool_t myWorkers;
