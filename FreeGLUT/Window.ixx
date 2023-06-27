@@ -203,23 +203,16 @@ export extern "C++" namespace gl::window
 		{
 			device::RawDeviceCommand cmd{};
 
-			if (auto result = device::DeviceCommandAPI::Pop(myHandle, cmd); device::MsgResult::Quit != result)
+			if (device::DeviceCommandAPI::Pop(myHandle, cmd))
 			{
-				if (device::MsgResult::Unknown == result)
-				{
-					return false;
-				}
-
 				if (device::DeviceCommandAPI::Translate(cmd))
 				{
 					device::DeviceCommandAPI::Dispatch(cmd);
+					return true;
 				}
-				return true;
 			}
-			else
-			{
-				return false;
-			}
+
+			return false;
 		}
 
 		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const

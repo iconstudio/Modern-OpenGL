@@ -70,17 +70,9 @@ int main(const int& argc, char** argv)
 
 	auto managed_window = gl::window::ManagedWindow<"TestWindow">(std::move(window));
 	managed_window.Awake();
-	managed_window.Start();
 
-	//gl::window::ManagedWindow<"TestWindow">::Instance->Awake();
-	//gl::window::ManagedWindow<"TestWindow">::Instance->Start();
-
-	//util::Println("handle is {}.", reinterpret_cast<void*>(gl::window::ManagedWindow<"TestWindow">::Instance));
-	//util::Println("{}.", gl::window::ManagedWindow<"TestWindow">::Instance->DefaultEventID);
-
-	util::CancellationSource cancellation_source{};
 	util::Println("Program Started");
-	managed_window.UpdateLoop(cancellation_source.get_token());
+	managed_window.Start();
 
 	return 0;
 }

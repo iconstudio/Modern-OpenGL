@@ -37,22 +37,22 @@ export namespace gl::window
 		using unit_t = std::unique_ptr<util::ThreadUnit>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
-		using event_id_t = typename device::DeviceCommandID;
+		using event_id_t = device::DeviceCommandID;
 		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
+
 		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
-		using event_t = std::pair<event_id_t, event_handler_t>;
+		static constexpr device::DeviceCommand DefaultEvent = {};
+		using event_t = device::DeviceCommand;
+		using event_alert_t = std::atomic<event_t>;
+
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
-		using event_alert_t = std::atomic<event_id_t>;
-
 		explicit ManagedWindow(Window&& window) noexcept
 			: underlying(std::move(window)), myDimensions()
 			, windowProcedureHandle(std::move(window.myProcecure))
-			, optionFullscreen(false), isRenderingNow(false)
-			, myEventHandlers()
-			, myWorkers(), cancellationSource(), awaitFlag(DefaultEventID)
+			, myWorkers(), cancellationSource(), awaitFlag(DefaultEvent)
 			, base_shared_t()
 			, base_singleton_t(this)
 		{
@@ -74,8 +74,15 @@ export namespace gl::window
 			underlying.Start();
 		}
 
+		/// <summary>
+		/// The main loop
+		/// </summary>
 		void Start() noexcept
 		{
+			while (true)
+			{
+
+			}
 		}
 
 		//[[deprecated("Use Start() instead")]]
@@ -102,29 +109,37 @@ export namespace gl::window
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
 		{
-			await_flag.wait(DefaultEventID, util::memory_order_relaxed);
+			await_flag.wait(DefaultEvent, util::memory_order_relaxed);
 
 			while (true)
 			{
-				//EventHandler(self, await_flag.load(), 0, 0);
+				auto event = await_flag.load();
 
-				const event_iterator it = self.myEventHandlers.find(await_flag.load());
+				const event_iterator it = self.myEventHandlers.find(event.id);
 				if (it != self.myEventHandlers.cend())
 				{
 					const event_handler_t& handler = it->second;
 
-					handler(self, 0, 0);
+					handler(self, event.wParam, event.lParam);
 				}
 
-				await_flag.store(DefaultEventID, util::memory_order_acquire);
-				await_flag.wait(DefaultEventID, util::memory_order_release);
+				await_flag.store(DefaultEvent, util::memory_order_acquire);
+				await_flag.wait(DefaultEvent, util::memory_order_release);
 			}
 		}
 
-		void AlertEvent(const event_id_t& event_id) noexcept
+		bool AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			awaitFlag.store(event_id);
-			awaitFlag.notify_one();
+			if (myEventHandlers.contains(event_id))
+			{
+				awaitFlag.store(event_t{ event_id, lhs, rhs });
+				awaitFlag.notify_one();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		[[nodiscard]]
@@ -147,14 +162,14 @@ export namespace gl::window
 		WindowProcedure windowProcedureHandle = nullptr;
 
 		// flat map
-		event_storage_t myEventHandlers;
+		event_storage_t myEventHandlers{};
 
 		pool_t myWorkers;
 		util::CancellationSource cancellationSource;
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag;
 
-		util::Option<bool> optionFullscreen;
+		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 	};
 
@@ -201,20 +216,11 @@ export namespace gl::window
 
 			default:
 			{
-				const util::Monad<event_handler_t> handle_pair = self.FindEventHandler(msg);
-				if (handle_pair)
-				{
-					const event_handler_t& handler = *handle_pair;
-					if (handler)
-					{
-						return handler(self, wparam, lparam);
-					}
-				}
-
-				return DefWindowProcW(hwnd, id, wparam, lparam);
+				AlertEvent(msg, wparam, lparam);
 			}
+			break;
 		}
 
-		return 0;
+		return DefWindowProcW(hwnd, id, wparam, lparam);
 	}
 }
