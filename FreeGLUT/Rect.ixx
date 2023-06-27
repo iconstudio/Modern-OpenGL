@@ -7,24 +7,24 @@ export extern "C" namespace gl
 		constexpr Rect() noexcept = default;
 		constexpr ~Rect() noexcept = default;
 
-		constexpr Rect(const int& x, const int& y, const int& width, const int& height)
+		constexpr Rect(const int& mx, const int& my, const int& width, const int& height)
 			noexcept
-			: x(x), y(y), w(width), h(height)
+			: x(mx), y(my), w(width), h(height)
 		{}
 
-		constexpr Rect(int&& x, int&& y, const int& width, const int& height)
+		constexpr Rect(int&& mx, int&& my, const int& width, const int& height)
 			noexcept
-			: x(static_cast<int&&>(x)), y(static_cast<int&&>(y)), w(width), h(height)
+			: x(static_cast<int&&>(mx)), y(static_cast<int&&>(my)), w(width), h(height)
 		{}
 
-		constexpr Rect(const int& x, const int& y, int&& width, int&& height)
+		constexpr Rect(const int& mx, const int& my, int&& width, int&& height)
 			noexcept
-			: x(x), y(y), w(static_cast<int&&>(width)), h(static_cast<int&&>(height))
+			: x(mx), y(my), w(static_cast<int&&>(width)), h(static_cast<int&&>(height))
 		{}
 
-		constexpr Rect(int&& x, int&& y, int&& width, int&& height)
+		constexpr Rect(int&& mx, int&& my, int&& width, int&& height)
 			noexcept
-			: x(static_cast<int&&>(x)), y(static_cast<int&&>(y)), w(static_cast<int&&>(width)), h(static_cast<int&&>(height))
+			: x(static_cast<int&&>(mx)), y(static_cast<int&&>(my)), w(static_cast<int&&>(width)), h(static_cast<int&&>(height))
 		{}
 
 		constexpr Rect(const Rect& other) noexcept = default;
