@@ -2,11 +2,12 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Window:Property;
+import <type_traits>;
 import Glib.Device.ProcessInstance;
 export import Glib.Device.Icon;
 import :ABI;
 
-export namespace gl::window
+export extern "C++" namespace gl::window
 {
 	//using ::WNDPROC;
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
