@@ -38,7 +38,7 @@ export namespace gl::window
 		using under_shared_t = std::shared_ptr<type>;
 		using under_weak_t = std::weak_ptr<type>;
 
-		using unit_t = std::unique_ptr<util::ThreadUnit>;
+		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
 		using event_id_t = device::DeviceCommandID;
