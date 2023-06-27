@@ -188,6 +188,7 @@
     <ClCompile Include="DeviceIO.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="KeyboardFlags.ixx" />
     <ClCompile Include="ManagedWindow.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />

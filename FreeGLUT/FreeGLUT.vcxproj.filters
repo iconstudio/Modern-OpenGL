@@ -115,5 +115,8 @@
     <ClCompile Include="DeviceIO.ixx">
       <Filter>헤더 파일\Device\IO</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardFlags.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
