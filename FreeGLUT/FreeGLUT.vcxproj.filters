@@ -13,17 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Device">
+    <Filter Include="헤더 파일\Window">
+      <UniqueIdentifier>{ff87e5b4-6cea-4667-9749-08eb4456f4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device">
       <UniqueIdentifier>{ebc17173-a354-4a16-8ab3-e146d1825e5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Utility">
+    <Filter Include="헤더 파일\Utility">
       <UniqueIdentifier>{aa861b64-4006-44be-af4b-5a7de359797d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Definitions">
+    <Filter Include="헤더 파일\Device\IO">
       <UniqueIdentifier>{15db4f74-cb17-43c3-8ef5-379bcced7713}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Window">
-      <UniqueIdentifier>{ff87e5b4-6cea-4667-9749-08eb4456f4f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,70 +47,70 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Rect.ixx">
-      <Filter>소스 파일\Utility</Filter>
+      <Filter>헤더 파일\Utility</Filter>
     </ClCompile>
     <ClCompile Include="MouseButtons.ixx">
-      <Filter>소스 파일\Definitions</Filter>
+      <Filter>헤더 파일\Device\IO</Filter>
     </ClCompile>
     <ClCompile Include="KeyModifiers.ixx">
-      <Filter>소스 파일\Definitions</Filter>
+      <Filter>헤더 파일\Device\IO</Filter>
     </ClCompile>
     <ClCompile Include="Keycodes.ixx">
-      <Filter>소스 파일\Definitions</Filter>
+      <Filter>헤더 파일\Device\IO</Filter>
     </ClCompile>
     <ClCompile Include="Display.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceContext.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceHandle.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="ProcessInstance.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DefaultProperty.ixx">
-      <Filter>소스 파일\Utility</Filter>
+      <Filter>헤더 파일\Utility</Filter>
     </ClCompile>
     <ClCompile Include="DeviceClass.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="WindowStyle.ixx">
-      <Filter>소스 파일\Window</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="Window.ixx">
-      <Filter>소스 파일\Window</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="WindowABI.ixx">
-      <Filter>소스 파일\Window</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="WindowOption.ixx">
-      <Filter>소스 파일\Window</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="WindowProperty.ixx">
-      <Filter>소스 파일\Window</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="DeviceCommand.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceIcon.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DisplayModes.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceCoroutine.ixx">
-      <Filter>소스 파일\Device</Filter>
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="ManagedWindow.ixx">
-      <Filter>소스 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGL.ixx">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL.cpp">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL.ixx">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
