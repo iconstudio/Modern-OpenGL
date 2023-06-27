@@ -4,7 +4,7 @@ import <memory>;
 import <vector>;
 import <unordered_map>;
 import Utility.Constraints;
-import Utility.Concurrency.Thread;
+import Utility.Singleton;
 import Utility.String;
 import Utility.FixedString;
 import Utility.Array;
