@@ -14,6 +14,7 @@ import Utility.Array;
 import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Coroutine;
+import Glib.Device.Command;
 
 export namespace gl::window
 {
@@ -26,9 +27,9 @@ export namespace gl::window
 		using unit_t = std::unique_ptr<util::ThreadUnit>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
-		using event_id_t = device::DeviceCommand;
+		using event_id_t = device::DeviceCommandID;
 		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
-		static constexpr event_id_t DefaultEventID = device::DeviceCommand::None;
+		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
 		using event_alert_t = std::atomic<event_id_t>;
 
