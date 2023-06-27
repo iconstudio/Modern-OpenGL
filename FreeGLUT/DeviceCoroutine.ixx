@@ -52,7 +52,8 @@ namespace gl::device
 				return false;
 			}
 
-			DeviceCommandAPI::Process(cmd);
+			//TODO
+			//DeviceCommandAPI::Process(cmd);
 			return true;
 		}
 		else
