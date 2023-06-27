@@ -18,17 +18,16 @@ int main(const int& argc, char** argv)
 	util::Println("Program Initiated");
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
-	gl::window::WindowProperty property = gl::window::CreateProperty(gl::device::GetProcessInstance(), gl::window::ManagedWindow<"TestWindow">::MainWorker, my_windows_class);
+	gl::window::WindowProperty property = gl::window::CreateProperty(gl::device::GetProcessInstance(), gl::window::ManagedWindow<L"TestWindow">::MainWorker, my_windows_class);
 	property.Register();
 
 	util::Println("Creating a Window");
-	auto window = gl::window::CreateWindow(property, L"MY_TITLE", 50, 70, 400, 300);
+	auto window = gl::window::CreateWindowEx<L"TestWindow">(property, L"MY_TITLE", 50, 70, 400, 300);
 
-	auto managed_window = gl::window::ManagedWindow<"TestWindow">(std::move(window));
-	managed_window.Awake();
+	window.Awake();
 
 	util::Println("Program Started");
-	managed_window.Start();
+	window.Start();
 
 	util::Println("Program Ended");
 

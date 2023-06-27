@@ -23,6 +23,7 @@ import Glib.Window;
 import Glib.Device.Coroutine;
 import Glib.Device.Command;
 
+#undef CreateWindow
 #undef CreateWindowEx
 
 export namespace gl::window
@@ -297,6 +298,158 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, dimension) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, dimension) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, dimension) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, options::Default, dimension) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, x, y, width, height) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(properties, title, dimension) };
+	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const Rect& dimension
+	) noexcept
+	{
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, dimension) };
+	}
+
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(const device::ProcessInstance& hinst, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept;
 
+	template<typename IconType, typename CursorType>
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(const device::ProcessInstance& hinst, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const ::HBRUSH& background
+		, const wchar_t* const& menu_name
+	) noexcept;
 }
