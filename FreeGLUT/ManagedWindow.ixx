@@ -28,11 +28,16 @@ export namespace gl::window
 	public:
 		static constexpr size_t WorkerCount = 4;
 
+		using type = ManagedWindow<Name>;
+		using base_shared_t = std::enable_shared_from_this<type>;
+		using base_singleton_t = util::Singleton<type>;
+		using under_shared_t = std::shared_ptr<type>;
+		using under_weak_t = std::weak_ptr<type>;
+
 		using unit_t = std::unique_ptr<util::ThreadUnit>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
 		using event_id_t = typename device::DeviceCommandID;
-
 		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
 		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
@@ -48,7 +53,8 @@ export namespace gl::window
 			, optionFullscreen(false), isRenderingNow(false)
 			, myEventHandlers()
 			, myWorkers(), cancellationSource(), awaitFlag(DefaultEventID)
-			, std::enable_shared_from_this<ManagedWindow>()
+			, base_shared_t()
+			, base_singleton_t(this)
 		{
 			myDimensions = underlying.GetDimensions();
 			myEventHandlers.reserve(20);
