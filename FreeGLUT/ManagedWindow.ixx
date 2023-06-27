@@ -117,6 +117,7 @@ export namespace gl::window
 			awaitFlag.notify_one();
 		}
 
+		[[nodiscard]]
 		util::Monad<event_handler_t> FindEventHandler(const event_id_t& event_id)
 			noexcept
 		{
@@ -133,19 +134,18 @@ export namespace gl::window
 
 		Window underlying;
 		Rect myDimensions;
-
-		util::Option<bool> optionFullscreen;
-
 		WindowProcedure windowProcedureHandle = nullptr;
-		bool isRenderingNow = false;
 
 		// flat map
 		event_storage_t myEventHandlers;
 
-		util::CancellationSource cancellationSource;
 		pool_t myWorkers;
+		util::CancellationSource cancellationSource;
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag;
+
+		util::Option<bool> optionFullscreen;
+		bool isRenderingNow = false;
 	};
 
 	template<util::basic_fixed_string Name>
