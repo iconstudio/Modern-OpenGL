@@ -38,7 +38,7 @@ export namespace gl::window
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
 		using event_id_t = typename device::DeviceCommandID;
-		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
+		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
 		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
 		using event_t = std::pair<event_id_t, event_handler_t>;
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
@@ -90,8 +90,26 @@ export namespace gl::window
 
 	private:
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
-		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
-		static bool EventHandler(ManagedWindow& self, const event_id_t& msg, unsigned long long wparam, long long lparam) noexcept;
+		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
+		{
+			await_flag.wait(DefaultEventID, util::memory_order_relaxed);
+
+			while (true)
+			{
+				//EventHandler(self, await_flag.load(), 0, 0);
+
+				const event_iterator it = self.myEventHandlers.find(await_flag.load());
+				if (it != self.myEventHandlers.cend())
+				{
+					const event_handler_t& handler = it->second;
+
+					handler(self, 0, 0);
+				}
+
+				await_flag.store(DefaultEventID, util::memory_order_acquire);
+				await_flag.wait(DefaultEventID, util::memory_order_release);
+			}
+		}
 
 		void AlertEvent(const event_id_t& event_id) noexcept
 		{
@@ -138,6 +156,7 @@ export namespace gl::window
 		noexcept
 	{
 		const event_id_t msg = static_cast<event_id_t>(id);
+		ManagedWindow<Name>& self = *ManagedWindow<Name>::Instance;
 
 		switch (msg)
 		{
@@ -172,53 +191,20 @@ export namespace gl::window
 
 			default:
 			{
+				const util::Monad<event_handler_t> handle_pair = self.FindEventHandler(msg);
+				if (handle_pair)
+				{
+					const event_handler_t& handler = *handle_pair;
+					if (handler)
+					{
+						return handler(self, wparam, lparam);
+					}
+				}
+
 				return DefWindowProcW(hwnd, id, wparam, lparam);
 			}
 		}
 
 		return 0;
-	}
-
-	template<util::basic_fixed_string Name>
-	void
-		ManagedWindow<Name>::Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
-	{
-		await_flag.wait(DefaultEventID, util::memory_order_relaxed);
-
-		while (true)
-		{
-			EventHandler(self, await_flag.load(), 0, 0);
-
-			const event_iterator it = self.myEventHandlers.find(await_flag.load());
-			if (it != self.myEventHandlers.cend())
-			{
-				const event_handler_t& handler = it->second;
-
-				handler(self, 0, 0);
-			}
-
-			await_flag.store(DefaultEventID, util::memory_order_acquire);
-			await_flag.wait(DefaultEventID, util::memory_order_release);
-		}
-	}
-
-	template<util::basic_fixed_string Name>
-	bool
-		ManagedWindow<Name>::EventHandler(ManagedWindow& self, const event_id_t& id, unsigned long long wparam, long long lparam)
-		noexcept
-	{
-		const util::Monad<event_handler_t> handle_pair = self.FindEventHandler(id);
-		if (handle_pair)
-		{
-			const event_handler_t& handler = *handle_pair;
-			if (handler)
-			{
-				handler(self, wparam, lparam);
-
-				return true;
-			}
-		}
-
-		return false;
 	}
 }
