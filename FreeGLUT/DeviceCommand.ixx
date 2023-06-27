@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Command;
+import Utility;
 import Utility.Monad;
 
 export namespace gl::device
@@ -86,24 +87,49 @@ export namespace gl::device
 			return MsgResult{ ::GetMessage(&output, hwnd, 0, 0) };
 		}
 
-		static bool Push(const HWND& hwnd, const DeviceCommandIDType& msg, const unsigned long long& lhs = 0, const long long& rhs = 0) noexcept
+		static bool Push(const HWND& hwnd, const DeviceCommandIDType& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, msg, lhs, rhs);
+			return 0 != ::PostMessage(hwnd, id, lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, const DeviceCommandID& msg, const unsigned long long& lhs = 0, const long long& rhs = 0) noexcept
+		static bool Push(const HWND& hwnd, DeviceCommandIDType&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(msg), lhs, rhs);
+			return 0 != ::PostMessage(hwnd, util::move(id), lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommandID&& msg, const unsigned long long& lhs, const long long& rhs) noexcept
+		static bool Push(const HWND& hwnd, DeviceCommandIDType&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(msg), lhs, rhs);
+			return 0 != ::PostMessage(hwnd, util::move(id), util::move(lhs), util::move(rhs));
+		}
+
+		static bool Push(const HWND& hwnd, const DeviceCommandID& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		{
+			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
+		}
+
+		static bool Push(const HWND& hwnd, DeviceCommandID&& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		{
+			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
+		}
+
+		static bool Push(const HWND& hwnd, DeviceCommandID&& id, unsigned long long&& lhs, long long&& rhs) noexcept
+		{
+			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), util::move(lhs), util::move(rhs));
+		}
+
+		static bool Push(const HWND& hwnd, const DeviceCommand& msg) noexcept
+		{
+			return Push(hwnd, msg.id, msg.wParam, msg.lParam);
+		}
+
+		static bool Push(const HWND& hwnd, DeviceCommand&& msg) noexcept
+		{
+			return Push(hwnd, util::move(msg.id), util::move(msg.wParam), util::move(msg.lParam));
 		}
 
 		static MsgResult Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
-			return MsgResult{ ::PeekMessage(&output, hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
+			return MsgResult{ ::PeekMessage(util::addressof(output), hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
 		}
 
 		static long long Dispatch(const RawDeviceCommand& msg) noexcept
