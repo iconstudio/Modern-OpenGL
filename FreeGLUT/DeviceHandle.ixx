@@ -43,10 +43,16 @@ export namespace gl::device
 			return 0 != ::UpdateWindow(myHandle);
 		}
 
-		inline bool SendCommand(const unsigned int& msg, const WPARAM& lhs, const LPARAM& rhs) const
+		inline bool SendCommand(const unsigned int& id, const WPARAM& lhs, const LPARAM& rhs) const
 			noexcept
 		{
-			return DeviceCommandAPI::Push(myHandle, msg, lhs, rhs);
+			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
+		}
+
+		inline bool SendCommand(const DeviceCommandID& id, const WPARAM& lhs, const LPARAM& rhs) const
+			noexcept
+		{
+			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
 		}
 
 		inline bool UICommand(const int& cmd) noexcept
