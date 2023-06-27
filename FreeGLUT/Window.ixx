@@ -176,7 +176,10 @@ export extern "C++" namespace gl::window
 
 		inline ~Window() noexcept
 		{
-			detail::UnregisterProcess(myInstance.myHandle, myClassName);
+			if (nullptr != myClassName && nullptr != myHandle.GetHandle())
+			{
+				detail::UnregisterProcess(myInstance.myHandle, myClassName);
+			}
 		}
 
 		inline void Awake() noexcept
