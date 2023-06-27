@@ -145,7 +145,7 @@ export namespace gl::window
 		event_alert_t awaitFlag;
 
 		util::Option<bool> optionFullscreen;
-		bool isRenderingNow = false;
+		util::atomic_bool isRenderingNow = false;
 	};
 
 	template<util::basic_fixed_string Name>
