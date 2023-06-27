@@ -312,10 +312,11 @@ export namespace gl::window
 				{
 					self->AlertEvent(msg, wparam, lparam);
 				}
+				return DefWindowProc(hwnd, id, wparam, lparam);
 			}
 			break;
 		}
 
-		return DefWindowProc(hwnd, id, wparam, lparam);
+		return 0;
 	}
 }
