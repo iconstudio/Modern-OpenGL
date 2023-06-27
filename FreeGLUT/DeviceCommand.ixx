@@ -128,9 +128,9 @@ export namespace gl::device
 			return Push(hwnd, util::move(msg.id), util::move(msg.wParam), util::move(msg.lParam));
 		}
 
-		static MsgResult Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static bool Peek(const HWND& hwnd, RawDeviceCommand& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
 		{
-			return MsgResult{ ::PeekMessage(util::addressof(output), hwnd, 0, 0, static_cast<unsigned int>(cmd)) };
+			return 0 != ::PeekMessage(util::addressof(output), hwnd, 0, 0, static_cast<unsigned int>(cmd));
 		}
 
 		static long long Dispatch(const RawDeviceCommand& msg) noexcept
