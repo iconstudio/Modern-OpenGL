@@ -132,7 +132,7 @@ export namespace gl::window
 		{
 			if (myEventHandlers.contains(event_id))
 			{
-				awaitFlag.store(event_t{ event_id, lhs, rhs });
+				awaitFlag.store(event_t(event_id, lhs, rhs, 0));
 				awaitFlag.notify_one();
 				return true;
 			}
