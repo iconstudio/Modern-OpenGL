@@ -69,7 +69,7 @@ export namespace gl::window
 			size_t index = 0;
 			for (unit_t& worker : myWorkers)
 			{
-				worker = std::make_unique<util::ThreadUnit>(ManagedWindow::Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
+				worker = std::make_unique<util::jthread>(ManagedWindow::Worker, util::ref(*this), util::ref(awaitFlag));
 
 				++index;
 			}
@@ -83,19 +83,16 @@ export namespace gl::window
 		/// </summary>
 		void Start() noexcept
 		{
+			isRunning = true;
+
 			while (true)
 			{
-				underlying.UpdateOnce();
-			}
-		}
-
-		//[[deprecated("Use Start() instead")]]
-		inline void UpdateLoop(util::stop_token canceller) noexcept
-		{
-			while (underlying.UpdateOnce())
-			{
-				if (canceller.stop_requested())
+				if (cancellationSource.stop_requested())
+				{
 					break;
+				}
+
+				underlying.UpdateOnce();
 			}
 		}
 
@@ -104,20 +101,35 @@ export namespace gl::window
 			myEventHandlers.insert(std::make_pair(id, procedure));
 		}
 
-		ManagedWindow(const ManagedWindow&) = delete;
-		ManagedWindow(ManagedWindow&&) noexcept = delete;
-		ManagedWindow& operator=(const ManagedWindow&) = delete;
-		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
+		void Destroy() noexcept
+		{
+			if (isRunning)
+			{
+				for (unit_t& worker : myWorkers)
+				{
+					worker->request_stop();
+				}
+				cancellationSource.request_stop();
+				awaitFlag.notify_all();
+
+				isRunning = false;
+			}
+		}
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
-		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
+
+		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
 		{
 			await_flag.wait(DefaultEvent, util::memory_order_relaxed);
 
 			while (true)
 			{
-				auto event = await_flag.load();
+				if (stop_token.stop_requested())
+				{
+					return;
+				}
 
+				auto event = await_flag.load();
 				const event_iterator it = self.myEventHandlers.find(event.id);
 				if (it != self.myEventHandlers.cend())
 				{
@@ -130,6 +142,11 @@ export namespace gl::window
 				await_flag.wait(DefaultEvent, util::memory_order_release);
 			}
 		}
+
+		ManagedWindow(const ManagedWindow&) = delete;
+		ManagedWindow(ManagedWindow&&) noexcept = delete;
+		ManagedWindow& operator=(const ManagedWindow&) = delete;
+		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
 
 	private:
 		bool AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
@@ -169,6 +186,7 @@ export namespace gl::window
 		event_storage_t myEventHandlers{};
 
 		pool_t myWorkers;
+		util::atomic_bool isRunning = false;
 		util::CancellationSource cancellationSource;
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag;
@@ -200,6 +218,11 @@ export namespace gl::window
 			case event_id_t::Destroy:
 			{
 				PostQuitMessage(0);
+
+				if (self)
+				{
+					self->Destroy();
+				}
 			}
 			break;
 

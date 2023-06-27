@@ -30,5 +30,7 @@ int main(const int& argc, char** argv)
 	util::Println("Program Started");
 	managed_window.Start();
 
+	util::Println("Program Ended");
+
 	return 0;
 }
