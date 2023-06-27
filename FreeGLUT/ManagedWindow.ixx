@@ -33,9 +33,9 @@ export namespace gl::window
 		, public util::Singleton<ManagedWindow<ID>>
 	{
 	public:
-		template<util::basic_fixed_string ID>
+		template<util::basic_fixed_string NID>
 		[[nodiscard]]
-		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const WindowOption& option
@@ -45,9 +45,39 @@ export namespace gl::window
 			, const int& height
 		) noexcept;
 
-		template<util::basic_fixed_string ID>
+		template<util::basic_fixed_string NID>
 		[[nodiscard]]
-		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const Rect& dimension
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const Rect& dimension
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
 			, const int& x
@@ -56,14 +86,65 @@ export namespace gl::window
 			, const int& height
 		) noexcept;
 
-		template<util::basic_fixed_string ID>
+		template<util::basic_fixed_string NID>
 		[[nodiscard]]
-		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const Rect& dimension
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const Rect& dimension
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const int& x
 			, const int& y
 			, const int& width
 			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const Rect& dimension
+		) noexcept;
+
+		template<util::basic_fixed_string NID>
+		[[nodiscard]]
+		friend ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
+			, const std::wstring_view& title
+			, const Rect& dimension
 		) noexcept;
 
 		static constexpr size_t WorkerCount = 4;
@@ -319,4 +400,17 @@ export namespace gl::window
 
 		return 0;
 	}
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept;
+
 }
