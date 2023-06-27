@@ -187,16 +187,6 @@
     <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
-    <ClCompile Include="ManagedWindow.cpp">
-      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExternalTemplatesDiagnostics>
-      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
-      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExternalTemplatesDiagnostics>
-      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
-      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExternalTemplatesDiagnostics>
-      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
-      <ExternalTemplatesDiagnostics Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExternalTemplatesDiagnostics>
-      <AnalyzeExternalRuleset Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MinimumRecommendedRules.ruleset</AnalyzeExternalRuleset>
-    </ClCompile>
     <ClCompile Include="ManagedWindow.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
