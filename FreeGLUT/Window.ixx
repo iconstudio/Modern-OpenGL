@@ -29,7 +29,7 @@ export extern "C++" namespace gl::window
 		) noexcept
 			: myInstance(properties.GetInstance())
 			, myClassName(properties.GetClass())
-			, myHandle(nullptr), myProcecure(properties.GetProcedure())
+			, myProcecure(properties.GetProcedure())
 		{
 			myHandle = detail::CreateNativeWindow(properties.GetInstance().myHandle
 				, properties.GetClass()
@@ -49,7 +49,6 @@ export extern "C++" namespace gl::window
 		) noexcept
 			: myInstance(static_cast<WindowProperty&&>(properties).GetInstance())
 			, myClassName(static_cast<WindowProperty&&>(properties).GetClass())
-			, myHandle(nullptr)
 		{
 			myHandle = detail::CreateNativeWindow(myInstance.myHandle
 				, myClassName
@@ -307,6 +306,15 @@ export extern "C++" namespace gl::window
 			return myHandle.DisableInput();
 		}
 
+		constexpr void Swap(Window& other) noexcept
+		{
+			std::swap(myHandle, other.myHandle);
+			std::swap(myInstance, other.myInstance);
+			std::swap(myClassName, other.myClassName);
+			std::swap(myProcecure, other.myProcecure);
+			std::swap(frameLimit, other.frameLimit);
+		}
+
 		[[nodiscard]]
 		inline bool IsMinimized() const noexcept
 		{
@@ -405,18 +413,36 @@ export extern "C++" namespace gl::window
 			return static_cast<const wchar_t*&&>(myClassName);
 		}
 
+		constexpr Window(Window&& other) noexcept
+			: myInstance(static_cast<device::ProcessInstance&&>(other.myInstance))
+			, myHandle(static_cast<device::DeviceHandle&&>(other.myHandle))
+			, myProcecure(static_cast<WindowProcedure&&>(other.myProcecure))
+			, myClassName(static_cast<const wchar_t*&&>(other.myClassName))
+		{
+			other.myInstance = nullptr;
+			other.myHandle = nullptr;
+			other.myProcecure = nullptr;
+			other.myClassName = nullptr;
+			other.frameLimit = 0;
+		}
+
+		constexpr Window& operator=(Window&& other) noexcept
+		{
+			other.Swap(*this);
+			return *this;
+		}
+
 		Window(const Window&) = delete;
-		constexpr Window(Window&&) noexcept = default;
+
 		Window& operator=(const Window&) = delete;
-		constexpr Window& operator=(Window&&) noexcept = default;
 
-		device::ProcessInstance myInstance;
-		device::DeviceHandle myHandle;
-		WindowProcedure myProcecure;
-		const wchar_t* myClassName;
+		device::ProcessInstance myInstance = nullptr;
+		device::DeviceHandle myHandle = nullptr;
+		WindowProcedure myProcecure = nullptr;
+		const wchar_t* myClassName = nullptr;
 
-		bool isFrameLimited;
-		unsigned int frameLimit;
+		bool isFrameLimited = false;
+		unsigned int frameLimit = 0;
 	};
 
 	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const int& x, const int& y, const int& width, const int& height) noexcept
