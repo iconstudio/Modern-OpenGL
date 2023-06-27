@@ -23,17 +23,54 @@ import Glib.Window;
 import Glib.Device.Coroutine;
 import Glib.Device.Command;
 
+#undef CreateWindowEx
+
 export namespace gl::window
 {
-	template<util::basic_fixed_string Name>
+	template<util::basic_fixed_string ID>
 	class [[nodiscard]] ManagedWindow
-		: public ::std::enable_shared_from_this<ManagedWindow<Name>>
-		, public util::Singleton<ManagedWindow<Name>>
+		: public ::std::enable_shared_from_this<ManagedWindow<ID>>
+		, public util::Singleton<ManagedWindow<ID>>
 	{
 	public:
+		template<util::basic_fixed_string ID>
+		[[nodiscard]]
+		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const WindowOption& option
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string ID>
+		[[nodiscard]]
+		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const WindowStyle& style
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
+		template<util::basic_fixed_string ID>
+		[[nodiscard]]
+		friend ManagedWindow<ID> CreateWindowEx(const WindowProperty& properties
+			, const std::wstring_view& title
+			, const int& x
+			, const int& y
+			, const int& width
+			, const int& height
+		) noexcept;
+
 		static constexpr size_t WorkerCount = 4;
 
-		using type = ManagedWindow<Name>;
+		using type = ManagedWindow<ID>;
+		using name_type = decltype(ID);
+
 		using base_shared_t = std::enable_shared_from_this<type>;
 		using base_singleton_t = util::Singleton<type>;
 		using under_shared_t = std::shared_ptr<type>;
