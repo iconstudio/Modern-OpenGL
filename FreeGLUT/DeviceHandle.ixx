@@ -8,6 +8,7 @@ import Glib.Device.Command;
 export namespace gl::device
 {
 	using RawDeviceHandle = ::HWND__*;
+	using HWND = ::HWND__*;
 	using NativeRect = ::tagRECT;
 
 	using ::GetLastError;
@@ -288,7 +289,8 @@ export namespace gl::device
 	}
 
 	using ::PostQuitMessage;
-	using ::DefWindowProc;
+	using ::DefWindowProcW;
+	using ::DestroyWindow;
 
 //#define IsLButtonDown()  (GetKeyState(VK_LBUTTON) < 0)
 //#define IsRButtonDown()  (GetKeyState(VK_RBUTTON) < 0)
