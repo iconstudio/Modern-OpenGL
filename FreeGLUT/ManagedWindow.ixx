@@ -105,7 +105,6 @@ export namespace gl::window
 		ManagedWindow& operator=(const ManagedWindow&) = delete;
 		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
 
-	private:
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept
 		{
@@ -128,6 +127,7 @@ export namespace gl::window
 			}
 		}
 
+	private:
 		bool AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
 			if (myEventHandlers.contains(event_id))
