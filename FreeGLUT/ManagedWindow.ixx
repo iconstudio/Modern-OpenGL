@@ -185,7 +185,7 @@ export namespace gl::window
 		noexcept
 	{
 		const event_id_t msg = static_cast<event_id_t>(id);
-		ManagedWindow<Name>& self = *ManagedWindow<Name>::Instance;
+		ManagedWindow<Name>* self = ManagedWindow<Name>::Instance;
 
 		switch (msg)
 		{
@@ -220,7 +220,10 @@ export namespace gl::window
 
 			default:
 			{
-				AlertEvent(msg, wparam, lparam);
+				if (self)
+				{
+					self->AlertEvent(msg, wparam, lparam);
+				}
 			}
 			break;
 		}
