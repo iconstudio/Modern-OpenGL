@@ -438,18 +438,31 @@ export namespace gl::window
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, dimension) };
 	}
 
+	template<util::basic_fixed_string NID>
 	[[nodiscard]]
-	WindowProperty CreatePropertyEx(const device::ProcessInstance& hinst, WindowProcedure procedure, const wchar_t* const& class_name
-	) noexcept;
+	WindowProperty CreatePropertyEx() noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
 
-	template<typename IconType, typename CursorType>
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker, class_name_view.data());
+	}
+
+	template<util::basic_fixed_string NID, typename IconType, typename CursorType>
 	[[nodiscard]]
-	WindowProperty CreatePropertyEx(const device::ProcessInstance& hinst, WindowProcedure procedure
-		, const wchar_t* const& class_name
-		, IconType&& icon
+	WindowProperty CreatePropertyEx(IconType&& icon
 		, IconType&& small_icon
 		, CursorType&& cursor
 		, const ::HBRUSH& background
 		, const wchar_t* const& menu_name
-	) noexcept;
+	) noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker
+			, class_name_view.data()
+			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, background
+			, menu_name);
+	}
 }

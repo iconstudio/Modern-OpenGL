@@ -11,14 +11,14 @@ import Glib.Device.Handle;
 import Glib.Window;
 import Glib.Window.ManagedWindow;
 
-const auto& my_windows_class = L"MY_CLASS";
+constexpr auto& my_windows_class = L"MY_CLASS";
 
 int main(const int& argc, char** argv)
 {
 	util::Println("Program Initiated");
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
-	gl::window::WindowProperty property = gl::window::CreateProperty(gl::device::GetProcessInstance(), gl::window::ManagedWindow<L"TestWindow">::MainWorker, my_windows_class);
+	gl::window::WindowProperty property = gl::window::CreatePropertyEx<L"TestWindow">();
 	property.Register();
 
 	util::Println("Creating a Window");
