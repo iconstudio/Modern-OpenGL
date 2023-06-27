@@ -76,9 +76,9 @@ export namespace gl::window
 		}
 
 		ManagedWindow(const ManagedWindow&) = delete;
-		ManagedWindow(ManagedWindow&&) noexcept = default;
+		ManagedWindow(ManagedWindow&&) noexcept = delete;
 		ManagedWindow& operator=(const ManagedWindow&) = delete;
-		ManagedWindow& operator=(ManagedWindow&&) noexcept = default;
+		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
 
 	private:
 		static void Worker(ManagedWindow& self, event_alert_t& await_flag) noexcept;
