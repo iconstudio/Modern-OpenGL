@@ -1,7 +1,7 @@
-export module Glib.IO.Keycodes;
+export module Glib.Device.IO.Keycodes;
 export import :Modifier;
 
-export namespace gl::io
+export namespace gl::device::io
 {
 	enum class [[nodiscard]] Keycodes : int
 	{

@@ -1,4 +1,4 @@
-export module DeviceIO;
+export module Glib.Device.IO;
 
 export namespace gl::device::io
 {

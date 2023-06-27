@@ -1,6 +1,6 @@
-export module Glib.IO.Keycodes:Modifier;
+export module Glib.Device.IO.Keycodes:Modifier;
 
-export namespace gl::io
+export namespace gl::device::io
 {
 	/// <summary>
 	/// glutGetModifiers

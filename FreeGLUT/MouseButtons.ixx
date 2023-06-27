@@ -1,6 +1,6 @@
-export module Glib.IO.MouseButtons;
+export module Glib.Device.IO.MouseButtons;
 
-export namespace gl::io
+export namespace gl::device::io
 {
 	enum class [[nodiscard]] MouseButtons
 	{
