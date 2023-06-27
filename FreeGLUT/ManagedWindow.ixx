@@ -42,7 +42,8 @@ export namespace gl::window
 
 		explicit ManagedWindow(Window&& window) noexcept
 			: underlying(std::move(window)), myDimensions()
-			, optionFullscreen(false)
+			, windowProcedureHandle(std::move(window.myProcecure))
+			, optionFullscreen(false), isRenderingNow(false)
 			, myEventHandlers()
 			, myWorkers(), cancellationSource(), awaitFlag(DefaultEventID)
 			, std::enable_shared_from_this<ManagedWindow>()
@@ -107,7 +108,7 @@ export namespace gl::window
 
 		util::Option<bool> optionFullscreen;
 
-		void* windowProcedureHandle = nullptr;
+		WindowProcedure windowProcedureHandle = nullptr;
 		bool isRenderingNow = false;
 
 		// flat map
