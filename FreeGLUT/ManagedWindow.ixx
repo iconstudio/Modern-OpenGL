@@ -143,6 +143,8 @@ export namespace gl::window
 				await_flag.store(DefaultEvent, util::memory_order_acquire);
 				await_flag.wait(DefaultEvent, util::memory_order_release);
 			}
+
+			self.terminateLatch.arrive_and_wait();
 		}
 
 		ManagedWindow(const ManagedWindow&) = delete;
@@ -190,6 +192,8 @@ export namespace gl::window
 		pool_t myWorkers;
 		util::atomic_bool isRunning = false;
 		util::CancellationSource cancellationSource;
+		std::latch terminateLatch{ WorkerCount };
+
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag;
 
