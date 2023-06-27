@@ -238,15 +238,15 @@ export namespace gl::window
 		util::atomic_bool isRenderingNow = false;
 	};
 
-	template<util::basic_fixed_string Name>
+	template<util::basic_fixed_string ID>
 	long long
-		ManagedWindow<Name>::MainWorker(device::HWND hwnd // underlying.myHandle
+		ManagedWindow<ID>::MainWorker(device::HWND hwnd // underlying.myHandle
 	, unsigned int id
 	, unsigned long long wparam, long long lparam)
 		noexcept
 	{
 		const event_id_t msg = static_cast<event_id_t>(id);
-		ManagedWindow<Name>* self = ManagedWindow<Name>::Instance;
+		ManagedWindow<ID>* self = ManagedWindow<ID>::Instance;
 
 		switch (msg)
 		{
