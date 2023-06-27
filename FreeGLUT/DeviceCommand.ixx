@@ -36,6 +36,7 @@ export namespace gl::device
 		GetTextLength = WM_GETTEXTLENGTH,
 		Paint = WM_PAINT,
 		Close = WM_CLOSE,
+		CleanupMemory = WM_NCDESTROY,
 		QueryEndSession = WM_QUERYENDSESSION,
 	};
 
