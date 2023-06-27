@@ -1,6 +1,10 @@
+module;
+#include "Internal.hpp"
+
 export module Glib.Window.ManagedWindow;
 import <utility>;
 import <memory>;
+import <atomic>;
 import <vector>;
 import <unordered_map>;
 import Utility.Constraints;
