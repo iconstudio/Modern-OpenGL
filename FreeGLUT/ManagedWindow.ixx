@@ -28,7 +28,9 @@ import Glib.Device.Command;
 
 export namespace gl::window
 {
-	template<util::basic_fixed_string ID>
+	template<typename T>
+	concept CharEventHandler = util::invocables<T, unsigned long long, long long>;
+
 	template<util::basic_fixed_string ID, size_t WorkerCount = 4>
 	class [[nodiscard]] ManagedWindow
 		: public ::std::enable_shared_from_this<ManagedWindow<ID>>
