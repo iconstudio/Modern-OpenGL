@@ -205,11 +205,12 @@ export extern "C++" namespace gl::window
 
 			if (device::DeviceCommandAPI::Pop(myHandle, cmd))
 			{
-				if (device::DeviceCommandAPI::Translate(cmd))
+				if (!device::DeviceCommandAPI::Translate(cmd))
 				{
-					device::DeviceCommandAPI::Dispatch(cmd);
-					return true;
 				}
+
+				device::DeviceCommandAPI::Dispatch(cmd);
+				return true;
 			}
 
 			return false;
