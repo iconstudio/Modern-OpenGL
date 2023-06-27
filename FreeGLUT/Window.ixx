@@ -211,8 +211,10 @@ export extern "C++" namespace gl::window
 					return false;
 				}
 
-				//TODO
-				//device::DeviceCommandAPI::Process(cmd);
+				if (device::DeviceCommandAPI::Translate(cmd))
+				{
+					device::DeviceCommandAPI::Dispatch(cmd);
+				}
 				return true;
 			}
 			else
