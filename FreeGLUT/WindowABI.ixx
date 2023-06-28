@@ -94,7 +94,7 @@ export namespace gl::window::detail
 		return FALSE != ::DestroyWindow(hwnd);
 	}
 
-	inline long long DefaultWindowsProcedure(const HWND& hwnd, const unsigned int& msg, const unsigned long long& wparam, const long long& lparam) noexcept
+	inline long long DefaultWindowsProcedure(HWND__* const& hwnd, const unsigned int& msg, const unsigned long long& wparam, const long long& lparam) noexcept
 	{
 		return ::DefWindowProc(hwnd, msg, wparam, lparam);
 	}
