@@ -15,7 +15,10 @@ export namespace gl::window
 	using util::coroutine::DeferredPromise;
 	using util::coroutine::RelaxedPromise;
 
-	template<util::basic_fixed_string WindowName>
+	template<util::fixed_wstring ID>
+	class ManagedWindow;
+
+	template<util::fixed_wstring WindowID>
 	class [[nodiscard]] Coroutine
 	{
 	public:
