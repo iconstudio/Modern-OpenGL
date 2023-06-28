@@ -1,10 +1,21 @@
 export module Glib.Window.Coroutine;
+import Utility.Constraints;
+import Utility.FixedString;
 import Utility.Coroutine;
 
 export namespace gl::window
 {
 	using util::coroutine::coroutine_handle;
+	using util::coroutine::awaitable;
+	using util::coroutine::suspend_always;
+	using util::coroutine::suspend_never;
+	using util::coroutine::Cowork;
+	using util::coroutine::coexecution;
+	using util::coroutine::default_sentinel_t;
+	using util::coroutine::DeferredPromise;
+	using util::coroutine::RelaxedPromise;
 
+	template<util::basic_fixed_string WindowName>
 	class [[nodiscard]] Coroutine
 	{
 	public:
@@ -25,6 +36,14 @@ export namespace gl::window
 			: myHandle(coroutine)
 		{}
 
+		void Resume() const noexcept
+		{
+			if (!IsEmpty() && !IsDone())
+			{
+				myHandle.resume();
+			}
+		}
+
 		[[nodiscard]]
 		bool IsDone() const noexcept
 		{
@@ -42,7 +61,6 @@ export namespace gl::window
 		Coroutine& operator=(const Coroutine& other) = delete;
 		constexpr Coroutine& operator=(Coroutine&& other) noexcept = default;
 
-		void* myFunctor;
 		handle_type myHandle;
 	};
 }
