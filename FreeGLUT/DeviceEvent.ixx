@@ -4,70 +4,16 @@ module;
 export module Glib.Device.Event;
 import <compare>;
 import Utility;
+export import :Definitions;
 
 export namespace gl::device
 {
-	using RawDeviceCommand = ::tagMSG;
-	using DeviceCommandIDType = decltype(RawDeviceCommand::message);
-
 	enum class [[nodiscard]] PeekCmd : unsigned int
 	{
 		DontRemove = PM_NOREMOVE,
 		Remove = PM_REMOVE,
 		NoYieldAndDontRemove = PM_NOREMOVE | PM_NOYIELD,
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
-	};
-
-	enum class [[nodiscard]] EventID : DeviceCommandIDType
-	{
-		None = 0,
-		Create = WM_CREATE,
-		Destroy = WM_DESTROY,
-
-		Move = WM_MOVE,
-		Size = WM_SIZE,
-		Activate = WM_ACTIVATE,
-		SetKeyboardFocus = WM_SETFOCUS,
-		KillKeyboardFocus = WM_KILLFOCUS,
-		Enable = WM_ENABLE,
-		SetRedraw = WM_SETREDRAW,
-		SetText = WM_SETTEXT,
-		GetText = WM_GETTEXT,
-		GetTextLength = WM_GETTEXTLENGTH,
-		Paint = WM_PAINT,
-
-		Close = WM_CLOSE,
-		QueryEndSession = WM_QUERYENDSESSION,
-		Quit = WM_QUIT,
-		CleanupMemory = WM_NCDESTROY,
-
-		KeyDown = WM_KEYDOWN,
-		KeyUp = WM_KEYUP,
-		Char = WM_CHAR,
-		DeadChar = WM_DEADCHAR,
-
-		SysKeyDown = WM_SYSKEYDOWN,
-		SysKeyUp = WM_SYSKEYUP,
-		SysChar = WM_SYSCHAR,
-		SysDeadChar = WM_SYSDEADCHAR,
-		SysCommand = WM_SYSCOMMAND,
-
-		MouseMove = WM_MOUSEMOVE,
-		MouseHover = WM_MOUSEHOVER,
-		MouseLeave = WM_MOUSELEAVE,
-		MouseWheel = WM_MOUSEWHEEL,
-		MouseHWheel = WM_MOUSEHWHEEL,
-		LButtonDown = WM_LBUTTONDOWN,
-		LButtonUp = WM_LBUTTONUP,
-		LButtonDoubleClick = WM_LBUTTONDBLCLK,
-		RButtonDown = WM_RBUTTONDOWN,
-		RButtonUp = WM_RBUTTONUP,
-		RButtonDoubleClick = WM_RBUTTONDBLCLK,
-		MButtonDown = WM_MBUTTONDOWN,
-		MButtonUp = WM_MBUTTONUP,
-		MButtonDoubleClick = WM_MBUTTONDBLCLK,
-
-		ChangedCapture = WM_CAPTURECHANGED,
 	};
 
 	/// <summary>
