@@ -11,6 +11,7 @@ import <latch>;
 import <unordered_map>;
 import Utility.Constraints;
 import Utility.Singleton;
+import Utility.Reflection.Unique;
 import Utility.String;
 import Utility.FixedString;
 import Utility.Array;
@@ -34,15 +35,15 @@ export namespace gl::window
 
 	template<util::basic_fixed_string ID, size_t WorkerCount = 4>
 	class [[nodiscard]] ManagedWindow
-		: public ::std::enable_shared_from_this<ManagedWindow<ID>>
-		, public util::Singleton<ManagedWindow<ID>>
+		: public std::enable_shared_from_this<ManagedWindow<ID>>
+		, public reflex::Unique<ManagedWindow<ID>, ID>
 	{
 	protected:
 		using type = ManagedWindow<ID>;
 		using name_type = decltype(ID);
 
 		using base_shared_t = std::enable_shared_from_this<type>;
-		using base_singleton_t = util::Singleton<type>;
+		using base_singleton_t = reflex::Unique<ManagedWindow<ID>, ID>;
 		using under_shared_t = std::shared_ptr<type>;
 		using under_weak_t = std::weak_ptr<type>;
 
