@@ -140,13 +140,9 @@ export namespace gl::window
 				}
 
 				auto event = await_flag.load();
-				const event_iterator it = self.myEventHandlers.find(event.id);
-				if (it != self.myEventHandlers.cend())
-				{
-					const event_handler_t& handler = it->second;
-
-					handler(self, event.wParam, event.lParam);
-				}
+				self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
+					long long result = handler(self, event.wParam, event.lParam);
+				});
 
 				await_flag.store(DefaultEvent, util::memory_order_acquire);
 				await_flag.wait(DefaultEvent, util::memory_order_release);
