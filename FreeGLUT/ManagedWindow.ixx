@@ -1,6 +1,7 @@
 module;
 
 export module Glib.Window.ManagedWindow;
+import <cstdio>;
 import <iostream>;
 import <utility>;
 import <memory>;
@@ -18,7 +19,6 @@ import Utility.Array;
 import Utility.Atomic;
 import Utility.Monad;
 import Utility.Option;
-import Utility.Print;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
 import Glib.Window;
@@ -457,8 +457,7 @@ noexcept
 		case event_id_t::SysKeyDown:
 		case event_id_t::SysKeyUp:
 		{
-			//util::debug::Println("Key: {}", wparam);
-			std::cout << "Key: " << wparam << '\n';
+			std::printf("Key: %lld\n", wparam);
 			if (key_handler)
 			{
 				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
@@ -471,6 +470,7 @@ noexcept
 		case event_id_t::SysChar:
 		case event_id_t::SysDeadChar:
 		{
+			std::printf("Char: %lld\n", wparam);
 			if (char_handler)
 			{
 				char_handler(static_cast<char32_t>(wparam), lparam);
@@ -487,12 +487,12 @@ noexcept
 			{
 				if (handle == hwnd)
 				{
-					//util::debug::Println("Activate: Unfocused");
+					std::printf("Activate: Unfocused\n");
 					self->isFocused = true;
 				}
 				else
 				{
-					//util::debug::Println("Activate: Focused");
+					std::printf("Activate: Focused\n");
 					self->isFocused = false;
 					self->ResetMouseCapture();
 				}
@@ -505,7 +505,7 @@ noexcept
 			const HWND handle = reinterpret_cast<HWND>(wparam);
 			if (handle == hwnd)
 			{
-				//util::debug::Println("KillFocus: Unfocused");
+				std::printf("KillFocus: Unfocused\n");
 				self->isFocused = false;
 				self->ResetMouseCapture();
 			}
@@ -514,7 +514,7 @@ noexcept
 
 		case event_id_t::SetFocus:
 		{
-			//util::debug::Println("SetFocus: Focused");
+			std::printf("SetFocus: Focused\n");
 			self->isFocused = true;
 			self->TryCaptureMouse();
 		}
