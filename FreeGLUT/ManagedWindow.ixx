@@ -19,10 +19,9 @@ import Utility.Option;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
 import Glib.Window;
-import Glib.Window.Coroutine;
-import Glib.Device.Coroutine;
 import Glib.Device.Event;
 import Glib.Device.Utility;
+export import Glib.Window.Coroutine;
 export import Glib.Device.IO.Keyboard.KeyCodes;
 export import Glib.Device.IO.Keyboard.Flags;
 
@@ -47,6 +46,7 @@ export namespace gl::window
 
 		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
+		using coro_t = Coroutine<ID>;
 
 	public:
 		static constexpr device::EventID DefaultEventID = device::EventID::None;
@@ -114,9 +114,14 @@ export namespace gl::window
 			isCapturing = flag;
 		}
 
-		Coroutine StartCoroutine(void* fn) noexcept
+		void StartCoroutine(coro_t&& coroutine) noexcept
 		{
+			if (0 < myCoroutines.size())
+			{
+				myCoroutines.top()->Resume();
+			}
 
+			myCoroutines.push(std::make_unique<coro_t>(std::move(coroutine)));
 		}
 
 		[[noreturn]]
@@ -240,7 +245,7 @@ export namespace gl::window
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 
-		std::stack<std::unique_ptr<Coroutine>> myCoroutines{};
+		std::stack<std::unique_ptr<coro_t>> myCoroutines{};
 	};
 
 #pragma region CreateWindowEx
