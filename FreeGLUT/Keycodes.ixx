@@ -1,9 +1,9 @@
-export module Glib.Device.IO.Keycodes;
+export module Glib.Device.IO.Keyboard.KeyCodes;
 export import :Modifier;
 
 export namespace gl::device::io
 {
-	enum class [[nodiscard]] Keycodes : int
+	enum class [[nodiscard]] KeyCode : int
 	{
 		BACKSPACE = 0x0008, TAB = 0x0009,
 		Space = ' ',
