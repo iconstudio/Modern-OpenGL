@@ -271,7 +271,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, x, y, width, height), Workers };
 	}
@@ -286,7 +286,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, x, y, width, height), Workers };
 	}
@@ -298,7 +298,7 @@ export namespace gl::window
 		, const WindowStyle& style
 		, const WindowOption& option
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, dimension), Workers };
 	}
@@ -310,7 +310,7 @@ export namespace gl::window
 		, const WindowStyle& style
 		, const WindowOption& option
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, dimension), Workers };
 	}
@@ -324,7 +324,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, style, x, y, width, height), Workers };
 	}
@@ -338,7 +338,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, x, y, width, height), Workers };
 	}
@@ -349,7 +349,7 @@ export namespace gl::window
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, style, dimension), Workers };
 	}
@@ -360,7 +360,7 @@ export namespace gl::window
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, options::Default, dimension), Workers };
 	}
@@ -373,7 +373,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, x, y, width, height), Workers };
 	}
@@ -386,7 +386,7 @@ export namespace gl::window
 		, const int& y
 		, const int& width
 		, const int& height
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, x, y, width, height), Workers };
 	}
@@ -396,7 +396,7 @@ export namespace gl::window
 	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(properties, title, dimension), Workers };
 	}
@@ -406,7 +406,7 @@ export namespace gl::window
 	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const Rect& dimension
-	) noexcept
+	)
 	{
 		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, dimension), Workers };
 	}
