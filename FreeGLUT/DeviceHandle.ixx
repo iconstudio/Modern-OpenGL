@@ -56,16 +56,16 @@ export namespace gl::device
 			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
 		}
 
-		inline bool SendCommand(const DeviceCommand& cmd) const
+		inline bool SendCommand(const Event& cmd) const
 			noexcept
 		{
 			return DeviceCommandAPI::Push(myHandle, cmd);
 		}
 
-		inline bool SendCommand(DeviceCommand&& cmd) const
+		inline bool SendCommand(Event&& cmd) const
 			noexcept
 		{
-			return DeviceCommandAPI::Push(myHandle, static_cast<DeviceCommand&&>(cmd));
+			return DeviceCommandAPI::Push(myHandle, static_cast<Event&&>(cmd));
 		}
 
 		inline bool UICommand(const int& cmd) noexcept

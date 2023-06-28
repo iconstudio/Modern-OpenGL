@@ -231,16 +231,16 @@ export extern "C++" namespace gl::window
 			return SendCommand(msg, 0, 0);
 		}
 
-		inline bool SendCommand(const device::DeviceCommand& cmd) const
+		inline bool SendCommand(const device::Event& cmd) const
 			noexcept
 		{
 			return myHandle.SendCommand(cmd);
 		}
 
-		inline bool SendCommand(device::DeviceCommand&& cmd) const
+		inline bool SendCommand(device::Event&& cmd) const
 			noexcept
 		{
-			return myHandle.SendCommand(static_cast<device::DeviceCommand&&>(cmd));
+			return myHandle.SendCommand(static_cast<device::Event&&>(cmd));
 		}
 
 		inline bool UICommand(const int& cmd) noexcept

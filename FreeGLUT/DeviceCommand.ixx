@@ -86,36 +86,39 @@ export namespace gl::device
 		return static_cast<unsigned short>(state) == rhs;
 	}
 
-	struct [[nodiscard]] DeviceCommand final
+#ifdef Event
+#undef Event
+#endif
+	struct [[nodiscard]] Event final
 	{
-		constexpr DeviceCommand() noexcept = default;
-		constexpr ~DeviceCommand() noexcept = default;
+		constexpr Event() noexcept = default;
+		constexpr ~Event() noexcept = default;
 
-		constexpr DeviceCommand(const RawDeviceCommand& msg) noexcept
+		constexpr Event(const RawDeviceCommand& msg) noexcept
 			: id(DeviceCommandID{ msg.message })
 			, wParam(msg.wParam), lParam(msg.lParam)
 			, time(msg.time)
 		{}
 
-		constexpr DeviceCommand(RawDeviceCommand&& msg) noexcept
+		constexpr Event(RawDeviceCommand&& msg) noexcept
 			: id(DeviceCommandID{ util::move(msg.message) })
 			, wParam(util::move(msg.wParam)), lParam(util::move(msg.lParam))
 			, time(util::move(msg.time))
 		{}
 
-		constexpr DeviceCommand(const DeviceCommandID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
+		constexpr Event(const DeviceCommandID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
 			: id(msg), wParam(lhs), lParam(rhs)
 			, time(tick)
 		{}
 
 		[[nodiscard]]
-		constexpr bool operator==(const DeviceCommand& rhs) const noexcept
+		constexpr bool operator==(const Event& rhs) const noexcept
 		{
 			return id == rhs.id && wParam == rhs.wParam && lParam == rhs.lParam;
 		}
 
 		[[nodiscard]]
-		constexpr std::strong_ordering operator<=>(const DeviceCommand& rhs) const noexcept
+		constexpr std::strong_ordering operator<=>(const Event& rhs) const noexcept
 		{
 			auto comp_id = id <=> rhs.id;
 			if (comp_id != std::strong_ordering::equal)
@@ -138,10 +141,10 @@ export namespace gl::device
 			return time <=> rhs.time;
 		}
 
-		constexpr DeviceCommand(const DeviceCommand&) noexcept = default;
-		constexpr DeviceCommand(DeviceCommand&&) noexcept = default;
-		constexpr DeviceCommand& operator=(const DeviceCommand&) noexcept = default;
-		constexpr DeviceCommand& operator=(DeviceCommand&&) noexcept = default;
+		constexpr Event(const Event&) noexcept = default;
+		constexpr Event(Event&&) noexcept = default;
+		constexpr Event& operator=(const Event&) noexcept = default;
+		constexpr Event& operator=(Event&&) noexcept = default;
 
 		DeviceCommandID id = DeviceCommandID::None;
 		unsigned long long wParam = 0;
@@ -188,12 +191,12 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), util::move(lhs), util::move(rhs));
 		}
 
-		static bool Push(const HWND& hwnd, const DeviceCommand& msg) noexcept
+		static bool Push(const HWND& hwnd, const Event& msg) noexcept
 		{
 			return Push(hwnd, msg.id, msg.wParam, msg.lParam);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommand&& msg) noexcept
+		static bool Push(const HWND& hwnd, Event&& msg) noexcept
 		{
 			return Push(hwnd, util::move(msg.id), util::move(msg.wParam), util::move(msg.lParam));
 		}

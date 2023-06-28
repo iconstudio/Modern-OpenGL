@@ -55,8 +55,8 @@ export namespace gl::window
 		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
 
 		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
-		static constexpr device::DeviceCommand DefaultEvent = {};
-		using event_t = device::DeviceCommand;
+		static constexpr device::Event DefaultEvent = {};
+		using event_t = device::Event;
 		using event_alert_t = std::atomic<event_t>;
 
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
