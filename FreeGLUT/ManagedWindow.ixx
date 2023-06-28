@@ -33,7 +33,7 @@ export namespace gl::window
 	using KeyEventHandler = void(*)(device::io::KeyCode, long long);
 	using CharEventHandler = void(*)(char32_t, long long);
 
-	template<util::basic_fixed_string ID, size_t WorkerCount = 4>
+	template<util::fixed_wstring ID>
 	class [[nodiscard]] ManagedWindow
 		: public std::enable_shared_from_this<ManagedWindow<ID>>
 		, public reflex::Unique<ManagedWindow<ID>, ID>
@@ -48,7 +48,7 @@ export namespace gl::window
 		using under_weak_t = std::weak_ptr<type>;
 
 		using unit_t = std::unique_ptr<util::jthread>;
-		using pool_t = util::Array<unit_t, WorkerCount>;
+		using pool_t = std::vector<unit_t>;
 		using coro_t = Coroutine<ID>;
 
 	public:
@@ -65,14 +65,16 @@ export namespace gl::window
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
-		explicit ManagedWindow(Window&& window) noexcept
+		explicit ManagedWindow(Window&& window, int number_of_workers) noexcept
 			: underlying(std::move(window))
+			, workerCount(number_of_workers), terminateLatch(number_of_workers)
 			, windowProcedureHandle(std::move(window.myProcecure))
 			, base_shared_t()
 			, base_singleton_t(this)
 		{
 			myDimensions = underlying.GetDimensions();
 			myEventHandlers.reserve(20);
+			myWorkers.reserve(number_of_workers);
 		}
 
 		void Awake() noexcept
@@ -233,9 +235,11 @@ export namespace gl::window
 		event_storage_t myEventHandlers{};
 
 		pool_t myWorkers{};
+		size_t workerCount = 0;
+
 		util::atomic_bool isRunning = false;
 		util::CancellationSource cancellationSource{};
-		std::latch terminateLatch{ WorkerCount };
+		std::latch terminateLatch;
 
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag{ DefaultEvent };
@@ -254,7 +258,7 @@ export namespace gl::window
 #pragma region CreateWindowEx
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const WindowOption& option
@@ -264,12 +268,12 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const WindowOption& option
@@ -279,36 +283,36 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const WindowOption& option
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, option, dimension), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const WindowOption& option
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, option, dimension), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const int& x
@@ -317,12 +321,12 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, style, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const int& x
@@ -331,34 +335,34 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, style, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, style, dimension), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, options::Default, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, style, options::Default, dimension), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const int& x
 		, const int& y
@@ -366,12 +370,12 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const int& x
 		, const int& y
@@ -379,30 +383,30 @@ export namespace gl::window
 		, const int& height
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, x, y, width, height) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, x, y, width, height), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
+	ManagedWindow<NID> CreateWindowEx(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(properties, title, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(properties, title, dimension), Workers };
 	}
 
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
-	ManagedWindow<NID, Workers> CreateWindowEx(WindowProperty&& properties
+	ManagedWindow<NID> CreateWindowEx(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const Rect& dimension
 	) noexcept
 	{
-		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, dimension) };
+		return ManagedWindow<NID>{ CreateWindow(std::move(properties), title, dimension), Workers };
 	}
 
-	template<util::basic_fixed_string NID>
+	template<util::fixed_wstring NID>
 	[[nodiscard]]
 	WindowProperty CreatePropertyEx() noexcept
 	{
@@ -411,7 +415,7 @@ export namespace gl::window
 		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker, class_name_view.data());
 	}
 
-	template<util::basic_fixed_string NID, typename IconType, typename CursorType>
+	template<util::fixed_wstring NID, typename IconType, typename CursorType>
 	[[nodiscard]]
 	WindowProperty CreatePropertyEx(IconType&& icon
 		, IconType&& small_icon
@@ -432,16 +436,16 @@ export namespace gl::window
 #pragma endregion
 }
 
-template<util::basic_fixed_string ID, size_t WorkerCount>
+template<util::fixed_wstring ID>
 long long
-gl::window::ManagedWindow<ID, WorkerCount>::MainWorker(device::HWND hwnd // underlying.myHandle
+gl::window::ManagedWindow<ID>::MainWorker(device::HWND hwnd // underlying.myHandle
 , unsigned int id
 , unsigned long long wparam, long long lparam)
 noexcept
 {
 	const event_id_t msg = static_cast<event_id_t>(id);
 
-	ManagedWindow<ID>* self = ManagedWindow<ID>::Instance;
+	ManagedWindow<ID>* self = ManagedWindow<ID>::GetInstance();
 	auto& key_handler = self->eventOfKeyHandler;
 	auto& char_handler = self->eventOfCharHandler;
 
@@ -565,8 +569,8 @@ noexcept
 	return 0;
 }
 
-template<util::basic_fixed_string ID, size_t WorkerCount>
-void gl::window::ManagedWindow<ID, WorkerCount>::Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
+template<util::fixed_wstring ID>
+void gl::window::ManagedWindow<ID>::Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
 {
 	await_flag.wait(DefaultEvent, util::memory_order_relaxed);
 
