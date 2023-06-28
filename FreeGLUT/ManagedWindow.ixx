@@ -38,7 +38,7 @@ export namespace gl::window
 		: public ::std::enable_shared_from_this<ManagedWindow<ID>>
 		, public util::Singleton<ManagedWindow<ID>>
 	{
-	public:
+	protected:
 		using type = ManagedWindow<ID>;
 		using name_type = decltype(ID);
 
@@ -50,6 +50,7 @@ export namespace gl::window
 		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
+	public:
 		using event_id_t = device::DeviceCommandID;
 		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
 
