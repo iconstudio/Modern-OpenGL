@@ -136,28 +136,7 @@ export namespace gl::window
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 
-		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
-		{
-			await_flag.wait(DefaultEvent, util::memory_order_relaxed);
-
-			while (true)
-			{
-				if (stop_token.stop_requested())
-				{
-					return;
-				}
-
-				auto event = await_flag.load();
-				self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
-					long long result = handler(self, event.wParam, event.lParam);
-				});
-
-				await_flag.store(DefaultEvent, util::memory_order_acquire);
-				await_flag.wait(DefaultEvent, util::memory_order_release);
-			}
-
-			self.terminateLatch.arrive_and_wait();
-		}
+		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept;
 
 		ManagedWindow(const ManagedWindow&) = delete;
 		ManagedWindow(ManagedWindow&&) noexcept = delete;
@@ -568,4 +547,28 @@ noexcept
 	}
 
 	return 0;
+}
+
+template<util::basic_fixed_string ID, size_t WorkerCount>
+void gl::window::ManagedWindow<ID, WorkerCount>::Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
+{
+	await_flag.wait(DefaultEvent, util::memory_order_relaxed);
+
+	while (true)
+	{
+		if (stop_token.stop_requested())
+		{
+			return;
+		}
+
+		auto event = await_flag.load();
+		self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
+			long long result = handler(self, event.wParam, event.lParam);
+		});
+
+		await_flag.store(DefaultEvent, util::memory_order_acquire);
+		await_flag.wait(DefaultEvent, util::memory_order_release);
+	}
+
+	self.terminateLatch.arrive_and_wait();
 }
