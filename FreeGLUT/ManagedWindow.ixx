@@ -65,13 +65,18 @@ export namespace gl::window
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
-		explicit ManagedWindow(Window&& window, int number_of_workers) noexcept
+		explicit ManagedWindow(Window&& window, int number_of_workers)
 			: underlying(std::move(window))
 			, workerCount(number_of_workers), terminateLatch(number_of_workers)
 			, windowProcedureHandle(std::move(window.myProcecure))
 			, base_shared_t()
-			, base_singleton_t(this)
 		{
+			if (base_singleton_t::GetInstance() != nullptr)
+			{
+				throw std::runtime_error("Only one instance of ManagedWindow is allowed.");
+			}
+			base_singleton_t::SetInstance(this);
+
 			myDimensions = underlying.GetDimensions();
 			myEventHandlers.reserve(20);
 			myWorkers.reserve(number_of_workers);
