@@ -127,5 +127,8 @@
     <ClCompile Include="DeviceEventHandler.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="WindowCoroutine.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
