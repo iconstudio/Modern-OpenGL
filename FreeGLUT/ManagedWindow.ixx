@@ -213,12 +213,20 @@ export namespace gl::window
 		/// <summary>
 		/// Only on the main thread
 		/// </summary>
+		[[noreturn]]
 		void ResetMouseCapture() noexcept
 		{
 			if (IsMouseCaptured())
 			{
 				::ReleaseCapture();
 			}
+		}
+
+		[[noreturn]]
+		void ClearMouseCapturing() noexcept
+		{
+			ResetMouseCapture();
+			isCapturing = false;
 		}
 
 		/// <summary>
@@ -335,7 +343,7 @@ export namespace gl::window
 			// Started by close button or system menu or Alt+F4
 			case event_id_t::Close:
 			{
-				self->ResetMouseCapture();
+				self->ClearMouseCapturing();
 				DestroyWindow(hwnd);
 			}
 			break;
