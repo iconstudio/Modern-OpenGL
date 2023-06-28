@@ -436,6 +436,7 @@ export namespace gl::window
 #pragma endregion
 }
 
+#pragma warning(push)
 template<util::fixed_wstring ID>
 long long
 gl::window::ManagedWindow<ID>::MainWorker(device::HWND hwnd // underlying.myHandle
@@ -519,7 +520,7 @@ noexcept
 		}
 		break;
 
-		// Started by close button or system menu or Alt+F4
+		// Started by close button or system menu [or Alt+F4]
 		case event_id_t::Close:
 		{
 			detail::DestroyNativeWindow(hwnd);
@@ -569,6 +570,7 @@ noexcept
 	return 0;
 }
 
+#pragma warning(disable: 4189)
 template<util::fixed_wstring ID>
 void gl::window::ManagedWindow<ID>::Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept
 {
@@ -592,3 +594,4 @@ void gl::window::ManagedWindow<ID>::Worker(util::CancellationToken stop_token, M
 
 	self.terminateLatch.arrive_and_wait();
 }
+#pragma warning(pop)
