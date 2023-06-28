@@ -190,6 +190,7 @@
     <ClCompile Include="DeviceUtil.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="Events.ixx" />
     <ClCompile Include="KeyboardFlags.ixx" />
     <ClCompile Include="ManagedWindow.cpp" />
     <ClCompile Include="ManagedWindow.ixx" />
