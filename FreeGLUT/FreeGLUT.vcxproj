@@ -183,7 +183,7 @@
     <ClCompile Include="DeviceContext.ixx" />
     <ClCompile Include="DeviceCoroutine.ixx" />
     <ClCompile Include="DeviceHandle.ixx" />
-    <ClCompile Include="DeviceCommand.ixx" />
+    <ClCompile Include="DeviceEvent.ixx" />
     <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
     <ClCompile Include="DeviceUtil.ixx" />

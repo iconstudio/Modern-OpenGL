@@ -91,7 +91,7 @@
     <ClCompile Include="WindowProperty.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceCommand.ixx">
+    <ClCompile Include="DeviceEvent.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="DeviceIcon.ixx">
