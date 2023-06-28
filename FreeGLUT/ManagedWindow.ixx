@@ -480,22 +480,19 @@ noexcept
 
 		case event_id_t::Activate:
 		{
-			const HWND handle = reinterpret_cast<HWND>(lparam);
-			const unsigned short trigger = device::HIWORD(wparam);
+			const unsigned short trigger = device::LOWORD(wparam);
 
 			if (trigger == device::DeviceActivation::Inactivated)
 			{
-				if (handle == hwnd)
-				{
-					std::printf("Activate: Unfocused\n");
-					self->isFocused = true;
-				}
-				else
-				{
-					std::printf("Activate: Focused\n");
-					self->isFocused = false;
-					self->ResetMouseCapture();
-				}
+				std::printf("Activate: Unfocused\n");
+				self->isFocused = false;
+				self->ResetMouseCapture();
+			}
+			else
+			{
+				std::printf("Activate: Focused\n");
+				self->isFocused = true;
+				self->TryCaptureMouse();
 			}
 		}
 		break;
@@ -503,7 +500,7 @@ noexcept
 		case event_id_t::KillFocus:
 		{
 			const HWND handle = reinterpret_cast<HWND>(wparam);
-			if (handle == hwnd)
+			if (NULL == handle || handle == hwnd)
 			{
 				std::printf("KillFocus: Unfocused\n");
 				self->isFocused = false;
