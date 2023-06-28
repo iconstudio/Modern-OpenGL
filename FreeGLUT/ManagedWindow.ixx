@@ -1,5 +1,7 @@
 module;
 #include "Internal.hpp"
+#undef LOWORD
+#undef HIWORD
 
 export module Glib.Window.ManagedWindow;
 import <utility>;
@@ -22,6 +24,7 @@ import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Coroutine;
 import Glib.Device.Command;
+import Glib.Device.Utility;
 export import Glib.Device.IO.Keyboard.KeyCodes;
 export import Glib.Device.IO.Keyboard.Flags;
 
