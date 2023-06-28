@@ -22,14 +22,16 @@ import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Coroutine;
 import Glib.Device.Command;
+export import Glib.Device.IO.Keyboard.KeyCodes;
+export import Glib.Device.IO.Keyboard.Flags;
 
 #undef CreateWindow
 #undef CreateWindowEx
 
 export namespace gl::window
 {
-	template<typename T>
-	concept CharEventHandler = util::invocables<T, unsigned long long, long long>;
+	using KeyEventHandler = void(*)(device::io::KeyCode, device::io::KeyboardFlag);
+	using CharEventHandler = void(*)(char32_t, device::io::KeyboardFlag);
 
 	template<util::basic_fixed_string ID, size_t WorkerCount = 4>
 	class [[nodiscard]] ManagedWindow
