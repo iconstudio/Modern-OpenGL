@@ -455,7 +455,7 @@ noexcept
 		case event_id_t::KeyDown:
 		case event_id_t::KeyUp:
 		{
-			std::printf("Key: %lld\n", wparam);
+			std::printf("[Key] %lld\n", wparam);
 			if (key_handler)
 			{
 				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
@@ -466,7 +466,7 @@ noexcept
 		case event_id_t::SysKeyDown:
 		case event_id_t::SysKeyUp:
 		{
-			std::printf("System Key: %lld\n", wparam);
+			std::printf("[System Key] %lld\n", wparam);
 			if (key_handler)
 			{
 				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
@@ -477,7 +477,7 @@ noexcept
 		case event_id_t::Char:
 		case event_id_t::DeadChar:
 		{
-			std::printf("Char: %lld\n", wparam);
+			std::printf("[Char] %lld\n", wparam);
 			if (char_handler)
 			{
 				char_handler(static_cast<char32_t>(wparam), lparam);
@@ -488,7 +488,7 @@ noexcept
 		case event_id_t::SysChar:
 		case event_id_t::SysDeadChar:
 		{
-			std::printf("System Char: %lld\n", wparam);
+			std::printf("[System Char] %lld\n", wparam);
 			if (char_handler)
 			{
 				char_handler(static_cast<char32_t>(wparam), lparam);
@@ -502,13 +502,13 @@ noexcept
 
 			if (trigger == device::DeviceActivation::Inactivated)
 			{
-				std::printf("Activate: Unfocused\n");
+				std::printf("[Activate] Unfocused\n");
 				self->isFocused = false;
 				self->ResetMouseCapture();
 			}
 			else
 			{
-				std::printf("Activate: Focused\n");
+				std::printf("[Activate] Focused\n");
 				self->isFocused = true;
 				self->TryCaptureMouse();
 			}
@@ -517,21 +517,13 @@ noexcept
 
 		case event_id_t::SetKeyboardFocus:
 		{
-			std::printf("SetKeyboardFocus: Focused\n");
-			self->isFocused = true;
-			self->TryCaptureMouse();
+			std::printf("[SetKeyboardFocus]\n");
 		}
 		break;
 
 		case event_id_t::KillKeyboardFocus:
 		{
-			const HWND handle = reinterpret_cast<HWND>(wparam);
-			if (NULL == handle || handle == hwnd)
-			{
-				std::printf("KillKeyboardFocus: Unfocused\n");
-				self->isFocused = false;
-				self->ResetMouseCapture();
-			}
+			std::printf("[KillKeyboardFocus]\n");
 		}
 		break;
 
