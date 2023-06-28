@@ -259,6 +259,7 @@ export namespace gl::window
 		util::atomic_bool isRenderingNow = false;
 	};
 
+#pragma region CreateWindowEx
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
 	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
@@ -436,6 +437,7 @@ export namespace gl::window
 			, background
 			, menu_name);
 	}
+#pragma endregion
 }
 
 template<util::basic_fixed_string ID, size_t WorkerCount>
