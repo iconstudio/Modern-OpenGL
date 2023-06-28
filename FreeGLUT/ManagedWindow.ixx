@@ -1,4 +1,7 @@
 module;
+#include "Internal.hpp"
+#undef LOWORD
+#undef HIWORD
 
 export module Glib.Window.ManagedWindow;
 import <utility>;
