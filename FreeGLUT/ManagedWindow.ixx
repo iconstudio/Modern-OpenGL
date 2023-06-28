@@ -10,6 +10,7 @@ import <utility>;
 import <memory>;
 import <atomic>;
 import <vector>;
+import <stack>;
 import <latch>;
 import <unordered_map>;
 import Utility.Constraints;
@@ -21,9 +22,9 @@ import Utility.Atomic;
 import Utility.Monad;
 import Utility.Option;
 import Utility.Concurrency.Thread;
-import Utility.Concurrency.Thread.Unit;
 import Glib.Rect;
 import Glib.Window;
+import Glib.Window.Coroutine;
 import Glib.Device.Coroutine;
 import Glib.Device.Event;
 import Glib.Device.Utility;
@@ -115,6 +116,11 @@ export namespace gl::window
 		void SetCaptureMouse(const bool& flag = true) noexcept
 		{
 			isCapturing = flag;
+		}
+
+		Coroutine StartCoroutine(void* fn) noexcept
+		{
+
 		}
 
 		[[noreturn]]
@@ -240,6 +246,8 @@ export namespace gl::window
 		util::atomic_bool isCapturing = false;
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
+
+		std::stack<std::unique_ptr<Coroutine>> myCoroutines{};
 	};
 
 #pragma region CreateWindowEx
