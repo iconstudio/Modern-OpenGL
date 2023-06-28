@@ -50,6 +50,7 @@ export namespace gl::device
 		SysKeyUp = WM_SYSKEYUP,
 		SysChar = WM_SYSCHAR,
 		SysDeadChar = WM_SYSDEADCHAR,
+		SysCommand = WM_SYSCOMMAND,
 
 		MouseMove = WM_MOUSEMOVE,
 		MouseHover = WM_MOUSEHOVER,
