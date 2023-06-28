@@ -30,8 +30,8 @@ export import Glib.Device.IO.Keyboard.Flags;
 
 export namespace gl::window
 {
-	using KeyEventHandler = void(*)(device::io::KeyCode, device::io::KeyboardFlag);
-	using CharEventHandler = void(*)(char32_t, device::io::KeyboardFlag);
+	using KeyEventHandler = void(*)(device::io::KeyCode, long long);
+	using CharEventHandler = void(*)(char32_t, long long);
 
 	template<util::basic_fixed_string ID, size_t WorkerCount = 4>
 	class [[nodiscard]] ManagedWindow
