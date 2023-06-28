@@ -454,8 +454,6 @@ noexcept
 	{
 		case event_id_t::KeyDown:
 		case event_id_t::KeyUp:
-		case event_id_t::SysKeyDown:
-		case event_id_t::SysKeyUp:
 		{
 			std::printf("Key: %lld\n", wparam);
 			if (key_handler)
@@ -465,12 +463,32 @@ noexcept
 		}
 		break;
 
+		case event_id_t::SysKeyDown:
+		case event_id_t::SysKeyUp:
+		{
+			std::printf("System Key: %lld\n", wparam);
+			if (key_handler)
+			{
+				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+			}
+		}
+		break;
+
 		case event_id_t::Char:
 		case event_id_t::DeadChar:
+		{
+			std::printf("Char: %lld\n", wparam);
+			if (char_handler)
+			{
+				char_handler(static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		break;
+
 		case event_id_t::SysChar:
 		case event_id_t::SysDeadChar:
 		{
-			std::printf("Char: %lld\n", wparam);
+			std::printf("System Char: %lld\n", wparam);
 			if (char_handler)
 			{
 				char_handler(static_cast<char32_t>(wparam), lparam);
@@ -497,6 +515,14 @@ noexcept
 		}
 		break;
 
+		case event_id_t::SetFocus:
+		{
+			std::printf("SetFocus: Focused\n");
+			self->isFocused = true;
+			self->TryCaptureMouse();
+		}
+		break;
+
 		case event_id_t::KillFocus:
 		{
 			const HWND handle = reinterpret_cast<HWND>(wparam);
@@ -506,14 +532,6 @@ noexcept
 				self->isFocused = false;
 				self->ResetMouseCapture();
 			}
-		}
-		break;
-
-		case event_id_t::SetFocus:
-		{
-			std::printf("SetFocus: Focused\n");
-			self->isFocused = true;
-			self->TryCaptureMouse();
 		}
 		break;
 
