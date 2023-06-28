@@ -515,20 +515,20 @@ noexcept
 		}
 		break;
 
-		case event_id_t::SetFocus:
+		case event_id_t::SetKeyboardFocus:
 		{
-			std::printf("SetFocus: Focused\n");
+			std::printf("SetKeyboardFocus: Focused\n");
 			self->isFocused = true;
 			self->TryCaptureMouse();
 		}
 		break;
 
-		case event_id_t::KillFocus:
+		case event_id_t::KillKeyboardFocus:
 		{
 			const HWND handle = reinterpret_cast<HWND>(wparam);
 			if (NULL == handle || handle == hwnd)
 			{
-				std::printf("KillFocus: Unfocused\n");
+				std::printf("KillKeyboardFocus: Unfocused\n");
 				self->isFocused = false;
 				self->ResetMouseCapture();
 			}
