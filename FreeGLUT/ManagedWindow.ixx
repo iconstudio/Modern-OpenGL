@@ -113,6 +113,11 @@ export namespace gl::window
 			myEventHandlers.insert(std::make_pair(id, procedure));
 		}
 
+		void SetCaptureMouse(const bool& flag = true) noexcept
+		{
+			isCapturing = flag;
+		}
+
 		void Destroy() noexcept
 		{
 			if (isRunning)
@@ -189,6 +194,42 @@ export namespace gl::window
 			}
 		}
 
+		/// <summary>
+		/// Only on the main thread
+		/// </summary>
+		bool TryCaptureMouse() noexcept
+		{
+			if (isCapturing)
+			{
+				::SetCapture(underlying.GetHandle());
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Only on the main thread
+		/// </summary>
+		void ResetMouseCapture() noexcept
+		{
+			if (IsMouseCaptured())
+			{
+				::ReleaseCapture();
+			}
+		}
+
+		/// <summary>
+		/// Only on the main thread
+		/// </summary>
+		[[nodiscard]]
+		bool IsMouseCaptured() const noexcept
+		{
+			return ::GetCapture() == underlying.GetHandle();
+		}
+
 		Window underlying;
 		Rect myDimensions{};
 		WindowProcedure windowProcedureHandle = nullptr;
@@ -206,6 +247,9 @@ export namespace gl::window
 
 		KeyEventHandler eventOfKeyHandler = nullptr;
 		CharEventHandler eventOfCharHandler = nullptr;
+
+		util::atomic_bool isFocused = false;
+		util::atomic_bool isCapturing = false;
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 	};
@@ -225,6 +269,45 @@ export namespace gl::window
 
 		switch (msg)
 		{
+			case event_id_t::Activate:
+			{
+				const HWND handle = reinterpret_cast<HWND>(lparam);
+				const auto trigger = device::HIWORD(wparam);
+
+				if (trigger == device::DeviceActivation::Inactivated)
+				{
+					if (handle == hwnd)
+					{
+						self->isFocused = true;
+					}
+					else
+					{
+						self->isFocused = false;
+						self->ResetMouseCapture();
+					}
+				}
+			}
+			return 0;
+
+			case event_id_t::KillFocus:
+			{
+				const HWND handle = reinterpret_cast<HWND>(wparam);
+				if (handle == hwnd)
+				{
+					self->isFocused = false;
+					self->ResetMouseCapture();
+				}
+			}
+			return 0;
+
+			case event_id_t::SetFocus:
+			{
+				self->isFocused = true;
+				self->TryCaptureMouse();
+
+			}
+			return 0;
+
 			case event_id_t::KeyDown:
 			case event_id_t::KeyUp:
 			case event_id_t::SysKeyDown:
@@ -252,6 +335,7 @@ export namespace gl::window
 			// Started by close button or system menu or Alt+F4
 			case event_id_t::Close:
 			{
+				self->ResetMouseCapture();
 				DestroyWindow(hwnd);
 			}
 			break;
