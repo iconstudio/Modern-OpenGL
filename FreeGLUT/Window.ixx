@@ -7,7 +7,7 @@ export import Glib.DefaultProperty;
 export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
-export import Glib.Device.Command;
+export import Glib.Device.Event;
 export import :Property;
 export import :Style;
 export import :Option;

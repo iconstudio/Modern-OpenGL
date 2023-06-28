@@ -6,7 +6,7 @@ import Utility.Coroutine;
 import Utility.Coroutine.Logic;
 export import Utility.Concurrency.Thread;
 export import Glib.Device.Handle;
-import Glib.Device.Command;
+import Glib.Device.Event;
 
 namespace gl::device
 {

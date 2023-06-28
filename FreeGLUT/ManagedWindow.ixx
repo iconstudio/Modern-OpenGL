@@ -20,7 +20,7 @@ import Utility.Concurrency.Thread.Unit;
 import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Coroutine;
-import Glib.Device.Command;
+import Glib.Device.Event;
 import Glib.Device.Utility;
 export import Glib.Device.IO.Keyboard.KeyCodes;
 export import Glib.Device.IO.Keyboard.Flags;

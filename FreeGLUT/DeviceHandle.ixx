@@ -3,7 +3,7 @@ module;
 
 export module Glib.Device.Handle;
 import <type_traits>;
-import Glib.Device.Command;
+import Glib.Device.Event;
 
 export namespace gl::device
 {

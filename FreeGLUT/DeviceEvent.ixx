@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Command;
+export module Glib.Device.Event;
 import <compare>;
 import Utility;
 import Utility.Monad;
