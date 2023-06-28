@@ -8,6 +8,7 @@ export import Glib.Device.ProcessInstance;
 export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import Glib.Device.Event;
+import Glib.Device.Event.Handler;
 export import :Property;
 export import :Style;
 export import :Option;
