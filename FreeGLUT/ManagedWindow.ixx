@@ -1,6 +1,7 @@
 module;
 
 export module Glib.Window.ManagedWindow;
+import <iostream>;
 import <utility>;
 import <memory>;
 import <atomic>;
@@ -16,6 +17,7 @@ import Utility.Array;
 import Utility.Atomic;
 import Utility.Monad;
 import Utility.Option;
+import Utility.Print;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
 import Glib.Window;
@@ -449,6 +451,8 @@ noexcept
 		case event_id_t::SysKeyDown:
 		case event_id_t::SysKeyUp:
 		{
+			//util::debug::Println("Key: {}", wparam);
+			std::cout << "Key: " << wparam << '\n';
 			if (key_handler)
 			{
 				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
@@ -471,16 +475,18 @@ noexcept
 		case event_id_t::Activate:
 		{
 			const HWND handle = reinterpret_cast<HWND>(lparam);
-			const auto trigger = device::HIWORD(wparam);
+			const unsigned short trigger = device::HIWORD(wparam);
 
 			if (trigger == device::DeviceActivation::Inactivated)
 			{
 				if (handle == hwnd)
 				{
+					//util::debug::Println("Activate: Unfocused");
 					self->isFocused = true;
 				}
 				else
 				{
+					//util::debug::Println("Activate: Focused");
 					self->isFocused = false;
 					self->ResetMouseCapture();
 				}
@@ -493,6 +499,7 @@ noexcept
 			const HWND handle = reinterpret_cast<HWND>(wparam);
 			if (handle == hwnd)
 			{
+				//util::debug::Println("KillFocus: Unfocused");
 				self->isFocused = false;
 				self->ResetMouseCapture();
 			}
@@ -501,17 +508,18 @@ noexcept
 
 		case event_id_t::SetFocus:
 		{
+			//util::debug::Println("SetFocus: Focused");
 			self->isFocused = true;
 			self->TryCaptureMouse();
-
 		}
 		break;
 
 		// Started by close button or system menu or Alt+F4
 		case event_id_t::Close:
 		{
+			//detail::DestroyNativeWindow(hwnd);
+			self->isFocused = false;
 			self->ClearMouseCapturing();
-			detail::DestroyNativeWindow(hwnd);
 		}
 		break;
 
