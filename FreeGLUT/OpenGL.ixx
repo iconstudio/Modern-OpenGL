@@ -2,7 +2,9 @@ module;
 #include "stdafx.inl"
 
 export module Glib;
+export import Utility.FixedString;
 export import Glib.DisplayModes;
+import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
