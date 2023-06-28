@@ -187,7 +187,7 @@ export namespace gl::window
 		{
 			if (isCapturing)
 			{
-				::SetCapture(underlying.GetHandle());
+				detail::CaptureMouse(underlying.GetHandle());
 				return true;
 			}
 			else
@@ -201,10 +201,7 @@ export namespace gl::window
 		/// </summary>
 		void ResetMouseCapture() noexcept
 		{
-			if (IsMouseCaptured())
-			{
-				::ReleaseCapture();
-			}
+			detail::ResetMouseCapture(underlying.GetHandle());
 		}
 
 		/// <summary>
@@ -222,7 +219,7 @@ export namespace gl::window
 		[[nodiscard]]
 		bool IsMouseCaptured() const noexcept
 		{
-			return ::GetCapture() == underlying.GetHandle();
+			return detail::IsMouseCaptured(underlying.GetHandle());
 		}
 
 		Window underlying;
