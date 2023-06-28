@@ -70,6 +70,14 @@ export namespace gl::device
 		ChangedCapture = WM_CAPTURECHANGED,
 	};
 
+	/// <summary>
+	/// WPARAM from DeviceCommandID::Activate
+	/// </summary>
+	enum class [[nodiscard]] DeviceActivation : unsigned long long
+	{
+		Activated = WA_ACTIVE,
+		ClickActive = WA_CLICKACTIVE,
+		Inactivated = WA_INACTIVE,
 	};
 
 	struct [[nodiscard]] DeviceCommand final
