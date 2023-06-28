@@ -259,134 +259,6 @@ export namespace gl::window
 		util::atomic_bool isRenderingNow = false;
 	};
 
-	template<util::basic_fixed_string ID, size_t WorkerCount>
-	long long
-		ManagedWindow<ID, WorkerCount>::MainWorker(device::HWND hwnd // underlying.myHandle
-	, unsigned int id
-	, unsigned long long wparam, long long lparam)
-		noexcept
-	{
-		const event_id_t msg = static_cast<event_id_t>(id);
-
-		ManagedWindow<ID>* self = ManagedWindow<ID>::Instance;
-		auto& key_handler = self->eventOfKeyHandler;
-		auto& char_handler = self->eventOfCharHandler;
-
-		switch (msg)
-		{
-			case event_id_t::Activate:
-			{
-				const HWND handle = reinterpret_cast<HWND>(lparam);
-				const auto trigger = device::HIWORD(wparam);
-
-				if (trigger == device::DeviceActivation::Inactivated)
-				{
-					if (handle == hwnd)
-					{
-						self->isFocused = true;
-					}
-					else
-					{
-						self->isFocused = false;
-						self->ResetMouseCapture();
-					}
-				}
-			}
-			return 0;
-
-			case event_id_t::KillFocus:
-			{
-				const HWND handle = reinterpret_cast<HWND>(wparam);
-				if (handle == hwnd)
-				{
-					self->isFocused = false;
-					self->ResetMouseCapture();
-				}
-			}
-			return 0;
-
-			case event_id_t::SetFocus:
-			{
-				self->isFocused = true;
-				self->TryCaptureMouse();
-
-			}
-			return 0;
-
-			case event_id_t::KeyDown:
-			case event_id_t::KeyUp:
-			case event_id_t::SysKeyDown:
-			case event_id_t::SysKeyUp:
-			{
-				if (key_handler)
-				{
-					key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
-				}
-			}
-			return 0;
-
-			case event_id_t::Char:
-			case event_id_t::DeadChar:
-			case event_id_t::SysChar:
-			case event_id_t::SysDeadChar:
-			{
-				if (char_handler)
-				{
-					char_handler(static_cast<char32_t>(wparam), lparam);
-				}
-			}
-			return 0;
-
-			// Started by close button or system menu or Alt+F4
-			case event_id_t::Close:
-			{
-				self->ClearMouseCapturing();
-				DestroyWindow(hwnd);
-			}
-			break;
-
-			// Started by DestroyWindow
-			case event_id_t::Destroy:
-			{
-				PostQuitMessage(0);
-
-				if (self)
-				{
-					self->Destroy();
-				}
-			}
-			break;
-
-			// Started by WM_DESTROY
-			case event_id_t::Quit:
-			{
-				//KillTimer(hwnd, RENDER_TIMER_ID);
-			}
-			break;
-
-			// Clean memory up
-			// Started by WM_DESTROY
-			case event_id_t::CleanupMemory:
-			{
-				// Forced stop code
-				return 0;
-			}
-
-			//[[fallthrough]]
-			default:
-			{
-				if (self)
-				{
-					self->AlertEvent(msg, wparam, lparam);
-				}
-				return DefWindowProc(hwnd, id, wparam, lparam);
-			}
-			break;
-		}
-
-		return 0;
-	}
-
 	template<util::basic_fixed_string NID, size_t Workers = 4>
 	[[nodiscard]]
 	ManagedWindow<NID, Workers> CreateWindowEx(const WindowProperty& properties
@@ -564,4 +436,133 @@ export namespace gl::window
 			, background
 			, menu_name);
 	}
+}
+
+template<util::basic_fixed_string ID, size_t WorkerCount>
+long long
+gl::window::ManagedWindow<ID, WorkerCount>::MainWorker(device::HWND hwnd // underlying.myHandle
+, unsigned int id
+, unsigned long long wparam, long long lparam)
+noexcept
+{
+	const event_id_t msg = static_cast<event_id_t>(id);
+
+	ManagedWindow<ID>* self = ManagedWindow<ID>::Instance;
+	auto& key_handler = self->eventOfKeyHandler;
+	auto& char_handler = self->eventOfCharHandler;
+
+	switch (msg)
+	{
+		case event_id_t::Activate:
+		{
+			const HWND handle = reinterpret_cast<HWND>(lparam);
+			const auto trigger = device::HIWORD(wparam);
+
+			if (trigger == device::DeviceActivation::Inactivated)
+			{
+				if (handle == hwnd)
+				{
+					self->isFocused = true;
+				}
+				else
+				{
+					self->isFocused = false;
+					self->ResetMouseCapture();
+				}
+			}
+		}
+		return 0;
+
+		case event_id_t::KillFocus:
+		{
+			const HWND handle = reinterpret_cast<HWND>(wparam);
+			if (handle == hwnd)
+			{
+				self->isFocused = false;
+				self->ResetMouseCapture();
+			}
+		}
+		return 0;
+
+		case event_id_t::SetFocus:
+		{
+			self->isFocused = true;
+			self->TryCaptureMouse();
+
+		}
+		return 0;
+
+		case event_id_t::KeyDown:
+		case event_id_t::KeyUp:
+		case event_id_t::SysKeyDown:
+		case event_id_t::SysKeyUp:
+		{
+			if (key_handler)
+			{
+				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+			}
+		}
+		return 0;
+
+		case event_id_t::Char:
+		case event_id_t::DeadChar:
+		case event_id_t::SysChar:
+		case event_id_t::SysDeadChar:
+		{
+			if (char_handler)
+			{
+				char_handler(static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		return 0;
+
+		// Started by close button or system menu or Alt+F4
+		case event_id_t::Close:
+		{
+			self->ClearMouseCapturing();
+			detail::DestroyNativeWindow(hwnd);
+		}
+		break;
+
+		// Started by DestroyWindow
+		case event_id_t::Destroy:
+		{
+			PostQuitMessage(0);
+
+			if (self)
+			{
+				self->Destroy();
+			}
+		}
+		break;
+
+		// Started by WM_DESTROY
+		case event_id_t::Quit:
+		{
+			//KillTimer(hwnd, RENDER_TIMER_ID);
+		}
+		break;
+
+		// Clean memory up
+		// Started by WM_DESTROY
+		case event_id_t::CleanupMemory:
+		{
+			// Forced stop code
+			return 0;
+		}
+
+		//[[fallthrough]]
+		default:
+		{
+			if (self)
+			{
+				self->AlertEvent(msg, wparam, lparam);
+			}
+
+			return detail::DefaultWindowsProcedure(hwnd, id, wparam, lparam);
+		}
+		break;
+	}
+
+	return 0;
 }
