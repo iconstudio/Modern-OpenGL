@@ -118,6 +118,7 @@ export namespace gl::window
 			isCapturing = flag;
 		}
 
+		[[noreturn]]
 		void Destroy() noexcept
 		{
 			if (isRunning)
@@ -192,7 +193,6 @@ export namespace gl::window
 		/// <summary>
 		/// Only on the main thread
 		/// </summary>
-		[[noreturn]]
 		void ResetMouseCapture() noexcept
 		{
 			if (IsMouseCaptured())
@@ -201,7 +201,9 @@ export namespace gl::window
 			}
 		}
 
-		[[noreturn]]
+		/// <summary>
+		/// Only on the main thread
+		/// </summary>
 		void ClearMouseCapturing() noexcept
 		{
 			ResetMouseCapture();
