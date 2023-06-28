@@ -455,6 +455,30 @@ noexcept
 
 	switch (msg)
 	{
+		case event_id_t::KeyDown:
+		case event_id_t::KeyUp:
+		case event_id_t::SysKeyDown:
+		case event_id_t::SysKeyUp:
+		{
+			if (key_handler)
+			{
+				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+			}
+		}
+		break;
+
+		case event_id_t::Char:
+		case event_id_t::DeadChar:
+		case event_id_t::SysChar:
+		case event_id_t::SysDeadChar:
+		{
+			if (char_handler)
+			{
+				char_handler(static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		break;
+
 		case event_id_t::Activate:
 		{
 			const HWND handle = reinterpret_cast<HWND>(lparam);
@@ -473,7 +497,7 @@ noexcept
 				}
 			}
 		}
-		return 0;
+		break;
 
 		case event_id_t::KillFocus:
 		{
@@ -484,7 +508,7 @@ noexcept
 				self->ResetMouseCapture();
 			}
 		}
-		return 0;
+		break;
 
 		case event_id_t::SetFocus:
 		{
@@ -492,31 +516,7 @@ noexcept
 			self->TryCaptureMouse();
 
 		}
-		return 0;
-
-		case event_id_t::KeyDown:
-		case event_id_t::KeyUp:
-		case event_id_t::SysKeyDown:
-		case event_id_t::SysKeyUp:
-		{
-			if (key_handler)
-			{
-				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
-			}
-		}
-		return 0;
-
-		case event_id_t::Char:
-		case event_id_t::DeadChar:
-		case event_id_t::SysChar:
-		case event_id_t::SysDeadChar:
-		{
-			if (char_handler)
-			{
-				char_handler(static_cast<char32_t>(wparam), lparam);
-			}
-		}
-		return 0;
+		break;
 
 		// Started by close button or system menu or Alt+F4
 		case event_id_t::Close:
@@ -548,10 +548,8 @@ noexcept
 		// Clean memory up
 		// Started by WM_DESTROY
 		case event_id_t::CleanupMemory:
-		{
-			// Forced stop code
-			return 0;
-		}
+		{}
+		break;
 
 		//[[fallthrough]]
 		default:
