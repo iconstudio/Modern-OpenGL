@@ -522,7 +522,7 @@ noexcept
 		// Started by close button or system menu or Alt+F4
 		case event_id_t::Close:
 		{
-			//detail::DestroyNativeWindow(hwnd);
+			detail::DestroyNativeWindow(hwnd);
 			self->isFocused = false;
 			self->ClearMouseCapturing();
 		}
@@ -531,7 +531,7 @@ noexcept
 		// Started by DestroyWindow
 		case event_id_t::Destroy:
 		{
-			PostQuitMessage(0);
+			device::PostQuitMessage(0);
 
 			if (self)
 			{
