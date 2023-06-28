@@ -19,7 +19,7 @@ export namespace gl::device
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
 	};
 
-	enum class DeviceCommandID : DeviceCommandIDType
+	enum class [[nodiscard]] EventID : DeviceCommandIDType
 	{
 		None = 0,
 		Create = WM_CREATE,
@@ -71,7 +71,7 @@ export namespace gl::device
 	};
 
 	/// <summary>
-	/// WPARAM from DeviceCommandID::Activate
+	/// WPARAM from EventID::Activate
 	/// </summary>
 	enum class [[nodiscard]] DeviceActivation : unsigned short
 	{
@@ -95,18 +95,18 @@ export namespace gl::device
 		constexpr ~Event() noexcept = default;
 
 		constexpr Event(const RawDeviceCommand& msg) noexcept
-			: id(DeviceCommandID{ msg.message })
+			: id(EventID{ msg.message })
 			, wParam(msg.wParam), lParam(msg.lParam)
 			, time(msg.time)
 		{}
 
 		constexpr Event(RawDeviceCommand&& msg) noexcept
-			: id(DeviceCommandID{ util::move(msg.message) })
+			: id(EventID{ util::move(msg.message) })
 			, wParam(util::move(msg.wParam)), lParam(util::move(msg.lParam))
 			, time(util::move(msg.time))
 		{}
 
-		constexpr Event(const DeviceCommandID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
+		constexpr Event(const EventID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
 			: id(msg), wParam(lhs), lParam(rhs)
 			, time(tick)
 		{}
@@ -146,7 +146,7 @@ export namespace gl::device
 		constexpr Event& operator=(const Event&) noexcept = default;
 		constexpr Event& operator=(Event&&) noexcept = default;
 
-		DeviceCommandID id = DeviceCommandID::None;
+		EventID id = EventID::None;
 		unsigned long long wParam = 0;
 		long long lParam = 0;
 		unsigned long time = 0;
@@ -176,17 +176,17 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, util::move(id), util::move(lhs), util::move(rhs));
 		}
 
-		static bool Push(const HWND& hwnd, const DeviceCommandID& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		static bool Push(const HWND& hwnd, const EventID& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommandID&& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		static bool Push(const HWND& hwnd, EventID&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommandID&& id, unsigned long long&& lhs, long long&& rhs) noexcept
+		static bool Push(const HWND& hwnd, EventID&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), util::move(lhs), util::move(rhs));
 		}

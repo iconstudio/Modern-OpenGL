@@ -51,10 +51,10 @@ export namespace gl::window
 		using pool_t = util::Array<unit_t, WorkerCount>;
 
 	public:
-		using event_id_t = device::DeviceCommandID;
+		using event_id_t = device::EventID;
 		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
 
-		static constexpr event_id_t DefaultEventID = device::DeviceCommandID::None;
+		static constexpr event_id_t DefaultEventID = device::EventID::None;
 		static constexpr device::Event DefaultEvent = {};
 		using event_t = device::Event;
 		using event_alert_t = std::atomic<event_t>;

@@ -50,7 +50,7 @@ export namespace gl::device
 			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
 		}
 
-		inline bool SendCommand(const DeviceCommandID& id, const unsigned long long& lhs, const long long& rhs) const
+		inline bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const
 			noexcept
 		{
 			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
