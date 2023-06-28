@@ -63,9 +63,8 @@ export namespace gl::window
 		using event_const_iterator = event_storage_t::const_iterator;
 
 		explicit ManagedWindow(Window&& window) noexcept
-			: underlying(std::move(window)), myDimensions()
+			: underlying(std::move(window))
 			, windowProcedureHandle(std::move(window.myProcecure))
-			, myWorkers(), cancellationSource(), awaitFlag(DefaultEvent)
 			, base_shared_t()
 			, base_singleton_t(this)
 		{
@@ -187,20 +186,22 @@ export namespace gl::window
 		}
 
 		Window underlying;
-		Rect myDimensions;
+		Rect myDimensions{};
 		WindowProcedure windowProcedureHandle = nullptr;
 
 		// flat map
 		event_storage_t myEventHandlers{};
 
-		pool_t myWorkers;
+		pool_t myWorkers{};
 		util::atomic_bool isRunning = false;
-		util::CancellationSource cancellationSource;
+		util::CancellationSource cancellationSource{};
 		std::latch terminateLatch{ WorkerCount };
 
 		util::atomic<int> awaitCount = 0;
-		event_alert_t awaitFlag;
+		event_alert_t awaitFlag{ DefaultEvent };
 
+		KeyEventHandler eventOfKeyHandler = nullptr;
+		CharEventHandler eventOfCharHandler = nullptr;
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 	};
@@ -226,11 +227,11 @@ export namespace gl::window
 			case event_id_t::SysKeyUp:
 			{
 				if (key_handler)
-			{
+				{
 					key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
 				}
 			}
-				return 0;
+			return 0;
 
 			case event_id_t::Char:
 			case event_id_t::DeadChar:
@@ -238,11 +239,11 @@ export namespace gl::window
 			case event_id_t::SysDeadChar:
 			{
 				if (char_handler)
-			{
+				{
 					char_handler(static_cast<char32_t>(wparam), lparam);
 				}
 			}
-				return 0;
+			return 0;
 
 			// Started by close button or system menu or Alt+F4
 			case event_id_t::Close:
