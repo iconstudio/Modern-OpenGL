@@ -73,12 +73,18 @@ export namespace gl::device
 	/// <summary>
 	/// WPARAM from DeviceCommandID::Activate
 	/// </summary>
-	enum class [[nodiscard]] DeviceActivation : unsigned long long
+	enum class [[nodiscard]] DeviceActivation : unsigned short
 	{
 		Activated = WA_ACTIVE,
 		ClickActive = WA_CLICKACTIVE,
 		Inactivated = WA_INACTIVE,
 	};
+
+	[[nodiscard]]
+	constexpr bool operator==(const DeviceActivation& state, const unsigned short& rhs) noexcept
+	{
+		return static_cast<unsigned short>(state) == rhs;
+	}
 
 	struct [[nodiscard]] DeviceCommand final
 	{
