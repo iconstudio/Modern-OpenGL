@@ -25,7 +25,7 @@ export namespace gl::window
 
 		~Coroutine() noexcept
 		{
-			if (myHandle.done())
+			if (myHandle)
 			{
 				myHandle.destroy();
 			}

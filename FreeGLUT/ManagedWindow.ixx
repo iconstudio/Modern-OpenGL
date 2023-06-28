@@ -245,7 +245,7 @@ export namespace gl::window
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 
-		std::stack<std::unique_ptr<coro_t>> myCoroutines{};
+		std::vector<std::unique_ptr<coro_t>> myCoroutines{};
 	};
 
 #pragma region CreateWindowEx
