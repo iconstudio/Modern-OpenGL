@@ -38,6 +38,34 @@ export namespace gl::window::detail
 		return FALSE != ::IsMouseInPointerEnabled();
 	}
 
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	void CaptureMouse(const HWND& handle) noexcept
+	{
+		::SetCapture(handle);
+	}
+
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	[[nodiscard]]
+	bool IsMouseCaptured(const HWND& handle) noexcept
+	{
+		return ::GetCapture() == handle;
+	}
+
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	void ResetMouseCapture(const HWND& handle) noexcept
+	{
+		if (IsMouseCaptured(handle))
+		{
+			::ReleaseCapture();
+		}
+	}
+
 	[[nodiscard]]
 	inline HWND__* CreateNativeWindow(const HINSTANCE& hinst
 		, const std::wstring_view& class_name
