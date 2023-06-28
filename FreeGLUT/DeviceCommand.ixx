@@ -66,6 +66,10 @@ export namespace gl::device
 		MButtonDown = WM_MBUTTONDOWN,
 		MButtonUp = WM_MBUTTONUP,
 		MButtonDoubleClick = WM_MBUTTONDBLCLK,
+
+		ChangedCapture = WM_CAPTURECHANGED,
+	};
+
 	};
 
 	struct [[nodiscard]] DeviceCommand final
