@@ -18,22 +18,22 @@ int main(const int& argc, const char** const& argv)
 	UNREFERENCED_PARAMETER(argc);
 	UNREFERENCED_PARAMETER(argv);
 
-	util::Println("Program Initiated");
+	util::Println("== Program Initiated ==");
 
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
 	gl::window::WindowProperty property = gl::window::CreatePropertyEx<my_windows_class>();
 	property.Register();
 
-	util::Println("Creating a Window");
+	util::Println("== Creating the Client ==");
 	auto window = gl::window::CreateWindowEx<my_windows_class>(property, L"MY_TITLE", 50, 70, 400, 300);
 
 	window.Awake();
 
-	util::Println("Program Started");
+	util::Println("== Program Started ==");
 	window.Start();
 
-	util::Println("Program Ended");
+	util::Println("== Program Ended ==");
 
 	return 0;
 }
