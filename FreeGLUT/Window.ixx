@@ -430,7 +430,6 @@ export extern "C++" namespace gl::window
 		}
 
 		Window(const Window&) = delete;
-
 		Window& operator=(const Window&) = delete;
 
 		device::ProcessInstance myInstance = nullptr;
