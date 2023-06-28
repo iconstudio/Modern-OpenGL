@@ -279,6 +279,12 @@ export namespace gl::device
 			return myHandle == rhs.myHandle;
 		}
 
+		[[nodiscard]]
+		constexpr bool operator==(const RawDeviceHandle& handle) const noexcept
+		{
+			return myHandle == handle;
+		}
+
 		DeviceHandle(const DeviceHandle&) = delete;
 		constexpr DeviceHandle(DeviceHandle&&) noexcept = default;
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
