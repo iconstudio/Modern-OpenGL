@@ -217,30 +217,36 @@ export namespace gl::window
 		noexcept
 	{
 		const event_id_t msg = static_cast<event_id_t>(id);
+
 		ManagedWindow<ID>* self = ManagedWindow<ID>::Instance;
+		auto& key_handler = self->eventOfKeyHandler;
+		auto& char_handler = self->eventOfCharHandler;
 
 		switch (msg)
 		{
 			case event_id_t::KeyDown:
 			case event_id_t::KeyUp:
-			{
-				return 0;
-			}
-			break;
-
-			case event_id_t::Char:
-			case event_id_t::DeadChar:
-			{
-				return 0;
-			}
-			break;
-
 			case event_id_t::SysKeyDown:
 			case event_id_t::SysKeyUp:
 			{
-				return 0;
+				if (key_handler)
+			{
+					key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+				}
 			}
-			break;
+				return 0;
+
+			case event_id_t::Char:
+			case event_id_t::DeadChar:
+			case event_id_t::SysChar:
+			case event_id_t::SysDeadChar:
+			{
+				if (char_handler)
+			{
+					char_handler(static_cast<char32_t>(wparam), lparam);
+				}
+			}
+				return 0;
 
 			// Started by close button or system menu or Alt+F4
 			case event_id_t::Close:
