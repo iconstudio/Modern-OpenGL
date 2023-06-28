@@ -2,6 +2,8 @@ module;
 #include "Internal.hpp"
 #undef LOWORD
 #undef HIWORD
+#undef CreateWindow
+#undef CreateWindowEx
 
 export module Glib.Window.ManagedWindow;
 import <utility>;
@@ -27,9 +29,6 @@ import Glib.Device.Event;
 import Glib.Device.Utility;
 export import Glib.Device.IO.Keyboard.KeyCodes;
 export import Glib.Device.IO.Keyboard.Flags;
-
-#undef CreateWindow
-#undef CreateWindowEx
 
 export namespace gl::window
 {
