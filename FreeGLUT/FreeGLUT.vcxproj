@@ -186,6 +186,7 @@
     <ClCompile Include="DeviceCommand.ixx" />
     <ClCompile Include="DeviceIcon.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
+    <ClCompile Include="DeviceUtil.ixx" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="KeyboardFlags.ixx" />
