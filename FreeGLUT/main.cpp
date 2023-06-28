@@ -13,9 +13,13 @@ import Glib.Window.ManagedWindow;
 
 static constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
 
-int main(const int& argc, char** argv)
+int main(const int& argc, const char** const& argv)
 {
+	UNREFERENCED_PARAMETER(argc);
+	UNREFERENCED_PARAMETER(argv);
+
 	util::Println("Program Initiated");
+
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
 	gl::window::WindowProperty property = gl::window::CreatePropertyEx<my_windows_class>();
