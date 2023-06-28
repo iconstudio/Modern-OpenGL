@@ -86,7 +86,7 @@ export namespace gl::device
 		[[nodiscard]]
 		static HICON Create(const int& width, const int& height
 			, const IconBytePtr& and_plain_mask
-			, const IconBytePtr& xor_color_mask, const unsigned int& xor_bits_per_pixel, const unsigned int& xor_planes = 1
+			, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
 		) noexcept
 		{
 			return ::CreateIcon(nullptr, width, height
@@ -96,7 +96,7 @@ export namespace gl::device
 		[[nodiscard]]
 		static bool TryCreate(HICON& output, const int& width, const int& height
 			, const IconBytePtr& and_plain_mask
-			, const IconBytePtr& xor_color_mask, const unsigned int& xor_bits_per_pixel, const unsigned int& xor_planes = 1
+			, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
 		) noexcept
 		{
 			output = ::CreateIcon(nullptr, width, height
@@ -153,7 +153,7 @@ export namespace gl::device
 		[[nodiscard]]
 		static unsigned int GetIconsNumber(const FilePath& path) noexcept
 		{
-			return ::ExtractIconEx(path.c_str(), -1, nullptr, nullptr, -1);
+			return ::ExtractIconEx(path.c_str(), -1, nullptr, nullptr, static_cast<unsigned int>(-1));
 		}
 
 		[[nodiscard]]
