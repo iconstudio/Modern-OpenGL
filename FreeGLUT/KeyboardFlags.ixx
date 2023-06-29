@@ -7,7 +7,7 @@ import Glib.Device.Utility;
 
 export namespace gl::device::io
 {
-	enum class KeyboardFlag : long long
+	enum class [[nodiscard]] KeyboardFlag : long long
 	{
 		None = 0,
 		IsReleased = KF_UP,
