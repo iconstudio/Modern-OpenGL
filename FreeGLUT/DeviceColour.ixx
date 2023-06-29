@@ -5,7 +5,6 @@ module;
 export module Glib.Device.Colour;
 import Glib.Device.Utility;
 import <type_traits>;
-export import :SystemColors;
 
 export namespace gl::device
 {
