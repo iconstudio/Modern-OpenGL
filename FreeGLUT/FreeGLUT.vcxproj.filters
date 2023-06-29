@@ -139,5 +139,11 @@
     <ClCompile Include="Events.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceColour.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemColours.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

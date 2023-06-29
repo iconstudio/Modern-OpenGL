@@ -184,6 +184,7 @@
   <ItemGroup>
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="DeviceClass.ixx" />
+    <ClCompile Include="DeviceColour.ixx" />
     <ClCompile Include="DeviceContext.ixx" />
     <ClCompile Include="DeviceCoroutine.ixx" />
     <ClCompile Include="DeviceEventHandler.ixx" />
@@ -209,6 +210,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
+    <ClCompile Include="SystemColours.ixx" />
     <ClCompile Include="WindowABI.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowOption.ixx" />
