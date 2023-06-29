@@ -245,6 +245,18 @@ export extern "C++" namespace gl::window
 			return myHandle.SendCommand(static_cast<device::Event&&>(cmd));
 		}
 
+		inline bool SendCommand(const device::KeyboardEventID& id, const int& keycode, const long long& flags = 0) const
+			noexcept
+		{
+			return myHandle.SendCommand(id, keycode, flags);
+		}
+
+		inline bool SendCommand(const device::KeyboardEventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags = device::io::KeyboardFlag::None) const
+			noexcept
+		{
+			return myHandle.SendCommand(id, keycode, flags);
+		}
+
 		inline bool UICommand(const int& cmd) noexcept
 		{
 			return myHandle.UICommand(cmd);

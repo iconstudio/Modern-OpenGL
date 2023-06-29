@@ -51,12 +51,6 @@ export namespace gl::device
 			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
 		}
 
-		inline bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const
-			noexcept
-		{
-			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
-		}
-
 		inline bool SendCommand(const Event& cmd) const
 			noexcept
 		{
@@ -67,6 +61,24 @@ export namespace gl::device
 			noexcept
 		{
 			return DeviceCommandAPI::Push(myHandle, static_cast<Event&&>(cmd));
+		}
+
+		inline bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const
+			noexcept
+		{
+			return DeviceCommandAPI::Push(myHandle, id, lhs, rhs);
+		}
+
+		inline bool SendCommand(const KeyboardEventID& id, const int& keycode, const long long& flags = 0) const
+			noexcept
+		{
+			return SendCommand(id.id, static_cast<unsigned long long>(keycode), flags);
+		}
+
+		inline bool SendCommand(const KeyboardEventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const
+			noexcept
+		{
+			return SendCommand(id.id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
 		}
 
 		inline bool UICommand(const int& cmd) noexcept
