@@ -1,5 +1,6 @@
 module;
 #include "stdafx.inl"
+#include <windows.ui.viewmanagement.h>
 
 export module Glib;
 export import Utility.FixedString;
