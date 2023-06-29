@@ -104,10 +104,37 @@ export namespace gl::device
 
 	[[nodiscard]]
 	constexpr Colour
-		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b)
-		noexcept
+		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b) noexcept
 	{
 		return Colour{ 0xFFU, r, g, b };
+	}
+
+	[[nodiscard]]
+	constexpr Colour
+		MakeColor(const NativeColor& argb) noexcept
+	{
+		return Colour{ argb };
+	}
+
+	[[nodiscard]]
+	constexpr Colour
+		MakeColor(NativeColor&& argb) noexcept
+	{
+		return Colour{ std::move(argb) };
+	}
+
+	[[nodiscard]]
+	constexpr Colour
+		MakeColor(const RawColour& rgb) noexcept
+	{
+		return Colour{ rgb };
+	}
+
+	[[nodiscard]]
+	constexpr Colour
+		MakeColor(RawColour&& rgb) noexcept
+	{
+		return Colour{ std::move(rgb) };
 	}
 
 	extern "C" namespace colors
