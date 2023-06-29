@@ -4,7 +4,7 @@ module;
 export module Glib.Window:Property;
 import <type_traits>;
 import Glib.Device.ProcessInstance;
-export import Glib.Device.Colour;
+export import Glib.Device.Brush;
 export import Glib.Device.Icon;
 import :ABI;
 
