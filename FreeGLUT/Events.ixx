@@ -25,6 +25,7 @@ export namespace gl::device
 		SetText = WM_SETTEXT,
 		GetText = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
+
 		Paint = WM_PAINT,
 		ChangedSetting = WM_SETTINGCHANGE,
 		ChangedDPI = WM_DPICHANGED,
@@ -49,10 +50,6 @@ export namespace gl::device
 		SysCommand = WM_SYSCOMMAND,
 
 		MouseMove = WM_MOUSEMOVE,
-		MouseHover = WM_MOUSEHOVER,
-		MouseLeave = WM_MOUSELEAVE,
-		MouseWheel = WM_MOUSEWHEEL,
-		MouseHWheel = WM_MOUSEHWHEEL,
 		LButtonDown = WM_LBUTTONDOWN,
 		LButtonUp = WM_LBUTTONUP,
 		LButtonDoubleClick = WM_LBUTTONDBLCLK,
@@ -62,7 +59,10 @@ export namespace gl::device
 		MButtonDown = WM_MBUTTONDOWN,
 		MButtonUp = WM_MBUTTONUP,
 		MButtonDoubleClick = WM_MBUTTONDBLCLK,
-
+		MouseWheel = WM_MOUSEWHEEL,
+		MouseHWheel = WM_MOUSEHWHEEL,
+		MouseHover = WM_MOUSEHOVER,
+		MouseLeave = WM_MOUSELEAVE,
 		ChangedCapture = WM_CAPTURECHANGED,
 	};
 
