@@ -158,8 +158,6 @@ export extern "C++" namespace gl::window
 		, const wchar_t* const& menu_name
 	) noexcept
 	{
-		static const HBRUSH& bk_color = device::GetComponentColor<device::colored_components::Background>();
-
 		return WindowProperty
 		{
 			hinst
@@ -169,6 +167,29 @@ export extern "C++" namespace gl::window
 			, static_cast<IconType&&>(small_icon)
 			, static_cast<CursorType&&>(cursor)
 			, background
+			, menu_name
+		};
+	}
+
+	template<device::ColoredComponent BkColorReference, typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, static_cast<IconType&&>(icon)
+			, static_cast<IconType&&>(small_icon)
+			, static_cast<CursorType&&>(cursor)
+			, device::GetComponentColor<BkColorReference>()
 			, menu_name
 		};
 	}
