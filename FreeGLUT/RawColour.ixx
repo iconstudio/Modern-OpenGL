@@ -32,16 +32,25 @@ export namespace gl::device
 		inline constexpr RawColour COLOR_SEMIBLACK = MakeRawColor(32U, 32U, 32U);
 		inline constexpr RawColour COLOR_BLACK = MakeRawColor(0U, 0U, 0U);
 
-		inline constexpr RawColour COLOR_SALMON = MakeRawColor(255U, 128U, 128U);
 		inline constexpr RawColour COLOR_RED = MakeRawColor(255U, 0, 0);
-		inline constexpr RawColour COLOR_MAROON = MakeRawColor(128U, 0, 0);
-		inline constexpr RawColour COLOR_LIME = MakeRawColor(0, 255U, 0);
 		inline constexpr RawColour COLOR_GREEN = MakeRawColor(0, 128U, 0);
 		inline constexpr RawColour COLOR_BLUE = MakeRawColor(0, 0, 255U);
-		inline constexpr RawColour COLOR_NAVY = MakeRawColor(20U, 18U, 149U);
-		inline constexpr RawColour COLOR_ORANGE = MakeRawColor(255U, 128U, 0);
+
+		inline constexpr RawColour COLOR_CYAN = MakeRawColor(0, 255U, 255U);
 		inline constexpr RawColour COLOR_YELLOW = MakeRawColor(255U, 255U, 0);
+		inline constexpr RawColour COLOR_MAGENTA = MakeRawColor(255U, 0, 255U);
+
+		inline constexpr RawColour COLOR_SALMON = MakeRawColor(250U, 128U, 114U);
+		inline constexpr RawColour COLOR_MAROON = MakeRawColor(128U, 0, 0);
 		inline constexpr RawColour COLOR_GOLD = MakeRawColor(223U, 130U, 20U);
+		inline constexpr RawColour COLOR_ORANGE = MakeRawColor(255U, 128U, 0);
+		inline constexpr RawColour COLOR_BROWN = MakeRawColor(165U, 42U, 42U);
+		inline constexpr RawColour COLOR_TAN = MakeRawColor(210U, 180U, 140U);
+		inline constexpr RawColour COLOR_LIME = MakeRawColor(0, 255U, 0);
+		inline constexpr RawColour COLOR_NAVY = MakeRawColor(20U, 18U, 149U);
+		inline constexpr RawColour COLOR_MIDNIGHTBLUE = MakeRawColor(25U, 25U, 112U);
+		inline constexpr RawColour COLOR_PINK = MakeRawColor(255U, 192U, 203U);
+		inline constexpr RawColour COLOR_PURPLE = MakeRawColor(128U, 0, 128U);
 	}
 
 	[[nodiscard]]
