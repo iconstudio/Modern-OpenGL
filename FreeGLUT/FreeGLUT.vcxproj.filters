@@ -25,6 +25,9 @@
     <Filter Include="헤더 파일\Device\IO">
       <UniqueIdentifier>{15db4f74-cb17-43c3-8ef5-379bcced7713}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Device\Render">
+      <UniqueIdentifier>{ed94cd53-7fe8-4fdc-8a9d-c90c57e4f82f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="stdafx.inl">
