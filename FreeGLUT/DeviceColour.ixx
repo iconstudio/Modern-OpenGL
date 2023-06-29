@@ -9,21 +9,30 @@ import <type_traits>;
 export import :RawColour;
 
 export using winrt::Windows::UI::operator==;
+using NativeColor = winrt::Windows::UI::Color;
 
 export namespace gl::device
 {
 	// A, R, G, B
-	struct [[nodiscard]] Colour : public winrt::Windows::UI::Color
+	struct [[nodiscard]] Colour : public NativeColor
 	{
 		constexpr Colour() noexcept = default;
 		constexpr ~Colour() noexcept = default;
 
 		constexpr Colour(const std::uint8_t& a, const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b) noexcept
-			: winrt::Windows::UI::Color(a, r, g, b)
+			: NativeColor(a, r, g, b)
+		{}
+
+		constexpr Colour(const NativeColor& argb) noexcept
+			: NativeColor(argb)
+		{}
+
+		constexpr Colour(NativeColor&& argb) noexcept
+			: NativeColor(std::move(argb))
 		{}
 
 		constexpr Colour(const RawColour& rgb) noexcept
-			: winrt::Windows::UI::Color(GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
+			: NativeColor(0xFF, GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
 		{}
 
 		[[nodiscard]]
@@ -42,6 +51,20 @@ export namespace gl::device
 		constexpr Colour& operator=(RawColour&& color) noexcept
 		{
 			swap(Colour{ std::move(color) });
+
+			return *this;
+		}
+
+		constexpr Colour& operator=(const NativeColor& color) noexcept
+		{
+			swap(Colour{ color.A, color.R, color.G, color.B });
+
+			return *this;
+		}
+
+		constexpr Colour& operator=(NativeColor&& color) noexcept
+		{
+			swap(Colour{ std::move(color.A), std::move(color.R), std::move(color.G), std::move(color.B) });
 
 			return *this;
 		}
