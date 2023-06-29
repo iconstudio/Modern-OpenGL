@@ -154,7 +154,55 @@ export extern "C++" namespace gl::window
 		, IconType&& icon
 		, IconType&& small_icon
 		, CursorType&& cursor
-		, const HBRUSH& background
+		, const device::ColorBrush& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, background.GetHandle()
+			, menu_name
+		};
+	}
+
+	template<typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, device::ColorBrush&& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, std::move(background).GetHandle()
+			, menu_name
+		};
+	}
+
+	template<typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const device::NativeColorBrush& background
 		, const wchar_t* const& menu_name
 	) noexcept
 	{
@@ -178,7 +226,7 @@ export extern "C++" namespace gl::window
 		, IconType&& icon
 		, IconType&& small_icon
 		, CursorType&& cursor
-		, HBRUSH&& background
+		, device::NativeColorBrush&& background
 		, const wchar_t* const& menu_name
 	) noexcept
 	{
