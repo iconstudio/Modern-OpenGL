@@ -138,7 +138,7 @@ namespace gl::device
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	const NativeColorBrush&
 		MakeDefaultComponentColor() noexcept
 	{
@@ -146,21 +146,35 @@ namespace gl::device
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	NativeColorBrush MakeNativeBrush(const RawColour& color) noexcept
 	{
 		return ::CreateSolidBrush(color);
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	NativeColorBrush MakeNativeBrush(RawColour&& color) noexcept
 	{
 		return ::CreateSolidBrush(std::move(color));
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
+	NativeColorBrush MakeNativeBrush(const Colour& color) noexcept
+	{
+		return ::CreateSolidBrush(color.ToRaw());
+	}
+
+	export
+		[[nodiscard]]
+	NativeColorBrush MakeNativeBrush(Colour&& color) noexcept
+	{
+		return ::CreateSolidBrush(color.ToRaw());
+	}
+
+	export
+		[[nodiscard]]
 	NativeColorBrush MakeNativePatternBrush(const HBITMAP& pattern_img) noexcept
 	{
 		return ::CreatePatternBrush(pattern_img);
@@ -172,21 +186,21 @@ namespace gl::device
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	ColorBrush MakeColorBrush(const RawColour& color) noexcept
 	{
 		return ColorBrush{ ::CreateSolidBrush(color) };
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	ColorBrush MakeColorBrush(RawColour&& color) noexcept
 	{
 		return ColorBrush{ ::CreateSolidBrush(std::move(color)) };
 	}
 
 	export
-	[[nodiscard]]
+		[[nodiscard]]
 	ColorBrush MakePatternBrush(const HBITMAP& pattern_img) noexcept
 	{
 		return ColorBrush{ ::CreatePatternBrush(pattern_img) };
