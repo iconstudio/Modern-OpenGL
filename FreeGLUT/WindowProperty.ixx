@@ -134,8 +134,6 @@ export extern "C++" namespace gl::window
 		, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept
 	{
-		static const HBRUSH& bk_color = device::GetComponentColor<device::system_components::Background>();
-
 		return WindowProperty
 		{
 			hinst
@@ -144,7 +142,7 @@ export extern "C++" namespace gl::window
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, nullptr //, LoadCursorW(hinst, IDC_ARROW)
-			, bk_color
+			, device::MakeDefaultComponentColor()
 			, nullptr
 		};
 	}
@@ -160,6 +158,8 @@ export extern "C++" namespace gl::window
 		, const wchar_t* const& menu_name
 	) noexcept
 	{
+		static const HBRUSH& bk_color = device::GetComponentColor<device::colored_components::Background>();
+
 		return WindowProperty
 		{
 			hinst
