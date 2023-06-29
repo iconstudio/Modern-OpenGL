@@ -1,8 +1,4 @@
 #include "pch.hpp"
-#include "Internal.hpp"
-#undef CreateWindow
-#undef CreateWindowEx
-
 import Utility.FixedString;
 import Utility.Print;
 import Glib;
@@ -13,11 +9,8 @@ import Glib.Window.ManagedWindow;
 
 static inline constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
 
-int main(const int& argc, const char** const& argv)
+int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
 {
-	UNREFERENCED_PARAMETER(argc);
-	UNREFERENCED_PARAMETER(argv);
-
 	util::Println("== Program Initiated ==");
 
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
