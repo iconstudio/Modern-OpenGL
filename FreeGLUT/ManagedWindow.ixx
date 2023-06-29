@@ -1,5 +1,3 @@
-module;
-
 export module Glib.Window.ManagedWindow;
 import <cstdio>;
 import <iostream>;
@@ -269,6 +267,7 @@ export namespace gl::window
 		CharUpEventHandler chrUpHandler = nullptr;
 
 		util::atomic_bool isFocused = false;
+		util::atomic_bool isMouseHover = false;
 		util::atomic_bool isCapturing = false;
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
@@ -613,11 +612,6 @@ noexcept
 		}
 		break;
 
-		case gl::device::mb::Covered:
-		{
-		}
-		break;
-
 		case event_id_t::Activate:
 		{
 			const unsigned short trigger = device::LOWORD(wparam);
@@ -626,14 +620,32 @@ noexcept
 			{
 				std::printf("[Activate] Unfocused\n");
 				self->isFocused = false;
+				self->isMouseHover = false;
 				self->ResetMouseCapture();
 			}
 			else
 			{
 				std::printf("[Activate] Focused\n");
 				self->isFocused = true;
+			}
+		}
+		break;
+
+		case gl::device::mb::Covered:
+		{
+			if (isFocused)
+			{
+				std::printf("[Mouse Hovered]\n");
+				self->isMouseHover = true;
 				self->TryCaptureMouse();
 			}
+		}
+		break;
+
+		case gl::device::mb::Uncovered:
+		{
+			std::printf("[Mouse Left]\n");
+			self->isMouseHover = false;
 		}
 		break;
 

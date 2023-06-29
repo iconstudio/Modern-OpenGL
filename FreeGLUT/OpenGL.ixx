@@ -1,5 +1,3 @@
-module;
-
 export module Glib;
 export import Utility.FixedString;
 import Utility.Print;
