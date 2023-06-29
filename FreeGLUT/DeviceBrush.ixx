@@ -60,6 +60,56 @@ namespace gl::device
 		inline constexpr ColoredComponent Hyperlink = ColoredComponent::Hyperlink;
 	}
 
+	class [[nodiscard]] ColorBrush
+	{
+	public:
+		constexpr ColorBrush() noexcept = default;
+
+		~ColorBrush() noexcept
+		{
+			::DeleteObject(myBrush);
+		}
+
+		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept
+			: myBrush(brush)
+		{}
+
+		explicit constexpr ColorBrush(NativeColorBrush&& brush) noexcept
+			: myBrush(std::move(brush))
+		{}
+
+		constexpr ColorBrush& operator=(const NativeColorBrush& brush) noexcept
+		{
+			myBrush = brush;
+			return *this;
+		}
+
+		constexpr ColorBrush& operator=(NativeColorBrush&& brush) noexcept
+		{
+			myBrush = std::move(brush);
+			return *this;
+		}
+
+		[[nodiscard]]
+		constexpr const NativeColorBrush& GetHandle() const& noexcept
+		{
+			return myBrush;
+		}
+
+		[[nodiscard]]
+		constexpr  NativeColorBrush&& GetHandle() && noexcept
+		{
+			return std::move(myBrush);
+		}
+
+		ColorBrush(const ColorBrush&) = delete;
+		constexpr ColorBrush(ColorBrush&&) noexcept = default;
+		ColorBrush& operator=(const ColorBrush&) = delete;
+		constexpr ColorBrush& operator=(ColorBrush&&) noexcept = default;
+
+		NativeColorBrush myBrush = nullptr;
+	};
+
 	template<ColoredComponent Target>
 	struct InternalCColor
 	{
