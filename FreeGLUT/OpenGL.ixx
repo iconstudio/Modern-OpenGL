@@ -1,15 +1,16 @@
 module;
 #include "stdafx.inl"
-#include <windows.ui.viewmanagement.h>
+#include <winrt/Windows.UI.ViewManagement.h>
 
 export module Glib;
 export import Utility.FixedString;
+import Utility.Print;
 export import Glib.DisplayModes;
 import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
-	using ABI::Windows::UI::Color;
+	using winrt::Windows::UI::Color;
 
 	EXT_C struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
 	EXT_C struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
@@ -28,13 +29,34 @@ export namespace gl
 	void Initialize(const DisplayModes& mode, const int& w, const int& h) noexcept;
 	void Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept;
 
+	[[nodiscard]]
+	constexpr bool IsColorBright(const Color& clr) noexcept
+	{
+		return 8 * 128 < int(5 * clr.G + 2 * clr.R + clr.B);
+	}
+
 	void Start()
 	{
-		using namespace ABI::Windows::UI::ViewManagement;
+		using namespace winrt::Windows::UI::ViewManagement;
 
-		//auto settings = UISettings();
-		//settings.GetColorValue(UIColorType::Background);
+		UISettings settings = UISettings();
+		const Color col_a_0 = settings.GetColorValue(UIColorType::Accent);
+		const Color col_a_1 = settings.GetColorValue(UIColorType::AccentDark1);
+		const Color col_a_2 = settings.GetColorValue(UIColorType::AccentDark2);
+		const Color col_a_3 = settings.GetColorValue(UIColorType::AccentDark3);
+		const Color col_a_4 = settings.GetColorValue(UIColorType::AccentLight1);
+		const Color col_a_5 = settings.GetColorValue(UIColorType::AccentLight2);
+		const Color col_a_6 = settings.GetColorValue(UIColorType::AccentLight3);
+		const Color col_fg = settings.GetColorValue(UIColorType::Foreground);
+		const Color col_bk = settings.GetColorValue(UIColorType::Background);
 
-		//auto foreground = settings.GetColorValue(UIColorType::Foreground);
+		if (IsColorBright(col_fg))
+		{
+			util::Println("Dark Mode");
+		}
+		else
+		{
+			util::Println("Light Mode");
+		}
 	}
 }
