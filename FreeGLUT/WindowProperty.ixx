@@ -4,6 +4,7 @@ module;
 export module Glib.Window:Property;
 import <type_traits>;
 import Glib.Device.ProcessInstance;
+export import Glib.Device.Colour;
 export import Glib.Device.Icon;
 import :ABI;
 
@@ -133,7 +134,7 @@ export extern "C++" namespace gl::window
 		, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept
 	{
-		static const HBRUSH bk_color = GetSysColorBrush(COLOR_WINDOW);
+		static const HBRUSH& bk_color = device::GetComponentColor<device::system_components::Background>();
 
 		return WindowProperty
 		{
