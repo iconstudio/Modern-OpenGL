@@ -1,4 +1,6 @@
 export module Glib.Device.IO;
+export import Glib.Device.IO.Mouse;
+export import Glib.Device.IO.Keyboard;
 
 export namespace gl::device::io
 {
