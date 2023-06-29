@@ -4,12 +4,12 @@ module;
 export module Glib.Device.Event:Definitions;
 import <compare>;
 
-namespace gl::device
+export namespace gl::device
 {
-	export using RawDeviceCommand = ::tagMSG;
-	export using DeviceCommandIDType = decltype(RawDeviceCommand::message);
+	using RawDeviceCommand = ::tagMSG;
+	using DeviceCommandIDType = decltype(RawDeviceCommand::message);
 
-	export enum class [[nodiscard]] EventID : DeviceCommandIDType
+	enum class [[nodiscard]] EventID : DeviceCommandIDType
 	{
 		None = 0,
 		Create = WM_CREATE,
@@ -122,7 +122,7 @@ namespace gl::device
 		EventID id = EventID::None;
 	};
 
-	export struct [[nodiscard]] KeyboardEventID : public EventIDWrapper
+	struct [[nodiscard]] KeyboardEventID : public EventIDWrapper
 	{
 		static inline constexpr EventID GUARD_FIRST = EventID{ WM_KEYFIRST };
 		static inline constexpr EventID GUARD_LAST = EventID{ WM_KEYLAST };
@@ -133,7 +133,7 @@ namespace gl::device
 		using EventIDWrapper::EventIDWrapper;
 	};
 
-	export namespace kb
+	namespace kb
 	{
 		inline constexpr KeyboardEventID Pressed{ EventID::KeyDown };
 		inline constexpr KeyboardEventID Released{ EventID::KeyUp };
@@ -146,7 +146,7 @@ namespace gl::device
 		inline constexpr KeyboardEventID AltCharReleased{ EventID::SysDeadChar };
 	}
 
-	export struct [[nodiscard]] MouseEventID : public EventIDWrapper
+	struct [[nodiscard]] MouseEventID : public EventIDWrapper
 	{
 		static inline constexpr EventID GUARD_FIRST = EventID{ WM_MOUSEFIRST };
 		static inline constexpr EventID GUARD_LAST = EventID{ WM_MOUSELAST };
@@ -157,7 +157,7 @@ namespace gl::device
 		using EventIDWrapper::EventIDWrapper;
 	};
 
-	export namespace mb
+	namespace mb
 	{
 		inline constexpr MouseEventID Moved{ EventID::MouseMove };
 		inline constexpr MouseEventID Covered{ EventID::MouseHover };
