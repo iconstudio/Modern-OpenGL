@@ -90,12 +90,6 @@ export namespace gl::device
 			lhs.swap(rhs);
 		}
 
-		[[nodiscard]]
-		inline friend constexpr bool IsColorBright(const Colour& col) noexcept
-		{
-			return 8 * 128 < static_cast<int>(5 * col.G + 2 * col.R + col.B);
-		}
-
 		constexpr Colour(const Colour&) noexcept = default;
 		constexpr Colour(Colour&&) noexcept = default;
 		constexpr Colour& operator=(const Colour&) noexcept = default;
@@ -230,5 +224,11 @@ export namespace gl::device
 	constexpr std::uint8_t GetAlpha(const Colour& argb) noexcept
 	{
 		return argb.A;
+	}
+
+	[[nodiscard]]
+	constexpr bool IsColorBright(const Colour& col) noexcept
+	{
+		return 8 * 128 < static_cast<int>(5 * col.G + 2 * col.R + col.B);
 	}
 }
