@@ -1,19 +1,18 @@
 module;
-#include "stdafx.inl"
-#include <winrt/Windows.UI.ViewManagement.h>
 
 export module Glib;
 export import Utility.FixedString;
 import Utility.Print;
 export import Glib.DisplayModes;
+export import Glib.Device.Colour;
 import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
-	using winrt::Windows::UI::Color;
+	using gl::device::Colour;
 
-	EXT_C struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
-	EXT_C struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
+	struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
+	struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
 
 	constexpr default_position_t default_position{};
 	constexpr default_resoulution_t default_resoulution{};

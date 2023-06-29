@@ -1,5 +1,6 @@
 module;
 #include "Internal.hpp"
+#include <winrt/Windows.UI.ViewManagement.h>
 #undef LOBYTE
 
 export module Glib.Device.Colour;
@@ -10,6 +11,7 @@ export namespace gl::device
 {
 	// DWORD
 	using RawColour = unsigned long;
+	using Colour = winrt::Windows::UI::Color;
 
 	extern "C" namespace native_colors
 	{
