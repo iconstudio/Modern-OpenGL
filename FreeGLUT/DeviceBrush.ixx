@@ -9,7 +9,7 @@ export import Glib.Device.Colour;
 
 namespace gl::device
 {
-	export using NativeColorBrush = HBRUSH;
+	export using NativeColorBrush = ::HBRUSH__*;
 
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
