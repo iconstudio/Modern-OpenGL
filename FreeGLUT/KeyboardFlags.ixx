@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 #undef HIWORD
 
-export module Glib.Device.IO.Keyboard.Flags;
+export module Glib.Device.IO.Keyboard:Flags;
 import Glib.Device.Utility;
 
 export namespace gl::device::io

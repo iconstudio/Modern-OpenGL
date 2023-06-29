@@ -1,5 +1,4 @@
-export module Glib.Device.IO.Keyboard.KeyCodes;
-export import :Modifier;
+export module Glib.Device.IO.Keyboard:KeyCodes;
 
 export namespace gl::device::io
 {
