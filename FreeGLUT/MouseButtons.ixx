@@ -1,4 +1,4 @@
-export module Glib.Device.IO.MouseButtons;
+export module Glib.Device.IO.Mouse:Buttons;
 
 export namespace gl::device::io
 {
