@@ -92,6 +92,18 @@ export namespace gl::device
 			: winrt::Windows::UI::Color(GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
 		{}
 
+		[[nodiscard]]
+		constexpr RawColour ToRaw() const noexcept
+		{
+			return MakeRawColor(R, G, B);
+		}
+
+		[[nodiscard]]
+		constexpr bool IsBright() const noexcept
+		{
+			return IsColorBright(*this);
+		}
+
 		constexpr Colour(const Colour&) noexcept = default;
 		constexpr Colour(Colour&&) noexcept = default;
 		constexpr Colour& operator=(const Colour&) noexcept = default;
