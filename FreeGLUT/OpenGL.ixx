@@ -9,6 +9,8 @@ import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
+	using ABI::Windows::UI::Color;
+
 	EXT_C struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
 	EXT_C struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
 
@@ -28,10 +30,11 @@ export namespace gl
 
 	void Start()
 	{
-		using ABI::Windows::System::VirtualKey_Snapshot;
+		using namespace ABI::Windows::UI::ViewManagement;
 
-		auto settings = UISettings();
+		//auto settings = UISettings();
+		//settings.GetColorValue(UIColorType::Background);
 
-		auto foreground = settings.GetColorValue(UIColorType::Foreground);
+		//auto foreground = settings.GetColorValue(UIColorType::Foreground);
 	}
 }
