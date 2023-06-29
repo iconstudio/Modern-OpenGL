@@ -194,7 +194,7 @@ export extern "C++" namespace gl::window
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, nullptr //, LoadCursorW(hinst, IDC_ARROW)
-			, device::MakeDefaultComponentColor()
+			, device::MakeDefaultComponentColouring()
 			, nullptr
 		};
 	}
@@ -313,7 +313,7 @@ export extern "C++" namespace gl::window
 			, std::forward<IconType>(icon)
 			, std::forward<IconType>(small_icon)
 			, std::forward<CursorType>(cursor)
-			, device::GetComponentColor<BkColorReference>()
+			, device::GetComponentColouring<BkColorReference>()
 			, menu_name
 		};
 	}
@@ -336,7 +336,7 @@ export extern "C++" namespace gl::window
 			, std::forward<IconType>(icon)
 			, std::forward<IconType>(small_icon)
 			, std::forward<CursorType>(cursor)
-			, device::MakeDefaultComponentColor()
+			, device::MakeDefaultComponentColouring()
 			, menu_name
 		};
 	}

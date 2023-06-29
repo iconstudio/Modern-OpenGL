@@ -138,7 +138,7 @@ namespace gl::device
 	export template<ColoredComponent Target>
 		[[nodiscard]]
 	const NativeColorBrush&
-		GetComponentColor()
+		GetComponentColouring()
 		noexcept(COLOR_WINDOW <= static_cast<int>(Target) && static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{
 		static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
@@ -148,9 +148,9 @@ namespace gl::device
 	export
 		[[nodiscard]]
 	const NativeColorBrush&
-		MakeDefaultComponentColor() noexcept
+		MakeDefaultComponentColouring() noexcept
 	{
-		return GetComponentColor<colored_components::Background>();
+		return GetComponentColouring<colored_components::Background>();
 	}
 
 	export
