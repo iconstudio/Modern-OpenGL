@@ -26,7 +26,8 @@ export namespace gl::device
 	{
 		inline constexpr RawColour COLOR_WHITE = MakeRawColor(255U, 255U, 255U);
 		inline constexpr RawColour COLOR_CLOUD = MakeRawColor(224U, 224U, 224U);
-		inline constexpr RawColour COLOR_LTGREY = MakeRawColor(192U, 192U, 192U);
+		inline constexpr RawColour COLOR_LTGREY = MakeRawColor(211U, 211U, 211U);
+		inline constexpr RawColour COLOR_SILVER = MakeRawColor(192U, 192U, 192U);
 		inline constexpr RawColour COLOR_GREY = MakeRawColor(128U, 128U, 128U);
 		inline constexpr RawColour COLOR_DKGREY = MakeRawColor(64U, 64U, 64U);
 		inline constexpr RawColour COLOR_SEMIBLACK = MakeRawColor(32U, 32U, 32U);
