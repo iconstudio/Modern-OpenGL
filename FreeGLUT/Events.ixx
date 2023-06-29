@@ -26,6 +26,11 @@ export namespace gl::device
 		GetText = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
 		Paint = WM_PAINT,
+		ChangedSetting = WM_SETTINGCHANGE,
+		ChangedDPI = WM_DPICHANGED,
+		ChangedTheme = WM_THEMECHANGED,
+		ChangedStaticColor = WM_SYSCOLORCHANGE, // GetSysColor, SetSysColor, GetSysColorBrush, SetSysColorBrush
+		ChangedUserColor = WM_DWMCOLORIZATIONCOLORCHANGED, // DwmGetColorizationColor, DwmSetColorizationColor
 
 		Close = WM_CLOSE,
 		QueryEndSession = WM_QUERYENDSESSION,
