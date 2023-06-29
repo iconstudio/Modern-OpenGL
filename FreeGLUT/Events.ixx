@@ -75,15 +75,19 @@ namespace gl::device
 		{}
 
 		[[nodiscard]]
-		constexpr bool operator==(const EventID& event_id) const noexcept
+		inline friend constexpr
+			bool
+			operator==(const EventIDWrapper& self, const EventID& event_id) noexcept
 		{
-			return id == event_id;
+			return self.id == event_id;
 		}
 
 		[[nodiscard]]
-		constexpr std::strong_ordering operator<=>(const EventID& event_id) const noexcept
+		inline friend constexpr
+		std::strong_ordering
+			operator<=>(const EventIDWrapper& self, const EventID& event_id) noexcept
 		{
-			return static_cast<DeviceCommandIDType>(id) <=> static_cast<DeviceCommandIDType>(event_id);
+			return static_cast<DeviceCommandIDType>(self.id) <=> static_cast<DeviceCommandIDType>(event_id);
 		}
 
 		constexpr operator EventID& () & noexcept
