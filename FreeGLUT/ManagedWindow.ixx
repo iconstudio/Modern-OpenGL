@@ -52,7 +52,7 @@ export namespace gl::window
 		static constexpr device::Event DefaultEvent = {};
 
 		using event_id_t = device::EventID;
-		using event_handler_t = long long(*)(ManagedWindow&, unsigned long long, long long);
+		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
 
 		using event_t = device::Event;
 		using event_alert_t = std::atomic<event_t>;
@@ -634,7 +634,7 @@ void gl::window::ManagedWindow<ID>::Worker(util::CancellationToken stop_token, M
 
 		auto event = await_flag.load();
 		self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
-			long long result = handler(self, event.wParam, event.lParam);
+			handler(self, event.wParam, event.lParam);
 		});
 
 		await_flag.store(DefaultEvent, util::memory_order_acquire);
