@@ -211,7 +211,6 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="Rect.ixx" />
-    <ClCompile Include="SystemColours.ixx" />
     <ClCompile Include="WindowABI.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowOption.ixx" />
