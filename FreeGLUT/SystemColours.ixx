@@ -6,9 +6,9 @@ import <type_traits>;
 
 #define DEPRECATED_WIN10 [[deprecated("This colour has been deprecated since Windows 10.")]]
 
-export namespace gl::device
+namespace gl::device
 {
-	extern "C" enum class [[nodiscard]] ColoredComponent : int
+	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
 		Window = COLOR_WINDOW,
 		Text = COLOR_WINDOWTEXT,
@@ -43,7 +43,7 @@ export namespace gl::device
 #pragma endregion
 	};
 
-	extern "C" namespace system_components
+	export extern "C" namespace system_components
 	{
 		inline constexpr ColoredComponent Text = ColoredComponent::Text;
 		inline constexpr ColoredComponent Background = ColoredComponent::Window;
@@ -58,12 +58,18 @@ export namespace gl::device
 	}
 
 	template<ColoredComponent Target>
+	struct InternalCColor
+	{
+		HBRUSH stock;
+	};
+
+	export template<ColoredComponent Target>
 	[[nodiscard]]
 	inline const HBRUSH&
 		GetComponentColor()
 		noexcept(COLOR_WINDOW <= static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{
-		static const HBRUSH stock = ::GetSysColorBrush(static_cast<int>(Target));
+		static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
 		return stock;
 	}
 }
