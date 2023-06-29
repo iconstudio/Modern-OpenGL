@@ -633,7 +633,7 @@ noexcept
 
 		case gl::device::mb::Covered:
 		{
-			if (isFocused)
+			if (self->isFocused)
 			{
 				std::printf("[Mouse Hovered]\n");
 				self->isMouseHover = true;
