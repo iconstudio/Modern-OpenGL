@@ -60,7 +60,7 @@ namespace gl::device
 		inline constexpr ColoredComponent Hyperlink = ColoredComponent::Hyperlink;
 	}
 
-	class [[nodiscard]] ColorBrush
+	export class [[nodiscard]] ColorBrush
 	{
 	public:
 		constexpr ColorBrush() noexcept = default;
@@ -137,6 +137,7 @@ namespace gl::device
 		return stock.myBrush;
 	}
 
+	[[nodiscard]]
 	export const NativeColorBrush&
 		MakeDefaultComponentColor() noexcept
 	{
@@ -149,6 +150,7 @@ namespace gl::device
 		return ::CreateSolidBrush(color);
 	}
 
+	[[nodiscard]]
 	export NativeColorBrush MakeNativeBrush(RawColour&& color) noexcept
 	{
 		return ::CreateSolidBrush(std::move(color));
@@ -163,5 +165,23 @@ namespace gl::device
 	export bool DeleteNativeBrush(NativeColorBrush& brush) noexcept
 	{
 		return 0 != ::DeleteObject(brush);
+	}
+
+	[[nodiscard]]
+	export ColorBrush MakeColorBrush(const RawColour& color) noexcept
+	{
+		return ColorBrush{ ::CreateSolidBrush(color) };
+	}
+
+	[[nodiscard]]
+	export ColorBrush MakeColorBrush(RawColour&& color) noexcept
+	{
+		return ColorBrush{ ::CreateSolidBrush(std::move(color)) };
+	}
+
+	[[nodiscard]]
+	export ColorBrush MakePatternBrush(const HBITMAP& pattern_img) noexcept
+	{
+		return ColorBrush{ ::CreatePatternBrush(pattern_img) };
 	}
 }
