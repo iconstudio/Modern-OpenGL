@@ -1,4 +1,5 @@
 module;
+#include <dwmapi.h>
 #include "Internal.hpp"
 
 export module Glib.Window:ABI;
@@ -81,12 +82,22 @@ export namespace gl::window::detail
 		, const LPVOID& uparams = nullptr)
 		noexcept
 	{
-		return ::CreateWindowEx(options
+		HWND result = ::CreateWindowEx(options
 		, class_name.data(), title.data()
 		, styles, x, y, width, height
 		, parent
 		, menu
 		, hinst, uparams);
+
+		if (result == nullptr)
+		{
+			return nullptr;
+		}
+
+		BOOL value = TRUE;
+		::DwmSetWindowAttribute(result, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+
+		return result;
 	}
 
 	inline bool DestroyNativeWindow(const HWND& hwnd) noexcept
