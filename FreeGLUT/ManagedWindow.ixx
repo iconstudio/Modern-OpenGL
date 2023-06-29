@@ -29,13 +29,6 @@ export import Glib.Device.IO;
 
 export namespace gl::window
 {
-	using KeyDownEventHandler = void(*)(device::io::KeyCode, bool is_first);
-	using KeyUpEventHandler = void(*)(device::io::KeyCode);
-	using SysKeyDownEventHandler = void(*)(device::io::KeyCode, bool is_first);
-	using SysKeyUpEventHandler = void(*)(device::io::KeyCode);
-	using CharDownEventHandler = void(*)(char32_t, long long);
-	using CharUpEventHandler = void(*)(char32_t, long long);
-
 	template<util::fixed_wstring ID>
 	class [[nodiscard]] ManagedWindow
 		: public std::enable_shared_from_this<ManagedWindow<ID>>
@@ -67,6 +60,13 @@ export namespace gl::window
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
+
+		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first);
+		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode);
+		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first);
+		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode);
+		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long);
+		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long);
 
 		explicit ManagedWindow(Window&& window, int number_of_workers)
 			: underlying(std::move(window))
@@ -478,7 +478,7 @@ noexcept
 			std::printf("[Key Pressed] %lld\n", wparam);
 			if (key_dw_handler)
 			{
-				key_dw_handler(static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
+				key_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
 			}
 		}
 		break;
@@ -488,7 +488,7 @@ noexcept
 			std::printf("[Key Released] %lld\n", wparam);
 			if (key_up_handler)
 			{
-				key_up_handler(static_cast<device::io::KeyCode>(wparam));
+				key_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
 			}
 		}
 		break;
@@ -498,7 +498,7 @@ noexcept
 			std::printf("[System Key Pressed] %lld\n", wparam);
 			if (sys_dw_handler)
 			{
-				sys_dw_handler(static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
+				sys_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
 			}
 		}
 		break;
@@ -508,7 +508,7 @@ noexcept
 			std::printf("[System Key Released] %lld\n", wparam);
 			if (sys_up_handler)
 			{
-				sys_up_handler(static_cast<device::io::KeyCode>(wparam));
+				sys_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
 			}
 		}
 		break;
@@ -519,7 +519,7 @@ noexcept
 			std::printf("[Chr Pressed] %lld\n", wparam);
 			if (chr_dw_handler)
 			{
-				chr_dw_handler(static_cast<char32_t>(wparam), lparam);
+				chr_dw_handler(*self, static_cast<char32_t>(wparam), lparam);
 			}
 		}
 		break;
@@ -530,7 +530,7 @@ noexcept
 			std::printf("[Chr Released] %lld\n", wparam);
 			if (chr_up_handler)
 			{
-				chr_up_handler(static_cast<char32_t>(wparam), lparam);
+				chr_up_handler(*self, static_cast<char32_t>(wparam), lparam);
 			}
 		}
 		break;
