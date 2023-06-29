@@ -8,6 +8,8 @@ import <type_traits>;
 
 namespace gl::device
 {
+	using NativeColorBrush = HBRUSH;
+
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
 		Window = COLOR_WINDOW,
@@ -60,12 +62,12 @@ namespace gl::device
 	template<ColoredComponent Target>
 	struct InternalCColor
 	{
-		HBRUSH stock;
+		NativeColorBrush stock;
 	};
 
 	export template<ColoredComponent Target>
 	[[nodiscard]]
-	inline const HBRUSH&
+	inline const NativeColorBrush&
 		GetComponentColor()
 		noexcept(COLOR_WINDOW <= static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{

@@ -10,7 +10,6 @@ export import :SystemColors;
 export namespace gl::device
 {
 	using RawColour = COLORREF;
-	using NativeColorBrush = HBRUSH;
 
 	extern "C" namespace native_colors
 	{
