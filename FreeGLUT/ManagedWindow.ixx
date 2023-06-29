@@ -25,13 +25,16 @@ import Glib.Window;
 import Glib.Device.Event;
 import Glib.Device.Utility;
 export import Glib.Window.Coroutine;
-export import Glib.Device.IO.Keyboard.KeyCodes;
-export import Glib.Device.IO.Keyboard.Flags;
+export import Glib.Device.IO;
 
 export namespace gl::window
 {
-	using KeyEventHandler = void(*)(device::io::KeyCode, long long);
-	using CharEventHandler = void(*)(char32_t, long long);
+	using KeyDownEventHandler = void(*)(device::io::KeyCode, bool is_first);
+	using KeyUpEventHandler = void(*)(device::io::KeyCode);
+	using SysKeyDownEventHandler = void(*)(device::io::KeyCode, bool is_first);
+	using SysKeyUpEventHandler = void(*)(device::io::KeyCode);
+	using CharDownEventHandler = void(*)(char32_t, long long);
+	using CharUpEventHandler = void(*)(char32_t, long long);
 
 	template<util::fixed_wstring ID>
 	class [[nodiscard]] ManagedWindow
@@ -249,8 +252,17 @@ export namespace gl::window
 		util::atomic<int> awaitCount = 0;
 		event_alert_t awaitFlag{ DefaultEvent };
 
-		KeyEventHandler eventOfKeyHandler = nullptr;
-		CharEventHandler eventOfCharHandler = nullptr;
+		KeyDownEventHandler keyDownHandler = nullptr;
+		KeyUpEventHandler keyUpHandler = nullptr;
+		SysKeyDownEventHandler sysDownHandler = [this](device::io::KeyCode code) {
+			if (code == device::io::KeyCode::F4)
+			{
+				underlying.SendCommand(event_id_t::Close);
+			}
+		};
+		SysKeyUpEventHandler sysUpHandler = nullptr;
+		CharDownEventHandler chrDownHandler = nullptr;
+		CharUpEventHandler chrUpHandler = nullptr;
 
 		util::atomic_bool isFocused = false;
 		util::atomic_bool isCapturing = false;
@@ -452,51 +464,73 @@ noexcept
 	const event_id_t msg = static_cast<event_id_t>(id);
 
 	ManagedWindow<ID>* self = ManagedWindow<ID>::GetInstance();
-	auto& key_handler = self->eventOfKeyHandler;
-	auto& char_handler = self->eventOfCharHandler;
+	auto& key_dw_handler = self->keyDownHandler;
+	auto& key_up_handler = self->keyUpHandler;
+	auto& sys_dw_handler = self->sysDownHandler;
+	auto& sys_up_handler = self->sysUpHandler;
+	auto& chr_dw_handler = self->chrDownHandler;
+	auto& chr_up_handler = self->chrUpHandler;
 
 	switch (msg)
 	{
-		case event_id_t::KeyDown:
-		case event_id_t::KeyUp:
+		case gl::device::KeyboardEventID::Pressed:
 		{
-			std::printf("[Key] %lld\n", wparam);
-			if (key_handler)
+			std::printf("[Key Pressed] %lld\n", wparam);
+			if (key_dw_handler)
 			{
-				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+				key_dw_handler(static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
 			}
 		}
 		break;
 
-		case event_id_t::SysKeyDown:
-		case event_id_t::SysKeyUp:
+		case gl::device::KeyboardEventID::Released:
 		{
-			std::printf("[System Key] %lld\n", wparam);
-			if (key_handler)
+			std::printf("[Key Released] %lld\n", wparam);
+			if (key_up_handler)
 			{
-				key_handler(static_cast<device::io::KeyCode>(wparam), lparam);
+				key_up_handler(static_cast<device::io::KeyCode>(wparam));
 			}
 		}
 		break;
 
-		case event_id_t::Char:
-		case event_id_t::DeadChar:
+		case gl::device::KeyboardEventID::AltPressed:
 		{
-			std::printf("[Char] %lld\n", wparam);
-			if (char_handler)
+			std::printf("[System Key Pressed] %lld\n", wparam);
+			if (sys_dw_handler)
 			{
-				char_handler(static_cast<char32_t>(wparam), lparam);
+				sys_dw_handler(static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
 			}
 		}
 		break;
 
-		case event_id_t::SysChar:
-		case event_id_t::SysDeadChar:
+		case gl::device::KeyboardEventID::AltReleased:
 		{
-			std::printf("[System Char] %lld\n", wparam);
-			if (char_handler)
+			std::printf("[System Key Released] %lld\n", wparam);
+			if (sys_up_handler)
 			{
-				char_handler(static_cast<char32_t>(wparam), lparam);
+				sys_up_handler(static_cast<device::io::KeyCode>(wparam));
+			}
+		}
+		break;
+
+		case gl::device::KeyboardEventID::CharPressed:
+		case gl::device::KeyboardEventID::AltCharPressed:
+		{
+			std::printf("[Chr Pressed] %lld\n", wparam);
+			if (chr_dw_handler)
+			{
+				chr_dw_handler(static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		break;
+
+		case gl::device::KeyboardEventID::CharReleased:
+		case gl::device::KeyboardEventID::AltCharReleased:
+		{
+			std::printf("[Chr Released] %lld\n", wparam);
+			if (chr_up_handler)
+			{
+				chr_up_handler(static_cast<char32_t>(wparam), lparam);
 			}
 		}
 		break;
