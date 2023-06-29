@@ -22,7 +22,7 @@ export namespace gl::device
 			: winrt::Windows::UI::Color(a, r, g, b)
 		{}
 
-		constexpr Colour(RawColour rgb) noexcept
+		constexpr Colour(const RawColour& rgb) noexcept
 			: winrt::Windows::UI::Color(GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
 		{}
 
@@ -32,10 +32,29 @@ export namespace gl::device
 			return MakeRawColor(R, G, B);
 		}
 
+		constexpr Colour& operator=(const RawColour& color) noexcept
+		{
+			auto a = Colour(color);
+			return *this;
+		}
+
 		[[nodiscard]]
 		inline friend constexpr bool IsColorBright(const Colour& col) noexcept
 		{
 			return 8 * 128 < static_cast<int>(5 * col.G + 2 * col.R + col.B);
+		}
+
+		constexpr void swap(Colour& other) noexcept
+		{
+			std::swap(A, other.A);
+			std::swap(R, other.R);
+			std::swap(G, other.G);
+			std::swap(B, other.B);
+		}
+
+		inline friend constexpr void swap(Colour& lhs, Colour& rhs) noexcept
+		{
+			lhs.swap(rhs);
 		}
 
 		constexpr Colour(const Colour&) noexcept = default;
