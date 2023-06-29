@@ -185,6 +185,7 @@
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="DeviceBrush.ixx" />
     <ClCompile Include="DeviceClass.ixx" />
+    <ClCompile Include="DeviceColour.cpp" />
     <ClCompile Include="DeviceColour.ixx" />
     <ClCompile Include="DeviceContext.ixx" />
     <ClCompile Include="DeviceCoroutine.ixx" />
