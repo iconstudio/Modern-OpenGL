@@ -8,9 +8,14 @@ using namespace winrt::Windows::UI::ViewManagement;
 
 namespace gl::display
 {
+	using DisplayProperty = winrt::Windows::UI::ViewManagement::UISettings;
+
+	[[nodiscard]]
+	DisplayProperty AcquireSettings() noexcept;
+
 	bool IsDimmingMode()
 	{
-		UISettings settings = UISettings();
+		DisplayProperty settings = AcquireSettings();
 		//const device::Colour col_a_0 = settings.GetColorValue(UIColorType::Accent);
 		//const device::Colour col_a_1 = settings.GetColorValue(UIColorType::AccentDark1);
 		//const device::Colour col_a_2 = settings.GetColorValue(UIColorType::AccentDark2);
@@ -23,13 +28,16 @@ namespace gl::display
 
 		if (device::IsColorBright(col_fg))
 		{
-			//util::Println("Dark Mode");
 			return true;
 		}
 		else
 		{
-			//util::Println("Light Mode");
 			return false;
 		}
+	}
+
+	DisplayProperty AcquireSettings() noexcept
+	{
+		return {};
 	}
 }
