@@ -79,7 +79,7 @@ namespace gl::device
 
 	export template<ColoredComponent Target>
 		[[nodiscard]]
-	inline const NativeColorBrush&
+	const NativeColorBrush&
 		GetComponentColor()
 		noexcept(COLOR_WINDOW <= static_cast<int>(Target) && static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{
@@ -87,9 +87,31 @@ namespace gl::device
 		return stock.myBrush;
 	}
 
-	export inline const NativeColorBrush&
+	export const NativeColorBrush&
 		MakeDefaultComponentColor() noexcept
 	{
 		return GetComponentColor<colored_components::Background>();
+	}
+
+	[[nodiscard]]
+	export NativeColorBrush MakeNativeBrush(const RawColour& color) noexcept
+	{
+		return ::CreateSolidBrush(color);
+	}
+
+	export NativeColorBrush MakeNativeBrush(RawColour&& color) noexcept
+	{
+		return ::CreateSolidBrush(std::move(color));
+	}
+
+	[[nodiscard]]
+	export NativeColorBrush MakeNativePatternBrush(const HBITMAP& pattern_img) noexcept
+	{
+		return ::CreatePatternBrush(pattern_img);
+	}
+
+	export bool DeleteNativeBrush(NativeColorBrush& brush) noexcept
+	{
+		return 0 != ::DeleteObject(brush);
 	}
 }
