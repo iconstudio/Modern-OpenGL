@@ -1,10 +1,14 @@
+module;
+//#include "Internal.hpp"
 export module Glib.Device.IO.Keyboard:KeyCodes;
 
 export namespace gl::device::io
 {
 	enum class [[nodiscard]] KeyCode : int
 	{
-		BACKSPACE = 0x0008, TAB = 0x0009,
+		Shift = 0x10, Control = 0x11, Alt = 0x12,
+		BackSpace = 0x0008, Tab = 0x0009,
+		Enter = 0x000D, Escape = 0x001B,
 		Space = ' ',
 		Exclamation = '!', DoubleQuote = '"', Hash = '#', Dollar = '$',
 		Percent = '%', Ampersand = '&', Quote = '\'',
@@ -39,13 +43,23 @@ export namespace gl::device::io
 		y = 'y', z = 'z',
 		LBrace = '{', Pipe = '|', RBrace = '}', Tilde = '~',
 
-		F1 = 0x0001, F2 = 0x0002, F3 = 0x0003,
-		F4 = 0x0004, F5 = 0x0005, F6 = 0x0006,
-		F7 = 0x0007, F8 = 0x0008, F9 = 0x0009,
-		F10 = 0x000A, F11 = 0x000B, F12 = 0x000C,
-		LEFT = 0x0064, UP = 0x0065, RIGHT = 0x0066, DOWN = 0x0067,
-		PAGE_UP = 0x0068, PAGE_DOWN = 0x0069,
-		HOME = 0x006A, END = 0x006B,
-		INSERT = 0x006C,
+		PageUp = 0x21, PageDown = 0x22,
+		End = 0x23, Home = 0x24,
+		Left = 0x25, Up = 0x26, Right = 0x27, Down = 0x28,
+		Snapshot = 0x2C, PrintScreen = 0x2C,
+		Insert = 0x2D, Delete = 0x2E,
+
+		F1 = 0x70, F2 = 0x71, F3 = 0x72,
+		F4 = 0x73, F5 = 0x74, F6 = 0x75,
+		F7 = 0x76, F8 = 0x77, F9 = 0x78,
+		F10 = 0x79, F11 = 0x7A, F12 = 0x7B,
+		F13 = 0x7C, F14 = 0x7D, F15 = 0x7E,
+		F16 = 0x7F, F17 = 0x80, F18 = 0x81,
+		F19 = 0x82, F20 = 0x83, F21 = 0x84,
+		F22 = 0x85, F23 = 0x86, F24 = 0x87,
+
+#ifdef _WIN32
+		System = 0x5B,
+#endif
 	};
 }
