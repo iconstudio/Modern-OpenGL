@@ -84,7 +84,7 @@ namespace gl::device
 
 		[[nodiscard]]
 		inline friend constexpr
-		std::strong_ordering
+			std::strong_ordering
 			operator<=>(const EventIDWrapper& self, const EventID& event_id) noexcept
 		{
 			return static_cast<DeviceCommandIDType>(self.id) <=> static_cast<DeviceCommandIDType>(event_id);
@@ -119,59 +119,63 @@ namespace gl::device
 
 		EventIDWrapper& operator=(EventID) = delete;
 
-		EventID id;
+		EventID id = EventID::None;
 	};
 
 	export struct [[nodiscard]] KeyboardEventID : public EventIDWrapper
 	{
-		static constexpr EventID GUARD_FIRST = EventID{ WM_KEYFIRST };
-		static constexpr EventID GUARD_LAST = EventID{ WM_KEYLAST };
+		static inline constexpr EventID GUARD_FIRST = EventID{ WM_KEYFIRST };
+		static inline constexpr EventID GUARD_LAST = EventID{ WM_KEYLAST };
 
-		static constexpr EventID Pressed = EventID{ WM_KEYDOWN };
-		static constexpr EventID Released = EventID{ WM_KEYUP };
-		static constexpr EventID CharPressed = EventID{ WM_CHAR };
-		static constexpr EventID CharReleased = EventID{ WM_DEADCHAR };
-
-		static constexpr EventID AltPressed = EventID{ WM_SYSKEYDOWN };
-		static constexpr EventID AltReleased = EventID{ WM_SYSKEYUP };
-		static constexpr EventID AltCharPressed = EventID{ WM_SYSCHAR };
-		static constexpr EventID AltCharReleased = EventID{ WM_SYSDEADCHAR };
-
-		constexpr KeyboardEventID(const KeyboardEventID&) noexcept = default;
-		constexpr KeyboardEventID(KeyboardEventID&&) noexcept = default;
-		constexpr KeyboardEventID& operator=(const KeyboardEventID&) noexcept = default;
-		constexpr KeyboardEventID& operator=(KeyboardEventID&&) noexcept = default;
 		KeyboardEventID& operator=(EventID) = delete;
+
+	private:
+		using EventIDWrapper::EventIDWrapper;
 	};
+
+	export namespace kb
+	{
+		inline constexpr KeyboardEventID Pressed{ EventID::KeyDown };
+		inline constexpr KeyboardEventID Released{ EventID::KeyUp };
+		inline constexpr KeyboardEventID CharPressed{ EventID::Char };
+		inline constexpr KeyboardEventID CharReleased{ EventID::DeadChar };
+
+		inline constexpr KeyboardEventID AltPressed{ EventID::SysKeyDown };
+		inline constexpr KeyboardEventID AltReleased{ EventID::SysKeyUp };
+		inline constexpr KeyboardEventID AltCharPressed{ EventID::SysChar };
+		inline constexpr KeyboardEventID AltCharReleased{ EventID::SysDeadChar };
+	}
 
 	export struct [[nodiscard]] MouseEventID : public EventIDWrapper
 	{
-		static constexpr EventID GUARD_FIRST = EventID{ WM_MOUSEFIRST };
-		static constexpr EventID GUARD_LAST = EventID{ WM_MOUSELAST };
+		static inline constexpr EventID GUARD_FIRST = EventID{ WM_MOUSEFIRST };
+		static inline constexpr EventID GUARD_LAST = EventID{ WM_MOUSELAST };
 
-		static constexpr EventID Moved = EventID{ WM_MOUSEMOVE };
-		static constexpr EventID Covered = EventID{ WM_MOUSEHOVER };
-		static constexpr EventID Uncovered = EventID{ WM_MOUSELEAVE };
-
-		static constexpr EventID VtWheel = EventID{ WM_MOUSEWHEEL };
-		static constexpr EventID HvWheel = EventID{ WM_MOUSEHWHEEL };
-
-		static constexpr EventID LtPressed = EventID{ WM_LBUTTONDOWN };
-		static constexpr EventID LtReleased = EventID{ WM_LBUTTONUP };
-		static constexpr EventID LtDoubleClicked = EventID{ WM_LBUTTONDBLCLK };
-
-		static constexpr EventID RtPressed = EventID{ WM_RBUTTONDOWN };
-		static constexpr EventID RtReleased = EventID{ WM_RBUTTONUP };
-		static constexpr EventID RtDoubleClicked = EventID{ WM_RBUTTONDBLCLK };
-
-		static constexpr EventID MdPressed = EventID{ WM_MBUTTONDOWN };
-		static constexpr EventID MdReleased = EventID{ WM_MBUTTONUP };
-		static constexpr EventID MdDoubleClicked = EventID{ WM_MBUTTONDBLCLK };
-
-		constexpr MouseEventID(const MouseEventID&) noexcept = default;
-		constexpr MouseEventID(MouseEventID&&) noexcept = default;
-		constexpr MouseEventID& operator=(const MouseEventID&) noexcept = default;
-		constexpr MouseEventID& operator=(MouseEventID&&) noexcept = default;
 		MouseEventID& operator=(EventID) = delete;
+
+	private:
+		using EventIDWrapper::EventIDWrapper;
+	};
+
+	export namespace mb
+	{
+		inline constexpr MouseEventID Moved{ EventID::MouseMove };
+		inline constexpr MouseEventID Covered{ EventID::MouseHover };
+		inline constexpr MouseEventID Uncovered{ EventID::MouseLeave };
+
+		inline constexpr MouseEventID VtWheel{ EventID::MouseWheel };
+		inline constexpr MouseEventID HvWheel{ EventID::MouseHWheel };
+
+		inline constexpr MouseEventID LtPressed{ EventID::LButtonDown };
+		inline constexpr MouseEventID LtReleased{ EventID::LButtonUp };
+		inline constexpr MouseEventID LtDoubleClicked{ EventID::LButtonDoubleClick };
+
+		inline constexpr MouseEventID RtPressed{ EventID::RButtonDown };
+		inline constexpr MouseEventID RtReleased{ EventID::RButtonUp };
+		inline constexpr MouseEventID RtDoubleClicked{ EventID::RButtonDoubleClick };
+
+		inline constexpr MouseEventID MdPressed{ EventID::MButtonDown };
+		inline constexpr MouseEventID MdReleased{ EventID::MButtonUp };
+		inline constexpr MouseEventID MdDoubleClicked{ EventID::MButtonDoubleClick };
 	};
 }

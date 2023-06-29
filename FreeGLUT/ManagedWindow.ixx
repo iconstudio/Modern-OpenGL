@@ -476,7 +476,7 @@ noexcept
 
 	switch (msg)
 	{
-		case gl::device::KeyboardEventID::Pressed:
+		case gl::device::kb::Pressed:
 		{
 			std::printf("[Key Pressed] %lld\n", wparam);
 			if (key_dw_handler)
@@ -486,7 +486,7 @@ noexcept
 		}
 		break;
 
-		case gl::device::KeyboardEventID::Released:
+		case gl::device::kb::Released:
 		{
 			std::printf("[Key Released] %lld\n", wparam);
 			if (key_up_handler)
@@ -496,7 +496,7 @@ noexcept
 		}
 		break;
 
-		case gl::device::KeyboardEventID::AltPressed:
+		case gl::device::kb::AltPressed:
 		{
 			std::printf("[System Key Pressed] %lld\n", wparam);
 			if (sys_dw_handler)
@@ -506,7 +506,7 @@ noexcept
 		}
 		break;
 
-		case gl::device::KeyboardEventID::AltReleased:
+		case gl::device::kb::AltReleased:
 		{
 			std::printf("[System Key Released] %lld\n", wparam);
 			if (sys_up_handler)
@@ -516,8 +516,8 @@ noexcept
 		}
 		break;
 
-		case gl::device::KeyboardEventID::CharPressed:
-		case gl::device::KeyboardEventID::AltCharPressed:
+		case gl::device::kb::CharPressed:
+		case gl::device::kb::AltCharPressed:
 		{
 			std::printf("[Chr Pressed] %lld\n", wparam);
 			if (chr_dw_handler)
@@ -527,14 +527,19 @@ noexcept
 		}
 		break;
 
-		case gl::device::KeyboardEventID::CharReleased:
-		case gl::device::KeyboardEventID::AltCharReleased:
+		case gl::device::kb::CharReleased:
+		case gl::device::kb::AltCharReleased:
 		{
 			std::printf("[Chr Released] %lld\n", wparam);
 			if (chr_up_handler)
 			{
 				chr_up_handler(*self, static_cast<char32_t>(wparam), lparam);
 			}
+		}
+		break;
+
+		case gl::device::mb::Covered:
+		{
 		}
 		break;
 
