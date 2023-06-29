@@ -2,6 +2,9 @@ module;
 #include <winrt/windows.ui.composition.h>
 #include <winrt/Windows.ui.viewmanagement.h>
 module Glib.Device.Display;
+import Glib.Device.Colour;
+
+using namespace winrt::Windows::UI::ViewManagement;
 
 namespace gl::device
 {
@@ -9,8 +12,6 @@ namespace gl::device
 	{
 		void FindDimmingMode()
 		{
-			using namespace winrt::Windows::UI::ViewManagement;
-
 			UISettings settings = UISettings();
 			const Colour col_a_0 = settings.GetColorValue(UIColorType::Accent);
 			const Colour col_a_1 = settings.GetColorValue(UIColorType::AccentDark1);
