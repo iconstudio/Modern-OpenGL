@@ -11,7 +11,7 @@ import Glib.Device.Handle;
 import Glib.Window;
 import Glib.Window.ManagedWindow;
 
-static constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
+static inline constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
 
 int main(const int& argc, const char** const& argv)
 {

@@ -58,7 +58,7 @@ namespace gl::device
 
 		DWORD GetCurrentTextScaleFactor() const
 		{
-			static constexpr wchar_t hKey[] = L"HKCU\\SOFTWARE\\Microsoft\\Accessibility";
+			static inline constexpr wchar_t hKey[] = L"HKCU\\SOFTWARE\\Microsoft\\Accessibility";
 			static HANDLE hEvent = NULL;
 
 			if (hKey)

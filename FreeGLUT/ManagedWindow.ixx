@@ -48,8 +48,8 @@ export namespace gl::window
 		using coro_t = Coroutine<ID>;
 
 	public:
-		static constexpr device::EventID DefaultEventID = device::EventID::None;
-		static constexpr device::Event DefaultEvent = {};
+		static inline constexpr device::EventID DefaultEventID = device::EventID::None;
+		static inline constexpr device::Event DefaultEvent = {};
 
 		using event_id_t = device::EventID;
 		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);

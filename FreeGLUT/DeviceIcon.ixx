@@ -15,16 +15,16 @@ export namespace gl::device
 	class IconAPI
 	{
 	public:
-		static constexpr IconByte SampleZero01x01[] = { 0x00 };
-		static constexpr IconByte SampleFill01x01[] = { 0xFF };
-		static constexpr IconByte SampleZero16x16[] =
+		static inline constexpr IconByte SampleZero01x01[] = { 0x00 };
+		static inline constexpr IconByte SampleFill01x01[] = { 0xFF };
+		static inline constexpr IconByte SampleZero16x16[] =
 		{
 			0x00, 0x00, 0x00, 0x00, // 0xF, 0xF, 0xF, 0xF (4 times)
 			0x00, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x00, 0x00,
 			0x00, 0x00, 0x00, 0x00,
 		};
-		static constexpr IconByte SampleFill16x16[] =
+		static inline constexpr IconByte SampleFill16x16[] =
 		{
 			0xFF, 0xFF, 0xFF, 0xFF, // 0xF, 0xF, 0xF, 0xF (4 times)
 			0xFF, 0xFF, 0xFF, 0xFF,
