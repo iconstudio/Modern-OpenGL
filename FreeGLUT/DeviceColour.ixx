@@ -8,7 +8,8 @@ import <type_traits>;
 
 export namespace gl::device
 {
-	using RawColour = COLORREF;
+	// DWORD
+	using RawColour = unsigned long;
 
 	extern "C" namespace native_colors
 	{
