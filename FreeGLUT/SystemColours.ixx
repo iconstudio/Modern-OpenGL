@@ -8,7 +8,7 @@ import <type_traits>;
 
 namespace gl::device
 {
-	using NativeColorBrush = HBRUSH;
+	export using NativeColorBrush = HBRUSH;
 
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
@@ -86,7 +86,7 @@ namespace gl::device
 		return stock.myBrush;
 	}
 
-	inline const NativeColorBrush&
+	export inline const NativeColorBrush&
 		MakeDefaultComponentColor() noexcept
 	{
 		return GetComponentColor<colored_components::Background>();
