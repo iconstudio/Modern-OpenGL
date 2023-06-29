@@ -45,7 +45,7 @@ namespace gl::device
 #pragma endregion
 	};
 
-	export extern "C" namespace system_components
+	export extern "C" namespace colored_components
 	{
 		inline constexpr ColoredComponent Text = ColoredComponent::Text;
 		inline constexpr ColoredComponent Background = ColoredComponent::Window;
@@ -84,5 +84,11 @@ namespace gl::device
 	{
 		static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
 		return stock.myBrush;
+	}
+
+	inline const NativeColorBrush&
+		MakeDefaultComponentColor() noexcept
+	{
+		return GetComponentColor<colored_components::Background>();
 	}
 }
