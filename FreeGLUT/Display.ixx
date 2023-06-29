@@ -1,18 +1,15 @@
 module;
 #include "Internal.hpp"
-
 #undef USER_DEFAULT_SCREEN_DPI
-export module Glib.Device.Display;
+
+export module Glib.Display;
 import <utility>;
 import Utility;
 export import Glib.Device.Colour;
 
-namespace gl::device
+namespace gl::display
 {
-	export namespace dim
-	{
-		void FindDimmingMode();
-	}
+	export bool IsDimmingMode();
 
 	export namespace dpi
 	{
