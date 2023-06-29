@@ -23,6 +23,7 @@ import Utility.Concurrency.Thread;
 import Glib.Rect;
 import Glib.Window;
 import Glib.Device.Event;
+import Glib.Device.Brush;
 import Glib.Device.Utility;
 export import Glib.Window.Coroutine;
 export import Glib.Device.IO;
@@ -440,7 +441,7 @@ export namespace gl::window
 	WindowProperty CreatePropertyEx(IconType&& icon
 		, IconType&& small_icon
 		, CursorType&& cursor
-		, const ::HBRUSH& background
+		, const device::ColorBrush& background
 		, const wchar_t* const& menu_name
 	) noexcept
 	{
@@ -451,6 +452,80 @@ export namespace gl::window
 			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
 			, std::forward<CursorType>(cursor)
 			, background
+			, menu_name);
+	}
+
+	template<util::fixed_wstring NID, typename IconType, typename CursorType>
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, device::ColorBrush&& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker
+			, class_name_view.data()
+			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, std::move(background)
+			, menu_name);
+	}
+
+	template<util::fixed_wstring NID, typename IconType, typename CursorType>
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const device::NativeColorBrush& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker
+			, class_name_view.data()
+			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, background
+			, menu_name);
+	}
+
+	template<util::fixed_wstring NID, typename IconType, typename CursorType>
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, device::NativeColorBrush&& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker
+			, class_name_view.data()
+			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, std::move(background)
+			, menu_name);
+	}
+
+	template<util::fixed_wstring NID, typename IconType, typename CursorType>
+	[[nodiscard]]
+	WindowProperty CreatePropertyEx(IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+
+		return gl::window::CreateProperty(device::GetProcessInstance(), ManagedWindow<NID>::MainWorker
+			, class_name_view.data()
+			, std::forward<IconType>(icon), std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
 			, menu_name);
 	}
 #pragma endregion
