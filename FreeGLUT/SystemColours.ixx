@@ -62,16 +62,27 @@ namespace gl::device
 	template<ColoredComponent Target>
 	struct InternalCColor
 	{
-		NativeColorBrush stock;
+		constexpr InternalCColor() noexcept = default;
+		constexpr ~InternalCColor() noexcept = default;
+
+		constexpr InternalCColor(const NativeColorBrush& brush) noexcept
+			: myBrush(brush)
+		{}
+
+		constexpr InternalCColor(NativeColorBrush&& brush) noexcept
+			: myBrush(std::move(brush))
+		{}
+
+		NativeColorBrush myBrush;
 	};
 
 	export template<ColoredComponent Target>
 	[[nodiscard]]
 	inline const NativeColorBrush&
 		GetComponentColor()
-		noexcept(COLOR_WINDOW <= static_cast<int>(Target) <= COLOR_HOTLIGHT)
+		noexcept(COLOR_WINDOW <= static_cast<int>(Target) && static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{
 		static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
-		return stock;
+		return stock.myBrush;
 	}
 }
