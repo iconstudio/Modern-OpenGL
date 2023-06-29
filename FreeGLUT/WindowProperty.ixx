@@ -133,7 +133,7 @@ export extern "C++" namespace gl::window
 		, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept
 	{
-		static const HBRUSH default_color = reinterpret_cast<HBRUSH>(COLOR_WINDOW);
+		static const HBRUSH bk_color = GetSysColorBrush(COLOR_WINDOW);
 
 		return WindowProperty
 		{
@@ -143,7 +143,7 @@ export extern "C++" namespace gl::window
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
 			, nullptr //, LoadCursorW(hinst, IDC_ARROW)
-			, default_color
+			, bk_color
 			, nullptr
 		};
 	}
