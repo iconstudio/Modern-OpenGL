@@ -608,7 +608,10 @@ noexcept
 		{
 			if (self)
 			{
-				self->AlertEvent(msg, wparam, lparam);
+				if (self->AlertEvent(msg, wparam, lparam))
+				{
+					break;
+				}
 			}
 
 			return detail::DefaultWindowsProcedure(hwnd, id, wparam, lparam);
