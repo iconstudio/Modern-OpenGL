@@ -4,6 +4,7 @@ module;
 export module Glib.Device.Handle;
 import <type_traits>;
 import Glib.Device.Event.Handler;
+export import Glib.Device.IO;
 
 export namespace gl::device
 {
