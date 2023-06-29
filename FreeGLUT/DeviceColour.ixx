@@ -34,14 +34,16 @@ export namespace gl::device
 
 		constexpr Colour& operator=(const RawColour& color) noexcept
 		{
-			auto a = Colour(color);
+			swap(Colour{ color });
+
 			return *this;
 		}
 
-		[[nodiscard]]
-		inline friend constexpr bool IsColorBright(const Colour& col) noexcept
+		constexpr Colour& operator=(RawColour&& color) noexcept
 		{
-			return 8 * 128 < static_cast<int>(5 * col.G + 2 * col.R + col.B);
+			swap(Colour{ std::move(color) });
+
+			return *this;
 		}
 
 		constexpr void swap(Colour& other) noexcept
@@ -52,9 +54,23 @@ export namespace gl::device
 			std::swap(B, other.B);
 		}
 
+		constexpr void swap(const Colour&& other) noexcept
+		{
+			A = std::move(other.A);
+			R = std::move(other.R);
+			G = std::move(other.G);
+			B = std::move(other.B);
+		}
+
 		inline friend constexpr void swap(Colour& lhs, Colour& rhs) noexcept
 		{
 			lhs.swap(rhs);
+		}
+
+		[[nodiscard]]
+		inline friend constexpr bool IsColorBright(const Colour& col) noexcept
+		{
+			return 8 * 128 < static_cast<int>(5 * col.G + 2 * col.R + col.B);
 		}
 
 		constexpr Colour(const Colour&) noexcept = default;
