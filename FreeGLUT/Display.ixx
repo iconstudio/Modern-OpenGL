@@ -4,11 +4,8 @@ module;
 #undef USER_DEFAULT_SCREEN_DPI
 export module Glib.Device.Display;
 import <utility>;
-import <numeric>;
-import <limits>;
 import Utility;
-import Utility.Traits;
-import Glib.Device.Colour;
+export import Glib.Device.Colour;
 
 namespace gl::device
 {
