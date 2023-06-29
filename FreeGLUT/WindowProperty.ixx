@@ -133,7 +133,7 @@ export extern "C++" namespace gl::window
 		, WindowProcedure procedure, const wchar_t* const& class_name
 	) noexcept
 	{
-		static const HBRUSH default_color = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+		static const HBRUSH default_color = reinterpret_cast<HBRUSH>(COLOR_WINDOW);
 
 		return WindowProperty
 		{
