@@ -70,6 +70,14 @@ namespace gl::device
 			::DeleteObject(myBrush);
 		}
 
+		explicit ColorBrush(const ColoredComponent& component) noexcept
+			: myBrush(::GetSysColorBrush(static_cast<int>(component)))
+		{}
+
+		explicit ColorBrush(ColoredComponent&& component) noexcept
+			: myBrush(::GetSysColorBrush(static_cast<int>(component)))
+		{}
+
 		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept
 			: myBrush(brush)
 		{}
@@ -97,7 +105,7 @@ namespace gl::device
 		}
 
 		[[nodiscard]]
-		constexpr  NativeColorBrush&& GetHandle() && noexcept
+		constexpr NativeColorBrush&& GetHandle() && noexcept
 		{
 			return std::move(myBrush);
 		}
