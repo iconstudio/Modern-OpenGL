@@ -148,5 +148,8 @@
     <ClCompile Include="DeviceBrush.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="RawColour.ixx">
+      <Filter>헤더 파일\Device\Render</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
