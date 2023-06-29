@@ -5,34 +5,53 @@ module;
 
 export module Glib.Device.Colour;
 import Glib.Device.Utility;
+import <cstdint>;
 import <type_traits>;
+
+export using winrt::Windows::UI::operator==;
 
 export namespace gl::device
 {
 	// DWORD
 	using RawColour = unsigned long;
+	// A, R, G, B
 	using Colour = winrt::Windows::UI::Color;
 
-	extern "C" namespace native_colors
+	[[nodiscard]]
+	constexpr Colour
+		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b)
+		noexcept
 	{
-		inline constexpr RawColour COLOR_BLACK = RGB(0, 0, 0);
-		inline constexpr RawColour COLOR_WHITE = RGB(255, 255, 255);
-		inline constexpr RawColour COLOR_GREY = RGB(128, 128, 128);
-		inline constexpr RawColour COLOR_LTGREY = RGB(192, 192, 192);
-		inline constexpr RawColour COLOR_DKGREY = RGB(64, 64, 64);
-		inline constexpr RawColour COLOR_SEMIBLACK = RGB(224, 224, 224);
+		return Colour{ 0xFFU, r, g, b };
+	}
 
-		inline constexpr RawColour COLOR_SALMON = RGB(255, 128, 128);
-		inline constexpr RawColour COLOR_RED = RGB(255, 0, 0);
-		inline constexpr RawColour COLOR_MAROON = RGB(128, 0, 0);
-		inline constexpr RawColour COLOR_LIME = RGB(0, 255, 0);
-		inline constexpr RawColour COLOR_GREEN = RGB(0, 128, 0);
-		inline constexpr RawColour COLOR_BLUE = RGB(0, 0, 255);
-		inline constexpr RawColour COLOR_NAVY = RGB(20, 18, 149);
-		inline constexpr RawColour COLOR_ORANGE = RGB(255, 128, 0);
-		inline constexpr RawColour COLOR_YELLOW = RGB(255, 255, 0);
-		inline constexpr RawColour COLOR_GOLD = RGB(223, 130, 20);
-#undef RGB
+	extern "C" namespace colors
+	{
+
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t GetRed(const Colour& argb) noexcept
+	{
+		return argb.R;
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t GetGreen(const Colour& argb) noexcept
+	{
+		return argb.G;
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t GetBlue(const Colour& argb) noexcept
+	{
+		return argb.B;
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t GetAlpha(const Colour& argb) noexcept
+	{
+		return argb.A;
 	}
 
 	[[nodiscard]]
@@ -49,6 +68,29 @@ export namespace gl::device
 		noexcept
 	{
 		return (r | static_cast<unsigned int>(g << 8U)) | (b << 16U);
+	}
+
+	extern "C" namespace native_colors
+	{
+		inline constexpr RawColour COLOR_WHITE = MakeRawColor(255U, 255U, 255U);
+		inline constexpr RawColour COLOR_CLOUD = MakeRawColor(224U, 224U, 224U);
+		inline constexpr RawColour COLOR_LTGREY = MakeRawColor(192U, 192U, 192U);
+		inline constexpr RawColour COLOR_GREY = MakeRawColor(128U, 128U, 128U);
+		inline constexpr RawColour COLOR_DKGREY = MakeRawColor(64U, 64U, 64U);
+		inline constexpr RawColour COLOR_SEMIBLACK = MakeRawColor(32U, 32U, 32U);
+		inline constexpr RawColour COLOR_BLACK = MakeRawColor(0U, 0U, 0U);
+
+		inline constexpr RawColour COLOR_SALMON = MakeRawColor(255U, 128U, 128U);
+		inline constexpr RawColour COLOR_RED = MakeRawColor(255U, 0, 0);
+		inline constexpr RawColour COLOR_MAROON = MakeRawColor(128U, 0, 0);
+		inline constexpr RawColour COLOR_LIME = MakeRawColor(0, 255U, 0);
+		inline constexpr RawColour COLOR_GREEN = MakeRawColor(0, 128U, 0);
+		inline constexpr RawColour COLOR_BLUE = MakeRawColor(0, 0, 255U);
+		inline constexpr RawColour COLOR_NAVY = MakeRawColor(20U, 18U, 149U);
+		inline constexpr RawColour COLOR_ORANGE = MakeRawColor(255U, 128U, 0);
+		inline constexpr RawColour COLOR_YELLOW = MakeRawColor(255U, 255U, 0);
+		inline constexpr RawColour COLOR_GOLD = MakeRawColor(223U, 130U, 20U);
+#undef RGB
 	}
 
 	[[nodiscard]]
