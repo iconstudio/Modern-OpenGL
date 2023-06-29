@@ -24,10 +24,12 @@ namespace gl::display
 		if (device::IsColorBright(col_fg))
 		{
 			//util::Println("Dark Mode");
+			return true;
 		}
 		else
 		{
 			//util::Println("Light Mode");
+			return false;
 		}
 	}
 }

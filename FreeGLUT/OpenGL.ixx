@@ -1,6 +1,7 @@
 export module Glib;
 export import Utility.FixedString;
 import Utility.Print;
+export import Glib.Display;
 export import Glib.DisplayModes;
 export import Glib.Device.Colour;
 import Glib.Window.ManagedWindow;
@@ -28,7 +29,7 @@ export namespace gl
 
 	void Start()
 	{
-		if (IsColorBright(col_fg))
+		if (display::IsDimmingMode())
 		{
 			util::Println("Dark Mode");
 		}
