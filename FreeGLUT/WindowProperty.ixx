@@ -49,19 +49,71 @@ export extern "C++" namespace gl::window
 		constexpr ~WindowProperty() noexcept = default;
 
 		[[nodiscard]]
-		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WindowProcedure procedure, const wchar_t* const& class_name
-		) noexcept;
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WindowProcedure procedure, const wchar_t* const& class_name) noexcept;
 
 		template<typename IconType, typename CursorType>
 		[[nodiscard]]
-		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst, WindowProcedure procedure
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
 			, const wchar_t* const& class_name
 			, IconType&& icon
 			, IconType&& small_icon
 			, CursorType&& cursor
-			, const ::HBRUSH& background
-			, const wchar_t* const& menu_name
-		) noexcept;
+			, const device::ColorBrush& background
+			, const wchar_t* const& menu_name) noexcept;
+
+		template<typename IconType, typename CursorType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
+			, const wchar_t* const& class_name
+			, IconType&& icon
+			, IconType&& small_icon
+			, CursorType&& cursor
+			, device::ColorBrush&& background
+			, const wchar_t* const& menu_name) noexcept;
+
+		template<typename IconType, typename CursorType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
+			, const wchar_t* const& class_name
+			, IconType&& icon
+			, IconType&& small_icon
+			, CursorType&& cursor
+			, const device::NativeColorBrush& background
+			, const wchar_t* const& menu_name) noexcept;
+
+		template<typename IconType, typename CursorType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
+			, const wchar_t* const& class_name
+			, IconType&& icon
+			, IconType&& small_icon
+			, CursorType&& cursor
+			, device::NativeColorBrush&& background
+			, const wchar_t* const& menu_name) noexcept;
+
+		template<device::ColoredComponent BkColorReference, typename IconType, typename CursorType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
+			, const wchar_t* const& class_name
+			, IconType&& icon
+			, IconType&& small_icon
+			, CursorType&& cursor
+			, const wchar_t* const& menu_name) noexcept;
+
+		template<typename IconType, typename CursorType>
+		[[nodiscard]]
+		friend WindowProperty CreateProperty(const device::ProcessInstance& hinst
+			, WindowProcedure procedure
+			, const wchar_t* const& class_name
+			, IconType&& icon
+			, IconType&& small_icon
+			, CursorType&& cursor
+			, const wchar_t* const& menu_name) noexcept;
 
 		inline bool Register() noexcept
 		{
