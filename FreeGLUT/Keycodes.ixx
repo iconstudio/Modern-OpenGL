@@ -1,14 +1,26 @@
 module;
-//#include "Internal.hpp"
+#include <windows.system.h>
 export module Glib.Device.IO.Keyboard:KeyCodes;
+
+using enum ABI::Windows::System::VirtualKey;
 
 export namespace gl::device::io
 {
 	enum class [[nodiscard]] KeyCode : int
 	{
-		Shift = 0x10, Control = 0x11, Alt = 0x12,
-		BackSpace = 0x0008, Tab = 0x0009,
-		Enter = 0x000D, Escape = 0x001B,
+		Shift = VirtualKey_Shift,
+		Control = VirtualKey_Control,
+		Alt = VirtualKey_Menu,
+
+		BackSpace = VirtualKey_Back,
+		Tab = VirtualKey_Tab,
+		Enter = VirtualKey_Enter,
+		Escape = VirtualKey_Escape,
+		Pause = VirtualKey_Pause,
+		CapitalLock = VirtualKey_CapitalLock,
+		System = VirtualKey_LeftWindows,
+		System2 = VirtualKey_RightWindows,
+
 		Space = ' ',
 		Exclamation = '!', DoubleQuote = '"', Hash = '#', Dollar = '$',
 		Percent = '%', Ampersand = '&', Quote = '\'',
@@ -43,23 +55,13 @@ export namespace gl::device::io
 		y = 'y', z = 'z',
 		LBrace = '{', Pipe = '|', RBrace = '}', Tilde = '~',
 
-		PageUp = 0x21, PageDown = 0x22,
-		End = 0x23, Home = 0x24,
-		Left = 0x25, Up = 0x26, Right = 0x27, Down = 0x28,
-		Snapshot = 0x2C, PrintScreen = 0x2C,
-		Insert = 0x2D, Delete = 0x2E,
+		PageUp = VirtualKey_PageUp, PageDown = VirtualKey_PageDown,
+		End = VirtualKey_End, Home = VirtualKey_Home,
+		Left = VirtualKey_Left, Up = VirtualKey_Up, Right = VirtualKey_Right, Down = VirtualKey_Down,
+		Snapshot = VirtualKey_Snapshot, PrintScreen = VirtualKey_Snapshot,
+		Insert = VirtualKey_Insert, Delete = VirtualKey_Delete,
 
-		F1 = 0x70, F2 = 0x71, F3 = 0x72,
-		F4 = 0x73, F5 = 0x74, F6 = 0x75,
-		F7 = 0x76, F8 = 0x77, F9 = 0x78,
-		F10 = 0x79, F11 = 0x7A, F12 = 0x7B,
-		F13 = 0x7C, F14 = 0x7D, F15 = 0x7E,
-		F16 = 0x7F, F17 = 0x80, F18 = 0x81,
-		F19 = 0x82, F20 = 0x83, F21 = 0x84,
-		F22 = 0x85, F23 = 0x86, F24 = 0x87,
-
-#ifdef _WIN32
-		System = 0x5B,
-#endif
+		F1 = VirtualKey_F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+		F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24,
 	};
 }

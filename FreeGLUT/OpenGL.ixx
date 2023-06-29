@@ -26,5 +26,12 @@ export namespace gl
 	void Initialize(const DisplayModes& mode, const int& w, const int& h) noexcept;
 	void Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept;
 
-	void Start();
+	void Start()
+	{
+		using ABI::Windows::System::VirtualKey_Snapshot;
+
+		auto settings = UISettings();
+
+		auto foreground = settings.GetColorValue(UIColorType::Foreground);
+	}
 }
