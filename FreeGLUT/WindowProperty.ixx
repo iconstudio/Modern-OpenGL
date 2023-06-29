@@ -265,4 +265,27 @@ export extern "C++" namespace gl::window
 			, menu_name
 		};
 	}
+
+	template<typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, device::MakeDefaultComponentColor()
+			, menu_name
+		};
+	}
 }
