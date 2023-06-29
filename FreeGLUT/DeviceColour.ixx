@@ -72,6 +72,12 @@ export namespace gl::device
 		return LOBYTE(rgb >> 16U);
 	}
 
+	[[nodiscard]]
+	constexpr bool IsColorBright(const RawColour& col) noexcept
+	{
+		return 8 * 128 < static_cast<int>(5 * GetGreen(col) + 2 * GetRed(col) + GetBlue(col));
+	}
+
 	// A, R, G, B
 	struct [[nodiscard]] Colour : public winrt::Windows::UI::Color
 	{
