@@ -3,14 +3,20 @@ module;
 
 #undef USER_DEFAULT_SCREEN_DPI
 export module Glib.Device.Display;
-import Utility;
-import Utility.Traits;
 import <utility>;
 import <numeric>;
 import <limits>;
+import Utility;
+import Utility.Traits;
+import Glib.Device.Colour;
 
 namespace gl::device
 {
+	export namespace dim
+	{
+		void FindDimmingMode();
+	}
+
 	export namespace dpi
 	{
 		constexpr UINT USER_DEFAULT_SCREEN_DPI = 96;
@@ -71,8 +77,8 @@ namespace gl::device
 				if (RegNotifyChangeKeyValue(hKey, FALSE, REG_NOTIFY_CHANGE_LAST_SET, this->hEvent, TRUE) == ERROR_SUCCESS)
 				{
 					return true;
-				}
-			}
+		}
+	}
 			else
 			{
 				if (RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft", 0, KEY_NOTIFY, &hKey) == ERROR_SUCCESS)
@@ -93,7 +99,7 @@ namespace gl::device
 			}
 			else
 				return 100;
-		}
+}
 #endif
 	}
 
