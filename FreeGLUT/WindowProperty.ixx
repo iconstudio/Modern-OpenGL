@@ -163,10 +163,34 @@ export extern "C++" namespace gl::window
 			hinst
 			, procedure
 			, class_name
-			, static_cast<IconType&&>(icon)
-			, static_cast<IconType&&>(small_icon)
-			, static_cast<CursorType&&>(cursor)
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
 			, background
+			, menu_name
+		};
+	}
+
+	template<typename IconType, typename CursorType>
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, const wchar_t* const& class_name
+		, IconType&& icon
+		, IconType&& small_icon
+		, CursorType&& cursor
+		, HBRUSH&& background
+		, const wchar_t* const& menu_name
+	) noexcept
+	{
+		return WindowProperty
+		{
+			hinst
+			, procedure
+			, class_name
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
+			, std::move(background)
 			, menu_name
 		};
 	}
@@ -186,9 +210,9 @@ export extern "C++" namespace gl::window
 			hinst
 			, procedure
 			, class_name
-			, static_cast<IconType&&>(icon)
-			, static_cast<IconType&&>(small_icon)
-			, static_cast<CursorType&&>(cursor)
+			, std::forward<IconType>(icon)
+			, std::forward<IconType>(small_icon)
+			, std::forward<CursorType>(cursor)
 			, device::GetComponentColor<BkColorReference>()
 			, menu_name
 		};
