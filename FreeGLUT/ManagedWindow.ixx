@@ -235,6 +235,14 @@ export namespace gl::window
 			return detail::IsMouseCaptured(underlying.GetHandle());
 		}
 
+		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept
+		{
+			if (is_first && code == device::io::KeyCode::F4)
+			{
+				self.underlying.SendCommand(event_id_t::Close);
+			}
+		}
+
 		Window underlying;
 		Rect myDimensions{};
 		WindowProcedure windowProcedureHandle = nullptr;
@@ -254,12 +262,7 @@ export namespace gl::window
 
 		KeyDownEventHandler keyDownHandler = nullptr;
 		KeyUpEventHandler keyUpHandler = nullptr;
-		SysKeyDownEventHandler sysDownHandler = [this](device::io::KeyCode code) {
-			if (code == device::io::KeyCode::F4)
-			{
-				underlying.SendCommand(event_id_t::Close);
-			}
-		};
+		SysKeyDownEventHandler sysDownHandler = DefaultSysKeyEvent;
 		SysKeyUpEventHandler sysUpHandler = nullptr;
 		CharDownEventHandler chrDownHandler = nullptr;
 		CharUpEventHandler chrUpHandler = nullptr;
