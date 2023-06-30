@@ -128,10 +128,7 @@ export namespace gl::window
 
 		void StartCoroutine(coro_t&& coroutine) noexcept
 		{
-			if (0 < myCoroutines.size())
-			{
-				myCoroutines.top()->Resume();
-			}
+			ResumeTopCoroutine();
 
 			myCoroutines.push(std::make_unique<coro_t>(std::move(coroutine)));
 		}
@@ -232,6 +229,14 @@ export namespace gl::window
 		bool IsMouseCaptured() const noexcept
 		{
 			return device::io::IsMouseCaptured(underlying.GetHandle());
+		}
+
+		void ResumeTopCoroutine() noexcept
+		{
+			if (0 < myCoroutines.size())
+			{
+				myCoroutines.top()->Resume();
+			}
 		}
 
 		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept
@@ -715,6 +720,11 @@ noexcept
 				if (self->AlertEvent(msg, wparam, lparam))
 				{
 					break;
+				}
+				else
+				{
+					self->ResumeTopCoroutine();
+					// will be resumed by yielder
 				}
 			}
 
