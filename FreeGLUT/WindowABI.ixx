@@ -10,53 +10,6 @@ export namespace gl::window::detail
 {
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
-	inline bool EnablePointingDevice() noexcept
-	{
-		return FALSE != ::EnableMouseInPointer(TRUE);
-	}
-
-	inline bool DisablePointingDevice() noexcept
-	{
-		return FALSE != ::EnableMouseInPointer(FALSE);
-	}
-
-	/// <summary>
-	/// Is support pen or touch input?
-	/// </summary>
-	[[nodiscard]]
-	inline bool IsPointingDeviceEnabled() noexcept
-	{
-		return FALSE != ::IsMouseInPointerEnabled();
-	}
-
-	/// <summary>
-	/// Only on the main thread
-	/// </summary>
-	void CaptureMouse(const HWND& handle) noexcept
-	{
-		::SetCapture(handle);
-	}
-
-	/// <summary>
-	/// Only on the main thread
-	/// </summary>
-	[[nodiscard]]
-	bool IsMouseCaptured(const HWND& handle) noexcept
-	{
-		return ::GetCapture() == handle;
-	}
-
-	/// <summary>
-	/// Only on the main thread
-	/// </summary>
-	void ResetMouseCapture(const HWND& handle) noexcept
-	{
-		if (IsMouseCaptured(handle))
-		{
-			::ReleaseCapture();
-		}
-	}
-
 	[[nodiscard]]
 	inline HWND__* CreateNativeWindow(const HINSTANCE& hinst
 		, const std::wstring_view& class_name
