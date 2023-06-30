@@ -15,9 +15,6 @@ export namespace gl::window
 	using util::coroutine::DeferredPromise;
 	using util::coroutine::RelaxedPromise;
 
-	template<util::fixed_wstring ID>
-	class ManagedWindow;
-
 	struct WaitForSeconds
 	{
 		constexpr WaitForSeconds(long long ms) noexcept
@@ -39,7 +36,6 @@ export namespace gl::window
 		long long milliSeconds;
 	};
 
-	template<util::fixed_wstring WindowID>
 	class [[nodiscard]] Coroutine
 	{
 	public:

@@ -44,7 +44,7 @@ export namespace gl::window
 
 		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = std::vector<unit_t>;
-		using coro_t = Coroutine<ID>;
+		using coro_t = gl::window::Coroutine;
 
 	public:
 		static inline constexpr device::EventID DefaultEventID = device::EventID::None;
