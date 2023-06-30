@@ -5,11 +5,21 @@ module;
 export module Glib.Display;
 import <utility>;
 import Utility;
+export import Glib.Rect;
 export import Glib.Device.Colour;
 
 namespace gl::display
 {
-	export bool IsDimmingMode();
+	export extern "C" namespace dpi
+	{
+		bool SetDPIAware(const bool& enable) noexcept;
+		[[nodiscard]] bool GetDPIAware() noexcept;
+		[[nodiscard]] unsigned int GetDPI() noexcept;
+		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return 96; }
+	}
+
+	export [[nodiscard]] Rect GetDisplaySize() noexcept;
+	export [[nodiscard]] bool IsDimmingMode();
 
 	export namespace dpi
 	{
