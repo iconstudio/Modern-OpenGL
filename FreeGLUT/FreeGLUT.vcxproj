@@ -99,6 +99,8 @@
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +123,8 @@
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,6 +147,8 @@
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,6 +171,8 @@
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
