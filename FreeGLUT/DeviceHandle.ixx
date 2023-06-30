@@ -70,16 +70,16 @@ export namespace gl::device
 			return EventAPI::Push(myHandle, static_cast<Event&&>(cmd));
 		}
 
-		inline bool SendCommand(const KeyboardEventID& id, const int& keycode, const long long& flags = 0) const
+		inline bool SendCommand(const EventID& id, const int& keycode, const long long& flags = 0) const
 			noexcept
 		{
-			return SendCommand(id.id, static_cast<unsigned long long>(keycode), flags);
+			return SendCommand(id, static_cast<unsigned long long>(keycode), flags);
 		}
 
-		inline bool SendCommand(const KeyboardEventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const
+		inline bool SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const
 			noexcept
 		{
-			return SendCommand(id.id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
+			return SendCommand(id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
 		}
 
 		inline bool UICommand(const int& cmd) noexcept

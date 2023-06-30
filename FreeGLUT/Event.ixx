@@ -4,6 +4,8 @@ module;
 export module Glib.Device.Event;
 import <compare>;
 export import :ID;
+export import :Implement;
+import :Special;
 
 export namespace gl::device
 {
