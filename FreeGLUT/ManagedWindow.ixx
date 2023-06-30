@@ -132,7 +132,7 @@ export namespace gl::window
 		{
 			ResumeTopCoroutine();
 
-			myCoroutines->push(std::make_unique<coro_t>(std::move(coroutine)));
+			myCoroutines->push(std::move(coroutine));
 		}
 
 		[[noreturn]]
