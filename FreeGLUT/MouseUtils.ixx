@@ -4,6 +4,34 @@ export module Glib.Device.IO.Mouse:Utils;
 
 export namespace gl::device::io
 {
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	void CaptureMouse(const HWND& handle) noexcept
+	{
+		::SetCapture(handle);
+	}
+
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	[[nodiscard]]
+	bool IsMouseCaptured(const HWND& handle) noexcept
+	{
+		return ::GetCapture() == handle;
+	}
+
+	/// <summary>
+	/// Only on the main thread
+	/// </summary>
+	void ResetMouseCapture(const HWND& handle) noexcept
+	{
+		if (IsMouseCaptured(handle))
+		{
+			::ReleaseCapture();
+		}
+	}
+
 	inline bool EnablePointingDevice() noexcept
 	{
 		return FALSE != ::EnableMouseInPointer(TRUE);
