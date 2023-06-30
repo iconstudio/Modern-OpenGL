@@ -1,4 +1,4 @@
-export module Glib.Device.Colour:RawColour;
+export module Glib.Device.Colour:Implement;
 import Glib.Device.Utility;
 
 export namespace gl::device
@@ -22,7 +22,7 @@ export namespace gl::device
 		return (r | static_cast<unsigned int>(g << 8U)) | (b << 16U);
 	}
 
-	extern "C" namespace native_colors
+	extern "C" namespace raw_colours
 	{
 		inline constexpr RawColour COLOR_WHITE = MakeRawColor(255U, 255U, 255U);
 		inline constexpr RawColour COLOR_CLOUD = MakeRawColor(224U, 224U, 224U);

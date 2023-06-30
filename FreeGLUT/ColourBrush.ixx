@@ -5,8 +5,6 @@ export module Glib.Device.Brush;
 import <type_traits>;
 export import Glib.Device.Colour;
 
-#define DEPRECATED_WIN10 [[deprecated("This colour has been deprecated since Windows 10.")]]
-
 namespace gl::device
 {
 	export using NativeColorBrush = ::HBRUSH__*;
@@ -21,29 +19,6 @@ namespace gl::device
 		HighlightText = COLOR_HIGHLIGHTTEXT,
 		Face3D = COLOR_3DFACE,
 		Hyperlink = COLOR_HOTLIGHT,
-
-#pragma region Deprecated
-		__ActiveBorder DEPRECATED_WIN10 = COLOR_ACTIVEBORDER,
-		__ActiveCaption DEPRECATED_WIN10 = COLOR_ACTIVECAPTION,
-		__AppWorkspace DEPRECATED_WIN10 = COLOR_APPWORKSPACE,
-		__Background DEPRECATED_WIN10 = COLOR_BACKGROUND,
-		__BtnFace DEPRECATED_WIN10 = COLOR_BTNFACE,
-		__BtnHighlight DEPRECATED_WIN10 = COLOR_BTNHIGHLIGHT,
-		__BtnShadow DEPRECATED_WIN10 = COLOR_BTNSHADOW,
-		__CaptionText DEPRECATED_WIN10 = COLOR_CAPTIONTEXT,
-		__Desktop DEPRECATED_WIN10 = COLOR_DESKTOP,
-		__GradientActiveCaption DEPRECATED_WIN10 = COLOR_GRADIENTACTIVECAPTION,
-		__GradientInactiveCaption DEPRECATED_WIN10 = COLOR_GRADIENTINACTIVECAPTION,
-		__InactiveBorder DEPRECATED_WIN10 = COLOR_INACTIVEBORDER,
-		__InactiveCaption DEPRECATED_WIN10 = COLOR_INACTIVECAPTION,
-		__InactiveCaptionText DEPRECATED_WIN10 = COLOR_INACTIVECAPTIONTEXT,
-		__InfoBk DEPRECATED_WIN10 = COLOR_INFOBK,
-		__InfoText DEPRECATED_WIN10 = COLOR_INFOTEXT,
-		__Menu DEPRECATED_WIN10 = COLOR_MENU,
-		__MenuText DEPRECATED_WIN10 = COLOR_MENUTEXT,
-		__Scrollbar DEPRECATED_WIN10 = COLOR_SCROLLBAR,
-		__WindowFrame DEPRECATED_WIN10 = COLOR_WINDOWFRAME,
-#pragma endregion
 	};
 
 	export extern "C" namespace colored_components
@@ -70,12 +45,12 @@ namespace gl::device
 			::DeleteObject(myBrush);
 		}
 
-		explicit ColorBrush(const ColoredComponent& component) noexcept
-			: myBrush(::GetSysColorBrush(static_cast<int>(component)))
+		explicit ColorBrush(const int& component_id) noexcept
+			: myBrush(::GetSysColorBrush(component_id))
 		{}
 
-		explicit ColorBrush(ColoredComponent&& component) noexcept
-			: myBrush(::GetSysColorBrush(static_cast<int>(component)))
+		explicit ColorBrush(int&& component_id) noexcept
+			: myBrush(::GetSysColorBrush(component_id))
 		{}
 
 		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept

@@ -6,7 +6,7 @@ module;
 export module Glib.Device.Colour;
 import <cstdint>;
 import <type_traits>;
-export import :RawColour;
+export import :Implement;
 
 export using winrt::Windows::UI::operator==;
 export using NativeColor = winrt::Windows::UI::Color;
@@ -133,70 +133,70 @@ export namespace gl::device
 
 	extern "C" namespace colors
 	{
-		inline constexpr Colour White = MakeColor(native_colors::COLOR_WHITE);
-		inline constexpr Colour Cloud = MakeColor(native_colors::COLOR_CLOUD);
-		inline constexpr Colour LightGray = MakeColor(native_colors::COLOR_LTGREY);
+		inline constexpr Colour White = MakeColor(raw_colours::COLOR_WHITE);
+		inline constexpr Colour Cloud = MakeColor(raw_colours::COLOR_CLOUD);
+		inline constexpr Colour LightGray = MakeColor(raw_colours::COLOR_LTGREY);
 		inline constexpr Colour LightGrey = LightGray;
-		inline constexpr Colour Silver = MakeColor(native_colors::COLOR_SILVER);
-		inline constexpr Colour Gray = MakeColor(native_colors::COLOR_GREY);
+		inline constexpr Colour Silver = MakeColor(raw_colours::COLOR_SILVER);
+		inline constexpr Colour Gray = MakeColor(raw_colours::COLOR_GREY);
 		inline constexpr Colour Grey = Gray;
 		inline constexpr Colour DimGray = MakeColor(105U, 105U, 105U);
 		inline constexpr Colour DimGrey = DimGray;
-		inline constexpr Colour DarkGray = MakeColor(native_colors::COLOR_DKGREY);
+		inline constexpr Colour DarkGray = MakeColor(raw_colours::COLOR_DKGREY);
 		inline constexpr Colour DarkGrey = DarkGray;
 		inline constexpr Colour LightSlateGray = MakeColor(119U, 136U, 153U);
 		inline constexpr Colour LightSlateGrey = LightSlateGray;
 		inline constexpr Colour SlateGray = MakeColor(112U, 128U, 144U);
 		inline constexpr Colour SlateGrey = SlateGray;
-		inline constexpr Colour SemiBlack = MakeColor(native_colors::COLOR_SEMIBLACK);
-		inline constexpr Colour Black = MakeColor(native_colors::COLOR_BLACK);
+		inline constexpr Colour SemiBlack = MakeColor(raw_colours::COLOR_SEMIBLACK);
+		inline constexpr Colour Black = MakeColor(raw_colours::COLOR_BLACK);
 
 		inline constexpr Colour Crimson = MakeColor(220U, 20U, 60U);
-		inline constexpr Colour Red = MakeColor(native_colors::COLOR_RED);
-		inline constexpr Colour Maroon = MakeColor(native_colors::COLOR_MAROON);
-		inline constexpr Colour Yellow = MakeColor(native_colors::COLOR_YELLOW);
-		inline constexpr Colour Gold = MakeColor(native_colors::COLOR_GOLD);
+		inline constexpr Colour Red = MakeColor(raw_colours::COLOR_RED);
+		inline constexpr Colour Maroon = MakeColor(raw_colours::COLOR_MAROON);
+		inline constexpr Colour Yellow = MakeColor(raw_colours::COLOR_YELLOW);
+		inline constexpr Colour Gold = MakeColor(raw_colours::COLOR_GOLD);
 
-		inline constexpr Colour Salmon = MakeColor(native_colors::COLOR_SALMON);
-		inline constexpr Colour Orange = MakeColor(native_colors::COLOR_ORANGE);
-		inline constexpr Colour Brown = MakeColor(native_colors::COLOR_BROWN);
+		inline constexpr Colour Salmon = MakeColor(raw_colours::COLOR_SALMON);
+		inline constexpr Colour Orange = MakeColor(raw_colours::COLOR_ORANGE);
+		inline constexpr Colour Brown = MakeColor(raw_colours::COLOR_BROWN);
 		inline constexpr Colour CornSilk = MakeColor(255, 248, 220);
 		inline constexpr Colour Beige = MakeColor(245, 245, 220);
-		inline constexpr Colour Tan = MakeColor(native_colors::COLOR_TAN);
+		inline constexpr Colour Tan = MakeColor(raw_colours::COLOR_TAN);
 		inline constexpr Colour Khaki = MakeColor(240U, 230U, 140U);
 
 		inline constexpr Colour Olive = MakeColor(128U, 128U, 0U);
-		inline constexpr Colour Lime = MakeColor(native_colors::COLOR_LIME);
+		inline constexpr Colour Lime = MakeColor(raw_colours::COLOR_LIME);
 		inline constexpr Colour LightGreen = MakeColor(144U, 238U, 144U);
 		inline constexpr Colour PaleGreen = MakeColor(152U, 251U, 152U);
-		inline constexpr Colour Green = MakeColor(native_colors::COLOR_GREEN);
+		inline constexpr Colour Green = MakeColor(raw_colours::COLOR_GREEN);
 		inline constexpr Colour ForrestGreen = MakeColor(34U, 139U, 34U);
 		inline constexpr Colour SeaGreen = MakeColor(46U, 139U, 87U);
 		inline constexpr Colour DarkGreen = MakeColor(0U, 100U, 0U);
 
 		inline constexpr Colour Teal = MakeColor(0U, 128U, 128U);
 		inline constexpr Colour SteelBlue = MakeColor(70U, 130U, 180U);
-		inline constexpr Colour Cyan = MakeColor(native_colors::COLOR_CYAN);
+		inline constexpr Colour Cyan = MakeColor(raw_colours::COLOR_CYAN);
 		inline constexpr Colour PaleAzure = MakeColor(240U, 255U, 255U);
 		inline constexpr Colour Azure = MakeColor(0U, 127U, 255U);
 
 		inline constexpr Colour SkyBlue = MakeColor(0U, 191U, 255U);
-		inline constexpr Colour MidnightBlue = MakeColor(native_colors::COLOR_MIDNIGHTBLUE);
+		inline constexpr Colour MidnightBlue = MakeColor(raw_colours::COLOR_MIDNIGHTBLUE);
 		inline constexpr Colour RoyaleBlue = MakeColor(65U, 105U, 225U);
 
-		inline constexpr Colour Blue = MakeColor(native_colors::COLOR_BLUE);
+		inline constexpr Colour Blue = MakeColor(raw_colours::COLOR_BLUE);
 		inline constexpr Colour MediumBlue = MakeColor(0U, 0U, 205U);
 		inline constexpr Colour DarkBlue = MakeColor(0U, 0U, 139U);
-		inline constexpr Colour NAVY = MakeColor(native_colors::COLOR_NAVY);
+		inline constexpr Colour NAVY = MakeColor(raw_colours::COLOR_NAVY);
 
 		inline constexpr Colour Lavender = MakeColor(230U, 230U, 250U);
 		inline constexpr Colour Violet = MakeColor(140U, 0U, 255U);
-		inline constexpr Colour Purple = MakeColor(native_colors::COLOR_PURPLE);
+		inline constexpr Colour Purple = MakeColor(raw_colours::COLOR_PURPLE);
 		inline constexpr Colour Indigo = MakeColor(148U, 0U, 211U);
 		inline constexpr Colour DarkIndigo = MakeColor(75U, 0U, 130U);
 
-		inline constexpr Colour Magenta = MakeColor(native_colors::COLOR_MAGENTA);
-		inline constexpr Colour Pink = MakeColor(native_colors::COLOR_PINK);
+		inline constexpr Colour Magenta = MakeColor(raw_colours::COLOR_MAGENTA);
+		inline constexpr Colour Pink = MakeColor(raw_colours::COLOR_PINK);
 		inline constexpr Colour HotPink = MakeColor(255U, 105U, 180U);
 		inline constexpr Colour DeepPink = MakeColor(255U, 20U, 147U);
 
