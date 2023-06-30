@@ -99,7 +99,7 @@ namespace gl::display
 
 	Rect GetActualDisplaySize() noexcept
 	{
-		return Rect{ 0, 0, ::GetSystemMetricsForDpi(SM_CXSCREEN), ::GetSystemMetricsForDpi(SM_CYSCREEN) };
+		return Rect{ 0, 0, ::GetSystemMetrics(SM_CXSCREEN), ::GetSystemMetrics(SM_CYSCREEN) };
 	}
 
 	Rect GetDisplaySize() noexcept
