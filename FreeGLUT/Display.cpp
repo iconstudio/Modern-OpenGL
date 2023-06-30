@@ -2,6 +2,7 @@ module;
 #include <winrt/windows.ui.composition.h>
 #include <winrt/Windows.ui.viewmanagement.h>
 module Glib.Display;
+import Glib.Rect;
 import Glib.Device.Colour;
 
 using namespace winrt::Windows::UI::ViewManagement;
