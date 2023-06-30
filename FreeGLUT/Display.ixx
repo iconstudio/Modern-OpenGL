@@ -29,21 +29,35 @@ namespace gl::display
 			// Get the DPI awareness of the window from the DPI-awareness context of the thread
 			DPI_AWARENESS_CONTEXT dpiAwarenessContext = GetThreadDpiAwarenessContext();
 			DPI_AWARENESS dpiAwareness = GetAwarenessFromDpiAwarenessContext(dpiAwarenessContext);
+
+			switch (dpiAwareness)
+			{
+				case DPI_AWARENESS_SYSTEM_AWARE:L"DPI_AWARENESS_CONTEXT_SYSTEM_AWARE");
+				{}
+				break;
+
+				case DPI_AWARENESS_PER_MONITOR_AWARE:
+				{
+					if (AreDpiAwarenessContextsEqual(dpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2))
+					{
+					}
+					else
+					{
+					}
+				}
+				break;
+
+				case DPI_AWARENESS_UNAWARE:
+				default:
+				{}
+				break;
+			}
+
+			//SetWindowText(hWnd, result);
 		}
 
 		UINT GetDPI(HWND hWnd)
 		{
-			if (hWnd != NULL)
-			{
-				if (pfnGetDpiForWindow)
-					return pfnGetDpiForWindow(hWnd);
-			}
-			else
-			{
-				if (pfnGetDpiForSystem)
-					return pfnGetDpiForSystem();
-			}
-
 			if (HDC hDC = GetDC(hWnd))
 			{
 				auto dpi = GetDeviceCaps(hDC, LOGPIXELSX);
@@ -71,8 +85,8 @@ namespace gl::display
 				if (RegNotifyChangeKeyValue(hKey, FALSE, REG_NOTIFY_CHANGE_LAST_SET, this->hEvent, TRUE) == ERROR_SUCCESS)
 				{
 					return true;
-		}
-	}
+				}
+			}
 			else
 			{
 				if (RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft", 0, KEY_NOTIFY, &hKey) == ERROR_SUCCESS)
@@ -93,7 +107,7 @@ namespace gl::display
 			}
 			else
 				return 100;
-}
+		}
 #endif
 	}
 
