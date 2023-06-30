@@ -132,11 +132,8 @@ namespace gl::display
 #endif
 	}
 
-	namespace display
+	namespace this_device
 	{
-		namespace this_device
-		{
-			static void* context = nullptr;
-		}
+		static void* context = nullptr;
 	}
 }
