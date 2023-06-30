@@ -37,7 +37,7 @@ namespace gl::display
 
 		DpiAwareness Convert(const DPI_AWARENESS&& awareness) noexcept
 		{
-			switch (std::move(awareness))
+			switch (awareness)
 			{
 				case DPI_AWARENESS_UNAWARE: return DpiAwareness::Unaware;
 				case DPI_AWARENESS_SYSTEM_AWARE: return DpiAwareness::System;
