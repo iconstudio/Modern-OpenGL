@@ -33,7 +33,7 @@ export extern "C++" namespace gl::window
 			myWindowClass.lpfnWndProc = procedure;
 			myWindowClass.cbClsExtra = 0;
 			myWindowClass.cbWndExtra = 0;
-			myWindowClass.style = CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
+			myWindowClass.style = CS_HREDRAW | CS_VREDRAW;
 			myWindowClass.hbrBackground = background;
 			myWindowClass.lpszMenuName = menu_name;
 			myWindowClass.hIcon = static_cast<IconType&&>(icon).GetHandle();
