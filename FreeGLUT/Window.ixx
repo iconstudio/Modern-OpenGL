@@ -574,6 +574,4 @@ export extern "C++" namespace gl::window
 	}
 
 	using device::PostQuitMessage;
-	using device::DefWindowProcW;
-	using device::DestroyWindow;
 }
