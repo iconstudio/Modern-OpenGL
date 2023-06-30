@@ -8,6 +8,8 @@ inline static gl::Rect window_rect{};
 
 void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, const int& w, const int& h) noexcept
 {
+	display::dpi::SetDPIAware(true);
+
 	window_rect.x = x;
 	window_rect.y = y;
 	window_rect.w = w;
