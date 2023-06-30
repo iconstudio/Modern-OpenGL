@@ -117,12 +117,12 @@ export extern "C++" namespace gl::window
 
 		inline bool Register() noexcept
 		{
-			return detail::RegisterProcess(myWindowClass);
+			return 0 == ::RegisterClassEx(std::addressof(myWindowClass));
 		}
 
 		inline bool Deregister() noexcept
 		{
-			return detail::UnregisterProcess(myWindowClass.hInstance, myWindowClass.lpszClassName);
+			return FALSE != ::UnregisterClass(myWindowClass.lpszClassName, myWindowClass.hInstance);
 		}
 
 		[[nodiscard]]

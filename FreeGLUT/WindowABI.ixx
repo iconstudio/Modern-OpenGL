@@ -10,16 +10,6 @@ export namespace gl::window::detail
 {
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
-	inline bool RegisterProcess(const tagWNDCLASSEXW& property)
-	{
-		return FALSE == ::RegisterClassEx(&property);
-	}
-
-	inline bool UnregisterProcess(const HINSTANCE& hinst, const std::wstring_view& class_name)
-	{
-		return FALSE == ::UnregisterClass(class_name.data(), hinst);
-	}
-
 	inline bool EnablePointingDevice() noexcept
 	{
 		return FALSE != ::EnableMouseInPointer(TRUE);
