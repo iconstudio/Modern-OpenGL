@@ -20,117 +20,19 @@ namespace gl::display
 
 	export namespace dpi
 	{
+		constexpr UINT DEFAULT_DPI = 96U;
+
 		bool SetDPIAware(const bool& enable) noexcept;
 		[[nodiscard]] bool IsDPIAware() noexcept;
 		[[nodiscard]] DpiAwareness GetDPIAware() noexcept;
 		[[nodiscard]] bool IsDPIAware(const HWND& handle) noexcept;
 		[[nodiscard]] DpiAwareness GetDPIAware(const HWND& handle) noexcept;
 		[[nodiscard]] unsigned int GetDPI() noexcept;
-		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return 96; }
+		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return DEFAULT_DPI; }
 	}
 
 	export [[nodiscard]] Rect GetDisplaySize() noexcept;
 	export [[nodiscard]] bool IsDimmingMode();
-
-	export namespace dpi
-	{
-		constexpr UINT USER_DEFAULT_SCREEN_DPI = 96;
-
-		using ::DPI_AWARENESS;
-		using ::DPI_AWARENESS_CONTEXT__, ::DPI_AWARENESS_CONTEXT;
-
-#if 0
-		void testss()
-		{
-			DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2;
-			wchar_t result[50];
-			wchar_t awareness[50];
-			wchar_t awarenessContext[50];
-
-			// Get the DPI awareness of the window from the DPI-awareness context of the thread
-			DPI_AWARENESS_CONTEXT dpiAwarenessContext = GetThreadDpiAwarenessContext();
-			DPI_AWARENESS dpiAwareness = GetAwarenessFromDpiAwarenessContext(dpiAwarenessContext);
-
-			switch (dpiAwareness)
-			{
-				case DPI_AWARENESS_SYSTEM_AWARE:L"DPI_AWARENESS_CONTEXT_SYSTEM_AWARE");
-				{}
-				break;
-
-				case DPI_AWARENESS_PER_MONITOR_AWARE:
-				{
-					if (AreDpiAwarenessContextsEqual(dpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2))
-					{
-					}
-					else
-					{
-					}
-				}
-				break;
-
-				case DPI_AWARENESS_UNAWARE:
-				default:
-				{}
-				break;
-			}
-
-			//SetWindowText(hWnd, result);
-		}
-
-		UINT GetDPI(HWND hWnd)
-		{
-			if (HDC hDC = GetDC(hWnd))
-			{
-				auto dpi = GetDeviceCaps(hDC, LOGPIXELSX);
-				ReleaseDC(hWnd, hDC);
-				return dpi;
-			}
-			else
-			{
-				return USER_DEFAULT_SCREEN_DPI;
-			}
-		}
-
-		DWORD GetCurrentTextScaleFactor() const
-		{
-			static inline constexpr wchar_t hKey[] = L"HKCU\\SOFTWARE\\Microsoft\\Accessibility";
-			static HANDLE hEvent = NULL;
-
-			if (hKey)
-			{
-				RegCloseKey(hKey);
-				hKey = NULL;
-			}
-			if (RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Accessibility", 0, KEY_NOTIFY | KEY_QUERY_VALUE, &hKey) == ERROR_SUCCESS)
-			{
-				if (RegNotifyChangeKeyValue(hKey, FALSE, REG_NOTIFY_CHANGE_LAST_SET, this->hEvent, TRUE) == ERROR_SUCCESS)
-				{
-					return true;
-				}
-			}
-			else
-			{
-				if (RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft", 0, KEY_NOTIFY, &hKey) == ERROR_SUCCESS)
-				{
-					if (RegNotifyChangeKeyValue(this->hKey, FALSE, REG_NOTIFY_CHANGE_NAME, this->hEvent, TRUE) == ERROR_SUCCESS)
-					{
-						return true;
-					}
-				}
-			}
-
-			DWORD scale;
-			DWORD cb = sizeof scale;
-
-			if (RegQueryValueEx(hKey, L"TextScaleFactor", NULL, NULL, (LPBYTE)&scale, &cb) == ERROR_SUCCESS)
-			{
-				return scale;
-			}
-			else
-				return 100;
-		}
-#endif
-	}
 
 	namespace this_device
 	{
