@@ -97,9 +97,16 @@ namespace gl::display
 		}
 	}
 
+	Rect GetActualDisplaySize() noexcept
+	{
+		return Rect{ 0, 0, ::GetSystemMetricsForDpi(SM_CXSCREEN), ::GetSystemMetricsForDpi(SM_CYSCREEN) };
+	}
+
 	Rect GetDisplaySize() noexcept
 	{
-		return Rect();
+		const unsigned int dpi = dpi::GetDPI();
+
+		return Rect{ 0, 0, ::GetSystemMetricsForDpi(SM_CXSCREEN, dpi), ::GetSystemMetricsForDpi(SM_CYSCREEN, dpi) };
 	}
 
 	bool IsDimmingMode()

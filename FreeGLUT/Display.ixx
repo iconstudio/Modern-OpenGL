@@ -31,6 +31,7 @@ namespace gl::display
 		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return DEFAULT_DPI; }
 	}
 
+	export [[nodiscard]] Rect GetActualDisplaySize() noexcept;
 	export [[nodiscard]] Rect GetDisplaySize() noexcept;
 	export [[nodiscard]] bool IsDimmingMode();
 
