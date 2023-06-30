@@ -18,6 +18,27 @@ export namespace gl::window
 	template<util::fixed_wstring ID>
 	class ManagedWindow;
 
+	struct WaitForSeconds
+	{
+		constexpr WaitForSeconds(long long ms) noexcept
+			: milliSeconds(ms)
+		{}
+
+		constexpr bool await_ready() const noexcept
+		{
+			return false;
+		}
+
+		constexpr void await_suspend(coroutine_handle<> handle) const noexcept
+		{
+
+		}
+
+		constexpr void await_resume() const noexcept {}
+
+		long long milliSeconds;
+	};
+
 	template<util::fixed_wstring WindowID>
 	class [[nodiscard]] Coroutine
 	{
