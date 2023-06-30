@@ -180,7 +180,7 @@ export extern "C++" namespace gl::window
 		{
 			if (nullptr != myClassName && nullptr != myHandle.GetHandle())
 			{
-				detail::UnregisterProcess(myInstance.myHandle, myClassName);
+				device::UnregisterWindow(myInstance.myHandle, myClassName);
 			}
 		}
 

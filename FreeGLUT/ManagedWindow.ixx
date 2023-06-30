@@ -199,7 +199,7 @@ export namespace gl::window
 		{
 			if (isCapturing)
 			{
-				detail::CaptureMouse(underlying.GetHandle());
+				device::io::CaptureMouse(underlying.GetHandle());
 				return true;
 			}
 			else
@@ -213,7 +213,7 @@ export namespace gl::window
 		/// </summary>
 		void ResetMouseCapture() noexcept
 		{
-			detail::ResetMouseCapture(underlying.GetHandle());
+			device::io::ResetMouseCapture(underlying.GetHandle());
 		}
 
 		/// <summary>
@@ -231,7 +231,7 @@ export namespace gl::window
 		[[nodiscard]]
 		bool IsMouseCaptured() const noexcept
 		{
-			return detail::IsMouseCaptured(underlying.GetHandle());
+			return device::io::IsMouseCaptured(underlying.GetHandle());
 		}
 
 		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept
