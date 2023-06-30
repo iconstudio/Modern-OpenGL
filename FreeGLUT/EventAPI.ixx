@@ -1,13 +1,13 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Event.Handler;
+export module Glib.Device.Event.API;
 import <type_traits>;
 export import Glib.Device.Event;
 
 export namespace gl::device
 {
-	enum class [[nodiscard]] PeekCmd : unsigned int
+	enum class [[nodiscard]] EventPeeker : unsigned int
 	{
 		DontRemove = PM_NOREMOVE,
 		Remove = PM_REMOVE,
@@ -19,39 +19,45 @@ export namespace gl::device
 	{
 	public:
 		[[nodiscard]]
+		static consteval RawEvent MakeEvent() noexcept
+		{
+			return {};
+		}
+
+		[[nodiscard]]
 		static bool Pop(const HWND& hwnd, RawEvent& output) noexcept
 		{
 			return 0 != ::GetMessage(&output, hwnd, 0, 0);
 		}
 
-		static bool Push(const HWND& hwnd, const DeviceCommandIDType& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		static bool Push(const HWND& hwnd, const unsigned int& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, id, lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommandIDType&& id, const unsigned long long& lhs, const long long& rhs) noexcept
+		static bool Push(const HWND& hwnd, unsigned int&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, std::move(id), lhs, rhs);
 		}
 
-		static bool Push(const HWND& hwnd, DeviceCommandIDType&& id, unsigned long long&& lhs, long long&& rhs) noexcept
+		static bool Push(const HWND& hwnd, unsigned int&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
 			return 0 != ::PostMessage(hwnd, std::move(id), std::move(lhs), std::move(rhs));
 		}
 
 		static bool Push(const HWND& hwnd, const EventID& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
+			return 0 != ::PostMessage(hwnd, static_cast<unsigned int>(id), lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, EventID&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), lhs, rhs);
+			return 0 != ::PostMessage(hwnd, static_cast<unsigned int>(id), lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, EventID&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
-			return 0 != ::PostMessage(hwnd, static_cast<DeviceCommandIDType>(id), std::move(lhs), std::move(rhs));
+			return 0 != ::PostMessage(hwnd, static_cast<unsigned int>(id), std::move(lhs), std::move(rhs));
 		}
 
 		static bool Push(const HWND& hwnd, const Event& msg) noexcept
@@ -64,7 +70,7 @@ export namespace gl::device
 			return Push(hwnd, std::move(msg.id), std::move(msg.wParam), std::move(msg.lParam));
 		}
 
-		static bool Peek(const HWND& hwnd, RawEvent& output, const PeekCmd& cmd = PeekCmd::DontRemove) noexcept
+		static bool Peek(const HWND& hwnd, RawEvent& output, const EventPeeker& cmd = EventPeeker::DontRemove) noexcept
 		{
 			return 0 != ::PeekMessage(std::addressof(output), hwnd, 0, 0, static_cast<unsigned int>(cmd));
 		}

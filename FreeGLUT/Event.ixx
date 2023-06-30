@@ -12,19 +12,19 @@ export namespace gl::device
 		constexpr Event() noexcept = default;
 		constexpr ~Event() noexcept = default;
 
-		constexpr Event(const RawEvent& msg) noexcept
+		explicit constexpr Event(const RawEvent& msg) noexcept
 			: id(EventID{ msg.message })
 			, wParam(msg.wParam), lParam(msg.lParam)
 			, time(msg.time)
 		{}
 
-		constexpr Event(RawEvent&& msg) noexcept
+		explicit constexpr Event(RawEvent&& msg) noexcept
 			: id(EventID{ std::move(msg.message) })
 			, wParam(std::move(msg.wParam)), lParam(std::move(msg.lParam))
 			, time(std::move(msg.time))
 		{}
 
-		constexpr Event(const EventID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
+		explicit constexpr Event(const EventID& msg, const unsigned long long& lhs, const long long& rhs, const unsigned long& tick) noexcept
 			: id(msg), wParam(lhs), lParam(rhs)
 			, time(tick)
 		{}

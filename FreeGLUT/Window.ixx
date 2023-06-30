@@ -9,7 +9,7 @@ export import Glib.Device.Context;
 export import Glib.Device.Handle;
 export import Glib.Device.Event;
 export import Glib.Device.IO;
-import Glib.Device.Event.Handler;
+import Glib.Device.Event.API;
 export import :Property;
 export import :Style;
 export import :Option;
@@ -206,15 +206,15 @@ export extern "C++" namespace gl::window
 
 		inline bool UpdateOnce() noexcept
 		{
-			device::RawEvent cmd{};
+			device::RawEvent event = device::EventAPI::MakeEvent();
 
-			if (device::EventAPI::Pop(myHandle, cmd))
+			if (device::EventAPI::Pop(myHandle, event))
 			{
-				if (!device::EventAPI::Translate(cmd))
+				if (!device::EventAPI::Translate(event))
 				{
 				}
 
-				device::EventAPI::Dispatch(cmd);
+				device::EventAPI::Dispatch(event);
 				return true;
 			}
 
