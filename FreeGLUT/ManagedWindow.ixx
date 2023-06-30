@@ -661,6 +661,18 @@ noexcept
 		}
 		break;
 
+		case event_id_t::NCCreate:
+		{
+			std::printf("[Preprocess]\n");
+		}
+		return detail::DefaultWindowsProcedure(hwnd, id, wparam, lparam);
+
+		case event_id_t::Create:
+		{
+			std::printf("[Create]\n");
+		}
+		return detail::DefaultWindowsProcedure(hwnd, id, wparam, lparam);
+
 		// Started by close button or system menu [or Alt+F4]
 		case event_id_t::Close:
 		{
