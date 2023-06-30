@@ -1,11 +1,15 @@
 module;
+#include <dwmapi.h>
+#include <winrt/windows.devices.display.h>
 #include <winrt/windows.ui.composition.h>
 #include <winrt/Windows.ui.viewmanagement.h>
+
 module Glib.Display;
 import Glib.Rect;
 import Glib.Device.Colour;
 
 using namespace winrt::Windows::UI::ViewManagement;
+using namespace winrt::Windows::Devices::Display;
 
 namespace gl::display
 {
@@ -13,6 +17,82 @@ namespace gl::display
 
 	[[nodiscard]]
 	DisplayProperty AcquireSettings() noexcept;
+
+	namespace dpi
+	{
+		bool SetDPIAware(const bool& enable) noexcept
+		{
+			if (enable)
+			{
+				// Sharp
+				// Also calls EnableNonClientDpiScaling
+				return 0 != ::SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+			}
+			else
+			{
+				// Little Blurry
+				return 0 != ::SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+			}
+		}
+
+		DpiAwareness Convert(const DPI_AWARENESS&& awareness) noexcept
+		{
+			switch (std::move(awareness))
+			{
+				case DPI_AWARENESS_UNAWARE: return DpiAwareness::Unaware;
+				case DPI_AWARENESS_SYSTEM_AWARE: return DpiAwareness::System;
+				case DPI_AWARENESS_PER_MONITOR_AWARE: return DpiAwareness::Aware;
+				//case DPI_AWARENESS_PER_MONITOR_AWARE_V2: return DpiAwareness::PerMonitorAwareV2;
+				//case DPI_AWARENESS_UNAWARE_GDISCALED: return DpiAwareness::UnawareGDIScaled;
+				default:
+				{
+					return DpiAwareness::Unaware;
+				}
+			}
+		}
+
+		DpiAwareness GetDPIAware() noexcept
+		{
+			DPI_AWARENESS_CONTEXT context = ::GetThreadDpiAwarenessContext();
+			if (::IsValidDpiAwarenessContext(context))
+			{
+				return Convert(::GetAwarenessFromDpiAwarenessContext(context));
+			}
+
+			return DpiAwareness::Unaware;
+		}
+
+		bool IsDPIAware() noexcept
+		{
+			return DpiAwareness::Aware == GetDPIAware();
+		}
+
+		DpiAwareness GetDPIAware(const HWND& handle) noexcept
+		{
+			DPI_AWARENESS_CONTEXT context = ::GetWindowDpiAwarenessContext(handle);
+			if (::IsValidDpiAwarenessContext(context))
+			{
+				return Convert(::GetAwarenessFromDpiAwarenessContext(context));
+			}
+
+			return DpiAwareness::Unaware;
+		}
+
+		bool IsDPIAware(const HWND& handle) noexcept
+		{
+			return DpiAwareness::Aware == GetDPIAware(handle);
+		}
+
+		unsigned int GetDPI() noexcept
+		{
+			return 0;
+		}
+	}
+
+	Rect GetDisplaySize() noexcept
+	{
+		return Rect();
+	}
 
 	bool IsDimmingMode()
 	{
