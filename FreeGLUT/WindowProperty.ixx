@@ -5,7 +5,7 @@ export module Glib.Window:Property;
 import <type_traits>;
 import Glib.Device.ProcessInstance;
 export import Glib.Device.Brush;
-export import Glib.Device.Icon;
+export import Glib.Device.Resource.Icon;
 
 export extern "C++" namespace gl::window
 {

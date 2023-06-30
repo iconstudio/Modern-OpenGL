@@ -142,7 +142,7 @@
     <ClCompile Include="EventID.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceIcon.ixx">
+    <ClCompile Include="Icon.ixx">
       <Filter>헤더 파일\Device\Resource</Filter>
     </ClCompile>
     <ClCompile Include="DeviceHandle.ixx">
@@ -171,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="SpecialEvent.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RawIcon.ixx">
+      <Filter>헤더 파일\Device\Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

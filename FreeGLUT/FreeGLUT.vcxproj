@@ -198,7 +198,7 @@
     <ClCompile Include="EventAPI.ixx" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="Event.ixx" />
-    <ClCompile Include="DeviceIcon.ixx" />
+    <ClCompile Include="Icon.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
     <ClCompile Include="DeviceUtil.ixx" />
     <ClCompile Include="Display.cpp" />
@@ -220,6 +220,7 @@
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="RawColour.ixx" />
     <ClCompile Include="RawEvent.ixx" />
+    <ClCompile Include="RawIcon.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="SpecialEvent.ixx" />
     <ClCompile Include="WindowABI.ixx" />
