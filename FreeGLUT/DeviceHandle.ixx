@@ -3,6 +3,7 @@ module;
 
 export module Glib.Device.Handle;
 import <type_traits>;
+import <string_view>;
 import Glib.Device.Event.Handler;
 export import Glib.Device.IO;
 
@@ -311,6 +312,16 @@ export namespace gl::device
 	constexpr NativeRect MakeNativeRect() noexcept
 	{
 		return {};
+	}
+
+	inline bool RegisterWindow(const tagWNDCLASSEXW& property)
+	{
+		return 0 == ::RegisterClassEx(&property);
+	}
+
+	inline bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name)
+	{
+		return 0 == ::UnregisterClass(class_name.data(), hinst);
 	}
 
 	using ::PostQuitMessage;
