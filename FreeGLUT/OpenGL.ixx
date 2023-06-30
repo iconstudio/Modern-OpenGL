@@ -1,10 +1,7 @@
 export module Glib;
 export import Utility.FixedString;
-import Utility.Print;
-export import Glib.Display;
 export import Glib.DisplayModes;
 export import Glib.Device.Colour;
-import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
@@ -27,15 +24,5 @@ export namespace gl
 	void Initialize(const DisplayModes& mode, const int& w, const int& h) noexcept;
 	void Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept;
 
-	void Start()
-	{
-		if (display::IsDimmingMode())
-		{
-			util::Println("Dark Mode");
-		}
-		else
-		{
-			util::Println("Light Mode");
-		}
-	}
+	void Start();
 }

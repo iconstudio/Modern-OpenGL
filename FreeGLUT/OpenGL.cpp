@@ -1,6 +1,11 @@
 module;
 module Glib;
+import Utility;
+import Utility.Print;
 import Glib.Rect;
+import Glib.Window.ManagedWindow;
+import Glib.Device.Colour;
+import Glib.Display;
 
 inline static int window_handle = -1;
 inline static gl::DisplayModes window_mode{};
@@ -35,4 +40,16 @@ void gl::Initialize(const DisplayModes& mode, const int& w, const int& h) noexce
 void gl::Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept
 {
 	return Initialize(mode, default_window_x, default_window_y, default_window_w, default_window_h);
+}
+
+void gl::Start()
+{
+	if (display::IsDimmingMode())
+	{
+		util::Println("Dark Mode");
+	}
+	else
+	{
+		util::Println("Light Mode");
+	}
 }
