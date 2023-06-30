@@ -172,5 +172,8 @@
     <ClCompile Include="Display.ixx">
       <Filter>헤더 파일\Device\Measurement</Filter>
     </ClCompile>
+    <ClCompile Include="MouseUtils.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

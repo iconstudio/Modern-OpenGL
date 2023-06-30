@@ -204,6 +204,7 @@
     <ClCompile Include="ManagedWindow.cpp" />
     <ClCompile Include="ManagedWindow.ixx" />
     <ClCompile Include="Mouse.ixx" />
+    <ClCompile Include="MouseUtils.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="Keycodes.ixx" />
