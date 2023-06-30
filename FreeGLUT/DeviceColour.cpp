@@ -1,1 +1,0 @@
-module Glib.Device.Colour;
