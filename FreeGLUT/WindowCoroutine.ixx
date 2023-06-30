@@ -39,7 +39,35 @@ export namespace gl::window
 	class [[nodiscard]] Coroutine
 	{
 	public:
-		using handle_type = util::coroutine::coroutine_handle<void>;
+		struct promise_type;
+		using handle_type = util::coroutine::coroutine_handle<promise_type>;
+
+		struct promise_type
+		{
+			Coroutine get_return_object() noexcept
+			{
+				return Coroutine{ handle_type::from_promise(*this) };
+			}
+
+			auto yield_value(const WaitForSeconds& wait) noexcept
+			{
+				return wait;
+			}
+
+			static suspend_always initial_suspend() noexcept
+			{
+				return {};
+			}
+
+			static suspend_always final_suspend() noexcept
+			{
+				return {};
+			}
+
+			static void return_void() noexcept {}
+
+			static void unhandled_exception() noexcept {}
+		};
 
 		constexpr Coroutine() noexcept = default;
 

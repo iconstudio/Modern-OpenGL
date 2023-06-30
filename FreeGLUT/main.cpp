@@ -6,6 +6,11 @@ import Glib.Window.ManagedWindow;
 
 static inline constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
 
+gl::window::Coroutine test_coroutine() noexcept
+{
+	co_yield gl::window::WaitForSeconds(4000);
+}
+
 int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
 {
 	util::Println("== Program Initiated ==");
@@ -23,6 +28,8 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	util::Println("== Program Started ==");
 
 	gl::Start();
+
+	//window.StartCoroutine(test_coroutine());
 	window.Start();
 
 	util::Println("== Program Ended ==");
