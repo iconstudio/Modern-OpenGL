@@ -85,7 +85,15 @@ namespace gl::display
 
 		unsigned int GetDPI() noexcept
 		{
-			return 0;
+			DPI_AWARENESS_CONTEXT context = ::GetThreadDpiAwarenessContext();
+			if (::IsValidDpiAwarenessContext(context))
+			{
+				return ::GetDpiFromDpiAwarenessContext(context);
+			}
+			else
+			{
+				return 96;
+			}
 		}
 	}
 
