@@ -14,6 +14,12 @@ export namespace gl::device
 		None = 0,
 		Create = WM_CREATE,
 		Destroy = WM_DESTROY,
+		Show = WM_SHOWWINDOW,
+
+		NCActivate = WM_NCACTIVATE,
+		NCCreate = WM_NCCREATE,
+		NCDestroy = WM_NCDESTROY,
+		NCMouseMove = WM_NCMOUSEMOVE,
 
 		Move = WM_MOVE,
 		Size = WM_SIZE,
