@@ -10,7 +10,15 @@ export import Glib.Device.Colour;
 
 namespace gl::display
 {
-	export extern "C" namespace dpi
+	export extern "C" enum class [[nodiscard]] DpiAwareness
+	{
+		Invalid = ::DPI_AWARENESS_INVALID,
+		Unaware = ::DPI_AWARENESS_UNAWARE,
+		System = ::DPI_AWARENESS_SYSTEM_AWARE,
+		Aware = ::DPI_AWARENESS_PER_MONITOR_AWARE
+	};
+
+	export namespace dpi
 	{
 		bool SetDPIAware(const bool& enable) noexcept;
 		[[nodiscard]] bool GetDPIAware() noexcept;
