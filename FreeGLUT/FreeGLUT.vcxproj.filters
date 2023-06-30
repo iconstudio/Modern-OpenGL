@@ -133,13 +133,13 @@
     <ClCompile Include="Colour.ixx">
       <Filter>헤더 파일\Device\Colouring</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceEventHandler.ixx">
+    <ClCompile Include="EventAPI.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceEvent.ixx">
+    <ClCompile Include="Event.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Events.ixx">
+    <ClCompile Include="EventID.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
     <ClCompile Include="DeviceIcon.ixx">
@@ -149,9 +149,6 @@
       <Filter>헤더 파일\Device\Core</Filter>
     </ClCompile>
     <ClCompile Include="ProcessInstance.ixx">
-      <Filter>헤더 파일\Device\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceClass.ixx">
       <Filter>헤더 파일\Device\Core</Filter>
     </ClCompile>
     <ClCompile Include="DisplayModes.ixx">

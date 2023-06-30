@@ -1,13 +1,13 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Event:Definitions;
+export module Glib.Device.Event:ID;
 import <compare>;
 
 export namespace gl::device
 {
-	using RawDeviceCommand = ::tagMSG;
-	using DeviceCommandIDType = decltype(RawDeviceCommand::message);
+	using RawEvent = ::tagMSG;
+	using DeviceCommandIDType = decltype(RawEvent::message);
 
 	enum class [[nodiscard]] EventID : DeviceCommandIDType
 	{
@@ -44,6 +44,7 @@ export namespace gl::device
 		Quit = WM_QUIT,
 		CleanupMemory = WM_NCDESTROY,
 
+		KeyboardFirst = WM_KEYFIRST,
 		KeyDown = WM_KEYDOWN,
 		KeyUp = WM_KEYUP,
 		Char = WM_CHAR,
@@ -54,7 +55,9 @@ export namespace gl::device
 		SysChar = WM_SYSCHAR,
 		SysDeadChar = WM_SYSDEADCHAR,
 		SysCommand = WM_SYSCOMMAND,
+		KeyboardLast = WM_KEYLAST,
 
+		MouseFirst = WM_MOUSEFIRST,
 		MouseMove = WM_MOUSEMOVE,
 		LButtonDown = WM_LBUTTONDOWN,
 		LButtonUp = WM_LBUTTONUP,
@@ -69,8 +72,26 @@ export namespace gl::device
 		MouseHWheel = WM_MOUSEHWHEEL,
 		MouseHover = WM_MOUSEHOVER,
 		MouseLeave = WM_MOUSELEAVE,
+		MouseLast = WM_MOUSELAST,
+
 		ChangedCapture = WM_CAPTURECHANGED,
 	};
+
+	/// <summary>
+	/// WPARAM from EventID::Activate
+	/// </summary>
+	enum class [[nodiscard]] DeviceActivation : unsigned short
+	{
+		Activated = WA_ACTIVE,
+		ClickActive = WA_CLICKACTIVE,
+		Inactivated = WA_INACTIVE,
+	};
+
+	[[nodiscard]]
+	constexpr bool operator==(const DeviceActivation& state, const unsigned short& rhs) noexcept
+	{
+		return static_cast<unsigned short>(state) == rhs;
+	}
 
 	struct [[nodiscard]] EventIDWrapper
 	{
@@ -135,60 +156,21 @@ export namespace gl::device
 
 	struct [[nodiscard]] KeyboardEventID : public EventIDWrapper
 	{
-		static inline constexpr EventID GUARD_FIRST = EventID{ WM_KEYFIRST };
-		static inline constexpr EventID GUARD_LAST = EventID{ WM_KEYLAST };
-
 		KeyboardEventID& operator=(EventID) = delete;
 
 	private:
+		KeyboardEventID() noexcept = default;
+
 		using EventIDWrapper::EventIDWrapper;
 	};
-
-	namespace kb
-	{
-		inline constexpr KeyboardEventID Pressed{ EventID::KeyDown };
-		inline constexpr KeyboardEventID Released{ EventID::KeyUp };
-		inline constexpr KeyboardEventID CharPressed{ EventID::Char };
-		inline constexpr KeyboardEventID CharReleased{ EventID::DeadChar };
-
-		inline constexpr KeyboardEventID AltPressed{ EventID::SysKeyDown };
-		inline constexpr KeyboardEventID AltReleased{ EventID::SysKeyUp };
-		inline constexpr KeyboardEventID AltCharPressed{ EventID::SysChar };
-		inline constexpr KeyboardEventID AltCharReleased{ EventID::SysDeadChar };
-	}
 
 	struct [[nodiscard]] MouseEventID : public EventIDWrapper
 	{
-		static inline constexpr EventID GUARD_FIRST = EventID{ WM_MOUSEFIRST };
-		static inline constexpr EventID GUARD_LAST = EventID{ WM_MOUSELAST };
-
 		MouseEventID& operator=(EventID) = delete;
 
 	private:
+		MouseEventID() noexcept = default;
+
 		using EventIDWrapper::EventIDWrapper;
-	};
-
-	namespace mb
-	{
-		inline constexpr MouseEventID Moved{ EventID::MouseMove };
-		inline constexpr MouseEventID Covered{ EventID::MouseHover };
-		inline constexpr MouseEventID Uncovered{ EventID::MouseLeave };
-
-		inline constexpr MouseEventID VtWheel{ EventID::MouseWheel };
-		inline constexpr MouseEventID HvWheel{ EventID::MouseHWheel };
-
-		inline constexpr MouseEventID LtPressed{ EventID::LButtonDown };
-		inline constexpr MouseEventID LtReleased{ EventID::LButtonUp };
-		inline constexpr MouseEventID LtDoubleClicked{ EventID::LButtonDoubleClick };
-
-		inline constexpr MouseEventID RtPressed{ EventID::RButtonDown };
-		inline constexpr MouseEventID RtReleased{ EventID::RButtonUp };
-		inline constexpr MouseEventID RtDoubleClicked{ EventID::RButtonDoubleClick };
-
-		inline constexpr MouseEventID MdPressed{ EventID::MButtonDown };
-		inline constexpr MouseEventID MdReleased{ EventID::MButtonUp };
-		inline constexpr MouseEventID MdDoubleClicked{ EventID::MButtonDoubleClick };
-
-		inline constexpr MouseEventID MovedOutside{ EventID::NCMouseMove };
 	};
 }

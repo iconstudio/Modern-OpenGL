@@ -206,15 +206,15 @@ export extern "C++" namespace gl::window
 
 		inline bool UpdateOnce() noexcept
 		{
-			device::RawDeviceCommand cmd{};
+			device::RawEvent cmd{};
 
-			if (device::DeviceCommandAPI::Pop(myHandle, cmd))
+			if (device::EventAPI::Pop(myHandle, cmd))
 			{
-				if (!device::DeviceCommandAPI::Translate(cmd))
+				if (!device::EventAPI::Translate(cmd))
 				{
 				}
 
-				device::DeviceCommandAPI::Dispatch(cmd);
+				device::EventAPI::Dispatch(cmd);
 				return true;
 			}
 
