@@ -23,6 +23,22 @@ export namespace gl::device
 
 		constexpr IWindowHandle() noexcept = default;
 
+		constexpr IWindowHandle(IWindowHandle&& other) noexcept
+			: base(std::move(other))
+		{}
+
+		constexpr IWindowHandle& operator=(IWindowHandle&& other) noexcept
+		{
+			base::operator=(std::move(other));
+			return *this;
+		}
+
+		constexpr IWindowHandle& operator=(handle_type&& handle) noexcept
+		{
+			base::operator=(std::move(handle));
+			return *this;
+		}
+
 		constexpr IWindowHandle(nullptr_t) noexcept
 			: base(nullptr)
 		{}
