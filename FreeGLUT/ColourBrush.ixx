@@ -3,7 +3,6 @@ module;
 
 export module Glib.Device.Brush;
 import <type_traits>;
-export import Glib.Device.Colour;
 
 export namespace gl::device
 {
