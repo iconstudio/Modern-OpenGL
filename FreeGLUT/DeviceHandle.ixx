@@ -13,7 +13,8 @@ export namespace gl::device
 	using HWND = ::HWND__*;
 	using NativeRect = ::tagRECT;
 
-	using ::GetLastError;
+	struct [[nodiscard]] log_t { constexpr log_t() noexcept = default; };
+	inline constexpr log_t log{};
 
 	class [[nodiscard]] DeviceHandle
 	{
@@ -44,6 +45,11 @@ export namespace gl::device
 		inline bool StartUpdate() noexcept
 		{
 			return 0 != ::UpdateWindow(myHandle);
+		}
+
+		long long DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs) const noexcept
+		{
+			return ::DefWindowProc(myHandle, msg, lhs, rhs);
 		}
 
 		inline bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const
@@ -337,6 +343,6 @@ export namespace gl::device
 	}
 
 	using ::PostQuitMessage;
-	using ::DefWindowProcW;
 	using ::DestroyWindow;
+	using ::GetLastError;
 }
