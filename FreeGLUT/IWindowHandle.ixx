@@ -258,6 +258,4 @@ export namespace gl::device
 	}
 
 	using ::PostQuitMessage;
-	using ::DestroyWindow;
-	using ::GetLastError;
 }
