@@ -4,23 +4,19 @@ module;
 export module Glib.Device.Handle;
 import <type_traits>;
 import <string_view>;
-import Glib.Device.IHandle;
+import Glib.Device.IWindowHandle;
 import Glib.Device.Event.API;
 export import Glib.Device.IO;
 
 export namespace gl::device
 {
-	using RawDeviceHandle = ::HWND__*;
-	using HWND = ::HWND__*;
-	using NativeRect = ::tagRECT;
-
 	struct [[nodiscard]] log_t { constexpr log_t() noexcept = default; };
 	inline constexpr log_t log{};
 
-	class [[nodiscard]] DeviceHandle : public IHandle<RawDeviceHandle>
+	class [[nodiscard]] DeviceHandle : public IWindowHandle
 	{
 	public:
-		using base = IHandle<RawDeviceHandle>;
+		using base = IWindowHandle;
 		using handle_type = base::handle_type;
 		using base::base;
 
