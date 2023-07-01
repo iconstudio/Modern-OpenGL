@@ -4,11 +4,6 @@ import Utility.Constraints;
 export namespace gl::device
 {
 	template<util::movable H>
-	struct handle_traits
-	{
-		using Deleter = void(*)(H&);
-	};
-
 	struct [[nodiscard]] IHandle
 	{
 		constexpr IHandle()
