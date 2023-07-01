@@ -294,10 +294,21 @@ export extern "C++" namespace gl::window
 			return static_cast<const wchar_t*&&>(myClassName);
 		}
 
+		constexpr Window(Window&& other) noexcept
+			: myInstance(std::exchange(other.myInstance, nullptr))
+			, myHandle(std::exchange(other.myHandle, nullptr))
+			, myProcecure(std::exchange(other.myProcecure, nullptr))
+			, myClassName(std::exchange(other.myClassName, nullptr))
+		{}
+
+		constexpr Window& operator=(Window&& other) noexcept
+		{
+			other.Swap(*this);
+			return *this;
+		}
+
 		Window(const Window&) = delete;
-		constexpr Window(Window&& other) noexcept = default;
 		Window& operator=(const Window&) = delete;
-		constexpr Window& operator=(Window&& other) noexcept = default;
 
 		device::ProcessInstance myInstance = nullptr;
 		device::DeviceHandle myHandle = nullptr;
