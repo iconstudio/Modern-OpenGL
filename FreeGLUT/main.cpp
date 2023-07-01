@@ -17,7 +17,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	gl::Initialize(gl::DisplayModes::DEPTH, gl::default_position, gl::default_resoulution);
 
-	auto property = gl::window::CreatePropertyEx<my_windows_class>();
+	auto property = gl::window::CreateProperty<my_windows_class>(gl::window::ManagedWindow::MainWorker);
 	property.Register();
 
 	util::Println("== Creating the Client ==");
