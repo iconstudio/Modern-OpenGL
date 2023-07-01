@@ -156,22 +156,44 @@ export namespace gl::device
 			return 0 != ::IsWindowEnabled(myHandle);
 		}
 
+		inline long long SetInternalValue(int index, const long long& value) const noexcept
+		{
+			return ::SetWindowLongPtr(myHandle, index, value);
+		}
+
+		inline long long SetInternalValue(int index, long long&& value) const noexcept
+		{
+			return ::SetWindowLongPtr(myHandle, index, std::move(value));
+		}
+
+		[[nodiscard]]
+		inline long long GetInternalValue(int index) const noexcept
+		{
+			return ::GetWindowLongPtr(myHandle, index);
+		}
+
+		[[nodiscard]]
+		inline long long GetInternalUserData(int index) const noexcept
+		{
+			return GetInternalValue(GWLP_USERDATA);
+		}
+
 		[[nodiscard]]
 		inline unsigned long GetStyle() const noexcept
 		{
-			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_STYLE));
+			return static_cast<DWORD>(GetInternalValue(GWL_STYLE));
 		}
 
 		[[nodiscard]]
 		inline unsigned long GetExStyle() const noexcept
 		{
-			return static_cast<DWORD>(GetWindowLongPtr(myHandle, GWL_EXSTYLE));
+			return static_cast<DWORD>(GetInternalValue(GWL_EXSTYLE));
 		}
 
 		[[nodiscard]]
 		inline int GetID() const noexcept
 		{
-			return static_cast<int>(GetWindowLongPtr(myHandle, GWLP_ID));
+			return static_cast<int>(GetInternalValue(GWLP_ID));
 		}
 
 		[[nodiscard]]
