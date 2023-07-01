@@ -38,4 +38,6 @@ export namespace gl::device
 	{
 		return ProcessInstance{ ::GetModuleHandle(NULL) };
 	}
+
+	using ::GetLastError;
 }
