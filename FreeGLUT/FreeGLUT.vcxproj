@@ -228,6 +228,7 @@
     <ClCompile Include="WindowOption.ixx" />
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="Window.ixx" />
+    <ClCompile Include="WindowsPropertyFactory.ixx" />
     <ClCompile Include="WindowStyle.ixx" />
   </ItemGroup>
   <ItemGroup>
