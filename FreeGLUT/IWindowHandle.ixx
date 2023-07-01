@@ -11,14 +11,13 @@ export import Glib.Device.IO;
 
 export namespace gl::device
 {
-	using RawDeviceHandle = ::HWND__*;
 	using HWND = ::HWND__*;
 	using NativeRect = tagRECT;
 
-	class [[nodiscard]] IWindowHandle : public IHandle<RawDeviceHandle>
+	class [[nodiscard]] IWindowHandle : public IHandle<HWND>
 	{
 	public:
-		using base = IHandle<RawDeviceHandle>;
+		using base = IHandle<HWND>;
 		using handle_type = base::handle_type;
 
 		constexpr IWindowHandle() noexcept = default;
@@ -63,9 +62,16 @@ export namespace gl::device
 
 		bool Destroy() noexcept
 		{
-			if (myHandle)
+			if (handle_type& handle = GetHandle(); nullptr != handle)
 			{
-				return 0 != Delegate(::DestroyWindow);
+				if (bool result = (0 != Delegate(::DestroyWindow)); result)
+				{
+					handle = nullptr;
+				}
+				else
+				{
+					return result;
+				}
 			}
 			else
 			{
