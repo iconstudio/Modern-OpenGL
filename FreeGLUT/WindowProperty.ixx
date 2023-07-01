@@ -14,37 +14,35 @@ export extern "C++" namespace gl::window
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
 	using RawWindowProperty = ::tagWNDCLASSEXW;
 
+	inline constexpr RawWindowProperty DefaultWindowProperty
+	{
+		.cbSize = sizeof(RawWindowProperty),
+			.style = CS_HREDRAW | CS_VREDRAW,
+			.lpfnWndProc = nullptr,
+			.cbClsExtra = 0,
+			.cbWndExtra = sizeof(void*),
+			.hInstance = nullptr,
+			.hIcon = nullptr,
+			.hCursor = nullptr,
+			.hbrBackground = nullptr,
+			.lpszMenuName = nullptr,
+			.lpszClassName = nullptr,
+			.hIconSm = nullptr,
+	};
+
 	class [[nodiscard]] WindowProperty
 	{
 	public:
-		template<typename IconType, typename CursorType>
-		explicit constexpr WindowProperty(const device::ProcessInstance& hinst
-			, WindowProcedure procedure
-			, const wchar_t* const& class_name
-			, IconType&& icon
-			, IconType&& small_icon
-			, CursorType&& cursor
-			, const HBRUSH& background
-			, const wchar_t* const& menu_name
-		) noexcept
-			: myWindowClass()
-		{
-			myWindowClass.cbSize = sizeof(RawWindowProperty);
-			myWindowClass.hInstance = hinst.myHandle;
-			myWindowClass.lpszClassName = class_name;
-			myWindowClass.lpfnWndProc = procedure;
-			myWindowClass.cbClsExtra = 0;
-			myWindowClass.cbWndExtra = 0;
-			myWindowClass.style = CS_HREDRAW | CS_VREDRAW;
-			myWindowClass.hbrBackground = background;
-			myWindowClass.lpszMenuName = menu_name;
-			myWindowClass.hIcon = static_cast<IconType&&>(icon).GetHandle();
-			myWindowClass.hIconSm = static_cast<IconType&&>(small_icon).GetHandle();
-			myWindowClass.hCursor = static_cast<CursorType&&>(cursor);
-		}
-
 		constexpr WindowProperty() noexcept = default;
 		constexpr ~WindowProperty() noexcept = default;
+
+		explicit constexpr WindowProperty(const RawWindowProperty& data) noexcept
+			: myWindowClass(data)
+		{}
+
+		explicit constexpr WindowProperty(RawWindowProperty&& data) noexcept
+			: myWindowClass(std::move(data))
+		{}
 
 		inline bool Register() noexcept
 		{
@@ -109,166 +107,129 @@ export extern "C++" namespace gl::window
 		constexpr WindowProperty(WindowProperty&&) noexcept = default;
 		constexpr WindowProperty& operator=(WindowProperty&&) noexcept = default;
 
-	private:
 		RawWindowProperty myWindowClass{};
 	};
 
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
-		, WindowProcedure procedure, const wchar_t* const& class_name
-	) noexcept
-	{
-		return WindowProperty
-		{
-			hinst
-			, procedure
-			, class_name
-			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
-			, device::MakeEmptyIcon() //, LoadIconW(hinst, IDI_APPLICATION)
-			, nullptr //, LoadCursorW(hinst, IDC_ARROW)
-			, device::MakeDefaultComponentColouring()
-			, nullptr
-		};
-	}
-
-	template<typename IconType, typename CursorType>
+	[[nodiscard]]
 	WindowProperty CreateProperty(const device::ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
 		, const device::ColorBrush& background
-		, const wchar_t* const& menu_name
+		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
 		return WindowProperty
 		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, background.GetHandle()
-			, menu_name
+			RawWindowProperty
+			{
+				.cbSize = sizeof(RawWindowProperty),
+				.style = CS_HREDRAW | CS_VREDRAW,
+				.lpfnWndProc = procedure,
+				.cbClsExtra = 0,
+				.cbWndExtra = 0,
+				.hInstance = hinst.myHandle,
+				.hIcon = std::move(icon).GetHandle(),
+				.hCursor = std::move(cursor).GetHandle(),
+				.hbrBackground = background.GetHandle(),
+				.lpszMenuName = menu_name,
+				.lpszClassName = class_name,
+				.hIconSm = std::move(small_icon).GetHandle(),
+			}
 		};
 	}
 
-	template<typename IconType, typename CursorType>
+	[[nodiscard]]
 	WindowProperty CreateProperty(const device::ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
 		, device::ColorBrush&& background
-		, const wchar_t* const& menu_name
+		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
 		return WindowProperty
 		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, std::move(background).GetHandle()
-			, menu_name
+			RawWindowProperty
+			{
+				.cbSize = sizeof(RawWindowProperty),
+				.style = CS_HREDRAW | CS_VREDRAW,
+				.lpfnWndProc = procedure,
+				.cbClsExtra = 0,
+				.cbWndExtra = 0,
+				.hInstance = hinst.myHandle,
+				.hIcon = std::move(icon).GetHandle(),
+				.hCursor = std::move(cursor).GetHandle(),
+				.hbrBackground = std::move(background).GetHandle(),
+				.lpszMenuName = menu_name,
+				.lpszClassName = class_name,
+				.hIconSm = std::move(small_icon).GetHandle(),
+			}
 		};
 	}
 
-	template<typename IconType, typename CursorType>
+	template<device::ColoredComponent BkColorReference>
+	[[nodiscard]]
 	WindowProperty CreateProperty(const device::ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
-		, const device::NativeColorBrush& background
-		, const wchar_t* const& menu_name
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
+		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
 		return WindowProperty
 		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, background
-			, menu_name
+			RawWindowProperty
+			{
+				.cbSize = sizeof(RawWindowProperty),
+				.style = CS_HREDRAW | CS_VREDRAW,
+				.lpfnWndProc = procedure,
+				.cbClsExtra = 0,
+				.cbWndExtra = 0,
+				.hInstance = hinst.myHandle,
+				.hIcon = std::move(icon).GetHandle(),
+				.hCursor = std::move(cursor).GetHandle(),
+				.hbrBackground = device::GetComponentColouring<BkColorReference>(),
+				.lpszMenuName = menu_name,
+				.lpszClassName = class_name,
+				.hIconSm = std::move(small_icon).GetHandle(),
+			}
 		};
 	}
 
-	template<typename IconType, typename CursorType>
+	[[nodiscard]]
 	WindowProperty CreateProperty(const device::ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
-		, device::NativeColorBrush&& background
-		, const wchar_t* const& menu_name
+		, device::resource::Icon&& icon = nullptr
+		, device::resource::Icon&& small_icon = nullptr
+		, device::resource::Icon&& cursor = nullptr
+		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
 		return WindowProperty
 		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, std::move(background)
-			, menu_name
-		};
-	}
-
-	template<device::ColoredComponent BkColorReference, typename IconType, typename CursorType>
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
-		, WindowProcedure procedure
-		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
-		, const wchar_t* const& menu_name
-	) noexcept
-	{
-		return WindowProperty
-		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, device::GetComponentColouring<BkColorReference>()
-			, menu_name
-		};
-	}
-
-	template<typename IconType, typename CursorType>
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
-		, WindowProcedure procedure
-		, const wchar_t* const& class_name
-		, IconType&& icon
-		, IconType&& small_icon
-		, CursorType&& cursor
-		, const wchar_t* const& menu_name
-	) noexcept
-	{
-		return WindowProperty
-		{
-			hinst
-			, procedure
-			, class_name
-			, std::forward<IconType>(icon)
-			, std::forward<IconType>(small_icon)
-			, std::forward<CursorType>(cursor)
-			, device::MakeDefaultComponentColouring()
-			, menu_name
+			RawWindowProperty
+			{
+				.cbSize = sizeof(RawWindowProperty),
+				.style = CS_HREDRAW | CS_VREDRAW,
+				.lpfnWndProc = procedure,
+				.cbClsExtra = 0,
+				.cbWndExtra = 0,
+				.hInstance = hinst.myHandle,
+				.hIcon = std::move(icon).GetHandle(),
+				.hCursor = std::move(cursor).GetHandle(),
+				.hbrBackground = device::MakeDefaultComponentColouring(),
+				.lpszMenuName = menu_name,
+				.lpszClassName = class_name,
+				.hIconSm = std::move(small_icon).GetHandle(),
+			}
 		};
 	}
 }
