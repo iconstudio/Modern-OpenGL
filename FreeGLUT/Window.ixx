@@ -59,9 +59,9 @@ export extern "C++" namespace gl::window
 				, x, y, width, height);
 		}
 
-		Window() noexcept = default;
+		constexpr Window() noexcept = default;
 
-		inline ~Window() noexcept
+		~Window() noexcept
 		{
 			if (nullptr != myClassName && nullptr != myHandle.GetHandle())
 			{
@@ -69,18 +69,18 @@ export extern "C++" namespace gl::window
 			}
 		}
 
-		inline void Awake() noexcept
+		void Awake() noexcept
 		{
 			Show();
 		}
 
-		inline void Start() noexcept
+		void Start() noexcept
 		{
 			myHandle.StartUpdate();
 		}
 
 		[[noreturn]]
-		inline void UpdateLoop(util::stop_token canceller) noexcept
+		void UpdateLoop(util::stop_token canceller) noexcept
 		{
 			while (UpdateOnce())
 			{
@@ -89,7 +89,7 @@ export extern "C++" namespace gl::window
 			}
 		}
 
-		inline bool UpdateOnce() noexcept
+		bool UpdateOnce() noexcept
 		{
 			device::RawEvent event = device::EventAPI::MakeEvent();
 
@@ -106,83 +106,83 @@ export extern "C++" namespace gl::window
 			return false;
 		}
 
-		inline bool SendCommand(const device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs) const
+		bool SendCommand(const device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs) const
 			noexcept
 		{
 			return myHandle.SendCommand(msg, lhs, rhs);
 		}
 
-		inline bool SendCommand(const device::EventID& msg) const
+		bool SendCommand(const device::EventID& msg) const
 			noexcept
 		{
 			return SendCommand(msg, 0, 0);
 		}
 
-		inline bool SendCommand(const device::Event& cmd) const
+		bool SendCommand(const device::Event& cmd) const
 			noexcept
 		{
 			return myHandle.SendCommand(cmd);
 		}
 
-		inline bool SendCommand(device::Event&& cmd) const
+		bool SendCommand(device::Event&& cmd) const
 			noexcept
 		{
 			return myHandle.SendCommand(static_cast<device::Event&&>(cmd));
 		}
 
-		inline bool SendCommand(const device::EventID& id, const int& keycode, const long long& flags = 0) const
+		bool SendCommand(const device::EventID& id, const int& keycode, const long long& flags = 0) const
 			noexcept
 		{
 			return myHandle.SendCommand(id, keycode, flags);
 		}
 
-		inline bool SendCommand(const device::EventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags = device::io::KeyboardFlag::None) const
+		bool SendCommand(const device::EventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags = device::io::KeyboardFlag::None) const
 			noexcept
 		{
 			return myHandle.SendCommand(id, keycode, flags);
 		}
 
-		inline bool Show() noexcept
+		bool Show() noexcept
 		{
 			return myHandle.Show();
 		}
 
-		inline bool Hide() noexcept
+		bool Hide() noexcept
 		{
 			return myHandle.Hide();
 		}
 
-		inline bool Maximize() noexcept
+		bool Maximize() noexcept
 		{
 			return myHandle.Maximize();
 		}
 
-		inline bool Minimize() noexcept
+		bool Minimize() noexcept
 		{
 			return myHandle.Minimize();
 		}
 
-		inline bool Restore() noexcept
+		bool Restore() noexcept
 		{
 			return myHandle.Restore();
 		}
 
-		inline bool Redraw(const bool& flag) noexcept
+		bool Redraw(const bool& flag) noexcept
 		{
 			return myHandle.Redraw(flag);
 		}
 
-		inline bool EnableInput() noexcept
+		bool EnableInput() noexcept
 		{
 			return myHandle.EnableInput();
 		}
 
-		inline bool DisableInput() noexcept
+		bool DisableInput() noexcept
 		{
 			return myHandle.DisableInput();
 		}
 
-		inline bool Close() noexcept
+		bool Close() noexcept
 		{
 			return myHandle.Close();
 		}
@@ -196,31 +196,31 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		inline bool IsMinimized() const noexcept
+		bool IsMinimized() const noexcept
 		{
 			return myHandle.IsMinimized();
 		}
 
 		[[nodiscard]]
-		inline bool IsMaximized() const noexcept
+		bool IsMaximized() const noexcept
 		{
 			return myHandle.IsMaximized();
 		}
 
 		[[nodiscard]]
-		inline bool IsRestored() const noexcept
+		bool IsRestored() const noexcept
 		{
 			return myHandle.IsRestored();
 		}
 
 		[[nodiscard]]
-		inline bool IsInputEnabled() const noexcept
+		bool IsInputEnabled() const noexcept
 		{
 			return myHandle.IsInputEnabled();
 		}
 
 		[[nodiscard]]
-		inline WindowStyle GetStyle() const noexcept
+		WindowStyle GetStyle() const noexcept
 		{
 			return WindowStyle{ myHandle.GetStyle() };
 		}
@@ -229,19 +229,19 @@ export extern "C++" namespace gl::window
 		/// GetExStyle
 		/// </summary>
 		[[nodiscard]]
-		inline WindowOption GetOption() const noexcept
+		WindowOption GetOption() const noexcept
 		{
 			return WindowOption{ myHandle.GetExStyle() };
 		}
 
 		[[nodiscard]]
-		inline int GetID() const noexcept
+		int GetID() const noexcept
 		{
 			return myHandle.GetID();
 		}
 
 		[[nodiscard]]
-		inline Rect GetDimensions() const noexcept
+		Rect GetDimensions() const noexcept
 		{
 			auto result = myHandle.GetDimensions();
 			return Rect
@@ -254,7 +254,7 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		inline bool TryGetDimensions(Rect& output) const noexcept
+		bool TryGetDimensions(Rect& output) const noexcept
 		{
 			auto result = device::MakeNativeRect();
 			const bool ok = myHandle.TryGetDimensions(result);
