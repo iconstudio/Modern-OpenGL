@@ -107,18 +107,6 @@ export extern "C++" namespace gl::window
 			return false;
 		}
 
-		inline bool SendCommand(const unsigned int& msg, const unsigned long long& lhs, const unsigned long& rhs) const
-			noexcept
-		{
-			return myHandle.SendCommand(msg, lhs, rhs);
-		}
-
-		inline bool SendCommand(const unsigned int& msg) const
-			noexcept
-		{
-			return SendCommand(msg, 0, 0);
-		}
-
 		inline bool SendCommand(const device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs) const
 			noexcept
 		{
@@ -155,16 +143,6 @@ export extern "C++" namespace gl::window
 			return myHandle.SendCommand(id, keycode, flags);
 		}
 
-		inline bool UICommand(const int& cmd) noexcept
-		{
-			return myHandle.UICommand(cmd);
-		}
-
-		inline bool Close() noexcept
-		{
-			return myHandle.Close();
-		}
-
 		inline bool Show() noexcept
 		{
 			return myHandle.Show();
@@ -190,16 +168,6 @@ export extern "C++" namespace gl::window
 			return myHandle.Restore();
 		}
 
-		inline bool MakeFocus() noexcept
-		{
-			return myHandle.MakeFocus();
-		}
-
-		inline bool MakeForeground() noexcept
-		{
-			return myHandle.MakeForeground();
-		}
-
 		inline bool Redraw(const bool& flag) noexcept
 		{
 			return myHandle.Redraw(flag);
@@ -213,6 +181,11 @@ export extern "C++" namespace gl::window
 		inline bool DisableInput() noexcept
 		{
 			return myHandle.DisableInput();
+		}
+
+		inline bool Close() noexcept
+		{
+			return myHandle.Close();
 		}
 
 		constexpr void Swap(Window& other) noexcept

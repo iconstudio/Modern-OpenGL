@@ -84,22 +84,17 @@ export namespace gl::device
 
 		inline bool UICommand(const int& cmd) noexcept
 		{
-			return SendCommand(WM_SHOWWINDOW, static_cast<WPARAM>(cmd), 0);
-		}
-
-		inline bool Close() noexcept
-		{
-			return SendCommand(WM_CLOSE, 0, 0);
+			return 0 != ::ShowWindow(myHandle, cmd);
 		}
 
 		inline bool Show() noexcept
 		{
-			return 0 != ::ShowWindow(myHandle, SW_SHOW);
+			return UICommand(SW_SHOW);
 		}
 
 		inline bool Hide() noexcept
 		{
-			return 0 != ::ShowWindow(myHandle, SW_HIDE);
+			return UICommand(SW_HIDE);
 		}
 
 		inline bool Maximize() noexcept
@@ -117,16 +112,6 @@ export namespace gl::device
 			return UICommand(SW_RESTORE);
 		}
 
-		inline bool MakeFocus() noexcept
-		{
-			return SendCommand(WM_SETFOCUS, TRUE, 0);
-		}
-
-		inline bool MakeForeground() noexcept
-		{
-			return SendCommand(WM_ACTIVATE, WA_ACTIVE, 0);
-		}
-
 		inline bool Redraw(const bool& flag) noexcept
 		{
 			return SendCommand(WM_SETREDRAW, static_cast<WPARAM>(flag), 0);
@@ -140,6 +125,11 @@ export namespace gl::device
 		inline bool DisableInput() noexcept
 		{
 			return 0 != ::EnableWindow(myHandle, FALSE);
+		}
+
+		inline bool Close() noexcept
+		{
+			return SendCommand(WM_CLOSE, 0, 0);
 		}
 
 		[[nodiscard]]
