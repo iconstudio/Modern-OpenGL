@@ -1,4 +1,5 @@
 export module Glib.Device.IHandle;
+import <utility>;
 import Utility.Constraints;
 
 export namespace gl::device
@@ -20,17 +21,29 @@ export namespace gl::device
 			: myHandle(nullptr)
 		{}
 
+		constexpr IHandle(IHandle&& other)
+			noexcept(util::nothrow_move_constructibles<handle_type>)
+			: myHandle(std::exchange(other.myHandle, nullptr))
+		{}
+
 		explicit constexpr IHandle(handle_type const& handle) noexcept
 			: myHandle(handle)
 		{}
 
 		explicit constexpr IHandle(handle_type&& handle) noexcept
-			: myHandle(std::move(handle))
+			: myHandle(std::exchange(handle, nullptr))
 		{}
+
+		constexpr IHandle& operator=(IHandle&& other)
+			noexcept(util::nothrow_move_assignables<handle_type>)
+		{
+			myHandle = std::exchange(other.myHandle, nullptr);
+			return *this;
+		}
 
 		constexpr IHandle& operator=(handle_type&& handle) noexcept
 		{
-			myHandle = std::move(handle);
+			myHandle = std::exchange(handle, nullptr);
 			return *this;
 		}
 
@@ -207,9 +220,7 @@ export namespace gl::device
 		}
 
 		IHandle(const IHandle&) = delete;
-		constexpr IHandle(IHandle&&) noexcept = default;
 		IHandle& operator=(const IHandle&) = delete;
-		constexpr IHandle& operator=(IHandle&&) noexcept = default;
 
 		handle_type myHandle;
 	};
