@@ -13,26 +13,21 @@ export namespace gl::device
 		using handle_type = base::handle_type;
 		using base::base;
 
-		constexpr DeviceHandle& operator=(nullptr_t) noexcept
-		{
-			base::operator=(nullptr);
-			return *this;
-		}
-
 		constexpr DeviceHandle& operator=(handle_type&& handle) noexcept
 		{
 			base::operator=(std::move(handle));
 			return *this;
 		}
 
+		constexpr DeviceHandle& operator=(nullptr_t) noexcept
+		{
+			base::operator=(nullptr);
+			return *this;
+		}
+
 		~DeviceHandle() noexcept
 		{
-			if (myHandle)
-			{
-				// TODO: replace with new interface
-				//::DestroyWindow(myHandle);
-				myHandle = nullptr;
-			}
+			Destroy();
 		}
 
 		DeviceHandle(const DeviceHandle&) = delete;
