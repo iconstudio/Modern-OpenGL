@@ -4,6 +4,7 @@ module;
 export module Glib.Device.Handle;
 import <type_traits>;
 import <string_view>;
+import Glib.Device.IHandle;
 import Glib.Device.Event.API;
 export import Glib.Device.IO;
 

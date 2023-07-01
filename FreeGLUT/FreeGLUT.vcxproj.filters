@@ -181,5 +181,8 @@
     <ClCompile Include="WindowFactory.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
+    <ClCompile Include="IHandle.ixx">
+      <Filter>헤더 파일\Device\Core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
