@@ -17,10 +17,6 @@ export namespace gl::device
 		constexpr IHandle() noexcept = default;
 		constexpr ~IHandle() = default;
 
-		constexpr IHandle(nullptr_t) noexcept
-			: myHandle(nullptr)
-		{}
-
 		constexpr IHandle(IHandle&& other)
 			noexcept(util::nothrow_move_constructibles<handle_type>)
 			: myHandle(std::exchange(other.myHandle, nullptr))
@@ -32,6 +28,10 @@ export namespace gl::device
 
 		explicit constexpr IHandle(handle_type&& handle) noexcept
 			: myHandle(std::exchange(handle, nullptr))
+		{}
+
+		explicit constexpr IHandle(nullptr_t) noexcept
+			: myHandle(nullptr)
 		{}
 
 		constexpr IHandle& operator=(IHandle&& other)
