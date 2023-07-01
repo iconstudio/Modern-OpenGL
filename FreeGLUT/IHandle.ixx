@@ -166,22 +166,22 @@ export namespace gl::device
 			return std::move(myHandle);
 		}
 
-		explicit constexpr operator handle_type& () & noexcept
+		constexpr operator handle_type& () & noexcept
 		{
 			return myHandle;
 		}
 
-		explicit constexpr operator handle_type const& () const& noexcept
+		constexpr operator handle_type const& () const& noexcept
 		{
 			return myHandle;
 		}
 
-		explicit constexpr operator handle_type && () && noexcept
+		constexpr operator handle_type && () && noexcept
 		{
 			return std::move(myHandle);
 		}
 
-		explicit constexpr operator handle_type const&& () const&& noexcept
+		constexpr operator handle_type const&& () const&& noexcept
 		{
 			return std::move(myHandle);
 		}
