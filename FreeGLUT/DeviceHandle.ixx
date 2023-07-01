@@ -22,32 +22,17 @@ export namespace gl::device
 	public:
 		using base = IHandle<RawDeviceHandle>;
 		using handle_type = base::handle_type;
-
-		constexpr DeviceHandle()
-			: base()
-		{}
-
-		constexpr DeviceHandle(nullptr_t) noexcept
-			: base(nullptr)
-		{}
-
-		explicit constexpr DeviceHandle(handle_type const& handle) noexcept
-			: base(handle)
-		{}
-
-		explicit constexpr DeviceHandle(handle_type&& handle) noexcept
-			: base(std::move(handle))
-		{}
+		using base::base;
 
 		constexpr DeviceHandle& operator=(nullptr_t) noexcept
 		{
-			base::myHandle = nullptr;
+			base::operator=(nullptr);
 			return *this;
 		}
 
 		constexpr DeviceHandle& operator=(handle_type&& handle) noexcept
 		{
-			base::myHandle = std::move(handle);
+			base::operator=(std::move(handle));
 			return *this;
 		}
 
@@ -63,7 +48,7 @@ export namespace gl::device
 
 		inline bool StartUpdate() noexcept
 		{
-			return 0 != ::UpdateWindow(myHandle);
+			return 0 != Delegate(::UpdateWindow);
 		}
 
 		long long DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs) const noexcept
