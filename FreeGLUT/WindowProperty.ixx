@@ -3,6 +3,7 @@ module;
 
 export module Glib.Window.Property;
 import <type_traits>;
+import Utility.FixedString;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Brush;
 import Glib.Device.Brush.Component;
@@ -231,5 +232,59 @@ export extern "C++" namespace gl::window
 				.hIconSm = std::move(small_icon).GetHandle(),
 			}
 		};
+	}
+
+	template<util::fixed_wstring ClassName>
+	[[nodiscard]]
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
+		, const device::ColorBrush& background
+		, const wchar_t* const& menu_name = nullptr
+	) noexcept(ClassName.size() <= 256)
+	{
+		return CreateProperty(hinst, procedure, ClassName.data(), std::move(icon), std::move(small_icon), std::move(cursor), background, menu_name);
+	}
+
+	template<util::fixed_wstring ClassName>
+	[[nodiscard]]
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
+		, device::ColorBrush&& background
+		, const wchar_t* const& menu_name = nullptr
+	) noexcept(ClassName.size() <= 256)
+	{
+		return CreateProperty(hinst, procedure, ClassName.data(), std::move(icon), std::move(small_icon), std::move(cursor), std::move(background), menu_name);
+	}
+
+	template<util::fixed_wstring ClassName, device::ColoredComponent BkColorReference>
+	[[nodiscard]]
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, device::resource::Icon&& icon
+		, device::resource::Icon&& small_icon
+		, device::resource::Icon&& cursor
+		, const wchar_t* const& menu_name = nullptr
+	) noexcept(ClassName.size() <= 256)
+	{
+		return CreateProperty<BkColorReference>(hinst, procedure, ClassName.data(), std::move(icon), std::move(small_icon), std::move(cursor), menu_name);
+	}
+
+	template<util::fixed_wstring ClassName>
+	[[nodiscard]]
+	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+		, WindowProcedure procedure
+		, device::resource::Icon&& icon = nullptr
+		, device::resource::Icon&& small_icon = nullptr
+		, device::resource::Icon&& cursor = nullptr
+		, const wchar_t* const& menu_name = nullptr
+	) noexcept(ClassName.size() <= 256)
+	{
+		return CreateProperty(hinst, procedure, ClassName.data(), std::move(icon), std::move(small_icon), std::move(cursor), menu_name);
 	}
 }
