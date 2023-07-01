@@ -178,5 +178,8 @@
     <ClCompile Include="WindowsPropertyFactory.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
+    <ClCompile Include="WindowFactory.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -225,6 +225,7 @@
     <ClCompile Include="SpecialEvent.ixx" />
     <ClCompile Include="WindowABI.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
+    <ClCompile Include="WindowFactory.ixx" />
     <ClCompile Include="WindowOption.ixx" />
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="Window.ixx" />
