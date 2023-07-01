@@ -17,22 +17,39 @@ export namespace gl::device
 	struct [[nodiscard]] log_t { constexpr log_t() noexcept = default; };
 	inline constexpr log_t log{};
 
-	class [[nodiscard]] DeviceHandle
+	class [[nodiscard]] DeviceHandle : public IHandle<RawDeviceHandle>
 	{
 	public:
-		constexpr DeviceHandle() noexcept = default;
+		using base = IHandle<RawDeviceHandle>;
+		using handle_type = base::handle_type;
+
+		constexpr DeviceHandle()
+			: base()
+		{}
 
 		constexpr DeviceHandle(nullptr_t) noexcept
-			: myHandle(nullptr)
+			: base(nullptr)
 		{}
 
-		constexpr DeviceHandle(RawDeviceHandle&& handle) noexcept
-			: myHandle(static_cast<RawDeviceHandle&&>(handle))
+		explicit constexpr DeviceHandle(handle_type const& handle) noexcept
+			: base(handle)
 		{}
 
-		constexpr DeviceHandle(volatile RawDeviceHandle&& handle) noexcept
-			: myHandle(static_cast<volatile RawDeviceHandle&&>(handle))
+		explicit constexpr DeviceHandle(handle_type&& handle) noexcept
+			: base(std::move(handle))
 		{}
+
+		constexpr DeviceHandle& operator=(nullptr_t) noexcept
+		{
+			base::myHandle = nullptr;
+			return *this;
+		}
+
+		constexpr DeviceHandle& operator=(handle_type&& handle) noexcept
+		{
+			base::myHandle = std::move(handle);
+			return *this;
+		}
 
 		~DeviceHandle() noexcept
 		{
@@ -277,54 +294,10 @@ export namespace gl::device
 			return ::GetAncestor(myHandle, GA_ROOTOWNER);
 		}
 
-		[[nodiscard]]
-		inline const RawDeviceHandle& GetHandle() const& noexcept
-		{
-			return myHandle;
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle&& GetHandle() && noexcept
-		{
-			return static_cast<RawDeviceHandle&&>(myHandle);
-		}
-
-		constexpr operator RawDeviceHandle() const noexcept
-		{
-			return myHandle;
-		}
-
-		constexpr DeviceHandle& operator=(nullptr_t) noexcept
-		{
-			myHandle = nullptr;
-			return *this;
-		}
-
-		constexpr DeviceHandle& operator=(RawDeviceHandle&& handle) noexcept
-		{
-			myHandle = static_cast<RawDeviceHandle&&>(handle);
-			return *this;
-		}
-
-		[[nodiscard]]
-		constexpr bool operator==(const DeviceHandle& rhs) const noexcept
-		{
-			return myHandle == rhs.myHandle;
-		}
-
-		[[nodiscard]]
-		constexpr bool operator==(const RawDeviceHandle& handle) const noexcept
-		{
-			return myHandle == handle;
-		}
-
 		DeviceHandle(const DeviceHandle&) = delete;
 		constexpr DeviceHandle(DeviceHandle&&) noexcept = default;
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
 		constexpr DeviceHandle& operator=(DeviceHandle&&) noexcept = default;
-
-	private:
-		RawDeviceHandle myHandle = nullptr;
 	};
 
 	[[nodiscard]]
