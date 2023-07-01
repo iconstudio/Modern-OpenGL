@@ -29,6 +29,12 @@ export namespace gl::device
 			: myHandle(std::move(handle))
 		{}
 
+		constexpr IHandle& operator=(H&& handle) noexcept
+		{
+			myHandle = std::move(handle);
+			return *this;
+		}
+
 		[[nodiscard]]
 		constexpr H& GetHandle() & noexcept
 		{
@@ -51,6 +57,18 @@ export namespace gl::device
 		constexpr const H&& GetHandle() const&& noexcept
 		{
 			return std::move(myHandle);
+		}
+
+		[[nodiscard]]
+		constexpr bool operator==(const IHandle& other) const noexcept
+		{
+			return myHandle == other.myHandle;
+		}
+
+		[[nodiscard]]
+		constexpr bool operator==(const H& handle) const noexcept
+		{
+			return myHandle == handle;
 		}
 
 		constexpr IHandle(const IHandle&)
