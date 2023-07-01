@@ -38,7 +38,18 @@ export namespace gl::window::detail
 		}
 
 		BOOL value = TRUE;
-		::DwmSetWindowAttribute(result, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+#if _DEBUG
+		HRESULT hr =
+#endif
+			::DwmSetWindowAttribute(result, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+
+#if _DEBUG
+		if (FAILED(hr))
+		{
+			::DestroyWindow(result);
+			return nullptr;
+		}
+#endif
 
 		return result;
 	}
