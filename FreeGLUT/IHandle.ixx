@@ -59,6 +59,26 @@ export namespace gl::device
 			return std::move(myHandle);
 		}
 
+		explicit constexpr operator H& () & noexcept
+		{
+			return myHandle;
+		}
+
+		explicit constexpr operator const H& () const& noexcept
+		{
+			return myHandle;
+		}
+
+		explicit constexpr operator H && () && noexcept
+		{
+			return std::move(myHandle);
+		}
+
+		explicit constexpr operator const H && () const&& noexcept
+		{
+			return std::move(myHandle);
+		}
+
 		[[nodiscard]]
 		constexpr bool operator==(const IHandle& other) const noexcept
 		{
