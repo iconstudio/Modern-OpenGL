@@ -16,6 +16,10 @@ export namespace gl::device
 		constexpr IHandle() noexcept = default;
 		constexpr ~IHandle() = default;
 
+		constexpr IHandle(nullptr_t) noexcept
+			: myHandle(nullptr)
+		{}
+
 		explicit constexpr IHandle(handle_type const& handle) noexcept
 			: myHandle(handle)
 		{}
