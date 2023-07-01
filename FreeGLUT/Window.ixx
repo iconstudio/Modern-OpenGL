@@ -19,7 +19,7 @@ export extern "C++" namespace gl::window
 {
 	class [[nodiscard]] Window
 	{
-	protected:
+	public:
 		Window(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
@@ -49,8 +49,9 @@ export extern "C++" namespace gl::window
 			, const int& width
 			, const int& height
 		) noexcept
-			: myInstance(static_cast<WindowProperty&&>(properties).GetInstance())
-			, myClassName(static_cast<WindowProperty&&>(properties).GetClass())
+			: myInstance(std::move(properties).GetInstance())
+			, myClassName(std::move(properties).GetClass())
+			, myProcecure(std::move(properties).GetProcedure())
 		{
 			myHandle = detail::CreateNativeWindow(myInstance.myHandle
 				, myClassName
@@ -59,7 +60,6 @@ export extern "C++" namespace gl::window
 				, x, y, width, height);
 		}
 
-	public:
 		[[nodiscard]]
 		friend Window CreateWindow(const WindowProperty& properties
 			, const std::wstring_view& title
