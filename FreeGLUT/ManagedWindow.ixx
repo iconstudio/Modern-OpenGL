@@ -294,7 +294,7 @@ export namespace gl::window
 	{
 		const gl::window::ManagedWindow::event_id_t msg = static_cast<event_id_t>(id);
 
-		device::DeviceHandle ctx{ std::move(hwnd) };
+		device::IWindowHandle ctx{ std::move(hwnd) };
 
 		ManagedWindow* self = ManagedWindow::GetInstance();
 
