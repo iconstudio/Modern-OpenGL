@@ -142,11 +142,6 @@ export namespace gl::device::resource::detail
 		return nullptr != output;
 	}
 
-	bool Destroy(const RawIcon& icon) noexcept
-	{
-		return 0 != ::DestroyIcon(icon);
-	}
-
 	bool Draw(const RawIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
 	{
 		return 0 != ::DrawIcon(hdc, x, y, icon);
@@ -172,5 +167,10 @@ export namespace gl::device::resource::detail
 	bool TryGetInfo(const RawIcon& icon, ::ICONINFO& output) noexcept
 	{
 		return 0 != ::GetIconInfo(icon, &output);
+	}
+
+	bool Destroy(RawIcon& icon) noexcept
+	{
+		return 0 != ::DestroyIcon(icon);
 	}
 }

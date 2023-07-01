@@ -48,6 +48,7 @@ export namespace gl::device::resource
 		[[nodiscard]]
 		friend bool TryCopyIcon(const Icon& icon, Icon& output) noexcept;
 		friend bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
+		friend bool DestroyIcon(Icon& icon) noexcept;
 
 		constexpr Icon(nullptr_t) noexcept
 			: myIcon(nullptr)
@@ -223,6 +224,11 @@ export namespace gl::device::resource
 	bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
 	{
 		return detail::Draw(icon.GetHandle(), hdc, x, y);
+	}
+
+	bool DestroyIcon(Icon& icon) noexcept
+	{
+		return detail::Destroy(icon.myIcon);
 	}
 }
 
