@@ -221,7 +221,6 @@ export extern "C++" namespace gl::window
 			std::swap(myInstance, other.myInstance);
 			std::swap(myClassName, other.myClassName);
 			std::swap(myProcecure, other.myProcecure);
-			std::swap(frameLimit, other.frameLimit);
 		}
 
 		[[nodiscard]]
@@ -311,13 +310,13 @@ export extern "C++" namespace gl::window
 		}
 
 		[[nodiscard]]
-		constexpr const wchar_t* const& GetClass() const& noexcept
+		constexpr const wchar_t* const& GetClassName() const& noexcept
 		{
 			return myClassName;
 		}
 
 		[[nodiscard]]
-		constexpr const wchar_t*&& GetClass() && noexcept
+		constexpr const wchar_t*&& GetClassName() && noexcept
 		{
 			return static_cast<const wchar_t*&&>(myClassName);
 		}
@@ -331,9 +330,6 @@ export extern "C++" namespace gl::window
 		device::DeviceHandle myHandle = nullptr;
 		WindowProcedure myProcecure = nullptr;
 		const wchar_t* myClassName = nullptr;
-
-		bool isFrameLimited = false;
-		unsigned int frameLimit = 0;
 	};
 
 	Window CreateWindow(const WindowProperty& properties, const std::wstring_view& title, const WindowStyle& style, const WindowOption& option, const int& x, const int& y, const int& width, const int& height) noexcept
