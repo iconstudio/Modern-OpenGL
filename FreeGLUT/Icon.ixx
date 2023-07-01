@@ -9,45 +9,47 @@ import :Implement;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] DeviceIcon
+	using detail::RawIcon;
+
+	class [[nodiscard]] Icon
 	{
 	protected:
-		constexpr DeviceIcon(const HICON& icon, const unsigned int& length) noexcept
+		constexpr Icon(const RawIcon& icon, const unsigned int& length) noexcept
 			: myIcon(icon)
 			, myLength(length)
 		{}
 
-		constexpr DeviceIcon(HICON&& icon, const unsigned int& length) noexcept
-			: myIcon(static_cast<HICON&&>(icon))
+		constexpr Icon(RawIcon&& icon, const unsigned int& length) noexcept
+			: myIcon(static_cast<RawIcon&&>(icon))
 			, myLength(length)
 		{}
 
 	public:
 		[[nodiscard]]
-		friend DeviceIcon MakeEmptyIcon() noexcept;
+		friend Icon MakeEmptyIcon() noexcept;
 		[[nodiscard]]
-		friend DeviceIcon LoadIcon(const FilePath& path) noexcept;
+		friend Icon LoadIcon(const FilePath& path) noexcept;
 		[[nodiscard]]
-		friend bool TryLoadIcon(const FilePath& path, DeviceIcon& output) noexcept;
+		friend bool TryLoadIcon(const FilePath& path, Icon& output) noexcept;
 		[[nodiscard]]
-		friend DeviceIcon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept;
+		friend Icon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept;
 		[[nodiscard]]
-		friend bool TryLoadIconAt(const FilePath& path, const unsigned int& index, DeviceIcon& output) noexcept;
+		friend bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept;
 		[[nodiscard]]
-		friend DeviceIcon LoadResource(const std::wstring_view& name) noexcept;
+		friend Icon LoadResource(const std::wstring_view& name) noexcept;
 		[[nodiscard]]
-		friend bool TryLoadResource(const std::wstring_view& name, DeviceIcon& output) noexcept;
+		friend bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept;
 		[[nodiscard]]
-		friend DeviceIcon LoadResource(const int& id) noexcept;
+		friend Icon LoadResource(const int& id) noexcept;
 		[[nodiscard]]
-		friend bool TryLoadResource(const int& id, DeviceIcon& output) noexcept;
+		friend bool TryLoadResource(const int& id, Icon& output) noexcept;
 		[[nodiscard]]
-		friend DeviceIcon CopyIcon(const DeviceIcon& icon) noexcept;
+		friend Icon CopyIcon(const Icon& icon) noexcept;
 		[[nodiscard]]
-		friend bool TryCopyIcon(const DeviceIcon& icon, DeviceIcon& output) noexcept;
-		friend bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
+		friend bool TryCopyIcon(const Icon& icon, Icon& output) noexcept;
+		friend bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
 
-		virtual inline ~DeviceIcon() noexcept
+		virtual inline ~Icon() noexcept
 		{
 			if (nullptr != myIcon)
 			{
@@ -56,13 +58,13 @@ export namespace gl::device::resource
 		}
 
 		[[nodiscard]]
-		DeviceIcon Copy() const noexcept
+		Icon Copy() const noexcept
 		{
 			return CopyIcon(*this);
 		}
 
 		[[nodiscard]]
-		bool TryCopy(DeviceIcon& output) const noexcept
+		bool TryCopy(Icon& output) const noexcept
 		{
 			return TryCopyIcon(*this, output);
 		}
@@ -73,15 +75,15 @@ export namespace gl::device::resource
 		}
 
 		[[nodiscard]]
-		constexpr const HICON& GetHandle() const& noexcept
+		constexpr const RawIcon& GetHandle() const& noexcept
 		{
 			return myIcon;
 		}
 
 		[[nodiscard]]
-		constexpr HICON&& GetHandle() && noexcept
+		constexpr RawIcon&& GetHandle() && noexcept
 		{
-			return static_cast<HICON&&>(myIcon);
+			return static_cast<RawIcon&&>(myIcon);
 		}
 
 		[[nodiscard]]
@@ -96,27 +98,27 @@ export namespace gl::device::resource
 			return nullptr == myIcon;
 		}
 
-		DeviceIcon(const DeviceIcon&) = delete;
-		constexpr DeviceIcon(DeviceIcon&&) noexcept = default;
-		DeviceIcon& operator=(const DeviceIcon&) = delete;
-		constexpr DeviceIcon& operator=(DeviceIcon&&) = default;
+		Icon(const Icon&) = delete;
+		constexpr Icon(Icon&&) noexcept = default;
+		Icon& operator=(const Icon&) = delete;
+		constexpr Icon& operator=(Icon&&) = default;
 
 	private:
-		HICON myIcon;
+		RawIcon myIcon;
 		unsigned int myLength;
 	};
 
-	DeviceIcon MakeEmptyIcon() noexcept
+	Icon MakeEmptyIcon() noexcept
 	{
-		return DeviceIcon(nullptr, 0U);
+		return Icon(nullptr, 0U);
 	}
 
-	DeviceIcon LoadIcon(const FilePath& path) noexcept
+	Icon LoadIcon(const FilePath& path) noexcept
 	{
-		return DeviceIcon(detail::ExtractFrom(path, 0), detail::GetIconsNumber(path));
+		return Icon(detail::ExtractFrom(path, 0), detail::GetIconsNumber(path));
 	}
 
-	bool TryLoadIcon(const FilePath& path, DeviceIcon& output) noexcept
+	bool TryLoadIcon(const FilePath& path, Icon& output) noexcept
 	{
 		if (nullptr != detail::ExtractFrom(path, 0))
 		{
@@ -129,12 +131,12 @@ export namespace gl::device::resource
 		}
 	}
 
-	DeviceIcon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
+	Icon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
 	{
-		return DeviceIcon(detail::ExtractFrom(path, index), detail::GetIconsNumber(path));
+		return Icon(detail::ExtractFrom(path, index), detail::GetIconsNumber(path));
 	}
 
-	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, DeviceIcon& output) noexcept
+	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept
 	{
 		if (nullptr != detail::ExtractFrom(path, index))
 		{
@@ -147,12 +149,12 @@ export namespace gl::device::resource
 		}
 	}
 
-	DeviceIcon LoadResource(const std::wstring_view& name) noexcept
+	Icon LoadResource(const std::wstring_view& name) noexcept
 	{
-		return DeviceIcon(detail::LoadResource(name), 1);
+		return Icon(detail::LoadResource(name), 1);
 	}
 
-	bool TryLoadResource(const std::wstring_view& name, DeviceIcon& output) noexcept
+	bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept
 	{
 		if (detail::TryLoadResource(output.myIcon, name))
 		{
@@ -165,12 +167,12 @@ export namespace gl::device::resource
 		}
 	}
 
-	DeviceIcon LoadResource(const int& id) noexcept
+	Icon LoadResource(const int& id) noexcept
 	{
-		return DeviceIcon(detail::LoadResource(id), 1);
+		return Icon(detail::LoadResource(id), 1);
 	}
 
-	bool TryLoadResource(const int& id, DeviceIcon& output) noexcept
+	bool TryLoadResource(const int& id, Icon& output) noexcept
 	{
 		if (detail::TryLoadResource(output.myIcon, id))
 		{
@@ -183,12 +185,12 @@ export namespace gl::device::resource
 		}
 	}
 
-	DeviceIcon CopyIcon(const DeviceIcon& icon) noexcept
+	Icon CopyIcon(const Icon& icon) noexcept
 	{
-		return DeviceIcon(detail::Copy(icon.myIcon), icon.myLength);
+		return Icon(detail::Copy(icon.myIcon), icon.myLength);
 	}
 
-	bool TryCopyIcon(const DeviceIcon& icon, DeviceIcon& output) noexcept
+	bool TryCopyIcon(const Icon& icon, Icon& output) noexcept
 	{
 		if (detail::TryCopy(icon.myIcon, output.myIcon))
 		{
@@ -201,7 +203,7 @@ export namespace gl::device::resource
 		}
 	}
 
-	bool DrawIcon(const DeviceIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
+	bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
 	{
 		return detail::Draw(icon.GetHandle(), hdc, x, y);
 	}
