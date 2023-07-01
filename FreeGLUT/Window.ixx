@@ -325,7 +325,7 @@ export extern "C++" namespace gl::window
 		return Window{ static_cast<WindowProperty&&>(properties), title, style, option, dimension.x, dimension.y, dimension.w, dimension.h };
 	}
 
-	inline Window CreateWindow(const WindowProperty& properties
+	Window CreateWindow(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const int& x
@@ -337,7 +337,7 @@ export extern "C++" namespace gl::window
 		return Window{ properties, title, style, options::Default, x, y, width, height };
 	}
 
-	inline Window CreateWindow(WindowProperty&& properties
+	Window CreateWindow(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const int& x
@@ -349,7 +349,7 @@ export extern "C++" namespace gl::window
 		return Window{ static_cast<WindowProperty&&>(properties), title, style, options::Default, x, y, width, height };
 	}
 
-	inline Window CreateWindow(const WindowProperty& properties
+	Window CreateWindow(const WindowProperty& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
@@ -358,7 +358,7 @@ export extern "C++" namespace gl::window
 		return Window{ properties, title, style, options::Default, dimension.x, dimension.y, dimension.w, dimension.h };
 	}
 
-	inline Window CreateWindow(WindowProperty&& properties
+	Window CreateWindow(WindowProperty&& properties
 		, const std::wstring_view& title
 		, const WindowStyle& style
 		, const Rect& dimension
