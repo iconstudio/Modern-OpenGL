@@ -86,6 +86,62 @@ export namespace gl::device
 			}
 		}
 
+		template<util::invocables<value_type&> Fn>
+		constexpr auto Delegate(Fn&& fn) &
+			noexcept(util::nothrow_invocables<Fn, value_type&>)
+		{
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, value_type&>, void>)
+			{
+				std::invoke(std::forward<Fn>(fn), *myHandle);
+			}
+			else
+			{
+				return std::invoke(std::forward<Fn>(fn), *myHandle);
+			}
+		}
+
+		template<util::invocables<const value_type&> Fn>
+		constexpr auto Delegate(Fn&& fn) const&
+			noexcept(util::nothrow_invocables<Fn, const value_type&>)
+		{
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, const value_type&>, void>)
+			{
+				std::invoke(std::forward<Fn>(fn), *myHandle);
+			}
+			else
+			{
+				return std::invoke(std::forward<Fn>(fn), *myHandle);
+			}
+		}
+
+		template<util::invocables<value_type&&> Fn>
+		constexpr auto Delegate(Fn&& fn) &&
+			noexcept(util::nothrow_invocables<Fn, value_type&&>)
+		{
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, value_type&&>, void>)
+			{
+				std::invoke(std::forward<Fn>(fn), std::move(*myHandle));
+			}
+			else
+			{
+				return std::invoke(std::forward<Fn>(fn), std::move(*myHandle));
+			}
+		}
+
+		template<util::invocables<const value_type&&> Fn>
+		constexpr auto Delegate(Fn&& fn) const&&
+			noexcept(util::nothrow_invocables<Fn, const value_type&&>)
+		{
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, const value_type&&>, void>)
+			{
+				std::invoke(std::forward<Fn>(fn), std::move(*myHandle));
+			}
+			else
+			{
+				return std::invoke(std::forward<Fn>(fn), std::move(*myHandle));
+			}
+		}
+
 		[[nodiscard]]
 		constexpr handle_type& GetHandle() & noexcept
 		{
