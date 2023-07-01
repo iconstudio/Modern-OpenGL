@@ -3,11 +3,10 @@ module;
 
 export module Glib.Device.Brush.Component;
 import <type_traits>;
+export import Glib.Device.Brush;
 
 namespace gl::device
 {
-	using NativeColorBrush = ::HBRUSH__*;
-
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
 		Window = COLOR_WINDOW,

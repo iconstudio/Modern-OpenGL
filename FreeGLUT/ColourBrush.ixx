@@ -13,6 +13,10 @@ export namespace gl::device
 	public:
 		constexpr ColorBrush() noexcept = default;
 
+		constexpr ColorBrush(nullptr_t) noexcept
+			: myBrush(nullptr)
+		{}
+
 		~ColorBrush() noexcept
 		{
 			::DeleteObject(myBrush);
@@ -35,6 +39,17 @@ export namespace gl::device
 		constexpr ColorBrush& operator=(NativeColorBrush&& brush) noexcept
 		{
 			myBrush = std::move(brush);
+			return *this;
+		}
+
+		ColorBrush& operator=(nullptr_t) noexcept
+		{
+			if (nullptr != myBrush)
+			{
+				::DeleteObject(myBrush);
+			}
+			myBrush = nullptr;
+
 			return *this;
 		}
 
