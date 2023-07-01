@@ -9,7 +9,7 @@ import Glib.Device.Handle;
 import Glib.Device.Event;
 import Glib.Device.IO;
 import Glib.Device.Event.API;
-export import Glib.Window.Property;
+import Glib.Window.Property;
 export import :Style;
 export import :Option;
 export import :ABI;

@@ -19,12 +19,13 @@ import Utility.Monad;
 import Utility.Option;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
-import Glib.Window;
 import Glib.Device.Event;
 import Glib.Device.Brush;
+export import Glib.Device.IO;
 import Glib.Device.Utility;
 export import Glib.Window.Coroutine;
-export import Glib.Device.IO;
+import Glib.Window;
+import Glib.Window.Property.Factory;
 
 export namespace gl::window
 {
