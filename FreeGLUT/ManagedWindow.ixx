@@ -94,8 +94,6 @@ export namespace gl::window
 				++index;
 			}
 
-			myCoroutines = std::make_unique<std::stack<coro_t>>();
-
 			underlying.Awake();
 			underlying.Start();
 		}
@@ -130,9 +128,9 @@ export namespace gl::window
 
 		void StartCoroutine(coro_t&& coroutine) noexcept
 		{
-			ResumeTopCoroutine();
+			//ResumeTopCoroutine();
 
-			myCoroutines->push(std::move(coroutine));
+			//myCoroutines->push(std::move(coroutine));
 		}
 
 		[[noreturn]]
@@ -234,12 +232,7 @@ export namespace gl::window
 		}
 
 		void ResumeTopCoroutine() noexcept
-		{
-			if (0 < myCoroutines->size())
-			{
-				myCoroutines->top().Resume();
-			}
-		}
+		{}
 
 		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept
 		{
@@ -279,7 +272,7 @@ export namespace gl::window
 		util::Option<bool> optionFullscreen{ false };
 		util::atomic_bool isRenderingNow = false;
 
-		std::unique_ptr<std::stack<coro_t>> myCoroutines{};
+		//std::unique_ptr<std::stack<coro_t>> myCoroutines{};
 	};
 
 #pragma region CreateWindowEx
