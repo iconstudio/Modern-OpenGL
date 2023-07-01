@@ -173,7 +173,7 @@ export namespace gl::device
 		}
 
 		[[nodiscard]]
-		inline long long GetInternalUserData(int index) const noexcept
+		inline long long GetInternalUserData() const noexcept
 		{
 			return GetInternalValue(GWLP_USERDATA);
 		}
