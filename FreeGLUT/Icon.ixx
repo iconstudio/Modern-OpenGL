@@ -49,12 +49,29 @@ export namespace gl::device::resource
 		friend bool TryCopyIcon(const Icon& icon, Icon& output) noexcept;
 		friend bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
 
+		constexpr Icon(nullptr_t) noexcept
+			: myIcon(nullptr)
+			, myLength(0U)
+		{}
+
+		constexpr Icon& operator=(nullptr_t) noexcept
+		{
+			if (nullptr != myIcon)
+			{
+				detail::Destroy(myIcon);
+			}
+			myLength = 0U;
+
+			return *this;
+		}
+
 		virtual inline ~Icon() noexcept
 		{
 			if (nullptr != myIcon)
 			{
 				detail::Destroy(myIcon);
 			}
+			myLength = 0U;
 		}
 
 		[[nodiscard]]
