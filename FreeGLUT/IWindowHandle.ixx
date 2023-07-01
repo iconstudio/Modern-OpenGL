@@ -27,6 +27,18 @@ export namespace gl::device
 			: base(std::move(other))
 		{}
 
+		explicit constexpr IWindowHandle(const handle_type& handle) noexcept
+			: base(handle)
+		{}
+
+		explicit constexpr IWindowHandle(handle_type&& handle) noexcept
+			: base(std::move(handle))
+		{}
+
+		constexpr IWindowHandle(nullptr_t) noexcept
+			: base(nullptr)
+		{}
+
 		constexpr IWindowHandle& operator=(IWindowHandle&& other) noexcept
 		{
 			base::operator=(std::move(other));
@@ -39,18 +51,6 @@ export namespace gl::device
 			return *this;
 		}
 
-		constexpr IWindowHandle(nullptr_t) noexcept
-			: base(nullptr)
-		{}
-
-		explicit constexpr IWindowHandle(const handle_type& handle) noexcept
-			: base(handle)
-		{}
-
-		explicit constexpr IWindowHandle(handle_type&& handle) noexcept
-			: base(std::move(handle))
-		{}
-
 		inline bool StartUpdate() noexcept
 		{
 			return 0 != Delegate(::UpdateWindow);
@@ -59,6 +59,18 @@ export namespace gl::device
 		long long DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs) const noexcept
 		{
 			return Delegate(::DefWindowProc, msg, lhs, rhs);
+		}
+
+		bool Destroy() noexcept
+		{
+			if (myHandle)
+			{
+				return 0 != Delegate(::DestroyWindow);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		inline bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const
