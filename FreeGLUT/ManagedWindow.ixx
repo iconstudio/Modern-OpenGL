@@ -25,6 +25,7 @@ export import Glib.Device.IO;
 import Glib.Device.Utility;
 export import Glib.Window.Coroutine;
 import Glib.Window;
+import Glib.Window.Factory;
 export import Glib.Window.Property.Factory;
 
 export namespace gl::window
