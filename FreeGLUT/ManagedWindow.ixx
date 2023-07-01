@@ -72,7 +72,7 @@ export namespace gl::window
 		explicit ManagedWindow(Window&& window, int number_of_workers)
 			: underlying(std::move(window))
 			, workerCount(number_of_workers), terminateLatch(number_of_workers)
-			, windowProcedureHandle(std::move(window.myProcecure))
+			, windowProcedureHandle(std::move(window.myProcedure))
 			, base_shared_t()
 		{
 			if (base_singleton_t::GetInstance() != nullptr)

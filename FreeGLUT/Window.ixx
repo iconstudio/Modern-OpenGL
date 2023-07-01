@@ -19,6 +19,8 @@ export extern "C++" namespace gl::window
 	class [[nodiscard]] Window
 	{
 	public:
+		constexpr Window() noexcept = default;
+
 		explicit Window(const WindowProperty& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
@@ -30,7 +32,7 @@ export extern "C++" namespace gl::window
 		) noexcept
 			: myInstance(properties.GetInstance())
 			, myClassName(properties.GetClass())
-			, myProcecure(properties.GetProcedure())
+			, myProcedure(properties.GetProcedure())
 		{
 			myHandle = detail::CreateNativeWindow(properties.GetInstance().myHandle
 				, properties.GetClass()
@@ -50,7 +52,7 @@ export extern "C++" namespace gl::window
 		) noexcept
 			: myInstance(std::move(properties).GetInstance())
 			, myClassName(std::move(properties).GetClass())
-			, myProcecure(std::move(properties).GetProcedure())
+			, myProcedure(std::move(properties).GetProcedure())
 		{
 			myHandle = detail::CreateNativeWindow(myInstance.myHandle
 				, myClassName
@@ -58,8 +60,6 @@ export extern "C++" namespace gl::window
 				, Export(style), Export(option)
 				, x, y, width, height);
 		}
-
-		constexpr Window() noexcept = default;
 
 		~Window() noexcept
 		{
@@ -192,7 +192,7 @@ export extern "C++" namespace gl::window
 			std::swap(myHandle, other.myHandle);
 			std::swap(myInstance, other.myInstance);
 			std::swap(myClassName, other.myClassName);
-			std::swap(myProcecure, other.myProcecure);
+			std::swap(myProcedure, other.myProcedure);
 		}
 
 		[[nodiscard]]
@@ -296,7 +296,7 @@ export extern "C++" namespace gl::window
 		constexpr Window(Window&& other) noexcept
 			: myInstance(std::exchange(other.myInstance, nullptr))
 			, myHandle(std::exchange(other.myHandle, nullptr))
-			, myProcecure(std::exchange(other.myProcecure, nullptr))
+			, myProcedure(std::exchange(other.myProcedure, nullptr))
 			, myClassName(std::exchange(other.myClassName, nullptr))
 		{}
 
@@ -311,7 +311,7 @@ export extern "C++" namespace gl::window
 
 		device::ProcessInstance myInstance = nullptr;
 		device::DeviceHandle myHandle = nullptr;
-		WindowProcedure myProcecure = nullptr;
+		WindowProcedure myProcedure = nullptr;
 		const wchar_t* myClassName = nullptr;
 	};
 
