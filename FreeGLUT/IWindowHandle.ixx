@@ -208,4 +208,24 @@ export namespace gl::device
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
 		constexpr IWindowHandle& operator=(IWindowHandle&&) noexcept = default;
 	};
+
+	[[nodiscard]]
+	constexpr NativeRect MakeNativeRect() noexcept
+	{
+		return {};
+	}
+
+	inline bool RegisterWindow(const tagWNDCLASSEXW& property)
+	{
+		return 0 == ::RegisterClassEx(&property);
+	}
+
+	inline bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name)
+	{
+		return 0 == ::UnregisterClass(class_name.data(), hinst);
+	}
+
+	using ::PostQuitMessage;
+	using ::DestroyWindow;
+	using ::GetLastError;
 }
