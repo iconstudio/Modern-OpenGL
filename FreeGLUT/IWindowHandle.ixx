@@ -43,11 +43,11 @@ export namespace gl::device
 			: base(nullptr)
 		{}
 
-		constexpr IWindowHandle(const handle_type& handle) noexcept
+		explicit constexpr IWindowHandle(const handle_type& handle) noexcept
 			: base(handle)
 		{}
 
-		constexpr IWindowHandle(handle_type&& handle) noexcept
+		explicit constexpr IWindowHandle(handle_type&& handle) noexcept
 			: base(std::move(handle))
 		{}
 
@@ -220,9 +220,7 @@ export namespace gl::device
 		}
 
 		IWindowHandle(const IWindowHandle&) = delete;
-		constexpr IWindowHandle(IWindowHandle&&) noexcept = default;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
-		constexpr IWindowHandle& operator=(IWindowHandle&&) noexcept = default;
 	};
 
 	[[nodiscard]]
