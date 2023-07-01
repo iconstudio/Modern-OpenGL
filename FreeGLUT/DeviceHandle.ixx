@@ -235,66 +235,6 @@ export namespace gl::device
 			return 0 != ::GetWindowRect(myHandle, &output);
 		}
 
-		[[nodiscard]]
-		inline RawDeviceHandle GetOwner() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_OWNER);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetFirstChild() const noexcept
-		{
-			return ::GetTopWindow(myHandle);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetFirstSibling() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_HWNDFIRST);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetLastChild() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_CHILD);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetLastSibling() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_HWNDLAST);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetNextSibling() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_HWNDNEXT);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetPrevSibling() const noexcept
-		{
-			return ::GetWindow(myHandle, GW_HWNDPREV);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetParent() const noexcept
-		{
-			return ::GetParent(myHandle);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetRoot() const noexcept
-		{
-			return ::GetAncestor(myHandle, GA_ROOT);
-		}
-
-		[[nodiscard]]
-		inline RawDeviceHandle GetRootOwner() const noexcept
-		{
-			return ::GetAncestor(myHandle, GA_ROOTOWNER);
-		}
-
 		DeviceHandle(const DeviceHandle&) = delete;
 		constexpr DeviceHandle(DeviceHandle&&) noexcept = default;
 		DeviceHandle& operator=(const DeviceHandle&) = delete;
