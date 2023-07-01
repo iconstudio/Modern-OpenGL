@@ -1,5 +1,5 @@
-module;
 export module Glib.Window;
+import <type_traits>;
 import <string_view>;
 import Utility.Concurrency.Thread;
 export import Glib.Rect;
@@ -322,27 +322,10 @@ export extern "C++" namespace gl::window
 			return static_cast<const wchar_t*&&>(myClassName);
 		}
 
-		constexpr Window(Window&& other) noexcept
-			: myInstance(static_cast<device::ProcessInstance&&>(other.myInstance))
-			, myHandle(static_cast<device::DeviceHandle&&>(other.myHandle))
-			, myProcecure(static_cast<WindowProcedure&&>(other.myProcecure))
-			, myClassName(static_cast<const wchar_t*&&>(other.myClassName))
-		{
-			other.myInstance = nullptr;
-			other.myHandle = nullptr;
-			other.myProcecure = nullptr;
-			other.myClassName = nullptr;
-			other.frameLimit = 0;
-		}
-
-		constexpr Window& operator=(Window&& other) noexcept
-		{
-			other.Swap(*this);
-			return *this;
-		}
-
 		Window(const Window&) = delete;
+		constexpr Window(Window&& other) noexcept = default;
 		Window& operator=(const Window&) = delete;
+		constexpr Window& operator=(Window&& other) noexcept = default;
 
 		device::ProcessInstance myInstance = nullptr;
 		device::DeviceHandle myHandle = nullptr;
