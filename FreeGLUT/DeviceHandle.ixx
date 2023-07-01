@@ -55,7 +55,8 @@ export namespace gl::device
 		{
 			if (myHandle)
 			{
-				::DestroyWindow(myHandle);
+				// TODO: replace with new interface
+				//::DestroyWindow(myHandle);
 				myHandle = nullptr;
 			}
 		}
