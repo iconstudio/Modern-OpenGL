@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Window:Property;
+export module Glib.Window.Property;
 import <type_traits>;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Brush;
