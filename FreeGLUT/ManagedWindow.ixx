@@ -71,12 +71,9 @@ export namespace gl::window
 
 		void Awake() noexcept
 		{
-			size_t index = 0;
-			for (unit_t& worker : myWorkers)
+			for (size_t index = 0; index < workerCount; ++index)
 			{
-				worker = std::make_unique<util::jthread>(ManagedWindow::Worker, cancellationSource.get_token(), util::ref(*this), util::ref(awaitFlag));
-
-				++index;
+				myWorkers.emplace_back(std::make_unique<util::jthread>(Worker, cancellationSource.get_token(), std::ref(*this), std::ref(awaitFlag)));
 			}
 
 			myCoroutines = std::make_unique<coro_storage>();
