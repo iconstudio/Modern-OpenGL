@@ -309,6 +309,4 @@ export extern "C++" namespace gl::window
 		WindowProcedure myProcedure = nullptr;
 		const wchar_t* myClassName = nullptr;
 	};
-
-	using device::PostQuitMessage;
 }

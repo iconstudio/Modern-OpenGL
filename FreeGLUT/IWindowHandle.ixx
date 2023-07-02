@@ -297,5 +297,8 @@ export namespace gl::device
 		return 0 == ::UnregisterClass(class_name.data(), hinst);
 	}
 
-	using ::PostQuitMessage;
+	inline void PostQuitMessage(const int& exit_code) noexcept
+	{
+		::PostQuitMessage(exit_code);
+	}
 }

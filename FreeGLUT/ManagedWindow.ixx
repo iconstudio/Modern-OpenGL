@@ -146,34 +146,14 @@ export namespace gl::window
 			}
 		}
 
-		ManagedWindow(ManagedWindow&& other) noexcept
-			: underlying(std::move(other.underlying))
-			, myDimensions(std::move(other.myDimensions))
-			, myEventHandlers(std::move(other.myEventHandlers))
-			, keyDownHandler(std::move(other.keyDownHandler))
-			, keyUpHandler(std::move(other.keyUpHandler))
-			, sysDownHandler(std::move(other.sysDownHandler))
-			, sysUpHandler(std::move(other.sysUpHandler))
-			, chrDownHandler(std::move(other.chrDownHandler))
-			, chrUpHandler(std::move(other.chrUpHandler))
-			, myWorkers(std::move(other.myWorkers))
-			, workerCount(std::move(other.workerCount))
-			, awaitCount(awaitCount.load(util::memory_order_relaxed))
-			, awaitFlag(other.awaitFlag.load(util::memory_order_relaxed))
-			, cancellationSource(std::move(other.cancellationSource))
-			, myCoroutines(std::move(other.myCoroutines))
-			, terminateLatch(other.terminateLatch.load(util::memory_order_relaxed))
-			, isRunning(other.isRunning.load(util::memory_order_relaxed))
-			, isCapturing(other.isCapturing.load(util::memory_order_relaxed))
-		{}
-
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 
 		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept;
 
 		ManagedWindow(const ManagedWindow&) = delete;
+		ManagedWindow(ManagedWindow&&) = delete;
 		ManagedWindow& operator=(const ManagedWindow&) = delete;
-		ManagedWindow& operator=(ManagedWindow&&) noexcept = default;
+		ManagedWindow& operator=(ManagedWindow&&) noexcept = delete;
 
 	private:
 		bool AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
