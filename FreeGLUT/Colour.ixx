@@ -31,17 +31,17 @@ export namespace gl::device
 			: NativeColor(std::move(argb))
 		{}
 
-		constexpr Colour(const RawColour& rgb) noexcept
+		constexpr Colour(const RawRGB& rgb) noexcept
 			: NativeColor(0xFF, GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
 		{}
 
 		[[nodiscard]]
-		constexpr RawColour ToRaw() const noexcept
+		constexpr RawRGB ToRaw() const noexcept
 		{
 			return MakeRawColor(R, G, B);
 		}
 
-		constexpr Colour& operator=(const RawColour& color) noexcept
+		constexpr Colour& operator=(const RawRGB& color) noexcept
 		{
 			swap(Colour{ color });
 
@@ -119,14 +119,14 @@ export namespace gl::device
 
 	[[nodiscard]]
 	constexpr Colour
-		MakeColor(const RawColour& rgb) noexcept
+		MakeColor(const RawRGB& rgb) noexcept
 	{
 		return Colour{ rgb };
 	}
 
 	[[nodiscard]]
 	constexpr Colour
-		MakeColor(RawColour&& rgb) noexcept
+		MakeColor(RawRGB&& rgb) noexcept
 	{
 		return Colour{ std::move(rgb) };
 	}
