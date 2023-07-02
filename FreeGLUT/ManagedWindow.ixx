@@ -24,6 +24,16 @@ import Glib.Window;
 
 export namespace gl::window
 {
+	namespace managed_window
+	{
+		enum class [[nodiscard]] AwakeResult
+		{
+			Success = 0b00,
+			FailedOnCreatingWorkers = 0b01,
+			FailedOnCreatingCoroutines = 0b10,
+		};
+	}
+
 	class [[nodiscard]] ManagedWindow
 		: public std::enable_shared_from_this<ManagedWindow>
 	{
@@ -58,18 +68,8 @@ export namespace gl::window
 		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long);
 
 		explicit ManagedWindow(Window&& window, int number_of_workers);
-		void Awake() noexcept
-		{
-			for (size_t index = 0; index < workerCount; ++index)
-			{
-				myWorkers.emplace_back(std::make_unique<util::jthread>(Worker, cancellationSource.get_token(), std::ref(*this), std::ref(awaitFlag)));
-			}
 
-			myCoroutines = std::make_unique<coro_storage>();
-
-			underlying.Awake();
-			underlying.Start();
-		}
+		managed_window::AwakeResult Awake() noexcept;
 
 		/// <summary>
 		/// The main loop
