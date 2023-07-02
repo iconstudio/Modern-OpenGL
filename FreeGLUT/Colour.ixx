@@ -1,14 +1,11 @@
 module;
-#include "Internal.hpp"
 #include <winrt/Windows.UI.ViewManagement.h>
-#undef LOBYTE
 
 export module Glib.Device.Colour;
 import <cstdint>;
 import <type_traits>;
 export import :Implement;
 
-export using winrt::Windows::UI::operator==;
 export using NativeColor = winrt::Windows::UI::Color;
 
 export namespace gl::device
@@ -19,7 +16,7 @@ export namespace gl::device
 		constexpr Colour() noexcept = default;
 		constexpr ~Colour() noexcept = default;
 
-		constexpr Colour(const std::uint8_t& a, const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b) noexcept
+		constexpr Colour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept
 			: NativeColor(a, r, g, b)
 		{}
 
@@ -31,28 +28,10 @@ export namespace gl::device
 			: NativeColor(std::move(argb))
 		{}
 
-		constexpr Colour(const RawRGB& rgb) noexcept
-			: NativeColor(0xFF, GetRed(rgb), GetGreen(rgb), GetBlue(rgb))
-		{}
-
 		[[nodiscard]]
 		constexpr RawRGB ToRaw() const noexcept
 		{
 			return MakeRawColor(R, G, B);
-		}
-
-		constexpr Colour& operator=(const RawRGB& color) noexcept
-		{
-			swap(Colour{ color });
-
-			return *this;
-		}
-
-		constexpr Colour& operator=(RawColour&& color) noexcept
-		{
-			swap(Colour{ std::move(color) });
-
-			return *this;
 		}
 
 		constexpr Colour& operator=(const NativeColor& color) noexcept
@@ -98,9 +77,9 @@ export namespace gl::device
 
 	[[nodiscard]]
 	constexpr Colour
-		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b) noexcept
+		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept
 	{
-		return Colour{ 0xFFU, r, g, b };
+		return Colour{ a, r, g, b };
 	}
 
 	[[nodiscard]]
@@ -121,14 +100,14 @@ export namespace gl::device
 	constexpr Colour
 		MakeColor(const RawRGB& rgb) noexcept
 	{
-		return Colour{ rgb };
+		return Colour{ GetRed(rgb), GetGreen(rgb), GetBlue(rgb) };
 	}
 
 	[[nodiscard]]
 	constexpr Colour
 		MakeColor(RawRGB&& rgb) noexcept
 	{
-		return Colour{ std::move(rgb) };
+		return Colour{ GetRed(rgb), GetGreen(rgb), GetBlue(rgb) };
 	}
 
 	extern "C" namespace colors
@@ -199,7 +178,6 @@ export namespace gl::device
 		inline constexpr Colour Pink = MakeColor(raw_colours::COLOR_PINK);
 		inline constexpr Colour HotPink = MakeColor(255U, 105U, 180U);
 		inline constexpr Colour DeepPink = MakeColor(255U, 20U, 147U);
-
 	}
 
 	[[nodiscard]]
