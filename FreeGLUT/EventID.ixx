@@ -16,10 +16,11 @@ export namespace gl::device
 		Destroy = WM_DESTROY,
 		Show = WM_SHOWWINDOW,
 
+		Initiate = WM_NCCREATE, // Create window handle and set the window data
+		Annihilate = WM_NCDESTROY, // Cleanup memory
+		TestMouse = WM_NCHITTEST, // Should use the result of DefWindowProc to handle this message
 		NCActivate = WM_NCACTIVATE,
-		NCCreate = WM_NCCREATE,
-		NCDestroy = WM_NCDESTROY,
-		NCMouseMove = WM_NCMOUSEMOVE,
+		GetTestMouse = WM_NCMOUSEMOVE, // Get the mouse position in the non-client area
 
 		Move = WM_MOVE,
 		Size = WM_SIZE,
@@ -32,19 +33,29 @@ export namespace gl::device
 		GetText = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
 
-		Paint = WM_PAINT,
+		/// <summary>
+		/// PaintFrame -> EraseBackground -> Paint
+		/// </summary>
+		Paint = WM_PAINT, // (3) BeginPaint, EndPaint
+		EraseBackground = WM_ERASEBKGND, // (2) WNDCLASS.hbrBackground
+		PaintFrame = WM_NCPAINT, // (1) wparam is HRGN. Use it with GetDCEx
+
+		Close = WM_CLOSE,
+		QueryEndSession = WM_QUERYENDSESSION,
+		Quit = WM_QUIT,
+
+		ShowCursor = WM_SETCURSOR,
+		WindowPositionChanging = WM_WINDOWPOSCHANGING,
+		WindowPositionChanged = WM_WINDOWPOSCHANGED,
+		WindowStyleChanged = WM_STYLECHANGED,
+
 		ChangedSetting = WM_SETTINGCHANGE,
 		ChangedDPI = WM_DPICHANGED,
 		ChangedTheme = WM_THEMECHANGED,
 		ChangedStaticColor = WM_SYSCOLORCHANGE, // GetSysColor, SetSysColor, GetSysColorBrush, SetSysColorBrush
 		ChangedUserColor = WM_DWMCOLORIZATIONCOLORCHANGED, // DwmGetColorizationColor, DwmSetColorizationColor
 
-		Close = WM_CLOSE,
-		QueryEndSession = WM_QUERYENDSESSION,
-		Quit = WM_QUIT,
-		CleanupMemory = WM_NCDESTROY,
-
-		KeyboardFirst = WM_KEYFIRST,
+		KeyboardFirst = WM_KEYFIRST, // 256
 		KeyDown = WM_KEYDOWN,
 		KeyUp = WM_KEYUP,
 		Char = WM_CHAR,
@@ -57,7 +68,7 @@ export namespace gl::device
 		SysCommand = WM_SYSCOMMAND,
 		KeyboardLast = WM_KEYLAST,
 
-		MouseFirst = WM_MOUSEFIRST,
+		MouseFirst = WM_MOUSEFIRST, // 512
 		MouseMove = WM_MOUSEMOVE,
 		LButtonDown = WM_LBUTTONDOWN,
 		LButtonUp = WM_LBUTTONUP,
