@@ -88,9 +88,6 @@
     <ClCompile Include="Window.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
-    <ClCompile Include="WindowABI.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
     <ClCompile Include="WindowOption.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>

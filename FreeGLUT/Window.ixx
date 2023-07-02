@@ -12,7 +12,6 @@ import Glib.Device.Event.API;
 import Glib.Window.Property;
 export import :Style;
 export import :Option;
-export import :ABI;
 
 export extern "C++" namespace gl::window
 {
