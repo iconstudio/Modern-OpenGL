@@ -81,7 +81,5 @@ export namespace gl::device
 		inline constexpr MouseEventID MdPressed{ EventID::MButtonDown };
 		inline constexpr MouseEventID MdReleased{ EventID::MButtonUp };
 		inline constexpr MouseEventID MdDoubleClicked{ EventID::MButtonDoubleClick };
-
-		inline constexpr MouseEventID MovedOutside{ EventID::NCMouseMove };
 	};
 }
