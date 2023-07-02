@@ -57,18 +57,7 @@ export namespace gl::window
 		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long);
 		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long);
 
-		explicit ManagedWindow(Window&& window, int number_of_workers)
-			: underlying(std::move(window))
-			, workerCount(number_of_workers), terminateLatch(number_of_workers)
-			, base_shared_t()
-		{
-			myDimensions = underlying.GetDimensions();
-			myEventHandlers.reserve(20);
-			myWorkers.reserve(number_of_workers);
-
-			underlying.SetInternalUserData(reinterpret_cast<long long>(this));
-		}
-
+		explicit ManagedWindow(Window&& window, int number_of_workers);
 		void Awake() noexcept
 		{
 			for (size_t index = 0; index < workerCount; ++index)
