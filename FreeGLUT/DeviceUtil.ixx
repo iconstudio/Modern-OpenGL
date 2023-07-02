@@ -38,13 +38,13 @@ export namespace gl::device
 	[[nodiscard]]
 	constexpr unsigned char LOBYTE(const std::integral auto& value) noexcept
 	{
-		return static_cast<unsigned char>(static_cast<unsigned long long>(value) & 0xFF);
+		return static_cast<unsigned char>(static_cast<unsigned short>(value) & 0xFF);
 	}
 
 #undef HIBYTE
 	[[nodiscard]]
 	constexpr unsigned char HIBYTE(const std::integral auto& value) noexcept
 	{
-		return static_cast<unsigned char>((static_cast<unsigned long long>(value) >> 8)) & 0xFF;
+		return static_cast<unsigned char>((static_cast<unsigned short>(value) >> 8)) & 0xFF;
 	}
 }
