@@ -362,6 +362,14 @@ export namespace gl::window
 			}
 			break;
 
+			case event_id_t::ChangedTheme:
+			case event_id_t::ChangedStaticColor:
+			case event_id_t::ChangedUserColor:
+			{
+				ctx.Redraw(true);
+			}
+			break;
+
 			case event_id_t::Activate:
 			{
 				const unsigned short trigger = device::LOWORD(wparam);
