@@ -43,7 +43,7 @@ export extern "C++" namespace gl::window
 
 		inline bool Register() noexcept
 		{
-			return 0 == ::RegisterClassEx(std::addressof(myWindowClass));
+			return FALSE != ::RegisterClassEx(std::addressof(myWindowClass));
 		}
 
 		inline bool Deregister() noexcept
