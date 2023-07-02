@@ -3,74 +3,68 @@ module;
 
 export module Glib.Device.Brush;
 import <type_traits>;
+import Glib.Device.IHandle;
 
 export namespace gl::device
 {
 	using NativeColorBrush = ::HBRUSH__*;
 
-	class [[nodiscard]] ColorBrush
+	class [[nodiscard]] ColorBrush : public IHandle<NativeColorBrush>
 	{
 	public:
+		using base = IHandle<NativeColorBrush>;
+
 		constexpr ColorBrush() noexcept = default;
 
 		constexpr ColorBrush(nullptr_t) noexcept
-			: myBrush(nullptr)
+			: base(nullptr)
+		{}
+
+		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept
+			: base(brush)
+		{}
+
+		explicit constexpr ColorBrush(NativeColorBrush&& brush) noexcept
+			: base(std::move(brush))
 		{}
 
 		~ColorBrush() noexcept
 		{
-			::DeleteObject(myBrush);
+			Destroy();
 		}
 
-		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept
-			: myBrush(brush)
-		{}
-
-		explicit constexpr ColorBrush(NativeColorBrush&& brush) noexcept
-			: myBrush(std::move(brush))
-		{}
+		void Destroy() noexcept
+		{
+			if (nullptr != GetHandle())
+			{
+				Delegate(::DeleteObject);
+				base::operator=(nullptr);
+			}
+		}
 
 		constexpr ColorBrush& operator=(const NativeColorBrush& brush) noexcept
 		{
-			myBrush = brush;
+			base::operator=(brush);
 			return *this;
 		}
 
 		constexpr ColorBrush& operator=(NativeColorBrush&& brush) noexcept
 		{
-			myBrush = std::move(brush);
+			base::operator=(std::move(brush));
 			return *this;
 		}
 
 		ColorBrush& operator=(nullptr_t) noexcept
 		{
-			if (nullptr != myBrush)
-			{
-				::DeleteObject(myBrush);
-			}
-			myBrush = nullptr;
+			Destroy();
 
 			return *this;
-		}
-
-		[[nodiscard]]
-		constexpr const NativeColorBrush& GetHandle() const& noexcept
-		{
-			return myBrush;
-		}
-
-		[[nodiscard]]
-		constexpr NativeColorBrush&& GetHandle() && noexcept
-		{
-			return std::move(myBrush);
 		}
 
 		ColorBrush(const ColorBrush&) = delete;
 		constexpr ColorBrush(ColorBrush&&) noexcept = default;
 		ColorBrush& operator=(const ColorBrush&) = delete;
 		constexpr ColorBrush& operator=(ColorBrush&&) noexcept = default;
-
-		NativeColorBrush myBrush = nullptr;
 	};
 
 	[[nodiscard]]
