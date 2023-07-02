@@ -195,6 +195,16 @@ export namespace gl::device
 			return Delegate(::SetWindowLongPtr, index, std::move(value));
 		}
 
+		inline long long SetInternalUserData(const long long& value) const noexcept
+		{
+			return Delegate(::SetWindowLongPtr, GWLP_USERDATA, value);
+		}
+
+		inline long long SetInternalUserData(long long&& value) const noexcept
+		{
+			return Delegate(::SetWindowLongPtr, GWLP_USERDATA, std::move(value));
+		}
+
 		[[nodiscard]]
 		inline long long GetInternalValue(int index) const noexcept
 		{
