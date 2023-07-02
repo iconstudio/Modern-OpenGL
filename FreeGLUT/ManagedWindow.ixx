@@ -1,24 +1,17 @@
 export module Glib.Window.ManagedWindow;
-import <cstdio>;
-import <iostream>;
 import <utility>;
 import <memory>;
 import <vector>;
 import <stack>;
 import <unordered_map>;
 import Utility.Constraints;
-import Utility.Reflection.Unique;
-import Utility.FixedString;
 import Utility.Array;
 import Utility.Atomic;
 import Utility.Monad;
-import Utility.Option;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
-import Glib.Device.Event;
-import Glib.Device.Brush;
-export import Glib.Device.IO;
-import Glib.Device.Utility;
+import Glib.Device.IO;
+export import Glib.Device.Event;
 export import Glib.Window.Coroutine;
 import Glib.Window;
 

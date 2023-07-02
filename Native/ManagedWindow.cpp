@@ -1,6 +1,7 @@
 module;
 module Glib.Window.ManagedWindow;
 import <exception>;
+import Glib.Device.Utility;
 
 gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
