@@ -11,7 +11,7 @@ export extern "C++" namespace gl::window
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
 	using RawWindowProperty = ::tagWNDCLASSEXW;
 
-	inline constexpr RawWindowProperty DefaultWindowProperty
+	inline constexpr RawWindowProperty DefaultWindowProperty = 
 	{
 		.cbSize = sizeof(RawWindowProperty),
 			.style = CS_HREDRAW | CS_VREDRAW,
