@@ -4,6 +4,7 @@ import <string_view>;
 import <memory>;
 import Utility.FixedString;
 export import Glib.Window;
+export import Glib.Window.Property.Factory;
 export import Glib.Window.ManagedWindow;
 
 export namespace gl::window

@@ -9,7 +9,6 @@ import <unordered_map>;
 import Utility.Constraints;
 import Utility.Singleton;
 import Utility.Reflection.Unique;
-import Utility.String;
 import Utility.FixedString;
 import Utility.Array;
 import Utility.Atomic;
@@ -23,7 +22,6 @@ export import Glib.Device.IO;
 import Glib.Device.Utility;
 export import Glib.Window.Coroutine;
 import Glib.Window;
-export import Glib.Window.Property.Factory;
 
 export namespace gl::window
 {
