@@ -17,6 +17,7 @@ export namespace gl::window
 		WindowEdge = 0x00000100L,
 		ClientEdge = 0x00000200L,
 		ContextHelp = 0x00000400L,
+		Layered = 0x00080000L,
 
 		Right = 0x00001000L,
 		Left = 0x00000000L,
