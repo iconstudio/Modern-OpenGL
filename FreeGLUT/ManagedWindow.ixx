@@ -40,6 +40,7 @@ export namespace gl::window
 		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = std::vector<unit_t>;
 		using coro_t = gl::window::Coroutine;
+		using coro_storage = std::stack<coro_t>;
 
 	public:
 		using event_id_t = device::EventID;
@@ -86,6 +87,8 @@ export namespace gl::window
 
 				++index;
 			}
+
+			myCoroutines = std::make_unique<coro_storage>();
 
 			underlying.Awake();
 			underlying.Start();
@@ -225,7 +228,12 @@ export namespace gl::window
 		}
 
 		void ResumeTopCoroutine() noexcept
-		{}
+		{
+			if (!myCoroutines->empty())
+			{
+				myCoroutines->top().Resume();
+			}
+		}
 
 		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept
 		{
@@ -264,7 +272,7 @@ export namespace gl::window
 		util::atomic_bool isCapturing = false;
 		util::atomic_bool isRenderingNow = false;
 
-		std::unique_ptr<std::stack<coro_t>> myCoroutines{};
+		std::unique_ptr<coro_storage> myCoroutines{};
 	};
 
 	long long
