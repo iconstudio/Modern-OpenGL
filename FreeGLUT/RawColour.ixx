@@ -70,19 +70,25 @@ export namespace gl::device
 	[[nodiscard]]
 	constexpr std::uint8_t GetRed(const RawRGB& rgb) noexcept
 	{
-		return LOBYTE(rgb);
+		return Get4thByte(rgb);
 	}
 
 	[[nodiscard]]
 	constexpr std::uint8_t GetGreen(const RawRGB& rgb) noexcept
 	{
-		return LOBYTE(static_cast<unsigned short>(rgb) >> 8U);
+		return Get3rdByte(rgb);
 	}
 
 	[[nodiscard]]
 	constexpr std::uint8_t GetBlue(const RawRGB& rgb) noexcept
 	{
-		return LOBYTE(rgb >> 16U);
+		return Get2ndByte(rgb);
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t GetAlpha(const RawRGB& rgb) noexcept
+	{
+		return Get1stByte(rgb);
 	}
 
 	[[nodiscard]]
