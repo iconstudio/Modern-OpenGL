@@ -1,8 +1,7 @@
 export module Glib.Window;
 import <type_traits>;
 import <string_view>;
-import Utility.Concurrency.Thread;
-export import Glib.Rect;
+import Glib.Rect;
 import Glib.DefaultProperty;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
@@ -79,13 +78,10 @@ export extern "C++" namespace gl::window
 		}
 
 		[[noreturn]]
-		void UpdateLoop(util::stop_token canceller) noexcept
+		void UpdateLoop() noexcept
 		{
 			while (UpdateOnce())
-			{
-				if (canceller.stop_requested())
-					break;
-			}
+			{}
 		}
 
 		bool UpdateOnce() noexcept
