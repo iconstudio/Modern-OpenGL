@@ -416,7 +416,7 @@ export namespace gl::window
 			}
 			break;
 
-			case event_id_t::NCCreate:
+			case event_id_t::Initiate:
 			{
 				std::printf("[Preprocess]\n");
 			}
@@ -454,12 +454,6 @@ export namespace gl::window
 			{
 				//KillTimer(ctx.GetHandle(), RENDER_TIMER_ID);
 			}
-			break;
-
-			// Clean memory up
-			// Started by WM_DESTROY
-			case event_id_t::CleanupMemory:
-			{}
 			break;
 
 			//[[fallthrough]]
