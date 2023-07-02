@@ -1,25 +1,31 @@
 export module Glib.Device.Colour:Implement;
+import <cstdint>;
 import Glib.Device.Utility;
 
 export namespace gl::device
 {
-	// DWORD
-	using RawColour = unsigned long;
+	/// <summary>
+	/// 32-bit value, where the least-significant 8 bits are blue, the next 8 bits are green, and the next 8 bits are red.
+	/// </summary>
+	/// <remarks>
+	/// This is <see cref="COLORREF"/> by Windows API.
+	/// </remarks>
+	using RawColour = std::uint32_t;
 
 	[[nodiscard]]
 	constexpr RawColour
-		MakeRawColor(const unsigned char& r, const unsigned char& g, const unsigned char& b)
+		MakeRawColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b)
 		noexcept
 	{
-		return static_cast<unsigned int>(r | (static_cast<unsigned short>(g) << 8U)) | (static_cast<unsigned int>(b) << 16U);
+		return static_cast<std::uint32_t>(r | (static_cast<unsigned short>(g) << 8U)) | (static_cast<std::uint32_t>(b) << 16U);
 	}
 
 	[[nodiscard]]
 	constexpr RawColour
-		MakeRawColor(const unsigned int& r, const unsigned int& g, const unsigned int& b)
+		MakeRawColor(const std::uint32_t& r, const std::uint32_t& g, const std::uint32_t& b)
 		noexcept
 	{
-		return (r | static_cast<unsigned int>(g << 8U)) | (b << 16U);
+		return (r | static_cast<std::uint32_t>(g << 8U)) | (b << 16U);
 	}
 
 	extern "C" namespace raw_colours
@@ -55,19 +61,19 @@ export namespace gl::device
 	}
 
 	[[nodiscard]]
-	constexpr unsigned char GetRed(const RawColour& rgb) noexcept
+	constexpr std::uint8_t GetRed(const RawColour& rgb) noexcept
 	{
 		return LOBYTE(rgb);
 	}
 
 	[[nodiscard]]
-	constexpr unsigned char GetGreen(const RawColour& rgb) noexcept
+	constexpr std::uint8_t GetGreen(const RawColour& rgb) noexcept
 	{
 		return LOBYTE(static_cast<unsigned short>(rgb) >> 8U);
 	}
 
 	[[nodiscard]]
-	constexpr unsigned char GetBlue(const RawColour& rgb) noexcept
+	constexpr std::uint8_t GetBlue(const RawColour& rgb) noexcept
 	{
 		return LOBYTE(rgb >> 16U);
 	}
