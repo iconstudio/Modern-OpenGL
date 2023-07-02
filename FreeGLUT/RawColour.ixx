@@ -11,6 +11,13 @@ export namespace gl::device
 	/// This is <see cref="COLORREF"/> by Windows API.
 	/// </remarks>
 	using RawRGB = std::uint32_t;
+	/// <summary>
+	/// 32-bit value, where the least-significant 8 bits are blue, the next 8 bits are green, the next 8 bits are red, and the next 8 bits are alpha.
+		/// </summary>
+	/// <remarks>
+	/// This is <see cref="Windows::UI::Color"/> by WinUI 3.
+	/// </remarks>
+	using RawARGB = std::uint32_t;
 
 	[[nodiscard]]
 	constexpr RawRGB
