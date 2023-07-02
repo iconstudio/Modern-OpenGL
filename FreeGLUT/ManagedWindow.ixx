@@ -426,7 +426,7 @@ export namespace gl::window
 			// Started by close button or system menu [or Alt+F4]
 			case event_id_t::Close:
 			{
-				detail::DestroyNativeWindow(ctx.GetHandle());
+				ctx.Destroy();
 				self->isFocused = false;
 				self->ClearMouseCapturing();
 			}
