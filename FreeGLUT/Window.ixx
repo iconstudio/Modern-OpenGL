@@ -215,6 +215,38 @@ export extern "C++" namespace gl::window
 			return myHandle.IsInputEnabled();
 		}
 
+		inline long long SetInternalValue(int index, const long long& value) const noexcept
+		{
+			return myHandle.SetInternalValue(index, value);
+		}
+
+		inline long long SetInternalValue(int index, long long&& value) const noexcept
+		{
+			return myHandle.SetInternalValue(index, std::move(value));
+		}
+
+		inline long long SetInternalUserData(const long long& value) const noexcept
+		{
+			return myHandle.SetInternalUserData(value);
+		}
+
+		inline long long SetInternalUserData(long long&& value) const noexcept
+		{
+			return myHandle.SetInternalUserData(std::move(value));
+		}
+
+		[[nodiscard]]
+		inline long long GetInternalValue(int index) const noexcept
+		{
+			return myHandle.GetInternalValue(index);
+		}
+
+		[[nodiscard]]
+		inline long long GetInternalUserData() const noexcept
+		{
+			return myHandle.GetInternalUserData();
+		}
+
 		[[nodiscard]]
 		WindowStyle GetStyle() const noexcept
 		{
