@@ -7,7 +7,6 @@ import <vector>;
 import <stack>;
 import <unordered_map>;
 import Utility.Constraints;
-import Utility.Singleton;
 import Utility.Reflection.Unique;
 import Utility.FixedString;
 import Utility.Array;
@@ -27,13 +26,11 @@ export namespace gl::window
 {
 	class [[nodiscard]] ManagedWindow
 		: public std::enable_shared_from_this<ManagedWindow>
-		, public reflex::Unique<ManagedWindow, L"ManagedWindow">
 	{
 	protected:
 		using type = ManagedWindow;
 
 		using base_shared_t = std::enable_shared_from_this<type>;
-		using base_singleton_t = reflex::Unique<type, L"ManagedWindow">;
 		using under_shared_t = std::shared_ptr<type>;
 		using under_weak_t = std::weak_ptr<type>;
 
@@ -65,17 +62,11 @@ export namespace gl::window
 			, workerCount(number_of_workers), terminateLatch(number_of_workers)
 			, base_shared_t()
 		{
-			if (base_singleton_t::GetInstance() != nullptr)
-			{
-				throw std::runtime_error("Only one instance of ManagedWindow is allowed.");
-			}
-			base_singleton_t::SetInstance(this);
-
 			myDimensions = underlying.GetDimensions();
 			myEventHandlers.reserve(20);
 			myWorkers.reserve(number_of_workers);
 
-
+			//underlying.
 		}
 
 		void Awake() noexcept
