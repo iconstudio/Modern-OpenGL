@@ -42,9 +42,6 @@ export namespace gl::window
 		using coro_t = gl::window::Coroutine;
 
 	public:
-		static inline constexpr device::EventID DefaultEventID = device::EventID::None;
-		static inline constexpr device::Event DefaultEvent = {};
-
 		using event_id_t = device::EventID;
 		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
 
@@ -241,16 +238,7 @@ export namespace gl::window
 
 		// flat map
 		event_storage_t myEventHandlers{};
-
-		pool_t myWorkers{};
-		size_t workerCount = 0;
-
-		util::atomic_bool isRunning = false;
-		util::CancellationSource cancellationSource{};
-		util::atomic_int terminateLatch;
-
-		util::atomic<int> awaitCount = 0;
-		event_alert_t awaitFlag{ DefaultEvent };
+		static inline constexpr device::Event DefaultEvent = {};
 
 		KeyDownEventHandler keyDownHandler = nullptr;
 		KeyUpEventHandler keyUpHandler = nullptr;
@@ -258,6 +246,16 @@ export namespace gl::window
 		SysKeyUpEventHandler sysUpHandler = nullptr;
 		CharDownEventHandler chrDownHandler = nullptr;
 		CharUpEventHandler chrUpHandler = nullptr;
+
+		pool_t myWorkers{};
+		size_t workerCount = 0;
+
+		util::atomic<int> awaitCount = 0;
+		event_alert_t awaitFlag{ DefaultEvent };
+
+		util::atomic_bool isRunning = false;
+		util::CancellationSource cancellationSource{};
+		util::atomic_int terminateLatch;
 
 		util::atomic_bool isFocused = false;
 		util::atomic_bool isMouseHover = false;
