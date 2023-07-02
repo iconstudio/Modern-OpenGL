@@ -47,4 +47,28 @@ export namespace gl::device
 	{
 		return static_cast<unsigned char>((static_cast<unsigned short>(value) >> 8)) & 0xFF;
 	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t Get1stByte(const std::uint32_t& rgb) noexcept
+	{
+		return HIBYTE(rgb >> 16U);
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t Get2ndByte(const std::uint32_t& rgb) noexcept
+	{
+		return LOBYTE(rgb >> 16U);
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t Get3rdByte(const std::uint32_t& rgb) noexcept
+	{
+		return HIBYTE(rgb);
+	}
+
+	[[nodiscard]]
+	constexpr std::uint8_t Get4thByte(const std::uint32_t& rgb) noexcept
+	{
+		return LOBYTE(rgb);
+	}
 }
