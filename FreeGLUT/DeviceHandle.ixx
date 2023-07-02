@@ -1,8 +1,6 @@
 export module Glib.Device.Handle;
 import <type_traits>;
-import <string_view>;
-export import Glib.Device.IWindowHandle;
-export import Glib.Device.IO;
+import Glib.Device.IWindowHandle;
 
 export namespace gl::device
 {

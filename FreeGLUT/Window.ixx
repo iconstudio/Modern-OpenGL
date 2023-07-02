@@ -9,6 +9,7 @@ import Glib.Device.Event;
 import Glib.Device.IO;
 import Glib.Device.Event.API;
 import Glib.Window.Property;
+export import Glib.Device.IWindowHandle;
 export import :Style;
 export import :Option;
 

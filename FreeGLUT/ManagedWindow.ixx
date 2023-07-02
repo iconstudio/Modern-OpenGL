@@ -73,6 +73,8 @@ export namespace gl::window
 			myDimensions = underlying.GetDimensions();
 			myEventHandlers.reserve(20);
 			myWorkers.reserve(number_of_workers);
+
+
 		}
 
 		void Awake() noexcept
