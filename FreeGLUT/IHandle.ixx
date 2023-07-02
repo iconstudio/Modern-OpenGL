@@ -41,6 +41,12 @@ export namespace gl::device
 			return *this;
 		}
 
+		constexpr IHandle& operator=(const handle_type& handle) noexcept
+		{
+			myHandle = handle;
+			return *this;
+		}
+
 		constexpr IHandle& operator=(handle_type&& handle) noexcept
 		{
 			myHandle = std::exchange(handle, nullptr);
