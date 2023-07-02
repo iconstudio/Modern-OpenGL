@@ -123,5 +123,7 @@ export namespace gl::window
 		util::atomic_bool isRenderingNow = false;
 
 		std::unique_ptr<coro_storage> myCoroutines{};
+
+		std::exception_ptr lastException{};
 	};
 }

@@ -28,6 +28,8 @@ noexcept
 	}
 	catch (...)
 	{
+		lastException = std::current_exception();
+
 		return managed_window::AwakeResult::FailedOnCreatingWorkers;
 	}
 
@@ -37,11 +39,15 @@ noexcept
 	}
 	catch (...)
 	{
+		lastException = std::current_exception();
+
 		return managed_window::AwakeResult::FailedOnCreatingCoroutines;
 	}
 
 	underlying.Awake();
 	underlying.Start();
+
+	return managed_window::AwakeResult::Success;
 }
 
 void
