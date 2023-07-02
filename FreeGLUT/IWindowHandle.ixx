@@ -228,7 +228,7 @@ export namespace gl::device
 		[[nodiscard]]
 		inline NativeRect GetDimensions() const noexcept
 		{
-			NativeRect rect;
+			NativeRect rect{};
 			Delegate(::GetWindowRect, &rect);
 			return rect;
 		}
