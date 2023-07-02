@@ -362,6 +362,13 @@ export namespace gl::window
 			}
 			break;
 
+			case event_id_t::ChangedDPI:
+			{
+				std::printf("[ChangedDPI]\n");
+				ctx.Redraw(true);
+			}
+			break;
+
 			case event_id_t::ChangedTheme:
 			{
 				std::printf("[ChangedTheme]\n");
