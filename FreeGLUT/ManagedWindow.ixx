@@ -363,9 +363,22 @@ export namespace gl::window
 			break;
 
 			case event_id_t::ChangedTheme:
+			{
+				std::printf("[ChangedTheme]\n");
+				ctx.Redraw(true);
+			}
+			break;
+
 			case event_id_t::ChangedStaticColor:
+			{
+				std::printf("[ChangedStaticColor]\n");
+				ctx.Redraw(true);
+			}
+			break;
+
 			case event_id_t::ChangedUserColor:
 			{
+				std::printf("[ChangedUserColor] Windows main colour is changed to %lld\n", wparam);
 				ctx.Redraw(true);
 			}
 			break;
