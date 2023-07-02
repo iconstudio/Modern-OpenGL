@@ -276,8 +276,13 @@ export namespace gl::device
 			return nullptr;
 		}
 
-		BOOL value = TRUE;
-		::DwmSetWindowAttribute(result, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
+		const BOOL value = TRUE;
+		if (auto hr = ::DwmSetWindowAttribute(result
+			, DWMWA_USE_IMMERSIVE_DARK_MODE
+			, &value, sizeof(value)); FAILED(hr))
+		{
+			::printf_s("DWMWA_USE_IMMERSIVE_DARK_MODE failed(%ld)\n", hr);
+		}
 
 		return result;
 	}
