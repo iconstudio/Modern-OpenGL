@@ -66,7 +66,7 @@ export namespace gl::window
 			myEventHandlers.reserve(20);
 			myWorkers.reserve(number_of_workers);
 
-			//underlying.
+			underlying.SetInternalUserData(reinterpret_cast<long long>(this));
 		}
 
 		void Awake() noexcept
@@ -273,7 +273,7 @@ export namespace gl::window
 
 		device::IWindowHandle ctx{ std::move(hwnd) };
 
-		ManagedWindow* self = ManagedWindow::GetInstance();
+		ManagedWindow* const& self = reinterpret_cast<ManagedWindow*>(ctx.GetInternalUserData());
 
 		switch (msg)
 		{
