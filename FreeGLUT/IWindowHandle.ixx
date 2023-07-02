@@ -67,10 +67,11 @@ export namespace gl::device
 				if (bool result = (0 != Delegate(::DestroyWindow)); result)
 				{
 					handle = nullptr;
+					return true;
 				}
 				else
 				{
-					return result;
+					return false;
 				}
 			}
 			else
