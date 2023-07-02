@@ -1,5 +1,4 @@
 module;
-#include <dwmapi.h>
 #include "Internal.hpp"
 
 export module Glib.Window:ABI;
@@ -10,36 +9,4 @@ export namespace gl::window::detail
 {
 	inline constexpr default_property_t<int> use_default = default_property_t{ CW_USEDEFAULT };
 
-	[[nodiscard]]
-	inline HWND__* CreateNativeWindow(const HINSTANCE& hinst
-		, const std::wstring_view& class_name
-		, const std::wstring_view& title
-		, const unsigned long& styles
-		, const unsigned long& options
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-		, const HWND& parent = nullptr
-		, const HMENU& menu = nullptr
-		, const LPVOID& uparams = nullptr)
-		noexcept
-	{
-		HWND result = ::CreateWindowEx(options
-		, class_name.data(), title.data()
-		, styles, x, y, width, height
-		, parent
-		, menu
-		, hinst, uparams);
-
-		if (result == nullptr)
-		{
-			return nullptr;
-		}
-
-		BOOL value = TRUE;
-		::DwmSetWindowAttribute(result, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
-
-		return result;
-	}
 }

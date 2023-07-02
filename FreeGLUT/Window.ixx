@@ -34,7 +34,7 @@ export extern "C++" namespace gl::window
 			, myClassName(properties.GetClass())
 			, myProcedure(properties.GetProcedure())
 		{
-			myHandle = detail::CreateNativeWindow(properties.GetInstance().myHandle
+			myHandle = device::MakeNativeWindow(properties.GetInstance().myHandle
 				, properties.GetClass()
 				, title
 				, Export(style), Export(option)
@@ -54,7 +54,7 @@ export extern "C++" namespace gl::window
 			, myClassName(std::move(properties).GetClass())
 			, myProcedure(std::move(properties).GetProcedure())
 		{
-			myHandle = detail::CreateNativeWindow(myInstance.myHandle
+			myHandle = device::MakeNativeWindow(myInstance.myHandle
 				, myClassName
 				, title
 				, Export(style), Export(option)
