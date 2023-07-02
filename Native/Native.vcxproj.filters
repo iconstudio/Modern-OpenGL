@@ -168,7 +168,7 @@
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="ManagedWindow.cpp">
-      <Filter>헤더 파일\Window</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
