@@ -133,144 +133,43 @@ export namespace gl::window
 		constexpr std::wstring_view class_name_view{ NID };
 		WindowProperty property = gl::window::CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
 
-		ManagedWindow handle = ManagedWindow{ CreateWindow(property, title, style, option, x, y, width, height), number_of_workers };
+		if (!property.Register())
+		{
 
-		return std::make_unique<ManagedWindow>(std::move(handle));
+		}
+
+		return std::make_unique<gl::window::ManagedWindow>
+		(
+			gl::window::CreateWindow(property
+			, title
+			, style
+			, option
+			, x, y, width, height)
+			, number_of_workers
+		);
 	}
 
-	template<util::basic_fixed_string NID, size_t Workers = 4>
+	template<util::basic_fixed_string NID>
 	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const WindowOption& option
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, style, option, x, y, width, height), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(const WindowProperty& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const WindowOption& option
+	std::unique_ptr<ManagedWindow> CreateWindowEx(const std::wstring_view& title
 		, const Rect& dimension
+		, const int& number_of_workers = 4
+		, const WindowStyle& style = styles::Default
+		, const WindowOption& option = options::Default
 	)
 	{
-		return ManagedWindow{ CreateWindow(properties, title, style, option, dimension), Workers };
-	}
+		constexpr std::wstring_view class_name_view{ NID };
+		WindowProperty property = gl::window::CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
 
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const WindowOption& option
-		, const Rect& dimension
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, style, option, dimension), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(const WindowProperty& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-	)
-	{
-		return ManagedWindow{ CreateWindow(properties, title, style, x, y, width, height), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, style, x, y, width, height), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(const WindowProperty& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const Rect& dimension
-	)
-	{
-		return ManagedWindow{ CreateWindow(properties, title, style, dimension), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const WindowStyle& style
-		, const Rect& dimension
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, style, options::Default, dimension), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(const WindowProperty& properties
-		, const std::wstring_view& title
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-	)
-	{
-		return ManagedWindow{ CreateWindow(properties, title, x, y, width, height), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, x, y, width, height), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(const WindowProperty& properties
-		, const std::wstring_view& title
-		, const Rect& dimension
-	)
-	{
-		return ManagedWindow{ CreateWindow(properties, title, dimension), Workers };
-	}
-
-	template<util::basic_fixed_string NID, size_t Workers = 4>
-	[[nodiscard]]
-	ManagedWindow CreateWindowEx(WindowProperty&& properties
-		, const std::wstring_view& title
-		, const Rect& dimension
-	)
-	{
-		return ManagedWindow{ CreateWindow(std::move(properties), title, dimension), Workers };
+		return std::make_unique<gl::window::ManagedWindow>
+		(
+			gl::window::CreateWindow(property
+			, title
+			, style
+			, option
+			, dimension.x, dimension.y, dimension.w, dimension.h)
+			, number_of_workers
+		);
 	}
 #pragma endregion
 }
