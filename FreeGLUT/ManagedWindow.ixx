@@ -362,7 +362,7 @@ export namespace gl::window
 
 			case event_id_t::ChangedUserColor:
 			{
-				std::printf("[ChangedUserColor] Windows main colour is changed to %lld. Is Fluent: %lld\n", wparam, lparam);
+				std::printf("[ChangedUserColor] Colour is changed to %lld. Is Fluent: %lld\n", wparam, lparam);
 				ctx.Redraw(true);
 			}
 			break;
