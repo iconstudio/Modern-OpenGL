@@ -6,6 +6,9 @@ export import :Implement;
 
 export namespace gl::device
 {
+	using RawEvent = ::tagMSG;
+	using RawEventID = decltype(RawEvent::message);
+
 	enum class [[nodiscard]] EventID : RawEventID
 	{
 		None = 0,

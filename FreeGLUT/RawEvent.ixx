@@ -6,13 +6,10 @@ import <type_traits>;
 
 export namespace gl::device
 {
-	using RawEvent = ::tagMSG;
-	using RawEventID = decltype(RawEvent::message);
-
 	namespace detail
 	{
 		[[nodiscard]]
-		bool Pop(const HWND& hwnd, RawEvent& output) noexcept
+		bool Pop(const HWND& hwnd, MSG& output) noexcept
 		{
 			return 0 != ::GetMessage(&output, hwnd, 0, 0);
 		}
@@ -27,12 +24,12 @@ export namespace gl::device
 			return 0 != ::PostMessage(hwnd, std::move(event_id), lhs, rhs);
 		}
 
-		bool Push(const HWND& hwnd, const RawEvent& event) noexcept
+		bool Push(const HWND& hwnd, const MSG& event) noexcept
 		{
 			return Push(hwnd, event.message, event.wParam, event.lParam);
 		}
 
-		bool Push(const HWND& hwnd, RawEvent&& event) noexcept
+		bool Push(const HWND& hwnd, MSG&& event) noexcept
 		{
 			return Push(hwnd, std::move(event.message), std::move(event.wParam), std::move(event.lParam));
 		}
