@@ -135,7 +135,7 @@ export namespace gl::window
 
 		if (!property.Register())
 		{
-
+			throw std::runtime_error{ "Failed to register window class" };
 		}
 
 		return std::make_unique<gl::window::ManagedWindow>
@@ -160,6 +160,11 @@ export namespace gl::window
 	{
 		constexpr std::wstring_view class_name_view{ NID };
 		WindowProperty property = gl::window::CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
+
+		if (!property.Register())
+		{
+			throw std::runtime_error{ "Failed to register window class" };
+		}
 
 		return std::make_unique<gl::window::ManagedWindow>
 		(
