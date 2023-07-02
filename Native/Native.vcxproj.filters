@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일\Device">
+      <UniqueIdentifier>{0ae1bc4b-0578-4f12-bfe7-b13c99153ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\IO">
+      <UniqueIdentifier>{d14413b9-d8ee-412e-8e8b-f7f07bb9bc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Colouring">
+      <UniqueIdentifier>{096aa7c6-dd81-4f07-86ed-8b0bf3e4712e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Rendering">
+      <UniqueIdentifier>{ce1cde95-ef11-4680-917e-81a450776d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Event">
+      <UniqueIdentifier>{0bf6f97f-94b7-4a3e-848e-295728d2fcce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Resource">
+      <UniqueIdentifier>{00b3b3ed-d15a-48fa-8e90-d307e55ab504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Core">
+      <UniqueIdentifier>{e5dbc0d1-8de5-4a3b-b984-014d05bfb379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\Measurement">
+      <UniqueIdentifier>{619caba6-e910-4bce-acd4-3b5bf7ee1258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Utility">
+      <UniqueIdentifier>{d15db6ec-62e0-4c92-924c-44a8bd7bc827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Window">
+      <UniqueIdentifier>{46f4f182-8de9-4525-9ead-143dd2c33e1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Native.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\DeviceContext.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\DeviceUtil.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\DeviceIO.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Keyboard.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\KeyboardFlags.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Mouse.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\MouseUtils.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Keycodes.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\KeyModifiers.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\MouseButtons.ixx">
+      <Filter>헤더 파일\Device\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\ComponentBrush.ixx">
+      <Filter>헤더 파일\Device\Colouring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\ColourBrush.ixx">
+      <Filter>헤더 파일\Device\Colouring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Colour.ixx">
+      <Filter>헤더 파일\Device\Colouring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\RawColour.ixx">
+      <Filter>헤더 파일\Device\Colouring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\EventAPI.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Event.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\EventID.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\RawEvent.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\SpecialEvent.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Icon.ixx">
+      <Filter>헤더 파일\Device\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\RawIcon.ixx">
+      <Filter>헤더 파일\Device\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\DeviceHandle.ixx">
+      <Filter>헤더 파일\Device\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\ProcessInstance.ixx">
+      <Filter>헤더 파일\Device\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\IHandle.ixx">
+      <Filter>헤더 파일\Device\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\IWindowHandle.ixx">
+      <Filter>헤더 파일\Device\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Display.cpp">
+      <Filter>헤더 파일\Device\Measurement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Display.ixx">
+      <Filter>헤더 파일\Device\Measurement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\DefaultProperty.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Rect.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\ManagedWindow.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowCoroutine.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowFactory.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowOption.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowProperty.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\Window.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowsPropertyFactory.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\FreeGLUT\WindowStyle.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

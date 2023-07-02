@@ -21,21 +21,20 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4c8fdd49-f3da-4897-bd44-0d7afec2494d}</ProjectGuid>
-    <RootNamespace>FreeGLUT</RootNamespace>
+    <ProjectGuid>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</ProjectGuid>
+    <RootNamespace>Native</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <EnableFuzzer>true</EnableFuzzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -43,14 +42,14 @@
     <EnableFuzzer>true</EnableFuzzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <EnableFuzzer>true</EnableFuzzer>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -60,7 +59,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared" />
+  <ImportGroup Label="Shared">
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -75,131 +75,152 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="stdafx.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Internal.hpp" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DisplayModes.ixx" />
-    <ClCompile Include="OpenGL.cpp" />
-    <ClCompile Include="OpenGL.ixx" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="..\FreeGLUT\Colour.ixx" />
+    <ClCompile Include="..\FreeGLUT\ColourBrush.ixx" />
+    <ClCompile Include="..\FreeGLUT\ComponentBrush.ixx" />
+    <ClCompile Include="..\FreeGLUT\DefaultProperty.ixx" />
+    <ClCompile Include="..\FreeGLUT\DeviceContext.ixx" />
+    <ClCompile Include="..\FreeGLUT\DeviceHandle.ixx" />
+    <ClCompile Include="..\FreeGLUT\DeviceIO.ixx" />
+    <ClCompile Include="..\FreeGLUT\DeviceUtil.ixx" />
+    <ClCompile Include="..\FreeGLUT\Display.cpp" />
+    <ClCompile Include="..\FreeGLUT\Display.ixx" />
+    <ClCompile Include="..\FreeGLUT\Event.ixx" />
+    <ClCompile Include="..\FreeGLUT\EventAPI.ixx" />
+    <ClCompile Include="..\FreeGLUT\EventID.ixx" />
+    <ClCompile Include="..\FreeGLUT\Icon.ixx" />
+    <ClCompile Include="..\FreeGLUT\IHandle.ixx" />
+    <ClCompile Include="..\FreeGLUT\IWindowHandle.ixx" />
+    <ClCompile Include="..\FreeGLUT\Keyboard.ixx" />
+    <ClCompile Include="..\FreeGLUT\KeyboardFlags.ixx" />
+    <ClCompile Include="..\FreeGLUT\Keycodes.ixx" />
+    <ClCompile Include="..\FreeGLUT\KeyModifiers.ixx" />
+    <ClCompile Include="..\FreeGLUT\ManagedWindow.ixx" />
+    <ClCompile Include="..\FreeGLUT\Mouse.ixx" />
+    <ClCompile Include="..\FreeGLUT\MouseButtons.ixx" />
+    <ClCompile Include="..\FreeGLUT\MouseUtils.ixx" />
+    <ClCompile Include="..\FreeGLUT\ProcessInstance.ixx" />
+    <ClCompile Include="..\FreeGLUT\RawColour.ixx" />
+    <ClCompile Include="..\FreeGLUT\RawEvent.ixx" />
+    <ClCompile Include="..\FreeGLUT\RawIcon.ixx" />
+    <ClCompile Include="..\FreeGLUT\Rect.ixx" />
+    <ClCompile Include="..\FreeGLUT\SpecialEvent.ixx" />
+    <ClCompile Include="..\FreeGLUT\Window.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowCoroutine.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowFactory.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowOption.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowProperty.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowsPropertyFactory.ixx" />
+    <ClCompile Include="..\FreeGLUT\WindowStyle.ixx" />
+    <ClCompile Include="Native.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Native\Native.vcxproj">
-      <Project>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Utility\src\Utility.vcxproj">
       <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
     </ProjectReference>
