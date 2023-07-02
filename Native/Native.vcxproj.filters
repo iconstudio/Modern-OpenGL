@@ -167,5 +167,8 @@
     <ClCompile Include="..\FreeGLUT\WindowStyle.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
+    <ClCompile Include="ManagedWindow.cpp">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
