@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Brush;
 import <type_traits>;
 import Glib.Device.Definitions;
@@ -51,6 +48,16 @@ export namespace gl::device
 		constexpr ColorBrush& operator=(ColorBrush&&) noexcept = default;
 	};
 
+	enum class [[nodiscard]] PatternBrushType
+	{
+		Horizontal = 0, // HS_HORIZONTAL
+		Vertical = 1, // HS_VERTICAL
+		DownDiagonal = 2, // HS_FDIAGONAL
+		UpDiagonal = 3, // HS_BDIAGONAL
+		Cross = 4, // HS_CROSS,
+		CrossDiagonal = 5, // HS_DIAGCROSS
+	};
+
 	[[nodiscard]]
 	ColorBrush MakeColorBrush(const unsigned long& color) noexcept;
 
@@ -58,5 +65,8 @@ export namespace gl::device
 	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const native::RawBitmap& pattern_img) noexcept;
+	ColorBrush MakePatternBrush(const native::RawBitmap& image) noexcept;
+
+	[[nodiscard]]
+	ColorBrush MakeStampBrush(const PatternBrushType& pattern) noexcept;
 }
