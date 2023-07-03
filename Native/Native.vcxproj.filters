@@ -137,9 +137,6 @@
     <ClCompile Include="..\FreeGLUT\Display.ixx">
       <Filter>헤더 파일\Device\Measurement</Filter>
     </ClCompile>
-    <ClCompile Include="..\FreeGLUT\DefaultProperty.ixx">
-      <Filter>헤더 파일\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\FreeGLUT\Rect.ixx">
       <Filter>헤더 파일\Utility</Filter>
     </ClCompile>

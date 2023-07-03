@@ -177,7 +177,6 @@
     <ClCompile Include="..\FreeGLUT\Colour.ixx" />
     <ClCompile Include="..\FreeGLUT\ColourBrush.ixx" />
     <ClCompile Include="..\FreeGLUT\ComponentBrush.ixx" />
-    <ClCompile Include="..\FreeGLUT\DefaultProperty.ixx" />
     <ClCompile Include="..\FreeGLUT\DeviceContext.ixx" />
     <ClCompile Include="..\FreeGLUT\DeviceHandle.ixx" />
     <ClCompile Include="..\FreeGLUT\DeviceIO.ixx" />

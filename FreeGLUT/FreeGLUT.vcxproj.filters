@@ -34,11 +34,14 @@
     <ClCompile Include="OpenGL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL.ixx">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="DefaultProperty.ixx">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="DisplayModes.ixx">
-      <Filter>소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL.ixx">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
