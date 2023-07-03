@@ -22,6 +22,9 @@
     <Filter Include="헤더 파일\Window">
       <UniqueIdentifier>{46f4f182-8de9-4525-9ead-143dd2c33e1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\GDI">
+      <UniqueIdentifier>{df96e776-1182-42b1-9b3c-cb60f1c52b41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -151,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Bitmap.ixx">
       <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBrush.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
