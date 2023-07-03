@@ -3,13 +3,13 @@ module;
 
 export module Glib.Window.Property;
 import <type_traits>;
+import Glib.Device.Definitions;
 import Glib.Device.ProcessInstance;
 
 export extern "C++" namespace gl::window
 {
-	//using ::WNDPROC;
-	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
-	using RawWindowProperty = ::tagWNDCLASSEXW;
+	using device::native::WindowProcedure;
+	using device::native::RawWindowProperty;
 
 	inline constexpr RawWindowProperty DefaultWindowProperty = 
 	{
