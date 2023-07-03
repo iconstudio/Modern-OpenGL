@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Internal.hpp" />
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
