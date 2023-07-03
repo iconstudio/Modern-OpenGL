@@ -26,9 +26,9 @@ namespace gl::display
 		[[nodiscard]] bool IsDPIAware() noexcept;
 		[[nodiscard]] DpiAwareness GetDPIAware() noexcept;
 		[[nodiscard]] bool IsDPIAware(const HWND& handle) noexcept;
+		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return DEFAULT_DPI; }
 		[[nodiscard]] DpiAwareness GetDPIAware(const HWND& handle) noexcept;
 		[[nodiscard]] unsigned int GetDPI() noexcept;
-		[[nodiscard]] consteval unsigned int GetDefaultDPI() noexcept { return DEFAULT_DPI; }
 	}
 
 	export [[nodiscard]] Rect GetActualDisplaySize() noexcept;
