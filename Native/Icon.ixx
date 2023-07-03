@@ -4,23 +4,20 @@ module;
 #undef DrawIcon
 
 export module Glib.Device.Resource.Icon;
-export import <string_view>;
-import :Implement;
+import <type_traits>;
+import <string_view>;
+import Glib.Device.Definitions;
+import Glib.Device.IHandle;
 
 export namespace gl::device::resource
 {
-	using detail::RawIcon;
-
-	class [[nodiscard]] Icon
+	class [[nodiscard]] Icon : public IHandle<native::RawIcon>
 	{
 	protected:
-		constexpr Icon(const RawIcon& icon, const unsigned int& length) noexcept
-			: myIcon(icon)
-			, myLength(length)
-		{}
+		using base = IHandle<native::RawIcon>;
 
-		constexpr Icon(RawIcon&& icon, const unsigned int& length) noexcept
-			: myIcon(static_cast<RawIcon&&>(icon))
+		constexpr Icon(handle_type&& icon, const unsigned int& length) noexcept
+			: base(std::move(icon))
 			, myLength(length)
 		{}
 
@@ -51,26 +48,26 @@ export namespace gl::device::resource
 		friend bool DestroyIcon(Icon& icon) noexcept;
 
 		constexpr Icon(nullptr_t) noexcept
-			: myIcon(nullptr)
+			: base(nullptr)
 			, myLength(0U)
 		{}
 
 		constexpr Icon& operator=(nullptr_t) noexcept
 		{
-			if (nullptr != myIcon)
+			if (nullptr != GetHandle())
 			{
-				detail::Destroy(myIcon);
+				detail::Destroy(GetHandle());
 			}
 			myLength = 0U;
 
 			return *this;
 		}
 
-		virtual inline ~Icon() noexcept
+		~Icon() noexcept
 		{
-			if (nullptr != myIcon)
+			if (nullptr != GetHandle())
 			{
-				detail::Destroy(myIcon);
+				detail::Destroy(GetHandle());
 			}
 			myLength = 0U;
 		}
@@ -93,18 +90,6 @@ export namespace gl::device::resource
 		}
 
 		[[nodiscard]]
-		constexpr const RawIcon& GetHandle() const& noexcept
-		{
-			return myIcon;
-		}
-
-		[[nodiscard]]
-		constexpr RawIcon&& GetHandle() && noexcept
-		{
-			return static_cast<RawIcon&&>(myIcon);
-		}
-
-		[[nodiscard]]
 		constexpr unsigned int GetLength() const noexcept
 		{
 			return myLength;
@@ -113,7 +98,7 @@ export namespace gl::device::resource
 		[[nodiscard]]
 		constexpr bool IsEmpty() const noexcept
 		{
-			return nullptr == myIcon;
+			return nullptr == GetHandle();
 		}
 
 		Icon(const Icon&) = delete;
@@ -122,7 +107,6 @@ export namespace gl::device::resource
 		constexpr Icon& operator=(Icon&&) = default;
 
 	private:
-		RawIcon myIcon;
 		unsigned int myLength;
 	};
 
@@ -174,7 +158,7 @@ export namespace gl::device::resource
 
 	bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept
 	{
-		if (detail::TryLoadResource(output.myIcon, name))
+		if (detail::TryLoadResource(output.GetHandle(), name))
 		{
 			output.myLength = 1;
 			return true;
@@ -192,7 +176,7 @@ export namespace gl::device::resource
 
 	bool TryLoadResource(const int& id, Icon& output) noexcept
 	{
-		if (detail::TryLoadResource(output.myIcon, id))
+		if (detail::TryLoadResource(output.GetHandle(), id))
 		{
 			output.myLength = 1;
 			return true;
@@ -205,12 +189,12 @@ export namespace gl::device::resource
 
 	Icon CopyIcon(const Icon& icon) noexcept
 	{
-		return Icon(detail::Copy(icon.myIcon), icon.myLength);
+		return Icon(detail::Copy(icon.GetHandle()), icon.myLength);
 	}
 
 	bool TryCopyIcon(const Icon& icon, Icon& output) noexcept
 	{
-		if (detail::TryCopy(icon.myIcon, output.myIcon))
+		if (detail::TryCopy(icon.GetHandle(), output.GetHandle()))
 		{
 			output.myLength = icon.myLength;
 			return true;
@@ -228,7 +212,7 @@ export namespace gl::device::resource
 
 	bool DestroyIcon(Icon& icon) noexcept
 	{
-		return detail::Destroy(icon.myIcon);
+		return detail::Destroy(icon.GetHandle());
 	}
 }
 
