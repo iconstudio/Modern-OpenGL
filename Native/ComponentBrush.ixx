@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Brush.Component;
 import Glib.Device.Definitions;
 import Glib.Device.Brush;

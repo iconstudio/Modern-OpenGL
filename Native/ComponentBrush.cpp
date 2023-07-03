@@ -4,29 +4,38 @@ module;
 module Glib.Device.Brush.Component;
 import <type_traits>;
 
-template<gl::device::ColoredComponent Target>
-struct InternalCColor
+namespace gl::device
 {
-	constexpr InternalCColor() noexcept = default;
-	constexpr ~InternalCColor() noexcept = default;
+	constexpr int make_index(const ColoredComponent& target) noexcept
+	{
+		return static_cast<int>(target);
+	}
 
-	constexpr InternalCColor(const gl::device::native::NativeColorBrush& brush) noexcept
-		: myBrush(brush)
-	{}
+	native::NativeColorBrush acquire_brush(ColoredComponent target) noexcept
+	{
+		return ::GetSysColorBrush(make_index(target));
+	}
 
-	constexpr InternalCColor(gl::device::native::NativeColorBrush&& brush) noexcept
-		: myBrush(std::move(brush))
-	{}
+	native::NativeColorBrush acquire_brush(int target) noexcept
+	{
+		return ::GetSysColorBrush(target);
+	}
 
-	gl::device::native::NativeColorBrush myBrush;
-};
+	static constexpr int cachedBrushSize = make_index(ColoredComponent::Hyperlink) + 1;
+	static native::NativeColorBrush cachedBrushes[cachedBrushSize];
+}
 
 const gl::device::native::NativeColorBrush&
 gl::device::GetComponentColouring(gl::device::ColoredComponent target)
 noexcept
 {
-	static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
-	return stock.myBrush;
+	native::NativeColorBrush& stock = cachedBrushes[make_index(target)];
+	if (stock == nullptr)
+	{
+		stock = acquire_brush(target);
+	}
+
+	return stock;
 }
 
 const gl::device::native::NativeColorBrush&
