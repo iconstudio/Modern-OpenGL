@@ -2,11 +2,10 @@ module;
 #include "Internal.hpp"
 
 export module Glib.Device.Brush.Component;
-import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.Brush;
 
-namespace gl::device
+export namespace gl::device
 {
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
@@ -20,7 +19,7 @@ namespace gl::device
 		Hyperlink = 26, // COLOR_HOTLIGHT
 	};
 
-	export extern "C" namespace colored_components
+	extern "C" namespace colored_components
 	{
 		inline constexpr ColoredComponent Text = ColoredComponent::Text;
 		inline constexpr ColoredComponent Background = ColoredComponent::Window;
@@ -34,40 +33,16 @@ namespace gl::device
 		inline constexpr ColoredComponent Hyperlink = ColoredComponent::Hyperlink;
 	}
 
-	template<ColoredComponent Target>
-	struct InternalCColor
-	{
-		constexpr InternalCColor() noexcept = default;
-		constexpr ~InternalCColor() noexcept = default;
-
-		constexpr InternalCColor(const native::NativeColorBrush& brush) noexcept
-			: myBrush(brush)
-		{}
-
-		constexpr InternalCColor(native::NativeColorBrush&& brush) noexcept
-			: myBrush(std::move(brush))
-		{}
-
-		native::NativeColorBrush myBrush;
-	};
-
 	const native::NativeColorBrush& GetComponentColouring(ColoredComponent) noexcept;
 
-	export template<ColoredComponent Target>
-		[[nodiscard]]
-	const native::NativeColorBrush&
-		GetComponentColouring()
-		noexcept(COLOR_WINDOW <= static_cast<int>(Target) && static_cast<int>(Target) <= COLOR_HOTLIGHT)
+	template<ColoredComponent Target>
+	[[nodiscard]]
+	const native::NativeColorBrush& GetComponentColouring() noexcept
 	{
-		static InternalCColor<Target> stock = ::GetSysColorBrush(static_cast<int>(Target));
-		return stock.myBrush;
+		static const native::NativeColorBrush& stock = GetComponentColouring(Target);
+		return stock;
 	}
 
-	export
-		[[nodiscard]]
-	const native::NativeColorBrush&
-		MakeDefaultComponentColouring() noexcept
-	{
-		return GetComponentColouring<colored_components::Background>();
-	}
+	[[nodiscard]]
+	const native::NativeColorBrush& MakeDefaultComponentColouring() noexcept;
 }
