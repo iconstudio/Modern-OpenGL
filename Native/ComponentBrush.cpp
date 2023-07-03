@@ -11,25 +11,25 @@ namespace gl::device
 		return static_cast<int>(target);
 	}
 
-	native::NativeColorBrush acquire_brush(ColoredComponent target) noexcept
+	native::RawColorBrush acquire_brush(ColoredComponent target) noexcept
 	{
 		return ::GetSysColorBrush(make_index(target));
 	}
 
-	native::NativeColorBrush acquire_brush(int target) noexcept
+	native::RawColorBrush acquire_brush(int target) noexcept
 	{
 		return ::GetSysColorBrush(target);
 	}
 
 	static constexpr int cachedBrushSize = make_index(ColoredComponent::Hyperlink) + 1;
-	static native::NativeColorBrush cachedBrushes[cachedBrushSize];
+	static native::RawColorBrush cachedBrushes[cachedBrushSize];
 }
 
-const gl::device::native::NativeColorBrush&
+const gl::device::native::RawColorBrush&
 gl::device::GetComponentColouring(gl::device::ColoredComponent target)
 noexcept
 {
-	native::NativeColorBrush& stock = cachedBrushes[make_index(target)];
+	native::RawColorBrush& stock = cachedBrushes[make_index(target)];
 	if (stock == nullptr)
 	{
 		stock = acquire_brush(target);
@@ -38,7 +38,7 @@ noexcept
 	return stock;
 }
 
-const gl::device::native::NativeColorBrush&
+const gl::device::native::RawColorBrush&
 gl::device::MakeDefaultComponentColouring()
 noexcept
 {

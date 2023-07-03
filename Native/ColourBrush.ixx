@@ -6,10 +6,10 @@ import Glib.Device.Colour;
 
 export namespace gl::device
 {
-	class [[nodiscard]] ColorBrush : public IHandle<native::NativeColorBrush>
+	class [[nodiscard]] ColorBrush : public IHandle<native::RawColorBrush>
 	{
 	public:
-		using base = IHandle<native::NativeColorBrush>;
+		using base = IHandle<native::RawColorBrush>;
 
 		constexpr ColorBrush() noexcept = default;
 

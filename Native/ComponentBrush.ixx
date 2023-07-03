@@ -29,16 +29,16 @@ export namespace gl::device
 		inline constexpr ColoredComponent Hyperlink = ColoredComponent::Hyperlink;
 	}
 
-	const native::NativeColorBrush& GetComponentColouring(ColoredComponent) noexcept;
+	const native::RawColorBrush& GetComponentColouring(ColoredComponent) noexcept;
 
 	template<ColoredComponent Target>
 	[[nodiscard]]
-	const native::NativeColorBrush& GetComponentColouring() noexcept
+	const native::RawColorBrush& GetComponentColouring() noexcept
 	{
-		static const native::NativeColorBrush& stock = GetComponentColouring(Target);
+		static const native::RawColorBrush& stock = GetComponentColouring(Target);
 		return stock;
 	}
 
 	[[nodiscard]]
-	const native::NativeColorBrush& MakeDefaultComponentColouring() noexcept;
+	const native::RawColorBrush& MakeDefaultComponentColouring() noexcept;
 }

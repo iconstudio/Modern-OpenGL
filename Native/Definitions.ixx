@@ -15,7 +15,7 @@ export namespace gl::device::native
 	using RawWindowProperty = ::tagWNDCLASSEXW;
 
 	using NativeSurface = ::HDC__*;
-	using NativeColorBrush = ::HBRUSH__*;
+	using RawColorBrush = ::HBRUSH__*;
 	using RawBitmap = ::HBITMAP__*;
 	using RawIcon = ::HICON__*;
 }
