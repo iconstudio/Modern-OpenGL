@@ -1,6 +1,13 @@
 module;
 #include "Internal.hpp"
+
 export module Glib.Device.Definitions;
+import <filesystem>;
+
+export namespace gl::device
+{
+	using FilePath = std::filesystem::path;
+}
 
 export namespace gl::device::native
 {
