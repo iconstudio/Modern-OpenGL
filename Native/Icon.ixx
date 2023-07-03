@@ -1,8 +1,3 @@
-module;
-#include "Internal.hpp"
-#undef LoadIcon
-#undef DrawIcon
-
 export module Glib.Device.Resource.Icon;
 import <type_traits>;
 import <string_view>;
@@ -31,19 +26,9 @@ export namespace gl::device::resource
 		[[nodiscard]]
 		friend bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept;
 		[[nodiscard]]
-		friend Icon LoadResource(const std::wstring_view& name) noexcept;
+		friend Icon LoadIcon(const int& id) noexcept;
 		[[nodiscard]]
-		friend bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept;
-		[[nodiscard]]
-		friend Icon LoadResource(const int& id) noexcept;
-		[[nodiscard]]
-		friend bool TryLoadResource(const int& id, Icon& output) noexcept;
-		[[nodiscard]]
-		friend Icon CopyIcon(const Icon& icon) noexcept;
-		[[nodiscard]]
-		friend bool TryCopyIcon(const Icon& icon, Icon& output) noexcept;
-		friend bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept;
-		friend bool DestroyIcon(Icon& icon) noexcept;
+		friend bool TryLoadIcon(const int& id, Icon& output) noexcept;
 
 		constexpr Icon(nullptr_t) noexcept
 			: base(nullptr)

@@ -1,9 +1,7 @@
 module;
 #include "Internal.hpp"
 #include <shellapi.h>
-
 module Glib.Device.Resource.Icon;
-import Glib.Device.Definitions;
 
 gl::device::resource::Icon&
 gl::device::resource::Icon::operator=(nullptr_t)
@@ -26,14 +24,30 @@ gl::device::resource::Icon
 gl::device::resource::Icon::Copy()
 const noexcept
 {
-	return CopyIcon(*this);
+	gl::device::resource::Icon result{ nullptr };
+
+	native::RawIcon copy = ::CopyIcon(GetHandle());
+	if (nullptr != copy)
+	{
+		result.myLength = myLength;
+		return result;
+	}
+
+	return nullptr;
 }
 
 bool
 gl::device::resource::Icon::TryCopy(Icon& output)
 const noexcept
 {
-	return TryCopyIcon(*this, output);
+	native::RawIcon copy = ::CopyIcon(GetHandle());
+	if (nullptr != copy)
+	{
+		output.myLength = myLength;
+		return true;
+	}
+
+	return false;
 }
 
 bool
@@ -49,11 +63,12 @@ noexcept
 		return false;
 	}
 }
+
 bool
 gl::device::resource::Icon::Draw(const gl::device::native::NativeSurface& hdc, const int& x, const int& y)
 const noexcept
 {
-	return DrawIcon(*this, hdc, x, y);
+	return 0 != ::DrawIcon(hdc, x, y, GetHandle());
 }
 
 gl::device::resource::Icon
@@ -64,111 +79,6 @@ gl::device::MakeEmptyIcon() noexcept
 
 namespace gl::device::resource
 {
-#undef LoadIcon
-	Icon LoadIcon(const FilePath& path) noexcept
-	{
-		return Icon(detail::ExtractFrom(path, 0), detail::GetIconsNumber(path));
-	}
-
-	bool TryLoadIcon(const FilePath& path, Icon& output) noexcept
-	{
-		if (nullptr != detail::ExtractFrom(path, 0))
-		{
-			output.myLength = detail::GetIconsNumber(path);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	Icon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
-	{
-		return Icon(detail::ExtractFrom(path, index), detail::GetIconsNumber(path));
-	}
-
-	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept
-	{
-		if (nullptr != detail::ExtractFrom(path, index))
-		{
-			output.myLength = detail::GetIconsNumber(path);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	Icon LoadResource(const std::wstring_view& name) noexcept
-	{
-		return Icon(detail::LoadResource(name), 1);
-	}
-
-	bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept
-	{
-		if (detail::TryLoadResource(output.GetHandle(), name))
-		{
-			output.myLength = 1;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	Icon LoadResource(const int& id) noexcept
-	{
-		return Icon(detail::LoadResource(id), 1);
-	}
-
-	bool TryLoadResource(const int& id, Icon& output) noexcept
-	{
-		if (detail::TryLoadResource(output.GetHandle(), id))
-		{
-			output.myLength = 1;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	Icon CopyIcon(const Icon& icon) noexcept
-	{
-		return Icon(detail::Copy(icon.GetHandle()), icon.myLength);
-	}
-
-	bool TryCopyIcon(const Icon& icon, Icon& output) noexcept
-	{
-		if (detail::TryCopy(icon.GetHandle(), output.GetHandle()))
-		{
-			output.myLength = icon.myLength;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
-	{
-		return detail::Draw(icon.GetHandle(), hdc, x, y);
-	}
-
-	bool DestroyIcon(Icon& icon) noexcept
-	{
-		return detail::Destroy(icon.GetHandle());
-	}
-}
-
-namespace gl::device::resource::detail
-{
-	using device::native::RawIcon;
 	using IconByte = unsigned char;
 	using IconBytePtr = IconByte*;
 
@@ -189,6 +99,153 @@ namespace gl::device::resource::detail
 		0xFF, 0xFF, 0xFF, 0xFF,
 	};
 
+	[[nodiscard]]
+	native::RawIcon Construct(::ICONINFO meta) noexcept
+	{
+		return ::CreateIconIndirect(&meta);
+	}
+
+	[[nodiscard]]
+	bool TryConstruct(native::RawIcon& output, ::ICONINFO meta) noexcept
+	{
+		return nullptr != (output = ::CreateIconIndirect(&meta));
+	}
+
+	[[nodiscard]]
+	native::RawIcon LoadResource(const std::wstring_view& name) noexcept
+	{
+		return ::LoadIcon(nullptr, name.data());
+	}
+
+	[[nodiscard]]
+	bool TryLoadResource(native::RawIcon& output, const std::wstring_view& name) noexcept
+	{
+		return nullptr != (output = LoadResource(name));
+	}
+
+	[[nodiscard]]
+	native::RawIcon LoadResource(const int& id) noexcept
+	{
+		return ::LoadIconW(nullptr, MAKEINTRESOURCE(id));
+	}
+
+	[[nodiscard]]
+	bool TryLoadResource(native::RawIcon& output, const int& id) noexcept
+	{
+		return nullptr != (output = LoadResource(id));
+	}
+
+	[[nodiscard]]
+	native::RawIcon Create(const int& width, const int& height
+		, const IconBytePtr& and_plain_mask
+		, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
+	) noexcept
+	{
+		return ::CreateIcon(nullptr, width, height
+			, xor_planes, xor_bits_per_pixel, and_plain_mask, xor_color_mask);
+	}
+
+	[[nodiscard]]
+	bool TryCreate(native::RawIcon& output, const int& width, const int& height
+		, const IconBytePtr& and_plain_mask
+		, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
+	) noexcept
+	{
+		output = ::CreateIcon(nullptr, width, height
+			, xor_planes, xor_bits_per_pixel, and_plain_mask, xor_color_mask);
+
+		return nullptr != output;
+	}
+
+	[[nodiscard]]
+	native::RawIcon ExtractFrom(const FilePath& path, const unsigned int& index) noexcept
+	{
+		return ::ExtractIcon(nullptr, path.c_str(), index);
+	}
+
+	template<unsigned int Count, size_t SmallNumber, size_t LargeNumber>
+	[[nodiscard]]
+	unsigned int ExtractFrom(const FilePath& path
+		, const int& index
+		, _Notnull_ native::RawIcon(&smalls)[SmallNumber]
+		, _Notnull_ native::RawIcon(&larges)[LargeNumber]
+	) noexcept
+	{
+		static_assert(0 < SmallNumber);
+		static_assert(0 < LargeNumber);
+		static_assert(0 < Count);
+		static_assert(SmallNumber <= SmallNumber);
+		static_assert(Count <= LargeNumber);
+
+		return ::ExtractIconEx(path.c_str(), (index), larges, smalls, Count);
+	}
+
+	[[nodiscard]]
+	unsigned int GetIconsNumber(const FilePath& path) noexcept
+	{
+		return ::ExtractIconEx(path.c_str(), -1, nullptr, nullptr, static_cast<unsigned int>(-1));
+	}
+
+#undef LoadIcon
+	Icon LoadIcon(const FilePath& path) noexcept
+	{
+		return Icon(ExtractFrom(path, 0), GetIconsNumber(path));
+	}
+
+	bool TryLoadIcon(const FilePath& path, Icon& output) noexcept
+	{
+		if (nullptr != ExtractFrom(path, 0))
+		{
+			output.myLength = GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
+	{
+		return Icon(ExtractFrom(path, index), GetIconsNumber(path));
+	}
+
+	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept
+	{
+		if (nullptr != ExtractFrom(path, index))
+		{
+			output.myLength = GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon LoadIcon(const int& id) noexcept
+	{
+		return Icon(LoadResource(id), 1);
+	}
+
+	bool TryLoadIcon(const int& id, Icon& output) noexcept
+	{
+		if (TryLoadResource(output.GetHandle(), id))
+		{
+			output.myLength = 1;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+namespace gl::device::resource::detail
+{
+	using device::native::RawIcon;
+
 	/// <param name="color">Plain color bitmap</param>
 	/// <param name="mask">Should have (1, 2)x resolution of the icon</param>
 	[[nodiscard]]
@@ -205,110 +262,6 @@ namespace gl::device::resource::detail
 	}
 
 	[[nodiscard]]
-	RawIcon Construct(::ICONINFO meta) noexcept
-	{
-		return ::CreateIconIndirect(&meta);
-	}
-
-	[[nodiscard]]
-	bool TryConstruct(RawIcon& output, ::ICONINFO meta) noexcept
-	{
-		return nullptr != (output = ::CreateIconIndirect(&meta));
-	}
-
-	[[nodiscard]]
-	RawIcon LoadResource(const std::wstring_view& name) noexcept
-	{
-		return ::LoadIcon(nullptr, name.data());
-	}
-
-	[[nodiscard]]
-	bool TryLoadResource(RawIcon& output, const std::wstring_view& name) noexcept
-	{
-		return nullptr != (output = LoadResource(name));
-	}
-
-	[[nodiscard]]
-	RawIcon LoadResource(const int& id) noexcept
-	{
-		return ::LoadIconW(nullptr, MAKEINTRESOURCE(id));
-	}
-
-	[[nodiscard]]
-	bool TryLoadResource(RawIcon& output, const int& id) noexcept
-	{
-		return nullptr != (output = LoadResource(id));
-	}
-
-	[[nodiscard]]
-	RawIcon Create(const int& width, const int& height
-		, const IconBytePtr& and_plain_mask
-		, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
-	) noexcept
-	{
-		return ::CreateIcon(nullptr, width, height
-			, xor_planes, xor_bits_per_pixel, and_plain_mask, xor_color_mask);
-	}
-
-	[[nodiscard]]
-	bool TryCreate(RawIcon& output, const int& width, const int& height
-		, const IconBytePtr& and_plain_mask
-		, const IconBytePtr& xor_color_mask, const unsigned char& xor_bits_per_pixel, const unsigned char& xor_planes = 1
-	) noexcept
-	{
-		output = ::CreateIcon(nullptr, width, height
-			, xor_planes, xor_bits_per_pixel, and_plain_mask, xor_color_mask);
-
-		return nullptr != output;
-	}
-
-	[[nodiscard]]
-	RawIcon ExtractFrom(const FilePath& path, const unsigned int& index) noexcept
-	{
-		return ::ExtractIcon(nullptr, path.c_str(), index);
-	}
-
-	template<unsigned int Count, size_t SmallNumber, size_t LargeNumber>
-	[[nodiscard]]
-	unsigned int ExtractFrom(const FilePath& path
-		, const int& index
-		, _Notnull_ RawIcon(&smalls)[SmallNumber]
-		, _Notnull_ RawIcon(&larges)[LargeNumber]
-	) noexcept(Count < SmallNumber&& Count < LargeNumber)
-	{
-		static_assert(0 < SmallNumber);
-		static_assert(0 < LargeNumber);
-		static_assert(0 < Count);
-
-		return ::ExtractIconEx(path.c_str(), ::abs(index), larges, smalls, Count);
-	}
-
-	[[nodiscard]]
-	RawIcon Copy(const RawIcon& icon) noexcept
-	{
-		return ::CopyIcon(icon);
-	}
-
-	[[nodiscard]]
-	bool TryCopy(const RawIcon& icon, RawIcon& output) noexcept
-	{
-		output = ::CopyIcon(icon);
-
-		return nullptr != output;
-	}
-
-	bool Draw(const RawIcon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
-	{
-		return 0 != ::DrawIcon(hdc, x, y, icon);
-	}
-
-	[[nodiscard]]
-	unsigned int GetIconsNumber(const FilePath& path) noexcept
-	{
-		return ::ExtractIconEx(path.c_str(), -1, nullptr, nullptr, static_cast<unsigned int>(-1));
-	}
-
-	[[nodiscard]]
 	::ICONINFO GetInfo(const RawIcon& icon) noexcept
 	{
 		::ICONINFO result{};
@@ -322,10 +275,5 @@ namespace gl::device::resource::detail
 	bool TryGetInfo(const RawIcon& icon, ::ICONINFO& output) noexcept
 	{
 		return 0 != ::GetIconInfo(icon, &output);
-	}
-
-	bool Destroy(RawIcon& icon) noexcept
-	{
-		return 0 != ::DestroyIcon(icon);
 	}
 }
