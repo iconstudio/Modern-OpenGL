@@ -186,7 +186,6 @@
     <None Include="stdafx.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Internal.hpp" />
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
