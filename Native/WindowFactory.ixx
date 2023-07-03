@@ -4,7 +4,7 @@ import <memory>;
 import Utility.FixedString;
 import Glib.Rect;
 import Glib.Window;
-import Glib.Window.Property;
+import Glib.Window.Property.Factory;
 import Glib.Window.ManagedWindow;
 
 export namespace gl::window
@@ -110,7 +110,26 @@ export namespace gl::window
 		, const int& number_of_workers = 4
 		, const WindowStyle& style = styles::Default
 		, const WindowOption& option = options::Default
-	);
+	)
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+		WindowProperty property = CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
+
+		if (!property.Register())
+		{
+			throw std::runtime_error{ "Failed to register window class" };
+		}
+
+		return std::make_unique<ManagedWindow>
+			(
+				CreateWindow(property
+			, title
+			, style
+			, option
+			, x, y, width, height)
+				, number_of_workers
+			);
+	}
 
 	template<util::basic_fixed_string NID>
 	[[nodiscard]]
@@ -119,6 +138,25 @@ export namespace gl::window
 		, const int& number_of_workers = 4
 		, const WindowStyle& style = styles::Default
 		, const WindowOption& option = options::Default
-	);
+	)
+	{
+		constexpr std::wstring_view class_name_view{ NID };
+		WindowProperty property = CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
+
+		if (!property.Register())
+		{
+			throw std::runtime_error{ "Failed to register window class" };
+		}
+
+		return std::make_unique<ManagedWindow>
+			(
+				CreateWindow(property
+			, title
+			, style
+			, option
+			, dimension.x, dimension.y, dimension.w, dimension.h)
+				, number_of_workers
+			);
+	}
 #pragma endregion
 }

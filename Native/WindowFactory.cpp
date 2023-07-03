@@ -1,10 +1,8 @@
 module Glib.Window.Factory;
 import <type_traits>;
+import <memory>;
 import <string_view>;
 import Utility.FixedString;
-import Glib.Window;
-import Glib.Window.Property;
-import Glib.Window.Property.Factory;
 
 namespace gl::window
 {
@@ -151,67 +149,6 @@ namespace gl::window
 			, std::move(dimension.x), std::move(dimension.y)
 			, std::move(dimension.w), std::move(dimension.h)
 		};
-	}
-#pragma endregion
-
-#pragma region CreateWindowEx
-	template<util::basic_fixed_string NID>
-	[[nodiscard]]
-	std::unique_ptr<ManagedWindow> CreateWindowEx(const std::wstring_view& title
-		, const int& x
-		, const int& y
-		, const int& width
-		, const int& height
-		, const int& number_of_workers
-		, const WindowStyle& style
-		, const WindowOption& option
-	)
-	{
-		constexpr std::wstring_view class_name_view{ NID };
-		WindowProperty property = gl::window::CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
-
-		if (!property.Register())
-		{
-			throw std::runtime_error{ "Failed to register window class" };
-		}
-
-		return std::make_unique<gl::window::ManagedWindow>
-			(
-				gl::window::CreateWindow(property
-			, title
-			, style
-			, option
-			, x, y, width, height)
-				, number_of_workers
-			);
-	}
-
-	template<util::basic_fixed_string NID>
-	[[nodiscard]]
-	std::unique_ptr<ManagedWindow> CreateWindowEx(const std::wstring_view& title
-		, const Rect& dimension
-		, const int& number_of_workers
-		, const WindowStyle& style
-		, const WindowOption& option
-	)
-	{
-		constexpr std::wstring_view class_name_view{ NID };
-		WindowProperty property = gl::window::CreateProperty(ManagedWindow::MainWorker, class_name_view.data());
-
-		if (!property.Register())
-		{
-			throw std::runtime_error{ "Failed to register window class" };
-		}
-
-		return std::make_unique<gl::window::ManagedWindow>
-			(
-				gl::window::CreateWindow(property
-			, title
-			, style
-			, option
-			, dimension.x, dimension.y, dimension.w, dimension.h)
-				, number_of_workers
-			);
 	}
 #pragma endregion
 }
