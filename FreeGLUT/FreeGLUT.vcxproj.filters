@@ -43,5 +43,11 @@
     <ClCompile Include="OpenGL.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Display.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

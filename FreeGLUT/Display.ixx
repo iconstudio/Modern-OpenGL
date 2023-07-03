@@ -1,5 +1,5 @@
 module;
-#include "Internal.hpp"
+#include <Windows.h>
 #undef USER_DEFAULT_SCREEN_DPI
 
 export module Glib.Display;

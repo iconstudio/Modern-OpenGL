@@ -190,6 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultProperty.ixx" />
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />

@@ -1,0 +1,124 @@
+export module Glib.Window.Factory;
+import <string_view>;
+import <memory>;
+import Utility.FixedString;
+import Glib.Rect;
+import Glib.Window;
+import Glib.Window.Property;
+import Glib.Window.ManagedWindow;
+
+export namespace gl::window
+{
+#pragma region CreateWindow
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const int& x, const int& y, const int& width, const int& height
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const int& x, const int& y, const int& width, const int& height
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const WindowOption& option
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const WindowStyle& style
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const int& x, const int& y, const int& width, const int& height
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const int& x, const int& y, const int& width, const int& height
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, const Rect& dimension
+	) noexcept;
+
+	Window CreateWindow(const WindowProperty& properties
+		, const std::wstring_view& title
+		, Rect&& dimension
+	) noexcept;
+
+	Window CreateWindow(WindowProperty&& properties
+		, const std::wstring_view& title
+		, Rect&& dimension
+	) noexcept;
+#pragma endregion
+
+#pragma region CreateWindowEx
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	std::unique_ptr<ManagedWindow> CreateWindowEx(const std::wstring_view& title
+		, const int& x
+		, const int& y
+		, const int& width
+		, const int& height
+		, const int& number_of_workers = 4
+		, const WindowStyle& style = styles::Default
+		, const WindowOption& option = options::Default
+	);
+
+	template<util::basic_fixed_string NID>
+	[[nodiscard]]
+	std::unique_ptr<ManagedWindow> CreateWindowEx(const std::wstring_view& title
+		, const Rect& dimension
+		, const int& number_of_workers = 4
+		, const WindowStyle& style = styles::Default
+		, const WindowOption& option = options::Default
+	);
+#pragma endregion
+}

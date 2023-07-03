@@ -2,7 +2,6 @@ export module Glib.Window;
 import <type_traits>;
 import <string_view>;
 import Glib.Rect;
-import Glib.DefaultProperty;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Handle;
 import Glib.Device.Event;

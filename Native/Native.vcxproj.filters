@@ -16,27 +16,6 @@
     <Filter Include="헤더 파일\Device">
       <UniqueIdentifier>{0ae1bc4b-0578-4f12-bfe7-b13c99153ea8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\Device\IO">
-      <UniqueIdentifier>{d14413b9-d8ee-412e-8e8b-f7f07bb9bc24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Colouring">
-      <UniqueIdentifier>{096aa7c6-dd81-4f07-86ed-8b0bf3e4712e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Rendering">
-      <UniqueIdentifier>{ce1cde95-ef11-4680-917e-81a450776d7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Event">
-      <UniqueIdentifier>{0bf6f97f-94b7-4a3e-848e-295728d2fcce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Resource">
-      <UniqueIdentifier>{00b3b3ed-d15a-48fa-8e90-d307e55ab504}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Core">
-      <UniqueIdentifier>{e5dbc0d1-8de5-4a3b-b984-014d05bfb379}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Device\Measurement">
-      <UniqueIdentifier>{619caba6-e910-4bce-acd4-3b5bf7ee1258}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Utility">
       <UniqueIdentifier>{d15db6ec-62e0-4c92-924c-44a8bd7bc827}</UniqueIdentifier>
     </Filter>
@@ -59,119 +38,113 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\FreeGLUT\DeviceContext.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\DeviceUtil.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\DeviceIO.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Keyboard.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\KeyboardFlags.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Mouse.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\MouseUtils.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Keycodes.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\KeyModifiers.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\MouseButtons.ixx">
-      <Filter>헤더 파일\Device\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\ComponentBrush.ixx">
-      <Filter>헤더 파일\Device\Colouring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\ColourBrush.ixx">
-      <Filter>헤더 파일\Device\Colouring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Colour.ixx">
-      <Filter>헤더 파일\Device\Colouring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\RawColour.ixx">
-      <Filter>헤더 파일\Device\Colouring</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\EventAPI.ixx">
-      <Filter>헤더 파일\Device\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Event.ixx">
-      <Filter>헤더 파일\Device\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\EventID.ixx">
-      <Filter>헤더 파일\Device\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\RawEvent.ixx">
-      <Filter>헤더 파일\Device\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\SpecialEvent.ixx">
-      <Filter>헤더 파일\Device\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Icon.ixx">
-      <Filter>헤더 파일\Device\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\RawIcon.ixx">
-      <Filter>헤더 파일\Device\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\DeviceHandle.ixx">
-      <Filter>헤더 파일\Device\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\ProcessInstance.ixx">
-      <Filter>헤더 파일\Device\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\IHandle.ixx">
-      <Filter>헤더 파일\Device\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\IWindowHandle.ixx">
-      <Filter>헤더 파일\Device\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Display.cpp">
-      <Filter>헤더 파일\Device\Measurement</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Display.ixx">
-      <Filter>헤더 파일\Device\Measurement</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Rect.ixx">
-      <Filter>헤더 파일\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\ManagedWindow.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowCoroutine.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowFactory.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowOption.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowProperty.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\Window.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowsPropertyFactory.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\FreeGLUT\WindowStyle.ixx">
-      <Filter>헤더 파일\Window</Filter>
-    </ClCompile>
     <ClCompile Include="ManagedWindow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="WindowFactory.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowCoroutine.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowFactory.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowProperty.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowOption.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsPropertyFactory.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowStyle.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagedWindow.ixx">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialEvent.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessInstance.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="RawColour.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="RawEvent.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="RawIcon.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseUtils.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseButtons.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyModifiers.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="EventAPI.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="EventID.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="IHandle.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="IWindowHandle.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardFlags.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Keycodes.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Colour.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ColourBrush.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBrush.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceHandle.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceIO.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceUtil.ixx">
+      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

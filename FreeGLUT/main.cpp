@@ -2,6 +2,7 @@
 import Utility.FixedString;
 import Utility.Print;
 import Glib;
+import Glib.Window.Coroutine;
 import Glib.Window.Factory;
 
 static inline constexpr util::basic_fixed_string my_windows_class = L"MY_CLASS";
