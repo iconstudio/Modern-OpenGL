@@ -204,7 +204,6 @@
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="RawColour.ixx" />
     <ClCompile Include="RawEvent.ixx" />
-    <ClCompile Include="RawIcon.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="SpecialEvent.ixx" />
     <ClCompile Include="Window.ixx" />

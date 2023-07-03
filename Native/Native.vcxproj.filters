@@ -86,9 +86,6 @@
     <ClCompile Include="RawEvent.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="RawIcon.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="MouseUtils.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
