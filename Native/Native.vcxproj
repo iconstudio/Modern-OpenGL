@@ -189,6 +189,7 @@
     <ClCompile Include="Event.ixx" />
     <ClCompile Include="EventAPI.ixx" />
     <ClCompile Include="EventID.ixx" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Icon.ixx" />
     <ClCompile Include="IHandle.ixx" />
     <ClCompile Include="IWindowHandle.ixx" />
