@@ -52,16 +52,7 @@ export namespace gl::device::resource
 			, myLength(0U)
 		{}
 
-		constexpr Icon& operator=(nullptr_t) noexcept
-		{
-			if (nullptr != GetHandle())
-			{
-				detail::Destroy(GetHandle());
-			}
-			myLength = 0U;
-
-			return *this;
-		}
+		Icon& operator=(nullptr_t) noexcept;
 
 		~Icon() noexcept
 		{

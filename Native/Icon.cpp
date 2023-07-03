@@ -3,12 +3,23 @@ module;
 #include <shellapi.h>
 
 module Glib.Device.Resource.Icon;
-import <filesystem>;
 import Glib.Device.Definitions;
+
+gl::device::resource::Icon&
+gl::device::resource::Icon::operator=(nullptr_t)
+noexcept
+{
+	if (nullptr != GetHandle())
+	{
+		detail::Destroy(GetHandle());
+	}
+	myLength = 0U;
+
+	return *this;
+}
 
 namespace gl::device
 {
-	using FilePath = std::filesystem::path;
 }
 
 namespace gl::device::resource::detail
