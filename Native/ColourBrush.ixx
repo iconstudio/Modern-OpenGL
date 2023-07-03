@@ -3,16 +3,15 @@ module;
 
 export module Glib.Device.Brush;
 import <type_traits>;
+import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 
 export namespace gl::device
 {
-	using NativeColorBrush = ::HBRUSH__*;
-
-	class [[nodiscard]] ColorBrush : public IHandle<NativeColorBrush>
+	class [[nodiscard]] ColorBrush : public IHandle<native::NativeColorBrush>
 	{
 	public:
-		using base = IHandle<NativeColorBrush>;
+		using base = IHandle<native::NativeColorBrush>;
 
 		constexpr ColorBrush() noexcept = default;
 
@@ -20,11 +19,11 @@ export namespace gl::device
 			: base(nullptr)
 		{}
 
-		explicit constexpr ColorBrush(const NativeColorBrush& brush) noexcept
+		explicit constexpr ColorBrush(const handle_type& brush) noexcept
 			: base(brush)
 		{}
 
-		explicit constexpr ColorBrush(NativeColorBrush&& brush) noexcept
+		explicit constexpr ColorBrush(handle_type&& brush) noexcept
 			: base(std::move(brush))
 		{}
 
@@ -42,13 +41,13 @@ export namespace gl::device
 			}
 		}
 
-		constexpr ColorBrush& operator=(const NativeColorBrush& brush) noexcept
+		constexpr ColorBrush& operator=(const handle_type& brush) noexcept
 		{
 			base::operator=(brush);
 			return *this;
 		}
 
-		constexpr ColorBrush& operator=(NativeColorBrush&& brush) noexcept
+		constexpr ColorBrush& operator=(handle_type&& brush) noexcept
 		{
 			base::operator=(std::move(brush));
 			return *this;
@@ -83,22 +82,5 @@ export namespace gl::device
 	ColorBrush MakePatternBrush(const HBITMAP& pattern_img) noexcept
 	{
 		return ColorBrush{ ::CreatePatternBrush(pattern_img) };
-	}
-
-	[[nodiscard]]
-	NativeColorBrush MakeNativeBrush(const unsigned long& color) noexcept
-	{
-		return ::CreateSolidBrush(color);
-	}
-
-	[[nodiscard]]
-	NativeColorBrush MakeNativeBrush(unsigned long&& color) noexcept
-	{
-		return ::CreateSolidBrush(std::move(color));
-	}
-
-	export bool DeleteNativeBrush(NativeColorBrush& brush) noexcept
-	{
-		return 0 != ::DeleteObject(brush);
 	}
 }
