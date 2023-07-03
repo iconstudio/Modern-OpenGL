@@ -44,7 +44,7 @@ noexcept
 }
 
 gl::device::ColorBrush
-gl::device::MakePatternBrush(const native::NativeBitmap& pattern_img)
+gl::device::MakePatternBrush(const native::RawBitmap& pattern_img)
 noexcept
 {
 	return ColorBrush{ ::CreatePatternBrush(pattern_img) };

@@ -16,6 +16,6 @@ export namespace gl::device::native
 
 	using NativeSurface = ::HDC__*;
 	using NativeColorBrush = ::HBRUSH__*;
-	using NativeBitmap = ::HBITMAP__*;
+	using RawBitmap = ::HBITMAP__*;
 	using RawIcon = ::HICON__*;
 }

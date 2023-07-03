@@ -58,5 +58,5 @@ export namespace gl::device
 	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const native::NativeBitmap& pattern_img) noexcept;
+	ColorBrush MakePatternBrush(const native::RawBitmap& pattern_img) noexcept;
 }
