@@ -48,7 +48,7 @@ export namespace gl::device
 		constexpr ColorBrush& operator=(ColorBrush&&) noexcept = default;
 	};
 
-	enum class [[nodiscard]] PatternBrushType
+	enum class [[nodiscard]] BrushPattern
 	{
 		Horizontal = 0, // HS_HORIZONTAL
 		Vertical = 1, // HS_VERTICAL
@@ -65,8 +65,8 @@ export namespace gl::device
 	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const native::RawBitmap& image) noexcept;
+	ColorBrush MakePatternBrush(const BrushPattern& pattern, const unsigned long& rgb) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeStampBrush(const PatternBrushType& pattern) noexcept;
+	ColorBrush MakeStampBrush(const native::RawBitmap& image) noexcept;
 }

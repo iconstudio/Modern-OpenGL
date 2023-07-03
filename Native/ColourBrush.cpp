@@ -44,8 +44,15 @@ noexcept
 }
 
 gl::device::ColorBrush
-gl::device::MakePatternBrush(const native::RawBitmap& pattern_img)
+gl::device::MakePatternBrush(const BrushPattern& pattern, const unsigned long& rgb)
 noexcept
 {
-	return ColorBrush{ ::CreatePatternBrush(pattern_img) };
+	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
+}
+
+gl::device::ColorBrush
+gl::device::MakeStampBrush(const native::RawBitmap& image)
+noexcept
+{
+	return ColorBrush{ ::CreatePatternBrush(image) };
 }
