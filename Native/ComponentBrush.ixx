@@ -3,7 +3,8 @@ module;
 
 export module Glib.Device.Brush.Component;
 import <type_traits>;
-export import Glib.Device.Brush;
+import Glib.Device.Definitions;
+import Glib.Device.Brush;
 
 namespace gl::device
 {
@@ -39,20 +40,22 @@ namespace gl::device
 		constexpr InternalCColor() noexcept = default;
 		constexpr ~InternalCColor() noexcept = default;
 
-		constexpr InternalCColor(const NativeColorBrush& brush) noexcept
+		constexpr InternalCColor(const native::NativeColorBrush& brush) noexcept
 			: myBrush(brush)
 		{}
 
-		constexpr InternalCColor(NativeColorBrush&& brush) noexcept
+		constexpr InternalCColor(native::NativeColorBrush&& brush) noexcept
 			: myBrush(std::move(brush))
 		{}
 
-		NativeColorBrush myBrush;
+		native::NativeColorBrush myBrush;
 	};
+
+	const native::NativeColorBrush& GetComponentColouring(ColoredComponent) noexcept;
 
 	export template<ColoredComponent Target>
 		[[nodiscard]]
-	const NativeColorBrush&
+	const native::NativeColorBrush&
 		GetComponentColouring()
 		noexcept(COLOR_WINDOW <= static_cast<int>(Target) && static_cast<int>(Target) <= COLOR_HOTLIGHT)
 	{
@@ -62,7 +65,7 @@ namespace gl::device
 
 	export
 		[[nodiscard]]
-	const NativeColorBrush&
+	const native::NativeColorBrush&
 		MakeDefaultComponentColouring() noexcept
 	{
 		return GetComponentColouring<colored_components::Background>();
