@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="Bitmap.ixx" />
     <ClCompile Include="Colour.ixx" />
+    <ClCompile Include="ColourBrush.cpp" />
     <ClCompile Include="ColourBrush.ixx" />
     <ClCompile Include="ComponentBrush.cpp" />
     <ClCompile Include="ComponentBrush.ixx" />
