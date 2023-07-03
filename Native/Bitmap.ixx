@@ -4,17 +4,17 @@ module;
 export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
 import Glib.Device.Definitions;
-import Glib.Device.IHandle;
+import Glib.Device.Resource.IBitmap;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] Bitmap : public IHandle<native::RawBitmap>
+	class [[nodiscard]] Bitmap : public Image
 	{
 	protected:
 		Bitmap(native::RawBitmap&&) noexcept;
 
 	public:
-		using base = IHandle<native::RawBitmap>;
+		using base = Image;
 
 #undef LoadBitmap
 		[[nodiscard]]
@@ -27,16 +27,6 @@ export namespace gl::device::resource
 		friend bool TryLoadBitmap(const int& id, Bitmap& output) noexcept;
 
 		constexpr Bitmap() noexcept = default;
-
-		[[nodiscard]]
-		Bitmap Copy() const noexcept;
-
-		[[nodiscard]]
-		bool TryCopy(Bitmap& output) const noexcept;
-
-		bool Draw(const native::NativeSurface& hdc, const int& x, const int& y) const noexcept;
-
-		bool Destroy() noexcept;
 
 		[[nodiscard]]
 		constexpr bool IsEmpty() const noexcept
