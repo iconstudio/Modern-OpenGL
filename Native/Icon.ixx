@@ -8,15 +8,9 @@ export namespace gl::device::resource
 {
 	class [[nodiscard]] Icon : public IHandle<native::RawIcon>
 	{
-	protected:
+	public:
 		using base = IHandle<native::RawIcon>;
 
-		constexpr Icon(handle_type&& icon, const unsigned int& length) noexcept
-			: base(std::move(icon))
-			, myLength(length)
-		{}
-
-	public:
 		[[nodiscard]]
 		friend Icon LoadIcon(const FilePath& path) noexcept;
 		[[nodiscard]]
@@ -65,6 +59,12 @@ export namespace gl::device::resource
 		constexpr Icon(Icon&&) noexcept = default;
 		Icon& operator=(const Icon&) = delete;
 		constexpr Icon& operator=(Icon&&) noexcept = default;
+
+	protected:
+		constexpr Icon(handle_type&& icon, const unsigned int& length) noexcept
+			: base(std::move(icon))
+			, myLength(length)
+		{}
 
 	private:
 		unsigned int myLength;
