@@ -164,5 +164,8 @@
     <ClCompile Include="IBitmap.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="ISurface.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
