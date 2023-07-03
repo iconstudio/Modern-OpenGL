@@ -13,11 +13,11 @@ export namespace gl::device::resource
 	public:
 	};
 
-	class [[nodiscard]] Image : public IHandle<native::RawBitmap>
+	class [[nodiscard]] IBitmap : public IHandle<native::RawBitmap>
 	{
 	public:
-		[[nodiscard]] Image Copy() const noexcept;
-		[[nodiscard]] bool TryCopy(Image& output) const noexcept;
+		[[nodiscard]] IBitmap Copy() const noexcept;
+		[[nodiscard]] bool TryCopy(IBitmap& output) const noexcept;
 
 		bool Destroy() noexcept;
 
