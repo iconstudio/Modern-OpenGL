@@ -58,14 +58,14 @@ noexcept
 }
 
 gl::device::ColorBrush
-gl::device::MakePatternBrush(const BrushPattern& pattern, const unsigned long& rgb)
+gl::device::MakePatternBrush(const BrushPatterns& pattern, const unsigned long& rgb)
 noexcept
 {
 	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
 }
 
 gl::device::ColorBrush
-gl::device::MakePatternBrush(const BrushPattern& pattern, const Colour& argb)
+gl::device::MakePatternBrush(const BrushPatterns& pattern, const Colour& argb)
 noexcept
 {
 	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), argb.ToRaw()) };
