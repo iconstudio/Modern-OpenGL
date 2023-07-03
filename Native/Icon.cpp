@@ -9,17 +9,161 @@ gl::device::resource::Icon&
 gl::device::resource::Icon::operator=(nullptr_t)
 noexcept
 {
-	if (nullptr != GetHandle())
-	{
-		detail::Destroy(GetHandle());
-	}
+	Destroy();
 	myLength = 0U;
 
 	return *this;
 }
 
-namespace gl::device
+gl::device::resource::Icon::~Icon()
+noexcept
 {
+	Destroy();
+	myLength = 0U;
+}
+
+gl::device::resource::Icon
+gl::device::resource::Icon::Copy()
+const noexcept
+{
+	return CopyIcon(*this);
+}
+
+bool
+gl::device::resource::Icon::TryCopy(Icon& output)
+const noexcept
+{
+	return TryCopyIcon(*this, output);
+}
+
+bool
+gl::device::resource::Icon::Destroy()
+noexcept
+{
+	if (nullptr != GetHandle())
+	{
+		return 0 != Delegate(::DestroyIcon);
+	}
+	else
+	{
+		return false;
+	}
+}
+bool
+gl::device::resource::Icon::Draw(const gl::device::native::NativeSurface& hdc, const int& x, const int& y)
+const noexcept
+{
+	return DrawIcon(*this, hdc, x, y);
+}
+
+gl::device::resource::Icon
+gl::device::MakeEmptyIcon() noexcept
+{
+	return resource::Icon(nullptr);
+}
+
+namespace gl::device::resource
+{
+#undef LoadIcon
+	Icon LoadIcon(const FilePath& path) noexcept
+	{
+		return Icon(detail::ExtractFrom(path, 0), detail::GetIconsNumber(path));
+	}
+
+	bool TryLoadIcon(const FilePath& path, Icon& output) noexcept
+	{
+		if (nullptr != detail::ExtractFrom(path, 0))
+		{
+			output.myLength = detail::GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon LoadIconAt(const FilePath& path, const unsigned int& index) noexcept
+	{
+		return Icon(detail::ExtractFrom(path, index), detail::GetIconsNumber(path));
+	}
+
+	bool TryLoadIconAt(const FilePath& path, const unsigned int& index, Icon& output) noexcept
+	{
+		if (nullptr != detail::ExtractFrom(path, index))
+		{
+			output.myLength = detail::GetIconsNumber(path);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon LoadResource(const std::wstring_view& name) noexcept
+	{
+		return Icon(detail::LoadResource(name), 1);
+	}
+
+	bool TryLoadResource(const std::wstring_view& name, Icon& output) noexcept
+	{
+		if (detail::TryLoadResource(output.GetHandle(), name))
+		{
+			output.myLength = 1;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon LoadResource(const int& id) noexcept
+	{
+		return Icon(detail::LoadResource(id), 1);
+	}
+
+	bool TryLoadResource(const int& id, Icon& output) noexcept
+	{
+		if (detail::TryLoadResource(output.GetHandle(), id))
+		{
+			output.myLength = 1;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	Icon CopyIcon(const Icon& icon) noexcept
+	{
+		return Icon(detail::Copy(icon.GetHandle()), icon.myLength);
+	}
+
+	bool TryCopyIcon(const Icon& icon, Icon& output) noexcept
+	{
+		if (detail::TryCopy(icon.GetHandle(), output.GetHandle()))
+		{
+			output.myLength = icon.myLength;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool DrawIcon(const Icon& icon, const ::HDC& hdc, const int& x, const int& y) noexcept
+	{
+		return detail::Draw(icon.GetHandle(), hdc, x, y);
+	}
+
+	bool DestroyIcon(Icon& icon) noexcept
+	{
+		return detail::Destroy(icon.GetHandle());
+	}
 }
 
 namespace gl::device::resource::detail
@@ -87,7 +231,7 @@ namespace gl::device::resource::detail
 	[[nodiscard]]
 	RawIcon LoadResource(const int& id) noexcept
 	{
-		return ::LoadIcon(nullptr, MAKEINTRESOURCE(id));
+		return ::LoadIconW(nullptr, MAKEINTRESOURCE(id));
 	}
 
 	[[nodiscard]]
