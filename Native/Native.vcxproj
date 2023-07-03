@@ -178,6 +178,7 @@
     <ClCompile Include="Colour.ixx" />
     <ClCompile Include="ColourBrush.ixx" />
     <ClCompile Include="ComponentBrush.ixx" />
+    <ClCompile Include="Definitions.ixx" />
     <ClCompile Include="DeviceContext.ixx" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
