@@ -27,19 +27,9 @@ export namespace gl::device
 			: base(std::move(brush))
 		{}
 
-		~ColorBrush() noexcept
-		{
-			Destroy();
-		}
+		~ColorBrush() noexcept;
 
-		void Destroy() noexcept
-		{
-			if (nullptr != GetHandle())
-			{
-				Delegate(::DeleteObject);
-				base::operator=(nullptr);
-			}
-		}
+		void Destroy() noexcept;
 
 		constexpr ColorBrush& operator=(const handle_type& brush) noexcept
 		{
@@ -53,12 +43,7 @@ export namespace gl::device
 			return *this;
 		}
 
-		ColorBrush& operator=(nullptr_t) noexcept
-		{
-			Destroy();
-
-			return *this;
-		}
+		ColorBrush& operator=(nullptr_t) noexcept;
 
 		ColorBrush(const ColorBrush&) = delete;
 		constexpr ColorBrush(ColorBrush&&) noexcept = default;
@@ -67,20 +52,11 @@ export namespace gl::device
 	};
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(const unsigned long& color) noexcept
-	{
-		return ColorBrush{ ::CreateSolidBrush(color) };
-	}
+	ColorBrush MakeColorBrush(const unsigned long& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(unsigned long&& color) noexcept
-	{
-		return ColorBrush{ ::CreateSolidBrush(std::move(color)) };
-	}
+	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const HBITMAP& pattern_img) noexcept
-	{
-		return ColorBrush{ ::CreatePatternBrush(pattern_img) };
-	}
+	ColorBrush MakePatternBrush(const native::NativeBitmap& pattern_img) noexcept;
 }
