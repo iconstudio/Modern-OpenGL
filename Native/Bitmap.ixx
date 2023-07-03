@@ -1,19 +1,13 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Bitmap;
+export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] BitmapFactory
-	{
-	public:
-		::BITMAP data;
-	};
-
 	class [[nodiscard]] Bitmap : public IHandle<native::RawBitmap>
 	{
 	protected:
