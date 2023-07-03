@@ -9,14 +9,14 @@ namespace gl::device
 {
 	export extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
-		Window = COLOR_WINDOW,
-		Text = COLOR_WINDOWTEXT,
-		GrayText = COLOR_GRAYTEXT,
-		BtnText = COLOR_BTNTEXT,
-		Highlight = COLOR_HIGHLIGHT,
-		HighlightText = COLOR_HIGHLIGHTTEXT,
-		Face3D = COLOR_3DFACE,
-		Hyperlink = COLOR_HOTLIGHT,
+		Window = 5, // COLOR_WINDOW
+		Text = 8, // COLOR_WINDOWTEXT
+		Highlight = 13, // COLOR_HIGHLIGHT
+		HighlightText = 14, // COLOR_HIGHLIGHTTEXT
+		ButtonFace = 15, // COLOR_3DFACE
+		GrayText = 17, // COLOR_GRAYTEXT
+		BtnText = 18, // COLOR_BTNTEXT
+		Hyperlink = 26, // COLOR_HOTLIGHT
 	};
 
 	export extern "C" namespace colored_components
@@ -25,7 +25,7 @@ namespace gl::device
 		inline constexpr ColoredComponent Background = ColoredComponent::Window;
 		inline constexpr ColoredComponent Window = ColoredComponent::Window;
 		inline constexpr ColoredComponent ButtonText = ColoredComponent::BtnText;
-		inline constexpr ColoredComponent ButtonFace = ColoredComponent::Face3D;
+		inline constexpr ColoredComponent ButtonFace = ColoredComponent::ButtonFace;
 
 		inline constexpr ColoredComponent HighlightText = ColoredComponent::HighlightText;
 		inline constexpr ColoredComponent HighlightBackground = ColoredComponent::Highlight;
