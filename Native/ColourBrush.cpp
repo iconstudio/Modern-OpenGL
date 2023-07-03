@@ -44,10 +44,31 @@ noexcept
 }
 
 gl::device::ColorBrush
+gl::device::MakeColorBrush(const Colour& color)
+noexcept
+{
+	return ColorBrush{ ::CreateSolidBrush(color.ToRaw()) };
+}
+
+gl::device::ColorBrush
+gl::device::MakeColorBrush(Colour&& color)
+noexcept
+{
+	return ColorBrush{ ::CreateSolidBrush(std::move(color).ToRaw()) };
+}
+
+gl::device::ColorBrush
 gl::device::MakePatternBrush(const BrushPattern& pattern, const unsigned long& rgb)
 noexcept
 {
 	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
+}
+
+gl::device::ColorBrush
+gl::device::MakePatternBrush(const BrushPattern& pattern, const Colour& argb)
+noexcept
+{
+	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), argb.ToRaw()) };
 }
 
 gl::device::ColorBrush

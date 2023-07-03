@@ -2,6 +2,7 @@ export module Glib.Device.Brush;
 import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
+import Glib.Device.Colour;
 
 export namespace gl::device
 {
@@ -65,7 +66,16 @@ export namespace gl::device
 	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
+	ColorBrush MakeColorBrush(const Colour& color) noexcept;
+
+	[[nodiscard]]
+	ColorBrush MakeColorBrush(Colour&& color) noexcept;
+
+	[[nodiscard]]
 	ColorBrush MakePatternBrush(const BrushPattern& pattern, const unsigned long& rgb) noexcept;
+
+	[[nodiscard]]
+	ColorBrush MakePatternBrush(const BrushPattern& pattern, const Colour& argb) noexcept;
 
 	[[nodiscard]]
 	ColorBrush MakeStampBrush(const native::RawBitmap& image) noexcept;
