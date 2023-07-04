@@ -9,6 +9,18 @@ export namespace gl::device
 	using FilePath = std::filesystem::path;
 }
 
+export namespace gl::device
+{
+	class IContext;
+	class IBitmap;
+	class Colour;
+	class Palette;
+	class ColorBrush;
+	class Pen;
+	class Bitmap;
+	class Icon;
+}
+
 export namespace gl::device::native
 {
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
