@@ -14,8 +14,8 @@ import Glib.Device.ISurface;
 
 export namespace gl::device
 {
-	using HWND = ::HWND__*;
-	using NativeRect = tagRECT;
+	using native::HWND;
+	using native::NativeRect;
 
 	class [[nodiscard]] IWindowHandle : public IHandle<HWND>
 	{
