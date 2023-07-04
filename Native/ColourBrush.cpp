@@ -21,6 +21,27 @@ noexcept
 }
 
 gl::device::ColorBrush&
+gl::device::ColorBrush::operator=(const handle_type& brush)
+noexcept
+{
+	if (GetHandle() != brush)
+	{
+		Destroy();
+		base::operator=(brush);
+	}
+	return *this;
+}
+
+gl::device::ColorBrush&
+gl::device::ColorBrush::operator=(handle_type&& brush)
+noexcept
+{
+	Destroy();
+	base::operator=(std::move(brush));
+	return *this;
+}
+
+gl::device::ColorBrush&
 gl::device::ColorBrush::operator=(nullptr_t)
 noexcept
 {

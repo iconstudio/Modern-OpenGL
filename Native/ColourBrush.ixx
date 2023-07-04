@@ -28,24 +28,8 @@ export namespace gl::device
 		~ColorBrush() noexcept;
 
 		void Destroy() noexcept;
-
-		ColorBrush& operator=(const handle_type& brush) noexcept
-		{
-			if (GetHandle() != brush)
-			{
-				Destroy();
-				base::operator=(brush);
-			}
-			return *this;
-		}
-
-		ColorBrush& operator=(handle_type&& brush) noexcept
-		{
-			Destroy();
-			base::operator=(std::move(brush));
-			return *this;
-		}
-
+		ColorBrush& operator=(const handle_type& brush) noexcept;
+		ColorBrush& operator=(handle_type&& brush) noexcept;
 		ColorBrush& operator=(nullptr_t) noexcept;
 
 		ColorBrush(const ColorBrush&) = delete;
