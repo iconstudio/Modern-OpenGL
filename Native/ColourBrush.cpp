@@ -50,47 +50,47 @@ gl::device::resource::ColorBrush
 gl::device::MakeColorBrush(const unsigned long& color)
 noexcept
 {
-	return ColorBrush{ ::CreateSolidBrush(color) };
+	return resource::ColorBrush{ ::CreateSolidBrush(color) };
 }
 
 gl::device::resource::ColorBrush
 gl::device::MakeColorBrush(unsigned long&& color)
 noexcept
 {
-	return ColorBrush{ ::CreateSolidBrush(std::move(color)) };
+	return resource::ColorBrush{ ::CreateSolidBrush(std::move(color)) };
 }
 
 gl::device::resource::ColorBrush
 gl::device::MakeColorBrush(const Colour& color)
 noexcept
 {
-	return ColorBrush{ ::CreateSolidBrush(color.ToRaw()) };
+	return resource::ColorBrush{ ::CreateSolidBrush(color.ToRaw()) };
 }
 
 gl::device::resource::ColorBrush
 gl::device::MakeColorBrush(Colour&& color)
 noexcept
 {
-	return ColorBrush{ ::CreateSolidBrush(std::move(color).ToRaw()) };
+	return resource::ColorBrush{ ::CreateSolidBrush(std::move(color).ToRaw()) };
 }
 
 gl::device::resource::ColorBrush
-gl::device::MakePatternBrush(const BrushPatterns& pattern, const unsigned long& rgb)
+gl::device::MakePatternBrush(const resource::BrushPatterns& pattern, const unsigned long& rgb)
 noexcept
 {
-	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
+	return resource::ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
 }
 
 gl::device::resource::ColorBrush
-gl::device::MakePatternBrush(const BrushPatterns& pattern, const Colour& argb)
+gl::device::MakePatternBrush(const resource::BrushPatterns& pattern, const Colour& argb)
 noexcept
 {
-	return ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), argb.ToRaw()) };
+	return resource::ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), argb.ToRaw()) };
 }
 
 gl::device::resource::ColorBrush
 gl::device::MakeStampBrush(const native::RawBitmap& image)
 noexcept
 {
-	return ColorBrush{ ::CreatePatternBrush(image) };
+	return resource::ColorBrush{ ::CreatePatternBrush(image) };
 }

@@ -41,25 +41,28 @@ export namespace gl::device::resource
 		Cross = 4, // HS_CROSS,
 		CrossDiagonal = 5, // HS_DIAGCROSS
 	};
+}
+
+export namespace gl::device
+{
+	[[nodiscard]]
+	resource::ColorBrush MakeColorBrush(const unsigned long& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(const unsigned long& color) noexcept;
+	resource::ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(unsigned long&& color) noexcept;
+	resource::ColorBrush MakeColorBrush(const Colour& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(const Colour& color) noexcept;
+	resource::ColorBrush MakeColorBrush(Colour&& color) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakeColorBrush(Colour&& color) noexcept;
+	resource::ColorBrush MakePatternBrush(const resource::BrushPatterns& pattern, const unsigned long& rgb) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const BrushPatterns& pattern, const unsigned long& rgb) noexcept;
+	resource::ColorBrush MakePatternBrush(const resource::BrushPatterns& pattern, const Colour& argb) noexcept;
 
 	[[nodiscard]]
-	ColorBrush MakePatternBrush(const BrushPatterns& pattern, const Colour& argb) noexcept;
-
-	[[nodiscard]]
-	ColorBrush MakeStampBrush(const native::RawBitmap& image) noexcept;
+	resource::ColorBrush MakeStampBrush(const native::RawBitmap& image) noexcept;
 }
