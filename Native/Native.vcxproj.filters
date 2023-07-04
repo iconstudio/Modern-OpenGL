@@ -194,5 +194,8 @@
     <ClCompile Include="src\IWindowHandle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="IContext.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
