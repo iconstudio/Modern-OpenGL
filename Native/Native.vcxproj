@@ -175,6 +175,7 @@
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Bitmap.ixx" />
     <ClCompile Include="Colour.ixx" />
     <ClCompile Include="ColourBrush.cpp" />

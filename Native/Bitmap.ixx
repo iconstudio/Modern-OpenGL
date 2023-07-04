@@ -28,6 +28,14 @@ export namespace gl::device::resource
 
 		constexpr Bitmap() noexcept = default;
 
+		void Mirror() noexcept;
+		void Flip() noexcept;
+		void Rotate(float angle) noexcept;
+		void RotateR(float angle) noexcept;
+		void RotateL(float angle) noexcept;
+
+		bool Fill() noexcept;
+
 		[[nodiscard]]
 		constexpr bool IsEmpty() const noexcept
 		{
