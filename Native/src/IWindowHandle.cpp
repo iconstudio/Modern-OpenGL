@@ -237,17 +237,17 @@ const noexcept
 	return static_cast<int>(GetInternalValue(GWLP_ID));
 }
 
-gl::device::NativeRect
+gl::device::native::NativeRect
 gl::device::IWindowHandle::GetDimensions()
 const noexcept
 {
-	NativeRect rect{};
+	native::NativeRect rect{};
 	Delegate(::GetWindowRect, &rect);
 	return rect;
 }
 
 bool
-gl::device::IWindowHandle::TryGetDimensions(NativeRect& output)
+gl::device::IWindowHandle::TryGetDimensions(native::NativeRect& output)
 const noexcept
 {
 	return 0 != Delegate(::GetWindowRect, &output);

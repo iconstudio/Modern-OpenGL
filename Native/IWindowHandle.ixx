@@ -14,7 +14,6 @@ import Glib.Device.ISurface;
 export namespace gl::device
 {
 	using native::HWND;
-	using native::NativeRect;
 
 	class [[nodiscard]] IWindowHandle : public IHandle<HWND>
 	{
@@ -124,17 +123,17 @@ export namespace gl::device
 		int GetID() const noexcept;
 
 		[[nodiscard]]
-		NativeRect GetDimensions() const noexcept;
+		native::NativeRect GetDimensions() const noexcept;
 
 		[[nodiscard]]
-		bool TryGetDimensions(NativeRect& output) const noexcept;
+		bool TryGetDimensions(native::NativeRect& output) const noexcept;
 
 		IWindowHandle(const IWindowHandle&) = delete;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
 };
 
 	[[nodiscard]]
-	constexpr NativeRect MakeNativeRect() noexcept
+	constexpr native::NativeRect MakeNativeRect() noexcept
 	{
 		return {};
 	}
