@@ -43,6 +43,9 @@ export namespace gl::device::resource
 		IBitmap& operator=(const IBitmap&) = delete;
 		constexpr IBitmap& operator=(IBitmap&&) noexcept = default;
 
+	protected:
+		constexpr IBitmap() noexcept = default;
+
 	private:
 		bool shouldDestroy = false;
 		int cachedWidth = 0, cachedHeight = 0;
