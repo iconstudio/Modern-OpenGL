@@ -34,7 +34,7 @@ export namespace gl::device::resource
 		bool Destroy() noexcept;
 
 		bool Draw(const IWindowHandle& window_handle, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
-		bool Draw(const IContext& render_context, const IContext& window_context, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
+		bool Draw(const IContext& render_context, IContext& window_context, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
 
 		bool GetPixel(const IContext& context, const int& x, const int& y, Colour& output) const;
 		int GetWidth() const noexcept;

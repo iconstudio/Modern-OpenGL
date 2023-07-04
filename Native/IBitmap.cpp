@@ -112,12 +112,12 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const IContext& render_context, const IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::device::resource::IBitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	HGDIOBJ previous = window_context.Delegate(::SelectObject, GetHandle());
 
-	bool result = (0 == ::BitBlt(render_context
+	bool result = (0 == ::BitBlt(window_context
 		, x, y, cachedWidth, cachedHeight
 		, render_context
 		, srcx, srcy, SRCCOPY));
