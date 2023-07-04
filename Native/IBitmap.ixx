@@ -27,8 +27,8 @@ export namespace gl::device::resource
 		explicit IBitmap(handle_type&& handle) noexcept;
 		~IBitmap() noexcept;
 
-		[[nodiscard]] IBitmap Copy() const noexcept;
-		[[nodiscard]] bool TryCopy(IBitmap& output) const noexcept;
+		[[nodiscard]] IBitmap Copy(const ISurface& context) const noexcept;
+		[[nodiscard]] bool TryCopy(const ISurface& context, IBitmap& output) const noexcept;
 
 		bool Destroy() noexcept;
 
