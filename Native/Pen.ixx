@@ -1,8 +1,4 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Pen;
-import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 import Glib.Device.Colour;
@@ -33,6 +29,7 @@ export namespace gl::device
 		~Pen() noexcept;
 
 		void Destroy() noexcept;
+
 		Pen& operator=(nullptr_t) noexcept;
 
 		Pen(const Pen&) = delete;
@@ -42,7 +39,7 @@ export namespace gl::device
 
 	private:
 		PenStyles myStyle;
-		Colour myColor;
 		int mySize;
+		Colour myColor;
 	};
 }
