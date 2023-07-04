@@ -12,8 +12,12 @@ export namespace gl::device
 export namespace gl::device
 {
 	class IContext;
-	class IBitmap;
 	class Colour;
+}
+
+export namespace gl::device::resource
+{
+	class IBitmap;
 	class Palette;
 	class ColorBrush;
 	class Pen;
