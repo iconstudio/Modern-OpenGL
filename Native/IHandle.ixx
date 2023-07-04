@@ -10,7 +10,7 @@ export namespace gl::device
 	template<typename H>
 	struct [[nodiscard]] IHandle<H*>
 	{
-		using handle_type = std::remove_reference_t<H>;
+		using handle_type = std::remove_reference_t<H>*;
 		using pointer_type = H*;
 		using value_type = H;
 
