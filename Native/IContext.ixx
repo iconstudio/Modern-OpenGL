@@ -18,6 +18,10 @@ export namespace gl::device
 			: base(std::move(hdc))
 		{}
 
+		bool Destroy() noexcept;
+		bool Release() noexcept;
+		bool Release(native::HWND& owner) noexcept;
+
 		IContext(const IContext&) = delete;
 		IContext& operator=(const IContext&) = delete;
 	};
