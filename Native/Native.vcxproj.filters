@@ -113,12 +113,6 @@
     <ClCompile Include="Icon.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="IHandle.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="IWindowHandle.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
@@ -164,12 +158,6 @@
     <ClCompile Include="Icon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="IBitmap.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="ISurface.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="IBitmap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -181,6 +169,18 @@
     </ClCompile>
     <ClCompile Include="Pen.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IBitmap.ixx">
+      <Filter>헤더 파일\Device\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IHandle.ixx">
+      <Filter>헤더 파일\Device\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="ISurface.ixx">
+      <Filter>헤더 파일\Device\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IWindowHandle.ixx">
+      <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
