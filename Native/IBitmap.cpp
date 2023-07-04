@@ -47,38 +47,6 @@ noexcept
 	return false;
 }
 
-void
-gl::device::resource::IBitmap::Mirror()
-noexcept
-{}
-
-void
-gl::device::resource::IBitmap::Flip()
-noexcept
-{}
-
-void
-gl::device::resource::IBitmap::Rotate(float angle)
-noexcept
-{}
-
-void
-gl::device::resource::IBitmap::RotateR(float angle)
-noexcept
-{}
-
-void
-gl::device::resource::IBitmap::RotateL(float angle)
-noexcept
-{}
-
-bool
-gl::device::resource::IBitmap::Fill()
-noexcept
-{
-	return false;
-}
-
 bool
 gl::device::resource::IBitmap::Draw(const ISurface& context, const int& x, const int& y)
 const noexcept

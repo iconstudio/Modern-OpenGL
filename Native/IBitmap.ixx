@@ -37,15 +37,6 @@ export namespace gl::device::resource
 
 		bool Destroy() noexcept;
 
-		void Mirror() noexcept;
-		void Flip() noexcept;
-
-		void Rotate(float angle) noexcept;
-		void RotateR(float angle) noexcept;
-		void RotateL(float angle) noexcept;
-
-		bool Fill() noexcept;
-
 		bool Draw(const ISurface& context, const int& x, const int& y) const noexcept;
 
 		bool GetPixel(const ISurface& context, const int& x, const int& y, Colour& output) const;
