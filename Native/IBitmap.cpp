@@ -91,28 +91,28 @@ bool
 gl::device::resource::IBitmap::Draw(const IWindowHandle& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	native::NativeContext global_context = IWindowHandle{}.AcquireNativeContext();
-	if (nullptr == global_context)
+	IContext render_context = IWindowHandle{}.AcquireNativeContext();
+	if (nullptr == render_context)
 	{
 		return false;
 	}
 
-	native::NativeContext window_context = window_handle.AcquireNativeContext();
-	if (nullptr == window_context)
+	IContext render_target = window_handle.AcquireNativeContext();
+	if (nullptr == render_target)
 	{
 		return false;
 	}
 
-	HGDIOBJ previous = ::SelectObject(window_context, GetHandle());
+	HGDIOBJ previous = render_target.Delegate(::SelectObject, GetHandle());
 
-	bool result = (0 == ::BitBlt(window_context
+	bool result = (0 == ::BitBlt(render_target
 		, x, y, cachedWidth, cachedHeight
-		, global_context
+		, render_context
 		, srcx, srcy, SRCCOPY));
 
-	::SelectObject(window_context, previous);
-	window_handle.ReleaseNativeContext(window_context);
-	IWindowHandle{}.ReleaseNativeContext(global_context);
+	render_target.Delegate(::SelectObject, previous);
+	window_handle.ReleaseNativeContext(render_target);
+	IWindowHandle{}.ReleaseNativeContext(render_context);
 
 	return result;
 }
@@ -121,14 +121,14 @@ bool
 gl::device::resource::IBitmap::Draw(const IContext& render_context, const IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	native::NativeContext target = render_context.GetHandle();
+	const native::NativeContext& target = render_context.GetHandle();
 	if (nullptr == target)
 	{
 		return false;
 	}
 
-	native::NativeContext src = window_context.GetHandle();
-	if (nullptr == src)
+	const native::NativeContext& render_target = window_context.GetHandle();
+	if (nullptr == render_target)
 	{
 		return false;
 	}
@@ -137,7 +137,7 @@ const noexcept
 
 	if (0 == ::BitBlt(target
 		, x, y, cachedWidth, cachedHeight
-		, src
+		, render_target
 		, srcx, srcy, SRCCOPY)
 	)
 	{
