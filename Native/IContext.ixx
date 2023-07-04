@@ -19,7 +19,7 @@ export namespace gl::device
 		{}
 
 		IContext CreateCompatibleContext() const noexcept;
-		native::RawBitmap CreateCompatibleRawBitmap(const int& width, const int& height) const noexcept;
+		resource::IBitmap CreateCompatibleBitmap(const int& width, const int& height) const noexcept;
 		bool Destroy() noexcept;
 		bool Release() noexcept;
 		bool Release(native::HWND& owner) noexcept;

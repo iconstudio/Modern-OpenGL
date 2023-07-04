@@ -1,6 +1,7 @@
 module;
 #include "Internal.hpp"
 module Glib.Device.IContext;
+import Glib.Device.Resource.IBitmap;
 
 gl::device::IContext
 gl::device::IContext::CreateCompatibleContext()
@@ -9,8 +10,8 @@ const noexcept
 	return Delegate(::CreateCompatibleDC);
 }
 
-gl::device::native::RawBitmap
-gl::device::IContext::CreateCompatibleRawBitmap(const int& width, const int& height)
+gl::device::resource::IBitmap
+gl::device::IContext::CreateCompatibleBitmap(const int& width, const int& height)
 const noexcept
 {
 	return Delegate(::CreateCompatibleBitmap, width, height);
