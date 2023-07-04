@@ -153,7 +153,6 @@ export namespace gl::device
 		, const LPVOID& uparams = nullptr)
 		noexcept;
 
-	bool RegisterWindow(const device::native::RawWindowProperty& property) noexcept;
 
 	bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name);
 

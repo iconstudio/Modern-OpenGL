@@ -254,7 +254,8 @@ const noexcept
 }
 
 HWND__*
-gl::device::MakeNativeWindow(const HINSTANCE& hinst, const std::wstring_view& class_name
+gl::device::MakeNativeWindow(const ProcessInstance& hinst
+	, const std::wstring_view& class_name
 	, const std::wstring_view& title
 	, const unsigned long& styles
 	, const unsigned long& options
@@ -262,7 +263,7 @@ gl::device::MakeNativeWindow(const HINSTANCE& hinst, const std::wstring_view& cl
 	, const int& width, const int& height
 	, const HWND& parent
 	, const HMENU& menu
-	, const LPVOID& uparams
+	, void* uparams
 ) noexcept
 {
 	HWND result = ::CreateWindowEx(options
@@ -270,7 +271,7 @@ gl::device::MakeNativeWindow(const HINSTANCE& hinst, const std::wstring_view& cl
 	, styles, x, y, width, height
 	, parent
 	, menu
-	, hinst, uparams);
+	, hinst.myHandle, uparams);
 
 	if (result == nullptr)
 	{
@@ -288,16 +289,9 @@ gl::device::MakeNativeWindow(const HINSTANCE& hinst, const std::wstring_view& cl
 	return result;
 }
 
-bool
-gl::device::RegisterWindow(const gl::device::native::RawWindowProperty& property)
-noexcept
+bool gl::device::UnregisterWindow(const ProcessInstance& hinst, const std::wstring_view& class_name)
 {
-	return 0 == ::RegisterClassEx(&property);
-}
-
-bool gl::device::UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name)
-{
-	return 0 == ::UnregisterClass(class_name.data(), hinst);
+	return 0 == ::UnregisterClass(class_name.data(), hinst.myHandle);
 }
 
 void gl::device::PostQuitMessage(const int& exit_code) noexcept
