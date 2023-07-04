@@ -3,19 +3,16 @@ module;
 module Glib.Device.Resource.IBitmap;
 
 gl::device::resource::IBitmap
-gl::device::resource::IBitmap::Copy()
+gl::device::resource::IBitmap::Copy(const ISurface& context)
 const noexcept
 {
-	auto& handle = GetHandle();
-	if (handle)
-	{
-	}
-
-	return IBitmap();
+	IBitmap result{};
+	TryCopy(context, result);
+	return result;
 }
 
 bool
-gl::device::resource::IBitmap::TryCopy(IBitmap& output)
+gl::device::resource::IBitmap::TryCopy(const ISurface& context, IBitmap& output)
 const noexcept
 {
 	auto& handle = GetHandle();
@@ -29,7 +26,50 @@ const noexcept
 		return false;
 	}
 
-	return false;
+	const HDC& hdc = context.GetHandle();
+	if (nullptr == hdc)
+	{
+		return false;
+	}
+
+	HDC memory = ::CreateCompatibleDC(hdc);
+	if (nullptr == memory)
+	{
+		return false;
+	}
+
+	HBITMAP bitmap = ::CreateCompatibleBitmap(hdc, cachedWidth, cachedHeight);
+	if (nullptr == bitmap)
+	{
+		::DeleteDC(memory);
+
+		return false;
+	}
+
+	HGDIOBJ previous = ::SelectObject(memory, bitmap);
+	if (nullptr == previous)
+	{
+		::DeleteObject(bitmap);
+		::DeleteDC(memory);
+
+		return false;
+	}
+
+	if (0 == ::BitBlt(memory, 0, 0, cachedWidth, cachedHeight, hdc, 0, 0, SRCCOPY))
+	{
+		::SelectObject(memory, previous);
+		::DeleteObject(bitmap);
+		::DeleteDC(memory);
+
+		return false;
+	}
+
+	::SelectObject(memory, previous);
+
+	output = IBitmap(bitmap);
+
+	::DeleteDC(memory);
+	return true;
 }
 
 bool
