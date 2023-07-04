@@ -53,207 +53,86 @@ export namespace gl::device
 			return *this;
 		}
 
-		inline bool StartUpdate() noexcept
-		{
-			return 0 != Delegate(::UpdateWindow);
-		}
+		bool StartUpdate() noexcept;
 
-		long long DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs) const noexcept
-		{
-			return Delegate(::DefWindowProc, msg, lhs, rhs);
-		}
+		long long DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs) const noexcept;
 
-		bool Destroy() noexcept
-		{
-			if (handle_type& handle = GetHandle(); nullptr != handle)
-			{
-				if (bool result = (0 != Delegate(::DestroyWindow)); result)
-				{
-					handle = nullptr;
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			else
-			{
-				return false;
-			}
-		}
+		bool Destroy() noexcept;
 
-		inline bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const
-			noexcept
-		{
-			return EventAPI::Push(GetHandle(), id, lhs, rhs);
-		}
+		bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
 
-		inline bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const
-			noexcept
-		{
-			return EventAPI::Push(GetHandle(), id, lhs, rhs);
-		}
+		bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
 
-		inline bool SendCommand(const Event& cmd) const
-			noexcept
-		{
-			return EventAPI::Push(GetHandle(), cmd);
-		}
+		bool SendCommand(const Event& cmd) const noexcept;
 
-		inline bool SendCommand(Event&& cmd) const
-			noexcept
-		{
-			return EventAPI::Push(GetHandle(), static_cast<Event&&>(cmd));
-		}
+		bool SendCommand(Event&& cmd) const noexcept;
 
-		inline bool SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const
-			noexcept
-		{
-			return SendCommand(id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
-		}
+		bool SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const noexcept;
 
-		inline bool UICommand(const int& cmd) noexcept
-		{
-			return 0 != Delegate(::ShowWindow, cmd);
-		}
+		bool UICommand(const int& cmd) noexcept;
 
-		inline bool Show() noexcept
-		{
-			return UICommand(SW_SHOW);
-		}
+		bool Show() noexcept;
 
-		inline bool Hide() noexcept
-		{
-			return UICommand(SW_HIDE);
-		}
+		bool Hide() noexcept;
 
-		inline bool Maximize() noexcept
-		{
-			return UICommand(SW_MAXIMIZE);
-		}
+		bool Maximize() noexcept;
 
-		inline bool Minimize() noexcept
-		{
-			return UICommand(SW_MINIMIZE);
-		}
+		bool Minimize() noexcept;
 
-		inline bool Restore() noexcept
-		{
-			return UICommand(SW_RESTORE);
-		}
+		bool Restore() noexcept;
 
-		inline bool Redraw(const bool& flag) noexcept
-		{
-			return SendCommand(EventID::SetRedraw, static_cast<WPARAM>(flag), 0);
-		}
+		bool Redraw(const bool& flag) noexcept;
 
-		inline bool Close() noexcept
-		{
-			return SendCommand(EventID::Close, 0, 0);
-		}
+		bool Close() noexcept;
 
-		inline bool EnableInput() noexcept
-		{
-			return 0 != Delegate(::EnableWindow, TRUE);
-		}
+		bool EnableInput() noexcept;
 
-		inline bool DisableInput() noexcept
-		{
-			return 0 != Delegate(::EnableWindow, FALSE);
-		}
+		bool DisableInput() noexcept;
 
 		[[nodiscard]]
-		inline bool IsMinimized() const noexcept
-		{
-			return 0 != Delegate(::IsIconic);
-		}
+		bool IsMinimized() const noexcept;
 
 		[[nodiscard]]
-		inline bool IsMaximized() const noexcept
-		{
-			return 0 != Delegate(::IsZoomed);
-		}
+		bool IsMaximized() const noexcept;
 
 		[[nodiscard]]
-		inline bool IsRestored() const noexcept
-		{
-			return 0L == (GetStyle() & (WS_MINIMIZE | WS_MAXIMIZE));
-		}
+		bool IsRestored() const noexcept;
 
 		[[nodiscard]]
-		inline bool IsInputEnabled() const noexcept
-		{
-			return 0 != Delegate(::IsWindowEnabled);
-		}
+		bool IsInputEnabled() const noexcept;
 
-		inline long long SetInternalValue(int index, const long long& value) const noexcept
-		{
-			return Delegate(::SetWindowLongPtr, index, value);
-		}
+		long long SetInternalValue(int index, const long long& value) const noexcept;
 
-		inline long long SetInternalValue(int index, long long&& value) const noexcept
-		{
-			return Delegate(::SetWindowLongPtr, index, std::move(value));
-		}
+		long long SetInternalValue(int index, long long&& value) const noexcept;
 
-		inline long long SetInternalUserData(const long long& value) const noexcept
-		{
-			return Delegate(::SetWindowLongPtr, GWLP_USERDATA, value);
-		}
+		long long SetInternalUserData(const long long& value) const noexcept;
 
-		inline long long SetInternalUserData(long long&& value) const noexcept
-		{
-			return Delegate(::SetWindowLongPtr, GWLP_USERDATA, std::move(value));
-		}
+		long long SetInternalUserData(long long&& value) const noexcept;
 
 		[[nodiscard]]
-		inline long long GetInternalValue(int index) const noexcept
-		{
-			return Delegate(::GetWindowLongPtr, index);
-		}
+		long long GetInternalValue(int index) const noexcept;
 
 		[[nodiscard]]
-		inline long long GetInternalUserData() const noexcept
-		{
-			return GetInternalValue(GWLP_USERDATA);
-		}
+		long long GetInternalUserData() const noexcept;
 
 		[[nodiscard]]
-		inline unsigned long GetStyle() const noexcept
-		{
-			return static_cast<DWORD>(GetInternalValue(GWL_STYLE));
-		}
+		unsigned long GetStyle() const noexcept;
 
 		[[nodiscard]]
-		inline unsigned long GetExStyle() const noexcept
-		{
-			return static_cast<DWORD>(GetInternalValue(GWL_EXSTYLE));
-		}
+		unsigned long GetExStyle() const noexcept;
 
 		[[nodiscard]]
-		inline int GetID() const noexcept
-		{
-			return static_cast<int>(GetInternalValue(GWLP_ID));
-		}
+		int GetID() const noexcept;
 
 		[[nodiscard]]
-		inline NativeRect GetDimensions() const noexcept
-		{
-			NativeRect rect{};
-			Delegate(::GetWindowRect, &rect);
-			return rect;
-		}
+		NativeRect GetDimensions() const noexcept;
 
 		[[nodiscard]]
-		inline bool TryGetDimensions(NativeRect& output) const noexcept
-		{
-			return 0 != Delegate(::GetWindowRect, &output);
-		}
+		bool TryGetDimensions(NativeRect& output) const noexcept;
 
 		IWindowHandle(const IWindowHandle&) = delete;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
-	};
+};
 
 	[[nodiscard]]
 	constexpr NativeRect MakeNativeRect() noexcept
