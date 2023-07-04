@@ -18,6 +18,8 @@ export namespace gl::device
 			: base(std::move(hdc))
 		{}
 
+		IContext CreateCompatibleContext() const noexcept;
+		native::RawBitmap CreateCompatibleRawBitmap(const int& width, const int& height) const noexcept;
 		bool Destroy() noexcept;
 		bool Release() noexcept;
 		bool Release(native::HWND& owner) noexcept;
