@@ -23,14 +23,9 @@ export namespace gl::device::resource
 	public:
 		using base = IGraphics<IBitmap, native::RawBitmap>;
 
-		constexpr IBitmap() noexcept = default;
 		explicit IBitmap(const handle_type& handle) noexcept;
 		explicit IBitmap(handle_type&& handle) noexcept;
 		~IBitmap() noexcept;
-
-		constexpr IBitmap(nullptr_t) noexcept
-			: base(nullifier)
-		{}
 
 		[[nodiscard]] IBitmap Copy() const noexcept;
 		[[nodiscard]] bool TryCopy(IBitmap& output) const noexcept;
