@@ -57,6 +57,8 @@ export namespace gl::device
 		constexpr auto Delegate(Fn&& fn, Args&&... args) &
 			noexcept(util::nothrow_invocables<Fn, handle_type&, Args&&...>)
 		{
+			static_assert(util::invocables<Fn, handle_type&, Args&&...>);
+
 			if constexpr (util::is_same_v<util::invoke_result_t<Fn, handle_type&, Args&&...>, void>)
 			{
 				std::invoke(std::forward<Fn>(fn), myHandle, std::forward<Args>(args)...);
@@ -69,9 +71,11 @@ export namespace gl::device
 
 		template<typename Fn, typename... Args>
 		constexpr auto Delegate(Fn&& fn, Args&&... args) const&
-			noexcept(util::nothrow_invocables<Fn, const handle_type&, Args&&...>)
+			noexcept(util::nothrow_invocables<Fn, handle_type const&, Args&&...>)
 		{
-			if constexpr (util::is_same_v<util::invoke_result_t<Fn, const handle_type&, Args&&...>, void>)
+			static_assert(util::invocables<Fn, handle_type const&, Args&&...>);
+
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, handle_type const&, Args&&...>, void>)
 			{
 				std::invoke(std::forward<Fn>(fn), myHandle, std::forward<Args>(args)...);
 			}
@@ -85,6 +89,8 @@ export namespace gl::device
 		constexpr auto Delegate(Fn&& fn, Args&&... args) &&
 			noexcept(util::nothrow_invocables<Fn, handle_type&&, Args&&...>)
 		{
+			static_assert(util::invocables<Fn, handle_type&&, Args&&...>);
+
 			if constexpr (util::is_same_v<util::invoke_result_t<Fn, handle_type&&, Args&&...>, void>)
 			{
 				std::invoke(std::forward<Fn>(fn), std::move(myHandle), std::forward<Args>(args)...);
@@ -97,9 +103,11 @@ export namespace gl::device
 
 		template<typename Fn, typename... Args>
 		constexpr auto Delegate(Fn&& fn, Args&&... args) const&&
-			noexcept(util::nothrow_invocables<Fn, const handle_type&, Args&&...>)
+			noexcept(util::nothrow_invocables<Fn, handle_type const&&, Args&&...>)
 		{
-			if constexpr (util::is_same_v<util::invoke_result_t<Fn, const handle_type&&, Args&&...>, void>)
+			static_assert(util::invocables<Fn, const handle_type&&, Args&&...>);
+
+			if constexpr (util::is_same_v<util::invoke_result_t<Fn, handle_type const&&, Args&&...>, void>)
 			{
 				std::invoke(std::forward<Fn>(fn), std::move(myHandle), std::forward<Args>(args)...);
 			}
