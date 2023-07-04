@@ -10,9 +10,6 @@ export namespace gl::device
 	public:
 		using base = IHandle<native::NativeContext>;
 
-		constexpr IContext() noexcept = default;
-		constexpr ~IContext() noexcept = default;
-
 		explicit constexpr IContext(const handle_type& hdc) noexcept
 			: base(hdc)
 		{}
