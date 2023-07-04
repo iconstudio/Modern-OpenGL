@@ -237,6 +237,13 @@ const noexcept
 	return static_cast<int>(GetInternalValue(GWLP_ID));
 }
 
+gl::device::native::NativeContext
+gl::device::IWindowHandle::GetNativeContext()
+const noexcept
+{
+	return Delegate(::GetDC);
+}
+
 gl::device::native::NativeRect
 gl::device::IWindowHandle::GetDimensions()
 const noexcept
