@@ -205,6 +205,7 @@
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="MouseUtils.ixx" />
     <ClCompile Include="Palette.ixx" />
+    <ClCompile Include="Pen.cpp" />
     <ClCompile Include="Pen.ixx" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="RawColour.ixx" />
