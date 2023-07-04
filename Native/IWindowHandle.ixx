@@ -130,7 +130,6 @@ export namespace gl::device
 		[[nodiscard]]
 		native::NativeRect GetDimensions() const noexcept;
 
-		[[nodiscard]]
 		bool TryGetDimensions(native::NativeRect& output) const noexcept;
 
 		IWindowHandle(const IWindowHandle&) = delete;
