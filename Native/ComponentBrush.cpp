@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Device.Brush.Component;
+module Glib.Device.Resource.Brush.Component;
 import <type_traits>;
 
 namespace gl::device

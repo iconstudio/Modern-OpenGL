@@ -2,8 +2,8 @@ export module Glib.Window.Property.Factory;
 import <type_traits>;
 import Utility.FixedString;
 import Glib.Device.ProcessInstance;
-import Glib.Device.Brush;
-import Glib.Device.Brush.Component;
+import Glib.Device.Resource.Brush;
+import Glib.Device.Resource.Brush.Component;
 import Glib.Device.Resource.Icon;
 export import Glib.Window.Property;
 
@@ -16,7 +16,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, const device::ColorBrush& background
+		, const device::resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -46,7 +46,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, const device::ColorBrush& background
+		, const device::resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -63,7 +63,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, device::ColorBrush&& background
+		, device::resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -93,7 +93,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, device::ColorBrush&& background
+		, device::resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -202,7 +202,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, const device::ColorBrush& background
+		, const device::resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -215,7 +215,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, const device::ColorBrush& background
+		, const device::resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -232,7 +232,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, device::ColorBrush&& background
+		, device::resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -245,7 +245,7 @@ export namespace gl::window
 		, device::resource::Icon&& icon
 		, device::resource::Icon&& small_icon
 		, device::resource::Icon&& cursor
-		, device::ColorBrush&& background
+		, device::resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{

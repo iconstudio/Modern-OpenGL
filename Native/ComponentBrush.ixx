@@ -1,4 +1,4 @@
-export module Glib.Device.Brush.Component;
+export module Glib.Device.Resource.Brush.Component;
 import Glib.Device.Definitions;
 
 export namespace gl::device
