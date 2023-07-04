@@ -1,12 +1,9 @@
 export module Glib;
 export import Utility.FixedString;
 export import Glib.DisplayModes;
-export import Glib.Device.Colour;
 
 export namespace gl
 {
-	using gl::device::Colour;
-
 	struct [[nodiscard]] default_position_t { constexpr default_position_t() noexcept = default; };
 	struct [[nodiscard]] default_resoulution_t { constexpr default_resoulution_t() noexcept = default; };
 
