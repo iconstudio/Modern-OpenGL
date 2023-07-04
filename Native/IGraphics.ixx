@@ -19,6 +19,11 @@ export namespace gl::device
 
 		constexpr ~IGraphics() noexcept = default;
 
+		bool Destroy() noexcept(noexcept(_Cast()->Destroy()))
+		{
+			return _Cast()->Destroy();
+		}
+
 		IGraphics& operator=(nullptr_t) noexcept
 		{
 			if (nullptr != base::GetHandle())
