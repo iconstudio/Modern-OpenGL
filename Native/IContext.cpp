@@ -22,3 +22,35 @@ noexcept
 {
 	return 0 != ::ReleaseDC(owner, GetHandle());
 }
+
+constexpr
+gl::device::IContext::operator
+native::NativeContext& ()
+& noexcept
+{
+	return GetHandle();
+}
+
+constexpr
+gl::device::IContext::operator
+const native::NativeContext& ()
+const& noexcept
+{
+	return GetHandle();
+}
+
+constexpr
+gl::device::IContext::operator
+native::NativeContext && ()
+&& noexcept
+{
+	return std::move(GetHandle());
+}
+
+constexpr
+gl::device::IContext::operator
+const native::NativeContext && ()
+const&& noexcept
+{
+	return std::move(GetHandle());
+}
