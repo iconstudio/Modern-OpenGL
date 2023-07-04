@@ -1,5 +1,5 @@
 export module Glib.Device.IGraphics;
-import <type_traits>;
+import <utility>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 
@@ -24,28 +24,6 @@ export namespace gl::device
 			return _Cast()->Destroy();
 		}
 
-		IGraphics& operator=(nullptr_t) noexcept
-		{
-			if (nullptr != base::GetHandle())
-			{
-				_Cast()->Destroy();
-				base::operator=(nullptr);
-			}
-
-			return *this;
-		}
-
-		IGraphics& operator=(IGraphics&& other) noexcept
-		{
-			if (nullptr != base::GetHandle())
-			{
-				_Cast()->Destroy();
-				base::operator=(other.GetHandle());
-			}
-
-			return *this;
-		}
-
 		IGraphics(const IGraphics&) = delete;
 		constexpr IGraphics(IGraphics&&) noexcept = default;
 		IGraphics& operator=(const IGraphics&&) = delete;
@@ -61,7 +39,50 @@ export namespace gl::device
 			: base(std::move(handle))
 		{}
 
-		constexpr T* const& _Cast() noexcept
+		IGraphics& operator=(nullptr_t) noexcept
+		{
+			if (nullptr != base::GetHandle())
+			{
+				_Cast()->Destroy();
+				base::operator=(nullptr);
+			}
+
+			return *this;
+		}
+
+		IGraphics& operator=(const handle_type& handle) noexcept
+		{
+			if (handle == base::GetHandle())
+			{
+				return *this;
+			}
+
+			if (nullptr != base::GetHandle())
+			{
+				_Cast()->Destroy();
+			}
+			base::operator=(handle);
+
+			return *this;
+		}
+
+		IGraphics& operator=(IGraphics&& other) noexcept
+		{
+			if (other.GetHandle() == base::GetHandle())
+			{
+				return *this;
+			}
+
+			if (nullptr != base::GetHandle())
+			{
+				_Cast()->Destroy();
+			}
+			base::operator=(std::exchange(other.GetHandle(), nullptr));
+
+			return *this;
+		}
+
+		constexpr T* _Cast() noexcept
 		{
 			static_assert(std::is_base_of_v<IGraphics, T>, "T must be derived from IGraphics");
 			static_assert(std::is_base_of_v<base, T>, "T must be derived from IHandle");
@@ -69,7 +90,7 @@ export namespace gl::device
 			return static_cast<T*>(this);
 		}
 
-		constexpr const T* const& _Cast() const noexcept
+		constexpr const T* _Cast() const noexcept
 		{
 			static_assert(std::is_base_of_v<IGraphics, T>, "T must be derived from IGraphics");
 			static_assert(std::is_base_of_v<base, T>, "T must be derived from IHandle");
