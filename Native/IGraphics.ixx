@@ -38,6 +38,10 @@ export namespace gl::device
 	protected:
 		constexpr IGraphics() noexcept = default;
 
+		constexpr IGraphics(nullifier_t) noexcept
+			: base(nullptr)
+		{}
+
 		explicit constexpr IGraphics(const handle_type& handle) noexcept
 			: base(handle)
 		{}
