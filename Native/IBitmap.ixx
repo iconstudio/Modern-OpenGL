@@ -16,6 +16,14 @@ export namespace gl::device::resource
 	class [[nodiscard]] IBitmap : public IHandle<native::RawBitmap>
 	{
 	public:
+		using base = IHandle<native::RawBitmap>;
+
+		constexpr IBitmap() noexcept = default;
+
+		constexpr IBitmap(nullptr_t) noexcept
+			: base(nullptr)
+		{}
+
 		[[nodiscard]] IBitmap Copy() const noexcept;
 		[[nodiscard]] bool TryCopy(IBitmap& output) const noexcept;
 
