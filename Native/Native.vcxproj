@@ -201,7 +201,7 @@
     <ClCompile Include="IGraphics.cpp" />
     <ClCompile Include="IGraphics.ixx" />
     <ClCompile Include="IHandle.ixx" />
-    <ClCompile Include="ISurface.ixx" />
+    <ClCompile Include="IContext.ixx" />
     <ClCompile Include="IWindowHandle.ixx" />
     <ClCompile Include="Keyboard.ixx" />
     <ClCompile Include="KeyboardFlags.ixx" />

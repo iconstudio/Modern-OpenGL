@@ -161,7 +161,7 @@
     <ClCompile Include="IHandle.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="ISurface.ixx">
+    <ClCompile Include="IContext.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="IWindowHandle.ixx">
