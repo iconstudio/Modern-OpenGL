@@ -5,11 +5,11 @@ import Glib.Device.IHandle;
 
 export namespace gl::device
 {
-	template<typename H>
-	class [[nodiscard]] IGraphics : public IHandle<H*>
+	template<typename T, typename H>
+	class [[nodiscard]] IGraphics : public IHandle<H>
 	{
 	public:
-		using base = IHandle<H*>;
+		using base = IHandle<H>;
 		using handle_type = base::handle_type;
 		using base::GetHandle;
 
@@ -17,15 +17,13 @@ export namespace gl::device
 			: base(nullptr)
 		{}
 
-		virtual constexpr ~IGraphics() noexcept = default;
-
-		virtual bool Destroy() noexcept = 0;
+		constexpr ~IGraphics() noexcept = default;
 
 		IGraphics& operator=(nullptr_t) noexcept
 		{
 			if (nullptr != base::GetHandle())
 			{
-				Destroy();
+				_Cast()->Destroy();
 				base::operator=(nullptr);
 			}
 
@@ -36,7 +34,7 @@ export namespace gl::device
 		{
 			if (nullptr != base::GetHandle())
 			{
-				Destroy();
+				_Cast()->Destroy();
 				base::operator=(other.GetHandle());
 			}
 
@@ -57,5 +55,21 @@ export namespace gl::device
 		explicit constexpr IGraphics(handle_type&& handle) noexcept
 			: base(std::move(handle))
 		{}
+
+		constexpr T* const& _Cast() noexcept
+		{
+			static_assert(std::is_base_of_v<IGraphics, T>, "T must be derived from IGraphics");
+			static_assert(std::is_base_of_v<base, T>, "T must be derived from IHandle");
+
+			return static_cast<T*>(this);
+		}
+
+		constexpr const T* const& _Cast() const noexcept
+		{
+			static_assert(std::is_base_of_v<IGraphics, T>, "T must be derived from IGraphics");
+			static_assert(std::is_base_of_v<base, T>, "T must be derived from IHandle");
+
+			return static_cast<const T*>(this);
+		}
 	};
 }
