@@ -2,14 +2,14 @@ export module Glib.Device.Resource.Icon;
 import <type_traits>;
 import <string_view>;
 import Glib.Device.Definitions;
-import Glib.Device.IHandle;
+import Glib.Device.IGraphics;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] Icon : public IHandle<native::RawIcon>
+	class [[nodiscard]] Icon : public IGraphics<Icon, native::RawIcon>
 	{
 	public:
-		using base = IHandle<native::RawIcon>;
+		using base = IGraphics<Icon, native::RawIcon>;
 
 		[[nodiscard]]
 		friend Icon LoadIcon(const FilePath& path) noexcept;
@@ -28,8 +28,6 @@ export namespace gl::device::resource
 			: base(nullptr)
 			, myLength(0U)
 		{}
-
-		Icon& operator=(nullptr_t) noexcept;
 
 		~Icon() noexcept;
 
@@ -54,6 +52,8 @@ export namespace gl::device::resource
 		{
 			return nullptr == GetHandle();
 		}
+
+		Icon& operator=(nullptr_t) noexcept;
 
 		Icon(const Icon&) = delete;
 		constexpr Icon(Icon&&) noexcept = default;
