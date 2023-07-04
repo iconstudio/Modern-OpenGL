@@ -1,6 +1,7 @@
 export module Glib.Device.Pen;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
+import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 
 export namespace gl::device
@@ -15,10 +16,10 @@ export namespace gl::device
 		//Frame = 6, // PS_INSIDEFRAME
 	};
 
-	class [[nodiscard]] Pen : public IHandle<native::RawPen>
+	class [[nodiscard]] Pen : public IGraphics<Pen, native::RawPen>
 	{
 	public:
-		using base = IHandle<native::RawPen>;
+		using base = IGraphics<Pen, native::RawPen>;
 
 		Pen(const PenStyles& style, const int& width, const Colour& color) noexcept;
 		Pen(const PenStyles& style, const int& width, Colour&& color) noexcept;
