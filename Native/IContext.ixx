@@ -22,10 +22,25 @@ export namespace gl::device
 		bool Release() noexcept;
 		bool Release(native::HWND& owner) noexcept;
 
-		constexpr operator gl::device::native::NativeContext& () & noexcept;
-		constexpr operator const gl::device::native::NativeContext& () const& noexcept;
-		constexpr operator gl::device::native::NativeContext&& () && noexcept;
-		constexpr operator const gl::device::native::NativeContext&& () const&& noexcept;
+		constexpr operator gl::device::native::NativeContext& () & noexcept
+		{
+			return GetHandle();
+		}
+
+		constexpr operator const gl::device::native::NativeContext& () const& noexcept
+		{
+			return GetHandle();
+		}
+
+		constexpr operator gl::device::native::NativeContext&& () && noexcept
+		{
+			return std::move(GetHandle());
+		}
+
+		constexpr operator const gl::device::native::NativeContext&& () const&& noexcept
+		{
+			return std::move(GetHandle());
+		}
 
 		IContext(const IContext&) = delete;
 		IContext& operator=(const IContext&) = delete;
