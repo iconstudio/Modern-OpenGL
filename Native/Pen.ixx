@@ -17,8 +17,6 @@ export namespace gl::device
 
 	class [[nodiscard]] Pen : public IHandle<native::RawPen>
 	{
-		constexpr Pen() noexcept = default;
-
 	public:
 		using base = IHandle<native::RawPen>;
 
