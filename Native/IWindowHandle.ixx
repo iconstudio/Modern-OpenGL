@@ -5,6 +5,7 @@ module;
 export module Glib.Device.IWindowHandle;
 import <type_traits>;
 import <string_view>;
+import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 import Glib.Device.Event;
 import Glib.Device.Event.API;
@@ -261,7 +262,7 @@ export namespace gl::device
 	}
 
 	[[nodiscard]]
-	inline HWND__* MakeNativeWindow(const HINSTANCE& hinst
+	HWND__* MakeNativeWindow(const HINSTANCE& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles
@@ -273,43 +274,11 @@ export namespace gl::device
 		, const HWND& parent = nullptr
 		, const HMENU& menu = nullptr
 		, const LPVOID& uparams = nullptr)
-		noexcept
-	{
-		HWND result = ::CreateWindowEx(options
-		, class_name.data(), title.data()
-		, styles, x, y, width, height
-		, parent
-		, menu
-		, hinst, uparams);
+		noexcept;
 
-		if (result == nullptr)
-		{
-			return nullptr;
-		}
+	bool RegisterWindow(const device::native::RawWindowProperty& property) noexcept;
 
-		const BOOL value = TRUE;
-		if (auto hr = ::DwmSetWindowAttribute(result
-			, DWMWA_USE_IMMERSIVE_DARK_MODE
-			, &value, sizeof(value)); FAILED(hr))
-		{
-			::printf_s("DWMWA_USE_IMMERSIVE_DARK_MODE failed(%ld)\n", hr);
-		}
+	bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name);
 
-		return result;
-	}
-
-	inline bool RegisterWindow(const tagWNDCLASSEXW& property)
-	{
-		return 0 == ::RegisterClassEx(&property);
-	}
-
-	inline bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name)
-	{
-		return 0 == ::UnregisterClass(class_name.data(), hinst);
-	}
-
-	inline void PostQuitMessage(const int& exit_code) noexcept
-	{
-		::PostQuitMessage(exit_code);
-	}
+	void PostQuitMessage(const int& exit_code) noexcept;
 }
