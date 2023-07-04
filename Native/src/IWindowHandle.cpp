@@ -244,6 +244,13 @@ const noexcept
 	return Delegate(::GetDC);
 }
 
+bool
+gl::device::IWindowHandle::ReleaseNativeContext(native::NativeContext& context)
+const noexcept
+{
+	return 0 != Delegate(::ReleaseDC, context);
+}
+
 gl::device::native::NativeRect
 gl::device::IWindowHandle::GetDimensions()
 const noexcept

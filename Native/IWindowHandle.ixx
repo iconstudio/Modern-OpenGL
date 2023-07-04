@@ -126,6 +126,9 @@ export namespace gl::device
 		native::NativeContext GetNativeContext() const noexcept;
 
 		[[nodiscard]]
+		bool ReleaseNativeContext(native::NativeContext& context) const noexcept;
+
+		[[nodiscard]]
 		native::NativeRect GetDimensions() const noexcept;
 
 		[[nodiscard]]
