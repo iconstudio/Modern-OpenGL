@@ -1,6 +1,5 @@
 module;
 #include "Internal.hpp"
-#include <dwmapi.h>
 
 export module Glib.Device.IWindowHandle;
 import <type_traits>;
@@ -8,7 +7,6 @@ import <string_view>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 import Glib.Device.Event;
-import Glib.Device.Event.API;
 import Glib.Device.IO;
 import Glib.Device.ISurface;
 
