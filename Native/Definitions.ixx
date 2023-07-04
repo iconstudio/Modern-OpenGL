@@ -12,8 +12,8 @@ export namespace gl::device
 export namespace gl::device::native
 {
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
-	using RawWindowProperty = ::tagWNDCLASSEXW;
-	using HWND = ::HWND__*;
+	using RawWindowProperty = tagWNDCLASSEXW;
+	using HWND = HWND__*;
 
 	using NativeRect = tagRECT;
 	using NativeSurface = ::HDC__*;
