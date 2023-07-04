@@ -25,6 +25,9 @@
     <Filter Include="헤더 파일\GDI">
       <UniqueIdentifier>{df96e776-1182-42b1-9b3c-cb60f1c52b41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Device\Interfaces">
+      <UniqueIdentifier>{12a2c31f-3667-4369-a84d-66239f782688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
