@@ -15,7 +15,7 @@ noexcept
 	if (nullptr != GetHandle())
 	{
 		bool result = 0 != Delegate(::DeleteObject);
-		base::operator=(nullptr);
+		base::operator=(nullifier);
 
 		return result;
 	}
