@@ -1,9 +1,9 @@
-export module Glib.Device.Pen;
+export module Glib.Device.Resource.Pen;
 import Glib.Device.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 
-export namespace gl::device
+export namespace gl::device::resource
 {
 	enum class [[nodiscard]] PenStyles
 	{
