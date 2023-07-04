@@ -30,6 +30,15 @@ export namespace gl::device
 
 		void Destroy() noexcept;
 
+		[[nodiscard]] const PenStyles& GetStyle() const& noexcept;
+		[[nodiscard]] PenStyles&& GetStyle() && noexcept;
+		[[nodiscard]] const int& GetSize() const& noexcept;
+		[[nodiscard]] int&& GetSize() && noexcept;
+		[[nodiscard]] Colour& GetColor() & noexcept;
+		[[nodiscard]] const Colour& GetColor() const& noexcept;
+		[[nodiscard]] Colour&& GetColor() && noexcept;
+		[[nodiscard]] const Colour&& GetColor() const&& noexcept;
+
 		Pen& operator=(nullptr_t) noexcept;
 
 		Pen(const Pen&) = delete;
@@ -38,8 +47,8 @@ export namespace gl::device
 		Pen& operator=(Pen&&) = delete;
 
 	private:
-		PenStyles myStyle;
-		int mySize;
-		Colour myColor;
+		PenStyles myStyle; // not modifiable
+		int mySize; // not modifiable
+		Colour myColor; // modifiable
 	};
 }
