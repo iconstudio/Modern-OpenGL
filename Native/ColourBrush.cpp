@@ -24,10 +24,17 @@ noexcept
 }
 
 gl::device::ColorBrush&
+gl::device::ColorBrush::operator=(nullptr_t)
+noexcept
+{
+	base::operator=(nullptr);
+	return *this;
+}
+
+gl::device::ColorBrush&
 gl::device::ColorBrush::operator=(handle_type&& brush)
 noexcept
 {
-	Destroy();
 	base::operator=(std::move(brush));
 	return *this;
 }
@@ -35,17 +42,7 @@ noexcept
 gl::device::ColorBrush&
 gl::device::ColorBrush::operator=(ColorBrush&& other) noexcept
 {
-	Destroy();
 	base::operator=(std::move(other));
-	return *this;
-}
-
-gl::device::ColorBrush&
-gl::device::ColorBrush::operator=(nullptr_t)
-noexcept
-{
-	Destroy();
-
 	return *this;
 }
 
