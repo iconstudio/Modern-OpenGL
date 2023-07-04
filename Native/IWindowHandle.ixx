@@ -8,7 +8,8 @@ import <string_view>;
 import Glib.Device.IHandle;
 import Glib.Device.Event;
 import Glib.Device.Event.API;
-export import Glib.Device.IO;
+import Glib.Device.IO;
+import Glib.Device.ISurface;
 
 export namespace gl::device
 {
