@@ -5,6 +5,7 @@ export module Glib.Device.IWindowHandle;
 import <type_traits>;
 import <string_view>;
 import Glib.Device.Definitions;
+import Glib.Device.ProcessInstance;
 import Glib.Device.IHandle;
 import Glib.Device.Event;
 import Glib.Device.IO;
@@ -139,7 +140,7 @@ export namespace gl::device
 	}
 
 	[[nodiscard]]
-	HWND__* MakeNativeWindow(const HINSTANCE& hinst
+	HWND__* MakeNativeWindow(const ProcessInstance& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles
@@ -150,11 +151,10 @@ export namespace gl::device
 		, const int& height
 		, const HWND& parent = nullptr
 		, const HMENU& menu = nullptr
-		, const LPVOID& uparams = nullptr)
+		, void* uparams = nullptr)
 		noexcept;
 
-
-	bool UnregisterWindow(const HINSTANCE& hinst, const std::wstring_view& class_name);
+	bool UnregisterWindow(const ProcessInstance& hinst, const std::wstring_view& class_name);
 
 	void PostQuitMessage(const int& exit_code) noexcept;
 }
