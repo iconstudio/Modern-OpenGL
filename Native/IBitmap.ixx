@@ -5,6 +5,7 @@ export module Glib.Device.Resource.IBitmap;
 import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.IGraphics;
+import Glib.Device.IWindowHandle;
 import Glib.Device.ISurface;
 import Glib.Device.Colour;
 
@@ -32,7 +33,8 @@ export namespace gl::device::resource
 
 		bool Destroy() noexcept;
 
-		bool Draw(const ISurface& context, const int& x, const int& y) const noexcept;
+		bool Draw(const IWindowHandle& window_handle, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
+		bool Draw(const ISurface& render_context, const ISurface& window_context, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
 
 		bool GetPixel(const ISurface& context, const int& x, const int& y, Colour& output) const;
 		int GetWidth() const noexcept;

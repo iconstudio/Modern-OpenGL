@@ -32,7 +32,7 @@ const noexcept
 		return false;
 	}
 
-	HDC memory = ::CreateCompatibleDC(hdc);
+	HDC memory = context.Delegate(::CreateCompatibleDC);
 	if (nullptr == memory)
 	{
 		return false;
@@ -88,10 +88,79 @@ noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const ISurface& context, const int& x, const int& y)
+gl::device::resource::IBitmap::Draw(const IWindowHandle& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	return false;
+	HDC render_context = IWindowHandle{}.Delegate(::GetDC);
+	if (nullptr == render_context)
+	{
+		return false;
+	}
+
+	HDC target = window_handle.Delegate(::GetDC);
+	if (nullptr == target)
+	{
+		return false;
+	}
+
+	HGDIOBJ previous = ::SelectObject(target, GetHandle());
+
+	if (0 == ::BitBlt(target
+		, x, y, cachedWidth, cachedHeight
+		, render_context
+		, srcx, srcy, SRCCOPY)
+	)
+	{
+		::SelectObject(target, previous);
+
+		//::ReleaseDC(window_handle.GetHandle(), target);
+		window_handle.Delegate(::ReleaseDC, target);
+
+		//::ReleaseDC(NULL, render_context);
+		IWindowHandle{}.Delegate(::ReleaseDC, render_context);
+
+		return false;
+	}
+
+	::SelectObject(target, previous);
+	::ReleaseDC(window_handle.GetHandle(), target);
+	::ReleaseDC(NULL, render_context);
+
+	return true;
+}
+
+bool
+gl::device::resource::IBitmap::Draw(const ISurface& render_context, const ISurface& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
+const noexcept
+{
+	HDC target = render_context.GetHandle();
+	if (nullptr == target)
+	{
+		return false;
+	}
+
+	HDC src = window_context.GetHandle();
+	if (nullptr == src)
+	{
+		return false;
+	}
+
+	HGDIOBJ previous = ::SelectObject(target, GetHandle());
+
+	if (0 == ::BitBlt(target
+		, x, y, cachedWidth, cachedHeight
+		, src
+		, srcx, srcy, SRCCOPY)
+	)
+	{
+		::SelectObject(target, previous);
+
+		return false;
+	}
+
+	::SelectObject(target, previous);
+
+	return true;
 }
 
 bool
