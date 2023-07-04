@@ -9,7 +9,7 @@ import Glib.Device.ProcessInstance;
 import Glib.Device.IHandle;
 import Glib.Device.Event;
 import Glib.Device.IO;
-import Glib.Device.ISurface;
+import Glib.Device.IContext;
 
 export namespace gl::device
 {

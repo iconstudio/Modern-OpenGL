@@ -1,27 +1,27 @@
-export module Glib.Device.ISurface;
+export module Glib.Device.IContext;
 import <type_traits>;
 import Glib.Device.Definitions;
 import Glib.Device.IHandle;
 
 export namespace gl::device
 {
-	class ISurface : public IHandle<native::NativeContext>
+	class IContext : public IHandle<native::NativeContext>
 	{
 	public:
 		using base = IHandle<native::NativeContext>;
 
-		constexpr ISurface() noexcept = default;
-		constexpr ~ISurface() noexcept = default;
+		constexpr IContext() noexcept = default;
+		constexpr ~IContext() noexcept = default;
 
-		explicit constexpr ISurface(const handle_type& hdc) noexcept
+		explicit constexpr IContext(const handle_type& hdc) noexcept
 			: base(hdc)
 		{}
 
-		explicit constexpr ISurface(handle_type&& hdc) noexcept
+		explicit constexpr IContext(handle_type&& hdc) noexcept
 			: base(std::move(hdc))
 		{}
 
-		ISurface(const ISurface&) = delete;
-		ISurface& operator=(const ISurface&) = delete;
+		IContext(const IContext&) = delete;
+		IContext& operator=(const IContext&) = delete;
 	};
 }

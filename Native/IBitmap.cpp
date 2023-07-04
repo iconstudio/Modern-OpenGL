@@ -3,7 +3,7 @@ module;
 module Glib.Device.Resource.IBitmap;
 
 gl::device::resource::IBitmap
-gl::device::resource::IBitmap::Copy(const ISurface& context)
+gl::device::resource::IBitmap::Copy(const IContext& context)
 const noexcept
 {
 	IBitmap result{};
@@ -12,7 +12,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::TryCopy(const ISurface& context, IBitmap& output)
+gl::device::resource::IBitmap::TryCopy(const IContext& context, IBitmap& output)
 const noexcept
 {
 	auto& handle = GetHandle();
@@ -130,7 +130,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const ISurface& render_context, const ISurface& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::device::resource::IBitmap::Draw(const IContext& render_context, const IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	HDC target = render_context.GetHandle();
@@ -164,7 +164,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::GetPixel(const ISurface& context, const int& x, const int& y, Colour& output)
+gl::device::resource::IBitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
 const
 {
 	if (RawRGB result = context.Delegate(::GetPixel, x, y); CLR_INVALID != result)
