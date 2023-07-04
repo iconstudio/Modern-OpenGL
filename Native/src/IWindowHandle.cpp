@@ -238,7 +238,7 @@ const noexcept
 }
 
 gl::device::native::NativeContext
-gl::device::IWindowHandle::GetNativeContext()
+gl::device::IWindowHandle::AcquireNativeContext()
 const noexcept
 {
 	return Delegate(::GetDC);
