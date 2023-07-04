@@ -25,7 +25,7 @@ noexcept
 
 constexpr
 gl::device::IContext::operator
-native::NativeContext& ()
+gl::device::native::NativeContext& ()
 & noexcept
 {
 	return GetHandle();
@@ -33,7 +33,7 @@ native::NativeContext& ()
 
 constexpr
 gl::device::IContext::operator
-const native::NativeContext& ()
+const gl::device::native::NativeContext& ()
 const& noexcept
 {
 	return GetHandle();
@@ -41,7 +41,7 @@ const& noexcept
 
 constexpr
 gl::device::IContext::operator
-native::NativeContext && ()
+gl::device::native::NativeContext && ()
 && noexcept
 {
 	return std::move(GetHandle());
@@ -49,7 +49,7 @@ native::NativeContext && ()
 
 constexpr
 gl::device::IContext::operator
-const native::NativeContext && ()
+const gl::device::native::NativeContext && ()
 const&& noexcept
 {
 	return std::move(GetHandle());
