@@ -15,7 +15,7 @@ bool
 gl::device::resource::IBitmap::TryCopy(const IContext& context, IBitmap& output)
 const noexcept
 {
-	auto& handle = GetHandle();
+	const native::RawBitmap& handle = GetHandle();
 	if (nullptr == handle)
 	{
 		return false;
@@ -26,19 +26,13 @@ const noexcept
 		return false;
 	}
 
-	const HDC& hdc = context.GetHandle();
-	if (nullptr == hdc)
-	{
-		return false;
-	}
-
-	HDC memory = context.Delegate(::CreateCompatibleDC);
+	native::NativeContext memory = context.Delegate(::CreateCompatibleDC);
 	if (nullptr == memory)
 	{
 		return false;
 	}
 
-	HBITMAP bitmap = ::CreateCompatibleBitmap(hdc, cachedWidth, cachedHeight);
+	native::RawBitmap bitmap = ::CreateCompatibleBitmap(memory, cachedWidth, cachedHeight);
 	if (nullptr == bitmap)
 	{
 		::DeleteDC(memory);
@@ -46,7 +40,7 @@ const noexcept
 		return false;
 	}
 
-	HGDIOBJ previous = ::SelectObject(memory, bitmap);
+	void* previous = ::SelectObject(memory, bitmap);
 	if (nullptr == previous)
 	{
 		::DeleteObject(bitmap);
@@ -55,7 +49,10 @@ const noexcept
 		return false;
 	}
 
-	if (0 == ::BitBlt(memory, 0, 0, cachedWidth, cachedHeight, hdc, 0, 0, SRCCOPY))
+	if (0 == ::BitBlt(memory
+		, 0, 0, cachedWidth, cachedHeight
+		, context, 0, 0
+		, SRCCOPY))
 	{
 		::SelectObject(memory, previous);
 		::DeleteObject(bitmap);
