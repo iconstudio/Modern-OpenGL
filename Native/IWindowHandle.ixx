@@ -123,10 +123,9 @@ export namespace gl::device
 		int GetID() const noexcept;
 
 		[[nodiscard]]
-		native::NativeContext AcquireNativeContext() const noexcept;
+		IContext AcquireNativeContext() const noexcept;
 
-		[[nodiscard]]
-		bool ReleaseNativeContext(native::NativeContext& context) const noexcept;
+		bool ReleaseNativeContext(IContext& context) const noexcept;
 
 		[[nodiscard]]
 		native::NativeRect GetDimensions() const noexcept;

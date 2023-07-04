@@ -237,15 +237,15 @@ const noexcept
 	return static_cast<int>(GetInternalValue(GWLP_ID));
 }
 
-gl::device::native::NativeContext
+gl::device::IContext
 gl::device::IWindowHandle::AcquireNativeContext()
 const noexcept
 {
-	return Delegate(::GetDC);
+	return IContext{ Delegate(::GetDC) };
 }
 
 bool
-gl::device::IWindowHandle::ReleaseNativeContext(native::NativeContext& context)
+gl::device::IWindowHandle::ReleaseNativeContext(IContext& context)
 const noexcept
 {
 	return 0 != Delegate(::ReleaseDC, context);
