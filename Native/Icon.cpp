@@ -65,7 +65,7 @@ noexcept
 }
 
 bool
-gl::device::resource::Icon::Draw(const gl::device::native::NativeSurface& hdc, const int& x, const int& y)
+gl::device::resource::Icon::Draw(const gl::device::native::NativeContext& hdc, const int& x, const int& y)
 const noexcept
 {
 	return 0 != ::DrawIcon(hdc, x, y, GetHandle());
