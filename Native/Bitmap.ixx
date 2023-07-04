@@ -8,13 +8,13 @@ import Glib.Device.Resource.IBitmap;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] Bitmap : public Image
+	class [[nodiscard]] Bitmap : public IBitmap
 	{
 	protected:
 		Bitmap(native::RawBitmap&&) noexcept;
 
 	public:
-		using base = Image;
+		using base = IBitmap;
 
 #undef LoadBitmap
 		[[nodiscard]]
