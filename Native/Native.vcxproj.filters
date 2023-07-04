@@ -182,5 +182,11 @@
     <ClCompile Include="IWindowHandle.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="IGraphics.ixx">
+      <Filter>헤더 파일\Device\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IGraphics.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

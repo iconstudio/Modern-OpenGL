@@ -193,6 +193,8 @@
     <ClCompile Include="IBitmap.ixx" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Icon.ixx" />
+    <ClCompile Include="IGraphics.cpp" />
+    <ClCompile Include="IGraphics.ixx" />
     <ClCompile Include="IHandle.ixx" />
     <ClCompile Include="ISurface.ixx" />
     <ClCompile Include="IWindowHandle.ixx" />
