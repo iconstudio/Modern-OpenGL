@@ -5,6 +5,13 @@ import Glib.Device.IHandle;
 
 export namespace gl::device
 {
+	struct [[nodiscard]] nullifier_t
+	{
+		constexpr nullifier_t() noexcept = default;
+	};
+
+	inline constexpr nullifier_t nullifier{};
+
 	template<typename T, typename H>
 	class [[nodiscard]] IGraphics : public IHandle<H>
 	{
@@ -47,6 +54,12 @@ export namespace gl::device
 				base::operator=(nullptr);
 			}
 
+			return *this;
+		}
+
+		IGraphics& operator=(nullifier_t) noexcept
+		{
+			base::operator=(nullptr);
 			return *this;
 		}
 
