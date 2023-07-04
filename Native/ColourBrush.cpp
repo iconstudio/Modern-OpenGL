@@ -1,6 +1,5 @@
 module;
 #include "Internal.hpp"
-
 module Glib.Device.Brush;
 
 gl::device::ColorBrush::~ColorBrush()
@@ -9,27 +8,19 @@ noexcept
 	Destroy();
 }
 
-void
+bool
 gl::device::ColorBrush::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
 	{
-		Delegate(::DeleteObject);
+		bool result = 0 != Delegate(::DeleteObject);
 		base::operator=(nullptr);
-	}
-}
 
-gl::device::ColorBrush&
-gl::device::ColorBrush::operator=(const handle_type& brush)
-noexcept
-{
-	if (GetHandle() != brush)
-	{
-		Destroy();
-		base::operator=(brush);
+		return result;
 	}
-	return *this;
+
+	return false;
 }
 
 gl::device::ColorBrush&
@@ -38,6 +29,14 @@ noexcept
 {
 	Destroy();
 	base::operator=(std::move(brush));
+	return *this;
+}
+
+gl::device::ColorBrush&
+gl::device::ColorBrush::operator=(ColorBrush&& other) noexcept
+{
+	Destroy();
+	base::operator=(std::move(other));
 	return *this;
 }
 

@@ -1,24 +1,18 @@
 export module Glib.Device.Brush;
 import <type_traits>;
 import Glib.Device.Definitions;
-import Glib.Device.IHandle;
+import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 
 export namespace gl::device
 {
-	class [[nodiscard]] ColorBrush : public IHandle<native::RawColorBrush>
+	class [[nodiscard]] ColorBrush : public IGraphics<ColorBrush, native::RawColorBrush>
 	{
 	public:
-		using base = IHandle<native::RawColorBrush>;
-
-		constexpr ColorBrush() noexcept = default;
+		using base = IGraphics<ColorBrush, native::RawColorBrush>;
 
 		constexpr ColorBrush(nullptr_t) noexcept
 			: base(nullptr)
-		{}
-
-		explicit constexpr ColorBrush(const handle_type& brush) noexcept
-			: base(brush)
 		{}
 
 		explicit constexpr ColorBrush(handle_type&& brush) noexcept
@@ -27,15 +21,15 @@ export namespace gl::device
 
 		~ColorBrush() noexcept;
 
-		void Destroy() noexcept;
-		ColorBrush& operator=(const handle_type& brush) noexcept;
-		ColorBrush& operator=(handle_type&& brush) noexcept;
+		bool Destroy() noexcept;
+
 		ColorBrush& operator=(nullptr_t) noexcept;
+		ColorBrush& operator=(handle_type&& brush) noexcept;
+		ColorBrush& operator=(ColorBrush&& other) noexcept;
 
 		ColorBrush(const ColorBrush&) = delete;
 		constexpr ColorBrush(ColorBrush&&) noexcept = default;
 		ColorBrush& operator=(const ColorBrush&) = delete;
-		constexpr ColorBrush& operator=(ColorBrush&&) noexcept = default;
 	};
 
 	enum class [[nodiscard]] BrushPatterns
