@@ -5,10 +5,10 @@ import Glib.Device.IHandle;
 
 export namespace gl::device
 {
-	class ISurface : public IHandle<native::NativeSurface>
+	class ISurface : public IHandle<native::NativeContext>
 	{
 	public:
-		using base = IHandle<native::NativeSurface>;
+		using base = IHandle<native::NativeContext>;
 
 		constexpr ISurface() noexcept = default;
 		constexpr ~ISurface() noexcept = default;

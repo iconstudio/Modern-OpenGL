@@ -37,7 +37,7 @@ export namespace gl::device::resource
 		[[nodiscard]]
 		bool TryCopy(Icon& output) const noexcept;
 
-		bool Draw(const native::NativeSurface& hdc, const int& x, const int& y) const noexcept;
+		bool Draw(const native::NativeContext& hdc, const int& x, const int& y) const noexcept;
 
 		bool Destroy() noexcept;
 
