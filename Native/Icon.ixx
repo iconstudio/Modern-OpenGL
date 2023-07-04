@@ -25,7 +25,7 @@ export namespace gl::device::resource
 		friend bool TryLoadIcon(const int& id, Icon& output) noexcept;
 
 		constexpr Icon(nullptr_t) noexcept
-			: base(nullptr)
+			: base(nullifier)
 			, myLength(0U)
 		{}
 
