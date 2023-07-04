@@ -241,7 +241,7 @@ gl::device::IContext
 gl::device::IWindowHandle::AcquireNativeContext()
 const noexcept
 {
-	return IContext{ Delegate(::GetDC) };
+	return Delegate(::GetDC);
 }
 
 bool

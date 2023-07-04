@@ -14,7 +14,7 @@ export namespace gl::device
 			: base(hdc)
 		{}
 
-		explicit constexpr IContext(handle_type&& hdc) noexcept
+		constexpr IContext(handle_type&& hdc) noexcept
 			: base(std::move(hdc))
 		{}
 
