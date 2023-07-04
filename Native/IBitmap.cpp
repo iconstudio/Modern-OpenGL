@@ -97,21 +97,15 @@ const noexcept
 		return false;
 	}
 
-	IContext render_target = window_handle.AcquireNativeContext();
-	if (nullptr == render_target)
+	IContext window_context = window_handle.AcquireNativeContext();
+	if (nullptr == window_context)
 	{
 		return false;
 	}
 
-	HGDIOBJ previous = render_target.Delegate(::SelectObject, GetHandle());
+	bool result = Draw(render_context, window_context, x, y, srcx, srcy);
 
-	bool result = (0 == ::BitBlt(render_target
-		, x, y, cachedWidth, cachedHeight
-		, render_context
-		, srcx, srcy, SRCCOPY));
-
-	render_target.Delegate(::SelectObject, previous);
-	window_handle.ReleaseNativeContext(render_target);
+	window_handle.ReleaseNativeContext(window_context);
 	IWindowHandle{}.ReleaseNativeContext(render_context);
 
 	return result;
@@ -121,34 +115,16 @@ bool
 gl::device::resource::IBitmap::Draw(const IContext& render_context, const IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	const native::NativeContext& target = render_context.GetHandle();
-	if (nullptr == target)
-	{
-		return false;
-	}
+	HGDIOBJ previous = window_context.Delegate(::SelectObject, GetHandle());
 
-	const native::NativeContext& render_target = window_context.GetHandle();
-	if (nullptr == render_target)
-	{
-		return false;
-	}
-
-	HGDIOBJ previous = ::SelectObject(target, GetHandle());
-
-	if (0 == ::BitBlt(target
+	bool result = (0 == ::BitBlt(render_context
 		, x, y, cachedWidth, cachedHeight
-		, render_target
-		, srcx, srcy, SRCCOPY)
-	)
-	{
-		::SelectObject(target, previous);
+		, render_context
+		, srcx, srcy, SRCCOPY));
 
-		return false;
-	}
+	window_context.Delegate(::SelectObject, previous);
 
-	::SelectObject(target, previous);
-
-	return true;
+	return result;
 }
 
 bool
