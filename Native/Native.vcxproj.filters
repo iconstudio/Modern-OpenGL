@@ -22,11 +22,11 @@
     <Filter Include="헤더 파일\Window">
       <UniqueIdentifier>{46f4f182-8de9-4525-9ead-143dd2c33e1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\GDI">
-      <UniqueIdentifier>{df96e776-1182-42b1-9b3c-cb60f1c52b41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Device\Interfaces">
       <UniqueIdentifier>{12a2c31f-3667-4369-a84d-66239f782688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device\GDI">
+      <UniqueIdentifier>{df96e776-1182-42b1-9b3c-cb60f1c52b41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +110,6 @@
     <ClCompile Include="EventID.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Icon.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
@@ -123,9 +120,6 @@
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Colour.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="ColourBrush.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="ComponentBrush.ixx">
@@ -146,9 +140,6 @@
     <ClCompile Include="Definitions.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Bitmap.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentBrush.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -160,12 +151,6 @@
     </ClCompile>
     <ClCompile Include="IBitmap.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Pen.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Palette.ixx">
-      <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Pen.cpp">
       <Filter>소스 파일</Filter>
@@ -187,6 +172,21 @@
     </ClCompile>
     <ClCompile Include="IGraphics.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="ColourBrush.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Pen.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Palette.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
