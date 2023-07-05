@@ -45,6 +45,7 @@ export namespace gl::device::native
 
 	using NativeRect = tagRECT;
 	using NativeContext = ::HDC__*;
+	using NativeMenu = ::HMENU__*;
 	using RawBitmap = ::HBITMAP__*;
 	using RawIcon = ::HICON__*;
 	using RawColorBrush = ::HBRUSH__*;
