@@ -5,7 +5,7 @@ import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.Brush;
 import Glib.Device.Resource.Pen;
 import Glib.Device.Resource.Palette;
-import Glib.Device.Resource.Bitmap;
+import Glib.Device.Resource.IBitmap;
 import Glib.Device.Resource.CompatibleBitmap;
 
 gl::device::IContext::~IContext() noexcept
@@ -73,14 +73,7 @@ const noexcept
 }
 
 gl::device::IContext::GraphicState
-gl::device::IContext::Select(const resource::Bitmap& obj)
-const noexcept
-{
-	return GraphicState{ Delegate(::SelectObject, obj.GetHandle()) };
-}
-
-gl::device::IContext::GraphicState
-gl::device::IContext::Select(const resource::CompatibleBitmap& obj)
+gl::device::IContext::Select(const resource::IBitmap& obj)
 const noexcept
 {
 	return GraphicState{ Delegate(::SelectObject, obj.GetHandle()) };

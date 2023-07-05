@@ -36,8 +36,7 @@ export namespace gl::device
 		GraphicState Select(const resource::ColorBrush& obj) const noexcept;
 		GraphicState Select(const resource::Pen& obj) const noexcept;
 		GraphicState Select(const resource::Palette& obj) const noexcept;
-		GraphicState Select(const resource::Bitmap& obj) const noexcept;
-		GraphicState Select(const resource::CompatibleBitmap& obj) const noexcept;
+		GraphicState Select(const resource::IBitmap& obj) const noexcept;
 		void Select(GraphicState& previous) const noexcept;
 
 		constexpr operator native::NativeContext& () & noexcept
