@@ -31,7 +31,7 @@ export namespace gl::device
 		resource::CompatibleBitmap CreateCompatibleBitmap(const int& width, const int& height) const noexcept;
 		bool Destroy() noexcept;
 		bool Release() noexcept;
-		bool Release(native::HWND& owner) noexcept;
+		bool Release(const native::HWND& owner) noexcept;
 
 		GraphicState Select(const resource::ColorBrush& obj) const noexcept;
 		GraphicState Select(const resource::Pen& obj) const noexcept;
