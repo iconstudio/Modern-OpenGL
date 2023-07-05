@@ -204,7 +204,7 @@
     <ClCompile Include="IGraphics.ixx" />
     <ClCompile Include="IHandle.ixx" />
     <ClCompile Include="IContext.ixx" />
-    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="ImageLoader.inl" />
     <ClCompile Include="IWindow.ixx" />
     <ClCompile Include="Keyboard.ixx" />
     <ClCompile Include="KeyboardFlags.ixx" />
