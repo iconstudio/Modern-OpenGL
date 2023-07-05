@@ -281,7 +281,7 @@ const noexcept
 	std::wstring result{};
 	result.reserve(64);
 
-	int count = Delegate(::GetWindowText, result.data(), result.size());
+	Delegate(::GetWindowText, result.data(), static_cast<int>(result.size()));
 
 	return result;
 }
