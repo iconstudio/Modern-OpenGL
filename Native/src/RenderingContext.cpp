@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 
 module Glib.Device.Context.Renderer;
-import Glib.Device.IWindowHandle;
+import Glib.Device.IWindow;
 
 gl::device::RenderingContext::RenderingContext(const gl::device::native::HWND& handle)
 noexcept

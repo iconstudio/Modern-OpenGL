@@ -4,7 +4,7 @@ import <string_view>;
 import Glib.Rect;
 import Glib.Definitions;
 import Glib.Device.IHandle;
-import Glib.Device.IWindowHandle;
+import Glib.Device.IWindow;
 import Glib.Device.IO;
 import Glib.Device.Event;
 import Glib.Window.Property;
@@ -13,10 +13,10 @@ export import :Option;
 
 export extern "C++" namespace gl::window
 {
-	class [[nodiscard]] Window : public device::IHandle<device::IWindowHandle>
+	class [[nodiscard]] Window : public device::IHandle<device::IWindow>
 	{
 	public:
-		using base = device::IHandle<device::IWindowHandle>;
+		using base = device::IHandle<device::IWindow>;
 
 		explicit Window(const WindowProperty& properties
 			, const std::wstring_view& title

@@ -1,14 +1,14 @@
 export module Glib.Device.Handle;
 import <type_traits>;
 import Glib.Definitions;
-import Glib.Device.IWindowHandle;
+import Glib.Device.IWindow;
 
 export namespace gl::device
 {
-	class [[nodiscard]] DeviceHandle : public IWindowHandle
+	class [[nodiscard]] DeviceHandle : public IWindow
 	{
 	public:
-		using base = IWindowHandle;
+		using base = IWindow;
 		using handle_type = base::handle_type;
 		using base::base;
 

@@ -1,4 +1,4 @@
-export module Glib.Device.IWindowHandle;
+export module Glib.Device.IWindow;
 import <type_traits>;
 import <string>;
 import <string_view>;
@@ -13,37 +13,37 @@ export namespace gl::device
 {
 	using native::HWND;
 
-	class [[nodiscard]] IWindowHandle : public IHandle<native::HWND>
+	class [[nodiscard]] IWindow : public IHandle<native::HWND>
 	{
 	public:
 		using base = IHandle<native::HWND>;
 		using handle_type = base::handle_type;
 
-		constexpr IWindowHandle() noexcept = default;
+		constexpr IWindow() noexcept = default;
 
-		constexpr IWindowHandle(nullptr_t) noexcept
+		constexpr IWindow(nullptr_t) noexcept
 			: base(nullptr)
 		{}
 
-		constexpr IWindowHandle(IWindowHandle&& other) noexcept
+		constexpr IWindow(IWindow&& other) noexcept
 			: base(std::move(other))
 		{}
 
-		explicit constexpr IWindowHandle(const handle_type& handle) noexcept
+		explicit constexpr IWindow(const handle_type& handle) noexcept
 			: base(handle)
 		{}
 
-		explicit constexpr IWindowHandle(handle_type&& handle) noexcept
+		explicit constexpr IWindow(handle_type&& handle) noexcept
 			: base(std::move(handle))
 		{}
 
-		constexpr IWindowHandle& operator=(IWindowHandle&& other) noexcept
+		constexpr IWindow& operator=(IWindow&& other) noexcept
 		{
 			base::operator=(std::exchange(other, nullptr));
 			return *this;
 		}
 
-		constexpr IWindowHandle& operator=(handle_type&& handle) noexcept
+		constexpr IWindow& operator=(handle_type&& handle) noexcept
 		{
 			base::operator=(std::move(handle));
 			return *this;
@@ -101,12 +101,12 @@ export namespace gl::device
 		[[nodiscard]] bool IsRestored() const noexcept;
 		[[nodiscard]] bool IsInputEnabled() const noexcept;
 
-		IWindowHandle(const IWindowHandle&) = delete;
-		IWindowHandle& operator=(const IWindowHandle&) = delete;
+		IWindow(const IWindow&) = delete;
+		IWindow& operator=(const IWindow&) = delete;
 	};
 
 	[[nodiscard]]
-	IWindowHandle MakeNativeWindow(const ProcessInstance& hinst
+	IWindow MakeNativeWindow(const ProcessInstance& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles
@@ -115,7 +115,7 @@ export namespace gl::device
 		, const int& y
 		, const int& width
 		, const int& height
-		, const IWindowHandle& parent = nullptr
+		, const IWindow& parent = nullptr
 		, const native::NativeMenu& menu = nullptr
 		, void* uparams = nullptr)
 		noexcept;

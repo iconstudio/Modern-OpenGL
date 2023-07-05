@@ -3,7 +3,7 @@ module;
 
 module Glib.Device.Resource.IBitmap;
 import Glib.Device.Resource.CompatibleBitmap;
-import Glib.Device.IWindowHandle;
+import Glib.Device.IWindow;
 import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
 
@@ -75,7 +75,7 @@ noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const IWindowHandle& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::device::resource::IBitmap::Draw(const IWindow& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	GlobalDeviceContext render_context = GlobalDeviceContext();

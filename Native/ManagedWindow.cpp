@@ -202,7 +202,7 @@ noexcept
 {
 	const event_id_t msg = static_cast<event_id_t>(id);
 
-	device::IWindowHandle ctx{ std::move(hwnd) };
+	device::IWindow ctx{ std::move(hwnd) };
 
 	ManagedWindow* const& self = reinterpret_cast<ManagedWindow*>(ctx.GetInternalUserData());
 
