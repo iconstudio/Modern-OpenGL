@@ -14,6 +14,7 @@ export namespace gl::device
 	class IContext;
 	class DeviceContext;
 	class CompatibleContext;
+	class RenderingContext;
 	class Colour;
 	class IWindowHandle;
 }
