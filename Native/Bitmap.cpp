@@ -9,6 +9,34 @@ import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.CompatibleBitmap;
 
 gl::device::resource::Bitmap
+gl::device::resource::Bitmap::Load(const FilePath& path)
+noexcept
+{
+	//auto handle = ::LoadBitmap(nullptr, path.c_str());
+}
+
+bool
+gl::device::resource::Bitmap::TryLoad(const FilePath& path, Bitmap& output)
+noexcept
+{
+	return false;
+}
+
+gl::device::resource::Bitmap
+gl::device::resource::Bitmap::Load(const int& id)
+noexcept
+{
+	return Bitmap();
+}
+
+bool
+gl::device::resource::Bitmap::TryLoad(const int& id, Bitmap& output)
+noexcept
+{
+	return false;
+}
+
+gl::device::resource::Bitmap
 gl::device::resource::Bitmap::Copy(const IContext& context)
 const noexcept
 {
