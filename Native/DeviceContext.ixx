@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Context;
 import <type_traits>;
 import Glib.Device.Definitions;
