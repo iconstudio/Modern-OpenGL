@@ -10,15 +10,9 @@ export namespace gl::device
 	public:
 		using base = IContext;
 
-		explicit constexpr DeviceContext(const handle_type& hdc) noexcept
-			: base(hdc)
-		{}
+		DeviceContext(const native::HWND& window) noexcept;
 
-		constexpr DeviceContext(handle_type&& handle) noexcept
-			: base(std::move(handle))
-		{}
-
-		constexpr DeviceContext(base&& handle) noexcept
+		explicit constexpr DeviceContext(handle_type&& handle) noexcept
 			: base(std::move(handle))
 		{}
 
