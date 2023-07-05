@@ -2,6 +2,7 @@ module;
 module Glib.Window.ManagedWindow;
 import <exception>;
 import Glib.Device.Utility;
+import Glib.Device.Context.Renderer;
 
 gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
@@ -207,6 +208,14 @@ noexcept
 
 	switch (msg)
 	{
+		case event_id_t::Paint:
+		{
+			device::RenderingContext render_ctx = ctx.AcquireRenderContext();
+
+			device::native::PaintStruct& ps = render_ctx.GetStatus();
+		}
+		break;
+
 		case gl::device::kb::Pressed:
 		{
 			std::printf("[Key Pressed] %lld\n", wparam);
