@@ -59,7 +59,7 @@ const noexcept
 
 	::SelectObject(current, previous);
 
-	output = IBitmap(bitmap);
+	output = IBitmap(std::move(bitmap));
 
 	return true;
 }
