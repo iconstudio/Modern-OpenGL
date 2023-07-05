@@ -2,9 +2,10 @@ module;
 #include "Internal.hpp"
 
 module Glib.Device.Resource.IBitmap;
+import Glib.Device.Resource.CompatibleBitmap;
+import Glib.Device.IWindowHandle;
 import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
-import Glib.Device.Resource.CompatibleBitmap;
 
 gl::device::resource::IBitmap
 gl::device::resource::IBitmap::Copy(const IContext& context)

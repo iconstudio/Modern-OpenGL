@@ -5,7 +5,6 @@ export module Glib.Device.Resource.IBitmap;
 import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IGraphics;
-import Glib.Device.IWindowHandle;
 import Glib.Device.IContext;
 import Glib.Device.Colour;
 
