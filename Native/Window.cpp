@@ -69,6 +69,13 @@ noexcept
 	return *this;
 }
 
+bool
+gl::window::Window::Destroy()
+noexcept
+{
+	return myHandle.Destroy();
+}
+
 void
 gl::window::Window::Swap(Window& other)
 noexcept
@@ -357,11 +364,3 @@ const noexcept
 
 	return ok;
 }
-
-bool
-gl::window::Window::Destroy()
-noexcept
-{
-	return myHandle.Destroy();
-}
-
