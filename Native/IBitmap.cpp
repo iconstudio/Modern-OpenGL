@@ -83,17 +83,13 @@ const noexcept
 		return false;
 	}
 
-	IContext window_context = window_handle.AcquireNativeContext();
+	DeviceContext window_context = window_handle.AcquireContext();
 	if (nullptr == window_context)
 	{
 		return false;
 	}
 
-	bool result = Draw(render_context, window_context, x, y, srcx, srcy);
-
-	window_handle.ReleaseNativeContext(window_context);
-
-	return result;
+	return Draw(render_context, window_context, x, y, srcx, srcy);
 }
 
 bool
