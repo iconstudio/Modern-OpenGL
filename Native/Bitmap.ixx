@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
 import Glib.Definitions;
@@ -10,9 +7,6 @@ export namespace gl::device::resource
 {
 	class [[nodiscard]] Bitmap : public IBitmap
 	{
-	protected:
-		Bitmap(native::RawBitmap&&) noexcept;
-
 	public:
 		using base = IBitmap;
 
@@ -42,8 +36,10 @@ export namespace gl::device::resource
 			return nullptr == GetHandle();
 		}
 
+	protected:
+		Bitmap(native::RawBitmap&&) noexcept;
+
 	private:
-		::BITMAP data;
 		void* myBuffer;
 	};
 }
