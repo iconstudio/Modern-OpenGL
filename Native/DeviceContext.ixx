@@ -26,4 +26,39 @@ export namespace gl::device
 	private:
 		native::HWND myWindowHandle;
 	};
+
+	class [[nodiscard]] GlobalDeviceContext
+	{
+	public:
+		GlobalDeviceContext() noexcept;
+		~GlobalDeviceContext() noexcept;
+
+		constexpr operator DeviceContext& () & noexcept
+		{
+			return myContext;
+		}
+
+		constexpr operator const DeviceContext& () const& noexcept
+		{
+			return myContext;
+		}
+
+		constexpr operator DeviceContext && () && noexcept
+		{
+			return std::move(myContext);
+		}
+
+		constexpr operator const DeviceContext && () const&& noexcept
+		{
+			return std::move(myContext);
+		}
+
+		GlobalDeviceContext(const GlobalDeviceContext&) = delete;
+		GlobalDeviceContext(GlobalDeviceContext&&) = delete;
+		GlobalDeviceContext& operator=(const GlobalDeviceContext&) = delete;
+		GlobalDeviceContext& operator=(GlobalDeviceContext&&) = delete;
+
+	private:
+		DeviceContext myContext;
+	};
 }

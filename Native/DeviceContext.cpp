@@ -13,3 +13,14 @@ noexcept
 {
 	Release(myWindowHandle);
 }
+
+gl::device::GlobalDeviceContext::GlobalDeviceContext()
+noexcept
+	: myContext((native::HWND)(nullptr))
+{}
+
+gl::device::GlobalDeviceContext::~GlobalDeviceContext()
+noexcept
+{
+	myContext.Release();
+}
