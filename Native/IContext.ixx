@@ -16,7 +16,10 @@ export namespace gl::device
 
 		constexpr IContext(handle_type&& hdc) noexcept
 			: base(std::move(hdc))
+			, shouldDestroy(true)
 		{}
+
+		~IContext() noexcept;
 
 		IContext CreateCompatibleContext() const noexcept;
 		resource::IBitmap CreateCompatibleBitmap(const int& width, const int& height) const noexcept;
@@ -34,17 +37,20 @@ export namespace gl::device
 			return GetHandle();
 		}
 
-		constexpr operator native::NativeContext&& () && noexcept
+		constexpr operator native::NativeContext && () && noexcept
 		{
 			return std::move(GetHandle());
 		}
 
-		constexpr operator const native::NativeContext&& () const&& noexcept
+		constexpr operator const native::NativeContext && () const&& noexcept
 		{
 			return std::move(GetHandle());
 		}
 
 		IContext(const IContext&) = delete;
 		IContext& operator=(const IContext&) = delete;
+
+	private:
+		bool shouldDestroy = false;
 	};
 }

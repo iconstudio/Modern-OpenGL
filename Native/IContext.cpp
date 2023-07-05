@@ -3,6 +3,14 @@ module;
 module Glib.Device.IContext;
 import Glib.Device.Resource.IBitmap;
 
+gl::device::IContext::~IContext() noexcept
+{
+	if (shouldDestroy && nullptr != GetHandle())
+	{
+		Destroy();
+	}
+}
+
 gl::device::IContext
 gl::device::IContext::CreateCompatibleContext()
 const noexcept
