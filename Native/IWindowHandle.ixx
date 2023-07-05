@@ -38,7 +38,7 @@ export namespace gl::device
 
 		constexpr IWindowHandle& operator=(IWindowHandle&& other) noexcept
 		{
-			base::operator=(std::move(other));
+			base::operator=(std::exchange(other, nullptr));
 			return *this;
 		}
 
