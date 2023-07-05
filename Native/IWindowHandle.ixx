@@ -147,7 +147,7 @@ export namespace gl::device
 	}
 
 	[[nodiscard]]
-	native::HWND MakeNativeWindow(const ProcessInstance& hinst
+	IWindowHandle MakeNativeWindow(const ProcessInstance& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles

@@ -290,7 +290,7 @@ const noexcept
 	return 0 != Delegate(::GetWindowRect, &output);
 }
 
-gl::device::native::HWND
+gl::device::IWindowHandle
 gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	, const std::wstring_view& class_name
 	, const std::wstring_view& title
@@ -322,13 +322,8 @@ gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	{
 		::printf_s("DWMWA_USE_IMMERSIVE_DARK_MODE failed(%ld)\n", hr);
 	}
-
-	return result;
-}
-
-bool gl::device::UnregisterWindow(const ProcessInstance& hinst, const std::wstring_view& class_name)
-{
-	return 0 == ::UnregisterClass(class_name.data(), hinst.myHandle);
+	//
+	return IWindowHandle{ std::move(result) };//
 }
 
 void gl::device::PostQuitMessage(const int& exit_code) noexcept
