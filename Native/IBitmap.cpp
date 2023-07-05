@@ -2,6 +2,7 @@ module;
 #include "Internal.hpp"
 
 module Glib.Device.Resource.IBitmap;
+import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.CompatibleBitmap;
 
@@ -76,7 +77,7 @@ bool
 gl::device::resource::IBitmap::Draw(const IWindowHandle& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	IContext render_context = IWindowHandle{}.AcquireNativeContext();
+	GlobalDeviceContext render_context = GlobalDeviceContext();
 	if (nullptr == render_context)
 	{
 		return false;
@@ -91,7 +92,6 @@ const noexcept
 	bool result = Draw(render_context, window_context, x, y, srcx, srcy);
 
 	window_handle.ReleaseNativeContext(window_context);
-	IWindowHandle{}.ReleaseNativeContext(render_context);
 
 	return result;
 }
