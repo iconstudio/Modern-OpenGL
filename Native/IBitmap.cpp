@@ -1,6 +1,7 @@
 module;
 #include "Internal.hpp"
 module Glib.Device.Resource.IBitmap;
+import Glib.Device.CompatibleContext;
 
 gl::device::resource::IBitmap
 gl::device::resource::IBitmap::Copy(const IContext& context)
@@ -27,7 +28,7 @@ const noexcept
 	}
 
 	// Automatic Destroy
-	IContext current = context.CreateCompatibleContext();
+	CompatibleContext current = context.CreateCompatibleContext();
 	if (nullptr == current)
 	{
 		return false;
