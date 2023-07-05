@@ -229,6 +229,7 @@
     <ClCompile Include="src\IWindowHandle.cpp" />
     <ClCompile Include="src\RenderingContext.cpp" />
     <ClCompile Include="src\RenderingContext.ixx" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowFactory.ixx" />

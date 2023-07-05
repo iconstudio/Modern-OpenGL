@@ -221,5 +221,8 @@
     <ClCompile Include="src\RenderingContext.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
