@@ -5,7 +5,7 @@ import Glib.Device.IHandle;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] Palette
+	class [[nodiscard]] Palette : public IHandle<native::RawPalette>
 	{
 	public:
 	};
