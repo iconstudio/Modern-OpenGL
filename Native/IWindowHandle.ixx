@@ -2,6 +2,7 @@ export module Glib.Device.IWindowHandle;
 import <type_traits>;
 import <string>;
 import <string_view>;
+import Glib.Rect;
 import Glib.Definitions;
 import Glib.Device.ProcessInstance;
 import Glib.Device.IHandle;
@@ -92,8 +93,8 @@ export namespace gl::device
 		[[nodiscard]] long long GetInternalValue(int index) const noexcept;
 		[[nodiscard]] long long GetInternalUserData() const noexcept;
 
-		[[nodiscard]] native::NativeRect GetDimensions() const noexcept;
-		bool TryGetDimensions(native::NativeRect& output) const noexcept;
+		[[nodiscard]] Rect GetDimensions() const noexcept;
+		bool TryGetDimensions(Rect& output) const noexcept;
 
 		[[nodiscard]] bool IsMinimized() const noexcept;
 		[[nodiscard]] bool IsMaximized() const noexcept;
@@ -103,12 +104,6 @@ export namespace gl::device
 		IWindowHandle(const IWindowHandle&) = delete;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
 	};
-
-	[[nodiscard]]
-	constexpr native::NativeRect MakeNativeRect() noexcept
-	{
-		return {};
-	}
 
 	[[nodiscard]]
 	IWindowHandle MakeNativeWindow(const ProcessInstance& hinst

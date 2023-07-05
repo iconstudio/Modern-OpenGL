@@ -286,20 +286,38 @@ const noexcept
 	return result;
 }
 
-gl::device::native::NativeRect
+gl::Rect
 gl::device::IWindowHandle::GetDimensions()
 const noexcept
 {
 	native::NativeRect rect{};
 	Delegate(::GetWindowRect, &rect);
-	return rect;
+
+	return gl::Rect
+	{
+		rect.left,
+		rect.top,
+		rect.right - result.left,
+		rect.bottom - result.top
+	};
 }
 
 bool
-gl::device::IWindowHandle::TryGetDimensions(gl::device::native::NativeRect& output)
+gl::device::IWindowHandle::TryGetDimensions(gl::Rect& output)
 const noexcept
 {
-	return 0 != Delegate(::GetWindowRect, &output);
+	native::NativeRect rect{};
+	bool result = (0 != Delegate(::GetWindowRect, &rect));
+
+	output = gl::Rect
+	{
+		rect.left,
+		rect.top,
+		rect.right - result.left,
+		rect.bottom - result.top
+	};
+
+	return result;
 }
 
 gl::device::IWindowHandle
