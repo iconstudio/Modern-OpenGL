@@ -11,10 +11,7 @@ export namespace gl::device::resource
 	public:
 		using base = IBitmap;
 
-		constexpr CompatibleBitmap(handle_type&& handle) noexcept
-			: base(std::move(handle))
-		{}
-
+		CompatibleBitmap(handle_type&& handle) noexcept;
 		~CompatibleBitmap() noexcept;
 
 		explicit constexpr operator handle_type& () & noexcept
