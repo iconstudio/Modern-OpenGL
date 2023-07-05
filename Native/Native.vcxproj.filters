@@ -209,5 +209,11 @@
     <ClCompile Include="src\CompatibleContext.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\CompatibleBitmap.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CompatibleBitmap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
