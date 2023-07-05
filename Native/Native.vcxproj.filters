@@ -170,9 +170,6 @@
     <ClCompile Include="IGraphics.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Bitmap.ixx">
-      <Filter>헤더 파일\Device\GDI</Filter>
-    </ClCompile>
     <ClCompile Include="ColourBrush.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
@@ -184,9 +181,6 @@
     </ClCompile>
     <ClCompile Include="Palette.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
-    </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\IWindowHandle.cpp">
       <Filter>소스 파일</Filter>
