@@ -6,7 +6,7 @@ import Glib.Definitions;
 import Glib.Device.IHandle;
 import Glib.Device.IWindowHandle;
 import Glib.Device.IO;
-import Glib.Device.Event.API;
+import Glib.Device.Event;
 import Glib.Window.Property;
 export import :Style;
 export import :Option;
