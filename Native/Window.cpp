@@ -343,29 +343,12 @@ gl::Rect
 gl::window::Window::GetDimensions()
 const noexcept
 {
-	auto result = myHandle.GetDimensions();
-	return gl::Rect
-	{
-		result.left,
-			result.top,
-			result.right - result.left,
-			result.bottom - result.top
-	};
+	return myHandle.GetDimensions();
 }
 
 bool
 gl::window::Window::TryGetDimensions(gl::Rect& output)
 const noexcept
 {
-	auto result = gl::device::MakeNativeRect();
-	const bool ok = myHandle.TryGetDimensions(result);
-	if (ok)
-	{
-		output = gl::Rect
-		{
-			result.left, result.top, result.right - result.left, result.bottom - result.top
-		};
-	}
-
-	return ok;
+	return myHandle.TryGetDimensions(output);
 }
