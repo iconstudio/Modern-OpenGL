@@ -69,13 +69,6 @@ noexcept
 	return *this;
 }
 
-bool
-gl::window::Window::Destroy()
-noexcept
-{
-	return myHandle.Destroy();
-}
-
 void
 gl::window::Window::Swap(Window& other)
 noexcept
@@ -101,18 +94,12 @@ void
 gl::window::Window::Awake()
 noexcept
 {
+	base::StartUpdate();
 	Show();
 }
 
 void
 gl::window::Window::Start()
-noexcept
-{
-	myHandle.StartUpdate();
-}
-
-void
-gl::window::Window::UpdateLoop()
 noexcept
 {
 	while (UpdateOnce())
@@ -138,217 +125,16 @@ noexcept
 	return false;
 }
 
-bool
-gl::window::Window::SendCommand(const gl::device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs)
-const noexcept
-{
-	return myHandle.SendCommand(msg, lhs, rhs);
-}
-
-bool
-gl::window::Window::SendCommand(const gl::device::EventID& msg)
-const noexcept
-{
-	return SendCommand(msg, 0, 0);
-}
-
-bool
-gl::window::Window::SendCommand(const device::Event& cmd)
-const noexcept
-{
-	return myHandle.SendCommand(cmd);
-}
-
-bool
-gl::window::Window::SendCommand(device::Event&& cmd)
-const noexcept
-{
-	return myHandle.SendCommand(std::move(cmd));
-}
-
-bool
-gl::window::Window::SendCommand(const device::EventID& id, const int& keycode, const long long& flags)
-const noexcept
-{
-	return myHandle.SendCommand(id, keycode, flags);
-}
-
-bool
-gl::window::Window::SendCommand(const device::EventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags)
-const noexcept
-{
-	return myHandle.SendCommand(id, keycode, flags);
-}
-
-bool
-gl::window::Window::Show()
-noexcept
-{
-	return myHandle.Show();
-}
-
-bool
-gl::window::Window::Hide()
-noexcept
-{
-	return myHandle.Hide();
-}
-
-bool
-gl::window::Window::Maximize()
-noexcept
-{
-	return myHandle.Maximize();
-}
-
-bool
-gl::window::Window::Minimize()
-noexcept
-{
-	return myHandle.Minimize();
-}
-
-bool
-gl::window::Window::Restore()
-noexcept
-{
-	return myHandle.Restore();
-}
-
-bool
-gl::window::Window::Close()
-noexcept
-{
-	return myHandle.Close();
-}
-
-bool
-gl::window::Window::Redraw(const bool& flag)
-noexcept
-{
-	return myHandle.Redraw(flag);
-}
-
-bool
-gl::window::Window::EnableInput()
-noexcept
-{
-	return myHandle.EnableInput();
-}
-
-bool
-gl::window::Window::DisableInput()
-noexcept
-{
-	return myHandle.DisableInput();
-}
-
-bool
-gl::window::Window::IsMinimized()
-const noexcept
-{
-	return myHandle.IsMinimized();
-}
-
-bool
-gl::window::Window::IsMaximized()
-const noexcept
-{
-	return myHandle.IsMaximized();
-}
-
-bool
-gl::window::Window::IsRestored()
-const noexcept
-{
-	return myHandle.IsRestored();
-}
-
-bool
-gl::window::Window::IsInputEnabled()
-const noexcept
-{
-	return myHandle.IsInputEnabled();
-}
-
-int
-gl::window::Window::GetID()
-const noexcept
-{
-	return myHandle.GetID();
-}
-
-std::wstring gl::window::Window::GetTitle() const noexcept
-{
-	return myHandle.GetTitle();
-}
-
 gl::window::WindowStyle
 gl::window::Window::GetStyle()
 const noexcept
 {
-	return WindowStyle{ myHandle.GetStyle() };
+	return WindowStyle{ base::GetStyle() };
 }
 
 gl::window::WindowOption
 gl::window::Window::GetOption()
 const noexcept
 {
-	return WindowOption{ myHandle.GetExStyle() };
-}
-
-long long
-gl::window::Window::SetInternalValue(int index, const long long& value)
-const noexcept
-{
-	return myHandle.SetInternalValue(index, value);
-}
-
-long long
-gl::window::Window::SetInternalValue(int index, long long&& value)
-const noexcept
-{
-	return myHandle.SetInternalValue(index, std::move(value));
-}
-
-long long
-gl::window::Window::SetInternalUserData(const long long& value)
-const noexcept
-{
-	return myHandle.SetInternalUserData(value);
-}
-
-long long
-gl::window::Window::SetInternalUserData(long long&& value)
-const noexcept
-{
-	return myHandle.SetInternalUserData(std::move(value));
-}
-
-long long
-gl::window::Window::GetInternalValue(int index)
-const noexcept
-{
-	return myHandle.GetInternalValue(index);
-}
-
-long long
-gl::window::Window::GetInternalUserData()
-const noexcept
-{
-	return myHandle.GetInternalUserData();
-}
-
-gl::Rect
-gl::window::Window::GetDimensions()
-const noexcept
-{
-	return myHandle.GetDimensions();
-}
-
-bool
-gl::window::Window::TryGetDimensions(gl::Rect& output)
-const noexcept
-{
-	return myHandle.TryGetDimensions(output);
+	return WindowOption{ base::GetExStyle() };
 }
