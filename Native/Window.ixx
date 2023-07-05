@@ -335,9 +335,9 @@ export extern "C++" namespace gl::window
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
 
-		device::ProcessInstance myInstance = nullptr;
-		device::DeviceHandle myHandle = nullptr;
-		WindowProcedure myProcedure = nullptr;
+	protected:
+		device::ProcessInstance myInstance;
+		WindowProcedure myProcedure;
 		const wchar_t* myClassName = nullptr;
 	};
 }
