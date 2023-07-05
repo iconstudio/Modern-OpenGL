@@ -297,8 +297,8 @@ const noexcept
 	{
 		rect.left,
 		rect.top,
-		rect.right - result.left,
-		rect.bottom - result.top
+		rect.right - rect.left,
+		rect.bottom - rect.top
 	};
 }
 
@@ -313,8 +313,8 @@ const noexcept
 	{
 		rect.left,
 		rect.top,
-		rect.right - result.left,
-		rect.bottom - result.top
+		rect.right - rect.left,
+		rect.bottom - rect.top
 	};
 
 	return result;
