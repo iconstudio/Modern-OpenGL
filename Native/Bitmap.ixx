@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
 import Glib.Definitions;
