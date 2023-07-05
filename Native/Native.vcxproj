@@ -195,8 +195,8 @@
     <ClCompile Include="Event.ixx" />
     <ClCompile Include="EventAPI.ixx" />
     <ClCompile Include="EventID.ixx" />
-    <ClCompile Include="IBitmap.cpp" />
-    <ClCompile Include="IBitmap.ixx" />
+    <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="Bitmap.ixx" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Icon.ixx" />
     <ClCompile Include="IContext.cpp" />
@@ -204,7 +204,7 @@
     <ClCompile Include="IGraphics.ixx" />
     <ClCompile Include="IHandle.ixx" />
     <ClCompile Include="IContext.ixx" />
-    <ClCompile Include="IWindowHandle.ixx" />
+    <ClCompile Include="IWindow.ixx" />
     <ClCompile Include="Keyboard.ixx" />
     <ClCompile Include="KeyboardFlags.ixx" />
     <ClCompile Include="Keycodes.ixx" />
