@@ -14,7 +14,6 @@ export namespace gl::device
 	class IContext;
 	class DeviceContext;
 	class CompatibleContext;
-	class CompatibleBitmap;
 	class Colour;
 	class IWindowHandle;
 }
@@ -26,6 +25,7 @@ export namespace gl::device::resource
 	class ColorBrush;
 	class Pen;
 	class Bitmap;
+	class CompatibleBitmap;
 	class Icon;
 }
 
