@@ -11,6 +11,7 @@ export namespace gl::device
 
 export namespace gl::device
 {
+	class ProcessInstance;
 	class IContext;
 	class DeviceContext;
 	class CompatibleContext;
