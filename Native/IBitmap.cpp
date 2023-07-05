@@ -42,27 +42,17 @@ const noexcept
 	}
 
 	void* previous = ::SelectObject(current, bitmap);
-	if (nullptr == previous)
-	{
-		return false;
-	}
 
-	if (0 == ::BitBlt(current
+	bool result = (0 == ::BitBlt(current
 		, 0, 0, cachedWidth, cachedHeight
 		, context, 0, 0
-		, SRCCOPY))
-	{
-		::SelectObject(current, previous);
-		::DeleteObject(bitmap);
-
-		return false;
-	}
+		, SRCCOPY));
 
 	::SelectObject(current, previous);
 
 	output = IBitmap(std::move(bitmap));
 
-	return true;
+	return result;
 }
 
 bool
