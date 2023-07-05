@@ -290,7 +290,7 @@ const noexcept
 	return 0 != Delegate(::GetWindowRect, &output);
 }
 
-HWND__*
+gl::device::native::HWND
 gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	, const std::wstring_view& class_name
 	, const std::wstring_view& title
@@ -298,12 +298,12 @@ gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	, const unsigned long& options
 	, const int& x, const int& y
 	, const int& width, const int& height
-	, const HWND& parent
-	, const HMENU& menu
+	, const native::HWND& parent
+	, const native::NativeMenu& menu
 	, void* uparams
 ) noexcept
 {
-	HWND result = ::CreateWindowEx(options
+	gl::device::native::HWND result = ::CreateWindowEx(options
 	, class_name.data(), title.data()
 	, styles, x, y, width, height
 	, parent

@@ -1,6 +1,3 @@
-module;
-#include "Internal.hpp"
-
 export module Glib.Device.IWindowHandle;
 import <type_traits>;
 import <string_view>;
@@ -151,7 +148,7 @@ export namespace gl::device
 	}
 
 	[[nodiscard]]
-	HWND__* MakeNativeWindow(const ProcessInstance& hinst
+	native::HWND MakeNativeWindow(const ProcessInstance& hinst
 		, const std::wstring_view& class_name
 		, const std::wstring_view& title
 		, const unsigned long& styles
@@ -160,8 +157,8 @@ export namespace gl::device
 		, const int& y
 		, const int& width
 		, const int& height
-		, const HWND& parent = nullptr
-		, const HMENU& menu = nullptr
+		, const native::HWND& parent = nullptr
+		, const native::NativeMenu& menu = nullptr
 		, void* uparams = nullptr)
 		noexcept;
 
