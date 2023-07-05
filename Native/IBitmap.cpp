@@ -3,6 +3,7 @@ module;
 
 module Glib.Device.Resource.IBitmap;
 import Glib.Device.CompatibleContext;
+import Glib.Device.Resource.CompatibleBitmap;
 
 gl::device::resource::IBitmap
 gl::device::resource::IBitmap::Copy(const IContext& context)
@@ -36,13 +37,13 @@ const noexcept
 	}
 
 	// Automatic Destroy
-	IBitmap bitmap = current.CreateCompatibleBitmap(cachedWidth, cachedHeight);
+	CompatibleBitmap bitmap = current.CreateCompatibleBitmap(cachedWidth, cachedHeight);
 	if (nullptr == bitmap)
 	{
 		return false;
 	}
 
-	void* previous = ::SelectObject(current, bitmap);
+	void* previous = ::SelectObject(current, bitmap.GetHandle());
 
 	bool result = (0 == ::BitBlt(current
 		, 0, 0, cachedWidth, cachedHeight
