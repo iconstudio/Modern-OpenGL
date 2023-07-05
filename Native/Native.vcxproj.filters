@@ -152,9 +152,6 @@
     <ClCompile Include="Pen.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="IBitmap.ixx">
-      <Filter>헤더 파일\Device\Interfaces</Filter>
-    </ClCompile>
     <ClCompile Include="IHandle.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
@@ -217,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>헤더 파일\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="IBitmap.ixx">
+      <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
