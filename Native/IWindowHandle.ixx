@@ -11,10 +11,10 @@ export namespace gl::device
 {
 	using native::HWND;
 
-	class [[nodiscard]] IWindowHandle : public IHandle<HWND>
+	class [[nodiscard]] IWindowHandle : public IHandle<native::HWND>
 	{
 	public:
-		using base = IHandle<HWND>;
+		using base = IHandle<native::HWND>;
 		using handle_type = base::handle_type;
 
 		constexpr IWindowHandle() noexcept = default;
