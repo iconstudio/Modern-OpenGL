@@ -13,13 +13,16 @@ export namespace gl::device
 		RenderingContext(const native::HWND& handle) noexcept;
 		~RenderingContext() noexcept;
 
+		native::PaintStruct& GetStatus() noexcept;
+		const native::PaintStruct& GetStatus() const noexcept;
+
 		RenderingContext(const RenderingContext&) = delete;
 		RenderingContext(RenderingContext&&) = delete;
 		RenderingContext& operator=(const RenderingContext&) = delete;
 		RenderingContext& operator=(RenderingContext&&) = delete;
 
 	private:
-		native::HWND myWindowHandle;
-		native::PaintStruct myStatus;
+		native::HWND myWindowHandle = nullptr;
+		native::PaintStruct myStatus{};
 	};
 }
