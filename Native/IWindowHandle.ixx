@@ -103,7 +103,7 @@ export namespace gl::device
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
 
 	private:
-		wchar_t titleBuffer[256]{};
+		wchar_t titleBuffer[128]{};
 	};
 
 	[[nodiscard]]
