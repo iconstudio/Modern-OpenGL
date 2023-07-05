@@ -5,6 +5,7 @@ module;
 module Glib.Device.IWindowHandle;
 import Glib.Device.Event.API;
 import Glib.Device.Context;
+import Glib.Device.Context.Renderer;
 
 bool
 gl::device::IWindowHandle::StartUpdate()
@@ -154,11 +155,11 @@ const noexcept
 	return GetHandle();
 }
 
-gl::device::DeviceContext
+gl::device::RenderingContext
 gl::device::IWindowHandle::AcquireRenderContext()
 const noexcept
 {
-	return nullptr;
+	return RenderingContext{ GetHandle() };
 }
 
 bool
