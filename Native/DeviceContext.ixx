@@ -24,41 +24,13 @@ export namespace gl::device
 		native::HWND myWindowHandle;
 	};
 
-	class [[nodiscard]] GlobalDeviceContext
+	class [[nodiscard]] GlobalDeviceContext : public IContext
 	{
 	public:
+		using base = IContext;
+
 		GlobalDeviceContext() noexcept;
 		~GlobalDeviceContext() noexcept;
-
-		constexpr bool operator==(nullptr_t) const noexcept
-		{
-			return myContext == nullptr;
-		}
-
-		constexpr bool operator==(const GlobalDeviceContext& other) const noexcept
-		{
-			return myContext == other.myContext;
-		}
-
-		constexpr operator DeviceContext& () & noexcept
-		{
-			return myContext;
-		}
-
-		constexpr operator const DeviceContext& () const& noexcept
-		{
-			return myContext;
-		}
-
-		constexpr operator DeviceContext && () && noexcept
-		{
-			return std::move(myContext);
-		}
-
-		constexpr operator const DeviceContext && () const&& noexcept
-		{
-			return std::move(myContext);
-		}
 
 		GlobalDeviceContext(const GlobalDeviceContext&) = delete;
 		GlobalDeviceContext(GlobalDeviceContext&&) = delete;
@@ -66,6 +38,8 @@ export namespace gl::device
 		GlobalDeviceContext& operator=(GlobalDeviceContext&&) = delete;
 
 	private:
-		DeviceContext myContext;
+		using base::Destroy;
+		using base::Release;
+		using base::operator=;
 	};
 }

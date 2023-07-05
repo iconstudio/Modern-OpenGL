@@ -14,13 +14,11 @@ noexcept
 	Release(myWindowHandle);
 }
 
-gl::device::GlobalDeviceContext::GlobalDeviceContext()
-noexcept
-	: myContext(static_cast<native::HWND>(nullptr))
+gl::device::GlobalDeviceContext::GlobalDeviceContext() noexcept
+	: base(::GetDC(nullptr))
 {}
 
-gl::device::GlobalDeviceContext::~GlobalDeviceContext()
-noexcept
+gl::device::GlobalDeviceContext::~GlobalDeviceContext() noexcept
 {
-	myContext.Release();
+	Release(nullptr);
 }
