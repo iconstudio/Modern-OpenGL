@@ -26,46 +26,41 @@ const noexcept
 		return false;
 	}
 
-	native::NativeContext memory = context.Delegate(::CreateCompatibleDC);
-	if (nullptr == memory)
+	// Automatic Destroy
+	IContext current = context.CreateCompatibleContext();
+	if (nullptr == current)
 	{
 		return false;
 	}
 
-	native::RawBitmap bitmap = ::CreateCompatibleBitmap(memory, cachedWidth, cachedHeight);
+	// Automatic Destroy
+	IBitmap bitmap = current.CreateCompatibleBitmap(cachedWidth, cachedHeight);
 	if (nullptr == bitmap)
 	{
-		::DeleteDC(memory);
-
 		return false;
 	}
 
-	void* previous = ::SelectObject(memory, bitmap);
+	void* previous = ::SelectObject(current, bitmap);
 	if (nullptr == previous)
 	{
-		::DeleteObject(bitmap);
-		::DeleteDC(memory);
-
 		return false;
 	}
 
-	if (0 == ::BitBlt(memory
+	if (0 == ::BitBlt(current
 		, 0, 0, cachedWidth, cachedHeight
 		, context, 0, 0
 		, SRCCOPY))
 	{
-		::SelectObject(memory, previous);
+		::SelectObject(current, previous);
 		::DeleteObject(bitmap);
-		::DeleteDC(memory);
 
 		return false;
 	}
 
-	::SelectObject(memory, previous);
+	::SelectObject(current, previous);
 
 	output = IBitmap(bitmap);
 
-	::DeleteDC(memory);
 	return true;
 }
 
