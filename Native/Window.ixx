@@ -26,18 +26,7 @@ export extern "C++" namespace gl::window
 			, const int& y
 			, const int& width
 			, const int& height
-		) noexcept
-			: myInstance(properties.GetInstance())
-			, myClassName(properties.GetClass())
-			, myProcedure(properties.GetProcedure())
-		{
-			myHandle = device::MakeNativeWindow(properties.GetInstance().myHandle
-				, properties.GetClass()
-				, title
-				, Export(style), Export(option)
-				, x, y, width, height);
-		}
-
+		) noexcept;
 		explicit Window(WindowProperty&& properties
 			, const std::wstring_view& title
 			, const WindowStyle& style
@@ -46,266 +35,58 @@ export extern "C++" namespace gl::window
 			, const int& y
 			, const int& width
 			, const int& height
-		) noexcept
-			: myInstance(std::move(properties).GetInstance())
-			, myClassName(std::move(properties).GetClass())
-			, myProcedure(std::move(properties).GetProcedure())
-		{
-			myHandle = device::MakeNativeWindow(myInstance.myHandle
-				, myClassName
-				, title
-				, Export(style), Export(option)
-				, x, y, width, height);
-		}
+		) noexcept;
 
-		~Window() noexcept
-		{
-			if (nullptr != myClassName && nullptr != myHandle.GetHandle())
-			{
-				device::UnregisterWindow(myInstance, myClassName);
-			}
-		}
+		Window(nullptr_t) noexcept;
+		Window(Window&& other) noexcept;
+		Window& operator=(Window&& other) noexcept;
+		~Window() noexcept;
 
-		void Awake() noexcept
-		{
-			Show();
-		}
+		void Awake() noexcept;
+		void Start() noexcept;
+		void UpdateLoop() noexcept;
+		bool UpdateOnce() noexcept;
+		bool Destroy() noexcept;
+		void Swap(Window& other) noexcept;
 
-		void Start() noexcept
-		{
-			myHandle.StartUpdate();
-		}
+		bool SendCommand(const device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs) const noexcept;
+		bool SendCommand(const device::EventID& msg) const noexcept;
+		bool SendCommand(const device::Event& cmd) const noexcept;
+		bool SendCommand(device::Event&& cmd) const noexcept;
+		bool SendCommand(const device::EventID& id, const int& keycode, const long long& flags = 0) const noexcept;
+		bool SendCommand(const device::EventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags = device::io::KeyboardFlag::None) const noexcept;
 
-		[[noreturn]]
-		void UpdateLoop() noexcept
-		{
-			while (UpdateOnce())
-			{}
-		}
+		bool Show() noexcept;
+		bool Hide() noexcept;
+		bool Maximize() noexcept;
+		bool Minimize() noexcept;
+		bool Restore() noexcept;
+		bool Close() noexcept;
 
-		bool UpdateOnce() noexcept
-		{
-			device::RawEvent event = device::EventAPI::MakeEvent();
+		bool Redraw(const bool& flag) noexcept;
 
-			if (device::EventAPI::Pop(myHandle, event))
-			{
-				if (!device::EventAPI::Translate(event))
-				{
-				}
+		bool EnableInput() noexcept;
+		bool DisableInput() noexcept;
 
-				device::EventAPI::Dispatch(event);
-				return true;
-			}
+		[[nodiscard]] bool IsMinimized() const noexcept;
+		[[nodiscard]] bool IsMaximized() const noexcept;
+		[[nodiscard]] bool IsRestored() const noexcept;
+		[[nodiscard]] bool IsInputEnabled() const noexcept;
 
-			return false;
-		}
+		[[nodiscard]] int GetID() const noexcept;
 
-		bool SendCommand(const device::EventID& msg, const unsigned long long& lhs, const unsigned long& rhs) const
-			noexcept
-		{
-			return myHandle.SendCommand(msg, lhs, rhs);
-		}
+		[[nodiscard]] WindowStyle GetStyle() const noexcept;
+		[[nodiscard]] WindowOption GetOption() const noexcept;
 
-		bool SendCommand(const device::EventID& msg) const
-			noexcept
-		{
-			return SendCommand(msg, 0, 0);
-		}
+		long long SetInternalValue(int index, const long long& value) const noexcept;
+		long long SetInternalValue(int index, long long&& value) const noexcept;
+		long long SetInternalUserData(const long long& value) const noexcept;
+		long long SetInternalUserData(long long&& value) const noexcept;
+		[[nodiscard]] long long GetInternalValue(int index) const noexcept;
+		[[nodiscard]] long long GetInternalUserData() const noexcept;
 
-		bool SendCommand(const device::Event& cmd) const
-			noexcept
-		{
-			return myHandle.SendCommand(cmd);
-		}
-
-		bool SendCommand(device::Event&& cmd) const
-			noexcept
-		{
-			return myHandle.SendCommand(static_cast<device::Event&&>(cmd));
-		}
-
-		bool SendCommand(const device::EventID& id, const int& keycode, const long long& flags = 0) const
-			noexcept
-		{
-			return myHandle.SendCommand(id, keycode, flags);
-		}
-
-		bool SendCommand(const device::EventID& id, const device::io::KeyCode& keycode, const device::io::KeyboardFlag& flags = device::io::KeyboardFlag::None) const
-			noexcept
-		{
-			return myHandle.SendCommand(id, keycode, flags);
-		}
-
-		bool Show() noexcept
-		{
-			return myHandle.Show();
-		}
-
-		bool Hide() noexcept
-		{
-			return myHandle.Hide();
-		}
-
-		bool Maximize() noexcept
-		{
-			return myHandle.Maximize();
-		}
-
-		bool Minimize() noexcept
-		{
-			return myHandle.Minimize();
-		}
-
-		bool Restore() noexcept
-		{
-			return myHandle.Restore();
-		}
-
-		bool Redraw(const bool& flag) noexcept
-		{
-			return myHandle.Redraw(flag);
-		}
-
-		bool EnableInput() noexcept
-		{
-			return myHandle.EnableInput();
-		}
-
-		bool DisableInput() noexcept
-		{
-			return myHandle.DisableInput();
-		}
-
-		bool Close() noexcept
-		{
-			return myHandle.Close();
-		}
-
-		constexpr void Swap(Window& other) noexcept
-		{
-			std::swap(myHandle, other.myHandle);
-			std::swap(myInstance, other.myInstance);
-			std::swap(myClassName, other.myClassName);
-			std::swap(myProcedure, other.myProcedure);
-		}
-
-		[[nodiscard]]
-		bool IsMinimized() const noexcept
-		{
-			return myHandle.IsMinimized();
-		}
-
-		[[nodiscard]]
-		bool IsMaximized() const noexcept
-		{
-			return myHandle.IsMaximized();
-		}
-
-		[[nodiscard]]
-		bool IsRestored() const noexcept
-		{
-			return myHandle.IsRestored();
-		}
-
-		[[nodiscard]]
-		bool IsInputEnabled() const noexcept
-		{
-			return myHandle.IsInputEnabled();
-		}
-
-		inline long long SetInternalValue(int index, const long long& value) const noexcept
-		{
-			return myHandle.SetInternalValue(index, value);
-		}
-
-		inline long long SetInternalValue(int index, long long&& value) const noexcept
-		{
-			return myHandle.SetInternalValue(index, std::move(value));
-		}
-
-		inline long long SetInternalUserData(const long long& value) const noexcept
-		{
-			return myHandle.SetInternalUserData(value);
-		}
-
-		inline long long SetInternalUserData(long long&& value) const noexcept
-		{
-			return myHandle.SetInternalUserData(std::move(value));
-		}
-
-		[[nodiscard]]
-		inline long long GetInternalValue(int index) const noexcept
-		{
-			return myHandle.GetInternalValue(index);
-		}
-
-		[[nodiscard]]
-		inline long long GetInternalUserData() const noexcept
-		{
-			return myHandle.GetInternalUserData();
-		}
-
-		[[nodiscard]]
-		WindowStyle GetStyle() const noexcept
-		{
-			return WindowStyle{ myHandle.GetStyle() };
-		}
-
-		/// <summary>
-		/// GetExStyle
-		/// </summary>
-		[[nodiscard]]
-		WindowOption GetOption() const noexcept
-		{
-			return WindowOption{ myHandle.GetExStyle() };
-		}
-
-		[[nodiscard]]
-		int GetID() const noexcept
-		{
-			return myHandle.GetID();
-		}
-
-		[[nodiscard]]
-		Rect GetDimensions() const noexcept
-		{
-			auto result = myHandle.GetDimensions();
-			return Rect
-			{
-				result.left,
-				result.top,
-				result.right - result.left,
-				result.bottom - result.top
-			};
-		}
-
-		[[nodiscard]]
-		bool TryGetDimensions(Rect& output) const noexcept
-		{
-			auto result = device::MakeNativeRect();
-			const bool ok = myHandle.TryGetDimensions(result);
-			if (ok)
-			{
-				output = Rect
-				{
-					result.left, result.top, result.right - result.left, result.bottom - result.top
-				};
-			}
-
-			return ok;
-		}
-
-		[[nodiscard]]
-		constexpr const device::DeviceHandle& GetHandle() const& noexcept
-		{
-			return myHandle;
-		}
-
-		[[nodiscard]]
-		constexpr device::DeviceHandle&& GetHandle() && noexcept
-		{
-			return static_cast<device::DeviceHandle&&>(myHandle);
-		}
+		[[nodiscard]] Rect GetDimensions() const noexcept;
+		bool TryGetDimensions(Rect& output) const noexcept;
 
 		[[nodiscard]]
 		constexpr const wchar_t* const& GetClassName() const& noexcept
@@ -317,19 +98,6 @@ export extern "C++" namespace gl::window
 		constexpr const wchar_t*&& GetClassName() && noexcept
 		{
 			return static_cast<const wchar_t*&&>(myClassName);
-		}
-
-		constexpr Window(Window&& other) noexcept
-			: myInstance(std::exchange(other.myInstance, nullptr))
-			, myHandle(std::exchange(other.myHandle, nullptr))
-			, myProcedure(std::exchange(other.myProcedure, nullptr))
-			, myClassName(std::exchange(other.myClassName, nullptr))
-		{}
-
-		constexpr Window& operator=(Window&& other) noexcept
-		{
-			other.Swap(*this);
-			return *this;
 		}
 
 		Window(const Window&) = delete;
