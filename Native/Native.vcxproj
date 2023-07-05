@@ -184,6 +184,7 @@
     <ClCompile Include="Colour.ixx" />
     <ClCompile Include="ColourBrush.cpp" />
     <ClCompile Include="ColourBrush.ixx" />
+    <ClCompile Include="CompatibleContext.ixx" />
     <ClCompile Include="ComponentBrush.cpp" />
     <ClCompile Include="ComponentBrush.ixx" />
     <ClCompile Include="Definitions.ixx" />
@@ -222,6 +223,7 @@
     <ClCompile Include="RawEvent.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="SpecialEvent.ixx" />
+    <ClCompile Include="src\CompatibleContext.cpp" />
     <ClCompile Include="src\IWindowHandle.cpp" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />

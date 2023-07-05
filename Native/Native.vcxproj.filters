@@ -203,5 +203,11 @@
     <ClCompile Include="Definitions.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CompatibleContext.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CompatibleContext.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
