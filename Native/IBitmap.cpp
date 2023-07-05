@@ -98,7 +98,7 @@ noexcept
 {
 	if (nullptr != GetHandle())
 	{
-		bool result = 0 != Delegate(::DeleteObject);
+		const bool result = 0 != Delegate(::DeleteObject);
 		base::operator=(nullifier);
 
 		return result;
@@ -130,14 +130,14 @@ bool
 gl::device::resource::Bitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
-	HGDIOBJ previous = window_context.Delegate(::SelectObject, GetHandle());
+	auto previous = window_context.Select(*this);
 
-	bool result = (0 == ::BitBlt(window_context
+	const bool result = (0 == ::BitBlt(window_context
 		, x, y, cachedWidth, cachedHeight
 		, render_context
 		, srcx, srcy, SRCCOPY));
 
-	window_context.Delegate(::SelectObject, previous);
+	window_context.Select(previous);
 
 	return result;
 }
