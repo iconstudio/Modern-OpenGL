@@ -11,11 +11,6 @@ import Glib.Device.Colour;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] ImageFactory
-	{
-	public:
-	};
-
 	/// <summary>
 	/// Bitmap Viewer
 	/// </summary>
