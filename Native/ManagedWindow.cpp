@@ -218,10 +218,15 @@ noexcept
 
 		case gl::device::kb::Pressed:
 		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
 			std::printf("[Key Pressed] %lld\n", wparam);
+			}
+
 			if (auto& key_dw_handler = self->keyDownHandler; key_dw_handler)
 			{
-				key_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
+				key_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), is_first);
 			}
 		}
 		break;
@@ -238,10 +243,15 @@ noexcept
 
 		case gl::device::kb::AltPressed:
 		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
 			std::printf("[System Key Pressed] %lld\n", wparam);
+			}
+
 			if (auto& sys_dw_handler = self->sysDownHandler; sys_dw_handler)
 			{
-				sys_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), device::io::IsFirstPress(lparam));
+				sys_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), is_first);
 			}
 		}
 		break;
@@ -259,7 +269,12 @@ noexcept
 		case gl::device::kb::CharPressed:
 		case gl::device::kb::AltCharPressed:
 		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
 			std::printf("[Chr Pressed] %lld\n", wparam);
+			}
+
 			if (auto& chr_dw_handler = self->chrDownHandler; chr_dw_handler)
 			{
 				chr_dw_handler(*self, static_cast<char32_t>(wparam), lparam);
