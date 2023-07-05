@@ -45,7 +45,6 @@ noexcept
 	}
 
 	underlying.Awake();
-	underlying.Start();
 
 	return managed_window::AwakeResult::Success;
 }
@@ -192,7 +191,7 @@ noexcept
 {
 	if (is_first && code == device::io::KeyCode::F4)
 	{
-		self.underlying.SendCommand(event_id_t::Close);
+		self.underlying.SendCommand(event_id_t::Close, 0, 0);
 	}
 }
 
