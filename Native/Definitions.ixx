@@ -12,6 +12,9 @@ export namespace gl::device
 export namespace gl::device
 {
 	class IContext;
+	class DeviceContext;
+	class IWindowHandle;
+	class DeviceContext;
 	class Colour;
 }
 
