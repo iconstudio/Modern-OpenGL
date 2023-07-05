@@ -13,10 +13,10 @@ export namespace gl::device
 {
 	class IContext;
 	class DeviceContext;
-	class IWindowHandle;
-	class DeviceContext;
 	class CompatibleContext;
+	class CompatibleBitmap;
 	class Colour;
+	class IWindowHandle;
 }
 
 export namespace gl::device::resource
