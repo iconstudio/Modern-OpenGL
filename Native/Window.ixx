@@ -2,13 +2,12 @@ export module Glib.Window;
 import <type_traits>;
 import <string_view>;
 import Glib.Rect;
-import Glib.Device.ProcessInstance;
-import Glib.Device.Handle;
-import Glib.Device.Event;
+import Glib.Definitions;
+import Glib.Device.IHandle;
+import Glib.Device.IWindowHandle;
 import Glib.Device.IO;
 import Glib.Device.Event.API;
 import Glib.Window.Property;
-import Glib.Device.IWindowHandle;
 export import :Style;
 export import :Option;
 
