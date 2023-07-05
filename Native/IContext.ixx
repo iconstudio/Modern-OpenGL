@@ -48,7 +48,9 @@ export namespace gl::device
 		}
 
 		IContext(const IContext&) = delete;
+		constexpr IContext(IContext&&) noexcept = default;
 		IContext& operator=(const IContext&) = delete;
+		constexpr IContext& operator=(IContext&&) noexcept = default;
 
 	private:
 		bool shouldDestroy = false;
