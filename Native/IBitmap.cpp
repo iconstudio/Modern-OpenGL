@@ -144,7 +144,7 @@ const noexcept
 
 bool
 gl::device::resource::Bitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
-const
+const noexcept
 {
 	if (RawRGB result = context.Delegate(::GetPixel, x, y); CLR_INVALID != result)
 	{
