@@ -227,6 +227,8 @@
     <ClCompile Include="src\CompatibleBitmap.ixx" />
     <ClCompile Include="src\CompatibleContext.cpp" />
     <ClCompile Include="src\IWindowHandle.cpp" />
+    <ClCompile Include="src\RenderingContext.cpp" />
+    <ClCompile Include="src\RenderingContext.ixx" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowFactory.ixx" />
