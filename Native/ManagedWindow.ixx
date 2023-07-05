@@ -44,7 +44,7 @@ export namespace gl::window
 
 	public:
 		using event_id_t = device::EventID;
-		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long);
+		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long) noexcept;
 
 		using event_t = device::Event;
 		using event_alert_t = std::atomic<event_t>;
@@ -53,12 +53,12 @@ export namespace gl::window
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
-		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first);
-		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode);
-		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first);
-		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode);
-		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long);
-		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long);
+		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
+		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
+		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
+		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
+		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
+		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
 
 		explicit ManagedWindow(Window&& window, int number_of_workers);
 
