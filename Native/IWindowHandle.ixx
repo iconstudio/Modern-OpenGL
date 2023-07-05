@@ -54,91 +54,57 @@ export namespace gl::device
 		bool Destroy() noexcept;
 
 		bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
-
 		bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
-
 		bool SendCommand(const Event& cmd) const noexcept;
-
 		bool SendCommand(Event&& cmd) const noexcept;
-
 		bool SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const noexcept;
 
 		bool UICommand(const int& cmd) noexcept;
-
 		bool Show() noexcept;
-
 		bool Hide() noexcept;
+		bool Close() noexcept;
 
 		bool Maximize() noexcept;
-
 		bool Minimize() noexcept;
-
 		bool Restore() noexcept;
 
 		bool Redraw(const bool& flag) noexcept;
 
-		bool Close() noexcept;
-
 		bool EnableInput() noexcept;
-
 		bool DisableInput() noexcept;
 
-		[[nodiscard]]
-		DeviceContext AcquireContext() const noexcept;
-
-		[[nodiscard]]
-		RenderingContext AcquireRenderContext() const noexcept;
-
+		[[nodiscard]] DeviceContext AcquireContext() const noexcept;
+		[[nodiscard]] RenderingContext AcquireRenderContext() const noexcept;
 		bool ReleaseContext(DeviceContext& context) const noexcept;
-
-		[[nodiscard]]
-		IContext AcquireNativeContext() const noexcept;
-
+		[[nodiscard]] IContext AcquireNativeContext() const noexcept;
 		bool ReleaseNativeContext(IContext& context) const noexcept;
 
-		[[nodiscard]]
-		bool IsMinimized() const noexcept;
-
-		[[nodiscard]]
-		bool IsMaximized() const noexcept;
-
-		[[nodiscard]]
-		bool IsRestored() const noexcept;
-
-		[[nodiscard]]
-		bool IsInputEnabled() const noexcept;
+		[[nodiscard]] unsigned long GetStyle() const noexcept;
+		[[nodiscard]] unsigned long GetExStyle() const noexcept;
+		[[nodiscard]] int GetID() const noexcept;
+		[[nodiscard]] std::wstring_view GetTitle() const noexcept;
 
 		long long SetInternalValue(int index, const long long& value) const noexcept;
-
 		long long SetInternalValue(int index, long long&& value) const noexcept;
-
 		long long SetInternalUserData(const long long& value) const noexcept;
-
 		long long SetInternalUserData(long long&& value) const noexcept;
+		[[nodiscard]] long long GetInternalValue(int index) const noexcept;
+		[[nodiscard]] long long GetInternalUserData() const noexcept;
 
-		[[nodiscard]]
-		long long GetInternalValue(int index) const noexcept;
-
-		[[nodiscard]]
-		long long GetInternalUserData() const noexcept;
-
-		[[nodiscard]]
-		unsigned long GetStyle() const noexcept;
-
-		[[nodiscard]]
-		unsigned long GetExStyle() const noexcept;
-
-		[[nodiscard]]
-		int GetID() const noexcept;
-
-		[[nodiscard]]
-		native::NativeRect GetDimensions() const noexcept;
-
+		[[nodiscard]] native::NativeRect GetDimensions() const noexcept;
 		bool TryGetDimensions(native::NativeRect& output) const noexcept;
+
+		[[nodiscard]] bool IsMinimized() const noexcept;
+		[[nodiscard]] bool IsMaximized() const noexcept;
+		[[nodiscard]] bool IsRestored() const noexcept;
+		[[nodiscard]] bool IsInputEnabled() const noexcept;
 
 		IWindowHandle(const IWindowHandle&) = delete;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
-};
+
+	private:
+		wchar_t titleBuffer[256]{};
+	};
 
 	[[nodiscard]]
 	constexpr native::NativeRect MakeNativeRect() noexcept
