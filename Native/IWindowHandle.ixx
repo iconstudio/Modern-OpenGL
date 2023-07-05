@@ -90,6 +90,9 @@ export namespace gl::device
 		[[nodiscard]]
 		DeviceContext AcquireContext() const noexcept;
 
+		[[nodiscard]]
+		DeviceContext AcquireRenderContext() const noexcept;
+
 		bool ReleaseContext(DeviceContext& context) const noexcept;
 
 		[[nodiscard]]

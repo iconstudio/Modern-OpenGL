@@ -147,12 +147,23 @@ noexcept
 	return 0 != Delegate(::EnableWindow, FALSE);
 }
 
-gl::device::DeviceContext gl::device::IWindowHandle::AcquireContext() const noexcept
+gl::device::DeviceContext
+gl::device::IWindowHandle::AcquireContext()
+const noexcept
 {
 	return GetHandle();
 }
 
-bool gl::device::IWindowHandle::ReleaseContext(gl::device::DeviceContext& context) const noexcept
+gl::device::DeviceContext
+gl::device::IWindowHandle::AcquireRenderContext()
+const noexcept
+{
+	return nullptr;
+}
+
+bool
+gl::device::IWindowHandle::ReleaseContext(gl::device::DeviceContext& context)
+const noexcept
 {
 	return 0 != Delegate(::ReleaseDC, context);
 }
