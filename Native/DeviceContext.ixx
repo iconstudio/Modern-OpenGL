@@ -11,11 +11,6 @@ export namespace gl::device
 		using base = IContext;
 
 		DeviceContext(const native::HWND& window) noexcept;
-
-		explicit constexpr DeviceContext(handle_type&& handle) noexcept
-			: base(std::move(handle))
-		{}
-
 		~DeviceContext() noexcept;
 
 		DeviceContext(const DeviceContext&) = delete;
