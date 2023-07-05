@@ -24,6 +24,10 @@ export namespace gl::device::resource
 	public:
 		using base = IGraphics<IBitmap, native::RawBitmap>;
 
+		constexpr IBitmap(nullptr_t) noexcept
+			: base(nullifier)
+		{}
+
 		explicit IBitmap(const handle_type& handle) noexcept;
 		IBitmap(handle_type&& handle) noexcept;
 		~IBitmap() noexcept;
