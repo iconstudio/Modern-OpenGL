@@ -1,6 +1,7 @@
 module;
 #include "Internal.hpp"
 module Glib.Device.IContext;
+import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.IBitmap;
 
 gl::device::IContext::~IContext() noexcept
@@ -11,7 +12,7 @@ gl::device::IContext::~IContext() noexcept
 	}
 }
 
-gl::device::IContext
+gl::device::CompatibleContext
 gl::device::IContext::CreateCompatibleContext()
 const noexcept
 {

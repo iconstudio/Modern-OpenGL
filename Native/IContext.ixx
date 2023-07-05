@@ -21,7 +21,7 @@ export namespace gl::device
 
 		~IContext() noexcept;
 
-		IContext CreateCompatibleContext() const noexcept;
+		CompatibleContext CreateCompatibleContext() const noexcept;
 		resource::IBitmap CreateCompatibleBitmap(const int& width, const int& height) const noexcept;
 		bool Destroy() noexcept;
 		bool Release() noexcept;
