@@ -161,7 +161,5 @@ export namespace gl::device
 		, void* uparams = nullptr)
 		noexcept;
 
-	bool UnregisterWindow(const ProcessInstance& hinst, const std::wstring_view& class_name);
-
 	void PostQuitMessage(const int& exit_code) noexcept;
 }
