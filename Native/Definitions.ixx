@@ -40,6 +40,7 @@ export namespace gl::device::native
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
 	using RawWindowProperty = tagWNDCLASSEXW;
 	using HWND = HWND__*;
+	using PaintStruct = tagPAINTSTRUCT;
 
 	using NativeRect = tagRECT;
 	using NativeContext = ::HDC__*;
