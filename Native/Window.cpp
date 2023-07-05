@@ -275,7 +275,12 @@ int
 gl::window::Window::GetID()
 const noexcept
 {
-	return 0;
+	return myHandle.GetID();
+}
+
+std::wstring gl::window::Window::GetTitle() const noexcept
+{
+	return myHandle.GetTitle();
 }
 
 gl::window::WindowStyle

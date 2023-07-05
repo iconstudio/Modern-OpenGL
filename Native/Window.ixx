@@ -74,9 +74,12 @@ export extern "C++" namespace gl::window
 		[[nodiscard]] bool IsInputEnabled() const noexcept;
 
 		[[nodiscard]] int GetID() const noexcept;
+		[[nodiscard]] std::wstring GetTitle() const noexcept;
 
 		[[nodiscard]] WindowStyle GetStyle() const noexcept;
 		[[nodiscard]] WindowOption GetOption() const noexcept;
+		[[nodiscard]] Rect GetDimensions() const noexcept;
+		bool TryGetDimensions(Rect& output) const noexcept;
 
 		long long SetInternalValue(int index, const long long& value) const noexcept;
 		long long SetInternalValue(int index, long long&& value) const noexcept;
@@ -84,9 +87,6 @@ export extern "C++" namespace gl::window
 		long long SetInternalUserData(long long&& value) const noexcept;
 		[[nodiscard]] long long GetInternalValue(int index) const noexcept;
 		[[nodiscard]] long long GetInternalUserData() const noexcept;
-
-		[[nodiscard]] Rect GetDimensions() const noexcept;
-		bool TryGetDimensions(Rect& output) const noexcept;
 
 		[[nodiscard]]
 		constexpr const wchar_t* const& GetClassName() const& noexcept
