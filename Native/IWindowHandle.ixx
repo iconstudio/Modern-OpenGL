@@ -88,6 +88,16 @@ export namespace gl::device
 		bool DisableInput() noexcept;
 
 		[[nodiscard]]
+		DeviceContext AcquireContext() const noexcept;
+
+		bool ReleaseContext(DeviceContext& context) const noexcept;
+
+		[[nodiscard]]
+		IContext AcquireNativeContext() const noexcept;
+
+		bool ReleaseNativeContext(IContext& context) const noexcept;
+
+		[[nodiscard]]
 		bool IsMinimized() const noexcept;
 
 		[[nodiscard]]
@@ -121,11 +131,6 @@ export namespace gl::device
 
 		[[nodiscard]]
 		int GetID() const noexcept;
-
-		[[nodiscard]]
-		IContext AcquireNativeContext() const noexcept;
-
-		bool ReleaseNativeContext(IContext& context) const noexcept;
 
 		[[nodiscard]]
 		native::NativeRect GetDimensions() const noexcept;

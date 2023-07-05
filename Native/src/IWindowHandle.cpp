@@ -4,6 +4,7 @@ module;
 
 module Glib.Device.IWindowHandle;
 import Glib.Device.Event.API;
+import Glib.Device.Context;
 
 bool
 gl::device::IWindowHandle::StartUpdate()
@@ -146,6 +147,30 @@ noexcept
 	return 0 != Delegate(::EnableWindow, FALSE);
 }
 
+gl::device::DeviceContext gl::device::IWindowHandle::AcquireContext() const noexcept
+{
+	return GetHandle();
+}
+
+bool gl::device::IWindowHandle::ReleaseContext(gl::device::DeviceContext& context) const noexcept
+{
+	return 0 != Delegate(::ReleaseDC, context);
+}
+
+gl::device::IContext
+gl::device::IWindowHandle::AcquireNativeContext()
+const noexcept
+{
+	return Delegate(::GetDC);
+}
+
+bool
+gl::device::IWindowHandle::ReleaseNativeContext(IContext& context)
+const noexcept
+{
+	return 0 != Delegate(::ReleaseDC, context);
+}
+
 bool
 gl::device::IWindowHandle::IsMinimized()
 const noexcept
@@ -235,20 +260,6 @@ gl::device::IWindowHandle::GetID()
 const noexcept
 {
 	return static_cast<int>(GetInternalValue(GWLP_ID));
-}
-
-gl::device::IContext
-gl::device::IWindowHandle::AcquireNativeContext()
-const noexcept
-{
-	return Delegate(::GetDC);
-}
-
-bool
-gl::device::IWindowHandle::ReleaseNativeContext(IContext& context)
-const noexcept
-{
-	return 0 != Delegate(::ReleaseDC, context);
 }
 
 gl::device::native::NativeRect
