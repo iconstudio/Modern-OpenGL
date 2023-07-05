@@ -1,23 +1,24 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Device.Resource.IBitmap;
-import Glib.Device.Resource.CompatibleBitmap;
+module Glib.Device.Resource.Bitmap;
+import Glib.Device.Colour;
 import Glib.Device.IWindow;
 import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
+import Glib.Device.Resource.CompatibleBitmap;
 
-gl::device::resource::IBitmap
-gl::device::resource::IBitmap::Copy(const IContext& context)
+gl::device::resource::Bitmap
+gl::device::resource::Bitmap::Copy(const IContext& context)
 const noexcept
 {
-	IBitmap result{};
+	Bitmap result{};
 	TryCopy(context, result);
 	return result;
 }
 
 bool
-gl::device::resource::IBitmap::TryCopy(const IContext& context, IBitmap& output)
+gl::device::resource::Bitmap::TryCopy(const IContext& context, Bitmap& output)
 const noexcept
 {
 	const native::RawBitmap& handle = GetHandle();
@@ -54,13 +55,45 @@ const noexcept
 
 	current.Select(previous);
 
-	output = IBitmap(std::move(bitmap));
+	output = Bitmap(std::move(bitmap));
 
 	return result;
 }
 
 bool
-gl::device::resource::IBitmap::Destroy()
+gl::device::resource::Bitmap::Fill(const Colour& color)
+noexcept
+{
+	return false;
+}
+
+void
+gl::device::resource::Bitmap::Mirror()
+noexcept
+{}
+
+void
+gl::device::resource::Bitmap::Flip()
+noexcept
+{}
+
+void
+gl::device::resource::Bitmap::Rotate(float angle)
+noexcept
+{}
+
+void
+gl::device::resource::Bitmap::RotateR(float angle)
+noexcept
+{}
+
+void
+gl::device::resource::Bitmap::RotateL(float angle)
+noexcept
+{}
+
+bool
+gl::device::resource::Bitmap::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -75,7 +108,7 @@ noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const IWindow& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::device::resource::Bitmap::Draw(const IWindow& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	GlobalDeviceContext render_context = GlobalDeviceContext();
@@ -94,7 +127,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::device::resource::Bitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	HGDIOBJ previous = window_context.Delegate(::SelectObject, GetHandle());
@@ -110,7 +143,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::IBitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
+gl::device::resource::Bitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
 const
 {
 	if (RawRGB result = context.Delegate(::GetPixel, x, y); CLR_INVALID != result)
@@ -126,20 +159,20 @@ const
 }
 
 int
-gl::device::resource::IBitmap::GetWidth()
+gl::device::resource::Bitmap::GetWidth()
 const noexcept
 {
 	return cachedWidth;
 }
 
 int
-gl::device::resource::IBitmap::GetHeight()
+gl::device::resource::Bitmap::GetHeight()
 const noexcept
 {
 	return cachedHeight;
 }
 
-gl::device::resource::IBitmap::IBitmap(const handle_type& handle)
+gl::device::resource::Bitmap::Bitmap(const handle_type& handle)
 noexcept
 	: base(handle)
 {
@@ -151,7 +184,7 @@ noexcept
 	}
 }
 
-gl::device::resource::IBitmap::IBitmap(handle_type&& handle)
+gl::device::resource::Bitmap::Bitmap(handle_type&& handle)
 noexcept
 	: base(std::move(handle))
 	, shouldDestroy(true)
@@ -164,7 +197,7 @@ noexcept
 	}
 }
 
-gl::device::resource::IBitmap::~IBitmap()
+gl::device::resource::Bitmap::~Bitmap()
 noexcept
 {
 	if (shouldDestroy)

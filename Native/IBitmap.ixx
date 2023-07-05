@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Resource.IBitmap;
+export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IGraphics;
@@ -10,26 +10,35 @@ import Glib.Device.Colour;
 
 export namespace gl::device::resource
 {
-	/// <summary>
-	/// Bitmap Viewer
-	/// </summary>
-	class [[nodiscard]] IBitmap : public IGraphics<IBitmap, native::RawBitmap>
+	class [[nodiscard]] Bitmap : public IGraphics<Bitmap, native::RawBitmap>
 	{
 	public:
-		using base = IGraphics<IBitmap, native::RawBitmap>;
+		using base = IGraphics<Bitmap, native::RawBitmap>;
 
-		constexpr IBitmap(nullptr_t) noexcept
-			: base(nullifier)
-		{}
+		[[nodiscard]]
+		static Bitmap Load(const FilePath& path) noexcept;
+		[[nodiscard]]
+		static bool TryLoad(const FilePath& path, Bitmap& output) noexcept;
+		[[nodiscard]]
+		static Bitmap Load(const int& id) noexcept;
+		[[nodiscard]]
+		static bool TryLoad(const int& id, Bitmap& output) noexcept;
 
-		explicit IBitmap(const handle_type& handle) noexcept;
-		IBitmap(handle_type&& handle) noexcept;
-		~IBitmap() noexcept;
+		explicit Bitmap(const handle_type& handle) noexcept;
+		Bitmap(handle_type&& handle) noexcept;
+		~Bitmap() noexcept;
 
-		[[nodiscard]] IBitmap Copy(const IContext& context) const noexcept;
-		bool TryCopy(const IContext& context, IBitmap& output) const noexcept;
+		[[nodiscard]] Bitmap Copy(const IContext& context) const noexcept;
+		bool TryCopy(const IContext& context, Bitmap& output) const noexcept;
 
 		bool Destroy() noexcept;
+
+		bool Fill(const Colour& color) noexcept;
+		void Mirror() noexcept;
+		void Flip() noexcept;
+		void Rotate(float angle) noexcept;
+		void RotateR(float angle) noexcept;
+		void RotateL(float angle) noexcept;
 
 		bool Draw(const IWindow& window_handle, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
 		bool Draw(const IContext& render_context, IContext& window_context, const int& dx, const int& dy, const int& srcx = 0, const int& srcy = 0) const noexcept;
@@ -38,13 +47,13 @@ export namespace gl::device::resource
 		int GetWidth() const noexcept;
 		int GetHeight() const noexcept;
 
-		IBitmap(const IBitmap&) = delete;
-		constexpr IBitmap(IBitmap&&) noexcept = default;
-		IBitmap& operator=(const IBitmap&) = delete;
-		constexpr IBitmap& operator=(IBitmap&&) noexcept = default;
+		Bitmap(const Bitmap&) = delete;
+		constexpr Bitmap(Bitmap&&) noexcept = default;
+		Bitmap& operator=(const Bitmap&) = delete;
+		constexpr Bitmap& operator=(Bitmap&&) noexcept = default;
 
 	protected:
-		constexpr IBitmap() noexcept = default;
+		constexpr Bitmap() noexcept = default;
 
 	private:
 		bool shouldDestroy = false;
