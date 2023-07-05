@@ -13,10 +13,10 @@ export import :Option;
 
 export extern "C++" namespace gl::window
 {
-	class [[nodiscard]] Window
+	class [[nodiscard]] Window : public device::IHandle<device::IWindowHandle>
 	{
 	public:
-		constexpr Window() noexcept = default;
+		using base = device::IHandle<device::IWindowHandle>;
 
 		explicit Window(const WindowProperty& properties
 			, const std::wstring_view& title
