@@ -33,6 +33,16 @@ export namespace gl::device
 		GlobalDeviceContext() noexcept;
 		~GlobalDeviceContext() noexcept;
 
+		constexpr bool operator==(nullptr_t) const noexcept
+		{
+			return myContext == nullptr;
+		}
+
+		constexpr bool operator==(const GlobalDeviceContext& other) const noexcept
+		{
+			return myContext == other.myContext;
+		}
+
 		constexpr operator DeviceContext& () & noexcept
 		{
 			return myContext;
