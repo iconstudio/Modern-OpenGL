@@ -221,7 +221,7 @@ noexcept
 			const bool is_first = device::io::IsFirstPress(lparam);
 			if (is_first)
 			{
-			std::printf("[Key Pressed] %lld\n", wparam);
+				std::printf("[Key Pressed] %lld\n", wparam);
 			}
 
 			if (auto& key_dw_handler = self->keyDownHandler; key_dw_handler)
@@ -246,7 +246,7 @@ noexcept
 			const bool is_first = device::io::IsFirstPress(lparam);
 			if (is_first)
 			{
-			std::printf("[System Key Pressed] %lld\n", wparam);
+				std::printf("[System Key Pressed] %lld\n", wparam);
 			}
 
 			if (auto& sys_dw_handler = self->sysDownHandler; sys_dw_handler)
@@ -272,7 +272,7 @@ noexcept
 			const bool is_first = device::io::IsFirstPress(lparam);
 			if (is_first)
 			{
-			std::printf("[Chr Pressed] %lld\n", wparam);
+				std::printf("[Chr Pressed] %lld\n", wparam);
 			}
 
 			if (auto& chr_dw_handler = self->chrDownHandler; chr_dw_handler)
@@ -385,6 +385,7 @@ noexcept
 		// Started by close button or system menu [or Alt+F4]
 		case event_id_t::Close:
 		{
+			std::printf("[Close]\n");
 			ctx.Destroy();
 			self->isFocused = false;
 			self->ClearMouseCapturing();
@@ -394,6 +395,7 @@ noexcept
 		// Started by DestroyWindow
 		case event_id_t::Destroy:
 		{
+			std::printf("[Destroy]\n");
 			device::PostQuitMessage(0);
 
 			if (self)
