@@ -43,14 +43,14 @@ const noexcept
 		return false;
 	}
 
-	void* previous = ::SelectObject(current, bitmap.GetHandle());
+	auto previous = current.Select(bitmap);
 
 	bool result = (0 == ::BitBlt(current
 		, 0, 0, cachedWidth, cachedHeight
 		, context, 0, 0
 		, SRCCOPY));
 
-	::SelectObject(current, previous);
+	current.Select(previous);
 
 	output = IBitmap(std::move(bitmap));
 
