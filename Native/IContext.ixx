@@ -7,6 +7,12 @@ export namespace gl::device
 {
 	class IContext : public IHandle<native::NativeContext>
 	{
+	private:
+		struct [[nodiscard]] GraphicState
+		{
+			void* object = nullptr;
+		};
+
 	public:
 		using base = IHandle<native::NativeContext>;
 
@@ -26,6 +32,13 @@ export namespace gl::device
 		bool Destroy() noexcept;
 		bool Release() noexcept;
 		bool Release(native::HWND& owner) noexcept;
+
+		GraphicState Select(const resource::ColorBrush& obj) const noexcept;
+		GraphicState Select(const resource::Pen& obj) const noexcept;
+		GraphicState Select(const resource::Palette& obj) const noexcept;
+		GraphicState Select(const resource::Bitmap& obj) const noexcept;
+		GraphicState Select(const resource::CompatibleBitmap& obj) const noexcept;
+		void Select(GraphicState& previous) const noexcept;
 
 		constexpr operator native::NativeContext& () & noexcept
 		{
