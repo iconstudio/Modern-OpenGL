@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 module Glib.Device.IContext;
 import Glib.Device.CompatibleContext;
-import Glib.Device.Resource.IBitmap;
+import Glib.Device.Resource.CompatibleBitmap;
 
 gl::device::IContext::~IContext() noexcept
 {
@@ -19,7 +19,7 @@ const noexcept
 	return Delegate(::CreateCompatibleDC);
 }
 
-gl::device::resource::IBitmap
+gl::device::resource::CompatibleBitmap
 gl::device::IContext::CreateCompatibleBitmap(const int& width, const int& height)
 const noexcept
 {
