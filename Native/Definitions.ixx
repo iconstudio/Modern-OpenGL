@@ -22,11 +22,10 @@ export namespace gl::device
 
 export namespace gl::device::resource
 {
-	class IBitmap;
+	class Bitmap;
 	class Palette;
 	class ColorBrush;
 	class Pen;
-	class Bitmap;
 	class CompatibleBitmap;
 	class Icon;
 }
