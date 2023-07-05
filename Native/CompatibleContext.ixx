@@ -6,10 +6,10 @@ import Glib.Device.IContext;
 
 export namespace gl::device
 {
-	class CompatibleContext : public IHandle<IContext>
+	class CompatibleContext : public IContext
 	{
 	public:
-		using base = IHandle<IContext>;
+		using base = IContext;
 
 		constexpr CompatibleContext(handle_type&& handle) noexcept
 			: base(std::move(handle))
@@ -21,24 +21,24 @@ export namespace gl::device
 
 		~CompatibleContext() noexcept;
 
-		constexpr operator native::NativeContext& () & noexcept
+		constexpr operator handle_type& () & noexcept
 		{
-			return GetHandle().GetHandle();
+			return GetHandle();
 		}
 
-		constexpr operator const native::NativeContext& () const& noexcept
+		constexpr operator const handle_type& () const& noexcept
 		{
-			return GetHandle().GetHandle();
+			return GetHandle();
 		}
 
-		constexpr operator native::NativeContext && () && noexcept
+		constexpr operator handle_type && () && noexcept
 		{
-			return std::move(GetHandle()).GetHandle();
+			return std::move(GetHandle());
 		}
 
-		constexpr operator const native::NativeContext && () const&& noexcept
+		constexpr operator const handle_type && () const&& noexcept
 		{
-			return std::move(GetHandle()).GetHandle();
+			return std::move(GetHandle());
 		}
 
 		CompatibleContext(const CompatibleContext&) = delete;
