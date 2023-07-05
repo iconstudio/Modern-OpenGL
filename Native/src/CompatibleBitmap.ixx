@@ -2,14 +2,14 @@ export module Glib.Device.Resource.CompatibleBitmap;
 import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IHandle;
-import Glib.Device.Resource.IBitmap;
+import Glib.Device.Resource.Bitmap;
 
 export namespace gl::device::resource
 {
-	class CompatibleBitmap : public IBitmap
+	class [[nodiscard]] CompatibleBitmap : public Bitmap
 	{
 	public:
-		using base = IBitmap;
+		using base = Bitmap;
 
 		CompatibleBitmap(handle_type&& handle) noexcept;
 		~CompatibleBitmap() noexcept;
