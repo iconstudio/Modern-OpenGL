@@ -6,7 +6,7 @@ import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.ProcessInstance;
 
-export extern "C++" namespace gl::window
+export namespace gl::window
 {
 	using device::native::WindowProcedure;
 	using device::native::RawWindowProperty;

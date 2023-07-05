@@ -64,6 +64,19 @@ bool
 gl::device::resource::Bitmap::Fill(const Colour& color)
 noexcept
 {
+	GlobalDeviceContext render_context = GlobalDeviceContext();
+	if (nullptr == render_context)
+	{
+		return false;
+	}
+
+	CompatibleContext current = render_context.CreateCompatibleContext();
+	if (nullptr == current)
+	{
+		return false;
+	}
+
+
 	return false;
 }
 

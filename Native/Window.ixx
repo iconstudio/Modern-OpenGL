@@ -10,7 +10,7 @@ import Glib.Window.Property;
 export import :Style;
 export import :Option;
 
-export extern "C++" namespace gl::window
+export namespace gl::window
 {
 	class [[nodiscard]] Window : public device::IWindow
 	{

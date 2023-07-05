@@ -3,7 +3,7 @@ import Glib.Definitions;
 
 export namespace gl::device
 {
-	export extern "C" enum class [[nodiscard]] ColoredComponent : int
+	extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{
 		Window = 5, // COLOR_WINDOW
 		Text = 8, // COLOR_WINDOWTEXT

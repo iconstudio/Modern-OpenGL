@@ -10,7 +10,7 @@ export import Glib.Device.Colour;
 
 namespace gl::display
 {
-	export extern "C" enum class [[nodiscard]] DpiAwareness
+	export enum class [[nodiscard]] DpiAwareness
 	{
 		Invalid = ::DPI_AWARENESS_INVALID,
 		Unaware = ::DPI_AWARENESS_UNAWARE,
