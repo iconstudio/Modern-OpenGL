@@ -21,6 +21,21 @@ noexcept
 	}
 }
 
+util::LooseMonad<HBITMAP, unsigned int>
+_LoadResourceBitmap(const wchar_t* const& name)
+noexcept
+{
+	HBITMAP result = ::LoadBitmap(nullptr, name);
+	if (nullptr == result)
+	{
+		return ::GetLastError();
+	}
+	else
+	{
+		return result;
+	}
+}
+
 util::LooseMonad<HICON, unsigned int>
 _LoadIcon(const FilePath& path)
 noexcept
