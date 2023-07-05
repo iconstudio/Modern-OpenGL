@@ -202,15 +202,15 @@ noexcept
 {
 	const event_id_t msg = static_cast<event_id_t>(id);
 
-	device::IWindow ctx{ std::move(hwnd) };
+	device::IWindow control{ std::move(hwnd) };
 
-	ManagedWindow* const& self = reinterpret_cast<ManagedWindow*>(ctx.GetInternalUserData());
+	ManagedWindow* const& self = reinterpret_cast<ManagedWindow*>(control.GetInternalUserData());
 
 	switch (msg)
 	{
 		case event_id_t::Paint:
 		{
-			device::RenderingContext render_ctx = ctx.AcquireRenderContext();
+			device::RenderingContext render_ctx = control.AcquireRenderContext();
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
 		}
@@ -296,28 +296,28 @@ noexcept
 		case event_id_t::ChangedDPI:
 		{
 			std::printf("[ChangedDPI]\n");
-			ctx.Redraw(true);
+			control.Redraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedTheme:
 		{
 			std::printf("[ChangedTheme]\n");
-			ctx.Redraw(true);
+			control.Redraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedStaticColor:
 		{
 			std::printf("[ChangedStaticColor]\n");
-			ctx.Redraw(true);
+			control.Redraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedUserColor:
 		{
 			std::printf("[ChangedUserColor] Colour is changed to %lld. Is Fluent: %lld\n", wparam, lparam);
-			ctx.Redraw(true);
+			control.Redraw(true);
 		}
 		break;
 
@@ -374,19 +374,19 @@ noexcept
 		{
 			std::printf("[Preprocess]\n");
 		}
-		return ctx.DefaultWndProc(id, wparam, lparam);
+		return control.DefaultWndProc(id, wparam, lparam);
 
 		case event_id_t::Create:
 		{
 			std::printf("[Create]\n");
 		}
-		return ctx.DefaultWndProc(id, wparam, lparam);
+		return control.DefaultWndProc(id, wparam, lparam);
 
 		// Started by close button or system menu [or Alt+F4]
 		case event_id_t::Close:
 		{
 			std::printf("[Close]\n");
-			ctx.Destroy();
+			control.Destroy();
 			self->isFocused = false;
 			self->ClearMouseCapturing();
 		}
@@ -408,7 +408,7 @@ noexcept
 		// Started by WM_DESTROY
 		case event_id_t::Quit:
 		{
-			//KillTimer(ctx.GetHandle(), RENDER_TIMER_ID);
+			//KillTimer(control.GetHandle(), RENDER_TIMER_ID);
 		}
 		break;
 
@@ -428,7 +428,7 @@ noexcept
 				}
 			}
 
-			return ctx.DefaultWndProc(id, wparam, lparam);
+			return control.DefaultWndProc(id, wparam, lparam);
 		}
 		break;
 	}
