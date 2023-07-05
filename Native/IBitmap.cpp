@@ -1,5 +1,6 @@
 module;
 #include "Internal.hpp"
+
 module Glib.Device.Resource.IBitmap;
 import Glib.Device.CompatibleContext;
 
