@@ -24,6 +24,8 @@ export namespace gl::device
 		constexpr DeviceContext& operator=(DeviceContext&&) noexcept = default;
 
 	private:
+		using base::Destroy;
+
 		native::HWND myWindowHandle;
 	};
 
