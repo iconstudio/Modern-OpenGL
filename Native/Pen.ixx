@@ -1,5 +1,5 @@
 export module Glib.Device.Resource.Pen;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 

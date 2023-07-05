@@ -1,6 +1,6 @@
 export module Glib.Device.Resource.Brush;
 import <type_traits>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 

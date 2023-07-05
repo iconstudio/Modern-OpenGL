@@ -4,7 +4,7 @@ module;
 export module Glib.Device.IWindowHandle;
 import <type_traits>;
 import <string_view>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.ProcessInstance;
 import Glib.Device.IHandle;
 import Glib.Device.Event;

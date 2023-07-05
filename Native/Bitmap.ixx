@@ -3,7 +3,7 @@ module;
 
 export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.Resource.IBitmap;
 
 export namespace gl::device::resource

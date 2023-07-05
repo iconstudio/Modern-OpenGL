@@ -1,6 +1,6 @@
 export module Glib.Device.Context;
 import <type_traits>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.IContext;
 
 export namespace gl::device

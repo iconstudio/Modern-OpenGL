@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Definitions;
+export module Glib.Definitions;
 import <filesystem>;
 
 export namespace gl::device
@@ -26,6 +26,12 @@ export namespace gl::device::resource
 	class Pen;
 	class Bitmap;
 	class Icon;
+}
+
+export namespace gl::window
+{
+	class Window;
+	class ManagedWindow;
 }
 
 export namespace gl::device::native

@@ -3,7 +3,7 @@ module;
 
 export module Glib.Window.Property;
 import <type_traits>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.ProcessInstance;
 
 export extern "C++" namespace gl::window

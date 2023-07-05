@@ -137,9 +137,6 @@
     <ClCompile Include="DeviceUtil.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Definitions.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentBrush.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -202,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="DeviceContext.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Definitions.ixx">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

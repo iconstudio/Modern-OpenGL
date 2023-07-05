@@ -1,5 +1,5 @@
 export module Glib.Device.Resource.Brush.Component;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 
 export namespace gl::device
 {

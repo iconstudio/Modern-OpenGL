@@ -1,7 +1,7 @@
 export module Glib.Device.Resource.Icon;
 import <type_traits>;
 import <string_view>;
-import Glib.Device.Definitions;
+import Glib.Definitions;
 import Glib.Device.IGraphics;
 
 export namespace gl::device::resource
