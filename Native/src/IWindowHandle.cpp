@@ -51,28 +51,28 @@ const noexcept
 }
 
 bool
-gl::device::IWindowHandle::SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs)
+gl::device::IWindowHandle::SendCommand(const gl::device::EventID& id, const unsigned long long& lhs, const long long& rhs)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), id, lhs, rhs);
 }
 
 bool
-gl::device::IWindowHandle::SendCommand(const Event& cmd)
+gl::device::IWindowHandle::SendCommand(const gl::device::Event& cmd)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), cmd);
 }
 
 bool
-gl::device::IWindowHandle::SendCommand(Event&& cmd)
+gl::device::IWindowHandle::SendCommand(gl::device::Event&& cmd)
 const noexcept
 {
-	return EventAPI::Push(GetHandle(), static_cast<Event&&>(cmd));
+	return EventAPI::Push(GetHandle(), std::move(cmd));
 }
 
 bool
-gl::device::IWindowHandle::SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags)
+gl::device::IWindowHandle::SendCommand(const gl::device::EventID& id, const gl::device::io::KeyCode& keycode, const gl::device::io::KeyboardFlag& flags)
 const noexcept
 {
 	return SendCommand(id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
@@ -177,7 +177,7 @@ const noexcept
 }
 
 bool
-gl::device::IWindowHandle::ReleaseNativeContext(IContext& context)
+gl::device::IWindowHandle::ReleaseNativeContext(gl::device::IContext& context)
 const noexcept
 {
 	return 0 != Delegate(::ReleaseDC, context);
@@ -284,7 +284,7 @@ const noexcept
 }
 
 bool
-gl::device::IWindowHandle::TryGetDimensions(native::NativeRect& output)
+gl::device::IWindowHandle::TryGetDimensions(gl::device::native::NativeRect& output)
 const noexcept
 {
 	return 0 != Delegate(::GetWindowRect, &output);
@@ -298,15 +298,15 @@ gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	, const unsigned long& options
 	, const int& x, const int& y
 	, const int& width, const int& height
-	, const native::HWND& parent
-	, const native::NativeMenu& menu
+	, const gl::device::IWindowHandle& parent
+	, const gl::device::native::NativeMenu& menu
 	, void* uparams
 ) noexcept
 {
 	gl::device::native::HWND result = ::CreateWindowEx(options
 	, class_name.data(), title.data()
 	, styles, x, y, width, height
-	, parent
+	, parent.GetHandle()
 	, menu
 	, hinst.myHandle, uparams);
 
@@ -322,8 +322,8 @@ gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	{
 		::printf_s("DWMWA_USE_IMMERSIVE_DARK_MODE failed(%ld)\n", hr);
 	}
-	//
-	return IWindowHandle{ std::move(result) };//
+
+	return IWindowHandle{ std::move(result) };
 }
 
 void gl::device::PostQuitMessage(const int& exit_code) noexcept

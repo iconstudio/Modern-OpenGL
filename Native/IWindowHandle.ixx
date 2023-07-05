@@ -156,7 +156,7 @@ export namespace gl::device
 		, const int& y
 		, const int& width
 		, const int& height
-		, const native::HWND& parent = nullptr
+		, const IWindowHandle& parent = nullptr
 		, const native::NativeMenu& menu = nullptr
 		, void* uparams = nullptr)
 		noexcept;
