@@ -274,6 +274,18 @@ const noexcept
 	return static_cast<int>(GetInternalValue(GWLP_ID));
 }
 
+std::wstring
+gl::device::IWindowHandle::GetTitle()
+const noexcept
+{
+	std::wstring result{};
+	result.reserve(64);
+
+	int count = Delegate(::GetWindowText, result.data(), result.size());
+
+	return result;
+}
+
 gl::device::native::NativeRect
 gl::device::IWindowHandle::GetDimensions()
 const noexcept

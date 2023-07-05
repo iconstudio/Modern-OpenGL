@@ -1,5 +1,6 @@
 export module Glib.Device.IWindowHandle;
 import <type_traits>;
+import <string>;
 import <string_view>;
 import Glib.Definitions;
 import Glib.Device.ProcessInstance;
@@ -82,7 +83,7 @@ export namespace gl::device
 		[[nodiscard]] unsigned long GetStyle() const noexcept;
 		[[nodiscard]] unsigned long GetExStyle() const noexcept;
 		[[nodiscard]] int GetID() const noexcept;
-		[[nodiscard]] std::wstring_view GetTitle() const noexcept;
+		[[nodiscard]] std::wstring GetTitle() const noexcept;
 
 		long long SetInternalValue(int index, const long long& value) const noexcept;
 		long long SetInternalValue(int index, long long&& value) const noexcept;
@@ -101,9 +102,6 @@ export namespace gl::device
 
 		IWindowHandle(const IWindowHandle&) = delete;
 		IWindowHandle& operator=(const IWindowHandle&) = delete;
-
-	private:
-		wchar_t titleBuffer[128]{};
 	};
 
 	[[nodiscard]]
