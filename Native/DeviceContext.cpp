@@ -16,7 +16,7 @@ noexcept
 
 gl::device::GlobalDeviceContext::GlobalDeviceContext()
 noexcept
-	: myContext((native::HWND)(nullptr))
+	: myContext(static_cast<native::HWND>(nullptr))
 {}
 
 gl::device::GlobalDeviceContext::~GlobalDeviceContext()
