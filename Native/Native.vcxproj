@@ -187,7 +187,9 @@
     <ClCompile Include="ComponentBrush.cpp" />
     <ClCompile Include="ComponentBrush.ixx" />
     <ClCompile Include="Definitions.ixx" />
+    <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="DeviceContext.ixx" />
+    <ClCompile Include="DeviceHandle.cpp" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
     <ClCompile Include="DeviceUtil.ixx" />

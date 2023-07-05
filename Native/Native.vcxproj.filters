@@ -197,5 +197,11 @@
     <ClCompile Include="IContext.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DeviceHandle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
