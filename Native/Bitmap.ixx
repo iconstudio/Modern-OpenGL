@@ -22,8 +22,9 @@ export namespace gl::device::resource
 		[[nodiscard]]
 		static bool TryLoad(const int& id, Bitmap& output) noexcept;
 
+		constexpr Bitmap() noexcept = default;
 		explicit Bitmap(const handle_type& handle) noexcept;
-		Bitmap(handle_type&& handle) noexcept;
+		explicit Bitmap(handle_type&& handle) noexcept;
 		~Bitmap() noexcept;
 
 		[[nodiscard]] Bitmap Copy(const IContext& context) const noexcept;
@@ -49,9 +50,6 @@ export namespace gl::device::resource
 		constexpr Bitmap(Bitmap&&) noexcept = default;
 		Bitmap& operator=(const Bitmap&) = delete;
 		constexpr Bitmap& operator=(Bitmap&&) noexcept = default;
-
-	protected:
-		constexpr Bitmap() noexcept = default;
 
 	private:
 		bool shouldDestroy = false;
