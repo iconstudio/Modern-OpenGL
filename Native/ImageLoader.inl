@@ -6,7 +6,7 @@ using gl::device::FilePath;
 
 inline constexpr unsigned int _DefaultFlag = LR_LOADFROMFILE | LR_DEFAULTSIZE;
 
-util::LooseMonad<HBITMAP, unsigned int>
+util::LooseMonad<HBITMAP, unsigned long>
 _LoadBitmap(const FilePath& path)
 noexcept
 {
@@ -21,7 +21,7 @@ noexcept
 	}
 }
 
-util::LooseMonad<HBITMAP, unsigned int>
+util::LooseMonad<HBITMAP, unsigned long>
 _LoadResourceBitmap(const wchar_t* const& name)
 noexcept
 {
@@ -36,7 +36,7 @@ noexcept
 	}
 }
 
-util::LooseMonad<HICON, unsigned int>
+util::LooseMonad<HICON, unsigned long>
 _LoadIcon(const FilePath& path)
 noexcept
 {
@@ -51,7 +51,7 @@ noexcept
 	}
 }
 
-util::LooseMonad<HCURSOR, unsigned int>
+util::LooseMonad<HCURSOR, unsigned long>
 _LoadCursor(const FilePath& path)
 noexcept
 {
