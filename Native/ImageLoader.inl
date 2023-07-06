@@ -4,7 +4,7 @@ import Utility.Monad.Loosen;
 
 using gl::device::FilePath;
 
-inline constexpr unsigned int _DefaultFlag = LR_LOADFROMFILE | LR_DEFAULTSIZE;
+inline constexpr unsigned int _DefaultFlag = LR_SHARED | LR_LOADFROMFILE | LR_DEFAULTSIZE;
 
 util::LooseMonad<HBITMAP, unsigned long>
 _LoadBitmap(const FilePath& path)
