@@ -1,5 +1,6 @@
 module;
 module Glib.Window.ManagedWindow;
+import <cstdio>;
 import <exception>;
 import Glib.Device.Utility;
 import Glib.Device.Context.Renderer;
