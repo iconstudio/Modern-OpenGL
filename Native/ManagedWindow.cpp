@@ -59,7 +59,7 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
-	test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_0.gif");
+	test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_2.bmp");
 
 	isRunning = true;
 
@@ -220,6 +220,9 @@ noexcept
 			device::RenderingContext render_ctx = control.AcquireRenderContext();
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
+
+			device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
+			bool drawn = test_bitmap.Draw(render_ctx, local_ctx, 0, 0);
 		}
 		break;
 
@@ -245,6 +248,7 @@ noexcept
 			{
 				key_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
 			}
+			//::InvalidateRect(hwnd, nullptr, TRUE);
 		}
 		break;
 
