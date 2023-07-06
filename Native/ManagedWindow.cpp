@@ -1,9 +1,10 @@
-module;
+ module;
 module Glib.Window.ManagedWindow;
 import <cstdio>;
 import <exception>;
 import Glib.Device.Utility;
 import Glib.Device.Context.Renderer;
+import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.Bitmap;
 
 gl::device::resource::Bitmap test_bitmap{};
