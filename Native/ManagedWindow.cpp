@@ -3,6 +3,7 @@ module Glib.Window.ManagedWindow;
 import <exception>;
 import Glib.Device.Utility;
 import Glib.Device.Context.Renderer;
+import Glib.Device.Resource.Bitmap;
 
 gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
