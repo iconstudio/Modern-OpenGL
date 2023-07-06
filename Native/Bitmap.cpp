@@ -31,7 +31,7 @@ bool
 gl::device::resource::Bitmap::TryLoad(const FilePath& path, Bitmap& output)
 noexcept
 {
-	if (auto result = Load(path); result.has_value<HBITMAP>())
+	if (auto result = Load(path); result.has_value())
 	{
 		output = Bitmap{ std::move(result).value() };
 		return true;
@@ -63,7 +63,7 @@ bool
 gl::device::resource::Bitmap::TryLoad(const int& id, Bitmap& output)
 noexcept
 {
-	if (auto result = Load(id); result.has_value<HBITMAP>())
+	if (auto result = Load(id); result.has_value())
 	{
 		output = Bitmap{ std::move(result).value() };
 		return true;
