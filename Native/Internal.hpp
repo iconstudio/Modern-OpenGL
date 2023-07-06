@@ -17,7 +17,6 @@
 #define NOLSTRING
 #define NODBCS
 #define NOSCALABLEFONT
-#define NOMETAFILE
 #define NOSYSMETRICS
 #define NOSYSTEMPARAMSINFO
 #include <Windows.h>
