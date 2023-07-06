@@ -1,4 +1,7 @@
 module;
+#define _ATL_NO_AUTOMATIC_NAMESPACE
+#include <atlimage.h>
+
 module Glib;
 import Utility;
 import Utility.Print;
