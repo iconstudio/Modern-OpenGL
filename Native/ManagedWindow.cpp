@@ -5,6 +5,8 @@ import Glib.Device.Utility;
 import Glib.Device.Context.Renderer;
 import Glib.Device.Resource.Bitmap;
 
+gl::device::resource::Bitmap test_bitmap;
+
 gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
 	, workerCount(number_of_workers), terminateLatch(number_of_workers)
@@ -55,6 +57,8 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
+	test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_0.gif");
+
 	isRunning = true;
 
 	while (true)
