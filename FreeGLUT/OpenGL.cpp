@@ -3,7 +3,6 @@ module Glib;
 import Utility;
 import Utility.Print;
 import Glib.Rect;
-import Glib.Window.ManagedWindow;
 import Glib.Device.Colour;
 import Glib.Display;
 
