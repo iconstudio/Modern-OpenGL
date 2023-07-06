@@ -3,38 +3,76 @@ module;
 #include "ImageLoader.inl"
 
 module Glib.Device.Resource.Bitmap;
+import <type_traits>;
+import Utility.Monad;
 import Glib.Device.Colour;
 import Glib.Device.IWindow;
 import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.CompatibleBitmap;
 
-gl::device::resource::Bitmap
+util::Monad<gl::device::resource::Bitmap>
 gl::device::resource::Bitmap::Load(const FilePath& path)
 noexcept
 {
-	//auto handle = ::LoadBitmap(nullptr, path.c_str());
+	auto result = ::_LoadBitmap(path);
+	if (result.has_value<HBITMAP>())
+	{
+		return Bitmap{ result.get<HBITMAP>() };
+	}
+	else
+	{
+		::wprintf_s(L"Failed to load bitmap from file: %s\n", path.c_str());
+		return util::nullopt;
+	}
 }
 
 bool
 gl::device::resource::Bitmap::TryLoad(const FilePath& path, Bitmap& output)
 noexcept
 {
-	return false;
+	if (auto result = Load(path); result.has_value<HBITMAP>())
+	{
+		output = Bitmap{ std::move(result).value() };
+		return true;
+	}
+	else
+	{
+		::wprintf_s(L"Failed to load bitmap from file: %s\n", path.c_str());
+		return false;
+	}
 }
 
-gl::device::resource::Bitmap
+util::Monad<gl::device::resource::Bitmap>
 gl::device::resource::Bitmap::Load(const int& id)
 noexcept
 {
-	return Bitmap();
+	auto result = ::_LoadResourceBitmap(MAKEINTRESOURCE(id));
+	if (result.has_value<HBITMAP>())
+	{
+		return Bitmap{ result.get<HBITMAP>() };
+	}
+	else
+	{
+		::wprintf_s(L"Failed to load bitmap from resource: %d\n", id);
+		return util::nullopt;
+	}
 }
 
 bool
 gl::device::resource::Bitmap::TryLoad(const int& id, Bitmap& output)
 noexcept
 {
-	return false;
+	if (auto result = Load(id); result.has_value<HBITMAP>())
+	{
+		output = Bitmap{ std::move(result).value() };
+		return true;
+	}
+	else
+	{
+		::wprintf_s(L"Failed to load bitmap from resource: %d\n", id);
+		return false;
+	}
 }
 
 gl::device::resource::Bitmap

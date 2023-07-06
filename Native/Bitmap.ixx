@@ -1,5 +1,6 @@
 export module Glib.Device.Resource.Bitmap;
 import <type_traits>;
+import Utility.Monad;
 import Glib.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.IContext;
@@ -13,11 +14,11 @@ export namespace gl::device::resource
 		using base = IGraphics<Bitmap, native::RawBitmap>;
 
 		[[nodiscard]]
-		static Bitmap Load(const FilePath& path) noexcept;
+		static util::Monad<gl::device::resource::Bitmap> Load(const FilePath& path) noexcept;
 		[[nodiscard]]
 		static bool TryLoad(const FilePath& path, Bitmap& output) noexcept;
 		[[nodiscard]]
-		static Bitmap Load(const int& id) noexcept;
+		static util::Monad<gl::device::resource::Bitmap> Load(const int& id) noexcept;
 		[[nodiscard]]
 		static bool TryLoad(const int& id, Bitmap& output) noexcept;
 
