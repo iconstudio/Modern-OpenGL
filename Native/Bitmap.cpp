@@ -15,14 +15,13 @@ util::Monad<gl::device::resource::Bitmap>
 gl::device::resource::Bitmap::Load(const FilePath& path)
 noexcept
 {
-	auto result = ::_LoadBitmap(path);
-	if (result.has_value<HBITMAP>())
+	if (auto result = ::_LoadBitmap(path); result.has_value<HBITMAP>())
 	{
 		return Bitmap{ result.get<HBITMAP>() };
 	}
 	else
 	{
-		::wprintf_s(L"Failed to load bitmap from file: %s\n", path.c_str());
+		::wprintf_s(L"Failed to load a bitmap from the file: %s\nError: %d\n", path.c_str(), result.get<unsigned long>());
 		return util::nullopt;
 	}
 }
@@ -38,7 +37,6 @@ noexcept
 	}
 	else
 	{
-		::wprintf_s(L"Failed to load bitmap from file: %s\n", path.c_str());
 		return false;
 	}
 }
@@ -54,7 +52,7 @@ noexcept
 	}
 	else
 	{
-		::wprintf_s(L"Failed to load bitmap from resource: %d\n", id);
+		::wprintf_s(L"Failed to load a bitmap from the resource: %d\nError: %d\n", id, result.get<unsigned long>());
 		return util::nullopt;
 	}
 }
@@ -70,7 +68,6 @@ noexcept
 	}
 	else
 	{
-		::wprintf_s(L"Failed to load bitmap from resource: %d\n", id);
 		return false;
 	}
 }
