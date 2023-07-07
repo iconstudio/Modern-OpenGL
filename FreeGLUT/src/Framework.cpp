@@ -2,7 +2,9 @@ module Glib:Framework;
 
 
 gl::Framework::Framework()
-	: myInstance(nullptr)
+	: base()
+	, myInstance(nullptr)
+	, displayMode()
 {
 }
 
