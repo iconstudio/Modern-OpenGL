@@ -96,14 +96,12 @@ const noexcept
 		return false;
 	}
 
-	// Automatic Destroy
 	CompatibleContext current = context.CreateCompatibleContext();
 	if (nullptr == current)
 	{
 		return false;
 	}
 
-	// Automatic Destroy
 	CompatibleBitmap bitmap = current.CreateCompatibleBitmap(cachedWidth, cachedHeight);
 	if (nullptr == bitmap)
 	{
