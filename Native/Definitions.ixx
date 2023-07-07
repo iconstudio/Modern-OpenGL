@@ -23,6 +23,7 @@ export namespace gl::device
 
 export namespace gl::device::resource
 {
+	class Image;
 	class Bitmap;
 	class Palette;
 	class ColorBrush;
