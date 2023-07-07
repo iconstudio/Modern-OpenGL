@@ -1,4 +1,5 @@
 export module Glib:Framework;
+import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
