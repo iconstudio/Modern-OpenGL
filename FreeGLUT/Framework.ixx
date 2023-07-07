@@ -5,6 +5,14 @@ import :DisplayModes;
 
 export namespace gl
 {
+	namespace framework
+	{
+		enum class [[nodiscard]] InitError
+		{
+
+		};
+	}
+
 	class Framework : std::enable_shared_from_this<Framework>
 	{
 	public:
@@ -12,6 +20,9 @@ export namespace gl
 
 		Framework();
 		~Framework();
+
+		InitError Initialize(const int& x, const int& y, const int& width, const int& height);
+		void Run();
 
 	private:
 		std::unique_ptr<window::ManagedWindow> myInstance;
