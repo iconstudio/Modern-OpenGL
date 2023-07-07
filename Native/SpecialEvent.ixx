@@ -1,7 +1,6 @@
 export module Glib.Device.Event:Special;
 import <compare>;
 export import :ID;
-export import :Implement;
 
 export namespace gl::device
 {

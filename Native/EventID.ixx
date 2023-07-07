@@ -1,8 +1,6 @@
 module;
 #include "Internal.hpp"
-
 export module Glib.Device.Event:ID;
-export import :Implement;
 
 export namespace gl::device
 {
