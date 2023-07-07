@@ -1,7 +1,7 @@
 export module Glib;
 import <memory>;
-export import Glib.DisplayModes;
 import Glib.Window.ManagedWindow;
+export import Glib:DisplayModes;
 import Glib:DefaultProperty;
 
 export namespace gl

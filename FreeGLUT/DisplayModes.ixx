@@ -1,4 +1,4 @@
-export module Glib.DisplayModes;
+export module Glib:DisplayModes;
 
 export namespace gl
 {
