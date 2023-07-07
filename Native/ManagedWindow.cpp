@@ -224,7 +224,7 @@ noexcept
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
 
-			device::GlobalDeviceContext context = device::GlobalDeviceContext();
+			auto context = render_ctx.CreateCompatibleContext();
 
 			//device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
 			bool drawn = test_bitmap.Draw(render_ctx, context, 0, 0);
@@ -253,7 +253,7 @@ noexcept
 			{
 				key_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
 			}
-			//::InvalidateRect(hwnd, nullptr, TRUE);
+			//::InvalidateRect(control, nullptr, TRUE);
 		}
 		break;
 
