@@ -225,6 +225,8 @@
     <ClCompile Include="src\CompatibleBitmap.ixx" />
     <ClCompile Include="src\CompatibleContext.cpp" />
     <ClCompile Include="src\EventAPI.cpp" />
+    <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\Image.ixx" />
     <ClCompile Include="src\IWindowHandle.cpp" />
     <ClCompile Include="src\RenderingContext.cpp" />
     <ClCompile Include="src\RenderingContext.ixx" />
