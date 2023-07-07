@@ -3,6 +3,7 @@ module Glib.Window.ManagedWindow;
 import <cstdio>;
 import <exception>;
 import Glib.Device.Utility;
+import Glib.Device.Context;
 import Glib.Device.Context.Renderer;
 import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.Bitmap;
@@ -59,7 +60,9 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
-	test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_2.bmp");
+	//test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_2.bmp");
+	//int w = test_bitmap.GetWidth();
+	//int h = test_bitmap.GetHeight();
 
 	isRunning = true;
 
@@ -220,9 +223,11 @@ noexcept
 			device::RenderingContext render_ctx = control.AcquireRenderContext();
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
+			
+			device::GlobalDeviceContext context = device::GlobalDeviceContext();
 
-			device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
-			bool drawn = test_bitmap.Draw(render_ctx, local_ctx, 0, 0);
+			//device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
+			bool drawn = test_bitmap.Draw(render_ctx, context, 0, 0);
 		}
 		break;
 
