@@ -252,6 +252,7 @@ const noexcept
 gl::device::resource::Bitmap::Bitmap(const handle_type& handle)
 noexcept
 	: base(handle)
+	, shouldDestroy(nullptr != handle)
 {
 	::SIZE result{};
 	if (0 != ::GetBitmapDimensionEx(handle, &result))
