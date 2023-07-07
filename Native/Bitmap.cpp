@@ -254,24 +254,36 @@ noexcept
 	: base(handle)
 	, shouldDestroy(nullptr != handle)
 {
-	::SIZE result{};
-	if (0 != ::GetBitmapDimensionEx(handle, &result))
+	if (nullptr == handle)
 	{
-		cachedWidth = result.cx;
-		cachedHeight = result.cy;
+		return;
+	}
+
+	::BITMAP result{};
+
+	if (0 != ::GetObject(handle, sizeof(::BITMAP), &result))
+	{
+		cachedWidth = result.bmWidth;
+		cachedHeight = result.bmHeight;
 	}
 }
 
 gl::device::resource::Bitmap::Bitmap(handle_type&& handle)
 noexcept
 	: base(std::move(handle))
-	, shouldDestroy(true)
+	, shouldDestroy(nullptr != handle)
 {
-	::SIZE result{};
-	if (0 != ::GetBitmapDimensionEx(GetHandle(), &result))
+	if (nullptr == handle)
 	{
-		cachedWidth = result.cx;
-		cachedHeight = result.cy;
+		return;
+	}
+
+	::BITMAP result{};
+
+	if (0 != ::GetObject(GetHandle(), sizeof(::BITMAP), &result))
+	{
+		cachedWidth = result.bmWidth;
+		cachedHeight = result.bmHeight;
 	}
 }
 
