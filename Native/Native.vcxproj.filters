@@ -221,5 +221,8 @@
     <ClCompile Include="SpecialEvent.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
+    <ClCompile Include="src\EventAPI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
