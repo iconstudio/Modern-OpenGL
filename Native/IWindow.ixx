@@ -56,10 +56,10 @@ export namespace gl::device
 		bool Destroy() noexcept;
 
 		bool SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
-		bool SendCommand(const EventID& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
-		bool SendCommand(const Event& cmd) const noexcept;
-		bool SendCommand(Event&& cmd) const noexcept;
-		bool SendCommand(const EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const noexcept;
+		bool SendCommand(const gl::device::EventID& id, const unsigned long long& lhs, const long long& rhs) const noexcept;
+		bool SendCommand(const gl::device::Event& cmd) const noexcept;
+		bool SendCommand(gl::device::Event&& cmd) const noexcept;
+		bool SendCommand(const gl::device::EventID& id, const io::KeyCode& keycode, const io::KeyboardFlag& flags = io::KeyboardFlag::None) const noexcept;
 
 		bool UICommand(const int& cmd) noexcept;
 		bool Show() noexcept;
