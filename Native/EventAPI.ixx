@@ -15,35 +15,6 @@ export namespace gl::device
 		NoYieldAndRemove = PM_REMOVE | PM_NOYIELD,
 	};
 
-	namespace detail
-	{
-		[[nodiscard]]
-		bool Pop(const HWND& hwnd, MSG& output) noexcept
-		{
-			return 0 != ::GetMessage(&output, hwnd, 0, 0);
-		}
-
-		bool Push(const HWND& hwnd, const unsigned int& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
-		{
-			return 0 != ::PostMessage(hwnd, event_id, lhs, rhs);
-		}
-
-		bool Push(const HWND& hwnd, unsigned int&& event_id, const unsigned long long& lhs, const long long& rhs) noexcept
-		{
-			return 0 != ::PostMessage(hwnd, std::move(event_id), lhs, rhs);
-		}
-
-		bool Push(const HWND& hwnd, const MSG& event) noexcept
-		{
-			return Push(hwnd, event.message, event.wParam, event.lParam);
-		}
-
-		bool Push(const HWND& hwnd, MSG&& event) noexcept
-		{
-			return Push(hwnd, std::move(event.message), std::move(event.wParam), std::move(event.lParam));
-		}
-	}
-
 	class EventAPI final
 	{
 	public:
@@ -56,37 +27,37 @@ export namespace gl::device
 		[[nodiscard]]
 		static bool Pop(const HWND& hwnd, RawEvent& output) noexcept
 		{
-			return detail::Pop(hwnd, output);
+			return 0 != ::GetMessage(&output, hwnd, 0, 0);
 		}
 
 		static bool Push(const HWND& hwnd, const unsigned int& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return detail::Push(hwnd, id, lhs, rhs);
+			return 0 != ::PostMessage(hwnd, id, lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, unsigned int&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return detail::Push(hwnd, std::move(id), lhs, rhs);
+			return 0 != ::PostMessage(hwnd, std::move(id), lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, unsigned int&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
-			return detail::Push(hwnd, std::move(id), std::move(lhs), std::move(rhs));
+			return 0 != ::PostMessage(hwnd, std::move(id), std::move(lhs), std::move(rhs));
 		}
 
 		static bool Push(const HWND& hwnd, const EventID& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return detail::Push(hwnd, static_cast<unsigned int>(id), lhs, rhs);
+			return Push(hwnd, static_cast<unsigned int>(id), lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, EventID&& id, const unsigned long long& lhs, const long long& rhs) noexcept
 		{
-			return detail::Push(hwnd, static_cast<unsigned int>(id), lhs, rhs);
+			return Push(hwnd, static_cast<unsigned int>(id), lhs, rhs);
 		}
 
 		static bool Push(const HWND& hwnd, EventID&& id, unsigned long long&& lhs, long long&& rhs) noexcept
 		{
-			return detail::Push(hwnd, static_cast<unsigned int>(id), std::move(lhs), std::move(rhs));
+			return Push(hwnd, static_cast<unsigned int>(id), std::move(lhs), std::move(rhs));
 		}
 
 		static bool Push(const HWND& hwnd, const Event& msg) noexcept
