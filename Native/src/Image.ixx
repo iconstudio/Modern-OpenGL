@@ -6,14 +6,25 @@ import Glib.Device.Colour;
 
 export namespace gl::device::resource
 {
-	class [[nodiscard]] Image : public IHandle<native::RawImage>
+	class [[nodiscard]] Image : public IHandle<native::RawBitmap>
 	{
 	public:
-		Image() noexcept;
+		using base = IHandle<native::RawBitmap>;
+
+		constexpr Image() noexcept;
 
 
 
 	private:
 		long cachedWidth = 0, cachedHeight = 0;
+		void* m_pBits;
+		int m_nWidth;
+		int m_nHeight;
+		int m_nPitch;
+		int m_nBPP;
+		bool m_bIsDIBSection;
+		bool m_bHasAlphaChannel;
+		long m_iTransparentColor;
+		unsigned long m_clrTransparentColor;
 	};
 }
