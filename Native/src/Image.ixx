@@ -2,6 +2,7 @@ export module Glibe.Device.Resource.Image;
 import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IHandle;
+import Glib.Device.Colour;
 
 export namespace gl::device::resource
 {
