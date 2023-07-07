@@ -2,7 +2,6 @@
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #define NOKERNEL
-#define NONLS
 #define NOSERVICE
 #define NOSOUND
 #define NOCOMM
@@ -11,7 +10,6 @@
 #define NOPROFILER
 #define NOMEMMGR
 #define NOLFILEIO
-#define NORESOURCE
 #define NOATOM
 #define NOLANGUAGE
 #define NOLSTRING
@@ -19,4 +17,6 @@
 #define NOSCALABLEFONT
 #define NOSYSMETRICS
 #define NOSYSTEMPARAMSINFO
+#define NOMCX
+#define NOIME
 #include <Windows.h>
