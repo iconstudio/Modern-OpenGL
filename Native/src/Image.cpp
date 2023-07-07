@@ -1,6 +1,6 @@
 module;
-#include <Windows.h>
-#include <atlcore.h>
+#include "Internal.hpp"
+#define _ATL_NO_AUTOMATIC_NAMESPACE
 #include <atlimage.h>
 module Glibe.Device.Resource.Image;
 
