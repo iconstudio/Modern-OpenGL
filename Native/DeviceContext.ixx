@@ -40,6 +40,5 @@ export namespace gl::device
 	private:
 		using base::Destroy;
 		using base::Release;
-		using base::operator=;
 	};
 }
