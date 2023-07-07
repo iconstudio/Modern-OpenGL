@@ -4,6 +4,7 @@ module;
 module Glib;
 import Utility;
 import Utility.Print;
+import Utility.FixedString;
 import Glib.Rect;
 import Glib.Device.Colour;
 import Glib.Display;
