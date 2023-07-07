@@ -8,9 +8,9 @@ import Glib.Rect;
 import Glib.Device.Colour;
 import Glib.Display;
 
-inline static int window_handle = -1;
-inline static gl::DisplayModes window_mode{};
-inline static gl::Rect window_rect{};
+static inline int window_handle = -1;
+static inline gl::DisplayModes window_mode{};
+static inline gl::Rect window_rect{};
 
 void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, const int& w, const int& h) noexcept
 {
