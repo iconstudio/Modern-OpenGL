@@ -1,4 +1,4 @@
- module;
+module;
 module Glib.Window.ManagedWindow;
 import <cstdio>;
 import <exception>;
@@ -223,7 +223,7 @@ noexcept
 			device::RenderingContext render_ctx = control.AcquireRenderContext();
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
-			
+
 			device::GlobalDeviceContext context = device::GlobalDeviceContext();
 
 			//device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();

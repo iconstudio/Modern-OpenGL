@@ -146,9 +146,6 @@
     <ClCompile Include="Icon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="IBitmap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Pen.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -156,9 +153,6 @@
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="IContext.ixx">
-      <Filter>헤더 파일\Device\Interfaces</Filter>
-    </ClCompile>
-    <ClCompile Include="IWindowHandle.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="IGraphics.ixx">
@@ -215,8 +209,17 @@
     <ClCompile Include="Window.cpp">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
-    <ClCompile Include="IBitmap.ixx">
+    <ClCompile Include="IWindow.ixx">
+      <Filter>헤더 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.inl">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
