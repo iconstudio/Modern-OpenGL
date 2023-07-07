@@ -28,6 +28,9 @@
     <Filter Include="헤더 파일\Device\GDI">
       <UniqueIdentifier>{df96e776-1182-42b1-9b3c-cb60f1c52b41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Device\Event">
+      <UniqueIdentifier>{6c834170-4d40-42f5-a946-e8ed6b746e99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.hpp">
@@ -77,9 +80,6 @@
     <ClCompile Include="Rect.ixx">
       <Filter>헤더 파일\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="SpecialEvent.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
     <ClCompile Include="ProcessInstance.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
@@ -96,15 +96,6 @@
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="KeyModifiers.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="EventAPI.ixx">
-      <Filter>헤더 파일\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="EventID.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.ixx">
@@ -217,6 +208,18 @@
     </ClCompile>
     <ClCompile Include="ImageLoader.inl">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventAPI.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventID.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecialEvent.ixx">
+      <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
