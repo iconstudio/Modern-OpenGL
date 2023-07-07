@@ -1,6 +1,5 @@
 module Glib:Framework;
 
-
 gl::Framework::Framework()
 	: base()
 	, myInstance(nullptr)

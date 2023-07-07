@@ -21,7 +21,7 @@ export namespace gl
 		Framework();
 		~Framework();
 
-		InitError Initialize(const int& x, const int& y, const int& width, const int& height);
+		framework::InitError Initialize(const int& x, const int& y, const int& width, const int& height);
 		void Run();
 
 	private:
