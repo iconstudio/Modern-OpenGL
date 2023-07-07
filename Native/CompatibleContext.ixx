@@ -2,7 +2,7 @@ export module Glib.Device.CompatibleContext;
 import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IHandle;
-import Glib.Device.IContext;
+export import Glib.Device.IContext;
 
 export namespace gl::device
 {
