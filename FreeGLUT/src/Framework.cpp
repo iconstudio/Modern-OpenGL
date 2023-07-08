@@ -1,5 +1,7 @@
 module;
 #include <Windows.h>
+#undef CreateWindow
+#undef CreateWindowEx
 
 module Glib.Framework;
 import Utility.Print;
@@ -19,6 +21,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	{
 		util::Println("Light Mode");
 	}
+
+	myInstance = window::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
 
 	return framework::InitError::Success;
 }
