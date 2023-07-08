@@ -74,79 +74,6 @@ bool
 gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
 {
-	if (gl::device::kb::Pressed == event_id)
-	{
-		const bool is_first = device::io::IsFirstPress(rhs);
-		if (is_first)
-		{
-			std::printf("[Key Pressed] %lld\n", lhs);
-		}
-
-		if (nullptr != keyDownHandler)
-		{
-			keyDownHandler(*this, static_cast<device::io::KeyCode>(lhs), is_first);
-			return true;
-		}
-	}
-	else if (gl::device::kb::Released == event_id)
-	{
-		std::printf("[Key Released] %lld\n", lhs);
-
-		if (nullptr != keyUpHandler)
-		{
-			keyUpHandler(*this, static_cast<device::io::KeyCode>(lhs));
-			return true;
-		}
-	}
-	else if (gl::device::kb::AltPressed == event_id)
-	{
-		const bool is_first = device::io::IsFirstPress(rhs);
-		if (is_first)
-		{
-			std::printf("[System Key Pressed] %lld\n", lhs);
-		}
-
-		if (nullptr != sysDownHandler)
-		{
-			sysDownHandler(*this, static_cast<device::io::KeyCode>(lhs), is_first);
-			return true;
-		}
-	}
-	else if (gl::device::kb::AltReleased == event_id)
-	{
-		std::printf("[System Key Released] %lld\n", lhs);
-
-		if (nullptr != sysUpHandler)
-		{
-			sysUpHandler(*this, static_cast<device::io::KeyCode>(lhs));
-			return true;
-		}
-	}
-	else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
-	{
-		const bool is_first = device::io::IsFirstPress(rhs);
-		if (is_first)
-		{
-			std::printf("[Chr Pressed] %lld\n", lhs);
-		}
-
-		if (nullptr != chrDownHandler)
-		{
-			chrDownHandler(*this, static_cast<char32_t>(lhs), rhs);
-			return true;
-		}
-	}
-	else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
-	{
-		std::printf("[Chr Released] %lld\n", lhs);
-
-		if (nullptr != chrUpHandler)
-		{
-			chrUpHandler(*this, static_cast<char32_t>(lhs), rhs);
-			return true;
-		}
-	}
-
 	if (myEventHandlers.contains(event_id))
 	{
 		awaitFlag.store(event_t(event_id, lhs, rhs, 0));
@@ -353,9 +280,82 @@ noexcept
 		}
 
 		auto event = await_flag.load(util::memory_order_acquire);
-		self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
-			handler(self, event.wParam, event.lParam);
-		});
+		auto& event_id = event.id;
+		auto& wparam = event.wParam;
+		auto& lparam = event.lParam;
+
+		if (gl::device::kb::Pressed == event_id)
+		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
+				std::printf("[Key Pressed] %lld\n", wparam);
+			}
+
+			if (nullptr != self.keyDownHandler)
+			{
+				self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+			}
+		}
+		else if (gl::device::kb::Released == event_id)
+		{
+			std::printf("[Key Released] %lld\n", wparam);
+
+			if (nullptr != self.keyUpHandler)
+			{
+				self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+			}
+		}
+		else if (gl::device::kb::AltPressed == event_id)
+		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
+				std::printf("[System Key Pressed] %lld\n", wparam);
+			}
+
+			if (nullptr != self.sysDownHandler)
+			{
+				self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+			}
+		}
+		else if (gl::device::kb::AltReleased == event_id)
+		{
+			std::printf("[System Key Released] %lld\n", wparam);
+
+			if (nullptr != self.sysUpHandler)
+			{
+				self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+			}
+		}
+		else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
+		{
+			const bool is_first = device::io::IsFirstPress(lparam);
+			if (is_first)
+			{
+				std::printf("[Chr Pressed] %lld\n", wparam);
+			}
+
+			if (nullptr != self.chrDownHandler)
+			{
+				self.chrDownHandler(self, static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
+		{
+			std::printf("[Chr Released] %lld\n", wparam);
+
+			if (nullptr != self.chrUpHandler)
+			{
+				self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
+			}
+		}
+		else
+		{
+			self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
+				handler(self, event.wParam, event.lParam);
+			});
+		}
 
 		await_flag.store(DefaultEvent, util::memory_order_relaxed);
 		await_flag.wait(DefaultEvent, util::memory_order_release);
