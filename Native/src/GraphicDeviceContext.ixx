@@ -13,8 +13,8 @@ export namespace gl::device
 		GraphicDeviceContext(const native::HWND& handle) noexcept;
 		~GraphicDeviceContext() noexcept;
 
-		native::PaintStruct& GetStatus() noexcept;
-		const native::PaintStruct& GetStatus() const noexcept;
+		native::PaintStruct& GetPaintStruct() noexcept;
+		const native::PaintStruct& GetPaintStruct() const noexcept;
 
 		GraphicDeviceContext(const GraphicDeviceContext&) = delete;
 		GraphicDeviceContext(GraphicDeviceContext&&) = delete;

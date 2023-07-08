@@ -23,14 +23,14 @@ noexcept
 }
 
 gl::device::native::PaintStruct&
-gl::device::GraphicDeviceContext::GetStatus()
+gl::device::GraphicDeviceContext::GetPaintStruct()
 noexcept
 {
 	return myStatus;
 }
 
 const gl::device::native::PaintStruct&
-gl::device::GraphicDeviceContext::GetStatus()
+gl::device::GraphicDeviceContext::GetPaintStruct()
 const noexcept
 {
 	return myStatus;

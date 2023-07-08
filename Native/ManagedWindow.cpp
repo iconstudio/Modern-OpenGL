@@ -215,7 +215,7 @@ noexcept
 		{
 			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
-			device::native::PaintStruct& ps = render_ctx.GetStatus();
+			device::native::PaintStruct& ps = render_ctx.GetPaintStruct();
 
 			auto context = render_ctx.CreateCompatibleContext();
 
