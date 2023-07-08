@@ -42,12 +42,14 @@ export namespace gl::device::native
 {
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
 	using RawWindowProperty = tagWNDCLASSEXW;
+	using NativeRect = tagRECT;
+
 	using HWND = HWND__*;
 	using PaintStruct = tagPAINTSTRUCT;
-
-	using NativeRect = tagRECT;
 	using NativeContext = ::HDC__*;
+	using NativeOGL = ::HGLRC__*;
 	using NativeMenu = ::HMENU__*;
+
 	using RawBitmap = ::HBITMAP__*;
 	using RawIcon = ::HICON__*;
 	using RawColorBrush = ::HBRUSH__*;
