@@ -1,5 +1,9 @@
 module;
+#include <Windows.h>
+
 module Glib.Framework;
+import Glib.Display;
+import Glib.Window.Factory;
 
 gl::Framework::Framework()
 noexcept
