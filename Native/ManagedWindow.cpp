@@ -23,6 +23,8 @@ noexcept
 {
 	try
 	{
+		underlying.SetInternalUserData(reinterpret_cast<long long>(this));
+
 		for (size_t index = 0; index < workerCount; ++index)
 		{
 			myWorkers.emplace_back(std::make_unique<util::jthread>(Worker, cancellationSource.get_token(), std::ref(*this), std::ref(awaitFlag)));
@@ -48,6 +50,10 @@ noexcept
 
 	underlying.Awake();
 
+
+
+	AddEventHandler(gl::device::kb::Pressed, nullptr);
+
 	return managed_window::AwakeResult::Success;
 }
 
@@ -55,8 +61,6 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
-	underlying.SetInternalUserData(reinterpret_cast<long long>(this));
-
 	isRunning = true;
 
 	while (true)
