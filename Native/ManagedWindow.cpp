@@ -213,6 +213,12 @@ noexcept
 	{
 		case event_id_t::Paint:
 		{
+			if (nullptr == self)
+			{
+				std::printf("[Initiated] First Rendering\n");
+				break;
+			}
+
 			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
 			if (auto& renderer = self->renderHandler; renderer)
@@ -330,6 +336,12 @@ noexcept
 
 		case event_id_t::Activate:
 		{
+			if (nullptr == self)
+			{
+				std::printf("[Initiated]\n");
+				break;
+			}
+
 			const unsigned short trigger = device::LOWORD(wparam);
 
 			if (trigger == device::DeviceActivation::Inactivated)
