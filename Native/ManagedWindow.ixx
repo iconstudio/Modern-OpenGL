@@ -10,6 +10,7 @@ import Utility.Atomic;
 import Utility.Monad;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
+import Glib.Definitions;
 import Glib.Device.IO;
 export import Glib.Device.Event;
 export import Glib.Window.Coroutine;
@@ -59,6 +60,7 @@ export namespace gl::window
 		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
 		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
 		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
+		using RenderEventHandler = void(*)(ManagedWindow&, device::GraphicDeviceContext&) noexcept;
 
 		explicit ManagedWindow(Window&& window, int number_of_workers);
 
@@ -106,6 +108,7 @@ export namespace gl::window
 		SysKeyUpEventHandler sysUpHandler = nullptr;
 		CharDownEventHandler chrDownHandler = nullptr;
 		CharUpEventHandler chrUpHandler = nullptr;
+		RenderEventHandler renderHandler = nullptr;
 
 		pool_t myWorkers{};
 		size_t workerCount = 0;
