@@ -6,12 +6,20 @@ gl::device::GraphicDeviceContext::GraphicDeviceContext(const gl::device::native:
 noexcept
 	: base(::BeginPaint(handle, &myStatus))
 	, myWindowHandle(handle)
-{}
+	, myContext()
+{
+	myContext = ::wglCreateContext(myHandle);
+}
 
 gl::device::GraphicDeviceContext::~GraphicDeviceContext()
 noexcept
 {
 	::EndPaint(myWindowHandle, &myStatus);
+
+	if (myContext)
+	{
+		::wglDeleteContext(myContext);
+	}
 }
 
 gl::device::native::PaintStruct&

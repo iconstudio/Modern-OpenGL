@@ -24,5 +24,6 @@ export namespace gl::device
 	private:
 		native::HWND myWindowHandle = nullptr;
 		native::PaintStruct myStatus{};
+		native::NativeOGL myContext = nullptr;
 	};
 }
