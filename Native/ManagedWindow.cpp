@@ -215,11 +215,10 @@ noexcept
 		{
 			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
-			device::native::PaintStruct& ps = render_ctx.GetPaintStruct();
-
-			auto context = render_ctx.CreateCompatibleContext();
-
-			//device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
+			if (auto& renderer = self->renderHandler; renderer)
+			{
+				renderer(*self, render_ctx);
+			}
 		}
 		break;
 
