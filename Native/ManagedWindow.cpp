@@ -15,8 +15,6 @@ gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number
 	myDimensions = underlying.GetDimensions();
 	myEventHandlers.reserve(20);
 	myWorkers.reserve(number_of_workers);
-
-	underlying.SetInternalUserData(reinterpret_cast<long long>(this));
 }
 
 gl::window::managed_window::AwakeResult
@@ -57,6 +55,8 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
+	underlying.SetInternalUserData(reinterpret_cast<long long>(this));
+
 	isRunning = true;
 
 	while (true)
