@@ -1,6 +1,6 @@
 export module Glib.Framework;
 import <memory>;
-import <string>;
+import <string_view>;
 import Glib.Rect;
 import Glib.Window.ManagedWindow;
 
@@ -10,7 +10,7 @@ export namespace gl
 	{
 		struct Descriptor
 		{
-			std::wstring title;
+			std::wstring_view title;
 			int wx, wy, ww, wh;
 		};
 
@@ -21,10 +21,19 @@ export namespace gl
 		};
 
 		[[nodiscard]]
-		constexpr Descriptor DefaultDescriptor() noexcept
+		consteval Descriptor MakeDefaultDescriptor() noexcept
 		{
-			return Descriptor{ L"FreeGLUT", static_cast<int>(0x80000000), 0, 800, 600 };
+			return Descriptor
+			{
+				.title = L"FreeGLUT",
+				.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT
+				.wy = 0,
+				.ww = 800,
+				.wh = 600
+			};
 		}
+
+		inline constexpr Descriptor DefaultDescriptor = MakeDefaultDescriptor();
 	}
 
 	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>

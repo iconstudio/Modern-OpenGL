@@ -33,7 +33,7 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 gl::framework::InitError
 gl::Framework::Initialize()
 {
-	return Initialize(framework::DefaultDescriptor());
+	return Initialize(framework::MakeDefaultDescriptor());
 }
 
 void
