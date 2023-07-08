@@ -76,7 +76,7 @@ noexcept
 {
 	if (myEventHandlers.contains(event_id))
 	{
-		awaitFlag.store(event_t(event_id, lhs, rhs, 0));
+		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_acquire);
 		awaitFlag.notify_one();
 
 		//::InvalidateRect(control, nullptr, TRUE);
@@ -279,7 +279,7 @@ noexcept
 			return;
 		}
 
-		auto event = await_flag.load(util::memory_order_acquire);
+		auto event = await_flag.load(util::memory_order_release);
 		auto& event_id = event.id;
 		auto& wparam = event.wParam;
 		auto& lparam = event.lParam;
@@ -357,7 +357,7 @@ noexcept
 			});
 		}
 
-		await_flag.store(DefaultEvent, util::memory_order_relaxed);
+		await_flag.store(DefaultEvent, util::memory_order_acquire);
 		await_flag.wait(DefaultEvent, util::memory_order_release);
 	}
 
