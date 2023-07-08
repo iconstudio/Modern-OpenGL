@@ -32,7 +32,7 @@ export namespace gl
 	public:
 		using base = std::enable_shared_from_this<Framework>;
 
-		Framework() noexcept = default;
+		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
 
 		framework::InitError Initialize(const framework::Descriptor& setup);
