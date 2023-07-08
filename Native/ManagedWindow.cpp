@@ -469,26 +469,40 @@ void
 gl::window::ManagedWindow::CharKeyHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
 {
-	if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
+	const bool is_press = device::io::IsPressing(lparam);
+	const bool is_first = device::io::IsFirstPress(lparam);
+	const bool is_sys = device::io::IsWithAltKey(lparam);
+
+	if (!is_press)
 	{
-		const bool is_first = device::io::IsFirstPress(lparam);
-		if (is_first)
+		if (is_sys)
+		{
+			std::printf("[System Chr Released] %lld\n", wparam);
+		}
+		else
+		{
+			std::printf("[Chr Released] %lld\n", wparam);
+		}
+
+		if (nullptr != self.chrUpHandler)
+		{
+			self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
+		}
+	}
+	else if (is_first)
+	{
+		if (is_sys)
+		{
+			std::printf("[System Chr Pressed] %lld\n", wparam);
+		}
+		else
 		{
 			std::printf("[Chr Pressed] %lld\n", wparam);
 		}
 
 		if (nullptr != self.chrDownHandler)
 		{
-			self.chrDownHandler(self, static_cast<char32_t>(wparam), lparam);
-		}
-	}
-	else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
-	{
-		std::printf("[Chr Released] %lld\n", wparam);
-
-		if (nullptr != self.chrUpHandler)
-		{
-			self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
+			self.chrDownHandler(self, static_cast<char32_t>(wparam), is_first);
 		}
 	}
 }
