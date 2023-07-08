@@ -68,4 +68,13 @@ export namespace gl::device::io
 	{
 		return 0 != GetParam(lparam, io::KeyboardFlag::IsAlt);
 	}
+
+	/// <summary>
+	/// WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, WM_SYSKEYUP
+	/// </summary>
+	[[nodiscard]]
+	constexpr bool IsExtended(const long long& lparam) noexcept
+	{
+		return 0 != GetParam(lparam, io::KeyboardFlag::IsExtended);
+	}
 }
