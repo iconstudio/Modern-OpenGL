@@ -50,9 +50,14 @@ noexcept
 
 	underlying.Awake();
 
-
-
-	AddEventHandler(gl::device::kb::Pressed, nullptr);
+	AddEventHandler(gl::device::kb::Pressed, KeyboardHandler);
+	AddEventHandler(gl::device::kb::Released, KeyboardHandler);
+	AddEventHandler(gl::device::kb::CharPressed, KeyboardHandler);
+	AddEventHandler(gl::device::kb::CharReleased, KeyboardHandler);
+	AddEventHandler(gl::device::kb::AltPressed, KeyboardHandler);
+	AddEventHandler(gl::device::kb::AltReleased, KeyboardHandler);
+	AddEventHandler(gl::device::kb::AltCharPressed, KeyboardHandler);
+	AddEventHandler(gl::device::kb::AltCharReleased, KeyboardHandler);
 
 	return managed_window::AwakeResult::Success;
 }
@@ -481,6 +486,13 @@ noexcept
 	{
 		myCoroutines->top().Resume();
 	}
+}
+
+void
+gl::window::ManagedWindow::KeyboardHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
+noexcept
+{
+
 }
 
 void
