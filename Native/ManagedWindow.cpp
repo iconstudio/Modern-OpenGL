@@ -52,12 +52,13 @@ noexcept
 
 	AddEventHandler(gl::device::kb::Pressed, KeyboardHandler);
 	AddEventHandler(gl::device::kb::Released, KeyboardHandler);
-	AddEventHandler(gl::device::kb::CharPressed, KeyboardHandler);
-	AddEventHandler(gl::device::kb::CharReleased, KeyboardHandler);
 	AddEventHandler(gl::device::kb::AltPressed, KeyboardHandler);
 	AddEventHandler(gl::device::kb::AltReleased, KeyboardHandler);
-	AddEventHandler(gl::device::kb::AltCharPressed, KeyboardHandler);
-	AddEventHandler(gl::device::kb::AltCharReleased, KeyboardHandler);
+
+	AddEventHandler(gl::device::kb::CharPressed, CharKeyHandler);
+	AddEventHandler(gl::device::kb::CharReleased, CharKeyHandler);
+	AddEventHandler(gl::device::kb::AltCharPressed, CharKeyHandler);
+	AddEventHandler(gl::device::kb::AltCharReleased, CharKeyHandler);
 
 	return managed_window::AwakeResult::Success;
 }
@@ -289,82 +290,10 @@ noexcept
 		}
 
 		auto event = await_flag.load(util::memory_order_release);
-		auto& event_id = event.id;
-		auto& wparam = event.wParam;
-		auto& lparam = event.lParam;
-
-		if (gl::device::kb::Pressed == event_id)
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[Key Pressed] %lld\n", wparam);
-			}
-
-			if (nullptr != self.keyDownHandler)
-			{
-				self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
-			}
-		}
-		else if (gl::device::kb::Released == event_id)
-		{
-			std::printf("[Key Released] %lld\n", wparam);
-
-			if (nullptr != self.keyUpHandler)
-			{
-				self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
-			}
-		}
-		else if (gl::device::kb::AltPressed == event_id)
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[System Key Pressed] %lld\n", wparam);
-			}
-
-			if (nullptr != self.sysDownHandler)
-			{
-				self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
-			}
-		}
-		else if (gl::device::kb::AltReleased == event_id)
-		{
-			std::printf("[System Key Released] %lld\n", wparam);
-
-			if (nullptr != self.sysUpHandler)
-			{
-				self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
-			}
-		}
-		else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[Chr Pressed] %lld\n", wparam);
-			}
-
-			if (nullptr != self.chrDownHandler)
-			{
-				self.chrDownHandler(self, static_cast<char32_t>(wparam), lparam);
-			}
-		}
-		else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
-		{
-			std::printf("[Chr Released] %lld\n", wparam);
-
-			if (nullptr != self.chrUpHandler)
-			{
-				self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
-			}
-		}
-		else
-		{
-			self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
-				handler(self, event.wParam, event.lParam);
-			});
-		}
+		self.FindEventHandler(event.id).if_then(
+			[&](const event_handler_t& handler) noexcept {
+			handler(self, event.wParam, event.lParam);
+		});
 
 		await_flag.store(DefaultEvent, util::memory_order_acquire);
 		await_flag.wait(DefaultEvent, util::memory_order_release);
@@ -492,7 +421,88 @@ void
 gl::window::ManagedWindow::KeyboardHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
 {
+	const bool is_press = device::io::IsPressing(lparam);
+	const bool is_first = device::io::IsFirstPress(lparam);
+	const bool is_sys = device::io::IsWithAltKey(lparam);
 
+	
+
+	if (!is_press)
+	{
+		std::printf("[Key Pressed] %lld\n", wparam);
+	}
+	else if (is_first)
+	{
+		std::printf("[Key Pressed] %lld\n", wparam);
+	}
+
+	if (gl::device::kb::Pressed == event_id)
+	{
+
+		if (nullptr != self.keyDownHandler)
+		{
+			self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+		}
+	}
+	else if (gl::device::kb::Released == event_id)
+	{
+		std::printf("[Key Released] %lld\n", wparam);
+
+		if (nullptr != self.keyUpHandler)
+		{
+			self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+		}
+	}
+	else if (gl::device::kb::AltPressed == event_id)
+	{
+		const bool is_first = device::io::IsFirstPress(lparam);
+		if (is_first)
+		{
+			std::printf("[System Key Pressed] %lld\n", wparam);
+		}
+
+		if (nullptr != self.sysDownHandler)
+		{
+			self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+		}
+	}
+	else if (gl::device::kb::AltReleased == event_id)
+	{
+		std::printf("[System Key Released] %lld\n", wparam);
+
+		if (nullptr != self.sysUpHandler)
+		{
+			self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+		}
+	}
+	else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
+	{
+		const bool is_first = device::io::IsFirstPress(lparam);
+		if (is_first)
+		{
+			std::printf("[Chr Pressed] %lld\n", wparam);
+		}
+
+		if (nullptr != self.chrDownHandler)
+		{
+			self.chrDownHandler(self, static_cast<char32_t>(wparam), lparam);
+		}
+	}
+	else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
+	{
+		std::printf("[Chr Released] %lld\n", wparam);
+
+		if (nullptr != self.chrUpHandler)
+		{
+			self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
+		}
+	}
+}
+
+void
+gl::window::ManagedWindow::CharKeyHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
+noexcept
+{
 }
 
 void

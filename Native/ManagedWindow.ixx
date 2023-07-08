@@ -94,6 +94,7 @@ export namespace gl::window
 		void ResumeTopCoroutine() noexcept;
 
 		static void KeyboardHandler(ManagedWindow&, unsigned long long, long long) noexcept;
+		static void CharKeyHandler(ManagedWindow&, unsigned long long, long long) noexcept;
 		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept;
 
 		Window underlying;
