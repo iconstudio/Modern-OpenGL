@@ -425,57 +425,51 @@ noexcept
 	const bool is_first = device::io::IsFirstPress(lparam);
 	const bool is_sys = device::io::IsWithAltKey(lparam);
 
-	
-
 	if (!is_press)
 	{
-		std::printf("[Key Pressed] %lld\n", wparam);
+		if (is_sys)
+		{
+			std::printf("[System Key Released] %lld\n", wparam);
+			if (nullptr != self.sysUpHandler)
+			{
+				self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+			}
+		}
+		else
+		{
+			std::printf("[Key Released] %lld\n", wparam);
+			if (nullptr != self.keyUpHandler)
+			{
+				self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+			}
+		}
 	}
 	else if (is_first)
 	{
-		std::printf("[Key Pressed] %lld\n", wparam);
-	}
-
-	if (gl::device::kb::Pressed == event_id)
-	{
-
-		if (nullptr != self.keyDownHandler)
-		{
-			self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
-		}
-	}
-	else if (gl::device::kb::Released == event_id)
-	{
-		std::printf("[Key Released] %lld\n", wparam);
-
-		if (nullptr != self.keyUpHandler)
-		{
-			self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
-		}
-	}
-	else if (gl::device::kb::AltPressed == event_id)
-	{
-		const bool is_first = device::io::IsFirstPress(lparam);
-		if (is_first)
+		if (is_sys)
 		{
 			std::printf("[System Key Pressed] %lld\n", wparam);
+			if (nullptr != self.sysDownHandler)
+			{
+				self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+			}
 		}
-
-		if (nullptr != self.sysDownHandler)
+		else
 		{
-			self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+			std::printf("[Key Pressed] %lld\n", wparam);
+			if (nullptr != self.keyDownHandler)
+			{
+				self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+			}
 		}
 	}
-	else if (gl::device::kb::AltReleased == event_id)
-	{
-		std::printf("[System Key Released] %lld\n", wparam);
+}
 
-		if (nullptr != self.sysUpHandler)
-		{
-			self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
-		}
-	}
-	else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
+void
+gl::window::ManagedWindow::CharKeyHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
+noexcept
+{
+	if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
 	{
 		const bool is_first = device::io::IsFirstPress(lparam);
 		if (is_first)
@@ -497,12 +491,6 @@ noexcept
 			self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
 		}
 	}
-}
-
-void
-gl::window::ManagedWindow::CharKeyHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
-noexcept
-{
 }
 
 void
