@@ -70,47 +70,6 @@ noexcept
 	}
 }
 
-void
-gl::window::ManagedWindow::AddEventHandler(gl::window::ManagedWindow::event_id_t id, const gl::window::ManagedWindow::event_handler_t& procedure)
-noexcept
-{
-	myEventHandlers.insert(std::make_pair(id, procedure));
-}
-
-void
-gl::window::ManagedWindow::SetCaptureMouse(const bool& flag)
-noexcept
-{
-	isCapturing = flag;
-}
-
-void
-gl::window::ManagedWindow::StartCoroutine(gl::window::ManagedWindow::coro_t&& coroutine)
-noexcept
-{
-	ResumeTopCoroutine();
-
-	//myCoroutines->push(std::move(coroutine));
-}
-
-void
-gl::window::ManagedWindow::Destroy()
-noexcept
-{
-	if (isRunning)
-	{
-		cancellationSource.request_stop();
-		awaitFlag.notify_all();
-
-		for (unit_t& worker : myWorkers)
-		{
-			worker->detach();
-		}
-
-		isRunning = false;
-	}
-}
-
 bool
 gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
@@ -199,78 +158,6 @@ noexcept
 	else
 	{
 		return false;
-	}
-}
-
-util::Monad<gl::window::ManagedWindow::event_handler_t>
-gl::window::ManagedWindow::FindEventHandler(const event_id_t& event_id)
-noexcept
-{
-	const event_iterator it = myEventHandlers.find(event_id);
-	if (it == myEventHandlers.cend())
-	{
-		return util::nullopt;
-	}
-	else
-	{
-		return it->second;
-	}
-}
-
-bool
-gl::window::ManagedWindow::TryCaptureMouse()
-noexcept
-{
-	if (isCapturing)
-	{
-		device::io::CaptureMouse(underlying.GetHandle());
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void
-gl::window::ManagedWindow::ResetMouseCapture()
-noexcept
-{
-	device::io::ResetMouseCapture(underlying.GetHandle());
-}
-
-void
-gl::window::ManagedWindow::ClearMouseCapturing()
-noexcept
-{
-	ResetMouseCapture();
-	isCapturing = false;
-}
-
-bool
-gl::window::ManagedWindow::IsMouseCaptured() const
-noexcept
-{
-	return device::io::IsMouseCaptured(underlying.GetHandle());
-}
-
-void
-gl::window::ManagedWindow::ResumeTopCoroutine()
-noexcept
-{
-	if (!myCoroutines->empty())
-	{
-		myCoroutines->top().Resume();
-	}
-}
-
-void
-gl::window::ManagedWindow::DefaultSysKeyEvent(gl::window::ManagedWindow& self, device::io::KeyCode code, bool is_first)
-noexcept
-{
-	if (is_first && code == device::io::KeyCode::F4)
-	{
-		self.underlying.SendCommand(event_id_t::Close, 0, 0);
 	}
 }
 
@@ -486,5 +373,118 @@ noexcept
 	else
 	{
 		latch.wait(count, util::memory_order_release);
+	}
+}
+
+void
+gl::window::ManagedWindow::AddEventHandler(gl::window::ManagedWindow::event_id_t id, const gl::window::ManagedWindow::event_handler_t& procedure)
+noexcept
+{
+	myEventHandlers.insert(std::make_pair(id, procedure));
+}
+
+util::Monad<gl::window::ManagedWindow::event_handler_t>
+gl::window::ManagedWindow::FindEventHandler(const event_id_t& event_id)
+noexcept
+{
+	const event_iterator it = myEventHandlers.find(event_id);
+	if (it == myEventHandlers.cend())
+	{
+		return util::nullopt;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+void
+gl::window::ManagedWindow::StartCoroutine(gl::window::ManagedWindow::coro_t&& coroutine)
+noexcept
+{
+	ResumeTopCoroutine();
+
+	//myCoroutines->push(std::move(coroutine));
+}
+
+void
+gl::window::ManagedWindow::Destroy()
+noexcept
+{
+	if (isRunning)
+	{
+		cancellationSource.request_stop();
+		awaitFlag.notify_all();
+
+		for (unit_t& worker : myWorkers)
+		{
+			worker->detach();
+		}
+
+		isRunning = false;
+	}
+}
+
+void
+gl::window::ManagedWindow::SetCaptureMouse(const bool& flag)
+noexcept
+{
+	isCapturing = flag;
+}
+
+bool
+gl::window::ManagedWindow::TryCaptureMouse()
+noexcept
+{
+	if (isCapturing)
+	{
+		device::io::CaptureMouse(underlying.GetHandle());
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void
+gl::window::ManagedWindow::ResetMouseCapture()
+noexcept
+{
+	device::io::ResetMouseCapture(underlying.GetHandle());
+}
+
+void
+gl::window::ManagedWindow::ClearMouseCapturing()
+noexcept
+{
+	ResetMouseCapture();
+	isCapturing = false;
+}
+
+bool
+gl::window::ManagedWindow::IsMouseCaptured() const
+noexcept
+{
+	return device::io::IsMouseCaptured(underlying.GetHandle());
+}
+
+void
+gl::window::ManagedWindow::ResumeTopCoroutine()
+noexcept
+{
+	if (!myCoroutines->empty())
+	{
+		myCoroutines->top().Resume();
+	}
+}
+
+void
+gl::window::ManagedWindow::DefaultSysKeyEvent(gl::window::ManagedWindow& self, device::io::KeyCode code, bool is_first)
+noexcept
+{
+	if (is_first && code == device::io::KeyCode::F4)
+	{
+		self.underlying.SendCommand(event_id_t::Close, 0, 0);
 	}
 }
