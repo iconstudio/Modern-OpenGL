@@ -11,6 +11,13 @@ static inline int window_handle = -1;
 static inline gl::DisplayModes window_mode{};
 static inline gl::Rect window_rect{};
 
+std::shared_ptr<gl::Framework>
+gl::CreateFramework()
+noexcept
+{
+	return std::shared_ptr<Framework>();
+}
+
 void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, const int& w, const int& h) noexcept
 {
 	display::dpi::SetDPIAware(true);

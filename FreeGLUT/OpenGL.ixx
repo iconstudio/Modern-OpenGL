@@ -2,7 +2,7 @@ export module Glib;
 import <memory>;
 import :DefaultProperty;
 export import :DisplayModes;
-export import :Framework;
+export import Glib.Framework;
 
 export namespace gl
 {
