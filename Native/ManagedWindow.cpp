@@ -86,7 +86,7 @@ noexcept
 {
 	if (myEventHandlers.contains(event_id))
 	{
-		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_acquire);
+		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_release);
 		awaitFlag.notify_one();
 
 		//::InvalidateRect(control, nullptr, TRUE);
@@ -286,17 +286,17 @@ noexcept
 	{
 		if (stop_token.stop_requested())
 		{
-			return;
+			break;
 		}
 
-		auto event = await_flag.load(util::memory_order_release);
+		auto event = await_flag.load(util::memory_order_acquire);
 		self.FindEventHandler(event.id).if_then(
 			[&](const event_handler_t& handler) noexcept {
 			handler(self, event.wParam, event.lParam);
 		});
 
-		await_flag.store(DefaultEvent, util::memory_order_acquire);
-		await_flag.wait(DefaultEvent, util::memory_order_release);
+		await_flag.store(DefaultEvent, util::memory_order_release);
+		await_flag.wait(DefaultEvent, util::memory_order_acquire);
 	}
 
 	auto& latch = self.terminateLatch;
