@@ -1,7 +1,6 @@
-export module Glib:Framework;
+export module Glib.Framework;
 import <memory>;
 import Glib.Window.ManagedWindow;
-import :DisplayModes;
 
 export namespace gl
 {
@@ -13,19 +12,18 @@ export namespace gl
 		};
 	}
 
-	class Framework : std::enable_shared_from_this<Framework>
+	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>
 	{
 	public:
 		using base = std::enable_shared_from_this<Framework>;
 
-		Framework();
-		~Framework();
+		Framework() noexcept;
+		~Framework() noexcept;
 
 		framework::InitError Initialize(const int& x, const int& y, const int& width, const int& height);
-		void Run();
+		void Run() noexcept;
 
 	private:
 		std::unique_ptr<window::ManagedWindow> myInstance;
-		DisplayModes displayMode;
 	};
 }
