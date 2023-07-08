@@ -468,12 +468,12 @@ noexcept
 			return;
 		}
 
-		auto event = await_flag.load();
+		auto event = await_flag.load(util::memory_order_acquire);
 		self.FindEventHandler(event.id).if_then([&](const event_handler_t& handler) noexcept {
 			handler(self, event.wParam, event.lParam);
 		});
 
-		await_flag.store(DefaultEvent, util::memory_order_acquire);
+		await_flag.store(DefaultEvent, util::memory_order_relaxed);
 		await_flag.wait(DefaultEvent, util::memory_order_release);
 	}
 
