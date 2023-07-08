@@ -21,7 +21,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}
 	catch (const std::exception& e)
 	{
-		util::Println("예외 '{}'가 발생했습니다.", e.what());
+		//util::Println("예외 '{}'가 발생했습니다.", e.what());
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
@@ -39,7 +39,7 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 	}
 	catch (const std::exception& e)
 	{
-		util::Println("예외 '{}'가 발생했습니다.", e.what());
+		//util::Println("예외 '{}'가 발생했습니다.", e.what());
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
