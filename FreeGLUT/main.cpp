@@ -23,9 +23,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	util::Println("== Program Started ==");
 
-	gl::Start();
-
-	//window.StartCoroutine(test_coroutine());
 	window->Start();
 
 	util::Println("== Program Ended ==");
