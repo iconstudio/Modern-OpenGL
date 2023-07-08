@@ -15,7 +15,15 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 {
 	ReadyDisplay();
 
-	myInstance = window::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
+	try
+	{
+		myInstance = window::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
+	}
+	catch (const std::exception& e)
+	{
+		util::Println("예외 '{}'가 발생했습니다.", e.what());
+		return framework::InitError::FailedOnCreatingWindow;
+	}
 
 	return framework::InitError::Success;
 }
@@ -25,7 +33,15 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 {
 	ReadyDisplay();
 
-	myInstance = window::CreateWindowEx<L"ManagedWindow">(std::move(setup.title), std::move(setup.wx), std::move(setup.wy), std::move(setup.ww), std::move(setup.wh));
+	try
+	{
+		myInstance = window::CreateWindowEx<L"ManagedWindow">(std::move(setup.title), std::move(setup.wx), std::move(setup.wy), std::move(setup.ww), std::move(setup.wh));
+	}
+	catch (const std::exception& e)
+	{
+		util::Println("예외 '{}'가 발생했습니다.", e.what());
+		return framework::InitError::FailedOnCreatingWindow;
+	}
 
 	return framework::InitError::Success;
 }
