@@ -55,7 +55,10 @@ gl::Framework::Initialize()
 void
 gl::Framework::Run()
 noexcept
-{}
+{
+	myInstance->Awake();
+	myInstance->Start();
+}
 
 void ReadyDisplay() noexcept
 {
