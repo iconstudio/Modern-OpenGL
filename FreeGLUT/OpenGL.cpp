@@ -1,6 +1,4 @@
 module;
-#include <gdiplus.h>
-
 module Glib;
 import Utility;
 import Utility.Print;
