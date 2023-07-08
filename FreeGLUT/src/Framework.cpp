@@ -23,6 +23,12 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	return framework::InitError::Success;
 }
 
+gl::framework::InitError
+gl::Framework::Initialize()
+{
+	return Initialize(framework::DefaultDescriptor());
+}
+
 void
 gl::Framework::Run()
 noexcept
