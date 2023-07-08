@@ -26,7 +26,7 @@ void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, const 
 
 void gl::Initialize(const DisplayModes& mode, default_position_t, const int& w, const int& h) noexcept
 {
-	return Initialize(mode, default_window_x, default_window_y, w, h);
+	return Initialize(mode, 400, 400, w, h);
 }
 
 void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, default_resoulution_t) noexcept
@@ -36,12 +36,12 @@ void gl::Initialize(const DisplayModes& mode, const int& x, const int& y, defaul
 
 void gl::Initialize(const DisplayModes& mode, const int& w, const int& h) noexcept
 {
-	return Initialize(mode, default_window_x, default_window_y, w, h);
+	return Initialize(mode, 400, 400, w, h);
 }
 
 void gl::Initialize(const DisplayModes& mode, default_position_t, default_resoulution_t) noexcept
 {
-	return Initialize(mode, default_window_x, default_window_y, default_window_w, default_window_h);
+	return Initialize(mode, 400, 400, default_window_w, default_window_h);
 }
 
 void gl::Start()
