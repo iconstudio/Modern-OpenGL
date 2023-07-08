@@ -1,5 +1,4 @@
 module;
-#include "Internal.hpp"
 #include "ImageLoader.inl"
 
 module Glib.Device.Resource.Bitmap;
