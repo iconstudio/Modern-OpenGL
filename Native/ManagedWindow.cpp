@@ -115,10 +115,85 @@ bool
 gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
 {
+	if (gl::device::kb::Pressed == event_id)
+	{
+		const bool is_first = device::io::IsFirstPress(rhs);
+		if (is_first)
+		{
+			std::printf("[Key Pressed] %lld\n", lhs);
+		}
+
+		if (nullptr != keyDownHandler)
+		{
+			keyDownHandler(*this, static_cast<device::io::KeyCode>(lhs), is_first);
+			return true;
+		}
+	}
+	else if (gl::device::kb::Released == event_id)
+	{
+		std::printf("[Key Released] %lld\n", lhs);
+
+		if (nullptr != keyUpHandler)
+		{
+			keyUpHandler(*this, static_cast<device::io::KeyCode>(lhs));
+			return true;
+		}
+	}
+	else if (gl::device::kb::AltPressed == event_id)
+	{
+		const bool is_first = device::io::IsFirstPress(rhs);
+		if (is_first)
+		{
+			std::printf("[System Key Pressed] %lld\n", lhs);
+		}
+
+		if (nullptr != sysDownHandler)
+		{
+			sysDownHandler(*this, static_cast<device::io::KeyCode>(lhs), is_first);
+			return true;
+		}
+	}
+	else if (gl::device::kb::AltReleased == event_id)
+	{
+		std::printf("[System Key Released] %lld\n", lhs);
+
+		if (nullptr != sysUpHandler)
+		{
+			sysUpHandler(*this, static_cast<device::io::KeyCode>(lhs));
+			return true;
+		}
+	}
+	else if (gl::device::kb::CharPressed == event_id || gl::device::kb::AltCharPressed == event_id)
+	{
+		const bool is_first = device::io::IsFirstPress(rhs);
+		if (is_first)
+		{
+			std::printf("[Chr Pressed] %lld\n", lhs);
+		}
+
+		if (nullptr != chrDownHandler)
+		{
+			chrDownHandler(*this, static_cast<char32_t>(lhs), rhs);
+			return true;
+		}
+	}
+	else if (gl::device::kb::CharReleased == event_id || gl::device::kb::AltCharReleased == event_id)
+	{
+		std::printf("[Chr Released] %lld\n", lhs);
+
+		if (nullptr != chrUpHandler)
+		{
+			chrUpHandler(*this, static_cast<char32_t>(lhs), rhs);
+			return true;
+		}
+	}
+
 	if (myEventHandlers.contains(event_id))
 	{
 		awaitFlag.store(event_t(event_id, lhs, rhs, 0));
 		awaitFlag.notify_one();
+
+		//::InvalidateRect(control, nullptr, TRUE);
 		return true;
 	}
 	else
@@ -224,84 +299,6 @@ noexcept
 			if (auto& renderer = self->renderHandler; renderer)
 			{
 				renderer(*self, render_ctx);
-			}
-		}
-		break;
-
-		case gl::device::kb::Pressed:
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[Key Pressed] %lld\n", wparam);
-			}
-
-			if (auto& key_dw_handler = self->keyDownHandler; key_dw_handler)
-			{
-				key_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), is_first);
-			}
-		}
-		break;
-
-		case gl::device::kb::Released:
-		{
-			std::printf("[Key Released] %lld\n", wparam);
-			if (auto& key_up_handler = self->keyUpHandler; key_up_handler)
-			{
-				key_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
-			}
-			//::InvalidateRect(control, nullptr, TRUE);
-		}
-		break;
-
-		case gl::device::kb::AltPressed:
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[System Key Pressed] %lld\n", wparam);
-			}
-
-			if (auto& sys_dw_handler = self->sysDownHandler; sys_dw_handler)
-			{
-				sys_dw_handler(*self, static_cast<device::io::KeyCode>(wparam), is_first);
-			}
-		}
-		break;
-
-		case gl::device::kb::AltReleased:
-		{
-			std::printf("[System Key Released] %lld\n", wparam);
-			if (auto& sys_up_handler = self->sysUpHandler; sys_up_handler)
-			{
-				sys_up_handler(*self, static_cast<device::io::KeyCode>(wparam));
-			}
-		}
-		break;
-
-		case gl::device::kb::CharPressed:
-		case gl::device::kb::AltCharPressed:
-		{
-			const bool is_first = device::io::IsFirstPress(lparam);
-			if (is_first)
-			{
-				std::printf("[Chr Pressed] %lld\n", wparam);
-			}
-
-			if (auto& chr_dw_handler = self->chrDownHandler; chr_dw_handler)
-			{
-				chr_dw_handler(*self, static_cast<char32_t>(wparam), lparam);
-			}
-		}
-		break;
-
-		case gl::device::kb::CharReleased:
-		case gl::device::kb::AltCharReleased:
-		{
-			std::printf("[Chr Released] %lld\n", wparam);
-			if (auto& chr_up_handler = self->chrUpHandler; chr_up_handler)
-			{
-				chr_up_handler(*self, static_cast<char32_t>(wparam), lparam);
 			}
 		}
 		break;
