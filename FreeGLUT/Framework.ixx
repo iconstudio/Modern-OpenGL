@@ -36,6 +36,7 @@ export namespace gl
 		~Framework() noexcept = default;
 
 		framework::InitError Initialize(const framework::Descriptor& setup);
+		framework::InitError Initialize(framework::Descriptor&& setup);
 		framework::InitError Initialize();
 		void Run() noexcept;
 
