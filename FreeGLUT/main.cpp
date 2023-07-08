@@ -11,7 +11,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	auto framework = gl::CreateFramework();
 
 	util::Println("== Creating the Client ==");
-	framework->Initialize(gl::framework::Descriptor{});
+	framework->Initialize();
 
 	util::Println("== Program Started ==");
 	framework->Run();
