@@ -20,7 +20,9 @@ noexcept
 gl::framework::InitError
 gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 {
-	return {};
+	display::dpi::SetDPIAware(true);
+
+	return framework::InitError::Success;
 }
 
 void
