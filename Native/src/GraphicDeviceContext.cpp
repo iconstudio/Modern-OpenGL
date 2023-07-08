@@ -2,27 +2,27 @@ module;
 #include "Internal.hpp"
 module Glib.Device.Context.Renderer;
 
-gl::device::RenderingContext::RenderingContext(const gl::device::native::HWND& handle)
+gl::device::GraphicDeviceContext::GraphicDeviceContext(const gl::device::native::HWND& handle)
 noexcept
 	: base(::BeginPaint(handle, &myStatus))
 	, myWindowHandle(handle)
 {}
 
-gl::device::RenderingContext::~RenderingContext()
+gl::device::GraphicDeviceContext::~GraphicDeviceContext()
 noexcept
 {
 	::EndPaint(myWindowHandle, &myStatus);
 }
 
 gl::device::native::PaintStruct&
-gl::device::RenderingContext::GetStatus()
+gl::device::GraphicDeviceContext::GetStatus()
 noexcept
 {
 	return myStatus;
 }
 
 const gl::device::native::PaintStruct&
-gl::device::RenderingContext::GetStatus()
+gl::device::GraphicDeviceContext::GetStatus()
 const noexcept
 {
 	return myStatus;

@@ -76,7 +76,7 @@ export namespace gl::device
 		bool DisableInput() noexcept;
 
 		[[nodiscard]] DeviceContext AcquireContext() const noexcept;
-		[[nodiscard]] RenderingContext AcquireRenderContext() const noexcept;
+		[[nodiscard]] GraphicDeviceContext AcquireRenderContext() const noexcept;
 		bool ReleaseContext(DeviceContext& context) const noexcept;
 		[[nodiscard]] IContext AcquireNativeContext() const noexcept;
 		bool ReleaseNativeContext(IContext& context) const noexcept;

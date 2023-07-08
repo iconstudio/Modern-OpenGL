@@ -1,5 +1,6 @@
 export module Glib.Framework;
 import <memory>;
+import Glib.Window.Factory;
 import Glib.Window.ManagedWindow;
 
 export namespace gl

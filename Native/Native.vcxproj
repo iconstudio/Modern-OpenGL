@@ -228,8 +228,8 @@
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\Image.ixx" />
     <ClCompile Include="src\IWindowHandle.cpp" />
-    <ClCompile Include="src\RenderingContext.cpp" />
-    <ClCompile Include="src\RenderingContext.ixx" />
+    <ClCompile Include="src\GraphicDeviceContext.cpp" />
+    <ClCompile Include="src\GraphicDeviceContext.ixx" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />

@@ -155,11 +155,11 @@ const noexcept
 	return DeviceContext{ GetHandle() };
 }
 
-gl::device::RenderingContext
+gl::device::GraphicDeviceContext
 gl::device::IWindow::AcquireRenderContext()
 const noexcept
 {
-	return RenderingContext{ GetHandle() };
+	return GraphicDeviceContext{ GetHandle() };
 }
 
 bool

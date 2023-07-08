@@ -6,9 +6,6 @@ import Glib.Device.Utility;
 import Glib.Device.Context;
 import Glib.Device.Context.Renderer;
 import Glib.Device.CompatibleContext;
-import Glib.Device.Resource.Bitmap;
-
-gl::device::resource::Bitmap test_bitmap{};
 
 gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
@@ -60,10 +57,6 @@ void
 gl::window::ManagedWindow::Start()
 noexcept
 {
-	//test_bitmap = *gl::device::resource::Bitmap::Load(L"test_img_2.bmp");
-	//int w = test_bitmap.GetWidth();
-	//int h = test_bitmap.GetHeight();
-
 	isRunning = true;
 
 	while (true)
@@ -220,14 +213,13 @@ noexcept
 	{
 		case event_id_t::Paint:
 		{
-			device::RenderingContext render_ctx = control.AcquireRenderContext();
+			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
 			device::native::PaintStruct& ps = render_ctx.GetStatus();
 
 			auto context = render_ctx.CreateCompatibleContext();
 
 			//device::CompatibleContext local_ctx = render_ctx.CreateCompatibleContext();
-			bool drawn = test_bitmap.Draw(render_ctx, context, 0, 0);
 		}
 		break;
 
