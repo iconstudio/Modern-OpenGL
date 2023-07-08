@@ -1,5 +1,6 @@
 export module Glib.Framework;
 import <memory>;
+import <string>;
 import Glib.Rect;
 import Glib.Window.ManagedWindow;
 
@@ -7,6 +8,12 @@ export namespace gl
 {
 	namespace framework
 	{
+		struct Descriptor
+		{
+			std::wstring title;
+			int wx, wy, ww, wh;
+		};
+
 		enum class [[nodiscard]] InitError
 		{
 
@@ -21,7 +28,7 @@ export namespace gl
 		Framework() noexcept;
 		~Framework() noexcept;
 
-		framework::InitError Initialize(const int& x, const int& y, const int& width, const int& height);
+		framework::InitError Initialize(const framework::Descriptor& setup);
 		void Run() noexcept;
 
 	private:

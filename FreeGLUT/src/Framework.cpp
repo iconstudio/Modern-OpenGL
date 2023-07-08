@@ -18,7 +18,7 @@ noexcept
 }
 
 gl::framework::InitError
-gl::Framework::Initialize(const int& x, const int& y, const int& width, const int& height)
+gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 {
 	return {};
 }
