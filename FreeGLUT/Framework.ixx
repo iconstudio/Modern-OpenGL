@@ -19,6 +19,12 @@ export namespace gl
 			Success,
 			FailedOnCreatingWindow,
 		};
+
+		[[nodiscard]]
+		constexpr Descriptor DefaultDescriptor() noexcept
+		{
+			return Descriptor{ L"FreeGLUT", static_cast<int>(0x80000000), 0, 800, 600 };
+		}
 	}
 
 	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>
