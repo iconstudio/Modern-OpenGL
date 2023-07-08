@@ -1,7 +1,5 @@
 module;
 #include "Internal.hpp"
-#define _ATL_NO_AUTOMATIC_NAMESPACE
-#include <atlimage.h>
 
 export module Glib.Definitions;
 import <filesystem>;
@@ -50,7 +48,6 @@ export namespace gl::device::native
 	using NativeRect = tagRECT;
 	using NativeContext = ::HDC__*;
 	using NativeMenu = ::HMENU__*;
-	using RawImage = ::ATL::CImage;
 	using RawBitmap = ::HBITMAP__*;
 	using RawIcon = ::HICON__*;
 	using RawColorBrush = ::HBRUSH__*;
