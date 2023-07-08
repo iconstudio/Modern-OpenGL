@@ -25,6 +25,7 @@ export namespace gl
 		void Run() noexcept;
 
 	private:
-		std::unique_ptr<window::ManagedWindow> myInstance;
+		std::unique_ptr<window::ManagedWindow> myInstance{ nullptr };
+		gl::Rect window_rect{};
 	};
 }
