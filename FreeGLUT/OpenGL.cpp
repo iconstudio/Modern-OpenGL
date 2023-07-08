@@ -10,7 +10,7 @@ static inline int window_handle = -1;
 static inline gl::DisplayModes window_mode{};
 
 std::shared_ptr<gl::Framework>
-gl::InitializeFramework()
+gl::CreateFramework()
 noexcept
 {
 	return std::shared_ptr<Framework>();
