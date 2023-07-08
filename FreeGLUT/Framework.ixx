@@ -16,7 +16,8 @@ export namespace gl
 
 		enum class [[nodiscard]] InitError
 		{
-
+			Success,
+			FailedOnCreatingWindow,
 		};
 	}
 
