@@ -60,7 +60,7 @@ noexcept
 {
 	using enum window::managed_window::AwakeResult;
 	const auto awakenening = myInstance->Awake();
-	
+
 	if (awakenening != Success)
 	{
 		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
@@ -79,6 +79,11 @@ void ReadyDisplay() noexcept
 	if (gl::display::IsDimmingMode())
 	{
 		util::Println("Dark Mode");
+
+		constexpr int col_indices[] = { COLOR_WINDOW };
+		constexpr unsigned long colors[] = { RGB(40, 103, 160) };
+
+		::SetSysColors(1, col_indices, colors);
 	}
 	else
 	{
