@@ -50,15 +50,24 @@ noexcept
 
 	underlying.Awake();
 
-	AddEventHandler(gl::device::kb::Pressed, KeyboardHandler);
-	AddEventHandler(gl::device::kb::Released, KeyboardHandler);
-	AddEventHandler(gl::device::kb::AltPressed, KeyboardHandler);
-	AddEventHandler(gl::device::kb::AltReleased, KeyboardHandler);
+	try
+	{
+		AddEventHandler(gl::device::kb::Pressed, KeyboardHandler);
+		AddEventHandler(gl::device::kb::Released, KeyboardHandler);
+		AddEventHandler(gl::device::kb::AltPressed, KeyboardHandler);
+		AddEventHandler(gl::device::kb::AltReleased, KeyboardHandler);
 
-	AddEventHandler(gl::device::kb::CharPressed, CharKeyHandler);
-	AddEventHandler(gl::device::kb::CharReleased, CharKeyHandler);
-	AddEventHandler(gl::device::kb::AltCharPressed, CharKeyHandler);
-	AddEventHandler(gl::device::kb::AltCharReleased, CharKeyHandler);
+		AddEventHandler(gl::device::kb::CharPressed, CharKeyHandler);
+		AddEventHandler(gl::device::kb::CharReleased, CharKeyHandler);
+		AddEventHandler(gl::device::kb::AltCharPressed, CharKeyHandler);
+		AddEventHandler(gl::device::kb::AltCharReleased, CharKeyHandler);
+	}
+	catch (...)
+	{
+		lastException = std::current_exception();
+
+		return managed_window::AwakeResult::FailedOnPrepareEvent;
+	}
 
 	return managed_window::AwakeResult::Success;
 }

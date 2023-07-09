@@ -22,9 +22,10 @@ export namespace gl::window
 	{
 		enum class [[nodiscard]] AwakeResult
 		{
-			Success = 0b00,
-			FailedOnCreatingWorkers = 0b01,
-			FailedOnCreatingCoroutines = 0b10,
+			Success = 0,
+			FailedOnCreatingWorkers = 1,
+			FailedOnCreatingCoroutines = 2,
+			FailedOnPrepareEvent = 3,
 		};
 	}
 
