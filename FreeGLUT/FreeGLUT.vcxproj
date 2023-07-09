@@ -38,7 +38,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <EnableFuzzer>true</EnableFuzzer>
   </PropertyGroup>
@@ -53,7 +52,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <EnableFuzzer>true</EnableFuzzer>
   </PropertyGroup>
@@ -101,6 +99,7 @@
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,6 +124,10 @@
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <StringPooling>true</StringPooling>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +152,7 @@
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,6 +177,10 @@
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <StringPooling>true</StringPooling>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
