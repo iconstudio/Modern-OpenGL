@@ -14,7 +14,7 @@ export namespace gl
 			int wx, wy, ww, wh;
 		};
 
-		enum class [[nodiscard]] InitError
+		enum class InitError
 		{
 			Success,
 			FailedOnCreatingWindow,
