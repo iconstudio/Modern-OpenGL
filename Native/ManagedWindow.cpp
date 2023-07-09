@@ -345,6 +345,13 @@ noexcept
 	//myCoroutines->push(std::move(coroutine));
 }
 
+std::exception_ptr
+gl::window::ManagedWindow::GetException()
+const noexcept
+{
+	return lastException;
+}
+
 void
 gl::window::ManagedWindow::Destroy()
 noexcept

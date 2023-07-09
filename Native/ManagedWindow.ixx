@@ -72,6 +72,7 @@ export namespace gl::window
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
 		void SetCaptureMouse(const bool& flag = true) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
+		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
 		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept;
