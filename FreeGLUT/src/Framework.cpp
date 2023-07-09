@@ -4,6 +4,8 @@ module;
 #undef CreateWindowEx
 
 module Glib.Framework;
+import <exception>;
+import <format>;
 import Utility.Print;
 import Glib.Display;
 import Glib.Window.Factory;
@@ -56,7 +58,17 @@ void
 gl::Framework::Run()
 noexcept
 {
-	myInstance->Awake();
+	using enum window::managed_window::AwakeResult;
+	const auto awakenening = myInstance->Awake();
+	
+	if (awakenening != Success)
+	{
+		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
+
+		std::rethrow_exception(myInstance->GetException());
+		return;
+	}
+
 	myInstance->Start();
 }
 
