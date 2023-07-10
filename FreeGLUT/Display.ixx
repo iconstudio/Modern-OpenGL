@@ -1,12 +1,9 @@
 module;
 #include <Windows.h>
-#undef USER_DEFAULT_SCREEN_DPI
 
 export module Glib.Display;
-import <utility>;
-import Utility;
-export import Glib.Rect;
-export import Glib.Device.Colour;
+import Glib.Rect;
+import Glib.Device.Context;
 
 namespace gl::display
 {
