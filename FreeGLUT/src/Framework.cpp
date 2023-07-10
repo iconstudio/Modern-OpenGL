@@ -14,11 +14,9 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
 	sizeof(PIXELFORMATDESCRIPTOR),
 	1,                     // version number
-	PFD_DRAW_TO_WINDOW |   // support window
-	PFD_SUPPORT_OPENGL |   // support OpenGL
-	PFD_DOUBLEBUFFER,      // double buffered
+	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE,
 	PFD_TYPE_RGBA,         // RGBA type
-	24,                    // 24-bit color depth
+	32,
 	0, 0, 0, 0, 0, 0,      // color bits ignored
 	0,                     // no alpha buffer
 	0,                     // shift bit ignored
