@@ -132,6 +132,11 @@ namespace gl::display
 		}
 	}
 
+	HDC GetDisplayContext() noexcept
+	{
+		return ::GetDC(nullptr);
+	}
+
 	DisplayProperty AcquireSettings() noexcept
 	{
 		return {};

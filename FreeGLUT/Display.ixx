@@ -34,9 +34,5 @@ namespace gl::display
 	export [[nodiscard]] Rect GetActualDisplaySize() noexcept;
 	export [[nodiscard]] Rect GetDisplaySize() noexcept;
 	export [[nodiscard]] bool IsDimmingMode();
-
-	namespace this_device
-	{
-		static void* context = nullptr;
-	}
+	export [[nodiscard]] HDC GetDisplayContext() noexcept;
 }
