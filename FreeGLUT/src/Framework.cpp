@@ -80,10 +80,10 @@ void ReadyDisplay() noexcept
 	{
 		util::Println("Dark Mode");
 
-		constexpr int col_indices[] = { COLOR_WINDOW };
-		constexpr unsigned long colors[] = { RGB(40, 103, 160) };
+		//constexpr int col_indices[] = { COLOR_WINDOW };
+		//constexpr unsigned long colors[] = { RGB(255, 255, 255) };
 
-		::SetSysColors(1, col_indices, colors);
+		//::SetSysColors(1, col_indices, colors);
 	}
 	else
 	{
