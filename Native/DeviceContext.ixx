@@ -33,9 +33,9 @@ export namespace gl::device
 		~GlobalDeviceContext() noexcept;
 
 		GlobalDeviceContext(const GlobalDeviceContext&) = delete;
-		GlobalDeviceContext(GlobalDeviceContext&&) = delete;
+		constexpr GlobalDeviceContext(GlobalDeviceContext&&) noexcept = default;
 		GlobalDeviceContext& operator=(const GlobalDeviceContext&) = delete;
-		GlobalDeviceContext& operator=(GlobalDeviceContext&&) = delete;
+		constexpr GlobalDeviceContext& operator=(GlobalDeviceContext&&) noexcept = default;
 
 	private:
 		using base::Destroy;
