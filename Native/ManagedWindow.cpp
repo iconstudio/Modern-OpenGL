@@ -261,7 +261,19 @@ noexcept
 		}
 		break;
 
-		//[[fallthrough]]
+		case event_id_t::SysCommand:
+		{
+			device::SystemCommand cmd = static_cast<device::SystemCommand>(wparam);
+			switch (cmd)
+			{
+				case device::SystemCommand::MonitorPower:
+				if (noPowerSaves.load(util::memory_order_relaxed))
+				{
+					break;
+				}
+			}
+		}
+		[[fallthrough]]
 		default:
 		{
 			if (self)
@@ -391,6 +403,13 @@ gl::window::ManagedWindow::AcquireRenderContext()
 const noexcept
 {
 	return underlying.AcquireRenderContext();
+}
+
+void
+gl::window::ManagedWindow::SetPowerSave(const bool& flag)
+noexcept
+{
+	noPowerSaves = !flag;
 }
 
 void

@@ -73,9 +73,12 @@ export namespace gl::window
 		[[nodiscard]] device::DeviceContext AcquireContext() const noexcept;
 		[[nodiscard]] device::GraphicDeviceContext AcquireRenderContext() const noexcept;
 
-		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
+		void SetPowerSave(const bool& flag) noexcept;
 		void SetCaptureMouse(const bool& flag = true) noexcept;
+
+		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
+
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
@@ -131,6 +134,7 @@ export namespace gl::window
 		util::atomic_bool isMouseHover = false;
 		util::atomic_bool isCapturing = false;
 		util::atomic_bool isRenderingNow = false;
+		util::atomic_bool noPowerSaves = false;
 
 		std::unique_ptr<coro_storage> myCoroutines{};
 
