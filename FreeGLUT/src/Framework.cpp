@@ -4,9 +4,9 @@ module;
 #undef CreateWindowEx
 
 module Glib.Framework;
+import <cstdio>;
 import <exception>;
 import <format>;
-import Utility.Print;
 import Glib.Display;
 import Glib.Window.Factory;
 
@@ -14,7 +14,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
 	sizeof(PIXELFORMATDESCRIPTOR),
 	1,                     // version number
-	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE,
+	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
 	PFD_TYPE_RGBA,         // RGBA type
 	32,
 	0, 0, 0, 0, 0, 0,      // color bits ignored
@@ -61,7 +61,7 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 	}
 	catch (const std::exception& e)
 	{
-		//util::Println("예외 '{}'가 발생했습니다.", e.what());
+		std::printf("Exception: '%s'", e.what());
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
@@ -98,15 +98,44 @@ void ReadyDisplay() noexcept
 
 	if (gl::display::IsDimmingMode())
 	{
-		util::Println("Dark Mode");
+		std::puts("Dark Mode");
 
 		//constexpr int col_indices[] = { COLOR_WINDOW };
 		//constexpr unsigned long colors[] = { RGB(255, 255, 255) };
-
 		//::SetSysColors(1, col_indices, colors);
 	}
 	else
 	{
-		util::Println("Light Mode");
+		std::puts("Light Mode");
+	}
+
+	auto context = gl::display::GetDisplayContext();
+
+	const int target = ChoosePixelFormat(context, &opengl_format);
+	if (0 == target)
+	{
+		std::printf("Failed on acquiring a pixel format. (code: %u)\n", ::GetLastError());
+		return;
+	}
+
+	PIXELFORMATDESCRIPTOR checker{};
+
+	const int check = DescribePixelFormat(context, target, sizeof(checker), &checker);
+	if (0 == check)
+	{
+		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, ::GetLastError());
+		return;
+	}
+
+	if (0 == (checker.dwFlags & PFD_SUPPORT_OPENGL))
+	{
+		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, ::GetLastError());
+		return;
+	}
+
+	if (0 == SetPixelFormat(context, target, &opengl_format))
+	{
+		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, ::GetLastError());
+		return;
 	}
 }
