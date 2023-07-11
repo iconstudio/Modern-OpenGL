@@ -8,6 +8,7 @@ import <cstdio>;
 import <exception>;
 import <format>;
 import Glib.Display;
+import Glib.Device.Context;
 import Glib.Window.Factory;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
@@ -31,6 +32,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 };
 
 void ReadyDisplay() noexcept;
+void ReadyOpenGL(HDC context) noexcept;
 
 gl::framework::InitError
 gl::Framework::Initialize(const gl::framework::Descriptor& setup)
@@ -64,6 +66,8 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 		std::printf("Exception: '%s'", e.what());
 		return framework::InitError::FailedOnCreatingWindow;
 	}
+
+	ReadyOpenGL(myInstance->AcquireContext());
 
 	return framework::InitError::Success;
 }
@@ -108,9 +112,10 @@ void ReadyDisplay() noexcept
 	{
 		std::puts("Light Mode");
 	}
+}
 
-	auto context = gl::display::GetDisplayContext();
-
+void ReadyOpenGL(HDC context) noexcept
+{
 	const int target = ChoosePixelFormat(context, &opengl_format);
 	if (0 == target)
 	{
