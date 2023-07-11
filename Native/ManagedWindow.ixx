@@ -3,7 +3,6 @@ import <utility>;
 import <memory>;
 import <vector>;
 import <stack>;
-import <functional>;
 import <unordered_map>;
 import Utility.Constraints;
 import Utility.Array;
