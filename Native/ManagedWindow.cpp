@@ -267,13 +267,15 @@ noexcept
 			switch (cmd)
 			{
 				case device::SystemCommand::MonitorPower:
-				if (noPowerSaves.load(util::memory_order_relaxed))
+				if (self->noPowerSaves.load(util::memory_order_relaxed))
 				{
 					break;
 				}
 			}
+
+			return control.DefaultWndProc(id, wparam, lparam);
 		}
-		[[fallthrough]]
+
 		default:
 		{
 			if (self)
@@ -291,7 +293,6 @@ noexcept
 
 			return control.DefaultWndProc(id, wparam, lparam);
 		}
-		break;
 	}
 
 	return 0;
