@@ -18,6 +18,7 @@ export namespace gl
 		{
 			Success,
 			FailedOnCreatingWindow,
+			FailedOnSettingPixelFormat,
 		};
 
 		[[nodiscard]]
