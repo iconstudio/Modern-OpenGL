@@ -49,7 +49,8 @@ noexcept
 
 	if (myContext)
 	{
-		::wglMakeCurrent(myWindowHandle, nullptr);
+		//::wglMakeCurrent(GetHandle(), nullptr);
+		::wglMakeCurrent(nullptr, nullptr);
 
 		::wglDeleteContext(myContext);
 	}
