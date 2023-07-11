@@ -70,6 +70,9 @@ export namespace gl::window
 		[[noreturn]]
 		void Destroy() noexcept;
 
+		[[nodiscard]] device::DeviceContext AcquireContext() const noexcept;
+		[[nodiscard]] device::GraphicDeviceContext AcquireRenderContext() const noexcept;
+
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
 		void SetCaptureMouse(const bool& flag = true) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;

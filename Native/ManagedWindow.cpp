@@ -379,6 +379,20 @@ noexcept
 	}
 }
 
+gl::device::DeviceContext
+gl::window::ManagedWindow::AcquireContext()
+const noexcept
+{
+	return underlying.AcquireContext();
+}
+
+gl::device::GraphicDeviceContext
+gl::window::ManagedWindow::AcquireRenderContext()
+const noexcept
+{
+	return underlying.AcquireRenderContext();
+}
+
 void
 gl::window::ManagedWindow::SetCaptureMouse(const bool& flag)
 noexcept
