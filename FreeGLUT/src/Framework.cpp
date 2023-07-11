@@ -32,7 +32,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 };
 
 void ReadyDisplay() noexcept;
-void ReadyOpenGL(HDC context) noexcept;
+unsigned long ReadyOpenGL(HDC context) noexcept;
 
 gl::framework::InitError
 gl::Framework::Initialize(const gl::framework::Descriptor& setup)
@@ -67,7 +67,11 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	ReadyOpenGL(myInstance->AcquireContext());
+	if (unsigned long error = ReadyOpenGL(myInstance->AcquireContext()); 0 != error)
+	{
+		std::printf("Pixel Formatting Error: %lu\n", error);
+		return framework::InitError::FailedOnSettingPixelFormat;
+	}
 
 	return framework::InitError::Success;
 }
@@ -114,13 +118,14 @@ void ReadyDisplay() noexcept
 	}
 }
 
-void ReadyOpenGL(HDC context) noexcept
+unsigned long ReadyOpenGL(HDC context) noexcept
 {
 	const int target = ChoosePixelFormat(context, &opengl_format);
 	if (0 == target)
 	{
-		std::printf("Failed on acquiring a pixel format. (code: %u)\n", ::GetLastError());
-		return;
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on acquiring a pixel format. (code: %u)\n", error);
+		return error;
 	}
 
 	PIXELFORMATDESCRIPTOR checker{};
@@ -128,19 +133,24 @@ void ReadyOpenGL(HDC context) noexcept
 	const int check = DescribePixelFormat(context, target, sizeof(checker), &checker);
 	if (0 == check)
 	{
-		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, ::GetLastError());
-		return;
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
+		return error;
 	}
 
 	if (0 == (checker.dwFlags & PFD_SUPPORT_OPENGL))
 	{
-		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, ::GetLastError());
-		return;
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
+		return error;
 	}
 
 	if (0 == SetPixelFormat(context, target, &checker))
 	{
-		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, ::GetLastError());
-		return;
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
+		return error;
 	}
+
+	return 0UL;
 }
