@@ -53,6 +53,13 @@ noexcept
 	}
 }
 
+const gl::device::native::NativeOGL&
+gl::device::GraphicDeviceContext::GetContext()
+const& noexcept
+{
+	return myContext;
+}
+
 gl::device::native::PaintStruct&
 gl::device::GraphicDeviceContext::GetPaintStruct()
 noexcept
