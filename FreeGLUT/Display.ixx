@@ -4,9 +4,9 @@ module;
 export module Glib.Display;
 import Glib.Rect;
 
-namespace gl::display
+export namespace gl::display
 {
-	export enum class [[nodiscard]] DpiAwareness
+	enum class [[nodiscard]] DpiAwareness
 	{
 		Invalid = ::DPI_AWARENESS_INVALID,
 		Unaware = ::DPI_AWARENESS_UNAWARE,
@@ -14,7 +14,11 @@ namespace gl::display
 		Aware = ::DPI_AWARENESS_PER_MONITOR_AWARE
 	};
 
-	export namespace dpi
+	[[nodiscard]] Rect GetActualDisplaySize() noexcept;
+	[[nodiscard]] Rect GetDisplaySize() noexcept;
+	[[nodiscard]] bool IsDimmingMode();
+
+	namespace dpi
 	{
 		constexpr UINT DEFAULT_DPI = 96U;
 
@@ -26,8 +30,4 @@ namespace gl::display
 		[[nodiscard]] DpiAwareness GetDPIAware(const HWND& handle) noexcept;
 		[[nodiscard]] unsigned int GetDPI() noexcept;
 	}
-
-	export [[nodiscard]] Rect GetActualDisplaySize() noexcept;
-	export [[nodiscard]] Rect GetDisplaySize() noexcept;
-	export [[nodiscard]] bool IsDimmingMode();
 }
