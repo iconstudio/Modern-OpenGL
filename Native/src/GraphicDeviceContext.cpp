@@ -22,7 +22,10 @@ noexcept
 	myContext = ::wglCreateContext(myHandle);
 	if (nullptr != myContext)
 	{
-		::wglMakeCurrent(myHandle, myContext);
+		if (0 == ::wglMakeCurrent(myHandle, myContext))
+		{
+			std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
+		}
 	}
 	else
 	{
