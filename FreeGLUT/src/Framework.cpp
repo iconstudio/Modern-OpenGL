@@ -49,6 +49,14 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
+	if (unsigned long error = ReadyOpenGL(myInstance->AcquireContext()); 0 != error)
+	{
+		std::printf("Pixel Formatting Error: %lu\n", error);
+		return framework::InitError::FailedOnSettingPixelFormat;
+	}
+
+	myInstance->SetPowerSave(setup.isPowersave);
+
 	return framework::InitError::Success;
 }
 
@@ -72,6 +80,8 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 		std::printf("Pixel Formatting Error: %lu\n", error);
 		return framework::InitError::FailedOnSettingPixelFormat;
 	}
+
+	myInstance->SetPowerSave(std::move(setup.isPowersave));
 
 	return framework::InitError::Success;
 }

@@ -12,6 +12,7 @@ export namespace gl
 		{
 			std::wstring_view title;
 			int wx, wy, ww, wh;
+			bool isPowersave = false;
 		};
 
 		enum class InitError
