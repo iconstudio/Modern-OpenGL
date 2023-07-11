@@ -132,11 +132,6 @@ namespace gl::display
 		}
 	}
 
-	gl::device::GlobalDeviceContext GetDisplayContext() noexcept
-	{
-		return {};
-	}
-
 	DisplayProperty AcquireSettings() noexcept
 	{
 		return {};

@@ -3,7 +3,6 @@ module;
 
 export module Glib.Display;
 import Glib.Rect;
-import Glib.Device.Context;
 
 namespace gl::display
 {
@@ -31,5 +30,4 @@ namespace gl::display
 	export [[nodiscard]] Rect GetActualDisplaySize() noexcept;
 	export [[nodiscard]] Rect GetDisplaySize() noexcept;
 	export [[nodiscard]] bool IsDimmingMode();
-	export [[nodiscard]] gl::device::GlobalDeviceContext GetDisplayContext() noexcept;
 }
