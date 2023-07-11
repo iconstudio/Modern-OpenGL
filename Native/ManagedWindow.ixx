@@ -3,6 +3,7 @@ import <utility>;
 import <memory>;
 import <vector>;
 import <stack>;
+import <functional>;
 import <unordered_map>;
 import Utility.Constraints;
 import Utility.Array;
@@ -55,6 +56,7 @@ export namespace gl::window
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
+		std::move_only_function<void()> on_destroy{ nullptr };
 		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
 		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
 		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
@@ -112,13 +114,13 @@ export namespace gl::window
 		event_storage_t myEventHandlers{};
 		static inline constexpr device::Event DefaultEvent = {};
 
-		KeyDownEventHandler keyDownHandler = nullptr;
-		KeyUpEventHandler keyUpHandler = nullptr;
-		SysKeyDownEventHandler sysDownHandler = DefaultSysKeyEvent;
-		SysKeyUpEventHandler sysUpHandler = nullptr;
-		CharDownEventHandler chrDownHandler = nullptr;
-		CharUpEventHandler chrUpHandler = nullptr;
-		RenderEventHandler renderHandler = nullptr;
+		KeyDownEventHandler onKeyDown = nullptr;
+		KeyUpEventHandler onKeyUp = nullptr;
+		SysKeyDownEventHandler onSysDown = DefaultSysKeyEvent;
+		SysKeyUpEventHandler onSysUp = nullptr;
+		CharDownEventHandler onChrDown = nullptr;
+		CharUpEventHandler onChrUp = nullptr;
+		RenderEventHandler onRender = nullptr;
 
 		pool_t myWorkers{};
 		size_t workerCount = 0;

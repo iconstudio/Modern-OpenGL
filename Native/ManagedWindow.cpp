@@ -129,7 +129,7 @@ noexcept
 
 			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
-			if (auto& renderer = self->renderHandler; renderer)
+			if (auto& renderer = self->onRender; renderer)
 			{
 				renderer(*self, render_ctx);
 			}
@@ -479,17 +479,17 @@ noexcept
 		if (is_sys)
 		{
 			std::printf("[System Key Released] %lld\n", wparam);
-			if (nullptr != self.sysUpHandler)
+			if (nullptr != self.onSysUp)
 			{
-				self.sysUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+				self.onSysUp(self, static_cast<device::io::KeyCode>(wparam));
 			}
 		}
 		else
 		{
 			std::printf("[Key Released] %lld\n", wparam);
-			if (nullptr != self.keyUpHandler)
+			if (nullptr != self.onKeyUp)
 			{
-				self.keyUpHandler(self, static_cast<device::io::KeyCode>(wparam));
+				self.onKeyUp(self, static_cast<device::io::KeyCode>(wparam));
 			}
 		}
 	}
@@ -498,17 +498,17 @@ noexcept
 		if (is_sys)
 		{
 			std::printf("[System Key Pressed] %lld\n", wparam);
-			if (nullptr != self.sysDownHandler)
+			if (nullptr != self.onSysDown)
 			{
-				self.sysDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+				self.onSysDown(self, static_cast<device::io::KeyCode>(wparam), is_first);
 			}
 		}
 		else
 		{
 			std::printf("[Key Pressed] %lld\n", wparam);
-			if (nullptr != self.keyDownHandler)
+			if (nullptr != self.onKeyDown)
 			{
-				self.keyDownHandler(self, static_cast<device::io::KeyCode>(wparam), is_first);
+				self.onKeyDown(self, static_cast<device::io::KeyCode>(wparam), is_first);
 			}
 		}
 	}
@@ -533,9 +533,9 @@ noexcept
 			std::printf("[Chr Released] %lld\n", wparam);
 		}
 
-		if (nullptr != self.chrUpHandler)
+		if (nullptr != self.onChrUp)
 		{
-			self.chrUpHandler(self, static_cast<char32_t>(wparam), lparam);
+			self.onChrUp(self, static_cast<char32_t>(wparam), lparam);
 		}
 	}
 	else if (is_first)
@@ -549,9 +549,9 @@ noexcept
 			std::printf("[Chr Pressed] %lld\n", wparam);
 		}
 
-		if (nullptr != self.chrDownHandler)
+		if (nullptr != self.onChrDown)
 		{
-			self.chrDownHandler(self, static_cast<char32_t>(wparam), is_first);
+			self.onChrDown(self, static_cast<char32_t>(wparam), is_first);
 		}
 	}
 }
