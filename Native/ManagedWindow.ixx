@@ -28,6 +28,15 @@ export namespace gl::window
 			FailedOnCreatingCoroutines = 2,
 			FailedOnPrepareEvent = 3,
 		};
+
+		//using KeyDownEventHandler = std::move_only_function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
+		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
+		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
+		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
+		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
+		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
+		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
+		using RenderEventHandler = void(*)(ManagedWindow&, device::GraphicDeviceContext&) noexcept;
 	}
 
 	class [[nodiscard]] ManagedWindow
@@ -55,15 +64,6 @@ export namespace gl::window
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
-
-		//using KeyDownEventHandler = std::move_only_function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
-		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
-		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
-		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
-		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
-		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
-		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
-		using RenderEventHandler = void(*)(ManagedWindow&, device::GraphicDeviceContext&) noexcept;
 
 		explicit ManagedWindow(Window&& window, int number_of_workers);
 
@@ -114,13 +114,13 @@ export namespace gl::window
 		event_storage_t myEventHandlers{};
 		static inline constexpr device::Event DefaultEvent = {};
 
-		KeyDownEventHandler onKeyDown = nullptr;
-		KeyUpEventHandler onKeyUp = nullptr;
-		SysKeyDownEventHandler onSysDown = DefaultSysKeyEvent;
-		SysKeyUpEventHandler onSysUp = nullptr;
-		CharDownEventHandler onChrDown = nullptr;
-		CharUpEventHandler onChrUp = nullptr;
-		RenderEventHandler onRender = nullptr;
+		managed_window::KeyDownEventHandler onKeyDown = nullptr;
+		managed_window::KeyUpEventHandler onKeyUp = nullptr;
+		managed_window::SysKeyDownEventHandler onSysDown = DefaultSysKeyEvent;
+		managed_window::SysKeyUpEventHandler onSysUp = nullptr;
+		managed_window::CharDownEventHandler onChrDown = nullptr;
+		managed_window::CharUpEventHandler onChrUp = nullptr;
+		managed_window::RenderEventHandler onRender = nullptr;
 
 		pool_t myWorkers{};
 		size_t workerCount = 0;
