@@ -56,7 +56,7 @@ export namespace gl::window
 		using event_iterator = event_storage_t::iterator;
 		using event_const_iterator = event_storage_t::const_iterator;
 
-		std::move_only_function<void()> on_destroy{ nullptr };
+		//using KeyDownEventHandler = std::move_only_function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
 		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
 		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
 		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
