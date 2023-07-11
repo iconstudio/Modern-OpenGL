@@ -79,6 +79,12 @@ export namespace gl::window
 		void SetCaptureMouse(const bool& flag = true) noexcept;
 
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
+		managed_window::KeyDownEventHandler&& SetKeyDownHandler(managed_window::KeyDownEventHandler handler) noexcept;
+		managed_window::KeyUpEventHandler&& SetKeyUpHandler(managed_window::KeyUpEventHandler handler) noexcept;
+		managed_window::SysKeyDownEventHandler&& SetSysKeyDownHandler(managed_window::SysKeyDownEventHandler handler) noexcept;
+		managed_window::SysKeyUpEventHandler&& SetSysKeyUpHandler(managed_window::SysKeyUpEventHandler handler) noexcept;
+		managed_window::CharDownEventHandler&& SetCharDownHandler(managed_window::CharDownEventHandler handler) noexcept;
+		managed_window::CharUpEventHandler&& SetCharUpHandler(managed_window::CharUpEventHandler handler) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
 
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
