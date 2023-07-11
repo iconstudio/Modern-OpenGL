@@ -20,6 +20,7 @@ export namespace gl::device
 		NCActivate = WM_NCACTIVATE,
 		GetTestMouse = WM_NCMOUSEMOVE, // Get the mouse position in the non-client area
 
+		Timer = WM_TIMER,
 		Move = WM_MOVE,
 		Size = WM_SIZE,
 		Activate = WM_ACTIVATE,
@@ -30,6 +31,7 @@ export namespace gl::device
 		SetText = WM_SETTEXT,
 		GetText = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
+		Power = WM_POWER,
 
 		/// <summary>
 		/// PaintFrame -> EraseBackground -> Paint
@@ -94,6 +96,20 @@ export namespace gl::device
 		Activated = WA_ACTIVE,
 		ClickActive = WA_CLICKACTIVE,
 		Inactivated = WA_INACTIVE,
+	};
+
+	enum class [[nodiscard]] DevicePower : unsigned short
+	{
+		ResumeAutomatic = PBT_APMRESUMEAUTOMATIC,
+		ResumeCritical = PBT_APMRESUMECRITICAL,
+		ResumeSuspend = PBT_APMRESUMESUSPEND,
+		Suspend = PBT_APMSUSPEND,
+	};
+
+	enum class [[nodiscard]] SystemCommand : unsigned long long
+	{
+		ScreenSaver = SC_SCREENSAVE,
+		MonitorPower = SC_MONITORPOWER,
 	};
 
 	[[nodiscard]]
