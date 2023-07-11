@@ -1,5 +1,7 @@
 module;
 #include <Windows.h>
+#include <gl\gl.h>
+#include <gl\glu.h>
 #undef CreateWindow
 #undef CreateWindowEx
 
