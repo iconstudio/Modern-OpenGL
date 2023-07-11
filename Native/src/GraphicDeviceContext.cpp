@@ -1,6 +1,17 @@
 module;
 #include "Internal.hpp"
+
 module Glib.Device.Context.Renderer;
+import <cstdio>;
+
+PIXELFORMATDESCRIPTOR pixel_format =
+{
+	.nSize = sizeof(PIXELFORMATDESCRIPTOR),
+	.nVersion = 1,
+	.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
+	.iPixelType = PFD_TYPE_RGBA,
+	.cColorBits = 24,
+};
 
 gl::device::GraphicDeviceContext::GraphicDeviceContext(const gl::device::native::HWND& handle)
 noexcept
@@ -9,6 +20,26 @@ noexcept
 	, myContext()
 {
 	myContext = ::wglCreateContext(myHandle);
+	if (nullptr != myContext)
+	{
+		::wglMakeCurrent(myHandle, myContext);
+	}
+	else
+	{
+		const int current_format_id = GetPixelFormat(GetHandle());
+
+		if (0 == DescribePixelFormat(GetHandle(), current_format_id, sizeof(pixel_format), &pixel_format))
+		{
+			std::printf("Failed on reading a pixel format %d. (code: %u)\n", current_format_id, ::GetLastError());
+			return;
+		}
+
+		if (0 == (pixel_format.dwFlags & PFD_SUPPORT_OPENGL))
+		{
+			std::printf("Failed on checking a pixel format %d. (code: %u)\n", current_format_id, ::GetLastError());
+			return;
+		}
+	}
 }
 
 gl::device::GraphicDeviceContext::~GraphicDeviceContext()
