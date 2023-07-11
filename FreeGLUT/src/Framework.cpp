@@ -16,14 +16,14 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	1,                     // version number
 	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
 	PFD_TYPE_RGBA,         // RGBA type
-	32,
+	24,
 	0, 0, 0, 0, 0, 0,      // color bits ignored
-	0,                     // no alpha buffer
+	8,
 	0,                     // shift bit ignored
 	0,                     // no accumulation buffer
 	0, 0, 0, 0,            // accum bits ignored
-	32,                    // 32-bit z-buffer
-	0,                     // no stencil buffer
+	16,
+	8,
 	0,                     // no auxiliary buffer
 	PFD_MAIN_PLANE,        // main layer
 	0,                     // reserved
@@ -133,7 +133,7 @@ void ReadyDisplay() noexcept
 		return;
 	}
 
-	if (0 == SetPixelFormat(context, target, &opengl_format))
+	if (0 == SetPixelFormat(context, target, &checker))
 	{
 		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, ::GetLastError());
 		return;
