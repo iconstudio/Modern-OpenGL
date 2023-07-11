@@ -49,6 +49,8 @@ noexcept
 
 	if (myContext)
 	{
+		::wglMakeCurrent(myWindowHandle, nullptr);
+
 		::wglDeleteContext(myContext);
 	}
 }
