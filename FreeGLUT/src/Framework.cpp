@@ -113,28 +113,28 @@ noexcept
 }
 
 void
-gl::Framework::AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure)
+gl::Framework::AddEventHandler(gl::EventID id, const event_handler_t& procedure)
 noexcept
 {
 	myInstance->AddEventHandler(id, procedure);
 }
 
 void
-gl::Framework::AddEventHandler(handle_t::event_id_t id, handle_t::event_handler_t&& procedure)
+gl::Framework::AddEventHandler(gl::EventID id, event_handler_t&& procedure)
 noexcept
 {
 	myInstance->AddEventHandler(id, std::move(procedure));
 }
 
 void
-gl::Framework::RemoveEventHandler(gl::Framework::handle_t::event_id_t id)
+gl::Framework::RemoveEventHandler(gl::EventID id)
 noexcept
 {
 	myInstance->RemoveEventHandler(id);
 }
 
 void
-gl::Framework::SetRenderer(gl::Framework::renderer_t handler)
+gl::Framework::SetRenderer(render_t handler)
 noexcept
 {
 	myInstance->SetRenderer(std::move(handler));

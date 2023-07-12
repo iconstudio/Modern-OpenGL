@@ -4,6 +4,8 @@ import <string_view>;
 import Glib.Rect;
 import Glib.GraphicContext;
 import Glib.Window.ManagedWindow;
+import Glib.Device.Context.Renderer;
+export import Glib.Device.Event;
 
 export namespace gl
 {
@@ -39,12 +41,19 @@ export namespace gl
 		inline constexpr Descriptor DefaultDescriptor = MakeDefaultDescriptor();
 	}
 
+	using gl::device::Event;
+	using gl::device::EventID;
+	using gl::window::ManagedWindow;
+	using gl::device::GraphicDeviceContext;
+	using gl::window::RenderEventHandler;
+
 	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>
 	{
 	public:
 		using base = std::enable_shared_from_this<Framework>;
-		using handle_t = gl::window::ManagedWindow;
-		using renderer_t = gl::window::RenderEventHandler;
+		using handle_t = gl::ManagedWindow;
+		using event_handler_t = handle_t::event_handler_t;
+		using render_t = gl::RenderEventHandler;
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
@@ -54,11 +63,11 @@ export namespace gl
 		framework::InitError Initialize();
 		void Run() noexcept;
 
-		void AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure) noexcept;
-		void AddEventHandler(handle_t::event_id_t id, handle_t::event_handler_t&& procedure) noexcept;
-		void RemoveEventHandler(handle_t::event_id_t id) noexcept;
+		void AddEventHandler(EventID id, const event_handler_t& procedure) noexcept;
+		void AddEventHandler(EventID id, event_handler_t&& procedure) noexcept;
+		void RemoveEventHandler(EventID id) noexcept;
 
-		void SetRenderer(renderer_t handler) noexcept;
+		void SetRenderer(render_t handler) noexcept;
 
 	private:
 		std::unique_ptr<handle_t> myInstance{ nullptr };
