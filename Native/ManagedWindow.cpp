@@ -374,8 +374,19 @@ noexcept
 	return std::exchange(onChrUp, std::move(handler));
 }
 
-gl::window::managed_window::RenderEventHandler
-gl::window::ManagedWindow::SetRenderer(managed_window::RenderEventHandler handler)
+void
+gl::window::ManagedWindow::SetRenderer(const managed_window::RenderEventHandler& handler)
+noexcept
+{
+	onRender = handler;
+}
+
+void
+gl::window::ManagedWindow::SetRenderer(managed_window::RenderEventHandler&& handler) noexcept
+{
+	onRender = std::move(handler);
+}
+
 bool
 gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
