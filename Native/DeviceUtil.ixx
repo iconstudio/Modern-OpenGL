@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Utility;
+export module Glib.Windows.Utility;
 export import <utility>;
 
 export namespace gl::win32

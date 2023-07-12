@@ -10,9 +10,9 @@ import <cstdio>;
 import <exception>;
 import <format>;
 import Glib.Display;
-import Glib.Device.Context;
-import Glib.Device.Context.Renderer;
-import Glib.Window.Factory;
+import Glib.Windows.Context;
+import Glib.Windows.Context.Renderer;
+import Glib.Windows.Client.Factory;
 
 void ReadyDisplay() noexcept;
 

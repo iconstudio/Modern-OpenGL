@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.Resource.CompatibleBitmap;
+module Glib.Windows.Resource.CompatibleBitmap;
 
 gl::win32::resource::CompatibleBitmap::CompatibleBitmap(handle_type&& handle)
 noexcept

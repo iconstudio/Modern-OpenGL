@@ -1,6 +1,6 @@
 module;
 #include <windows.system.h>
-export module Glib.Device.IO.Keyboard:Modifier;
+export module Glib.Windows.IO.Keyboard:Modifier;
 
 using enum ABI::Windows::System::VirtualKeyModifiers;
 

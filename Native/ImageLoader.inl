@@ -1,5 +1,5 @@
 #include "Internal.hpp"
-import Glib.Definitions;
+import Glib.Windows.Definitions;
 import Utility.Monad.Loosen;
 
 using gl::win32::FilePath;

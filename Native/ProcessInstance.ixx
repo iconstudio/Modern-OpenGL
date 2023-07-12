@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 #include <type_traits>
-export module Glib.Device.ProcessInstance;
+export module Glib.Windows.ProcessInstance;
 
 export namespace gl::win32
 {

@@ -1,5 +1,5 @@
-export module Glib.Device.Resource.Brush.Component;
-import Glib.Definitions;
+export module Glib.Windows.Resource.Brush.Component;
+import Glib.Windows.Definitions;
 
 export namespace gl::win32
 {

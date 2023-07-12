@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-export module Glib.Window:Style;
+export module Glib.Windows.Client:Style;
 
 export namespace gl::win32
 {

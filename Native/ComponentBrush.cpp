@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Device.Resource.Brush.Component;
+module Glib.Windows.Resource.Brush.Component;
 import <type_traits>;
 
 namespace gl::win32

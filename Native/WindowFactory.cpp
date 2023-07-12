@@ -1,4 +1,4 @@
-module Glib.Window.Factory;
+module Glib.Windows.Client.Factory;
 import <type_traits>;
 import <memory>;
 import <string_view>;

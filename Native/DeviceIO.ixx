@@ -1,6 +1,6 @@
-export module Glib.Device.IO;
-export import Glib.Device.IO.Mouse;
-export import Glib.Device.IO.Keyboard;
+export module Glib.Windows.IO;
+export import Glib.Windows.IO.Mouse;
+export import Glib.Windows.IO.Keyboard;
 
 export namespace gl::win32::io
 {

@@ -1,7 +1,7 @@
-export module Glib.Device.IGraphics;
+export module Glib.Windows.IGraphics;
 import <utility>;
-import Glib.Definitions;
-import Glib.Device.IHandle;
+import Glib.Windows.Definitions;
+import Glib.Windows.IHandle;
 
 export namespace gl::win32
 {

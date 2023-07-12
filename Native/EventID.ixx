@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-export module Glib.Device.Event:ID;
+export module Glib.Windows.Event:ID;
 
 export namespace gl::win32
 {

@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Definitions;
+export module Glib.Windows.Definitions;
 import <filesystem>;
 
 export namespace gl::win32

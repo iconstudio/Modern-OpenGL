@@ -1,7 +1,7 @@
 module;
 #include <winrt/Windows.UI.ViewManagement.h>
 
-export module Glib.Device.Colour;
+export module Glib.Windows.Colour;
 import <cstdint>;
 import <type_traits>;
 export import :Implement;

@@ -6,7 +6,7 @@ module;
 
 module Glib.Display;
 import Glib.Rect;
-import Glib.Device.Colour;
+import Glib.Windows.Colour;
 
 using namespace winrt::Windows::UI::ViewManagement;
 using namespace winrt::Windows::Devices::Display;

@@ -1,4 +1,4 @@
-export module Glib.Window.ManagedWindow;
+export module Glib.Windows.ManagedClient;
 import <utility>;
 import <functional>;
 import <memory>;
@@ -11,11 +11,11 @@ import Utility.Atomic;
 import Utility.Monad;
 import Utility.Concurrency.Thread;
 import Glib.Rect;
-import Glib.Definitions;
-import Glib.Device.IO;
-export import Glib.Device.Event;
-export import Glib.Window.Coroutine;
-import Glib.Window;
+import Glib.Windows.Definitions;
+import Glib.Windows.IO;
+export import Glib.Windows.Event;
+export import Glib.Windows.Coroutine;
+import Glib.Windows.Client;
 
 namespace gl::win32
 {

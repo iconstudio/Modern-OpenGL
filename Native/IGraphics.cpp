@@ -1,3 +1,3 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.IGraphics;
+module Glib.Windows.IGraphics;

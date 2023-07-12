@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.Context;
+module Glib.Windows.Context;
 
 gl::win32::DeviceContext::DeviceContext(const native::HWND& window)
 noexcept

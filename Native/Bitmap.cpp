@@ -1,14 +1,14 @@
 module;
 #include "ImageLoader.inl"
 
-module Glib.Device.Resource.Bitmap;
+module Glib.Windows.Resource.Bitmap;
 import <type_traits>;
 import Utility.Monad;
-import Glib.Device.Colour;
-import Glib.Device.IWindow;
-import Glib.Device.Context;
-import Glib.Device.CompatibleContext;
-import Glib.Device.Resource.CompatibleBitmap;
+import Glib.Windows.Colour;
+import Glib.Windows.IWindow;
+import Glib.Windows.Context;
+import Glib.Windows.CompatibleContext;
+import Glib.Windows.Resource.CompatibleBitmap;
 
 util::Monad<gl::win32::resource::Bitmap>
 gl::win32::resource::Bitmap::Load(const FilePath& path)

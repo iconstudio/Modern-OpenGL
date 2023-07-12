@@ -1,8 +1,8 @@
-export module Glib.Device.Resource.CompatibleBitmap;
+export module Glib.Windows.Resource.CompatibleBitmap;
 import <type_traits>;
-import Glib.Definitions;
-import Glib.Device.IHandle;
-import Glib.Device.Resource.Bitmap;
+import Glib.Windows.Definitions;
+import Glib.Windows.IHandle;
+import Glib.Windows.Resource.Bitmap;
 
 export namespace gl::win32::resource
 {

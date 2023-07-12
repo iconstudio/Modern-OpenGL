@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Device.Context.Renderer;
+module Glib.Windows.Context.Renderer;
 
 gl::win32::GraphicDeviceContext::GraphicDeviceContext(const gl::win32::native::HWND& handle)
 noexcept

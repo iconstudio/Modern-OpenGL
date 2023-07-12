@@ -1,8 +1,8 @@
 export module Glibe.Device.Resource.Image;
 import <type_traits>;
-import Glib.Definitions;
-import Glib.Device.IHandle;
-import Glib.Device.Colour;
+import Glib.Windows.Definitions;
+import Glib.Windows.IHandle;
+import Glib.Windows.Colour;
 
 export namespace gl::win32::resource
 {

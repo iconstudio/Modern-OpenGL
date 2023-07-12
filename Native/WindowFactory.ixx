@@ -1,11 +1,11 @@
-export module Glib.Window.Factory;
+export module Glib.Windows.Client.Factory;
 import <string_view>;
 import <memory>;
 import Utility.FixedString;
 import Glib.Rect;
-import Glib.Window;
-import Glib.Window.Property.Factory;
-import Glib.Window.ManagedWindow;
+import Glib.Windows.Client;
+import Glib.Windows.Client.Property.Factory;
+import Glib.Windows.ManagedClient;
 
 export namespace gl::win32
 {

@@ -1,10 +1,10 @@
-export module Glib.Device.Resource.Bitmap;
+export module Glib.Windows.Resource.Bitmap;
 import <type_traits>;
 import Utility.Monad;
-import Glib.Definitions;
-import Glib.Device.IGraphics;
-import Glib.Device.IContext;
-import Glib.Device.Colour;
+import Glib.Windows.Definitions;
+import Glib.Windows.IGraphics;
+import Glib.Windows.IContext;
+import Glib.Windows.Colour;
 
 export namespace gl::win32::resource
 {

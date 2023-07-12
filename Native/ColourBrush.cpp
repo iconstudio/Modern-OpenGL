@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.Resource.Brush;
+module Glib.Windows.Resource.Brush;
 
 gl::win32::resource::ColorBrush::~ColorBrush()
 noexcept

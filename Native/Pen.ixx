@@ -1,7 +1,7 @@
-export module Glib.Device.Resource.Pen;
-import Glib.Definitions;
-import Glib.Device.IGraphics;
-import Glib.Device.Colour;
+export module Glib.Windows.Resource.Pen;
+import Glib.Windows.Definitions;
+import Glib.Windows.IGraphics;
+import Glib.Windows.Colour;
 
 export namespace gl::win32::resource
 {

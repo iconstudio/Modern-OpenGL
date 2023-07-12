@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Device.Event;
+export module Glib.Windows.Event;
 import <compare>;
 export import :ID;
 import :Special;

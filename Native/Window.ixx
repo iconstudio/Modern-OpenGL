@@ -1,12 +1,12 @@
-export module Glib.Window;
+export module Glib.Windows.Client;
 import <type_traits>;
 import <string_view>;
 import Glib.Rect;
-import Glib.Definitions;
-import Glib.Device.IWindow;
-import Glib.Device.IO;
-import Glib.Device.Event;
-import Glib.Window.Property;
+import Glib.Windows.Definitions;
+import Glib.Windows.IWindow;
+import Glib.Windows.IO;
+import Glib.Windows.Event;
+import Glib.Windows.Client.Property;
 export import :Style;
 export import :Option;
 

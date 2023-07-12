@@ -1,11 +1,11 @@
-export module Glib.Window.Property.Factory;
+export module Glib.Windows.Client.Property.Factory;
 import <type_traits>;
 import Utility.FixedString;
-import Glib.Device.ProcessInstance;
-import Glib.Device.Resource.Brush;
-import Glib.Device.Resource.Brush.Component;
-import Glib.Device.Resource.Icon;
-export import Glib.Window.Property;
+import Glib.Windows.ProcessInstance;
+import Glib.Windows.Resource.Brush;
+import Glib.Windows.Resource.Brush.Component;
+import Glib.Windows.Resource.Icon;
+export import Glib.Windows.Client.Property;
 
 export namespace gl::win32
 {

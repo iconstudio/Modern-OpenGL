@@ -1,4 +1,4 @@
-export module Glib.Device.Event:Special;
+export module Glib.Windows.Event:Special;
 import <compare>;
 export import :ID;
 

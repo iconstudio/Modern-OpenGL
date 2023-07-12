@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 #include <shellapi.h>
-module Glib.Device.Resource.Icon;
+module Glib.Windows.Resource.Icon;
 
 gl::win32::resource::Icon&
 gl::win32::resource::Icon::operator=(nullptr_t)

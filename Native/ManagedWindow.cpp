@@ -1,11 +1,11 @@
 module;
-module Glib.Window.ManagedWindow;
+module Glib.Windows.ManagedClient;
 import <cstdio>;
 import <exception>;
-import Glib.Device.Utility;
-import Glib.Device.Context;
-import Glib.Device.Context.Renderer;
-import Glib.Device.CompatibleContext;
+import Glib.Windows.Utility;
+import Glib.Windows.Context;
+import Glib.Windows.Context.Renderer;
+import Glib.Windows.CompatibleContext;
 
 gl::win32::ManagedWindow::ManagedWindow(gl::win32::Window&& window, int number_of_workers)
 	: underlying(std::move(window))

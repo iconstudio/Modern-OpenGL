@@ -1,7 +1,7 @@
-export module Glib.Device.Event.API;
+export module Glib.Windows.Event.API;
 import <type_traits>;
-export import Glib.Definitions;
-export import Glib.Device.Event;
+export import Glib.Windows.Definitions;
+export import Glib.Windows.Event;
 
 export namespace gl::win32
 {

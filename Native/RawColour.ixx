@@ -1,6 +1,6 @@
-export module Glib.Device.Colour:Implement;
+export module Glib.Windows.Colour:Implement;
 import <cstdint>;
-import Glib.Device.Utility;
+import Glib.Windows.Utility;
 
 export namespace gl::win32
 {

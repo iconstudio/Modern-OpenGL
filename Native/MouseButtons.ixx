@@ -1,4 +1,4 @@
-export module Glib.Device.IO.Mouse:Buttons;
+export module Glib.Windows.IO.Mouse:Buttons;
 
 export namespace gl::win32::io
 {

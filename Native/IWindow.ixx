@@ -1,13 +1,13 @@
-export module Glib.Device.IWindow;
+export module Glib.Windows.IWindow;
 import <type_traits>;
 import <string>;
 import <string_view>;
 import Glib.Rect;
-import Glib.Definitions;
-import Glib.Device.ProcessInstance;
-import Glib.Device.IHandle;
-import Glib.Device.Event;
-import Glib.Device.IO;
+import Glib.Windows.Definitions;
+import Glib.Windows.ProcessInstance;
+import Glib.Windows.IHandle;
+import Glib.Windows.Event;
+import Glib.Windows.IO;
 
 export namespace gl::win32
 {

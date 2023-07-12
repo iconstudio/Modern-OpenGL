@@ -1,1 +1,1 @@
-module Glib.Device.Handle;
+module Glib.Windows.Handle;

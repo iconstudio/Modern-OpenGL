@@ -1,7 +1,7 @@
-export module Glib.Device.IContext;
+export module Glib.Windows.IContext;
 import <type_traits>;
-import Glib.Definitions;
-import Glib.Device.IHandle;
+import Glib.Windows.Definitions;
+import Glib.Windows.IHandle;
 
 export namespace gl::win32
 {

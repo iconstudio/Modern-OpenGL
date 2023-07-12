@@ -1,4 +1,4 @@
-export module Glib.Window.Coroutine;
+export module Glib.Windows.Coroutine;
 import Utility.Constraints;
 import Utility.FixedString;
 import Utility.Coroutine;

@@ -1,12 +1,12 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.IContext;
-import Glib.Device.CompatibleContext;
-import Glib.Device.Resource.Brush;
-import Glib.Device.Resource.Pen;
-import Glib.Device.Resource.Palette;
-import Glib.Device.Resource.Bitmap;
-import Glib.Device.Resource.CompatibleBitmap;
+module Glib.Windows.IContext;
+import Glib.Windows.CompatibleContext;
+import Glib.Windows.Resource.Brush;
+import Glib.Windows.Resource.Pen;
+import Glib.Windows.Resource.Palette;
+import Glib.Windows.Resource.Bitmap;
+import Glib.Windows.Resource.CompatibleBitmap;
 
 gl::win32::IContext::~IContext() noexcept
 {

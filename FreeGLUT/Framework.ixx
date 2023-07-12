@@ -2,11 +2,11 @@ export module Glib.Framework;
 import <functional>;
 import <memory>;
 import <string_view>;
-import Glib.Definitions;
+import Glib.Windows.Definitions;
 import Glib.Rect;
 import Glib.GraphicContext;
-import Glib.Window.ManagedWindow;
-export import Glib.Device.Event;
+import Glib.Windows.ManagedClient;
+export import Glib.Windows.Event;
 
 export namespace gl
 {

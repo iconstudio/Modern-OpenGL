@@ -5,7 +5,7 @@ module;
 
 module Glib.GraphicContext;
 import <cstdio>;
-import Glib.Device.Context.Renderer;
+import Glib.Windows.Context.Renderer;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {

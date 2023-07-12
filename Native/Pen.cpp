@@ -1,7 +1,7 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Device.Resource.Pen;
+module Glib.Windows.Resource.Pen;
 import <type_traits>;
 
 gl::win32::resource::Pen::Pen(const gl::win32::resource::PenStyles& style, const int& width, const  gl::win32::Colour& color)

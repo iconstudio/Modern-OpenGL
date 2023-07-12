@@ -2,8 +2,8 @@ module;
 #include "Internal.hpp"
 #undef HIWORD
 
-export module Glib.Device.IO.Keyboard:Flags;
-import Glib.Device.Utility;
+export module Glib.Windows.IO.Keyboard:Flags;
+import Glib.Windows.Utility;
 
 export namespace gl::win32::io
 {

@@ -1,8 +1,8 @@
-export module Glib.Device.Resource.Icon;
+export module Glib.Windows.Resource.Icon;
 import <type_traits>;
 import <string_view>;
-import Glib.Definitions;
-import Glib.Device.IGraphics;
+import Glib.Windows.Definitions;
+import Glib.Windows.IGraphics;
 
 export namespace gl::win32::resource
 {

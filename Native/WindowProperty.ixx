@@ -1,10 +1,10 @@
 module;
 #include "Internal.hpp"
 
-export module Glib.Window.Property;
+export module Glib.Windows.Client.Property;
 import <type_traits>;
-import Glib.Definitions;
-import Glib.Device.ProcessInstance;
+import Glib.Windows.Definitions;
+import Glib.Windows.ProcessInstance;
 
 export namespace gl::win32
 {

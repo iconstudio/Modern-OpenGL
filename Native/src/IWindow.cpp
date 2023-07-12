@@ -2,10 +2,10 @@ module;
 #include "Internal.hpp"
 #include <dwmapi.h>
 
-module Glib.Device.IWindow;
-import Glib.Device.Event.API;
-import Glib.Device.Context;
-import Glib.Device.Context.Renderer;
+module Glib.Windows.IWindow;
+import Glib.Windows.Event.API;
+import Glib.Windows.Context;
+import Glib.Windows.Context.Renderer;
 
 bool
 gl::win32::IWindow::StartUpdate()

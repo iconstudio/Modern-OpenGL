@@ -1,8 +1,8 @@
-export module Glib.Device.Resource.Brush;
+export module Glib.Windows.Resource.Brush;
 import <type_traits>;
-import Glib.Definitions;
-import Glib.Device.IGraphics;
-import Glib.Device.Colour;
+import Glib.Windows.Definitions;
+import Glib.Windows.IGraphics;
+import Glib.Windows.Colour;
 
 export namespace gl::win32::resource
 {

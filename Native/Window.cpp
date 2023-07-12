@@ -1,9 +1,9 @@
 module;
 #include "Internal.hpp"
 
-module Glib.Window;
-import Glib.Device.ProcessInstance;
-import Glib.Device.Event.API;
+module Glib.Windows.Client;
+import Glib.Windows.ProcessInstance;
+import Glib.Windows.Event.API;
 
 gl::win32::Window::Window(nullptr_t)
 noexcept

@@ -1,6 +1,6 @@
 export module Glib.GraphicContext;
-import Glib.Definitions;
-import Glib.Device.IHandle;
+import Glib.Windows.Definitions;
+import Glib.Windows.IHandle;
 
 export namespace gl
 {

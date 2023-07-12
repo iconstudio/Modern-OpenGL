@@ -1,4 +1,4 @@
-export module Glib.Device.IHandle;
+export module Glib.Windows.IHandle;
 import <utility>;
 import Utility.Constraints;
 

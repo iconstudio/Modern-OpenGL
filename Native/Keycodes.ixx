@@ -1,6 +1,6 @@
 module;
 #include <windows.system.h>
-export module Glib.Device.IO.Keyboard:KeyCodes;
+export module Glib.Windows.IO.Keyboard:KeyCodes;
 
 using enum ABI::Windows::System::VirtualKey;
 

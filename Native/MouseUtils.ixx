@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-export module Glib.Device.IO.Mouse:Utils;
+export module Glib.Windows.IO.Mouse:Utils;
 
 export namespace gl::win32::io
 {

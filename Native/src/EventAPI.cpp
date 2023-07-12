@@ -1,6 +1,6 @@
 module;
 #include "Internal.hpp"
-module Glib.Device.Event.API;
+module Glib.Windows.Event.API;
 
 bool
 gl::win32::EventAPI::Pop(const gl::win32::native::HWND& hwnd, gl::win32::RawEvent& output)
