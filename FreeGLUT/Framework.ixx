@@ -6,7 +6,6 @@ import Glib.Definitions;
 import Glib.Rect;
 import Glib.GraphicContext;
 import Glib.Window.ManagedWindow;
-import Glib.Device.Context.Renderer;
 export import Glib.Device.Event;
 
 export namespace gl

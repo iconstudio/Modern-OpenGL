@@ -11,6 +11,7 @@ import <exception>;
 import <format>;
 import Glib.Display;
 import Glib.Device.Context;
+import Glib.Device.Context.Renderer;
 import Glib.Window.Factory;
 
 void ReadyDisplay() noexcept;
