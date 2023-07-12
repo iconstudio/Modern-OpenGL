@@ -70,6 +70,8 @@ export namespace gl::device
 		bool Minimize() noexcept;
 		bool Restore() noexcept;
 
+		bool Clear(const Rect& rect) noexcept;
+		bool Clear() noexcept;
 		bool Redraw(const bool& flag) noexcept;
 
 		bool EnableInput() noexcept;

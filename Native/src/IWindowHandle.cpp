@@ -121,6 +121,22 @@ noexcept
 }
 
 bool
+gl::device::IWindow::Clear(const Rect& rect)
+noexcept
+{
+	RECT client{ rect.x, rect.y, rect.x + rect.w, rect.y + rect.h };
+
+	Delegate(::InvalidateRect, &client, TRUE);
+}
+
+bool
+gl::device::IWindow::Clear()
+noexcept
+{
+	Delegate(::InvalidateRect, nullptr, TRUE);
+}
+
+bool
 gl::device::IWindow::Redraw(const bool& flag)
 noexcept
 {
@@ -296,9 +312,9 @@ const noexcept
 	return gl::Rect
 	{
 		rect.left,
-		rect.top,
-		rect.right - rect.left,
-		rect.bottom - rect.top
+			rect.top,
+			rect.right - rect.left,
+			rect.bottom - rect.top
 	};
 }
 
