@@ -202,8 +202,8 @@
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Framework.ixx" />
-    <ClCompile Include="GLContext.cpp" />
-    <ClCompile Include="GraphicContext.ixx" />
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Context.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
