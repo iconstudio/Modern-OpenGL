@@ -126,14 +126,14 @@ noexcept
 {
 	RECT client{ rect.x, rect.y, rect.x + rect.w, rect.y + rect.h };
 
-	Delegate(::InvalidateRect, &client, TRUE);
+	return 0 != Delegate(::InvalidateRect, &client, TRUE);
 }
 
 bool
 gl::device::IWindow::Clear()
 noexcept
 {
-	Delegate(::InvalidateRect, nullptr, TRUE);
+	return 0 != Delegate(::InvalidateRect, nullptr, TRUE);
 }
 
 bool
