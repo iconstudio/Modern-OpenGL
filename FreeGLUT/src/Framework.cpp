@@ -88,6 +88,8 @@ noexcept
 		return;
 	}
 
+	SetRenderer(DefaultRenderer);
+
 	myInstance->Start();
 }
 
@@ -121,9 +123,16 @@ noexcept
 		ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
 		glContext.Begin(ctx);
-
+		localRenderer(window);
 		glContext.End();
 	});
+}
+
+void
+gl::Framework::DefaultRenderer(gl::Framework::handle_t& window)
+noexcept
+{
+	// Do Nothing
 }
 
 void ReadyDisplay() noexcept

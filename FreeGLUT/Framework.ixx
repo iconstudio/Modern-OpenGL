@@ -75,6 +75,8 @@ export namespace gl
 		void SetRenderer(render_t handler) noexcept;
 
 	private:
+		static void DefaultRenderer(handle_t& window) noexcept;
+
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
 
