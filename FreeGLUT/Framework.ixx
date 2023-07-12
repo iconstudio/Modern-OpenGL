@@ -57,6 +57,6 @@ export namespace gl
 	private:
 		std::unique_ptr<framework::handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
-		GLContext myContext{};
+		GLContext myHandle{};
 	};
 }
