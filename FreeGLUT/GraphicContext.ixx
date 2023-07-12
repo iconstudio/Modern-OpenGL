@@ -7,6 +7,8 @@ export namespace gl
 	class GLContext : public device::IHandle<device::native::NativeOGL>
 	{
 	public:
+		GLContext() noexcept;
+		GLContext(nullptr_t) noexcept;
 		GLContext(const device::native::HWND& handle) noexcept;
 		~GLContext() noexcept;
 
