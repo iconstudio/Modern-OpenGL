@@ -8,9 +8,8 @@ export namespace gl
 	{
 	public:
 		GLContext() noexcept = default;
-		GLContext(nullptr_t) noexcept;
-		GLContext(const device::native::HWND& handle) noexcept;
 		~GLContext() noexcept = default;
 
+		bool Initialize(const device::IContext& hdc) noexcept;
 	};
 }
