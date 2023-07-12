@@ -10,6 +10,7 @@ import <cstdio>;
 import <exception>;
 import <format>;
 import Glib.Display;
+import Glib.Device.Context;
 import Glib.Window.Factory;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
