@@ -31,7 +31,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext()); 0 != error)
+	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext(), setup.ww, setup.wh)
+		; 0 != error)
 	{
 		std::printf("Pixel Formatting Error: %lu\n", error);
 		return framework::InitError::FailedOnSettingPixelFormat;
@@ -57,7 +58,8 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext()); 0 != error)
+	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext(), setup.ww, setup.wh)
+		; 0 != error)
 	{
 		std::printf("Pixel Formatting Error: %lu\n", error);
 		return framework::InitError::FailedOnSettingPixelFormat;
