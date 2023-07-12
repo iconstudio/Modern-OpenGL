@@ -326,6 +326,13 @@ noexcept
 }
 
 void
+gl::window::ManagedWindow::AddEventHandler(event_id_t id, event_handler_t&& procedure)
+noexcept
+{
+	myEventHandlers.insert(std::make_pair(id, std::move(procedure)));
+}
+
+void
 gl::window::ManagedWindow::RemoveEventHandler(gl::window::ManagedWindow::event_id_t id)
 noexcept
 {

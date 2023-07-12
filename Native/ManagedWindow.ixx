@@ -81,7 +81,10 @@ namespace gl::window
 		void SetCaptureMouse(const bool& flag = true) noexcept;
 
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
+		void AddEventHandler(event_id_t id, event_handler_t&& procedure) noexcept;
 		void RemoveEventHandler(event_id_t id) noexcept;
+		void SetRenderer(const RenderEventHandler& handler) noexcept;
+		void SetRenderer(RenderEventHandler&& handler) noexcept;
 
 		KeyDownEventHandler SetKeyDownHandler(KeyDownEventHandler handler) noexcept;
 		KeyUpEventHandler SetKeyUpHandler(KeyUpEventHandler handler) noexcept;
@@ -89,8 +92,6 @@ namespace gl::window
 		SysKeyUpEventHandler SetSysKeyUpHandler(SysKeyUpEventHandler handler) noexcept;
 		CharDownEventHandler SetCharDownHandler(CharDownEventHandler handler) noexcept;
 		CharUpEventHandler SetCharUpHandler(CharUpEventHandler handler) noexcept;
-		void SetRenderer(const RenderEventHandler& handler) noexcept;
-		void SetRenderer(RenderEventHandler&& handler) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
 
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
