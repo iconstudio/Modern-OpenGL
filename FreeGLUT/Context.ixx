@@ -4,15 +4,18 @@ import Glib.Device.IHandle;
 
 export namespace gl
 {
-	class GLContext : public device::IHandle<device::native::NativeOGL>
+	class [[nodiscard]] GLContext
+		: public device::IHandle<device::native::NativeOGL>
 	{
 	public:
-		GLContext() noexcept = default;
-		~GLContext() noexcept = default;
+		using base = device::IHandle<device::native::NativeOGL>;
+
+		GLContext() noexcept;
+		~GLContext() noexcept;
 
 		bool Initialize(const device::IContext& hdc) noexcept;
 
 		bool Begin(device::GraphicDeviceContext& painter) noexcept;
-		void End() noexcept;
+		bool End() noexcept;
 	};
 }
