@@ -40,8 +40,11 @@ noexcept
 }
 
 unsigned long
-gl::GLContext::Initialize(const gl::device::IContext& hdc)
-noexcept
+gl::GLContext::Initialize(
+	const gl::device::IContext& hdc
+	, int view_width
+	, int view_height
+) noexcept
 {
 	auto& handle = GetHandle();
 
