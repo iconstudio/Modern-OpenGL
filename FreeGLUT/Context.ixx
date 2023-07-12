@@ -13,7 +13,7 @@ export namespace gl
 		GLContext() noexcept;
 		~GLContext() noexcept;
 
-		bool Initialize(const device::IContext& hdc) noexcept;
+		unsigned long Initialize(const device::IContext& hdc) noexcept;
 
 		bool Begin(device::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;

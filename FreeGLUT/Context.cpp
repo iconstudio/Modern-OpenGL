@@ -5,13 +5,24 @@ module Glib.GraphicContext;
 import <cstdio>;
 import Glib.Device.Context.Renderer;
 
-PIXELFORMATDESCRIPTOR pixel_format =
+static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
-	.nSize = sizeof(PIXELFORMATDESCRIPTOR),
-	.nVersion = 1,
-	.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
-	.iPixelType = PFD_TYPE_RGBA,
-	.cColorBits = 24,
+	sizeof(PIXELFORMATDESCRIPTOR),
+	1,                     // version number
+	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
+	PFD_TYPE_RGBA,         // RGBA type
+	24,
+	0, 0, 0, 0, 0, 0,      // color bits ignored
+	8,
+	0,                     // shift bit ignored
+	0,                     // no accumulation buffer
+	0, 0, 0, 0,            // accum bits ignored
+	16,
+	8,
+	0,                     // no auxiliary buffer
+	PFD_MAIN_PLANE,        // main layer
+	0,                     // reserved
+	0, 0, 0                // layer masks ignored
 };
 
 gl::GLContext::GLContext()
@@ -28,7 +39,7 @@ noexcept
 	}
 }
 
-bool
+unsigned long
 gl::GLContext::Initialize(const gl::device::IContext& hdc)
 noexcept
 {
@@ -38,23 +49,23 @@ noexcept
 	if (nullptr == handle)
 	{
 		const int current_format_id = GetPixelFormat(hdc);
+		unsigned long error = ::GetLastError();
 
 		if (0 == DescribePixelFormat(hdc, current_format_id, sizeof(pixel_format), &pixel_format))
 		{
-			std::printf("Failed on reading a pixel format %d. (code: %u)\n", current_format_id, ::GetLastError());
-
-			return false;
+			std::printf("Failed on reading a pixel format %d. (code: %u)\n", current_format_id, error);
 		}
 
 		if (0 == (pixel_format.dwFlags & PFD_SUPPORT_OPENGL))
 		{
-			std::printf("Failed on checking a pixel format %d. (code: %u)\n", current_format_id, ::GetLastError());
-
-			return false;
+			unsigned long error = ::GetLastError();
+			std::printf("Failed on checking a pixel format %d. (code: %u)\n", current_format_id, error);
 		}
+
+		return error;
 	}
 
-	return true;
+	return 0;
 }
 
 bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
