@@ -1,5 +1,7 @@
 module;
 #include <Windows.h>
+#include <gl\gl.h>
+#include <gl\glu.h>
 
 module Glib.GraphicContext;
 import <cstdio>;
@@ -11,7 +13,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	1,                     // version number
 	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
 	PFD_TYPE_RGBA,         // RGBA type
-	24,
+	32,
 	0, 0, 0, 0, 0, 0,      // color bits ignored
 	8,
 	0,                     // shift bit ignored
@@ -87,6 +89,12 @@ gl::GLContext::Initialize(
 		std::printf("Failed on creating a opengl context. (code: %u)\n", error);
 		return error;
 	}
+
+	glEnable(GL_DEPTH_TEST);
+	glMatrixMode(GL_PROJECTION);
+	glDepthFunc(GL_LESS);
+	glViewport(0, 0, view_width, view_height);
+	glLoadIdentity();
 
 	return 0;
 }
