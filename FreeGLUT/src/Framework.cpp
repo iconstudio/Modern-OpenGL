@@ -127,16 +127,13 @@ noexcept
 		GraphicDeviceContext& ctx) {
 
 		glContext.Begin(ctx);
-
-		auto& painter = ctx.GetPaintStruct();
-		auto reuslt = ::FillRect(ctx, &painter.rcPaint, (HBRUSH)(COLOR_WINDOW + 2));
-		localRenderer(window);
+		localRenderer(ctx);
 		glContext.End();
 	});
 }
 
 void
-gl::Framework::DefaultRenderer(gl::Framework::handle_t& window)
+gl::Framework::DefaultRenderer(gl::GraphicDeviceContext& hdc)
 noexcept
 {
 	glClearColor(0, 0, 0, 0);
@@ -150,6 +147,7 @@ noexcept
 	glEnd();
 
 	glFlush();
+	SwapBuffers(hdc);
 }
 
 void ReadyDisplay() noexcept
