@@ -1,3 +1,7 @@
+#pragma once
+
+#ifndef _ICONER_IMAGE_LOADER_
+#define _ICONER_IMAGE_LOADER_
 #include "Internal.hpp"
 import Glib.Windows.Definitions;
 import Utility.Monad.Loosen;
@@ -65,3 +69,4 @@ noexcept
 		return static_cast<HCURSOR>(handle);
 	}
 }
+#endif // _ICONER_IMAGE_LOADER_
