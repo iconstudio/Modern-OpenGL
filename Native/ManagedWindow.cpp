@@ -535,6 +535,20 @@ noexcept
 	}
 }
 
+bool
+gl::window::ManagedWindow::ClearWindow(const gl::Rect& rect)
+noexcept
+{
+	return underlying.Clear(rect);
+}
+
+bool
+gl::window::ManagedWindow::ClearWindow()
+noexcept
+{
+	return underlying.Clear();
+}
+
 void
 gl::window::ManagedWindow::KeyboardHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
