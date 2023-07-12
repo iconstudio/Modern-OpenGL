@@ -72,10 +72,10 @@ export namespace gl::device
 
 		bool Clear(const Rect& rect) noexcept;
 		bool Clear() noexcept;
-		bool Redraw(const bool& flag) noexcept;
 
 		bool EnableInput() noexcept;
 		bool DisableInput() noexcept;
+		bool EnableRedraw(const bool& flag) noexcept;
 
 		[[nodiscard]] DeviceContext AcquireContext() const noexcept;
 		[[nodiscard]] GraphicDeviceContext AcquireRenderContext() const noexcept;

@@ -137,7 +137,7 @@ noexcept
 }
 
 bool
-gl::device::IWindow::Redraw(const bool& flag)
+gl::device::IWindow::EnableRedraw(const bool& flag)
 noexcept
 {
 	return SendCommand(EventID::SetRedraw, static_cast<WPARAM>(flag), 0);

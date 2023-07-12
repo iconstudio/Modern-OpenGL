@@ -121,28 +121,28 @@ noexcept
 		case event_id_t::ChangedDPI:
 		{
 			std::printf("[ChangedDPI]\n");
-			control.Redraw(true);
+			control.EnableRedraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedTheme:
 		{
 			std::printf("[ChangedTheme]\n");
-			control.Redraw(true);
+			control.EnableRedraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedStaticColor:
 		{
 			std::printf("[ChangedStaticColor]\n");
-			control.Redraw(true);
+			control.EnableRedraw(true);
 		}
 		break;
 
 		case event_id_t::ChangedUserColor:
 		{
 			std::printf("[ChangedUserColor] Colour is changed to %lld. Is Fluent: %lld\n", wparam, lparam);
-			control.Redraw(true);
+			control.EnableRedraw(true);
 		}
 		break;
 
