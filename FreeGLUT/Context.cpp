@@ -101,9 +101,7 @@ gl::GLContext::Initialize(
 
 bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
 {
-	auto& handle = GetHandle();
-
-	if (0 == ::wglMakeCurrent(painter, handle))
+	if (0 == ::wglMakeCurrent(painter, GetHandle()))
 	{
 		std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
 
