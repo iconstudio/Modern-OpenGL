@@ -125,7 +125,11 @@ noexcept
 		[this, localRenderer = std::move(handler)](
 		ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
+
 		glContext.Begin(ctx);
+
+		auto& painter = ctx.GetPaintStruct();
+		auto reuslt = ::FillRect(ctx, &painter.rcPaint, (HBRUSH)(COLOR_WINDOW + 2));
 		localRenderer(window);
 		glContext.End();
 	});
