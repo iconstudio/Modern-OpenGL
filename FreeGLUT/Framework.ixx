@@ -9,8 +9,6 @@ export namespace gl
 {
 	namespace framework
 	{
-		using handle_t = gl::window::ManagedWindow;
-
 		struct Descriptor
 		{
 			std::wstring_view title;
@@ -45,6 +43,7 @@ export namespace gl
 	{
 	public:
 		using base = std::enable_shared_from_this<Framework>;
+		using handle_t = gl::window::ManagedWindow;
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
@@ -54,8 +53,10 @@ export namespace gl
 		framework::InitError Initialize();
 		void Run() noexcept;
 
+		void AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure) noexcept;
+
 	private:
-		std::unique_ptr<framework::handle_t> myInstance{ nullptr };
+		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
 		GLContext myHandle{};
 	};
