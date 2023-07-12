@@ -1,12 +1,14 @@
 export module Glib.GraphicContext;
 import Glib.Definitions;
-import Glib.Device.Context;
-import Glib.Device.Context.Renderer;
+import Glib.Device.IHandle;
 
 export namespace gl
 {
-	class GLContext
+	class GLContext : public device::IHandle<device::native::NativeOGL>
 	{
 	public:
+		GLContext(const device::native::HWND& handle) noexcept;
+		~GLContext() noexcept;
+
 	};
 }
