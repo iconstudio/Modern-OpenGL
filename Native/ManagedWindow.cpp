@@ -87,6 +87,8 @@ noexcept
 
 		underlying.UpdateOnce();
 	}
+
+	isRunning = false;
 }
 
 long long
@@ -109,12 +111,15 @@ noexcept
 				break;
 			}
 
+			self->isRenderingNow.store(true, util::memory_order_relaxed);
 			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
 			if (auto& renderer = self->onRender; renderer)
 			{
 				renderer(*self, render_ctx);
 			}
+
+			self->isRenderingNow.store(false, util::memory_order_relaxed);
 		}
 		break;
 
