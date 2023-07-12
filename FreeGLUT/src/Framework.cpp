@@ -137,7 +137,14 @@ void
 gl::Framework::SetRenderer(render_t handler)
 noexcept
 {
-	myInstance->SetRenderer(std::move(handler));
+	myInstance->SetRenderer(
+		[this, localRenderer = std::move(handler)](
+		ManagedWindow& window,
+		GraphicDeviceContext& ctx) {
+		myHandle.Begin(ctx);
+
+		myHandle.End();
+	});
 }
 
 void ReadyDisplay() noexcept
