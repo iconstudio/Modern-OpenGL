@@ -77,4 +77,6 @@ export namespace gl
 
 		GLContext myHandle{};
 	};
+
+	std::shared_ptr<Framework> CreateFramework() noexcept;
 }
