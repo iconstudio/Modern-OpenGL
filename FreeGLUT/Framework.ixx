@@ -1,4 +1,5 @@
 export module Glib.Framework;
+import <functional>;
 import <memory>;
 import <string_view>;
 import Glib.Rect;
@@ -54,7 +55,7 @@ export namespace gl
 		using handle_t = gl::ManagedWindow;
 		using event_handler_t = handle_t::event_handler_t;
 		//using render_t = gl::RenderEventHandler;
-		using render_t = void(*)(handle_t&);
+		using render_t = std::function<void(handle_t&)>;
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;

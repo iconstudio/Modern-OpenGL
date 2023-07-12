@@ -1,5 +1,6 @@
 export module Glib.Window.ManagedWindow;
 import <utility>;
+import <functional>;
 import <memory>;
 import <vector>;
 import <stack>;
@@ -18,6 +19,9 @@ import Glib.Window;
 
 namespace gl::window
 {
+	// TODO: std::function -> std::move_only_function
+	class ManagedWindow;
+
 	export inline namespace managed_window
 	{
 		enum class [[nodiscard]] AwakeResult
@@ -28,14 +32,13 @@ namespace gl::window
 			FailedOnPrepareEvent = 3,
 		};
 
-		//using KeyDownEventHandler = std::move_only_function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
-		using KeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
-		using KeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
-		using SysKeyDownEventHandler = void(*)(ManagedWindow&, device::io::KeyCode, bool is_first) noexcept;
-		using SysKeyUpEventHandler = void(*)(ManagedWindow&, device::io::KeyCode) noexcept;
-		using CharDownEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
-		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
-		using RenderEventHandler = void(*)(ManagedWindow&, device::GraphicDeviceContext&) noexcept;
+		using KeyDownEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
+		using KeyUpEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode)>;
+		using SysKeyDownEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
+		using SysKeyUpEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode)>;
+		using CharDownEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
+		using CharUpEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
+		using RenderEventHandler = std::function<void(ManagedWindow&, device::GraphicDeviceContext&)>;
 	}
 
 	export class [[nodiscard]] ManagedWindow
@@ -55,7 +58,7 @@ namespace gl::window
 
 	public:
 		using event_id_t = device::EventID;
-		using event_handler_t = void(*)(ManagedWindow&, unsigned long long, long long) noexcept;
+		using event_handler_t = std::function<void(ManagedWindow&, unsigned long long, long long)>;
 
 		using event_t = device::Event;
 		using event_alert_t = std::atomic<event_t>;
@@ -88,7 +91,7 @@ namespace gl::window
 		CharUpEventHandler SetCharUpHandler(CharUpEventHandler handler) noexcept;
 		RenderEventHandler SetRenderer(RenderEventHandler handler) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
-		
+
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
