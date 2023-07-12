@@ -403,7 +403,6 @@ noexcept
 		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_release);
 		awaitFlag.notify_one();
 
-		//::InvalidateRect(control, nullptr, TRUE);
 		return true;
 	}
 	else
