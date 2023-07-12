@@ -44,6 +44,7 @@ export namespace gl
 	public:
 		using base = std::enable_shared_from_this<Framework>;
 		using handle_t = gl::window::ManagedWindow;
+		using renderer_t = gl::window::RenderEventHandler;
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
@@ -56,6 +57,8 @@ export namespace gl
 		void AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure) noexcept;
 		void AddEventHandler(handle_t::event_id_t id, handle_t::event_handler_t&& procedure) noexcept;
 		void RemoveEventHandler(handle_t::event_id_t id) noexcept;
+
+		void SetRenderer(renderer_t handler) noexcept;
 
 	private:
 		std::unique_ptr<handle_t> myInstance{ nullptr };
