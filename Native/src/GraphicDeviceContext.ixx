@@ -13,7 +13,6 @@ export namespace gl::device
 		GraphicDeviceContext(const native::HWND& handle) noexcept;
 		~GraphicDeviceContext() noexcept;
 
-		[[nodiscard]] const native::NativeOGL& GetContext() const& noexcept;
 		[[nodiscard]] native::PaintStruct& GetPaintStruct() noexcept;
 		[[nodiscard]] const native::PaintStruct& GetPaintStruct() const noexcept;
 
@@ -25,6 +24,5 @@ export namespace gl::device
 	private:
 		native::HWND myWindowHandle = nullptr;
 		native::PaintStruct myStatus{};
-		native::NativeOGL myContext = nullptr;
 	};
 }
