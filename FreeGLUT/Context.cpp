@@ -114,11 +114,17 @@ bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
 	}
 
 	nativeContext = painter;
+
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	return true;
 }
 
 bool gl::GLContext::End() noexcept
 {
+	glFlush();
+
 	if (isDoubleBuffered)
 	{
 		::SwapBuffers(nativeContext);

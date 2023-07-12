@@ -136,17 +136,12 @@ void
 gl::Framework::DefaultRenderer(gl::GraphicDeviceContext& hdc)
 noexcept
 {
-	glClearColor(0, 0, 0, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glBegin(GL_TRIANGLES);
 	glColor3f(0.1f, 0.2f, 0.3f);
 	glVertex3f(0, 0, 0);
 	glVertex3f(1, 0, 0);
 	glVertex3f(0, 1, 0);
 	glEnd();
-
-	glFlush();
 }
 
 void ReadyDisplay() noexcept
