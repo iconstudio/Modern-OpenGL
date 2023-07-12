@@ -18,7 +18,7 @@ import Glib.Window;
 
 namespace gl::window
 {
-	export namespace managed_window
+	export inline namespace managed_window
 	{
 		enum class [[nodiscard]] AwakeResult
 		{
@@ -37,8 +37,6 @@ namespace gl::window
 		using CharUpEventHandler = void(*)(ManagedWindow&, char32_t, long long) noexcept;
 		using RenderEventHandler = void(*)(ManagedWindow&, device::GraphicDeviceContext&) noexcept;
 	}
-
-	using namespace managed_window;
 
 	export class [[nodiscard]] ManagedWindow
 		: public std::enable_shared_from_this<ManagedWindow>
