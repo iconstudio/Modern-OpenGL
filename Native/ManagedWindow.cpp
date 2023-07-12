@@ -343,42 +343,42 @@ noexcept
 	myEventHandlers.insert(std::make_pair(id, procedure));
 }
 
-gl::window::managed_window::KeyDownEventHandler&&
+gl::window::managed_window::KeyDownEventHandler
 gl::window::ManagedWindow::SetKeyDownHandler(managed_window::KeyDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onKeyDown, std::move(handler));
 }
 
-gl::window::managed_window::KeyUpEventHandler&&
+gl::window::managed_window::KeyUpEventHandler
 gl::window::ManagedWindow::SetKeyUpHandler(managed_window::KeyUpEventHandler handler)
 noexcept
 {
 	return std::exchange(onKeyUp, std::move(handler));
 }
 
-gl::window::managed_window::SysKeyDownEventHandler&&
+gl::window::managed_window::SysKeyDownEventHandler
 gl::window::ManagedWindow::SetSysKeyDownHandler(managed_window::SysKeyDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onSysDown, std::move(handler));
 }
 
-gl::window::managed_window::SysKeyUpEventHandler&&
+gl::window::managed_window::SysKeyUpEventHandler
 gl::window::ManagedWindow::SetSysKeyUpHandler(managed_window::SysKeyUpEventHandler handler)
 noexcept
 {
 	return std::exchange(onSysUp, std::move(handler));
 }
 
-gl::window::managed_window::CharDownEventHandler&&
+gl::window::managed_window::CharDownEventHandler
 gl::window::ManagedWindow::SetCharDownHandler(managed_window::CharDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onChrDown, std::move(handler));
 }
 
-gl::window::managed_window::CharUpEventHandler&&
+gl::window::managed_window::CharUpEventHandler
 gl::window::ManagedWindow::SetCharUpHandler(managed_window::CharUpEventHandler handler)
 noexcept
 {
