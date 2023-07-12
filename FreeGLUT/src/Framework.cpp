@@ -13,28 +13,7 @@ import Glib.Display;
 import Glib.Device.Context;
 import Glib.Window.Factory;
 
-static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
-{
-	sizeof(PIXELFORMATDESCRIPTOR),
-	1,                     // version number
-	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
-	PFD_TYPE_RGBA,         // RGBA type
-	24,
-	0, 0, 0, 0, 0, 0,      // color bits ignored
-	8,
-	0,                     // shift bit ignored
-	0,                     // no accumulation buffer
-	0, 0, 0, 0,            // accum bits ignored
-	16,
-	8,
-	0,                     // no auxiliary buffer
-	PFD_MAIN_PLANE,        // main layer
-	0,                     // reserved
-	0, 0, 0                // layer masks ignored
-};
-
 void ReadyDisplay() noexcept;
-unsigned long ReadyOpenGL(HDC context) noexcept;
 
 gl::framework::InitError
 gl::Framework::Initialize(const gl::framework::Descriptor& setup)
@@ -51,7 +30,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	if (unsigned long error = ReadyOpenGL(myInstance->AcquireContext()); 0 != error)
+	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext()); 0 != error)
 	{
 		std::printf("Pixel Formatting Error: %lu\n", error);
 		return framework::InitError::FailedOnSettingPixelFormat;
@@ -77,7 +56,7 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	if (unsigned long error = ReadyOpenGL(myInstance->AcquireContext()); 0 != error)
+	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext()); 0 != error)
 	{
 		std::printf("Pixel Formatting Error: %lu\n", error);
 		return framework::InitError::FailedOnSettingPixelFormat;
@@ -141,9 +120,9 @@ noexcept
 		[this, localRenderer = std::move(handler)](
 		ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
-		myHandle.Begin(ctx);
+		glContext.Begin(ctx);
 
-		myHandle.End();
+		glContext.End();
 	});
 }
 
@@ -151,55 +130,18 @@ void ReadyDisplay() noexcept
 {
 	gl::display::dpi::SetDPIAware(true);
 
+	//constexpr int col_indices[] = { COLOR_WINDOW };
+	//constexpr unsigned long colors[] = { RGB(255, 255, 255) };
+	//::SetSysColors(1, col_indices, colors);
+
 	if (gl::display::IsDimmingMode())
 	{
 		std::puts("Dark Mode");
-
-		//constexpr int col_indices[] = { COLOR_WINDOW };
-		//constexpr unsigned long colors[] = { RGB(255, 255, 255) };
-		//::SetSysColors(1, col_indices, colors);
 	}
 	else
 	{
 		std::puts("Light Mode");
 	}
-}
-
-unsigned long ReadyOpenGL(HDC context) noexcept
-{
-	const int target = ChoosePixelFormat(context, &opengl_format);
-	if (0 == target)
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on acquiring a pixel format. (code: %u)\n", error);
-		return error;
-	}
-
-	PIXELFORMATDESCRIPTOR checker{};
-
-	const int check = DescribePixelFormat(context, target, sizeof(checker), &checker);
-	if (0 == check)
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
-		return error;
-	}
-
-	if (0 == (checker.dwFlags & PFD_SUPPORT_OPENGL))
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
-		return error;
-	}
-
-	if (0 == SetPixelFormat(context, target, &checker))
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
-		return error;
-	}
-
-	return 0UL;
 }
 
 std::shared_ptr<gl::Framework>
