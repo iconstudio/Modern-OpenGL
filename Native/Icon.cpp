@@ -3,8 +3,8 @@ module;
 #include <shellapi.h>
 module Glib.Device.Resource.Icon;
 
-gl::device::resource::Icon&
-gl::device::resource::Icon::operator=(nullptr_t)
+gl::win32::resource::Icon&
+gl::win32::resource::Icon::operator=(nullptr_t)
 noexcept
 {
 	Destroy();
@@ -13,18 +13,18 @@ noexcept
 	return *this;
 }
 
-gl::device::resource::Icon::~Icon()
+gl::win32::resource::Icon::~Icon()
 noexcept
 {
 	Destroy();
 	myLength = 0U;
 }
 
-gl::device::resource::Icon
-gl::device::resource::Icon::Copy()
+gl::win32::resource::Icon
+gl::win32::resource::Icon::Copy()
 const noexcept
 {
-	gl::device::resource::Icon result{ nullptr };
+	gl::win32::resource::Icon result{ nullptr };
 
 	native::RawIcon copy = ::CopyIcon(GetHandle());
 	if (nullptr != copy)
@@ -37,7 +37,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::Icon::TryCopy(Icon& output)
+gl::win32::resource::Icon::TryCopy(Icon& output)
 const noexcept
 {
 	native::RawIcon copy = ::CopyIcon(GetHandle());
@@ -51,7 +51,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::Icon::Destroy()
+gl::win32::resource::Icon::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -65,19 +65,19 @@ noexcept
 }
 
 bool
-gl::device::resource::Icon::Draw(const gl::device::native::NativeContext& hdc, const int& x, const int& y)
+gl::win32::resource::Icon::Draw(const gl::win32::native::NativeContext& hdc, const int& x, const int& y)
 const noexcept
 {
 	return 0 != ::DrawIcon(hdc, x, y, GetHandle());
 }
 
-gl::device::resource::Icon
-gl::device::MakeEmptyIcon() noexcept
+gl::win32::resource::Icon
+gl::win32::MakeEmptyIcon() noexcept
 {
 	return resource::Icon(nullptr);
 }
 
-namespace gl::device::resource
+namespace gl::win32::resource
 {
 	using IconByte = unsigned char;
 	using IconBytePtr = IconByte*;
@@ -242,9 +242,9 @@ namespace gl::device::resource
 	}
 }
 
-namespace gl::device::resource::detail
+namespace gl::win32::resource::detail
 {
-	using device::native::RawIcon;
+	using gl::win32::native::RawIcon;
 
 	/// <param name="color">Plain color bitmap</param>
 	/// <param name="mask">Should have (1, 2)x resolution of the icon</param>

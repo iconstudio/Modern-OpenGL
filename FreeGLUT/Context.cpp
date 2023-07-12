@@ -43,7 +43,7 @@ noexcept
 
 unsigned long
 gl::GLContext::Initialize(
-	const gl::device::IContext& hdc
+	const gl::win32::IContext& hdc
 	, int view_width
 	, int view_height
 ) noexcept
@@ -104,7 +104,7 @@ gl::GLContext::Initialize(
 	return 0;
 }
 
-bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
+bool gl::GLContext::Begin(win32::GraphicDeviceContext& painter) noexcept
 {
 	if (0 == ::wglMakeCurrent(painter, GetHandle()))
 	{

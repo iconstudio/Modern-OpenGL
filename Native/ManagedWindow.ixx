@@ -17,7 +17,7 @@ export import Glib.Device.Event;
 export import Glib.Window.Coroutine;
 import Glib.Window;
 
-namespace gl::window
+namespace gl::win32
 {
 	// TODO: std::function -> std::move_only_function
 	class ManagedWindow;
@@ -32,13 +32,13 @@ namespace gl::window
 			FailedOnPrepareEvent = 3,
 		};
 
-		using KeyDownEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
-		using KeyUpEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode)>;
-		using SysKeyDownEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode, bool is_first)>;
-		using SysKeyUpEventHandler = std::function<void(ManagedWindow&, device::io::KeyCode)>;
+		using KeyDownEventHandler = std::function<void(ManagedWindow&, io::KeyCode, bool is_first)>;
+		using KeyUpEventHandler = std::function<void(ManagedWindow&, io::KeyCode)>;
+		using SysKeyDownEventHandler = std::function<void(ManagedWindow&, io::KeyCode, bool is_first)>;
+		using SysKeyUpEventHandler = std::function<void(ManagedWindow&, io::KeyCode)>;
 		using CharDownEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
 		using CharUpEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
-		using RenderEventHandler = std::function<void(ManagedWindow&, device::GraphicDeviceContext&)>;
+		using RenderEventHandler = std::function<void(ManagedWindow&, GraphicDeviceContext&)>;
 	}
 
 	export class [[nodiscard]] ManagedWindow
@@ -53,14 +53,14 @@ namespace gl::window
 
 		using unit_t = std::unique_ptr<util::jthread>;
 		using pool_t = std::vector<unit_t>;
-		using coro_t = gl::window::Coroutine;
+		using coro_t = gl::win32::Coroutine;
 		using coro_storage = std::stack<coro_t>;
 
 	public:
-		using event_id_t = device::EventID;
+		using event_id_t = EventID;
 		using event_handler_t = std::function<void(ManagedWindow&, unsigned long long, long long)>;
 
-		using event_t = device::Event;
+		using event_t = Event;
 		using event_alert_t = std::atomic<event_t>;
 
 		using event_storage_t = std::unordered_map<event_id_t, event_handler_t>;
@@ -74,8 +74,8 @@ namespace gl::window
 		[[noreturn]]
 		void Destroy() noexcept;
 
-		[[nodiscard]] device::DeviceContext AcquireContext() const noexcept;
-		[[nodiscard]] device::GraphicDeviceContext AcquireRenderContext() const noexcept;
+		[[nodiscard]] DeviceContext AcquireContext() const noexcept;
+		[[nodiscard]] GraphicDeviceContext AcquireRenderContext() const noexcept;
 
 		void SetPowerSave(const bool& flag) noexcept;
 		void SetCaptureMouse(const bool& flag = true) noexcept;
@@ -96,7 +96,7 @@ namespace gl::window
 
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
-		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
+		static long long MainWorker(HWND, unsigned int, unsigned long long, long long) noexcept;
 		static void Worker(util::CancellationToken stop_token, ManagedWindow& self, event_alert_t& await_flag) noexcept;
 
 		ManagedWindow(const ManagedWindow&) = delete;
@@ -121,14 +121,14 @@ namespace gl::window
 
 		static void KeyboardHandler(ManagedWindow&, unsigned long long, long long) noexcept;
 		static void CharKeyHandler(ManagedWindow&, unsigned long long, long long) noexcept;
-		static void DefaultSysKeyEvent(ManagedWindow& self, device::io::KeyCode code, bool is_first) noexcept;
+		static void DefaultSysKeyEvent(ManagedWindow& self, io::KeyCode code, bool is_first) noexcept;
 
 		Window underlying;
 		Rect myDimensions{};
 
 		// flat map
 		event_storage_t myEventHandlers{};
-		static inline constexpr device::Event DefaultEvent = {};
+		static inline constexpr Event DefaultEvent = {};
 
 		managed_window::KeyDownEventHandler onKeyDown = nullptr;
 		managed_window::KeyUpEventHandler onKeyUp = nullptr;

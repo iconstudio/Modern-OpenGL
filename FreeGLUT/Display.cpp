@@ -112,17 +112,17 @@ namespace gl::display
 	bool IsDimmingMode()
 	{
 		DisplayProperty settings = AcquireSettings();
-		//const device::Colour col_a_0 = settings.GetColorValue(UIColorType::Accent);
-		//const device::Colour col_a_1 = settings.GetColorValue(UIColorType::AccentDark1);
-		//const device::Colour col_a_2 = settings.GetColorValue(UIColorType::AccentDark2);
-		//const device::Colour col_a_3 = settings.GetColorValue(UIColorType::AccentDark3);
-		//const device::Colour col_a_4 = settings.GetColorValue(UIColorType::AccentLight1);
-		//const device::Colour col_a_5 = settings.GetColorValue(UIColorType::AccentLight2);
-		//const device::Colour col_a_6 = settings.GetColorValue(UIColorType::AccentLight3);
-		const device::Colour col_fg = settings.GetColorValue(UIColorType::Foreground);
-		//const device::Colour col_bk = settings.GetColorValue(UIColorType::Background);
+		//const win32::Colour col_a_0 = settings.GetColorValue(UIColorType::Accent);
+		//const win32::Colour col_a_1 = settings.GetColorValue(UIColorType::AccentDark1);
+		//const win32::Colour col_a_2 = settings.GetColorValue(UIColorType::AccentDark2);
+		//const win32::Colour col_a_3 = settings.GetColorValue(UIColorType::AccentDark3);
+		//const win32::Colour col_a_4 = settings.GetColorValue(UIColorType::AccentLight1);
+		//const win32::Colour col_a_5 = settings.GetColorValue(UIColorType::AccentLight2);
+		//const win32::Colour col_a_6 = settings.GetColorValue(UIColorType::AccentLight3);
+		const win32::Colour col_fg = settings.GetColorValue(UIColorType::Foreground);
+		//const win32::Colour col_bk = settings.GetColorValue(UIColorType::Background);
 
-		if (device::IsColorBright(col_fg))
+		if (win32::IsColorBright(col_fg))
 		{
 			return true;
 		}

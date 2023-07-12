@@ -10,12 +10,12 @@ import Glib.Window.Property;
 export import :Style;
 export import :Option;
 
-export namespace gl::window
+export namespace gl::win32
 {
-	class [[nodiscard]] Window : public device::IWindow
+	class [[nodiscard]] Window : public IWindow
 	{
 	public:
-		using base = device::IWindow;
+		using base = IWindow;
 
 		explicit Window(const WindowProperty& properties
 			, const std::wstring_view& title
@@ -65,7 +65,7 @@ export namespace gl::window
 		Window& operator=(const Window&) = delete;
 
 	protected:
-		device::ProcessInstance myInstance;
+		ProcessInstance myInstance;
 		WindowProcedure myProcedure;
 		const wchar_t* myClassName = nullptr;
 

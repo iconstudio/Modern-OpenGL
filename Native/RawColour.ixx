@@ -2,7 +2,7 @@ export module Glib.Device.Colour:Implement;
 import <cstdint>;
 import Glib.Device.Utility;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	/// <summary>
 	/// 32-bit value, where the least-significant 8 bits are blue, the next 8 bits are green, and the next 8 bits are red.

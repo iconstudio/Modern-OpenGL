@@ -2,12 +2,12 @@ module;
 #include "Internal.hpp"
 module Glib.Device.Resource.CompatibleBitmap;
 
-gl::device::resource::CompatibleBitmap::CompatibleBitmap(handle_type&& handle)
+gl::win32::resource::CompatibleBitmap::CompatibleBitmap(handle_type&& handle)
 noexcept
 	: base(std::move(handle))
 {}
 
-gl::device::resource::CompatibleBitmap::~CompatibleBitmap()
+gl::win32::resource::CompatibleBitmap::~CompatibleBitmap()
 noexcept
 {
 	Destroy();

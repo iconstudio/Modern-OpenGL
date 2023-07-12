@@ -6,10 +6,10 @@ import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.ProcessInstance;
 
-export namespace gl::window
+export namespace gl::win32
 {
-	using device::native::WindowProcedure;
-	using device::native::RawWindowProperty;
+	using native::WindowProcedure;
+	using native::RawWindowProperty;
 
 	inline constexpr RawWindowProperty DefaultWindowProperty = 
 	{
@@ -64,15 +64,15 @@ export namespace gl::window
 		}
 
 		[[nodiscard]]
-		constexpr device::ProcessInstance GetInstance() const& noexcept
+		constexpr ProcessInstance GetInstance() const& noexcept
 		{
-			return device::ProcessInstance{ myWindowClass.hInstance };
+			return ProcessInstance{ myWindowClass.hInstance };
 		}
 
 		[[nodiscard]]
-		constexpr device::ProcessInstance GetInstance() && noexcept
+		constexpr ProcessInstance GetInstance() && noexcept
 		{
-			return device::ProcessInstance{ static_cast<device::HINSTANCE&&>(myWindowClass.hInstance) };
+			return ProcessInstance{ static_cast<HINSTANCE&&>(myWindowClass.hInstance) };
 		}
 
 		[[nodiscard]]

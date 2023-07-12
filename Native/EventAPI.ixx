@@ -3,7 +3,7 @@ import <type_traits>;
 export import Glib.Definitions;
 export import Glib.Device.Event;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	enum class [[nodiscard]] EventPeeker : unsigned int
 	{

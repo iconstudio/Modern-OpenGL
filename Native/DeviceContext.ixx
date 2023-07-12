@@ -3,7 +3,7 @@ import <type_traits>;
 import Glib.Definitions;
 export import Glib.Device.IContext;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	class [[nodiscard]] DeviceContext : public IContext
 	{

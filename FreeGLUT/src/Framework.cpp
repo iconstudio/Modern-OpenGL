@@ -23,7 +23,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	try
 	{
-		myInstance = window::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
+		myInstance = win32::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
 	}
 	catch (const std::exception& e)
 	{
@@ -50,7 +50,7 @@ gl::Framework::Initialize(gl::framework::Descriptor&& setup)
 
 	try
 	{
-		myInstance = window::CreateWindowEx<L"ManagedWindow">(std::move(setup.title), std::move(setup.wx), std::move(setup.wy), std::move(setup.ww), std::move(setup.wh));
+		myInstance = win32::CreateWindowEx<L"ManagedWindow">(std::move(setup.title), std::move(setup.wx), std::move(setup.wy), std::move(setup.ww), std::move(setup.wh));
 	}
 	catch (const std::exception& e)
 	{
@@ -82,7 +82,7 @@ noexcept
 {
 	SetRenderer(DefaultRenderer);
 
-	using enum window::managed_window::AwakeResult;
+	using enum win32::managed_window::AwakeResult;
 	const auto awakenening = myInstance->Awake();
 
 	if (awakenening != Success)

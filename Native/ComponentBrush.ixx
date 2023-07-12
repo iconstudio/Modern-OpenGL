@@ -1,7 +1,7 @@
 export module Glib.Device.Resource.Brush.Component;
 import Glib.Definitions;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	extern "C" enum class [[nodiscard]] ColoredComponent : int
 	{

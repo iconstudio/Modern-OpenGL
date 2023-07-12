@@ -2,7 +2,7 @@ export module Glib.Device.IHandle;
 import <utility>;
 import Utility.Constraints;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	template<typename H>
 	struct [[nodiscard]] IHandle

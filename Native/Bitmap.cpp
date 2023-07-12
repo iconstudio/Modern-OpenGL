@@ -10,8 +10,8 @@ import Glib.Device.Context;
 import Glib.Device.CompatibleContext;
 import Glib.Device.Resource.CompatibleBitmap;
 
-util::Monad<gl::device::resource::Bitmap>
-gl::device::resource::Bitmap::Load(const FilePath& path)
+util::Monad<gl::win32::resource::Bitmap>
+gl::win32::resource::Bitmap::Load(const FilePath& path)
 noexcept
 {
 	if (auto result = ::_LoadBitmap(path); result.has_value<HBITMAP>())
@@ -26,7 +26,7 @@ noexcept
 }
 
 bool
-gl::device::resource::Bitmap::TryLoad(const FilePath& path, Bitmap& output)
+gl::win32::resource::Bitmap::TryLoad(const FilePath& path, Bitmap& output)
 noexcept
 {
 	if (auto result = Load(path); result.has_value())
@@ -40,8 +40,8 @@ noexcept
 	}
 }
 
-util::Monad<gl::device::resource::Bitmap>
-gl::device::resource::Bitmap::Load(const int& id)
+util::Monad<gl::win32::resource::Bitmap>
+gl::win32::resource::Bitmap::Load(const int& id)
 noexcept
 {
 	auto result = ::_LoadResourceBitmap(MAKEINTRESOURCE(id));
@@ -57,7 +57,7 @@ noexcept
 }
 
 bool
-gl::device::resource::Bitmap::TryLoad(const int& id, Bitmap& output)
+gl::win32::resource::Bitmap::TryLoad(const int& id, Bitmap& output)
 noexcept
 {
 	if (auto result = Load(id); result.has_value())
@@ -71,8 +71,8 @@ noexcept
 	}
 }
 
-gl::device::resource::Bitmap
-gl::device::resource::Bitmap::Copy(const IContext& context)
+gl::win32::resource::Bitmap
+gl::win32::resource::Bitmap::Copy(const IContext& context)
 const noexcept
 {
 	Bitmap result{};
@@ -81,7 +81,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::Bitmap::TryCopy(const IContext& context, Bitmap& output)
+gl::win32::resource::Bitmap::TryCopy(const IContext& context, Bitmap& output)
 const noexcept
 {
 	const native::RawBitmap& handle = GetHandle();
@@ -122,7 +122,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::Bitmap::Fill(const Colour& color)
+gl::win32::resource::Bitmap::Fill(const Colour& color)
 noexcept
 {
 	GlobalDeviceContext render_context = GlobalDeviceContext();
@@ -142,32 +142,32 @@ noexcept
 }
 
 void
-gl::device::resource::Bitmap::Mirror()
+gl::win32::resource::Bitmap::Mirror()
 noexcept
 {}
 
 void
-gl::device::resource::Bitmap::Flip()
+gl::win32::resource::Bitmap::Flip()
 noexcept
 {}
 
 void
-gl::device::resource::Bitmap::Rotate(float angle)
+gl::win32::resource::Bitmap::Rotate(float angle)
 noexcept
 {}
 
 void
-gl::device::resource::Bitmap::RotateR(float angle)
+gl::win32::resource::Bitmap::RotateR(float angle)
 noexcept
 {}
 
 void
-gl::device::resource::Bitmap::RotateL(float angle)
+gl::win32::resource::Bitmap::RotateL(float angle)
 noexcept
 {}
 
 bool
-gl::device::resource::Bitmap::Destroy()
+gl::win32::resource::Bitmap::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -182,7 +182,7 @@ noexcept
 }
 
 bool
-gl::device::resource::Bitmap::Draw(const IWindow& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::win32::resource::Bitmap::Draw(const IWindow& window_handle, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	GlobalDeviceContext render_context = GlobalDeviceContext();
@@ -201,7 +201,7 @@ const noexcept
 }
 
 bool
-gl::device::resource::Bitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
+gl::win32::resource::Bitmap::Draw(const IContext& render_context, IContext& window_context, const int& x, const int& y, const int& srcx, const int& srcy)
 const noexcept
 {
 	auto previous = window_context.Select(*this);
@@ -217,12 +217,12 @@ const noexcept
 }
 
 bool
-gl::device::resource::Bitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
+gl::win32::resource::Bitmap::GetPixel(const IContext& context, const int& x, const int& y, Colour& output)
 const noexcept
 {
 	if (RawRGB result = context.Delegate(::GetPixel, x, y); CLR_INVALID != result)
 	{
-		output = device::MakeColor(result);
+		output = MakeColor(result);
 
 		return true;
 	}
@@ -233,20 +233,20 @@ const noexcept
 }
 
 int
-gl::device::resource::Bitmap::GetWidth()
+gl::win32::resource::Bitmap::GetWidth()
 const noexcept
 {
 	return cachedWidth;
 }
 
 int
-gl::device::resource::Bitmap::GetHeight()
+gl::win32::resource::Bitmap::GetHeight()
 const noexcept
 {
 	return cachedHeight;
 }
 
-gl::device::resource::Bitmap::Bitmap(const handle_type& handle)
+gl::win32::resource::Bitmap::Bitmap(const handle_type& handle)
 noexcept
 	: base(handle)
 	, shouldDestroy(nullptr != handle)
@@ -265,7 +265,7 @@ noexcept
 	}
 }
 
-gl::device::resource::Bitmap::Bitmap(handle_type&& handle)
+gl::win32::resource::Bitmap::Bitmap(handle_type&& handle)
 noexcept
 	: base(std::move(handle))
 	, shouldDestroy(nullptr != handle)
@@ -284,7 +284,7 @@ noexcept
 	}
 }
 
-gl::device::resource::Bitmap::~Bitmap()
+gl::win32::resource::Bitmap::~Bitmap()
 noexcept
 {
 	if (shouldDestroy)

@@ -7,7 +7,7 @@ import Glib.Device.Context;
 import Glib.Device.Context.Renderer;
 import Glib.Device.CompatibleContext;
 
-gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number_of_workers)
+gl::win32::ManagedWindow::ManagedWindow(gl::win32::Window&& window, int number_of_workers)
 	: underlying(std::move(window))
 	, workerCount(number_of_workers), terminateLatch(number_of_workers)
 	, base_shared_t()
@@ -17,8 +17,8 @@ gl::window::ManagedWindow::ManagedWindow(gl::window::Window&& window, int number
 	myWorkers.reserve(number_of_workers);
 }
 
-gl::window::managed_window::AwakeResult
-gl::window::ManagedWindow::Awake()
+gl::win32::managed_window::AwakeResult
+gl::win32::ManagedWindow::Awake()
 noexcept
 {
 	try
@@ -52,15 +52,15 @@ noexcept
 
 	try
 	{
-		AddEventHandler(gl::device::kb::Pressed, KeyboardHandler);
-		AddEventHandler(gl::device::kb::Released, KeyboardHandler);
-		AddEventHandler(gl::device::kb::AltPressed, KeyboardHandler);
-		AddEventHandler(gl::device::kb::AltReleased, KeyboardHandler);
+		AddEventHandler(gl::win32::kb::Pressed, KeyboardHandler);
+		AddEventHandler(gl::win32::kb::Released, KeyboardHandler);
+		AddEventHandler(gl::win32::kb::AltPressed, KeyboardHandler);
+		AddEventHandler(gl::win32::kb::AltReleased, KeyboardHandler);
 
-		AddEventHandler(gl::device::kb::CharPressed, CharKeyHandler);
-		AddEventHandler(gl::device::kb::CharReleased, CharKeyHandler);
-		AddEventHandler(gl::device::kb::AltCharPressed, CharKeyHandler);
-		AddEventHandler(gl::device::kb::AltCharReleased, CharKeyHandler);
+		AddEventHandler(gl::win32::kb::CharPressed, CharKeyHandler);
+		AddEventHandler(gl::win32::kb::CharReleased, CharKeyHandler);
+		AddEventHandler(gl::win32::kb::AltCharPressed, CharKeyHandler);
+		AddEventHandler(gl::win32::kb::AltCharReleased, CharKeyHandler);
 	}
 	catch (...)
 	{
@@ -73,7 +73,7 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::Start()
+gl::win32::ManagedWindow::Start()
 noexcept
 {
 	isRunning = true;
@@ -92,12 +92,12 @@ noexcept
 }
 
 long long
-gl::window::ManagedWindow::MainWorker(gl::device::HWND hwnd, unsigned int id, unsigned long long wparam, long long lparam)
+gl::win32::ManagedWindow::MainWorker(gl::win32::HWND hwnd, unsigned int id, unsigned long long wparam, long long lparam)
 noexcept
 {
 	const event_id_t msg = static_cast<event_id_t>(id);
 
-	device::IWindow control{ std::move(hwnd) };
+	IWindow control{ std::move(hwnd) };
 
 	ManagedWindow* const& self = reinterpret_cast<ManagedWindow*>(control.GetInternalUserData());
 
@@ -112,7 +112,7 @@ noexcept
 			}
 
 			self->isRenderingNow.store(true, util::memory_order_relaxed);
-			device::GraphicDeviceContext render_ctx = control.AcquireRenderContext();
+			GraphicDeviceContext render_ctx = control.AcquireRenderContext();
 
 			if (auto& renderer = self->onRender; renderer)
 			{
@@ -159,9 +159,9 @@ noexcept
 				break;
 			}
 
-			const unsigned short trigger = device::LOWORD(wparam);
+			const unsigned short trigger = LOWORD(wparam);
 
-			if (trigger == device::DeviceActivation::Inactivated)
+			if (trigger == DeviceActivation::Inactivated)
 			{
 				std::printf("[Activate] Unfocused\n");
 				self->isFocused = false;
@@ -176,7 +176,7 @@ noexcept
 		}
 		break;
 
-		case gl::device::mb::Covered:
+		case gl::win32::mb::Covered:
 		{
 			if (self->isFocused)
 			{
@@ -187,7 +187,7 @@ noexcept
 		}
 		break;
 
-		case gl::device::mb::Uncovered:
+		case gl::win32::mb::Uncovered:
 		{
 			std::printf("[Mouse Left]\n");
 			self->isMouseHover = false;
@@ -232,7 +232,7 @@ noexcept
 		case event_id_t::Destroy:
 		{
 			std::printf("[Destroy]\n");
-			device::PostQuitMessage(0);
+			PostQuitMessage(0);
 
 			if (self)
 			{
@@ -250,10 +250,10 @@ noexcept
 
 		case event_id_t::SysCommand:
 		{
-			device::SystemCommand cmd = static_cast<device::SystemCommand>(wparam);
+			SystemCommand cmd = static_cast<SystemCommand>(wparam);
 			switch (cmd)
 			{
-				case device::SystemCommand::MonitorPower:
+				case SystemCommand::MonitorPower:
 				if (self->noPowerSaves.load(util::memory_order_relaxed))
 				{
 					break;
@@ -286,7 +286,7 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::Worker(util::CancellationToken stop_token, gl::window::ManagedWindow& self, event_alert_t& await_flag)
+gl::win32::ManagedWindow::Worker(util::CancellationToken stop_token, gl::win32::ManagedWindow& self, event_alert_t& await_flag)
 noexcept
 {
 	await_flag.wait(DefaultEvent, util::memory_order_relaxed);
@@ -324,83 +324,83 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::AddEventHandler(gl::window::ManagedWindow::event_id_t id, const gl::window::ManagedWindow::event_handler_t& procedure)
+gl::win32::ManagedWindow::AddEventHandler(gl::win32::ManagedWindow::event_id_t id, const gl::win32::ManagedWindow::event_handler_t& procedure)
 noexcept
 {
 	myEventHandlers.insert(std::make_pair(id, procedure));
 }
 
 void
-gl::window::ManagedWindow::AddEventHandler(event_id_t id, event_handler_t&& procedure)
+gl::win32::ManagedWindow::AddEventHandler(event_id_t id, event_handler_t&& procedure)
 noexcept
 {
 	myEventHandlers.insert(std::make_pair(id, std::move(procedure)));
 }
 
 void
-gl::window::ManagedWindow::RemoveEventHandler(gl::window::ManagedWindow::event_id_t id)
+gl::win32::ManagedWindow::RemoveEventHandler(gl::win32::ManagedWindow::event_id_t id)
 noexcept
 {
 	myEventHandlers.erase(id);
 }
 
-gl::window::managed_window::KeyDownEventHandler
-gl::window::ManagedWindow::SetKeyDownHandler(managed_window::KeyDownEventHandler handler)
+gl::win32::managed_window::KeyDownEventHandler
+gl::win32::ManagedWindow::SetKeyDownHandler(managed_window::KeyDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onKeyDown, std::move(handler));
 }
 
-gl::window::managed_window::KeyUpEventHandler
-gl::window::ManagedWindow::SetKeyUpHandler(managed_window::KeyUpEventHandler handler)
+gl::win32::managed_window::KeyUpEventHandler
+gl::win32::ManagedWindow::SetKeyUpHandler(managed_window::KeyUpEventHandler handler)
 noexcept
 {
 	return std::exchange(onKeyUp, std::move(handler));
 }
 
-gl::window::managed_window::SysKeyDownEventHandler
-gl::window::ManagedWindow::SetSysKeyDownHandler(managed_window::SysKeyDownEventHandler handler)
+gl::win32::managed_window::SysKeyDownEventHandler
+gl::win32::ManagedWindow::SetSysKeyDownHandler(managed_window::SysKeyDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onSysDown, std::move(handler));
 }
 
-gl::window::managed_window::SysKeyUpEventHandler
-gl::window::ManagedWindow::SetSysKeyUpHandler(managed_window::SysKeyUpEventHandler handler)
+gl::win32::managed_window::SysKeyUpEventHandler
+gl::win32::ManagedWindow::SetSysKeyUpHandler(managed_window::SysKeyUpEventHandler handler)
 noexcept
 {
 	return std::exchange(onSysUp, std::move(handler));
 }
 
-gl::window::managed_window::CharDownEventHandler
-gl::window::ManagedWindow::SetCharDownHandler(managed_window::CharDownEventHandler handler)
+gl::win32::managed_window::CharDownEventHandler
+gl::win32::ManagedWindow::SetCharDownHandler(managed_window::CharDownEventHandler handler)
 noexcept
 {
 	return std::exchange(onChrDown, std::move(handler));
 }
 
-gl::window::managed_window::CharUpEventHandler
-gl::window::ManagedWindow::SetCharUpHandler(managed_window::CharUpEventHandler handler)
+gl::win32::managed_window::CharUpEventHandler
+gl::win32::ManagedWindow::SetCharUpHandler(managed_window::CharUpEventHandler handler)
 noexcept
 {
 	return std::exchange(onChrUp, std::move(handler));
 }
 
 void
-gl::window::ManagedWindow::SetRenderer(const managed_window::RenderEventHandler& handler)
+gl::win32::ManagedWindow::SetRenderer(const managed_window::RenderEventHandler& handler)
 noexcept
 {
 	onRender = handler;
 }
 
 void
-gl::window::ManagedWindow::SetRenderer(managed_window::RenderEventHandler&& handler) noexcept
+gl::win32::ManagedWindow::SetRenderer(managed_window::RenderEventHandler&& handler) noexcept
 {
 	onRender = std::move(handler);
 }
 
 bool
-gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
+gl::win32::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
 {
 	if (myEventHandlers.contains(event_id))
@@ -416,8 +416,8 @@ noexcept
 	}
 }
 
-util::Monad<gl::window::ManagedWindow::event_handler_t>
-gl::window::ManagedWindow::FindEventHandler(const event_id_t& event_id)
+util::Monad<gl::win32::ManagedWindow::event_handler_t>
+gl::win32::ManagedWindow::FindEventHandler(const event_id_t& event_id)
 noexcept
 {
 	const event_iterator it = myEventHandlers.find(event_id);
@@ -432,7 +432,7 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::StartCoroutine(gl::window::ManagedWindow::coro_t&& coroutine)
+gl::win32::ManagedWindow::StartCoroutine(gl::win32::ManagedWindow::coro_t&& coroutine)
 noexcept
 {
 	ResumeTopCoroutine();
@@ -441,14 +441,14 @@ noexcept
 }
 
 std::exception_ptr
-gl::window::ManagedWindow::GetException()
+gl::win32::ManagedWindow::GetException()
 const noexcept
 {
 	return lastException;
 }
 
 void
-gl::window::ManagedWindow::Destroy()
+gl::win32::ManagedWindow::Destroy()
 noexcept
 {
 	if (isRunning)
@@ -465,41 +465,41 @@ noexcept
 	}
 }
 
-gl::device::DeviceContext
-gl::window::ManagedWindow::AcquireContext()
+gl::win32::DeviceContext
+gl::win32::ManagedWindow::AcquireContext()
 const noexcept
 {
 	return underlying.AcquireContext();
 }
 
-gl::device::GraphicDeviceContext
-gl::window::ManagedWindow::AcquireRenderContext()
+gl::win32::GraphicDeviceContext
+gl::win32::ManagedWindow::AcquireRenderContext()
 const noexcept
 {
 	return underlying.AcquireRenderContext();
 }
 
 void
-gl::window::ManagedWindow::SetPowerSave(const bool& flag)
+gl::win32::ManagedWindow::SetPowerSave(const bool& flag)
 noexcept
 {
 	noPowerSaves = !flag;
 }
 
 void
-gl::window::ManagedWindow::SetCaptureMouse(const bool& flag)
+gl::win32::ManagedWindow::SetCaptureMouse(const bool& flag)
 noexcept
 {
 	isCapturing = flag;
 }
 
 bool
-gl::window::ManagedWindow::TryCaptureMouse()
+gl::win32::ManagedWindow::TryCaptureMouse()
 noexcept
 {
 	if (isCapturing)
 	{
-		device::io::CaptureMouse(underlying.GetHandle());
+		io::CaptureMouse(underlying.GetHandle());
 		return true;
 	}
 	else
@@ -509,14 +509,14 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::ResetMouseCapture()
+gl::win32::ManagedWindow::ResetMouseCapture()
 noexcept
 {
-	device::io::ResetMouseCapture(underlying.GetHandle());
+	io::ResetMouseCapture(underlying.GetHandle());
 }
 
 void
-gl::window::ManagedWindow::ClearMouseCapturing()
+gl::win32::ManagedWindow::ClearMouseCapturing()
 noexcept
 {
 	ResetMouseCapture();
@@ -524,14 +524,14 @@ noexcept
 }
 
 bool
-gl::window::ManagedWindow::IsMouseCaptured() const
+gl::win32::ManagedWindow::IsMouseCaptured() const
 noexcept
 {
-	return device::io::IsMouseCaptured(underlying.GetHandle());
+	return io::IsMouseCaptured(underlying.GetHandle());
 }
 
 void
-gl::window::ManagedWindow::ResumeTopCoroutine()
+gl::win32::ManagedWindow::ResumeTopCoroutine()
 noexcept
 {
 	if (!myCoroutines->empty())
@@ -541,28 +541,28 @@ noexcept
 }
 
 bool
-gl::window::ManagedWindow::ClearWindow(const gl::Rect& rect)
+gl::win32::ManagedWindow::ClearWindow(const gl::Rect& rect)
 noexcept
 {
 	return underlying.Clear(rect);
 }
 
 bool
-gl::window::ManagedWindow::ClearWindow()
+gl::win32::ManagedWindow::ClearWindow()
 noexcept
 {
 	return underlying.Clear();
 }
 
 void
-gl::window::ManagedWindow::KeyboardHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
+gl::win32::ManagedWindow::KeyboardHandler(gl::win32::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
 {
 	self.ClearWindow();
 
-	const bool is_press = device::io::IsPressing(lparam);
-	const bool is_first = device::io::IsFirstPress(lparam);
-	const bool is_sys = device::io::IsWithAltKey(lparam);
+	const bool is_press = io::IsPressing(lparam);
+	const bool is_first = io::IsFirstPress(lparam);
+	const bool is_sys = io::IsWithAltKey(lparam);
 
 	if (!is_press)
 	{
@@ -571,7 +571,7 @@ noexcept
 			std::printf("[System Key Released] %lld\n", wparam);
 			if (nullptr != self.onSysUp)
 			{
-				self.onSysUp(self, static_cast<device::io::KeyCode>(wparam));
+				self.onSysUp(self, static_cast<io::KeyCode>(wparam));
 			}
 		}
 		else
@@ -579,7 +579,7 @@ noexcept
 			std::printf("[Key Released] %lld\n", wparam);
 			if (nullptr != self.onKeyUp)
 			{
-				self.onKeyUp(self, static_cast<device::io::KeyCode>(wparam));
+				self.onKeyUp(self, static_cast<io::KeyCode>(wparam));
 			}
 		}
 	}
@@ -590,7 +590,7 @@ noexcept
 			std::printf("[System Key Pressed] %lld\n", wparam);
 			if (nullptr != self.onSysDown)
 			{
-				self.onSysDown(self, static_cast<device::io::KeyCode>(wparam), is_first);
+				self.onSysDown(self, static_cast<io::KeyCode>(wparam), is_first);
 			}
 		}
 		else
@@ -598,19 +598,19 @@ noexcept
 			std::printf("[Key Pressed] %lld\n", wparam);
 			if (nullptr != self.onKeyDown)
 			{
-				self.onKeyDown(self, static_cast<device::io::KeyCode>(wparam), is_first);
+				self.onKeyDown(self, static_cast<io::KeyCode>(wparam), is_first);
 			}
 		}
 	}
 }
 
 void
-gl::window::ManagedWindow::CharKeyHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
+gl::win32::ManagedWindow::CharKeyHandler(gl::win32::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
 {
-	const bool is_press = device::io::IsPressing(lparam);
-	const bool is_first = device::io::IsFirstPress(lparam);
-	const bool is_sys = device::io::IsWithAltKey(lparam);
+	const bool is_press = io::IsPressing(lparam);
+	const bool is_first = io::IsFirstPress(lparam);
+	const bool is_sys = io::IsWithAltKey(lparam);
 
 	if (!is_press)
 	{
@@ -647,10 +647,10 @@ noexcept
 }
 
 void
-gl::window::ManagedWindow::DefaultSysKeyEvent(gl::window::ManagedWindow& self, device::io::KeyCode code, bool is_first)
+gl::win32::ManagedWindow::DefaultSysKeyEvent(gl::win32::ManagedWindow& self, io::KeyCode code, bool is_first)
 noexcept
 {
-	if (is_first && code == device::io::KeyCode::F4)
+	if (is_first && code == io::KeyCode::F4)
 	{
 		self.underlying.SendCommand(event_id_t::Close, 0, 0);
 	}

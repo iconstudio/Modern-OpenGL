@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 export module Glib.Device.IO.Mouse:Utils;
 
-export namespace gl::device::io
+export namespace gl::win32::io
 {
 	/// <summary>
 	/// Only on the main thread

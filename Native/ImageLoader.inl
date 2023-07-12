@@ -2,7 +2,7 @@
 import Glib.Definitions;
 import Utility.Monad.Loosen;
 
-using gl::device::FilePath;
+using gl::win32::FilePath;
 
 inline constexpr unsigned int _DefaultFlag = LR_SHARED | LR_LOADFROMFILE | LR_DEFAULTSIZE;
 

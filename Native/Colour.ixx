@@ -8,7 +8,7 @@ export import :Implement;
 
 export using NativeColor = winrt::Windows::UI::Color;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	// A, R, G, B
 	struct [[nodiscard]] Colour : public NativeColor

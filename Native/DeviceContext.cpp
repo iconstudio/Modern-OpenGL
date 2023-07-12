@@ -2,23 +2,23 @@ module;
 #include "Internal.hpp"
 module Glib.Device.Context;
 
-gl::device::DeviceContext::DeviceContext(const native::HWND& window)
+gl::win32::DeviceContext::DeviceContext(const native::HWND& window)
 noexcept
 	: myWindowHandle(window)
 	, base(::GetDC(window))
 {}
 
-gl::device::DeviceContext::~DeviceContext()
+gl::win32::DeviceContext::~DeviceContext()
 noexcept
 {
 	Release(myWindowHandle);
 }
 
-gl::device::GlobalDeviceContext::GlobalDeviceContext() noexcept
+gl::win32::GlobalDeviceContext::GlobalDeviceContext() noexcept
 	: base(::GetDC(nullptr))
 {}
 
-gl::device::GlobalDeviceContext::~GlobalDeviceContext() noexcept
+gl::win32::GlobalDeviceContext::~GlobalDeviceContext() noexcept
 {
 	Release(nullptr);
 }

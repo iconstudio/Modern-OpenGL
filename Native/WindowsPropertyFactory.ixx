@@ -7,16 +7,16 @@ import Glib.Device.Resource.Brush.Component;
 import Glib.Device.Resource.Icon;
 export import Glib.Window.Property;
 
-export namespace gl::window
+export namespace gl::win32
 {
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, const device::resource::ColorBrush& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, const resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -43,27 +43,27 @@ export namespace gl::window
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, const device::resource::ColorBrush& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, const resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, class_name
+		return CreateProperty(GetProcessInstance(), procedure, class_name
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, background, menu_name);
 	}
 
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, device::resource::ColorBrush&& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -90,27 +90,27 @@ export namespace gl::window
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, device::resource::ColorBrush&& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, class_name
+		return CreateProperty(GetProcessInstance(), procedure, class_name
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, std::move(background), menu_name);
 	}
 
-	template<device::ColoredComponent BkColorReference>
+	template<ColoredComponent BkColorReference>
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -126,7 +126,7 @@ export namespace gl::window
 				.hInstance = hinst.myHandle,
 				.hIcon = std::move(icon).GetHandle(),
 				.hCursor = std::move(cursor).GetHandle(),
-				.hbrBackground = device::GetComponentColouring<BkColorReference>(),
+				.hbrBackground = GetComponentColouring<BkColorReference>(),
 				.lpszMenuName = menu_name,
 				.lpszClassName = class_name,
 				.hIconSm = std::move(small_icon).GetHandle(),
@@ -134,29 +134,29 @@ export namespace gl::window
 		};
 	}
 
-	template<device::ColoredComponent BkColorReference>
+	template<ColoredComponent BkColorReference>
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
-		return CreateProperty<BkColorReference>(device::GetProcessInstance(), procedure, class_name
+		return CreateProperty<BkColorReference>(GetProcessInstance(), procedure, class_name
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, menu_name);
 	}
 
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon = nullptr
-		, device::resource::Icon&& small_icon = nullptr
-		, device::resource::Icon&& cursor = nullptr
+		, resource::Icon&& icon = nullptr
+		, resource::Icon&& small_icon = nullptr
+		, resource::Icon&& cursor = nullptr
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
@@ -172,7 +172,7 @@ export namespace gl::window
 				.hInstance = hinst.myHandle,
 				.hIcon = std::move(icon).GetHandle(),
 				.hCursor = std::move(cursor).GetHandle(),
-				.hbrBackground = device::MakeDefaultComponentColouring(),
+				.hbrBackground = MakeDefaultComponentColouring(),
 				.lpszMenuName = menu_name,
 				.lpszClassName = class_name,
 				.hIconSm = std::move(small_icon).GetHandle(),
@@ -183,13 +183,13 @@ export namespace gl::window
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
 		, const wchar_t* const& class_name
-		, device::resource::Icon&& icon = nullptr
-		, device::resource::Icon&& small_icon = nullptr
-		, device::resource::Icon&& cursor = nullptr
+		, resource::Icon&& icon = nullptr
+		, resource::Icon&& small_icon = nullptr
+		, resource::Icon&& cursor = nullptr
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, class_name
+		return CreateProperty(GetProcessInstance(), procedure, class_name
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, menu_name);
@@ -197,12 +197,12 @@ export namespace gl::window
 
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, const device::resource::ColorBrush& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, const resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -212,14 +212,14 @@ export namespace gl::window
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, const device::resource::ColorBrush& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, const resource::ColorBrush& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, ClassName.data()
+		return CreateProperty(GetProcessInstance(), procedure, ClassName.data()
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, background, menu_name);
@@ -227,12 +227,12 @@ export namespace gl::window
 
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, device::resource::ColorBrush&& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -242,42 +242,42 @@ export namespace gl::window
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
-		, device::resource::ColorBrush&& background
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
+		, resource::ColorBrush&& background
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, ClassName.data()
+		return CreateProperty(GetProcessInstance(), procedure, ClassName.data()
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, std::move(background), menu_name);
 	}
 
-	template<util::fixed_wstring ClassName, device::ColoredComponent BkColorReference>
+	template<util::fixed_wstring ClassName, ColoredComponent BkColorReference>
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
 		return CreateProperty<BkColorReference>(hinst, procedure, ClassName.data(), std::move(icon), std::move(small_icon), std::move(cursor), menu_name);
 	}
 
-	template<util::fixed_wstring ClassName, device::ColoredComponent BkColorReference>
+	template<util::fixed_wstring ClassName, ColoredComponent BkColorReference>
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
-		, device::resource::Icon&& icon
-		, device::resource::Icon&& small_icon
-		, device::resource::Icon&& cursor
+		, resource::Icon&& icon
+		, resource::Icon&& small_icon
+		, resource::Icon&& cursor
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
-		return CreateProperty<BkColorReference>(device::GetProcessInstance(), procedure, ClassName.data()
+		return CreateProperty<BkColorReference>(GetProcessInstance(), procedure, ClassName.data()
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, menu_name);
@@ -285,11 +285,11 @@ export namespace gl::window
 
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
-	WindowProperty CreateProperty(const device::ProcessInstance& hinst
+	WindowProperty CreateProperty(const ProcessInstance& hinst
 		, WindowProcedure procedure
-		, device::resource::Icon&& icon = nullptr
-		, device::resource::Icon&& small_icon = nullptr
-		, device::resource::Icon&& cursor = nullptr
+		, resource::Icon&& icon = nullptr
+		, resource::Icon&& small_icon = nullptr
+		, resource::Icon&& cursor = nullptr
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
@@ -299,13 +299,13 @@ export namespace gl::window
 	template<util::fixed_wstring ClassName>
 	[[nodiscard]]
 	WindowProperty CreateProperty(WindowProcedure procedure
-		, device::resource::Icon&& icon = nullptr
-		, device::resource::Icon&& small_icon = nullptr
-		, device::resource::Icon&& cursor = nullptr
+		, resource::Icon&& icon = nullptr
+		, resource::Icon&& small_icon = nullptr
+		, resource::Icon&& cursor = nullptr
 		, const wchar_t* const& menu_name = nullptr
 	) noexcept(ClassName.size() <= 256)
 	{
-		return CreateProperty(device::GetProcessInstance(), procedure, ClassName.data()
+		return CreateProperty(GetProcessInstance(), procedure, ClassName.data()
 			, std::move(icon), std::move(small_icon)
 			, std::move(cursor)
 			, menu_name);

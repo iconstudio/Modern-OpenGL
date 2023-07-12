@@ -4,7 +4,7 @@ import <string_view>;
 import Glib.Definitions;
 import Glib.Device.IGraphics;
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	class [[nodiscard]] Icon : public IGraphics<Icon, native::RawIcon>
 	{
@@ -71,7 +71,7 @@ export namespace gl::device::resource
 	};
 }
 
-export namespace gl::device
+export namespace gl::win32
 {
 	resource::Icon MakeEmptyIcon() noexcept;
 }

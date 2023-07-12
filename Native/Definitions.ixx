@@ -4,12 +4,12 @@ module;
 export module Glib.Definitions;
 import <filesystem>;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	using FilePath = std::filesystem::path;
 }
 
-export namespace gl::device
+export namespace gl::win32
 {
 	class ProcessInstance;
 	class IContext;
@@ -21,7 +21,7 @@ export namespace gl::device
 	class IWindow;
 }
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	class Image;
 	class Bitmap;
@@ -32,13 +32,13 @@ export namespace gl::device::resource
 	class Icon;
 }
 
-export namespace gl::window
+export namespace gl::win32
 {
 	class Window;
 	class ManagedWindow;
 }
 
-export namespace gl::device::native
+export namespace gl::win32::native
 {
 	using WindowProcedure = long long(CALLBACK*)(HWND__*, unsigned int, unsigned long long, long long);
 	using RawWindowProperty = tagWNDCLASSEXW;

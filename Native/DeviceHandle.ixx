@@ -3,7 +3,7 @@ import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IWindow;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	class [[nodiscard]] DeviceHandle : public IWindow
 	{

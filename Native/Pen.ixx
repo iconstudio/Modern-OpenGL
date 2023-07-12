@@ -3,7 +3,7 @@ import Glib.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	enum class [[nodiscard]] PenStyles
 	{

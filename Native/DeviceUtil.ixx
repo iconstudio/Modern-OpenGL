@@ -4,7 +4,7 @@ module;
 export module Glib.Device.Utility;
 export import <utility>;
 
-export namespace gl::device
+export namespace gl::win32
 {
 #undef MAKEWORD
 [[nodiscard]]

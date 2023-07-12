@@ -5,7 +5,7 @@ module Glib.Window;
 import Glib.Device.ProcessInstance;
 import Glib.Device.Event.API;
 
-gl::window::Window::Window(nullptr_t)
+gl::win32::Window::Window(nullptr_t)
 noexcept
 	: myInstance()
 	, myClassName(nullptr)
@@ -13,10 +13,10 @@ noexcept
 	, base(nullptr)
 {}
 
-gl::window::Window::Window(const gl::window::WindowProperty& properties
+gl::win32::Window::Window(const gl::win32::WindowProperty& properties
 	, const std::wstring_view& title
-	, const gl::window::WindowStyle& style
-	, const gl::window::WindowOption& option
+	, const gl::win32::WindowStyle& style
+	, const gl::win32::WindowOption& option
 	, const int& x, const int& y
 	, const int& width, const int& height
 ) noexcept
@@ -25,7 +25,7 @@ gl::window::Window::Window(const gl::window::WindowProperty& properties
 	, myProcedure(properties.GetProcedure())
 	, base
 	{
-		gl::device::MakeNativeWindow(properties.GetInstance().myHandle,
+		gl::win32::MakeNativeWindow(properties.GetInstance().myHandle,
 		properties.GetClass(),
 		title,
 		Export(style), Export(option),
@@ -33,10 +33,10 @@ gl::window::Window::Window(const gl::window::WindowProperty& properties
 	}
 {}
 
-gl::window::Window::Window(gl::window::WindowProperty&& properties
+gl::win32::Window::Window(gl::win32::WindowProperty&& properties
 	, const std::wstring_view& title
-	, const gl::window::WindowStyle& style
-	, const gl::window::WindowOption& option
+	, const gl::win32::WindowStyle& style
+	, const gl::win32::WindowOption& option
 	, const int& x, const int& y
 	, const int& width, const int& height
 ) noexcept
@@ -45,7 +45,7 @@ gl::window::Window::Window(gl::window::WindowProperty&& properties
 	, myProcedure(std::move(properties).GetProcedure())
 	, base
 	{
-		gl::device::MakeNativeWindow(myInstance.myHandle
+		gl::win32::MakeNativeWindow(myInstance.myHandle
 		, myClassName
 		, title
 		, Export(style), Export(option)
@@ -53,7 +53,7 @@ gl::window::Window::Window(gl::window::WindowProperty&& properties
 	}
 {}
 
-gl::window::Window::Window(Window&& other)
+gl::win32::Window::Window(Window&& other)
 noexcept
 	: myInstance(std::exchange(other.myInstance, nullptr))
 	, myProcedure(std::exchange(other.myProcedure, nullptr))
@@ -61,8 +61,8 @@ noexcept
 	, base(std::exchange(other.myHandle, nullptr))
 {}
 
-gl::window::Window&
-gl::window::Window::operator=(Window&& other)
+gl::win32::Window&
+gl::win32::Window::operator=(Window&& other)
 noexcept
 {
 	other.Swap(*this);
@@ -70,7 +70,7 @@ noexcept
 }
 
 void
-gl::window::Window::Swap(Window& other)
+gl::win32::Window::Swap(Window& other)
 noexcept
 {
 	std::swap(myHandle, other.myHandle);
@@ -79,7 +79,7 @@ noexcept
 	std::swap(myProcedure, other.myProcedure);
 }
 
-gl::window::Window::~Window()
+gl::win32::Window::~Window()
 noexcept
 {
 	if (nullptr != myClassName)
@@ -91,7 +91,7 @@ noexcept
 }
 
 void
-gl::window::Window::Awake()
+gl::win32::Window::Awake()
 noexcept
 {
 	base::StartUpdate();
@@ -99,7 +99,7 @@ noexcept
 }
 
 void
-gl::window::Window::Start()
+gl::win32::Window::Start()
 noexcept
 {
 	while (UpdateOnce())
@@ -107,33 +107,33 @@ noexcept
 }
 
 bool
-gl::window::Window::UpdateOnce()
+gl::win32::Window::UpdateOnce()
 noexcept
 {
-	gl::device::RawEvent event = gl::device::EventAPI::MakeEvent();
+	gl::win32::RawEvent event = gl::win32::EventAPI::MakeEvent();
 
-	if (gl::device::EventAPI::Pop(myHandle, event))
+	if (gl::win32::EventAPI::Pop(myHandle, event))
 	{
-		if (!gl::device::EventAPI::Translate(event))
+		if (!gl::win32::EventAPI::Translate(event))
 		{
 		}
 
-		gl::device::EventAPI::Dispatch(event);
+		gl::win32::EventAPI::Dispatch(event);
 		return true;
 	}
 
 	return false;
 }
 
-gl::window::WindowStyle
-gl::window::Window::GetStyle()
+gl::win32::WindowStyle
+gl::win32::Window::GetStyle()
 const noexcept
 {
 	return WindowStyle{ base::GetStyle() };
 }
 
-gl::window::WindowOption
-gl::window::Window::GetOption()
+gl::win32::WindowOption
+gl::win32::Window::GetOption()
 const noexcept
 {
 	return WindowOption{ base::GetExStyle() };

@@ -6,7 +6,7 @@ import <compare>;
 export import :ID;
 import :Special;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	struct [[nodiscard]] Event final
 	{

@@ -5,21 +5,21 @@ import Glib.Device.IHandle;
 export namespace gl
 {
 	class [[nodiscard]] GLContext
-		: public device::IHandle<device::native::NativeOGL>
+		: public win32::IHandle<gl::win32::native::NativeOGL>
 	{
 	public:
-		using base = device::IHandle<device::native::NativeOGL>;
+		using base = win32::IHandle<gl::win32::native::NativeOGL>;
 
 		GLContext() noexcept;
 		~GLContext() noexcept;
 
-		unsigned long Initialize(const device::IContext& hdc, int view_width, int view_height) noexcept;
+		unsigned long Initialize(const win32::IContext& hdc, int view_width, int view_height) noexcept;
 
-		bool Begin(device::GraphicDeviceContext& painter) noexcept;
+		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;
 
 	private:
-		device::native::NativeContext nativeContext = nullptr;
+		gl::win32::native::NativeContext nativeContext = nullptr;
 		bool isDoubleBuffered = false;
 	};
 }

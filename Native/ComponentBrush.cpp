@@ -4,7 +4,7 @@ module;
 module Glib.Device.Resource.Brush.Component;
 import <type_traits>;
 
-namespace gl::device
+namespace gl::win32
 {
 	constexpr int make_index(const ColoredComponent& target) noexcept
 	{
@@ -25,8 +25,8 @@ namespace gl::device
 	static native::RawColorBrush cachedBrushes[cachedBrushSize];
 }
 
-const gl::device::native::RawColorBrush&
-gl::device::GetComponentColouring(gl::device::ColoredComponent target)
+const gl::win32::native::RawColorBrush&
+gl::win32::GetComponentColouring(gl::win32::ColoredComponent target)
 noexcept
 {
 	native::RawColorBrush& stock = cachedBrushes[make_index(target)];
@@ -38,8 +38,8 @@ noexcept
 	return stock;
 }
 
-const gl::device::native::RawColorBrush&
-gl::device::MakeDefaultComponentColouring()
+const gl::win32::native::RawColorBrush&
+gl::win32::MakeDefaultComponentColouring()
 noexcept
 {
 	return GetComponentColouring<colored_components::Background>();

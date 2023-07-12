@@ -4,7 +4,7 @@ import Glib.Definitions;
 import Glib.Device.IHandle;
 export import Glib.Device.IContext;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	class CompatibleContext : public IContext
 	{

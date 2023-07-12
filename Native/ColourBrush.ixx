@@ -4,7 +4,7 @@ import Glib.Definitions;
 import Glib.Device.IGraphics;
 import Glib.Device.Colour;
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	class [[nodiscard]] ColorBrush : public IGraphics<ColorBrush, native::RawColorBrush>
 	{
@@ -43,7 +43,7 @@ export namespace gl::device::resource
 	};
 }
 
-export namespace gl::device
+export namespace gl::win32
 {
 	[[nodiscard]]
 	resource::ColorBrush MakeColorBrush(const unsigned long& color) noexcept;

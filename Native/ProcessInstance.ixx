@@ -3,7 +3,7 @@ module;
 #include <type_traits>
 export module Glib.Device.ProcessInstance;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	using ::HINSTANCE__;
 	using ::HMODULE;

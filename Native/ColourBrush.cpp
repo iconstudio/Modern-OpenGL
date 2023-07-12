@@ -2,14 +2,14 @@ module;
 #include "Internal.hpp"
 module Glib.Device.Resource.Brush;
 
-gl::device::resource::ColorBrush::~ColorBrush()
+gl::win32::resource::ColorBrush::~ColorBrush()
 noexcept
 {
 	Destroy();
 }
 
 bool
-gl::device::resource::ColorBrush::Destroy()
+gl::win32::resource::ColorBrush::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -23,73 +23,73 @@ noexcept
 	return false;
 }
 
-gl::device::resource::ColorBrush&
-gl::device::resource::ColorBrush::operator=(nullptr_t)
+gl::win32::resource::ColorBrush&
+gl::win32::resource::ColorBrush::operator=(nullptr_t)
 noexcept
 {
 	base::operator=(nullptr);
 	return *this;
 }
 
-gl::device::resource::ColorBrush&
-gl::device::resource::ColorBrush::operator=(handle_type&& brush)
+gl::win32::resource::ColorBrush&
+gl::win32::resource::ColorBrush::operator=(handle_type&& brush)
 noexcept
 {
 	base::operator=(std::move(brush));
 	return *this;
 }
 
-gl::device::resource::ColorBrush&
-gl::device::resource::ColorBrush::operator=(ColorBrush&& other) noexcept
+gl::win32::resource::ColorBrush&
+gl::win32::resource::ColorBrush::operator=(ColorBrush&& other) noexcept
 {
 	base::operator=(std::move(other));
 	return *this;
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakeColorBrush(const unsigned long& color)
+gl::win32::resource::ColorBrush
+gl::win32::MakeColorBrush(const unsigned long& color)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateSolidBrush(color) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakeColorBrush(unsigned long&& color)
+gl::win32::resource::ColorBrush
+gl::win32::MakeColorBrush(unsigned long&& color)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateSolidBrush(std::move(color)) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakeColorBrush(const Colour& color)
+gl::win32::resource::ColorBrush
+gl::win32::MakeColorBrush(const Colour& color)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateSolidBrush(color.ToRaw()) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakeColorBrush(Colour&& color)
+gl::win32::resource::ColorBrush
+gl::win32::MakeColorBrush(Colour&& color)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateSolidBrush(std::move(color).ToRaw()) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakePatternBrush(const resource::BrushPatterns& pattern, const unsigned long& rgb)
+gl::win32::resource::ColorBrush
+gl::win32::MakePatternBrush(const resource::BrushPatterns& pattern, const unsigned long& rgb)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), rgb) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakePatternBrush(const resource::BrushPatterns& pattern, const Colour& argb)
+gl::win32::resource::ColorBrush
+gl::win32::MakePatternBrush(const resource::BrushPatterns& pattern, const Colour& argb)
 noexcept
 {
 	return resource::ColorBrush{ ::CreateHatchBrush(static_cast<int>(pattern), argb.ToRaw()) };
 }
 
-gl::device::resource::ColorBrush
-gl::device::MakeStampBrush(const native::RawBitmap& image)
+gl::win32::resource::ColorBrush
+gl::win32::MakeStampBrush(const native::RawBitmap& image)
 noexcept
 {
 	return resource::ColorBrush{ ::CreatePatternBrush(image) };

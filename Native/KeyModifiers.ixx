@@ -4,7 +4,7 @@ export module Glib.Device.IO.Keyboard:Modifier;
 
 using enum ABI::Windows::System::VirtualKeyModifiers;
 
-export namespace gl::device::io
+export namespace gl::win32::io
 {
 	/// <summary>
 	/// glutGetModifiers

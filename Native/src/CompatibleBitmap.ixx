@@ -4,7 +4,7 @@ import Glib.Definitions;
 import Glib.Device.IHandle;
 import Glib.Device.Resource.Bitmap;
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	class [[nodiscard]] CompatibleBitmap : public Bitmap
 	{

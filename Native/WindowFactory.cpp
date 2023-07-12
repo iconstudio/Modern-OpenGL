@@ -4,7 +4,7 @@ import <memory>;
 import <string_view>;
 import Utility.FixedString;
 
-namespace gl::window
+namespace gl::win32
 {
 #pragma region CreateWindow
 	Window CreateWindow(const WindowProperty& properties

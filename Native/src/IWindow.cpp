@@ -8,21 +8,21 @@ import Glib.Device.Context;
 import Glib.Device.Context.Renderer;
 
 bool
-gl::device::IWindow::StartUpdate()
+gl::win32::IWindow::StartUpdate()
 noexcept
 {
 	return 0 != Delegate(::UpdateWindow);
 }
 
 long long
-gl::device::IWindow::DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs)
+gl::win32::IWindow::DefaultWndProc(const unsigned int& msg, const unsigned long long& lhs, const long long& rhs)
 const noexcept
 {
 	return Delegate(::DefWindowProc, msg, lhs, rhs);
 }
 
 bool
-gl::device::IWindow::Destroy()
+gl::win32::IWindow::Destroy()
 noexcept
 {
 	if (handle_type& handle = GetHandle(); nullptr != handle)
@@ -44,84 +44,84 @@ noexcept
 }
 
 bool
-gl::device::IWindow::SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs)
+gl::win32::IWindow::SendCommand(const unsigned int& id, const unsigned long long& lhs, const long long& rhs)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), id, lhs, rhs);
 }
 
 bool
-gl::device::IWindow::SendCommand(const gl::device::EventID& id, const unsigned long long& lhs, const long long& rhs)
+gl::win32::IWindow::SendCommand(const gl::win32::EventID& id, const unsigned long long& lhs, const long long& rhs)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), id, lhs, rhs);
 }
 
 bool
-gl::device::IWindow::SendCommand(const gl::device::Event& cmd)
+gl::win32::IWindow::SendCommand(const gl::win32::Event& cmd)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), cmd);
 }
 
 bool
-gl::device::IWindow::SendCommand(gl::device::Event&& cmd)
+gl::win32::IWindow::SendCommand(gl::win32::Event&& cmd)
 const noexcept
 {
 	return EventAPI::Push(GetHandle(), std::move(cmd));
 }
 
 bool
-gl::device::IWindow::SendCommand(const gl::device::EventID& id, const gl::device::io::KeyCode& keycode, const gl::device::io::KeyboardFlag& flags)
+gl::win32::IWindow::SendCommand(const gl::win32::EventID& id, const gl::win32::io::KeyCode& keycode, const gl::win32::io::KeyboardFlag& flags)
 const noexcept
 {
 	return SendCommand(id, static_cast<unsigned long long>(keycode), static_cast<long long>(flags));
 }
 
 bool
-gl::device::IWindow::UICommand(const int& cmd)
+gl::win32::IWindow::UICommand(const int& cmd)
 noexcept
 {
 	return 0 != Delegate(::ShowWindow, cmd);
 }
 
 bool
-gl::device::IWindow::Show()
+gl::win32::IWindow::Show()
 noexcept
 {
 	return UICommand(SW_SHOW);
 }
 
 bool
-gl::device::IWindow::Hide()
+gl::win32::IWindow::Hide()
 noexcept
 {
 	return UICommand(SW_HIDE);
 }
 
 bool
-gl::device::IWindow::Maximize()
+gl::win32::IWindow::Maximize()
 noexcept
 {
 	return UICommand(SW_MAXIMIZE);
 }
 
 bool
-gl::device::IWindow::Minimize()
+gl::win32::IWindow::Minimize()
 noexcept
 {
 	return UICommand(SW_MINIMIZE);
 }
 
 bool
-gl::device::IWindow::Restore()
+gl::win32::IWindow::Restore()
 noexcept
 {
 	return UICommand(SW_RESTORE);
 }
 
 bool
-gl::device::IWindow::Clear(const Rect& rect)
+gl::win32::IWindow::Clear(const Rect& rect)
 noexcept
 {
 	RECT client{ rect.x, rect.y, rect.x + rect.w, rect.y + rect.h };
@@ -130,168 +130,168 @@ noexcept
 }
 
 bool
-gl::device::IWindow::Clear()
+gl::win32::IWindow::Clear()
 noexcept
 {
 	return 0 != Delegate(::InvalidateRect, nullptr, TRUE);
 }
 
 bool
-gl::device::IWindow::EnableRedraw(const bool& flag)
+gl::win32::IWindow::EnableRedraw(const bool& flag)
 noexcept
 {
 	return SendCommand(EventID::SetRedraw, static_cast<WPARAM>(flag), 0);
 }
 
 bool
-gl::device::IWindow::Close()
+gl::win32::IWindow::Close()
 noexcept
 {
 	return SendCommand(EventID::Close, 0, 0);
 }
 
 bool
-gl::device::IWindow::EnableInput()
+gl::win32::IWindow::EnableInput()
 noexcept
 {
 	return 0 != Delegate(::EnableWindow, TRUE);
 }
 
 bool
-gl::device::IWindow::DisableInput()
+gl::win32::IWindow::DisableInput()
 noexcept
 {
 	return 0 != Delegate(::EnableWindow, FALSE);
 }
 
-gl::device::DeviceContext
-gl::device::IWindow::AcquireContext()
+gl::win32::DeviceContext
+gl::win32::IWindow::AcquireContext()
 const noexcept
 {
 	return DeviceContext{ GetHandle() };
 }
 
-gl::device::GraphicDeviceContext
-gl::device::IWindow::AcquireRenderContext()
+gl::win32::GraphicDeviceContext
+gl::win32::IWindow::AcquireRenderContext()
 const noexcept
 {
 	return GraphicDeviceContext{ GetHandle() };
 }
 
 bool
-gl::device::IWindow::ReleaseContext(gl::device::DeviceContext& context)
+gl::win32::IWindow::ReleaseContext(gl::win32::DeviceContext& context)
 const noexcept
 {
 	return 0 != Delegate(::ReleaseDC, context);
 }
 
-gl::device::IContext
-gl::device::IWindow::AcquireNativeContext()
+gl::win32::IContext
+gl::win32::IWindow::AcquireNativeContext()
 const noexcept
 {
 	return Delegate(::GetDC);
 }
 
 bool
-gl::device::IWindow::ReleaseNativeContext(gl::device::IContext& context)
+gl::win32::IWindow::ReleaseNativeContext(gl::win32::IContext& context)
 const noexcept
 {
 	return 0 != Delegate(::ReleaseDC, context);
 }
 
 bool
-gl::device::IWindow::IsMinimized()
+gl::win32::IWindow::IsMinimized()
 const noexcept
 {
 	return 0 != Delegate(::IsIconic);
 }
 
 bool
-gl::device::IWindow::IsMaximized()
+gl::win32::IWindow::IsMaximized()
 const noexcept
 {
 	return 0 != Delegate(::IsZoomed);
 }
 
 bool
-gl::device::IWindow::IsRestored()
+gl::win32::IWindow::IsRestored()
 const noexcept
 {
 	return 0L == (GetStyle() & (WS_MINIMIZE | WS_MAXIMIZE));
 }
 
 bool
-gl::device::IWindow::IsInputEnabled()
+gl::win32::IWindow::IsInputEnabled()
 const noexcept
 {
 	return 0 != Delegate(::IsWindowEnabled);
 }
 
 long long
-gl::device::IWindow::SetInternalValue(int index, const long long& value)
+gl::win32::IWindow::SetInternalValue(int index, const long long& value)
 const noexcept
 {
 	return Delegate(::SetWindowLongPtr, index, value);
 }
 
 long long
-gl::device::IWindow::SetInternalValue(int index, long long&& value)
+gl::win32::IWindow::SetInternalValue(int index, long long&& value)
 const noexcept
 {
 	return Delegate(::SetWindowLongPtr, index, std::move(value));
 }
 
 long long
-gl::device::IWindow::SetInternalUserData(const long long& value)
+gl::win32::IWindow::SetInternalUserData(const long long& value)
 const noexcept
 {
 	return Delegate(::SetWindowLongPtr, GWLP_USERDATA, value);
 }
 
 long long
-gl::device::IWindow::SetInternalUserData(long long&& value)
+gl::win32::IWindow::SetInternalUserData(long long&& value)
 const noexcept
 {
 	return Delegate(::SetWindowLongPtr, GWLP_USERDATA, std::move(value));
 }
 
 long long
-gl::device::IWindow::GetInternalValue(int index)
+gl::win32::IWindow::GetInternalValue(int index)
 const noexcept
 {
 	return Delegate(::GetWindowLongPtr, index);
 }
 
 long long
-gl::device::IWindow::GetInternalUserData()
+gl::win32::IWindow::GetInternalUserData()
 const noexcept
 {
 	return GetInternalValue(GWLP_USERDATA);
 }
 
 unsigned long
-gl::device::IWindow::GetStyle()
+gl::win32::IWindow::GetStyle()
 const noexcept
 {
 	return static_cast<DWORD>(GetInternalValue(GWL_STYLE));
 }
 
 unsigned long
-gl::device::IWindow::GetExStyle()
+gl::win32::IWindow::GetExStyle()
 const noexcept
 {
 	return static_cast<DWORD>(GetInternalValue(GWL_EXSTYLE));
 }
 
 int
-gl::device::IWindow::GetID()
+gl::win32::IWindow::GetID()
 const noexcept
 {
 	return static_cast<int>(GetInternalValue(GWLP_ID));
 }
 
 std::wstring
-gl::device::IWindow::GetTitle()
+gl::win32::IWindow::GetTitle()
 const noexcept
 {
 	std::wstring result{};
@@ -303,7 +303,7 @@ const noexcept
 }
 
 gl::Rect
-gl::device::IWindow::GetDimensions()
+gl::win32::IWindow::GetDimensions()
 const noexcept
 {
 	native::NativeRect rect{};
@@ -319,7 +319,7 @@ const noexcept
 }
 
 bool
-gl::device::IWindow::TryGetDimensions(gl::Rect& output)
+gl::win32::IWindow::TryGetDimensions(gl::Rect& output)
 const noexcept
 {
 	native::NativeRect rect{};
@@ -336,20 +336,20 @@ const noexcept
 	return result;
 }
 
-gl::device::IWindow
-gl::device::MakeNativeWindow(const ProcessInstance& hinst
+gl::win32::IWindow
+gl::win32::MakeNativeWindow(const ProcessInstance& hinst
 	, const std::wstring_view& class_name
 	, const std::wstring_view& title
 	, const unsigned long& styles
 	, const unsigned long& options
 	, const int& x, const int& y
 	, const int& width, const int& height
-	, const gl::device::IWindow& parent
-	, const gl::device::native::NativeMenu& menu
+	, const gl::win32::IWindow& parent
+	, const gl::win32::native::NativeMenu& menu
 	, void* uparams
 ) noexcept
 {
-	gl::device::native::HWND result = ::CreateWindowEx(options
+	gl::win32::native::HWND result = ::CreateWindowEx(options
 	, class_name.data(), title.data()
 	, styles, x, y, width, height
 	, parent.GetHandle()
@@ -372,7 +372,7 @@ gl::device::MakeNativeWindow(const ProcessInstance& hinst
 	return IWindow{ std::move(result) };
 }
 
-void gl::device::PostQuitMessage(const int& exit_code) noexcept
+void gl::win32::PostQuitMessage(const int& exit_code) noexcept
 {
 	::PostQuitMessage(exit_code);
 }

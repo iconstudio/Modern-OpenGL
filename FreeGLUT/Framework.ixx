@@ -42,13 +42,13 @@ export namespace gl
 		inline constexpr Descriptor DefaultDescriptor = MakeDefaultDescriptor();
 	}
 
-	using gl::device::FilePath;
-	using gl::device::Colour;
-	using gl::device::Event;
-	using gl::device::EventID;
-	using gl::device::GraphicDeviceContext;
-	using gl::window::RenderEventHandler;
-	using gl::window::ManagedWindow;
+	using gl::win32::FilePath;
+	using gl::win32::Colour;
+	using gl::win32::Event;
+	using gl::win32::EventID;
+	using gl::win32::GraphicDeviceContext;
+	using gl::win32::RenderEventHandler;
+	using gl::win32::ManagedWindow;
 
 	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>
 	{

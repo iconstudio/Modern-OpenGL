@@ -6,7 +6,7 @@ import Glib.Device.IGraphics;
 import Glib.Device.IContext;
 import Glib.Device.Colour;
 
-export namespace gl::device::resource
+export namespace gl::win32::resource
 {
 	class [[nodiscard]] Bitmap : public IGraphics<Bitmap, native::RawBitmap>
 	{
@@ -14,11 +14,11 @@ export namespace gl::device::resource
 		using base = IGraphics<Bitmap, native::RawBitmap>;
 
 		[[nodiscard]]
-		static util::Monad<gl::device::resource::Bitmap> Load(const FilePath& path) noexcept;
+		static util::Monad<gl::win32::resource::Bitmap> Load(const FilePath& path) noexcept;
 		[[nodiscard]]
 		static bool TryLoad(const FilePath& path, Bitmap& output) noexcept;
 		[[nodiscard]]
-		static util::Monad<gl::device::resource::Bitmap> Load(const int& id) noexcept;
+		static util::Monad<gl::win32::resource::Bitmap> Load(const int& id) noexcept;
 		[[nodiscard]]
 		static bool TryLoad(const int& id, Bitmap& output) noexcept;
 

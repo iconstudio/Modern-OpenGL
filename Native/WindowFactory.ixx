@@ -7,7 +7,7 @@ import Glib.Window;
 import Glib.Window.Property.Factory;
 import Glib.Window.ManagedWindow;
 
-export namespace gl::window
+export namespace gl::win32
 {
 #pragma region CreateWindow
 	Window CreateWindow(const WindowProperty& properties

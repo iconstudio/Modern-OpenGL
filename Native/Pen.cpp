@@ -4,38 +4,38 @@ module;
 module Glib.Device.Resource.Pen;
 import <type_traits>;
 
-gl::device::resource::Pen::Pen(const gl::device::resource::PenStyles& style, const int& width, const  gl::device::Colour& color)
+gl::win32::resource::Pen::Pen(const gl::win32::resource::PenStyles& style, const int& width, const  gl::win32::Colour& color)
 noexcept
 	: base(::CreatePen(static_cast<int>(style), width, color.ToRaw()))
 	, myStyle(style), myColor(color), mySize(width)
 {}
 
-gl::device::resource::Pen::Pen(const PenStyles& style, const int& width, Colour&& color)
+gl::win32::resource::Pen::Pen(const PenStyles& style, const int& width, Colour&& color)
 noexcept
 	: base(::CreatePen(static_cast<int>(style), width, color.ToRaw()))
 	, myStyle(style), myColor(std::move(color)), mySize(width)
 {}
 
-gl::device::resource::Pen::Pen(const PenStyles& style, const int& width, const RawRGB& color)
+gl::win32::resource::Pen::Pen(const PenStyles& style, const int& width, const RawRGB& color)
 noexcept
 	: base(::CreatePen(static_cast<int>(style), width, color))
-	, myStyle(style), myColor(device::MakeColor(color)), mySize(width)
+	, myStyle(style), myColor(MakeColor(color)), mySize(width)
 {}
 
-gl::device::resource::Pen::Pen(const PenStyles& style, const int& width, RawRGB&& color)
+gl::win32::resource::Pen::Pen(const PenStyles& style, const int& width, RawRGB&& color)
 noexcept
 	: base(::CreatePen(static_cast<int>(style), width, color))
-	, myStyle(style), myColor(device::MakeColor(std::move(color))), mySize(width)
+	, myStyle(style), myColor(MakeColor(std::move(color))), mySize(width)
 {}
 
-gl::device::resource::Pen::~Pen()
+gl::win32::resource::Pen::~Pen()
 noexcept
 {
 	Destroy();
 }
 
 void
-gl::device::resource::Pen::Destroy()
+gl::win32::resource::Pen::Destroy()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -45,63 +45,63 @@ noexcept
 	}
 }
 
-const gl::device::resource::PenStyles&
-gl::device::resource::Pen::GetStyle()
+const gl::win32::resource::PenStyles&
+gl::win32::resource::Pen::GetStyle()
 const& noexcept
 {
 	return myStyle;
 }
 
-gl::device::resource::PenStyles&&
-gl::device::resource::Pen::GetStyle()
+gl::win32::resource::PenStyles&&
+gl::win32::resource::Pen::GetStyle()
 && noexcept
 {
 	return std::move(myStyle);
 }
 
 const int&
-gl::device::resource::Pen::GetSize()
+gl::win32::resource::Pen::GetSize()
 const& noexcept
 {
 	return mySize;
 }
 
-int&& gl::device::resource::Pen::GetSize()
+int&& gl::win32::resource::Pen::GetSize()
 && noexcept
 {
 	return std::move(mySize);
 }
 
-gl::device::Colour&
-gl::device::resource::Pen::GetColor()
+gl::win32::Colour&
+gl::win32::resource::Pen::GetColor()
 & noexcept
 {
 	return myColor;
 }
 
-const gl::device::Colour&
-gl::device::resource::Pen::GetColor()
+const gl::win32::Colour&
+gl::win32::resource::Pen::GetColor()
 const& noexcept
 {
 	return myColor;
 }
 
-gl::device::Colour&&
-gl::device::resource::Pen::GetColor()
+gl::win32::Colour&&
+gl::win32::resource::Pen::GetColor()
 && noexcept
 {
 	return std::move(myColor);
 }
 
-const gl::device::Colour&&
-gl::device::resource::Pen::GetColor()
+const gl::win32::Colour&&
+gl::win32::resource::Pen::GetColor()
 const&& noexcept
 {
 	return std::move(myColor);
 }
 
-gl::device::resource::Pen&
-gl::device::resource::Pen::operator=(nullptr_t)
+gl::win32::resource::Pen&
+gl::win32::resource::Pen::operator=(nullptr_t)
 noexcept
 {
 	Destroy();

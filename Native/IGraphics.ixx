@@ -3,7 +3,7 @@ import <utility>;
 import Glib.Definitions;
 import Glib.Device.IHandle;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	struct [[nodiscard]] nullifier_t
 	{

@@ -2,7 +2,7 @@ export module Glib.Device.Event:Special;
 import <compare>;
 export import :ID;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	struct [[nodiscard]] EventIDWrapper
 	{

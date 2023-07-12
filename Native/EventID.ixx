@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 export module Glib.Device.Event:ID;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	using RawEvent = ::tagMSG;
 	using RawEventID = decltype(RawEvent::message);

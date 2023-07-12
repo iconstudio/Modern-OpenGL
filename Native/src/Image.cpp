@@ -3,7 +3,7 @@ module;
 module Glibe.Device.Resource.Image;
 
 constexpr
-gl::device::resource::Image::Image()
+gl::win32::resource::Image::Image()
 noexcept
 	: base()
 {}

@@ -3,7 +3,7 @@ import <type_traits>;
 import Glib.Definitions;
 import Glib.Device.IHandle;
 
-export namespace gl::device
+export namespace gl::win32
 {
 	class IContext : public IHandle<native::NativeContext>
 	{

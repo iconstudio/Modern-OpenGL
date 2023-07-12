@@ -4,7 +4,7 @@ export module Glib.Device.IO.Keyboard:KeyCodes;
 
 using enum ABI::Windows::System::VirtualKey;
 
-export namespace gl::device::io
+export namespace gl::win32::io
 {
 	enum class [[nodiscard]] KeyCode : int
 	{

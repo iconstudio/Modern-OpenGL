@@ -5,7 +5,7 @@ module;
 export module Glib.Device.IO.Keyboard:Flags;
 import Glib.Device.Utility;
 
-export namespace gl::device::io
+export namespace gl::win32::io
 {
 	enum class [[nodiscard]] KeyboardFlag : long long
 	{

@@ -2,7 +2,7 @@ module;
 #include "Internal.hpp"
 export module Glib.Window:Style;
 
-export namespace gl::window
+export namespace gl::win32
 {
 	enum class WindowStyle : unsigned long
 	{
