@@ -55,7 +55,8 @@ export namespace gl
 		void Run() noexcept;
 
 	private:
-		std::unique_ptr<framework::handle_t> myInstance;
+		std::unique_ptr<framework::handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
+		GLContext myContext{};
 	};
 }
