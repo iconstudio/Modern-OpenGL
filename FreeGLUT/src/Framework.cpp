@@ -77,6 +77,8 @@ void
 gl::Framework::Run()
 noexcept
 {
+	SetRenderer(DefaultRenderer);
+
 	using enum window::managed_window::AwakeResult;
 	const auto awakenening = myInstance->Awake();
 
@@ -87,8 +89,6 @@ noexcept
 		std::rethrow_exception(myInstance->GetException());
 		return;
 	}
-
-	SetRenderer(DefaultRenderer);
 
 	myInstance->Start();
 }
