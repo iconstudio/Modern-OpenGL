@@ -3,6 +3,7 @@ module;
 
 module Glib.GraphicContext;
 import <cstdio>;
+import Glib.Device.Context.Renderer;
 
 PIXELFORMATDESCRIPTOR pixel_format =
 {
@@ -31,26 +32,14 @@ bool
 gl::GLContext::Initialize(const gl::device::IContext& hdc)
 noexcept
 {
-	return false;
-}
+	auto& handle = GetHandle();
 
-bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
-{
-	myHandle = ::wglCreateContext(painter);
-	if (nullptr != myHandle)
+	handle = ::wglCreateContext(hdc);
+	if (nullptr == handle)
 	{
-		if (0 == ::wglMakeCurrent(painter, myHandle))
-		{
-			std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
+		const int current_format_id = GetPixelFormat(hdc);
 
-			return false;
-		}
-	}
-	else
-	{
-		const int current_format_id = GetPixelFormat(GetHandle());
-
-		if (0 == DescribePixelFormat(GetHandle(), current_format_id, sizeof(pixel_format), &pixel_format))
+		if (0 == DescribePixelFormat(hdc, current_format_id, sizeof(pixel_format), &pixel_format))
 		{
 			std::printf("Failed on reading a pixel format %d. (code: %u)\n", current_format_id, ::GetLastError());
 
@@ -63,6 +52,20 @@ bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
 
 			return false;
 		}
+	}
+
+	return true;
+}
+
+bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
+{
+	auto& handle = GetHandle();
+
+	if (0 == ::wglMakeCurrent(painter, handle))
+	{
+		std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
+
+		return false;
 	}
 
 	return true;
