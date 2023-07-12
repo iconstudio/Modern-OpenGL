@@ -158,7 +158,7 @@
     <ClCompile Include="Palette.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
-    <ClCompile Include="src\IWindowHandle.cpp">
+    <ClCompile Include="src\IWindow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="IContext.cpp">
@@ -190,9 +190,6 @@
     </ClCompile>
     <ClCompile Include="src\GraphicDeviceContext.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>헤더 파일\Window</Filter>
     </ClCompile>
     <ClCompile Include="IWindow.ixx">
       <Filter>헤더 파일\Device</Filter>
@@ -229,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="IGraphics.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

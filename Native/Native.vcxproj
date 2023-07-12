@@ -227,7 +227,7 @@
     <ClCompile Include="src\EventAPI.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\Image.ixx" />
-    <ClCompile Include="src\IWindowHandle.cpp" />
+    <ClCompile Include="src\IWindow.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.ixx" />
     <ClCompile Include="Window.cpp" />
