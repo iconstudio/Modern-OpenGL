@@ -392,6 +392,13 @@ noexcept
 	return std::exchange(onChrUp, std::move(handler));
 }
 
+gl::window::managed_window::RenderEventHandler
+gl::window::ManagedWindow::SetRenderer(managed_window::RenderEventHandler handler)
+noexcept
+{
+	return std::exchange(onRender, std::move(handler));
+}
+
 util::Monad<gl::window::ManagedWindow::event_handler_t>
 gl::window::ManagedWindow::FindEventHandler(const event_id_t& event_id)
 noexcept

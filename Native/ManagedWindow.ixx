@@ -86,8 +86,9 @@ namespace gl::window
 		SysKeyUpEventHandler SetSysKeyUpHandler(SysKeyUpEventHandler handler) noexcept;
 		CharDownEventHandler SetCharDownHandler(CharDownEventHandler handler) noexcept;
 		CharUpEventHandler SetCharUpHandler(CharUpEventHandler handler) noexcept;
+		RenderEventHandler SetRenderer(RenderEventHandler handler) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
-
+		
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
 		static long long MainWorker(device::HWND, unsigned int, unsigned long long, long long) noexcept;
