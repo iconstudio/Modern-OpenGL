@@ -53,7 +53,8 @@ export namespace gl
 		using base = std::enable_shared_from_this<Framework>;
 		using handle_t = gl::ManagedWindow;
 		using event_handler_t = handle_t::event_handler_t;
-		using render_t = gl::RenderEventHandler;
+		//using render_t = gl::RenderEventHandler;
+		using render_t = void(*)(handle_t&);
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
@@ -72,6 +73,7 @@ export namespace gl
 	private:
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
+
 		GLContext myHandle{};
 	};
 }
