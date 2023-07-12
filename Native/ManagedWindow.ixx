@@ -78,6 +78,8 @@ namespace gl::window
 		void SetCaptureMouse(const bool& flag = true) noexcept;
 
 		void AddEventHandler(event_id_t id, const event_handler_t& procedure) noexcept;
+		void RemoveEventHandler(event_id_t id) noexcept;
+
 		KeyDownEventHandler SetKeyDownHandler(KeyDownEventHandler handler) noexcept;
 		KeyUpEventHandler SetKeyUpHandler(KeyUpEventHandler handler) noexcept;
 		SysKeyDownEventHandler SetSysKeyDownHandler(SysKeyDownEventHandler handler) noexcept;

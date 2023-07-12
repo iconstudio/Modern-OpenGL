@@ -343,6 +343,13 @@ noexcept
 	myEventHandlers.insert(std::make_pair(id, procedure));
 }
 
+void
+gl::window::ManagedWindow::RemoveEventHandler(gl::window::ManagedWindow::event_id_t id)
+noexcept
+{
+	myEventHandlers.erase(id);
+}
+
 gl::window::managed_window::KeyDownEventHandler
 gl::window::ManagedWindow::SetKeyDownHandler(managed_window::KeyDownEventHandler handler)
 noexcept
