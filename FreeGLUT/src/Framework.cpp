@@ -127,13 +127,13 @@ noexcept
 		GraphicDeviceContext& ctx) {
 
 		glContext.Begin(ctx);
-		localRenderer(ctx);
+		localRenderer();
 		glContext.End();
 	});
 }
 
 void
-gl::Framework::DefaultRenderer(gl::GraphicDeviceContext& hdc)
+gl::Framework::DefaultRenderer()
 noexcept
 {
 	glBegin(GL_TRIANGLES);
