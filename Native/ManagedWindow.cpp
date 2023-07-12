@@ -553,6 +553,8 @@ void
 gl::window::ManagedWindow::KeyboardHandler(gl::window::ManagedWindow& self, unsigned long long wparam, long long lparam)
 noexcept
 {
+	self.ClearWindow();
+
 	const bool is_press = device::io::IsPressing(lparam);
 	const bool is_first = device::io::IsFirstPress(lparam);
 	const bool is_sys = device::io::IsWithAltKey(lparam);
