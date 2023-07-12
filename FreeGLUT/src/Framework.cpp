@@ -112,6 +112,27 @@ noexcept
 	myInstance->Start();
 }
 
+void
+gl::Framework::AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure)
+noexcept
+{
+	myInstance->AddEventHandler(id, procedure);
+}
+
+void
+gl::Framework::AddEventHandler(handle_t::event_id_t id, handle_t::event_handler_t&& procedure)
+noexcept
+{
+	myInstance->AddEventHandler(id, std::move(procedure));
+}
+
+void
+gl::Framework::RemoveEventHandler(handle_t::event_id_t id)
+noexcept
+{
+	myInstance->RemoveEventHandler(id);
+}
+
 void ReadyDisplay() noexcept
 {
 	gl::display::dpi::SetDPIAware(true);

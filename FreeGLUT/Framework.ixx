@@ -54,6 +54,8 @@ export namespace gl
 		void Run() noexcept;
 
 		void AddEventHandler(handle_t::event_id_t id, const handle_t::event_handler_t& procedure) noexcept;
+		void AddEventHandler(handle_t::event_id_t id, handle_t::event_handler_t&& procedure) noexcept;
+		void RemoveEventHandler(handle_t::event_id_t id) noexcept;
 
 	private:
 		std::unique_ptr<handle_t> myInstance{ nullptr };
