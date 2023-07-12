@@ -2,12 +2,15 @@ export module Glib.Framework;
 import <memory>;
 import <string_view>;
 import Glib.Rect;
+import Glib.GraphicContext;
 import Glib.Window.ManagedWindow;
 
 export namespace gl
 {
 	namespace framework
 	{
+		using handle_t = gl::window::ManagedWindow;
+
 		struct Descriptor
 		{
 			std::wstring_view title;
@@ -52,7 +55,7 @@ export namespace gl
 		void Run() noexcept;
 
 	private:
-		std::unique_ptr<window::ManagedWindow> myInstance{ nullptr };
+		std::unique_ptr<framework::handle_t> myInstance;
 		gl::Rect window_rect{};
 	};
 }
