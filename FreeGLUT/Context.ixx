@@ -17,5 +17,9 @@ export namespace gl
 
 		bool Begin(device::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;
+
+	private:
+		device::native::NativeContext nativeContext = nullptr;
+		bool isDoubleBuffered = false;
 	};
 }

@@ -147,7 +147,6 @@ noexcept
 	glEnd();
 
 	glFlush();
-	SwapBuffers(hdc);
 }
 
 void ReadyDisplay() noexcept

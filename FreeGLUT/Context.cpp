@@ -75,6 +75,11 @@ gl::GLContext::Initialize(
 		return error;
 	}
 
+	if (0 != (checker.dwFlags & PFD_DOUBLEBUFFER))
+	{
+		isDoubleBuffered = true;
+	}
+
 	if (0 == SetPixelFormat(hdc, target, &checker))
 	{
 		unsigned long error = ::GetLastError();
@@ -92,7 +97,7 @@ gl::GLContext::Initialize(
 
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
-	glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);
 	glViewport(0, 0, view_width, view_height);
 	glLoadIdentity();
 
@@ -108,11 +113,17 @@ bool gl::GLContext::Begin(device::GraphicDeviceContext& painter) noexcept
 		return false;
 	}
 
+	nativeContext = painter;
 	return true;
 }
 
 bool gl::GLContext::End() noexcept
 {
-	//::wglMakeCurrent(GetHandle(), nullptr);
+	if (isDoubleBuffered)
+	{
+		::SwapBuffers(nativeContext);
+	}
+
+	//::wglMakeCurrent(nativeContext, nullptr);
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
 }
