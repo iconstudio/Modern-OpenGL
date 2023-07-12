@@ -89,24 +89,6 @@ noexcept
 	}
 }
 
-bool
-gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
-noexcept
-{
-	if (myEventHandlers.contains(event_id))
-	{
-		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_release);
-		awaitFlag.notify_one();
-
-		//::InvalidateRect(control, nullptr, TRUE);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 long long
 gl::window::ManagedWindow::MainWorker(gl::device::HWND hwnd, unsigned int id, unsigned long long wparam, long long lparam)
 noexcept
@@ -394,9 +376,22 @@ noexcept
 
 gl::window::managed_window::RenderEventHandler
 gl::window::ManagedWindow::SetRenderer(managed_window::RenderEventHandler handler)
+bool
+gl::window::ManagedWindow::AlertEvent(const event_id_t& event_id, const unsigned long long& lhs, const long long& rhs)
 noexcept
 {
-	return std::exchange(onRender, std::move(handler));
+	if (myEventHandlers.contains(event_id))
+	{
+		awaitFlag.store(event_t(event_id, lhs, rhs, 0), util::memory_order_release);
+		awaitFlag.notify_one();
+
+		//::InvalidateRect(control, nullptr, TRUE);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 util::Monad<gl::window::ManagedWindow::event_handler_t>
