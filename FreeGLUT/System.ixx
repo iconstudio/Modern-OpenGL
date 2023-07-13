@@ -6,7 +6,7 @@ import Glib.Windows.Colour;
 export namespace gl
 {
 	class [[nodiscard]] GLSystem
-		: public win32::IHandle<gl::win32::native::NativeOGL>
+		: private win32::IHandle<gl::win32::native::NativeOGL>
 	{
 	public:
 		using base = win32::IHandle<gl::win32::native::NativeOGL>;
