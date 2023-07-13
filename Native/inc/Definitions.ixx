@@ -49,6 +49,7 @@ export namespace gl::win32::native
 	using PaintStruct = tagPAINTSTRUCT;
 	using NativeContext = ::HDC__*;
 	using NativeOGL = ::HGLRC__*;
+	using NativePFT = ::tagPIXELFORMATDESCRIPTOR;
 	using NativeMenu = ::HMENU__*;
 
 	using RawBitmap = ::HBITMAP__*;
