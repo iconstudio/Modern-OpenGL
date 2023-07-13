@@ -197,6 +197,8 @@
     <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Atom.ixx" />
+    <ClCompile Include="BufferObjects.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display.ixx" />
@@ -214,6 +216,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="src\Framework.cpp" />
+    <ClCompile Include="Utility.ixx" />
+    <ClCompile Include="Vertex.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Native\Native.vcxproj">
