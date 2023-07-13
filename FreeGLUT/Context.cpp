@@ -115,7 +115,7 @@ bool gl::GLContext::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = painter;
 
-	glClearColor(0, 0, 0, 0);
+	glClearColor(backgroundColour.R / 255.0f, backgroundColour.G / 255.0f, backgroundColour.B / 255.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	return true;

@@ -1,6 +1,7 @@
 export module Glib.GraphicContext;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
+import Glib.Windows.Colour;
 
 export namespace gl
 {
@@ -20,6 +21,7 @@ export namespace gl
 
 	private:
 		gl::win32::native::NativeContext nativeContext = nullptr;
+		gl::win32::Colour backgroundColour = gl::win32::colors::ForrestGreen;
 		bool isDoubleBuffered = false;
 	};
 }
