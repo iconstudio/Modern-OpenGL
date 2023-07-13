@@ -218,6 +218,9 @@
     <ClCompile Include="inc\RawColour.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
+    <ClCompile Include="ProcessInstance.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="inc\ImageLoader.inl">

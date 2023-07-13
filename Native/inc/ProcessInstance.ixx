@@ -1,12 +1,11 @@
 module;
 #include "Internal.hpp"
-#include <type_traits>
+
 export module Glib.Windows.ProcessInstance;
+import <type_traits>;
 
 export namespace gl::win32
 {
-	using ::HINSTANCE__;
-	using ::HMODULE;
 	using HINSTANCE = HINSTANCE__*;
 
 	class [[nodiscard]] ProcessInstance
@@ -15,7 +14,7 @@ export namespace gl::win32
 		constexpr ProcessInstance() noexcept = default;
 		constexpr ~ProcessInstance() noexcept = default;
 
-		constexpr ProcessInstance(HINSTANCE handle) noexcept
+		constexpr ProcessInstance(HINSTANCE__* handle) noexcept
 			: myHandle(handle)
 		{}
 

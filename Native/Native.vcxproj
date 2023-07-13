@@ -224,6 +224,7 @@
     <ClCompile Include="inc\WindowProperty.ixx" />
     <ClCompile Include="inc\WindowsPropertyFactory.ixx" />
     <ClCompile Include="inc\WindowStyle.ixx" />
+    <ClCompile Include="ProcessInstance.cpp" />
     <ClCompile Include="src\Bitmap.cpp" />
     <ClCompile Include="src\ColourBrush.cpp" />
     <ClCompile Include="src\CompatibleBitmap.cpp" />
