@@ -5,6 +5,8 @@ import Glib.Windows.Colour;
 
 export namespace gl
 {
+	using win32::Colour;
+
 	class [[nodiscard]] GLSystem
 		: private win32::IHandle<gl::win32::native::NativeOGL>
 	{
@@ -22,8 +24,6 @@ export namespace gl
 	private:
 		int myPixelFormat = 0;
 		bool isDoubleBuffered = false;
-
-		gl::win32::Colour backgroundColour = gl::win32::colors::ForrestGreen;
 
 		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
