@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4c8fdd49-f3da-4897-bd44-0d7afec2494d}</ProjectGuid>
-    <RootNamespace>FreeGLUT</RootNamespace>
+    <RootNamespace>OpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
