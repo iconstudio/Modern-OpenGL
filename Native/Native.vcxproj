@@ -77,22 +77,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -179,46 +179,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Internal.hpp" />
+    <ClInclude Include="inc\Internal.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Colour.ixx" />
-    <ClCompile Include="ColourBrush.ixx" />
-    <ClCompile Include="CompatibleContext.ixx" />
-    <ClCompile Include="ComponentBrush.ixx" />
-    <ClCompile Include="Definitions.ixx" />
-    <ClCompile Include="DeviceContext.ixx" />
-    <ClCompile Include="DeviceHandle.ixx" />
-    <ClCompile Include="DeviceIO.ixx" />
-    <ClCompile Include="DeviceUtil.ixx" />
-    <ClCompile Include="Event.ixx" />
-    <ClCompile Include="EventAPI.ixx" />
-    <ClCompile Include="EventID.ixx" />
-    <ClCompile Include="Bitmap.ixx" />
-    <ClCompile Include="Icon.ixx" />
-    <ClCompile Include="IGraphics.ixx" />
-    <ClCompile Include="IHandle.ixx" />
-    <ClCompile Include="IContext.ixx" />
-    <ClCompile Include="ImageLoader.inl" />
-    <ClCompile Include="IWindow.ixx" />
-    <ClCompile Include="Keyboard.ixx" />
-    <ClCompile Include="KeyboardFlags.ixx" />
-    <ClCompile Include="Keycodes.ixx" />
-    <ClCompile Include="KeyModifiers.ixx" />
-    <ClCompile Include="ManagedWindow.ixx" />
-    <ClCompile Include="Mouse.ixx" />
-    <ClCompile Include="MouseButtons.ixx" />
-    <ClCompile Include="MouseUtils.ixx" />
-    <ClCompile Include="Palette.ixx" />
-    <ClCompile Include="Pen.ixx" />
-    <ClCompile Include="ProcessInstance.ixx" />
-    <ClCompile Include="RawColour.ixx" />
-    <ClCompile Include="Rect.ixx" />
-    <ClCompile Include="SpecialEvent.ixx" />
+    <ClCompile Include="inc\Bitmap.ixx" />
+    <ClCompile Include="inc\Colour.ixx" />
+    <ClCompile Include="inc\ColourBrush.ixx" />
+    <ClCompile Include="inc\CompatibleBitmap.ixx" />
+    <ClCompile Include="inc\CompatibleContext.ixx" />
+    <ClCompile Include="inc\ComponentBrush.ixx" />
+    <ClCompile Include="inc\Definitions.ixx" />
+    <ClCompile Include="inc\DeviceContext.ixx" />
+    <ClCompile Include="inc\DeviceHandle.ixx" />
+    <ClCompile Include="inc\DeviceIO.ixx" />
+    <ClCompile Include="inc\DeviceUtil.ixx" />
+    <ClCompile Include="inc\Event.ixx" />
+    <ClCompile Include="inc\EventAPI.ixx" />
+    <ClCompile Include="inc\EventID.ixx" />
+    <ClCompile Include="inc\GraphicDeviceContext.ixx" />
+    <ClCompile Include="inc\Icon.ixx" />
+    <ClCompile Include="inc\IContext.ixx" />
+    <ClCompile Include="inc\IGraphics.ixx" />
+    <ClCompile Include="inc\IHandle.ixx" />
+    <ClCompile Include="inc\Image.ixx" />
+    <ClCompile Include="inc\IWindow.ixx" />
+    <ClCompile Include="inc\Keyboard.ixx" />
+    <ClCompile Include="inc\KeyboardFlags.ixx" />
+    <ClCompile Include="inc\Keycodes.ixx" />
+    <ClCompile Include="inc\KeyModifiers.ixx" />
+    <ClCompile Include="inc\ManagedWindow.ixx" />
+    <ClCompile Include="inc\Mouse.ixx" />
+    <ClCompile Include="inc\MouseButtons.ixx" />
+    <ClCompile Include="inc\MouseUtils.ixx" />
+    <ClCompile Include="inc\Palette.ixx" />
+    <ClCompile Include="inc\Pen.ixx" />
+    <ClCompile Include="inc\ProcessInstance.ixx" />
+    <ClCompile Include="inc\RawColour.ixx" />
+    <ClCompile Include="inc\Rect.ixx" />
+    <ClCompile Include="inc\SpecialEvent.ixx" />
+    <ClCompile Include="inc\Window.ixx" />
+    <ClCompile Include="inc\WindowCoroutine.ixx" />
+    <ClCompile Include="inc\WindowFactory.ixx" />
+    <ClCompile Include="inc\WindowOption.ixx" />
+    <ClCompile Include="inc\WindowProperty.ixx" />
+    <ClCompile Include="inc\WindowsPropertyFactory.ixx" />
+    <ClCompile Include="inc\WindowStyle.ixx" />
     <ClCompile Include="src\Bitmap.cpp" />
     <ClCompile Include="src\ColourBrush.cpp" />
     <ClCompile Include="src\CompatibleBitmap.cpp" />
-    <ClCompile Include="src\CompatibleBitmap.ixx" />
     <ClCompile Include="src\CompatibleContext.cpp" />
     <ClCompile Include="src\ComponentBrush.cpp" />
     <ClCompile Include="src\DeviceContext.cpp" />
@@ -228,26 +236,20 @@
     <ClCompile Include="src\IContext.cpp" />
     <ClCompile Include="src\IGraphics.cpp" />
     <ClCompile Include="src\Image.cpp" />
-    <ClCompile Include="src\Image.ixx" />
     <ClCompile Include="src\IWindow.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.cpp" />
-    <ClCompile Include="src\GraphicDeviceContext.ixx" />
     <ClCompile Include="src\ManagedWindow.cpp" />
     <ClCompile Include="src\Pen.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\WindowFactory.cpp" />
-    <ClCompile Include="Window.ixx" />
-    <ClCompile Include="WindowCoroutine.ixx" />
-    <ClCompile Include="WindowFactory.ixx" />
-    <ClCompile Include="WindowOption.ixx" />
-    <ClCompile Include="WindowProperty.ixx" />
-    <ClCompile Include="WindowsPropertyFactory.ixx" />
-    <ClCompile Include="WindowStyle.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\src\Utility.vcxproj">
       <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="inc\ImageLoader.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
