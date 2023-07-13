@@ -3,7 +3,7 @@ module;
 #include <gl\gl.h>
 #include <gl\glu.h>
 
-module Glib.GraphicContext;
+module Glib;
 import <cstdio>;
 import Glib.Windows.Context.Renderer;
 
@@ -27,12 +27,12 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	0, 0, 0                // layer masks ignored
 };
 
-gl::GLContext::GLContext()
+gl::GLSystem::GLSystem()
 noexcept
 	: base(nullptr)
 {}
 
-gl::GLContext::~GLContext()
+gl::GLSystem::~GLSystem()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -42,7 +42,7 @@ noexcept
 }
 
 unsigned long
-gl::GLContext::Initialize(
+gl::GLSystem::Initialize(
 	const gl::win32::IContext& hdc
 	, int view_width
 	, int view_height
@@ -104,7 +104,7 @@ gl::GLContext::Initialize(
 	return 0;
 }
 
-bool gl::GLContext::Begin(win32::GraphicDeviceContext& painter) noexcept
+bool gl::GLSystem::Begin(win32::GraphicDeviceContext& painter) noexcept
 {
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
@@ -121,7 +121,7 @@ bool gl::GLContext::Begin(win32::GraphicDeviceContext& painter) noexcept
 	return true;
 }
 
-bool gl::GLContext::End() noexcept
+bool gl::GLSystem::End() noexcept
 {
 	glFlush();
 
