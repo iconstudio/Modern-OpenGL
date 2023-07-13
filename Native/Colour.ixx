@@ -79,7 +79,7 @@ export namespace gl::win32
 	constexpr Colour
 		MakeColor(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept
 	{
-		return Colour{ a, r, g, b };
+		return Colour{ r, g, b, a };
 	}
 
 	[[nodiscard]]
