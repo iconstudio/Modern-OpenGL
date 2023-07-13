@@ -1,4 +1,3 @@
-#include "pch.hpp"
 import Utility.Print;
 import Glib.Framework;
 

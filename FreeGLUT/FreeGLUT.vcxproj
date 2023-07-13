@@ -95,7 +95,8 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
@@ -120,7 +121,8 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
@@ -148,7 +150,8 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
@@ -173,7 +176,8 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
@@ -190,12 +194,6 @@
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <None Include="stdafx.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.hpp" />
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Atom.ixx" />
     <ClCompile Include="BufferObjects.ixx" />
@@ -214,7 +212,6 @@
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="src\Framework.cpp" />
     <ClCompile Include="Utility.ixx" />
     <ClCompile Include="Vertex.ixx" />
