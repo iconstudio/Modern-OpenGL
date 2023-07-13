@@ -37,7 +37,7 @@ noexcept
 {
 	if (nullptr != GetHandle())
 	{
-		::wglDeleteContext(GetHandle());
+		Delegate(::wglDeleteContext);
 	}
 }
 
@@ -87,7 +87,7 @@ gl::GLContext::Initialize(
 		return error;
 	}
 
-	handle = ::wglCreateContext(hdc);
+	handle = hdc.Delegate(::wglCreateContext);
 	if (nullptr == handle)
 	{
 		unsigned long error = ::GetLastError();
@@ -106,7 +106,7 @@ gl::GLContext::Initialize(
 
 bool gl::GLContext::Begin(win32::GraphicDeviceContext& painter) noexcept
 {
-	if (0 == ::wglMakeCurrent(painter, GetHandle()))
+	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
 		std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
 
