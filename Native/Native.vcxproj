@@ -183,27 +183,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Colour.ixx" />
-    <ClCompile Include="ColourBrush.cpp" />
     <ClCompile Include="ColourBrush.ixx" />
     <ClCompile Include="CompatibleContext.ixx" />
-    <ClCompile Include="ComponentBrush.cpp" />
     <ClCompile Include="ComponentBrush.ixx" />
     <ClCompile Include="Definitions.ixx" />
-    <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="DeviceContext.ixx" />
-    <ClCompile Include="DeviceHandle.cpp" />
     <ClCompile Include="DeviceHandle.ixx" />
     <ClCompile Include="DeviceIO.ixx" />
     <ClCompile Include="DeviceUtil.ixx" />
     <ClCompile Include="Event.ixx" />
     <ClCompile Include="EventAPI.ixx" />
     <ClCompile Include="EventID.ixx" />
-    <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Bitmap.ixx" />
-    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Icon.ixx" />
-    <ClCompile Include="IContext.cpp" />
-    <ClCompile Include="IGraphics.cpp" />
     <ClCompile Include="IGraphics.ixx" />
     <ClCompile Include="IHandle.ixx" />
     <ClCompile Include="IContext.ixx" />
@@ -218,22 +210,32 @@
     <ClCompile Include="MouseButtons.ixx" />
     <ClCompile Include="MouseUtils.ixx" />
     <ClCompile Include="Palette.ixx" />
-    <ClCompile Include="Pen.cpp" />
     <ClCompile Include="Pen.ixx" />
     <ClCompile Include="ProcessInstance.ixx" />
     <ClCompile Include="RawColour.ixx" />
     <ClCompile Include="Rect.ixx" />
     <ClCompile Include="SpecialEvent.ixx" />
+    <ClCompile Include="src\Bitmap.cpp" />
+    <ClCompile Include="src\ColourBrush.cpp" />
     <ClCompile Include="src\CompatibleBitmap.cpp" />
     <ClCompile Include="src\CompatibleBitmap.ixx" />
     <ClCompile Include="src\CompatibleContext.cpp" />
+    <ClCompile Include="src\ComponentBrush.cpp" />
+    <ClCompile Include="src\DeviceContext.cpp" />
+    <ClCompile Include="src\DeviceHandle.cpp" />
     <ClCompile Include="src\EventAPI.cpp" />
+    <ClCompile Include="src\Icon.cpp" />
+    <ClCompile Include="src\IContext.cpp" />
+    <ClCompile Include="src\IGraphics.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\Image.ixx" />
     <ClCompile Include="src\IWindow.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.ixx" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="src\ManagedWindow.cpp" />
+    <ClCompile Include="src\Pen.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\WindowFactory.cpp" />
     <ClCompile Include="Window.ixx" />
     <ClCompile Include="WindowCoroutine.ixx" />
     <ClCompile Include="WindowFactory.ixx" />
@@ -241,8 +243,6 @@
     <ClCompile Include="WindowProperty.ixx" />
     <ClCompile Include="WindowsPropertyFactory.ixx" />
     <ClCompile Include="WindowStyle.ixx" />
-    <ClCompile Include="ManagedWindow.cpp" />
-    <ClCompile Include="WindowFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\src\Utility.vcxproj">

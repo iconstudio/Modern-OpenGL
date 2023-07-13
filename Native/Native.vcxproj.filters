@@ -38,12 +38,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ManagedWindow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowFactory.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Window.ixx">
       <Filter>헤더 파일\Window</Filter>
     </ClCompile>
@@ -116,26 +110,11 @@
     <ClCompile Include="DeviceUtil.ixx">
       <Filter>헤더 파일\Device</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentBrush.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ColourBrush.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Icon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Pen.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="IHandle.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="IContext.ixx">
       <Filter>헤더 파일\Device\Interfaces</Filter>
-    </ClCompile>
-    <ClCompile Include="IGraphics.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ColourBrush.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
@@ -150,15 +129,6 @@
       <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
     <ClCompile Include="src\IWindow.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="IContext.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceHandle.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceContext.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Definitions.ixx">
@@ -188,12 +158,6 @@
     <ClCompile Include="Bitmap.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
-    <ClCompile Include="Bitmap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageLoader.inl">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Event.ixx">
       <Filter>헤더 파일\Device\Event</Filter>
     </ClCompile>
@@ -218,7 +182,43 @@
     <ClCompile Include="IGraphics.ixx">
       <Filter>헤더 파일\Device\GDI</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
+    <ClCompile Include="ImageLoader.inl">
+      <Filter>헤더 파일\Device\GDI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bitmap.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ColourBrush.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ComponentBrush.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceContext.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DeviceHandle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Icon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IContext.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IGraphics.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ManagedWindow.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pen.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowFactory.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
