@@ -44,6 +44,7 @@ export namespace gl::win32::native
 	using RawWindowProperty = tagWNDCLASSEXW;
 	using NativeRect = tagRECT;
 
+	using HINSTANCE = HINSTANCE__*;
 	using HWND = HWND__*;
 	using PaintStruct = tagPAINTSTRUCT;
 	using NativeContext = ::HDC__*;
