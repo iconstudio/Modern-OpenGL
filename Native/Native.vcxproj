@@ -224,7 +224,6 @@
     <ClCompile Include="inc\WindowProperty.ixx" />
     <ClCompile Include="inc\WindowsPropertyFactory.ixx" />
     <ClCompile Include="inc\WindowStyle.ixx" />
-    <ClCompile Include="ProcessInstance.cpp" />
     <ClCompile Include="src\Bitmap.cpp" />
     <ClCompile Include="src\ColourBrush.cpp" />
     <ClCompile Include="src\CompatibleBitmap.cpp" />
@@ -241,6 +240,7 @@
     <ClCompile Include="src\GraphicDeviceContext.cpp" />
     <ClCompile Include="src\ManagedWindow.cpp" />
     <ClCompile Include="src\Pen.cpp" />
+    <ClCompile Include="src\ProcessInstance.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\WindowFactory.cpp" />
   </ItemGroup>
