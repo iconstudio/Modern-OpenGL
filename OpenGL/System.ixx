@@ -20,8 +20,11 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
-		gl::win32::native::NativeContext nativeContext = nullptr;
-		gl::win32::Colour backgroundColour = gl::win32::colors::ForrestGreen;
+		int myPixelFormat = 0;
 		bool isDoubleBuffered = false;
+
+		gl::win32::Colour backgroundColour = gl::win32::colors::ForrestGreen;
+
+		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
 }

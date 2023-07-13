@@ -95,6 +95,8 @@ gl::GLSystem::Initialize(
 		return error;
 	}
 
+	myPixelFormat = target;
+
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
 	glDepthFunc(GL_LEQUAL);
