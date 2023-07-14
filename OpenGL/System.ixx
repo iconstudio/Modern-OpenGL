@@ -24,7 +24,7 @@ export namespace gl
 	public:
 		using base = win32::IHandle<gl::win32::native::NativeOGL>;
 
-		const win32::Colour DefaultColour = win32::colors::Black;
+		static const win32::Colour DefaultColour;
 
 		System() noexcept;
 		~System() noexcept;

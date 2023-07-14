@@ -145,3 +145,5 @@ gl::CreateSystem() noexcept
 {
 	return std::make_shared<gl::System>();
 }
+
+const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;
