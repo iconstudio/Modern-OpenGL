@@ -99,9 +99,9 @@ noexcept
 		ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
 
-		glContext.Begin(ctx);
+		glContext->Begin(ctx);
 		localRenderer();
-		glContext.End();
+		glContext->End();
 	});
 }
 

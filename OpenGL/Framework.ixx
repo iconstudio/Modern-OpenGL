@@ -56,6 +56,7 @@ export namespace gl
 		using base = std::enable_shared_from_this<Framework>;
 		using handle_t = gl::ManagedWindow;
 		using event_handler_t = handle_t::event_handler_t;
+		using opengl_context_t = std::shared_ptr<gl::System>;
 		using render_t = std::function<void()>;
 
 		constexpr Framework() noexcept = default;
@@ -77,7 +78,7 @@ export namespace gl
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
 
-		gl::System glContext{};
+		opengl_context_t glContext{ nullptr };
 	};
 
 	std::shared_ptr<Framework> CreateFramework() noexcept;
