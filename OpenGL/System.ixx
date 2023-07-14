@@ -41,5 +41,6 @@ export namespace gl
 		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
 
-	std::shared_ptr<System> CreateSystem() noexcept;
+	std::shared_ptr<System> CreateSystem(const system::Descriptor& setup) noexcept;
+	std::shared_ptr<System> CreateSystem(system::Descriptor&& setup) noexcept;
 }
