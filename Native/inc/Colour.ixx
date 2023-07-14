@@ -110,7 +110,7 @@ export namespace gl::win32
 		return Colour{ GetRed(rgb), GetGreen(rgb), GetBlue(rgb) };
 	}
 
-	extern "C" namespace colors
+	namespace colors
 	{
 		inline constexpr Colour White = MakeColor(raw_colours::COLOR_WHITE);
 		inline constexpr Colour Cloud = MakeColor(raw_colours::COLOR_CLOUD);
