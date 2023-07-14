@@ -44,33 +44,6 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 }
 
 gl::framework::InitError
-gl::Framework::Initialize(gl::framework::Descriptor&& setup)
-{
-	ReadyDisplay();
-
-	try
-	{
-		myInstance = win32::CreateWindowEx<L"ManagedWindow">(std::move(setup.title), std::move(setup.wx), std::move(setup.wy), std::move(setup.ww), std::move(setup.wh));
-	}
-	catch (const std::exception& e)
-	{
-		std::printf("Exception: '%s'", e.what());
-		return framework::InitError::FailedOnCreatingWindow;
-	}
-
-	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext(), setup.ww, setup.wh)
-		; 0 != error)
-	{
-		std::printf("Pixel Formatting Error: %lu\n", error);
-		return framework::InitError::FailedOnSettingPixelFormat;
-	}
-
-	myInstance->SetPowerSave(std::move(setup.isPowersave));
-
-	return framework::InitError::Success;
-}
-
-gl::framework::InitError
 gl::Framework::Initialize()
 {
 	return Initialize(framework::MakeDefaultDescriptor());
