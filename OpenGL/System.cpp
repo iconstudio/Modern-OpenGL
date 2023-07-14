@@ -6,6 +6,7 @@ module;
 module Glib;
 import <memory>;
 import <cstdio>;
+import Utility.Monad.Loosen;
 import Glib.Windows.Context.Renderer;
 import :System;
 import :Utility;
@@ -141,7 +142,7 @@ bool gl::System::End() noexcept
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
 }
 
-std::shared_ptr<gl::System>
+gl::SystemCreation
 gl::CreateSystem(const win32::IContext& hdc, const gl::system::Descriptor& setup)
 noexcept
 {
@@ -151,13 +152,13 @@ noexcept
 		, setup.viewCx, setup.viewCy)
 	)
 	{
-		return nullptr;
+		return ::GetLastError();
 	}
 
 	return result;
 }
 
-std::shared_ptr<gl::System>
+gl::SystemCreation
 gl::CreateSystem(const win32::IContext& hdc, gl::system::Descriptor&& setup)
 noexcept
 {
@@ -167,7 +168,7 @@ noexcept
 		, std::move(setup.viewCx), std::move(setup.viewCy))
 	)
 	{
-		return nullptr;
+		return ::GetLastError();
 	}
 
 	return result;

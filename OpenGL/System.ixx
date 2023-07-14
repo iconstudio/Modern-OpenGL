@@ -1,5 +1,6 @@
 export module Glib:System;
 import <memory>;
+import Utility.Monad.Loosen;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
@@ -10,7 +11,7 @@ export namespace gl
 
 	namespace system
 	{
-		struct Descriptor
+		struct [[nodiscard]] Descriptor
 		{
 			int viewCx, viewCy;
 
@@ -42,6 +43,10 @@ export namespace gl
 		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
 
-	std::shared_ptr<System> CreateSystem(const win32::IContext& hdc, const system::Descriptor& setup) noexcept;
-	std::shared_ptr<System> CreateSystem(const win32::IContext& hdc, system::Descriptor&& setup) noexcept;
+	using SystemCreation = util::LooseMonad<std::shared_ptr<System>, unsigned long>;
+
+	[[nodiscard]]
+	SystemCreation CreateSystem(const win32::IContext& hdc, const system::Descriptor& setup) noexcept;
+	[[nodiscard]]
+	SystemCreation CreateSystem(const win32::IContext& hdc, system::Descriptor&& setup) noexcept;
 }
