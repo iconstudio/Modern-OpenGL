@@ -106,7 +106,7 @@ gl::System::Initialize(
 	glDepthFunc(GL_LEQUAL);
 	glViewport(0, 0, view_width, view_height);
 	glLoadIdentity();
-	SetBackgroundColour(DefaultColour);
+	SetBackgroundColour(gl::System::DefaultColour);
 
 	return 0;
 }
