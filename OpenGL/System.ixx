@@ -37,10 +37,11 @@ export namespace gl
 	private:
 		int myPixelFormat = 0;
 		bool isDoubleBuffered = false;
+		bool keepRatioAspect = true;
 
 		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
 
-	std::shared_ptr<System> CreateSystem(const system::Descriptor& setup) noexcept;
-	std::shared_ptr<System> CreateSystem(system::Descriptor&& setup) noexcept;
+	std::shared_ptr<System> CreateSystem(const win32::IContext& hdc, const system::Descriptor& setup) noexcept;
+	std::shared_ptr<System> CreateSystem(const win32::IContext& hdc, system::Descriptor&& setup) noexcept;
 }
