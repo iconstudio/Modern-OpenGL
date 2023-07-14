@@ -8,5 +8,5 @@ export namespace gl
 
 	void SetBackgroundColour(const Colour& colour) noexcept;
 	void SetBackgroundColour(Colour&& colour) noexcept;
-	void SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, std::uint8_t& b = 255) noexcept;
+	void SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept;
 }
