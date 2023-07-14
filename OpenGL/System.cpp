@@ -174,4 +174,20 @@ noexcept
 	return result;
 }
 
+void
+gl::System::SetAspectRatio(bool keep_ratio)
+noexcept
+{
+	keepAspectRatio = keep_ratio;
+	if (keep_ratio)
+	{
+		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
+	}
+	else
+	{
+		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
+	}
+
+}
+
 const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;

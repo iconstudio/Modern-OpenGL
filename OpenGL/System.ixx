@@ -32,13 +32,15 @@ export namespace gl
 
 		unsigned long Initialize(const win32::IContext& hdc, int view_width, int view_height) noexcept;
 
+		void SetAspectRatio(bool keep_ratio) noexcept;
+
 		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;
 
 	private:
 		int myPixelFormat = 0;
 		bool isDoubleBuffered = false;
-		bool keepRatioAspect = true;
+		bool keepAspectRatio = true;
 
 		gl::win32::native::NativeContext nativeContext = nullptr;
 	};
