@@ -4,6 +4,7 @@ module;
 #include <gl\glu.h>
 
 module Glib;
+import <memory>;
 import <cstdio>;
 import Glib.Windows.Context.Renderer;
 import :System;
