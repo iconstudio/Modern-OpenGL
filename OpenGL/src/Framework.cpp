@@ -9,6 +9,7 @@ module Glib.Framework;
 import <cstdio>;
 import <exception>;
 import <format>;
+import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
 import Glib.Windows.Context.Renderer;
@@ -31,13 +32,18 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	if (unsigned long error = glContext.Initialize(myInstance->AcquireContext(), setup.ww, setup.wh)
-		; 0 != error)
+	auto gl_descriptor = gl::system::Descriptor{};
+	gl_descriptor.viewCx = setup.ww;
+	gl_descriptor.viewCy = setup.wh;
+
+	auto creation = gl::CreateSystem(myInstance->AcquireContext(), std::move(gl_descriptor));
+	if (creation.has_value<unsigned long>())
 	{
-		std::printf("Pixel Formatting Error: %lu\n", error);
+		std::printf("Pixel Formatting Error: %lu\n", creation.get<unsigned long>());
 		return framework::InitError::FailedOnSettingPixelFormat;
 	}
 
+	glContext = creation.get<opengl_context_t>();
 	myInstance->SetPowerSave(setup.isPowersave);
 
 	return framework::InitError::Success;
