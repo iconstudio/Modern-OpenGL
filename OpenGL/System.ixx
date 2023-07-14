@@ -7,14 +7,18 @@ export namespace gl
 {
 	using win32::Colour;
 
-	class [[nodiscard]] GLSystem
+	namespace system
+	{
+	}
+
+	class [[nodiscard]] System
 		: private win32::IHandle<gl::win32::native::NativeOGL>
 	{
 	public:
 		using base = win32::IHandle<gl::win32::native::NativeOGL>;
 
-		GLSystem() noexcept;
-		~GLSystem() noexcept;
+		System() noexcept;
+		~System() noexcept;
 
 		unsigned long Initialize(const win32::IContext& hdc, int view_width, int view_height) noexcept;
 

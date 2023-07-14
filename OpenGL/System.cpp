@@ -28,12 +28,12 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	0, 0, 0                // layer masks ignored
 };
 
-gl::GLSystem::GLSystem()
+gl::System::System()
 noexcept
 	: base(nullptr)
 {}
 
-gl::GLSystem::~GLSystem()
+gl::System::~System()
 noexcept
 {
 	if (nullptr != GetHandle())
@@ -43,7 +43,7 @@ noexcept
 }
 
 unsigned long
-gl::GLSystem::Initialize(
+gl::System::Initialize(
 	const gl::win32::IContext& hdc
 	, int view_width
 	, int view_height
@@ -108,7 +108,7 @@ gl::GLSystem::Initialize(
 	return 0;
 }
 
-bool gl::GLSystem::Begin(win32::GraphicDeviceContext& painter) noexcept
+bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 {
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
@@ -124,7 +124,7 @@ bool gl::GLSystem::Begin(win32::GraphicDeviceContext& painter) noexcept
 	return true;
 }
 
-bool gl::GLSystem::End() noexcept
+bool gl::System::End() noexcept
 {
 	glFlush();
 

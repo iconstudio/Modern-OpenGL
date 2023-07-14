@@ -78,7 +78,7 @@ export namespace gl
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
 
-		GLSystem glContext{};
+		gl::System glContext{};
 	};
 
 	std::shared_ptr<Framework> CreateFramework() noexcept;
