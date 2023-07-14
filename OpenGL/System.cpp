@@ -6,6 +6,7 @@ module;
 module Glib;
 import <cstdio>;
 import Glib.Windows.Context.Renderer;
+import :Utility;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
@@ -102,6 +103,7 @@ gl::GLSystem::Initialize(
 	glDepthFunc(GL_LEQUAL);
 	glViewport(0, 0, view_width, view_height);
 	glLoadIdentity();
+	SetBackgroundColour(DefaultColour);
 
 	return 0;
 }
@@ -117,7 +119,6 @@ bool gl::GLSystem::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = painter;
 
-	//glClearColor(backgroundColour.R / 255.0f, backgroundColour.G / 255.0f, backgroundColour.B / 255.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	return true;
