@@ -142,9 +142,35 @@ bool gl::System::End() noexcept
 }
 
 std::shared_ptr<gl::System>
-gl::CreateSystem() noexcept
+gl::CreateSystem(const win32::IContext& hdc, const gl::system::Descriptor& setup)
+noexcept
 {
-	return std::make_shared<gl::System>();
+	auto result = std::make_shared<gl::System>();
+
+	if (0 != result->Initialize(hdc
+		, setup.viewCx, setup.viewCy)
+	)
+	{
+		return nullptr;
+	}
+
+	return result;
+}
+
+std::shared_ptr<gl::System>
+gl::CreateSystem(const win32::IContext& hdc, gl::system::Descriptor&& setup)
+noexcept
+{
+	auto result = std::make_shared<gl::System>();
+
+	if (0 != result->Initialize(hdc
+		, std::move(setup.viewCx), std::move(setup.viewCy))
+	)
+	{
+		return nullptr;
+	}
+
+	return result;
 }
 
 const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;
