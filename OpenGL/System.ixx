@@ -26,5 +26,7 @@ export namespace gl
 		bool isDoubleBuffered = false;
 
 		gl::win32::native::NativeContext nativeContext = nullptr;
+
+		static inline constexpr Colour DefaultColour = win32::colors::Black;
 	};
 }
