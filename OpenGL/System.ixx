@@ -1,4 +1,5 @@
 export module Glib:System;
+import <memory>;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
@@ -9,6 +10,12 @@ export namespace gl
 
 	namespace system
 	{
+		struct Descriptor
+		{
+			int viewCx, viewCy;
+
+			bool keepRatioAspect = true;
+		};
 	}
 
 	class [[nodiscard]] System
@@ -16,6 +23,8 @@ export namespace gl
 	{
 	public:
 		using base = win32::IHandle<gl::win32::native::NativeOGL>;
+
+		static inline constexpr Colour DefaultColour = win32::colors::Black;
 
 		System() noexcept;
 		~System() noexcept;
@@ -30,7 +39,7 @@ export namespace gl
 		bool isDoubleBuffered = false;
 
 		gl::win32::native::NativeContext nativeContext = nullptr;
-
-		static inline constexpr Colour DefaultColour = win32::colors::Black;
 	};
+
+	std::shared_ptr<System> CreateSystem() noexcept;
 }

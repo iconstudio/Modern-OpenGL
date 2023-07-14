@@ -100,6 +100,8 @@ gl::System::Initialize(
 	myPixelFormat = target;
 
 	glEnable(GL_DEPTH_TEST);
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
 	glMatrixMode(GL_PROJECTION);
 	glDepthFunc(GL_LEQUAL);
 	glViewport(0, 0, view_width, view_height);
@@ -136,4 +138,10 @@ bool gl::System::End() noexcept
 
 	//::wglMakeCurrent(nativeContext, nullptr);
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
+}
+
+std::shared_ptr<gl::System>
+gl::CreateSystem() noexcept
+{
+	return std::make_shared<gl::System>();
 }
