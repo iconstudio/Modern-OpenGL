@@ -203,12 +203,7 @@
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="src\Utility.cpp" />
-    <ClCompile Include="System.cpp">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
-    </ClCompile>
+    <ClCompile Include="System.cpp" />
     <ClCompile Include="System.ixx" />
     <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
