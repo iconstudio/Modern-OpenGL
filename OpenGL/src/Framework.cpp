@@ -32,21 +32,28 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	auto gl_descriptor = gl::system::Descriptor{};
+	gl::system::Descriptor gl_descriptor{};
 	gl_descriptor.viewCx = setup.ww;
 	gl_descriptor.viewCy = setup.wh;
 
-	auto creation = gl::CreateSystem(myInstance->AcquireContext(), std::move(gl_descriptor));
-	if (creation.has_value<unsigned long>())
+	framework::InitError ok{};
+
+	gl::CreateSystem(myInstance->AcquireContext(), std::move(gl_descriptor)).if_then<unsigned long>(
+		[&](unsigned long&& code) noexcept {
+		std::printf("Pixel Formatting Error: %lu\n", code);
+		ok = framework::InitError::FailedOnSettingPixelFormat;
+	}).if_then<opengl_context_t>(
+		[&](opengl_context_t& context) noexcept {
+		glContext = std::move(context);
+		ok = framework::InitError::Success;
+	});
+
+	if (ok == framework::InitError::Success)
 	{
-		std::printf("Pixel Formatting Error: %lu\n", creation.get<unsigned long>());
-		return framework::InitError::FailedOnSettingPixelFormat;
+		myInstance->SetPowerSave(setup.isPowersave);
 	}
 
-	glContext = creation.get<opengl_context_t>();
-	myInstance->SetPowerSave(setup.isPowersave);
-
-	return framework::InitError::Success;
+	return ok;
 }
 
 gl::framework::InitError
