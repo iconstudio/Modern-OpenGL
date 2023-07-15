@@ -3,10 +3,13 @@ import <cstdint>;
 import Glib.Windows.Colour;
 export import :State;
 
-export namespace gl::global
+export namespace gl
 {
 	using win32::Colour;
+}
 
+export namespace gl::global
+{
 	void SetState(const gl::State& state) noexcept;
 	void SetState(const volatile gl::State& state) noexcept;
 	void SetState(gl::State&& state) noexcept;
