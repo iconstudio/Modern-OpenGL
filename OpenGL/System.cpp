@@ -33,7 +33,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 
 gl::System::System()
 noexcept
-	: base(nullptr)
+	: base1(nullptr), base2()
 {}
 
 gl::System::~System()
@@ -83,7 +83,7 @@ noexcept
 		myPainter = gl::SinglePainter;
 	}
 
-	base::operator=(hdc.Delegate(::wglCreateContext));
+	base1::operator=(hdc.Delegate(::wglCreateContext));
 	if (nullptr == *this)
 	{
 		unsigned long error = ::GetLastError();

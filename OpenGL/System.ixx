@@ -36,7 +36,8 @@ export namespace gl
 		, public std::enable_shared_from_this<System>
 	{
 	public:
-		using base = win32::IHandle<win32::native::NativeOGL>;
+		using base1 = win32::IHandle<win32::native::NativeOGL>;
+		using base2 = std::enable_shared_from_this<System>;
 
 		static const win32::Colour DefaultColour;
 
