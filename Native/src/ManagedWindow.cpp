@@ -13,7 +13,8 @@ gl::win32::ManagedWindow::ManagedWindow(gl::win32::Window&& window, int number_o
 	, base_shared_t()
 {
 	myDimensions = underlying.GetDimensions();
-	myEventHandlers.reserve(20);
+	myEventHandlers.reserve(255);
+
 	myWorkers.reserve(number_of_workers);
 }
 
