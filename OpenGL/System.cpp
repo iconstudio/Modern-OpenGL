@@ -101,11 +101,11 @@ gl::System::Initialize(
 
 	myPixelFormat = target;
 
-	glEnable(GL_DEPTH_TEST);
+	gl::SetState(gl::State::Depth);
+	gl::SetState(gl::State::Culling);
+
 	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
 	glMatrixMode(GL_PROJECTION);
-	glDepthFunc(GL_LEQUAL);
 	glViewport(0, 0, view_width, view_height);
 	glLoadIdentity();
 	SetBackgroundColour(gl::System::DefaultColour);
