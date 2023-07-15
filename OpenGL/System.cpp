@@ -83,9 +83,8 @@ noexcept
 		myPainter = gl::SinglePainter;
 	}
 
-	auto& handle = GetHandle();
-	handle = hdc.Delegate(::wglCreateContext);
-	if (nullptr == handle)
+	base::operator=(hdc.Delegate(::wglCreateContext));
+	if (nullptr == *this)
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on creating a opengl context. (code: %u)\n", error);
