@@ -43,7 +43,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		std::printf("Pixel Formatting Error: %lu\n", code);
 		ok = framework::InitError::FailedOnSettingPixelFormat;
 	}).if_then<opengl_context_t>(
-		[&](opengl_context_t& context) noexcept {
+		[&](opengl_context_t&& context) noexcept {
 		glContext = std::move(context);
 		ok = framework::InitError::Success;
 	});
