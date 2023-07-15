@@ -203,6 +203,7 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
+    <ClCompile Include="Face.ixx" />
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="State.ixx" />
