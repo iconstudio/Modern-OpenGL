@@ -6,6 +6,34 @@ module Glib;
 import :Utility;
 
 void
+gl::SetState(const gl::State& flag)
+noexcept
+{
+	::glEnable(static_cast<GLenum>(flag));
+}
+
+void
+gl::SetState(gl::State&& flag)
+noexcept
+{
+	::glEnable(static_cast<GLenum>(flag));
+}
+
+void
+gl::SetState(const volatile gl::State& flag)
+noexcept
+{
+	::glEnable(static_cast<GLenum>(flag));
+}
+
+void
+gl::SetState(volatile gl::State&& flag)
+noexcept
+{
+	::glEnable(static_cast<GLenum>(flag));
+}
+
+void
 gl::SetBackgroundColour(const gl::Colour& colour)
 noexcept
 {
