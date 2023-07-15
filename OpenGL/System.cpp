@@ -15,7 +15,7 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
 	sizeof(PIXELFORMATDESCRIPTOR),
 	1,                     // version number
-	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
+	PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_SUPPORT_COMPOSITION | PFD_SWAP_EXCHANGE | PFD_GENERIC_ACCELERATED,
 	PFD_TYPE_RGBA,         // RGBA type
 	32,
 	0, 0, 0, 0, 0, 0,      // color bits ignored
@@ -50,14 +50,16 @@ _InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_form
 noexcept;
 
 unsigned long
-gl::System::Initialize(
-	const gl::win32::IContext& hdc
-	, int view_width
-	, int view_height
-) noexcept
+gl::System::Initialize(const gl::win32::IContext& hdc, const gl::system::Descriptor& descriptor)
+noexcept
 {
-	PIXELFORMATDESCRIPTOR my_format{};
+	::PIXELFORMATDESCRIPTOR my_format = opengl_format;
 	int my_target = 0;
+
+	if (descriptor.doubleBuffered)
+	{
+		my_format.dwFlags |= PFD_DOUBLEBUFFER;
+	}
 
 	if (unsigned long error = _InitializeSystem(hdc, my_format, my_target); 0 != error)
 	{
@@ -81,13 +83,6 @@ gl::System::Initialize(
 		myPainter = gl::SinglePainter;
 	}
 
-	if (0 == ::SetPixelFormat(hdc, my_target, &my_format))
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on setting pixel format %d. (code: %u)\n", my_target, error);
-		return error;
-	}
-
 	auto& handle = GetHandle();
 	handle = hdc.Delegate(::wglCreateContext);
 	if (nullptr == handle)
@@ -103,7 +98,7 @@ gl::System::Initialize(
 
 	::glCullFace(GL_BACK);
 	::glMatrixMode(GL_PROJECTION);
-	::glViewport(0, 0, view_width, view_height);
+	::glViewport(0, 0, descriptor.viewCx, descriptor.viewCy);
 	::glLoadIdentity();
 
 	return 0;
@@ -139,8 +134,7 @@ noexcept
 {
 	auto result = std::make_shared<gl::System>();
 
-	if (0 != result->Initialize(hdc
-		, setup.viewCx, setup.viewCy)
+	if (0 != result->Initialize(hdc, setup)
 	)
 	{
 		return ::GetLastError();
@@ -155,8 +149,7 @@ noexcept
 {
 	auto result = std::make_shared<gl::System>();
 
-	if (0 != result->Initialize(hdc
-		, std::move(setup.viewCx), std::move(setup.viewCy))
+	if (0 != result->Initialize(hdc, std::move(setup))
 	)
 	{
 		return ::GetLastError();
@@ -185,7 +178,7 @@ unsigned long
 _InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept
 {
-	const int target = ::ChoosePixelFormat(hdc, &opengl_format);
+	const int target = ::ChoosePixelFormat(hdc, &my_format);
 	if (0 == target)
 	{
 		unsigned long error = ::GetLastError();
@@ -198,6 +191,13 @@ noexcept
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
+		return error;
+	}
+
+	if (0 == ::SetPixelFormat(hdc, target, &my_format))
+	{
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
 		return error;
 	}
 
