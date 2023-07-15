@@ -109,3 +109,63 @@ noexcept
 {
 	::glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
 }
+
+bool
+gl::global::IsBlending()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_BLEND, &result);
+
+	return GL_TRUE == result;
+}
+
+bool
+gl::global::IsCulling()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_CULL_FACE, &result);
+
+	return GL_TRUE == result;
+}
+
+bool
+gl::global::IsScissoring()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_SCISSOR_TEST, &result);
+
+	return GL_TRUE == result;
+}
+
+bool
+gl::global::IsTestingAlpha()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_ALPHA, &result);
+
+	return GL_TRUE == result;
+}
+
+bool
+gl::global::IsTestingDepth()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_DEPTH_TEST, &result);
+
+	return GL_TRUE == result;
+}
+
+bool
+gl::global::IsTestingStencil()
+noexcept
+{
+	GLboolean result{};
+	::glGetBooleanv(GL_STENCIL_TEST, &result);
+
+	return GL_TRUE == result;
+}

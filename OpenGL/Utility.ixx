@@ -22,4 +22,11 @@ export namespace gl::global
 	void SetBackgroundColour(const Colour& colour) noexcept;
 	void SetBackgroundColour(Colour&& colour) noexcept;
 	void SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept;
+
+	[[nodiscard]] bool IsBlending() noexcept;
+	[[nodiscard]] bool IsCulling() noexcept;
+	[[nodiscard]] bool IsScissoring() noexcept;
+	[[nodiscard]] bool IsTestingAlpha() noexcept;
+	[[nodiscard]] bool IsTestingDepth() noexcept;
+	[[nodiscard]] bool IsTestingStencil() noexcept;
 }
