@@ -63,5 +63,8 @@
     <ClCompile Include="src\Utility.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="State.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
