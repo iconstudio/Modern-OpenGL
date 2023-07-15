@@ -46,7 +46,7 @@ noexcept
 }
 
 unsigned long
-_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format)
+_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept;
 
 unsigned long
@@ -57,8 +57,9 @@ gl::System::Initialize(
 ) noexcept
 {
 	PIXELFORMATDESCRIPTOR my_format{};
+	int my_target = 0;
 
-	if (unsigned long error = _InitializeSystem(hdc, my_format); 0 != error)
+	if (unsigned long error = _InitializeSystem(hdc, my_format, my_target); 0 != error)
 	{
 		return error;
 	}
@@ -66,7 +67,7 @@ gl::System::Initialize(
 	if (0 == (my_format.dwFlags & PFD_SUPPORT_OPENGL))
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
+		std::printf("Failed on checking a pixel format %d. (code: %u)\n", my_target, error);
 		return error;
 	}
 
@@ -80,10 +81,10 @@ gl::System::Initialize(
 		myPainter = gl::SinglePainter;
 	}
 
-	if (0 == ::SetPixelFormat(hdc, target, &my_format))
+	if (0 == ::SetPixelFormat(hdc, my_target, &my_format))
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
+		std::printf("Failed on setting pixel format %d. (code: %u)\n", my_target, error);
 		return error;
 	}
 
@@ -96,8 +97,7 @@ gl::System::Initialize(
 		return error;
 	}
 
-	myPixelFormat = 0;
-
+	global::SetBackgroundColour(gl::System::DefaultColour);
 	global::SetState(gl::State::Depth);
 	global::SetState(gl::State::Culling);
 
@@ -105,7 +105,6 @@ gl::System::Initialize(
 	::glMatrixMode(GL_PROJECTION);
 	::glViewport(0, 0, view_width, view_height);
 	::glLoadIdentity();
-	global::SetBackgroundColour(gl::System::DefaultColour);
 
 	return 0;
 }
@@ -183,7 +182,7 @@ noexcept
 }
 
 unsigned long
-_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format)
+_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept
 {
 	const int target = ::ChoosePixelFormat(hdc, &opengl_format);
@@ -201,6 +200,8 @@ noexcept
 		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
 		return error;
 	}
+
+	my_target = target;
 
 	return 0UL;
 }
