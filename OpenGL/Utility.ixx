@@ -3,7 +3,7 @@ import <cstdint>;
 import Glib.Windows.Colour;
 export import :State;
 
-export namespace gl
+export namespace gl::global
 {
 	using win32::Colour;
 

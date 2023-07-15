@@ -54,7 +54,7 @@ gl::System::Initialize(
 {
 	auto& handle = GetHandle();
 
-	const int target = ChoosePixelFormat(hdc, &opengl_format);
+	const int target = ::ChoosePixelFormat(hdc, &opengl_format);
 	if (0 == target)
 	{
 		unsigned long error = ::GetLastError();
@@ -64,7 +64,7 @@ gl::System::Initialize(
 
 	PIXELFORMATDESCRIPTOR checker{};
 
-	const int check = DescribePixelFormat(hdc, target, sizeof(checker), &checker);
+	const int check = ::DescribePixelFormat(hdc, target, sizeof(checker), &checker);
 	if (0 == check)
 	{
 		unsigned long error = ::GetLastError();
@@ -84,7 +84,7 @@ gl::System::Initialize(
 		isDoubleBuffered = true;
 	}
 
-	if (0 == SetPixelFormat(hdc, target, &checker))
+	if (0 == ::SetPixelFormat(hdc, target, &checker))
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
@@ -101,14 +101,14 @@ gl::System::Initialize(
 
 	myPixelFormat = target;
 
-	gl::SetState(gl::State::Depth);
-	gl::SetState(gl::State::Culling);
+	global::SetState(gl::State::Depth);
+	global::SetState(gl::State::Culling);
 
-	glCullFace(GL_BACK);
-	glMatrixMode(GL_PROJECTION);
-	glViewport(0, 0, view_width, view_height);
-	glLoadIdentity();
-	SetBackgroundColour(gl::System::DefaultColour);
+	::glCullFace(GL_BACK);
+	::glMatrixMode(GL_PROJECTION);
+	::glViewport(0, 0, view_width, view_height);
+	::glLoadIdentity();
+	global::SetBackgroundColour(gl::System::DefaultColour);
 
 	return 0;
 }
@@ -124,14 +124,14 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = painter;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	return true;
 }
 
 bool gl::System::End() noexcept
 {
-	glFlush();
+	::glFlush();
 
 	if (isDoubleBuffered)
 	{

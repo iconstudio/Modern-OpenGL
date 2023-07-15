@@ -6,35 +6,35 @@ module Glib;
 import :Utility;
 
 void
-gl::SetState(const gl::State& state)
+gl::global::SetState(const gl::State& state)
 noexcept
 {
 	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(gl::State&& state)
+gl::global::SetState(gl::State&& state)
 noexcept
 {
 	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(const volatile gl::State& state)
+gl::global::SetState(const volatile gl::State& state)
 noexcept
 {
 	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(volatile gl::State&& state)
+gl::global::SetState(volatile gl::State&& state)
 noexcept
 {
 	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(const gl::State& state, bool flag)
+gl::global::SetState(const gl::State& state, bool flag)
 noexcept
 {
 	if (flag)
@@ -48,7 +48,7 @@ noexcept
 }
 
 void
-gl::SetState(const volatile gl::State& state, bool flag)
+gl::global::SetState(const volatile gl::State& state, bool flag)
 noexcept
 {
 	if (flag)
@@ -62,7 +62,7 @@ noexcept
 }
 
 void
-gl::SetState(gl::State&& state, bool flag)
+gl::global::SetState(gl::State&& state, bool flag)
 noexcept
 {
 	if (flag)
@@ -76,7 +76,7 @@ noexcept
 }
 
 void
-gl::SetState(volatile gl::State&& state, bool flag)
+gl::global::SetState(volatile gl::State&& state, bool flag)
 noexcept
 {
 	if (flag)
@@ -90,21 +90,21 @@ noexcept
 }
 
 void
-gl::SetBackgroundColour(const gl::Colour& colour)
+gl::global::SetBackgroundColour(const gl::Colour& colour)
 noexcept
 {
 	::glClearColor(colour.R / 255.0f, colour.G / 255.0f, colour.B / 255.0f, colour.A / 255.0f);
 }
 
 void
-gl::SetBackgroundColour(gl::Colour&& colour)
+gl::global::SetBackgroundColour(gl::Colour&& colour)
 noexcept
 {
 	::glClearColor(colour.R / 255.0f, colour.G / 255.0f, colour.B / 255.0f, colour.A / 255.0f);
 }
 
 void
-gl::SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a)
+gl::global::SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a)
 noexcept
 {
 	::glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
