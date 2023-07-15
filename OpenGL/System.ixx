@@ -5,6 +5,14 @@ import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
 
+namespace gl
+{
+	using Painter = void(*)(win32::GraphicDeviceContext* const&) noexcept;
+
+	void SinglePainter(win32::GraphicDeviceContext* const&) noexcept;
+	void DoublePainter(win32::GraphicDeviceContext* const&) noexcept;
+}
+
 export namespace gl
 {
 	using win32::Colour;
@@ -45,6 +53,7 @@ export namespace gl
 		bool isDoubleBuffered = false;
 		bool keepAspectRatio = true;
 
+		Painter myPainter = nullptr;
 		win32::GraphicDeviceContext* nativeContext = nullptr;
 	};
 

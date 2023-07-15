@@ -82,6 +82,11 @@ gl::System::Initialize(
 	if (0 != (checker.dwFlags & PFD_DOUBLEBUFFER))
 	{
 		isDoubleBuffered = true;
+		myPainter = gl::DoublePainter;
+	}
+	else
+	{
+		myPainter = gl::SinglePainter;
 	}
 
 	if (0 == ::SetPixelFormat(hdc, target, &checker))
@@ -131,12 +136,7 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 bool gl::System::End() noexcept
 {
-	::glFlush();
-
-	if (isDoubleBuffered)
-	{
-		nativeContext->Delegate(::SwapBuffers);
-	}
+	myPainter(nativeContext);
 
 	//::wglMakeCurrent(nativeContext, nullptr);
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
@@ -188,6 +188,20 @@ noexcept
 		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
 	}
 
+}
+
+void
+gl::SinglePainter(gl::win32::GraphicDeviceContext* const&)
+noexcept
+{
+	::glFlush();
+}
+
+void
+gl::DoublePainter(gl::win32::GraphicDeviceContext* const& context)
+noexcept
+{
+	context->Delegate(::SwapBuffers);
 }
 
 const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;
