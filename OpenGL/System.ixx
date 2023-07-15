@@ -23,6 +23,7 @@ export namespace gl
 		{
 			int viewCx, viewCy;
 
+			bool doubleBuffered = true;
 			bool keepRatioAspect = true;
 		};
 	}

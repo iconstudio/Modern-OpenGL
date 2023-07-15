@@ -46,40 +46,31 @@ noexcept
 }
 
 unsigned long
+_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format)
+noexcept;
+
+unsigned long
 gl::System::Initialize(
 	const gl::win32::IContext& hdc
 	, int view_width
 	, int view_height
 ) noexcept
 {
-	auto& handle = GetHandle();
+	PIXELFORMATDESCRIPTOR my_format{};
 
-	const int target = ::ChoosePixelFormat(hdc, &opengl_format);
-	if (0 == target)
+	if (unsigned long error = _InitializeSystem(hdc, my_format); 0 != error)
 	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on acquiring a pixel format. (code: %u)\n", error);
 		return error;
 	}
 
-	PIXELFORMATDESCRIPTOR checker{};
-
-	const int check = ::DescribePixelFormat(hdc, target, sizeof(checker), &checker);
-	if (0 == check)
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
-		return error;
-	}
-
-	if (0 == (checker.dwFlags & PFD_SUPPORT_OPENGL))
+	if (0 == (my_format.dwFlags & PFD_SUPPORT_OPENGL))
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
 		return error;
 	}
 
-	if (0 != (checker.dwFlags & PFD_DOUBLEBUFFER))
+	if (0 != (my_format.dwFlags & PFD_DOUBLEBUFFER))
 	{
 		isDoubleBuffered = true;
 		myPainter = gl::DoublePainter;
@@ -89,13 +80,14 @@ gl::System::Initialize(
 		myPainter = gl::SinglePainter;
 	}
 
-	if (0 == ::SetPixelFormat(hdc, target, &checker))
+	if (0 == ::SetPixelFormat(hdc, target, &my_format))
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
 		return error;
 	}
 
+	auto& handle = GetHandle();
 	handle = hdc.Delegate(::wglCreateContext);
 	if (nullptr == handle)
 	{
@@ -104,7 +96,7 @@ gl::System::Initialize(
 		return error;
 	}
 
-	myPixelFormat = target;
+	myPixelFormat = 0;
 
 	global::SetState(gl::State::Depth);
 	global::SetState(gl::State::Culling);
@@ -188,6 +180,29 @@ noexcept
 		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
 	}
 
+}
+
+unsigned long
+_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format)
+noexcept
+{
+	const int target = ::ChoosePixelFormat(hdc, &opengl_format);
+	if (0 == target)
+	{
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on acquiring a pixel format. (code: %u)\n", error);
+		return error;
+	}
+
+	const int check = ::DescribePixelFormat(hdc, target, sizeof(my_format), &my_format);
+	if (0 == check)
+	{
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
+		return error;
+	}
+
+	return 0UL;
 }
 
 void
