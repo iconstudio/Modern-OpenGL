@@ -42,7 +42,7 @@ export namespace gl
 		System() noexcept;
 		~System() noexcept;
 
-		unsigned long Initialize(const win32::IContext& hdc, int view_width, int view_height) noexcept;
+		unsigned long Initialize(const win32::IContext& hdc, const system::Descriptor& descriptor) noexcept;
 
 		void SetAspectRatio(bool keep_ratio) noexcept;
 
