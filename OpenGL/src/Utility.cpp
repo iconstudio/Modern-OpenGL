@@ -6,31 +6,87 @@ module Glib;
 import :Utility;
 
 void
-gl::SetState(const gl::State& flag)
+gl::SetState(const gl::State& state)
 noexcept
 {
-	::glEnable(static_cast<GLenum>(flag));
+	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(gl::State&& flag)
+gl::SetState(gl::State&& state)
 noexcept
 {
-	::glEnable(static_cast<GLenum>(flag));
+	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(const volatile gl::State& flag)
+gl::SetState(const volatile gl::State& state)
 noexcept
 {
-	::glEnable(static_cast<GLenum>(flag));
+	::glEnable(static_cast<GLenum>(state));
 }
 
 void
-gl::SetState(volatile gl::State&& flag)
+gl::SetState(volatile gl::State&& state)
 noexcept
 {
-	::glEnable(static_cast<GLenum>(flag));
+	::glEnable(static_cast<GLenum>(state));
+}
+
+void
+gl::SetState(const gl::State& state, bool flag)
+noexcept
+{
+	if (flag)
+	{
+		::glEnable(static_cast<GLenum>(state));
+	}
+	else
+	{
+		::glDisable(static_cast<GLenum>(state));
+	}
+}
+
+void
+gl::SetState(const volatile gl::State& state, bool flag)
+noexcept
+{
+	if (flag)
+	{
+		::glEnable(static_cast<GLenum>(state));
+	}
+	else
+	{
+		::glDisable(static_cast<GLenum>(state));
+	}
+}
+
+void
+gl::SetState(gl::State&& state, bool flag)
+noexcept
+{
+	if (flag)
+	{
+		::glEnable(static_cast<GLenum>(state));
+	}
+	else
+	{
+		::glDisable(static_cast<GLenum>(state));
+	}
+}
+
+void
+gl::SetState(volatile gl::State&& state, bool flag)
+noexcept
+{
+	if (flag)
+	{
+		::glEnable(static_cast<GLenum>(state));
+	}
+	else
+	{
+		::glDisable(static_cast<GLenum>(state));
+	}
 }
 
 void

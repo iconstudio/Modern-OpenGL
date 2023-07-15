@@ -7,10 +7,14 @@ export namespace gl
 {
 	using win32::Colour;
 
-	void SetState(const gl::State& flag) noexcept;
-	void SetState(gl::State&& flag) noexcept;
-	void SetState(const volatile gl::State& flag) noexcept;
-	void SetState(volatile gl::State&& flag) noexcept;
+	void SetState(const gl::State& state) noexcept;
+	void SetState(const volatile gl::State& state) noexcept;
+	void SetState(gl::State&& state) noexcept;
+	void SetState(volatile gl::State&& state) noexcept;
+	void SetState(const gl::State& state, bool flag) noexcept;
+	void SetState(const volatile gl::State& state, bool flag) noexcept;
+	void SetState(gl::State&& state, bool flag) noexcept;
+	void SetState(volatile gl::State&& state, bool flag) noexcept;
 
 	void SetBackgroundColour(const Colour& colour) noexcept;
 	void SetBackgroundColour(Colour&& colour) noexcept;
