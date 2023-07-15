@@ -196,6 +196,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Atom.ixx" />
+    <ClCompile Include="Blender.ixx" />
     <ClCompile Include="BufferObjects.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="Display.cpp" />
