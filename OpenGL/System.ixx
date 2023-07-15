@@ -50,7 +50,6 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
-		int myPixelFormat = 0;
 		bool isDoubleBuffered = false;
 		bool keepAspectRatio = true;
 
