@@ -9,7 +9,7 @@ export namespace gl
 		FrontAndBack = 0x0408,
 		LEFT = 0x0406,
 		RIGHT = 0x0407,
-	}
+	};
 
 	enum class [[nodiscard]] CullFace : unsigned int
 	{
