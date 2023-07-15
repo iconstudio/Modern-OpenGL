@@ -122,7 +122,7 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 		return false;
 	}
 
-	nativeContext = painter;
+	nativeContext = std::addressof(painter);
 
 	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -135,7 +135,7 @@ bool gl::System::End() noexcept
 
 	if (isDoubleBuffered)
 	{
-		::SwapBuffers(nativeContext);
+		nativeContext->Delegate(::SwapBuffers);
 	}
 
 	//::wglMakeCurrent(nativeContext, nullptr);

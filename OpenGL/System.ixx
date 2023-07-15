@@ -23,10 +23,10 @@ export namespace gl
 	/// OpenGL Main System
 	/// </summary>
 	class [[nodiscard]] System
-		: private win32::IHandle<gl::win32::native::NativeOGL>
+		: private win32::IHandle<win32::native::NativeOGL>
 	{
 	public:
-		using base = win32::IHandle<gl::win32::native::NativeOGL>;
+		using base = win32::IHandle<win32::native::NativeOGL>;
 
 		static const win32::Colour DefaultColour;
 
@@ -45,7 +45,7 @@ export namespace gl
 		bool isDoubleBuffered = false;
 		bool keepAspectRatio = true;
 
-		gl::win32::native::NativeContext nativeContext = nullptr;
+		win32::GraphicDeviceContext* nativeContext = nullptr;
 	};
 
 	using SystemCreation = util::LooseMonad<std::shared_ptr<System>, unsigned long>;
