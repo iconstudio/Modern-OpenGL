@@ -33,6 +33,7 @@ export namespace gl
 	/// </summary>
 	class [[nodiscard]] System
 		: private win32::IHandle<win32::native::NativeOGL>
+		, public std::enable_shared_from_this<System>
 	{
 	public:
 		using base = win32::IHandle<win32::native::NativeOGL>;
