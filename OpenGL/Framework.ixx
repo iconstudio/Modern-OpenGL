@@ -50,6 +50,9 @@ export namespace gl
 	using gl::win32::RenderEventHandler;
 	using gl::win32::ManagedWindow;
 
+	/// <summary>
+	/// Client Interface With OpenGL
+	/// </summary>
 	class [[nodiscard]] Framework : public std::enable_shared_from_this<Framework>
 	{
 	public:

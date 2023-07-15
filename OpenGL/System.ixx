@@ -19,6 +19,9 @@ export namespace gl
 		};
 	}
 
+	/// <summary>
+	/// OpenGL Main System
+	/// </summary>
 	class [[nodiscard]] System
 		: private win32::IHandle<gl::win32::native::NativeOGL>
 	{
