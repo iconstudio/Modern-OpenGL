@@ -42,9 +42,9 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		[&](unsigned long&& code) noexcept {
 		std::printf("Pixel Formatting Error: %lu\n", code);
 		ok = framework::InitError::FailedOnSettingPixelFormat;
-	}).if_then<opengl_context_t>(
-		[&](opengl_context_t&& context) noexcept {
-		glContext = std::move(context);
+	}).if_then<opengl_system_t>(
+		[&](opengl_system_t&& context) noexcept {
+		glSystem = std::move(context);
 		ok = framework::InitError::Success;
 	});
 
@@ -112,9 +112,9 @@ noexcept
 		ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
 
-		glContext->Begin(ctx);
+		glSystem->Begin(ctx);
 		localRenderer();
-		glContext->End();
+		glSystem->End();
 	});
 }
 
