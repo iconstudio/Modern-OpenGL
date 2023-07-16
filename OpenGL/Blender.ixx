@@ -5,7 +5,12 @@ export namespace gl
 {
 	enum class [[nodiscard]] BlendMode : unsigned int
 	{
-		ADD = 0x8006,
+		One = 0x0001,
+	};
+
+	enum class [[nodiscard]] BlendFunction : unsigned int
+	{
+		Add = 0x8006,
 	};
 
 	enum class [[nodiscard]] BlendTarget : unsigned int
