@@ -25,6 +25,10 @@ export namespace gl
 		constexpr Blender() noexcept = default;
 		constexpr ~Blender() noexcept = default;
 
+		Blender(const Blender&) = delete;
+		constexpr Blender(Blender&&) noexcept = default;
+		Blender& operator=(const Blender&) = delete;
+		constexpr Blender& operator=(Blender&&) noexcept = default;
 
 
 
