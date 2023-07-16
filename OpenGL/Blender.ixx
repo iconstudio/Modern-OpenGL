@@ -22,19 +22,23 @@ export namespace gl
 	class Blender
 	{
 	public:
-		constexpr Blender() noexcept = default;
-		constexpr ~Blender() noexcept = default;
+		Blender(bool enable) noexcept;
+		Blender(BlendMode src, BlendMode dest) noexcept;
+		~Blender() noexcept;
 
 		Blender(const Blender&) = delete;
 		constexpr Blender(Blender&&) noexcept = default;
 		Blender& operator=(const Blender&) = delete;
 		constexpr Blender& operator=(Blender&&) noexcept = default;
 
+	private:
+		bool isBlending = false;
 
-
-		constexpr Blender(const Blender&) noexcept = default;
-		constexpr Blender& operator=(const Blender&) noexcept = default;
-		constexpr Blender(Blender&&) noexcept = default;
-		constexpr Blender& operator=(Blender&&) noexcept = default;
+		// My modes, not current modes
+		BlendMode mySrcMode, myDestMode;
+		// Stacked modes
+		BlendMode prevSrcMode, prevDestMode;
+		// Optional
+		BlendFunction prevFunc;
 	};
 }
