@@ -7,22 +7,22 @@ module Glib.Blender;
 gl::Blender::Blender(bool enable)
 noexcept
 	: isBlending(enable)
-	, wasBlending(gl::global::IsBlending())
+	, wasBlending(global::IsBlending())
 {
 	if (isBlending && !wasBlending)
 	{
-		::glEnable(GL_BLEND);
+		global::SetState(gl::State::Blending, true);
 	}
 	else if (!isBlending && wasBlending)
 	{
-		::glDisable(GL_BLEND);
+		global::SetState(gl::State::Blending, false);
 	}
 }
 
 gl::Blender::Blender(BlendMode src, BlendMode dest)
 noexcept
 	: isBlending(true)
-	, wasBlending(gl::global::IsBlending())
+	, wasBlending(global::IsBlending())
 {
 	GLint prev_source = 0;
 	::glGetIntegerv(GL_BLEND_SRC, &prev_source);
@@ -38,7 +38,7 @@ noexcept
 
 	if (!wasBlending)
 	{
-		::glEnable(GL_BLEND);
+		global::SetState(gl::State::Blending, true);
 	}
 }
 
@@ -47,10 +47,15 @@ noexcept
 {
 	if (isBlending && !wasBlending)
 	{
-		::glDisable(GL_BLEND);
+		global::SetState(gl::State::Blending, false);
 	}
 	else if (!isBlending && wasBlending)
 	{
-		::glEnable(GL_BLEND);
+		global::SetState(gl::State::Blending, true);
+	}
+
+	if (BlendMode::None != prevDestMode)
+	{
+		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDestMode));
 	}
 }
