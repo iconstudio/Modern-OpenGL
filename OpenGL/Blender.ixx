@@ -5,6 +5,7 @@ export namespace gl
 {
 	enum class [[nodiscard]] BlendMode : unsigned int
 	{
+		None = 0x0000,
 		One = 0x0001,
 	};
 
@@ -33,11 +34,12 @@ export namespace gl
 
 	private:
 		bool isBlending = false;
+		bool wasBlending = false;
 
 		// My modes, not current modes
 		BlendMode mySrcMode, myDestMode;
 		// Stacked modes
-		BlendMode prevSrcMode, prevDestMode;
+		BlendMode prevSrcMode = BlendMode::None, prevDestMode = BlendMode::None;
 		// Optional
 		BlendFunction prevFunc;
 	};
