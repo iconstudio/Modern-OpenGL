@@ -12,8 +12,9 @@ export namespace gl
 {
 	namespace framework
 	{
-		struct Descriptor : gl::system::Descriptor
+		struct Descriptor
 		{
+			gl::system::Descriptor glDescriptor;
 			std::wstring_view title;
 			int wx, wy, ww, wh;
 			bool isPowersave = false;
@@ -31,6 +32,11 @@ export namespace gl
 		{
 			return Descriptor
 			{
+				.glDescriptor = gl::system::Descriptor
+				{
+					.viewCh = 800,
+					.viewCv = 600,
+				},
 				.title = L"FreeGLUT",
 				.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT
 				.wy = 0,
