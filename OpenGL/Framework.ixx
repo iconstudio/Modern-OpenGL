@@ -12,7 +12,7 @@ export namespace gl
 {
 	namespace framework
 	{
-		struct Descriptor
+		struct Descriptor : gl::system::Descriptor
 		{
 			std::wstring_view title;
 			int wx, wy, ww, wh;
@@ -35,7 +35,7 @@ export namespace gl
 				.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT
 				.wy = 0,
 				.ww = 800,
-				.wh = 600
+				.wh = 600,
 			};
 		}
 
