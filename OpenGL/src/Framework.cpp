@@ -33,8 +33,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}
 
 	gl::system::Descriptor gl_descriptor{};
-	gl_descriptor.viewCx = setup.ww;
-	gl_descriptor.viewCy = setup.wh;
+	gl_descriptor.viewCh = setup.ww;
+	gl_descriptor.viewCv = setup.wh;
 
 	framework::InitError ok{};
 

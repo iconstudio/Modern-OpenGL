@@ -101,7 +101,7 @@ noexcept
 
 	::glCullFace(GL_BACK);
 	::glMatrixMode(GL_PROJECTION);
-	::glViewport(0, 0, descriptor.viewCx, descriptor.viewCy);
+	::glViewport(0, 0, descriptor.viewCh, descriptor.viewCv);
 	::glLoadIdentity();
 
 	return 0;

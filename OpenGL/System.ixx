@@ -21,7 +21,7 @@ export namespace gl
 	{
 		struct [[nodiscard]] Descriptor
 		{
-			int viewCx, viewCy;
+			int viewCh, viewCv;
 
 			bool alphaBlend = false;
 			bool doubleBuffered = true;
