@@ -53,7 +53,6 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
-		bool isDoubleBuffered = false;
 		bool keepAspectRatio = true;
 
 		Painter myPainter = nullptr;

@@ -83,7 +83,6 @@ noexcept
 
 	if (0 != (my_format.dwFlags & PFD_DOUBLEBUFFER))
 	{
-		isDoubleBuffered = true;
 		myPainter = gl::DoublePainter;
 	}
 	else
