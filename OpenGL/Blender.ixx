@@ -1,5 +1,4 @@
 export module Glib.Blender;
-import Glib;
 
 export namespace gl
 {

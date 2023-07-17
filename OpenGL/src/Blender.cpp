@@ -2,7 +2,9 @@ module;
 #include <Windows.h>
 #include <gl\gl.h>
 #include <gl\glu.h>
+
 module Glib.Blender;
+import Glib;
 
 gl::Blender::Blender(bool enable)
 noexcept
