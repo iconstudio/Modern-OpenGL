@@ -35,11 +35,11 @@ export namespace gl
 		bool isBlending = false;
 		bool wasBlending = false;
 
-		// My modes, not current modes
+		// [Optional] My modes, not current modes
 		BlendMode mySrcMode, myDestMode;
-		// Stacked modes
+		// [Optional] Stacked previous modes
 		BlendMode prevSrcMode = BlendMode::None, prevDestMode = BlendMode::None;
-		// Optional
+		// [Optional] Blend function
 		BlendFunction prevFunc;
 	};
 }
