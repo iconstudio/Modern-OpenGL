@@ -73,6 +73,14 @@ noexcept
 		return error;
 	}
 
+	base1::operator=(hdc.Delegate(::wglCreateContext));
+	if (nullptr == *this)
+	{
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on creating a opengl context. (code: %u)\n", error);
+		return error;
+	}
+
 	if (0 != (my_format.dwFlags & PFD_DOUBLEBUFFER))
 	{
 		isDoubleBuffered = true;
@@ -83,12 +91,9 @@ noexcept
 		myPainter = gl::SinglePainter;
 	}
 
-	base1::operator=(hdc.Delegate(::wglCreateContext));
-	if (nullptr == *this)
+	if (descriptor.alphaBlend)
 	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on creating a opengl context. (code: %u)\n", error);
-		return error;
+		global::SetState(gl::State::Blending);
 	}
 
 	global::SetBackgroundColour(gl::System::DefaultColour);
