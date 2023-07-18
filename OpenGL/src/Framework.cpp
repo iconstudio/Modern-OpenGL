@@ -43,13 +43,10 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}).if_then<opengl_system_t>(
 		[&](opengl_system_t&& context) noexcept {
 		glSystem = std::move(context);
+		myInstance->SetPowerSave(setup.isPowersave);
+
 		ok = framework::InitError::Success;
 	});
-
-	if (ok == framework::InitError::Success)
-	{
-		myInstance->SetPowerSave(setup.isPowersave);
-	}
 
 	return ok;
 }
