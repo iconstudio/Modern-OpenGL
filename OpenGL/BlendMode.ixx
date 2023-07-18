@@ -33,7 +33,7 @@ namespace gl
 		}
 
 		constexpr bool operator==(DstBlendOption) noexcept = default;
-		constexpr bool operator==(const SrcBlendOption&) noexcept = delete;
+		bool operator==(const SrcBlendOption&) = delete;
 
 		BlendOption myOption;
 	};
@@ -47,7 +47,7 @@ namespace gl
 		}
 
 		constexpr bool operator==(SrcBlendOption) noexcept = default;
-		constexpr bool operator==(const DstBlendOption&) noexcept = delete;
+		bool operator==(const DstBlendOption&) = delete;
 
 		BlendOption myOption;
 	};
