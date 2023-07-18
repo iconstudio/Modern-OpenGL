@@ -22,18 +22,18 @@ noexcept
 	}
 }
 
-gl::Blender::Blender(BlendMode src, BlendMode dest)
+gl::Blender::Blender(BlendOption src, BlendOption dest)
 noexcept
 	: isBlending(true)
 	, wasBlending(global::IsBlending())
 {
 	GLint prev_source = 0;
 	::glGetIntegerv(GL_BLEND_SRC, &prev_source);
-	prevSrcMode = static_cast<BlendMode>(prev_source);
+	prevSrcMode = static_cast<BlendOption>(prev_source);
 
 	GLint prev_dest = 0;
 	::glGetIntegerv(GL_BLEND_DST, &prev_dest);
-	prevDstMode = static_cast<BlendMode>(prev_dest);
+	prevDstMode = static_cast<BlendOption>(prev_dest);
 
 	::glBlendFunc(static_cast<GLenum>(src), static_cast<GLenum>(dest));
 	mySrcMode = src;
@@ -57,7 +57,7 @@ noexcept
 		global::SetState(gl::State::Blending, true);
 	}
 
-	if (BlendMode::None != prevDstMode)
+	if (BlendOption::None != prevDstMode)
 	{
 		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDstMode));
 	}
@@ -70,11 +70,11 @@ const noexcept
 	return isBlending;
 }
 
-util::Monad<gl::BlendMode>
+util::Monad<gl::BlendOption>
 gl::Blender::GetSrcMode()
 const noexcept
 {
-	if (BlendMode::None != mySrcMode)
+	if (BlendOption::None != mySrcMode)
 	{
 		return mySrcMode;
 	}
@@ -84,11 +84,11 @@ const noexcept
 	}
 }
 
-util::Monad<gl::BlendMode>
+util::Monad<gl::BlendOption>
 gl::Blender::GetDstMode()
 const noexcept
 {
-	if (BlendMode::None != myDstMode)
+	if (BlendOption::None != myDstMode)
 	{
 		return myDstMode;
 	}
@@ -98,11 +98,11 @@ const noexcept
 	}
 }
 
-util::Monad<gl::BlendMode>
+util::Monad<gl::BlendOption>
 gl::Blender::GetPrevSrcMode()
 const noexcept
 {
-	if (BlendMode::None != prevSrcMode)
+	if (BlendOption::None != prevSrcMode)
 	{
 		return prevSrcMode;
 	}
@@ -112,11 +112,11 @@ const noexcept
 	}
 }
 
-util::Monad<gl::BlendMode>
+util::Monad<gl::BlendOption>
 gl::Blender::GetPrevDstMode()
 const noexcept
 {
-	if (BlendMode::None != prevDstMode)
+	if (BlendOption::None != prevDstMode)
 	{
 		return prevDstMode;
 	}

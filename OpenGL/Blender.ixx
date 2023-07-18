@@ -3,7 +3,7 @@ import Utility.Monad;
 
 export namespace gl
 {
-	enum class [[nodiscard]] BlendMode : unsigned int
+	enum class [[nodiscard]] BlendOption : unsigned int
 	{
 		None = 0x0000,
 		One = 0x0001,
@@ -19,14 +19,14 @@ export namespace gl
 	{
 	public:
 		Blender(bool enable) noexcept;
-		Blender(BlendMode src, BlendMode dest) noexcept;
+		Blender(BlendOption src, BlendOption dest) noexcept;
 		~Blender() noexcept;
 
 		[[nodiscard]] bool IsBlending() const noexcept;
-		[[nodiscard]] util::Monad<BlendMode> GetSrcMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendMode> GetDstMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendMode> GetPrevSrcMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendMode> GetPrevDstMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendOption> GetSrcMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendOption> GetDstMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendOption> GetPrevSrcMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendOption> GetPrevDstMode() const noexcept;
 
 		void swap(Blender& other) noexcept;
 
@@ -40,8 +40,8 @@ export namespace gl
 		bool wasBlending = false;
 
 		// [Optional] My modes, not current modes
-		BlendMode mySrcMode, myDstMode;
+		BlendOption mySrcMode, myDstMode;
 		// [Optional] Stacked previous modes
-		BlendMode prevSrcMode = BlendMode::None, prevDstMode = BlendMode::None;
+		BlendOption prevSrcMode = BlendOption::None, prevDstMode = BlendOption::None;
 	};
 }
