@@ -197,6 +197,7 @@
   <ItemGroup>
     <ClCompile Include="Atom.ixx" />
     <ClCompile Include="Blender.ixx" />
+    <ClCompile Include="BlendMode.ixx" />
     <ClCompile Include="BufferObjects.ixx" />
     <ClCompile Include="Comparator.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
@@ -206,6 +207,7 @@
     <ClCompile Include="Face.ixx" />
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="src\Blender.cpp" />
+    <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="State.ixx" />
     <ClCompile Include="System.cpp" />

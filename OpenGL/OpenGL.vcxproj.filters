@@ -78,5 +78,11 @@
     <ClCompile Include="src\Blender.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="BlendMode.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BlendMode.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

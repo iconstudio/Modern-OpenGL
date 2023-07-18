@@ -20,6 +20,8 @@ noexcept
 	{
 		global::SetState(gl::State::Blending, false);
 	}
+
+	GL_ONE;
 }
 
 gl::Blender::Blender(BlendOption src, BlendOption dest)
