@@ -41,12 +41,7 @@ export namespace gl
 
 		// [Optional] My modes, not actually current modes
 		BlendMode myMode{ BlendOption::Invalid, BlendOption::Invalid };
-		BlendOption& mySrcMode = myMode.srcOption;
-		BlendOption& myDstMode = myMode.dstOption;
-
 		// [Optional] Stacked previous modes
 		BlendMode prevMove{ BlendOption::Invalid, BlendOption::Invalid };
-		BlendOption& prevSrcMode = prevMove.srcOption;
-		BlendOption& prevDstMode = prevMove.dstOption;
 	};
 }

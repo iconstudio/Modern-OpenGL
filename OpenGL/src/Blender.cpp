@@ -20,8 +20,6 @@ noexcept
 	{
 		global::SetState(gl::State::Blending, false);
 	}
-
-	GL_ONE;
 }
 
 gl::Blender::Blender(const gl::BlendMode& mode)
@@ -41,14 +39,14 @@ noexcept
 {
 	GLint prev_source = 0;
 	::glGetIntegerv(GL_BLEND_SRC, &prev_source);
-	prevSrcMode = static_cast<BlendOption>(prev_source);
+	prevMove.srcOption = static_cast<BlendOption>(prev_source);
 
 	GLint prev_dest = 0;
 	::glGetIntegerv(GL_BLEND_DST, &prev_dest);
-	prevDstMode = static_cast<BlendOption>(prev_dest);
+	prevMove.dstOption = static_cast<BlendOption>(prev_dest);
 
-	mySrcMode = src;
-	myDstMode = dest;
+	myMode.srcOption = src;
+	myMode.dstOption = dest;
 	Apply();
 
 	if (!wasBlending)
@@ -69,9 +67,9 @@ noexcept
 		global::SetState(gl::State::Blending, true);
 	}
 
-	if (BlendOption::Invalid != prevDstMode)
+	if (BlendOption::Invalid != prevMove.dstOption)
 	{
-		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDstMode));
+		::glBlendFunc(static_cast<GLenum>(prevMove.srcOption), static_cast<GLenum>(prevMove.dstOption));
 	}
 }
 
@@ -79,9 +77,9 @@ void
 gl::Blender::Apply()
 const noexcept
 {
-	if (BlendOption::Invalid != mySrcMode && BlendOption::Invalid != myDstMode)
+	if (BlendOption::Invalid != myMode.srcOption && BlendOption::Invalid != myMode.dstOption)
 	{
-		::glBlendFunc(static_cast<GLenum>(mySrcMode), static_cast<GLenum>(myDstMode));
+		::glBlendFunc(static_cast<GLenum>(myMode.srcOption), static_cast<GLenum>(myMode.dstOption));
 	}
 }
 
@@ -96,9 +94,9 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetSrcMode()
 const noexcept
 {
-	if (BlendOption::Invalid != mySrcMode)
+	if (BlendOption::Invalid != myMode.srcOption)
 	{
-		return mySrcMode;
+		return myMode.srcOption;
 	}
 	else
 	{
@@ -110,9 +108,9 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetDstMode()
 const noexcept
 {
-	if (BlendOption::Invalid != myDstMode)
+	if (BlendOption::Invalid != myMode.dstOption)
 	{
-		return myDstMode;
+		return myMode.dstOption;
 	}
 	else
 	{
@@ -124,9 +122,9 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetPrevSrcMode()
 const noexcept
 {
-	if (BlendOption::Invalid != prevSrcMode)
+	if (BlendOption::Invalid != prevMove.srcOption)
 	{
-		return prevSrcMode;
+		return prevMove.srcOption;
 	}
 	else
 	{
@@ -138,9 +136,9 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetPrevDstMode()
 const noexcept
 {
-	if (BlendOption::Invalid != prevDstMode)
+	if (BlendOption::Invalid != prevMove.dstOption)
 	{
-		return prevDstMode;
+		return prevMove.dstOption;
 	}
 	else
 	{
@@ -154,8 +152,8 @@ noexcept
 {
 	std::swap(isBlending, other.isBlending);
 	std::swap(wasBlending, other.wasBlending);
-	std::swap(mySrcMode, other.mySrcMode);
-	std::swap(myDstMode, other.myDstMode);
-	std::swap(prevSrcMode, other.prevSrcMode);
-	std::swap(prevDstMode, other.prevDstMode);
+	std::swap(myMode.srcOption, other.myMode.srcOption);
+	std::swap(myMode.dstOption, other.myMode.dstOption);
+	std::swap(prevMove.srcOption, other.prevMove.srcOption);
+	std::swap(prevMove.dstOption, other.prevMove.dstOption);
 }
