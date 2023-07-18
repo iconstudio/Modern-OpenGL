@@ -8,7 +8,35 @@ export namespace gl
 		Zero = 0x0000,
 		One = 0x0001,
 	};
+}
 
+namespace gl
+{
+	class [[nodiscard]] DestBlendOption
+	{
+	public:
+		constexpr operator BlendOption() const noexcept
+		{
+			return myOption;
+		}
+
+		BlendOption myOption;
+	};
+
+	class [[nodiscard]] SrcBlendOption
+	{
+	public:
+		constexpr operator BlendOption() const noexcept
+		{
+			return myOption;
+		}
+
+		BlendOption myOption;
+	};
+}
+
+export namespace gl
+{
 	class [[nodiscard]] BlendMode
 	{
 	public:
