@@ -11,6 +11,7 @@ import Glib.Windows.Context.Renderer;
 import :System;
 import :Utility;
 import Glib.Blender;
+import Glib.Culling;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
@@ -87,11 +88,16 @@ noexcept
 		myBlender = new gl::Blender{ gl::DefaultAlpha };
 	}
 
+	if (descriptor.hiddenSurfaceRemoval)
+	{
+		//global::SetState(gl::State::Culling);
+		gl::Culling(gl::Face::Back);
+		gl::CullingDirection(true);
+	}
+
 	global::SetBackgroundColour(gl::System::DefaultColour);
 	global::SetState(gl::State::Depth);
-	global::SetState(gl::State::Culling);
 
-	::glCullFace(GL_BACK);
 	::glMatrixMode(GL_PROJECTION);
 	::glViewport(0, 0, descriptor.viewCh, descriptor.viewCv);
 	::glLoadIdentity();
