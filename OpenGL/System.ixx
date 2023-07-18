@@ -25,6 +25,8 @@ export namespace gl
 			int viewCh, viewCv;
 
 			bool alphaBlend = false;
+			bool hiddenSurfaceRemoval = false;
+			bool cullingIsClockwise = false;
 			bool doubleBuffered = true;
 			bool keepRatioAspect = true;
 		};
