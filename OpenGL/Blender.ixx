@@ -9,12 +9,6 @@ export namespace gl
 		One = 0x0001,
 	};
 
-	enum class [[nodiscard]] BlendFunction : unsigned int
-	{
-		None = 0x0000,
-		Add = 0x8006,
-	};
-
 	enum class [[nodiscard]] BlendTarget : unsigned int
 	{
 		Dest = 0x0BE0,
@@ -33,7 +27,6 @@ export namespace gl
 		[[nodiscard]] util::Monad<BlendMode> GetDstMode() const noexcept;
 		[[nodiscard]] util::Monad<BlendMode> GetPrevSrcMode() const noexcept;
 		[[nodiscard]] util::Monad<BlendMode> GetPrevDstMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendFunction> GetFunction() const noexcept;
 
 		void swap(Blender& other) noexcept;
 
@@ -50,7 +43,5 @@ export namespace gl
 		BlendMode mySrcMode, myDstMode;
 		// [Optional] Stacked previous modes
 		BlendMode prevSrcMode = BlendMode::None, prevDstMode = BlendMode::None;
-		// [Optional] Blend function
-		BlendFunction prevFunc;
 	};
 }

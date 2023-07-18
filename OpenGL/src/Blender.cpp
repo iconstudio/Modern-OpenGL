@@ -126,20 +126,6 @@ const noexcept
 	}
 }
 
-util::Monad<gl::BlendFunction>
-gl::Blender::GetFunction()
-const noexcept
-{
-	if (BlendFunction::None != prevFunc)
-	{
-		return prevFunc;
-	}
-	else
-	{
-		return util::nullopt;
-	}
-}
-
 void
 gl::Blender::swap(gl::Blender& other)
 noexcept
@@ -147,8 +133,7 @@ noexcept
 	std::swap(isBlending, other.isBlending);
 	std::swap(wasBlending, other.wasBlending);
 	std::swap(mySrcMode, other.mySrcMode);
-	std::swap(myDestMode, other.myDestMode);
+	std::swap(myDstMode, other.myDstMode);
 	std::swap(prevSrcMode, other.prevSrcMode);
-	std::swap(prevDestMode, other.prevDestMode);
-	std::swap(prevFunc, other.prevFunc);
+	std::swap(prevDstMode, other.prevDstMode);
 }
