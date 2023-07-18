@@ -40,7 +40,7 @@ export namespace gl
 		bool wasBlending = false;
 
 		// [Optional] My modes, not current modes
-		BlendOption mySrcMode, myDstMode;
+		BlendOption mySrcMode = BlendOption::None, myDstMode = BlendOption::None;
 		// [Optional] Stacked previous modes
 		BlendOption prevSrcMode = BlendOption::None, prevDstMode = BlendOption::None;
 	};
