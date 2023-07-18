@@ -16,6 +16,7 @@ namespace gl
 export namespace gl
 {
 	using win32::Colour;
+	class Blender;
 
 	namespace system
 	{
@@ -57,6 +58,7 @@ export namespace gl
 
 		Painter myPainter = nullptr;
 		win32::GraphicDeviceContext* nativeContext = nullptr;
+		const Blender* myBlender = nullptr;
 	};
 
 	using SystemCreation = util::LooseMonad<std::shared_ptr<System>, unsigned long>;

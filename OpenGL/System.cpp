@@ -10,6 +10,7 @@ import Utility.Monad.Loosen;
 import Glib.Windows.Context.Renderer;
 import :System;
 import :Utility;
+import Glib.Blender;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
@@ -35,15 +36,6 @@ gl::System::System()
 noexcept
 	: base1(nullptr), base2()
 {}
-
-gl::System::~System()
-noexcept
-{
-	if (nullptr != GetHandle())
-	{
-		Delegate(::wglDeleteContext);
-	}
-}
 
 unsigned long
 _InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
@@ -92,7 +84,7 @@ noexcept
 
 	if (descriptor.alphaBlend)
 	{
-		global::SetState(gl::State::Blending);
+		myBlender = new gl::Blender{ gl::DefaultAlpha };
 	}
 
 	global::SetBackgroundColour(gl::System::DefaultColour);
@@ -129,6 +121,17 @@ bool gl::System::End() noexcept
 
 	//::wglMakeCurrent(nativeContext, nullptr);
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
+}
+
+gl::System::~System()
+noexcept
+{
+	if (nullptr != GetHandle())
+	{
+		Delegate(::wglDeleteContext);
+	}
+
+	delete myBlender;
 }
 
 gl::SystemCreation
