@@ -32,13 +32,11 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
-	gl::system::Descriptor gl_descriptor{};
-	gl_descriptor.viewCh = setup.ww;
-	gl_descriptor.viewCv = setup.wh;
+	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 
 	framework::InitError ok{};
 
-	gl::CreateSystem(myInstance->AcquireContext(), std::move(gl_descriptor)).if_then<unsigned long>(
+	gl::CreateSystem(myInstance->AcquireContext(), gl_descriptor).if_then<unsigned long>(
 		[&](unsigned long&& code) noexcept {
 		std::printf("Pixel Formatting Error: %lu\n", code);
 		ok = framework::InitError::FailedOnSettingPixelFormat;
