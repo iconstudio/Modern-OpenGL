@@ -5,7 +5,10 @@ export namespace gl
 {
 	struct [[nodiscard]] BlendMode
 	{
-		BlendOption dstOption;
 		BlendOption srcOption;
+		BlendOption dstOption;
 	};
+
+	inline constexpr BlendMode DefaultAlpha{ BlendOption::SourceAlpha, BlendOption::InvertedSrcAlpha };
+	inline constexpr BlendMode Opaque{ BlendOption::One, BlendOption::Zero };
 }
