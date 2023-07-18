@@ -21,13 +21,19 @@ export namespace gl
 
 namespace gl
 {
-	struct [[nodiscard]] DestBlendOption
+	struct DstBlendOption;
+	struct SrcBlendOption;
+
+	struct [[nodiscard]] DstBlendOption
 	{
 	public:
 		constexpr operator BlendOption() const noexcept
 		{
 			return myOption;
 		}
+
+		constexpr bool operator==(DstBlendOption) noexcept = default;
+		constexpr bool operator==(const SrcBlendOption&) noexcept = delete;
 
 		BlendOption myOption;
 	};
@@ -39,6 +45,9 @@ namespace gl
 		{
 			return myOption;
 		}
+
+		constexpr bool operator==(SrcBlendOption) noexcept = default;
+		constexpr bool operator==(const DstBlendOption&) noexcept = delete;
 
 		BlendOption myOption;
 	};
