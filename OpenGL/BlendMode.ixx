@@ -21,7 +21,7 @@ export namespace gl
 
 namespace gl
 {
-	class [[nodiscard]] DestBlendOption
+	struct [[nodiscard]] DestBlendOption
 	{
 	public:
 		constexpr operator BlendOption() const noexcept
@@ -32,7 +32,7 @@ namespace gl
 		BlendOption myOption;
 	};
 
-	class [[nodiscard]] SrcBlendOption
+	struct [[nodiscard]] SrcBlendOption
 	{
 	public:
 		constexpr operator BlendOption() const noexcept
@@ -46,9 +46,8 @@ namespace gl
 
 export namespace gl
 {
-	class [[nodiscard]] BlendMode
+	struct [[nodiscard]] BlendMode
 	{
-	public:
 		BlendOption myOption;
 	};
 }
