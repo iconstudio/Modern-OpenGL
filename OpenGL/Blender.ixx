@@ -15,6 +15,7 @@ export namespace gl
 	{
 	public:
 		Blender(bool enable) noexcept;
+		Blender(BlendMode mode) noexcept;
 		Blender(BlendOption src, BlendOption dest) noexcept;
 		~Blender() noexcept;
 
@@ -36,8 +37,8 @@ export namespace gl
 		bool wasBlending = false;
 
 		// [Optional] My modes, not current modes
-		BlendOption mySrcMode = BlendOption::None, myDstMode = BlendOption::None;
+		BlendOption mySrcMode = BlendOption::Invalid, myDstMode = BlendOption::Invalid;
 		// [Optional] Stacked previous modes
-		BlendOption prevSrcMode = BlendOption::None, prevDstMode = BlendOption::None;
+		BlendOption prevSrcMode = BlendOption::Invalid, prevDstMode = BlendOption::Invalid;
 	};
 }

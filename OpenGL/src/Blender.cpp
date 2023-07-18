@@ -59,7 +59,7 @@ noexcept
 		global::SetState(gl::State::Blending, true);
 	}
 
-	if (BlendOption::None != prevDstMode)
+	if (BlendOption::Invalid != prevDstMode)
 	{
 		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDstMode));
 	}
@@ -76,7 +76,7 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetSrcMode()
 const noexcept
 {
-	if (BlendOption::None != mySrcMode)
+	if (BlendOption::Invalid != mySrcMode)
 	{
 		return mySrcMode;
 	}
@@ -90,7 +90,7 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetDstMode()
 const noexcept
 {
-	if (BlendOption::None != myDstMode)
+	if (BlendOption::Invalid != myDstMode)
 	{
 		return myDstMode;
 	}
@@ -104,7 +104,7 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetPrevSrcMode()
 const noexcept
 {
-	if (BlendOption::None != prevSrcMode)
+	if (BlendOption::Invalid != prevSrcMode)
 	{
 		return prevSrcMode;
 	}
@@ -118,7 +118,7 @@ util::Monad<gl::BlendOption>
 gl::Blender::GetPrevDstMode()
 const noexcept
 {
-	if (BlendOption::None != prevDstMode)
+	if (BlendOption::Invalid != prevDstMode)
 	{
 		return prevDstMode;
 	}
