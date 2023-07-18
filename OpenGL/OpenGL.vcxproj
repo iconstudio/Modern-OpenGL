@@ -201,6 +201,7 @@
     <ClCompile Include="BlendOption.ixx" />
     <ClCompile Include="BufferObjects.ixx" />
     <ClCompile Include="Comparator.ixx" />
+    <ClCompile Include="Culling.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display.ixx" />
