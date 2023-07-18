@@ -24,7 +24,17 @@ noexcept
 	GL_ONE;
 }
 
-gl::Blender::Blender(BlendOption src, BlendOption dest)
+gl::Blender::Blender(const gl::BlendMode& mode)
+noexcept
+	: Blender(mode.srcOption, mode.dstOption)
+{}
+
+gl::Blender::Blender(gl::BlendMode&& mode)
+noexcept
+	: Blender(std::move(mode.srcOption), std::move(mode.dstOption))
+{}
+
+gl::Blender::Blender(gl::BlendOption src, gl::BlendOption dest)
 noexcept
 	: isBlending(true)
 	, wasBlending(global::IsBlending())

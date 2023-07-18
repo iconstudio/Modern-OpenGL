@@ -15,7 +15,8 @@ export namespace gl
 	{
 	public:
 		Blender(bool enable) noexcept;
-		Blender(BlendMode mode) noexcept;
+		Blender(const BlendMode& mode) noexcept;
+		Blender(BlendMode&& mode) noexcept;
 		Blender(BlendOption src, BlendOption dest) noexcept;
 		~Blender() noexcept;
 
