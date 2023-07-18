@@ -79,6 +79,7 @@ export namespace gl
 
 	struct [[nodiscard]] BlendMode
 	{
-		BlendOption myOption;
+		BlendOption dstOption;
+		BlendOption srcOption;
 	};
 }
