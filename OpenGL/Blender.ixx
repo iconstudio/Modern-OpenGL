@@ -28,17 +28,22 @@ export namespace gl
 		void swap(Blender& other) noexcept;
 
 		Blender(const Blender&) = delete;
-		constexpr Blender(Blender&&) noexcept = default;
+		Blender(Blender&&) = delete;
 		Blender& operator=(const Blender&) = delete;
-		constexpr Blender& operator=(Blender&&) noexcept = default;
+		Blender& operator=(Blender&&) = delete;
 
 	private:
 		bool isBlending = false;
 		bool wasBlending = false;
 
-		// [Optional] My modes, not current modes
-		BlendOption mySrcMode = BlendOption::Invalid, myDstMode = BlendOption::Invalid;
+		// [Optional] My modes, not actually current modes
+		BlendMode myMode{ BlendOption::Invalid, BlendOption::Invalid };
+		BlendOption& mySrcMode = myMode.srcOption;
+		BlendOption& myDstMode = myMode.dstOption;
+
 		// [Optional] Stacked previous modes
-		BlendOption prevSrcMode = BlendOption::Invalid, prevDstMode = BlendOption::Invalid;
+		BlendMode prevMove{ BlendOption::Invalid, BlendOption::Invalid };
+		BlendOption& prevSrcMode = prevMove.srcOption;
+		BlendOption& prevDstMode = prevMove.dstOption;
 	};
 }
