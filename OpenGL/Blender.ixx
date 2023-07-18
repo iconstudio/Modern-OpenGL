@@ -1,4 +1,5 @@
 export module Glib.Blender;
+import Utility.Monad;
 
 export namespace gl
 {
@@ -10,6 +11,7 @@ export namespace gl
 
 	enum class [[nodiscard]] BlendFunction : unsigned int
 	{
+		None = 0x0000,
 		Add = 0x8006,
 	};
 
@@ -26,6 +28,13 @@ export namespace gl
 		Blender(BlendMode src, BlendMode dest) noexcept;
 		~Blender() noexcept;
 
+		[[nodiscard]] bool IsBlending() const noexcept;
+		[[nodiscard]] util::Monad<BlendMode> GetSrcMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendMode> GetDstMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendMode> GetPrevSrcMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendMode> GetPrevDstMode() const noexcept;
+		[[nodiscard]] util::Monad<BlendFunction> GetFunction() const noexcept;
+
 		void swap(Blender& other) noexcept;
 
 		Blender(const Blender&) = delete;
@@ -38,9 +47,9 @@ export namespace gl
 		bool wasBlending = false;
 
 		// [Optional] My modes, not current modes
-		BlendMode mySrcMode, myDestMode;
+		BlendMode mySrcMode, myDstMode;
 		// [Optional] Stacked previous modes
-		BlendMode prevSrcMode = BlendMode::None, prevDestMode = BlendMode::None;
+		BlendMode prevSrcMode = BlendMode::None, prevDstMode = BlendMode::None;
 		// [Optional] Blend function
 		BlendFunction prevFunc;
 	};
