@@ -1,5 +1,6 @@
 export module Glib.Blender;
 import Utility.Monad;
+import :Option;
 import :Mode;
 
 export namespace gl

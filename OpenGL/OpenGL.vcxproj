@@ -198,6 +198,7 @@
     <ClCompile Include="Atom.ixx" />
     <ClCompile Include="Blender.ixx" />
     <ClCompile Include="BlendMode.ixx" />
+    <ClCompile Include="BlendOption.ixx" />
     <ClCompile Include="BufferObjects.ixx" />
     <ClCompile Include="Comparator.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
