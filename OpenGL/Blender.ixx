@@ -20,6 +20,8 @@ export namespace gl
 		Blender(BlendOption src, BlendOption dest) noexcept;
 		~Blender() noexcept;
 
+		void Apply() const noexcept;
+
 		[[nodiscard]] bool IsBlending() const noexcept;
 		[[nodiscard]] util::Monad<BlendOption> GetSrcMode() const noexcept;
 		[[nodiscard]] util::Monad<BlendOption> GetDstMode() const noexcept;

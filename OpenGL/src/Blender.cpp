@@ -47,9 +47,9 @@ noexcept
 	::glGetIntegerv(GL_BLEND_DST, &prev_dest);
 	prevDstMode = static_cast<BlendOption>(prev_dest);
 
-	::glBlendFunc(static_cast<GLenum>(src), static_cast<GLenum>(dest));
 	mySrcMode = src;
 	myDstMode = dest;
+	Apply();
 
 	if (!wasBlending)
 	{
@@ -72,6 +72,16 @@ noexcept
 	if (BlendOption::Invalid != prevDstMode)
 	{
 		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDstMode));
+	}
+}
+
+void
+gl::Blender::Apply()
+const noexcept
+{
+	if (BlendOption::Invalid != mySrcMode && BlendOption::Invalid != myDstMode)
+	{
+		::glBlendFunc(static_cast<GLenum>(mySrcMode), static_cast<GLenum>(myDstMode));
 	}
 }
 
