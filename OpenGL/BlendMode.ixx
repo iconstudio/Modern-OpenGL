@@ -64,7 +64,17 @@ export namespace gl
 		inline constexpr DstBlendOption DstFromInvertedSrcColor{ BlendOption::InvertedSrcColour };
 		inline constexpr DstBlendOption DstFromInvertedSrcAlpha{ BlendOption::InvertedSrcAlpha };
 		inline constexpr DstBlendOption DstFromMyAlpha{ BlendOption::DestAlpha };
-		inline constexpr DstBlendOption DstFromInvertedMyAlpha{ BlendOption::InvertedDestAlpha };
+		inline constexpr DstBlendOption DstFromInvertedMyAlpha{ BlendOption::InvertedDstAlpha };
+
+		inline constexpr SrcBlendOption SrcZero{ BlendOption::Zero };
+		inline constexpr SrcBlendOption SrcOne{ BlendOption::One };
+		inline constexpr SrcBlendOption SrcFromDstColor{ BlendOption::DestColour };
+		inline constexpr SrcBlendOption SrcFromDstAlpha{ BlendOption::DestAlpha };
+		inline constexpr SrcBlendOption SrcFromInvertedDstColor{ BlendOption::InvertedDstColour };
+		inline constexpr SrcBlendOption SrcFromInvertedDstAlpha{ BlendOption::InvertedDstAlpha };
+		inline constexpr SrcBlendOption SrcFromMyAlpha{ BlendOption::SourceAlpha };
+		inline constexpr SrcBlendOption SrcFromInvertedMyAlpha{ BlendOption::InvertedSrcAlpha };
+		inline constexpr SrcBlendOption SrcFromSaturation{ BlendOption::SaturateSourceAlpha };
 	}
 
 	struct [[nodiscard]] BlendMode
