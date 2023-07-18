@@ -210,6 +210,7 @@
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
+    <ClCompile Include="src\Culling.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="State.ixx" />
     <ClCompile Include="System.cpp" />
