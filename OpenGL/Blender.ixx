@@ -26,6 +26,8 @@ export namespace gl
 		Blender(BlendMode src, BlendMode dest) noexcept;
 		~Blender() noexcept;
 
+		void swap(Blender& other) noexcept;
+
 		Blender(const Blender&) = delete;
 		constexpr Blender(Blender&&) noexcept = default;
 		Blender& operator=(const Blender&) = delete;

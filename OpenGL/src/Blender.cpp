@@ -4,6 +4,7 @@ module;
 #include <gl\glu.h>
 
 module Glib.Blender;
+import <utility>;
 import Glib;
 
 gl::Blender::Blender(bool enable)
@@ -60,4 +61,17 @@ noexcept
 	{
 		::glBlendFunc(static_cast<GLenum>(prevSrcMode), static_cast<GLenum>(prevDestMode));
 	}
+}
+
+void
+gl::Blender::swap(gl::Blender& other)
+noexcept
+{
+	std::swap(isBlending, other.isBlending);
+	std::swap(wasBlending, other.wasBlending);
+	std::swap(mySrcMode, other.mySrcMode);
+	std::swap(myDestMode, other.myDestMode);
+	std::swap(prevSrcMode, other.prevSrcMode);
+	std::swap(prevDestMode, other.prevDestMode);
+	std::swap(prevFunc, other.prevFunc);
 }
