@@ -14,7 +14,12 @@ namespace gl
 			return myOption;
 		}
 
-		constexpr bool operator==(DstBlendOption) noexcept = default;
+		[[nodiscard]]
+		constexpr bool operator==(const DstBlendOption& other) noexcept
+		{
+			return other.myOption == myOption;
+		}
+
 		bool operator==(const SrcBlendOption&) = delete;
 
 		BlendOption myOption;
@@ -28,7 +33,12 @@ namespace gl
 			return myOption;
 		}
 
-		constexpr bool operator==(SrcBlendOption) noexcept = default;
+		[[nodiscard]]
+		constexpr bool operator==(const SrcBlendOption& other) noexcept
+		{
+			return other.myOption == myOption;
+		}
+
 		bool operator==(const DstBlendOption&) = delete;
 
 		BlendOption myOption;
