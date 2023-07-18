@@ -14,7 +14,7 @@ export namespace gl
 		DestColour = 0x0306,
 		InvertedDstColour = 0x0307,
 		DestAlpha = 0x0304,
-		InvertedDestAlpha = 0x0305,
+		InvertedDstAlpha = 0x0305,
 		SaturateSourceAlpha = 0x0308
 	};
 }
