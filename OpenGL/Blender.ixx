@@ -4,12 +4,6 @@ import :Mode;
 
 export namespace gl
 {
-	enum class [[nodiscard]] BlendOption : unsigned int
-	{
-		None = 0x0000,
-		One = 0x0001,
-	};
-
 	enum class [[nodiscard]] BlendTarget : unsigned int
 	{
 		Dest = 0x0BE0,
