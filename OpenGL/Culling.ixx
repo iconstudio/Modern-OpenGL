@@ -1,5 +1,5 @@
 export module Glib.Culling;
-import Glib;
+import :Face;
 
 export namespace gl
 {
