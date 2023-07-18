@@ -9,4 +9,9 @@ export namespace gl
 		One = 0x0001,
 	};
 
+	class [[nodiscard]] BlendMode
+	{
+	public:
+		BlendOption myOption;
+	};
 }
