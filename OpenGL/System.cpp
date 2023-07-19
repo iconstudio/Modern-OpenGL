@@ -92,7 +92,7 @@ noexcept
 	{
 		//global::SetState(gl::State::Culling);
 		gl::Culling(gl::Face::Back);
-		gl::CullingDirection(true);
+		gl::CullingDirection(descriptor.cullingIsClockwise);
 	}
 
 	global::SetBackgroundColour(gl::System::DefaultColour);
