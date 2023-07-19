@@ -173,7 +173,7 @@ noexcept
 }
 
 void
-gl::System::SetAspectRatio(bool keep_ratio)
+gl::System::KeepAspectRatio(bool keep_ratio)
 noexcept
 {
 	keepAspectRatio = keep_ratio;

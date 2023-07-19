@@ -50,7 +50,7 @@ export namespace gl
 
 		unsigned long Initialize(const win32::IContext& hdc, const system::Descriptor& descriptor) noexcept;
 
-		void SetAspectRatio(bool keep_ratio) noexcept;
+		void KeepAspectRatio(bool keep_ratio) noexcept;
 		[[nodiscard]] double GetAspectRatio() const noexcept;
 
 		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
