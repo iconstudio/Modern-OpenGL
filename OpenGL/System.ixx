@@ -57,6 +57,7 @@ export namespace gl
 
 	private:
 		bool keepAspectRatio = true;
+		double aspectRatio = 1.0;
 
 		Painter myPainter = nullptr;
 		win32::GraphicDeviceContext* nativeContext = nullptr;

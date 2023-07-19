@@ -98,6 +98,8 @@ noexcept
 	global::SetBackgroundColour(gl::System::DefaultColour);
 	global::SetState(gl::State::Depth);
 
+	aspectRatio = static_cast<double>(descriptor.viewCv) / static_cast<double>(descriptor.viewCh);
+
 	::glMatrixMode(GL_PROJECTION);
 	::glViewport(0, 0, descriptor.viewCh, descriptor.viewCv);
 	::glLoadIdentity();
