@@ -31,9 +31,9 @@ export namespace gl
 		void swap(Blender& other) noexcept;
 
 		Blender(const Blender&) = delete;
-		Blender(Blender&&) = delete;
+		Blender(Blender&&) noexcept = default;
 		Blender& operator=(const Blender&) = delete;
-		Blender& operator=(Blender&&) = delete;
+		Blender& operator=(Blender&&) noexcept = default;
 
 	private:
 		bool isBlending = false;
