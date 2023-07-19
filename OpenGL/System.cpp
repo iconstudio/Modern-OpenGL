@@ -188,6 +188,13 @@ noexcept
 
 }
 
+double
+gl::System::GetAspectRatio()
+const noexcept
+{
+	return aspectRatio;
+}
+
 unsigned long
 _InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept
