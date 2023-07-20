@@ -117,7 +117,9 @@ noexcept
 		//::wglSwapIntervalEXT(1);
 	}
 
-	SetViewPort(0, 0, descriptor.viewCh, descriptor.viewCv);
+	viewPort.w = descriptor.viewCh;
+	viewPort.h = descriptor.viewCv;
+	//SetViewPort(0, 0, descriptor.viewCh, descriptor.viewCv);
 
 	::glMatrixMode(GL_PROJECTION);
 	::glLoadIdentity();

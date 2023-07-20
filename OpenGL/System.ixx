@@ -67,7 +67,7 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
-		Rect viewPort;
+		Rect viewPort{};
 		bool keepAspectRatio = true;
 		double aspectRatio = 1.0;
 
