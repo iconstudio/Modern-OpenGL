@@ -143,7 +143,8 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = std::addressof(painter);
 
-	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//::glClearColor(float(viewPort.x % 255) / 255.0f, float(viewPort.y % 255) / 255.0f, float(viewPort.w % 255) / 255.0f, 1.0f);
+	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_VIEWPORT_BIT | GL_STENCIL_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_TRANSFORM_BIT);
 
 	return true;
 }
