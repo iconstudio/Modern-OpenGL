@@ -105,6 +105,7 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	global::SetBackgroundColour(gl::System::DefaultColour);
 	myBlender->Apply();
+	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 
 	return true;
 }
@@ -277,7 +278,6 @@ void gl::System::SetViewPosition(int x, int y) noexcept
 {
 	viewPort.x = x;
 	viewPort.y = y;
-	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -286,7 +286,6 @@ noexcept
 {
 	viewPort.w = width;
 	viewPort.h = height;
-	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -294,7 +293,6 @@ gl::System::SetViewPort(const gl::Rect& size)
 noexcept
 {
 	viewPort = size;
-	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -302,7 +300,6 @@ gl::System::SetViewPort(gl::Rect&& size)
 noexcept
 {
 	viewPort = std::move(size);
-	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
