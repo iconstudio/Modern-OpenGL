@@ -46,6 +46,7 @@ unsigned long
 gl::System::Initialize(const gl::win32::IContext& hdc, const gl::system::Descriptor& descriptor)
 noexcept
 {
+	mySettings = descriptor;
 	::PIXELFORMATDESCRIPTOR my_format = opengl_format;
 	int my_target = 0;
 

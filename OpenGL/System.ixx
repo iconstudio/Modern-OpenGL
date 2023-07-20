@@ -67,6 +67,10 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
+		void _InitializeSystem() noexcept;
+
+		system::Descriptor mySettings{};
+
 		Rect viewPort{};
 		bool keepAspectRatio = true;
 		double aspectRatio = 1.0;
