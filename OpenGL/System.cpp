@@ -151,6 +151,8 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 bool gl::System::End() noexcept
 {
+	glFlush();
+
 	myPainter(nativeContext);
 
 	//::wglMakeCurrent(nativeContext, nullptr);
