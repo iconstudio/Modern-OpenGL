@@ -229,6 +229,14 @@ noexcept
 		}
 		break;
 
+		case event_id_t::Resize:
+		{
+			//std::printf("[Resize]\n");
+			//self->ClearWindow();
+			self->AlertEvent(msg, wparam, lparam);
+		}
+		break;
+
 		// Started by DestroyWindow
 		case event_id_t::Destroy:
 		{
