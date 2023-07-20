@@ -298,6 +298,62 @@ const noexcept
 	return mySettings.viewPort;
 }
 
+int&
+gl::System::ViewX()
+noexcept
+{
+	return mySettings.viewPort.x;
+}
+
+int&
+gl::System::ViewY()
+noexcept
+{
+	return mySettings.viewPort.y;
+}
+
+int&
+gl::System::ViewWidth()
+noexcept
+{
+	return mySettings.viewPort.w;
+}
+
+int&
+gl::System::ViewHeight()
+noexcept
+{
+	return mySettings.viewPort.h;
+}
+
+const int&
+gl::System::ViewX()
+const noexcept
+{
+	return mySettings.viewPort.x;
+}
+
+const int&
+gl::System::ViewY()
+const noexcept
+{
+	return mySettings.viewPort.y;
+}
+
+const int&
+gl::System::ViewWidth()
+const noexcept
+{
+	return mySettings.viewPort.w;
+}
+
+const int&
+gl::System::ViewHeight()
+const noexcept
+{
+	return mySettings.viewPort.h;
+}
+
 void
 gl::System::UpdateViewPort(int client_hsize, int client_vsize)
 noexcept

@@ -58,14 +58,23 @@ export namespace gl
 		void SetViewPort(const Rect& size) noexcept;
 		void SetViewPort(Rect&& size) noexcept;
 		void SetViewPort(int x, int y, int width, int height) noexcept;
-		[[nodiscard]] const Rect& GetViewPort() const noexcept;
 		void UpdateViewPort(int client_hsize, int client_vsize) noexcept;
 
 		void KeepAspectRatio(bool keep_ratio) noexcept;
-		[[nodiscard]] double GetAspectRatio() const noexcept;
 
 		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;
+
+		[[nodiscard]] const Rect& GetViewPort() const noexcept;
+		[[nodiscard]] int& ViewX() noexcept;
+		[[nodiscard]] int& ViewY() noexcept;
+		[[nodiscard]] int& ViewWidth() noexcept;
+		[[nodiscard]] int& ViewHeight() noexcept;
+		[[nodiscard]] const int& ViewX() const noexcept;
+		[[nodiscard]] const int& ViewY() const noexcept;
+		[[nodiscard]] const int& ViewWidth() const noexcept;
+		[[nodiscard]] const int& ViewHeight() const noexcept;
+		[[nodiscard]] double GetAspectRatio() const noexcept;
 
 	private:
 		unsigned long _InitializeSystem() noexcept;
