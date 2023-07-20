@@ -24,6 +24,8 @@ export namespace gl
 		struct [[nodiscard]] Descriptor
 		{
 			int viewCh, viewCv;
+			Colour backgroundColour = win32::colors::Azure;
+			Colour borderColour = win32::colors::Black;
 
 			bool alphaBlend = false;
 			bool hiddenSurfaceRemoval = false;
@@ -44,8 +46,6 @@ export namespace gl
 	public:
 		using base1 = win32::IHandle<win32::native::NativeOGL>;
 		using base2 = std::enable_shared_from_this<System>;
-
-		static const win32::Colour DefaultColour;
 
 		System() noexcept;
 		~System() noexcept;

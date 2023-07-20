@@ -92,20 +92,25 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = std::addressof(painter);
 
-	::glMatrixMode(GL_PROJECTION);
-	::glPushMatrix();
-
-	::glLoadIdentity();
-	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-	::glMatrixMode(GL_MODELVIEW);
-	::glPushMatrix();
-
-	::glLoadIdentity();
-	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	global::SetBackgroundColour(gl::System::DefaultColour);
 	myBlender->Apply();
 	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
+	::glClear(GL_DEPTH_BUFFER_BIT);
+
+	::glMatrixMode(GL_PROJECTION);
+	::glPushMatrix();
+	::glLoadIdentity();
+
+	global::SetBackgroundColour(mySettings.borderColour);
+	::glClear(GL_COLOR_BUFFER_BIT);
+
+	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+
+
+	global::SetBackgroundColour(mySettings.backgroundColour);
+
+	::glMatrixMode(GL_MODELVIEW);
+	::glPushMatrix();
+	::glLoadIdentity();
 
 	return true;
 }
@@ -343,5 +348,3 @@ const noexcept
 {
 	return aspectRatio;
 }
-
-const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;
