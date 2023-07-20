@@ -32,7 +32,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 
-	framework::InitError ok{};
+	framework::InitError ok = framework::InitError::Success;
 
 	gl::CreateSystem(myInstance->AcquireContext(), gl_descriptor).if_then<unsigned long>(
 		[&](unsigned long&& code) noexcept {
@@ -42,8 +42,6 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		[&](opengl_system_t&& context) noexcept {
 		glSystem = std::move(context);
 		myInstance->SetPowerSave(setup.isPowersave);
-
-		ok = framework::InitError::Success;
 	});
 
 	return ok;
