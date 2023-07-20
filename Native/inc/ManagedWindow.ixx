@@ -94,6 +94,9 @@ namespace gl::win32
 		CharUpEventHandler SetCharUpHandler(CharUpEventHandler handler) noexcept;
 		void StartCoroutine(coro_t&& coroutine) noexcept;
 
+		bool ClearWindow(const Rect& rect) noexcept;
+		bool ClearWindow() noexcept;
+
 		[[nodiscard]] std::exception_ptr GetException() const noexcept;
 
 		static long long MainWorker(HWND, unsigned int, unsigned long long, long long) noexcept;
@@ -115,9 +118,6 @@ namespace gl::win32
 		[[nodiscard]]
 		bool IsMouseCaptured() const noexcept;
 		void ResumeTopCoroutine() noexcept;
-
-		bool ClearWindow(const Rect& rect) noexcept;
-		bool ClearWindow() noexcept;
 
 		static void KeyboardHandler(ManagedWindow&, unsigned long long, long long) noexcept;
 		static void CharKeyHandler(ManagedWindow&, unsigned long long, long long) noexcept;
