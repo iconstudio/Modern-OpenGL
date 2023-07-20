@@ -1,6 +1,7 @@
 export module Glib:System;
 import <memory>;
 import Utility.Monad.Loosen;
+import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
@@ -50,6 +51,11 @@ export namespace gl
 
 		unsigned long Initialize(const win32::IContext& hdc, const system::Descriptor& descriptor) noexcept;
 
+		void SetViewPosition(int x, int y) noexcept;
+		void SetViewSize(int width, int height) noexcept;
+		void SetViewPort(const Rect& size) noexcept;
+		void SetViewPort(Rect&& size) noexcept;
+		[[nodiscard]] const Rect& GetViewPort() const& noexcept;
 		void KeepAspectRatio(bool keep_ratio) noexcept;
 		[[nodiscard]] double GetAspectRatio() const noexcept;
 
@@ -57,6 +63,7 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
+		Rect viewPort;
 		bool keepAspectRatio = true;
 		double aspectRatio = 1.0;
 
