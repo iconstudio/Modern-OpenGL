@@ -1,11 +1,12 @@
 module;
+#define NOMINMAX
 #include <Windows.h>
 #include <gl\gl.h>
 #include <gl\glu.h>
 
 module Glib;
+import <utility>;
 import <memory>;
-import <cstdio>;
 import Utility.Monad.Loosen;
 import Glib.Windows.Context.Renderer;
 import :System;
@@ -297,30 +298,25 @@ const noexcept
 }
 
 void
-gl::System::UpdateViewPort(int client_width, int client_height)
+gl::System::UpdateViewPort(int client_hsize, int client_vsize)
 noexcept
 {
-	clientWidth = client_width;
-	clientHeight = client_height;
+	clientWidth = client_hsize;
+	clientHeight = std::max(1, client_vsize);
 
 	if (keepAspectRatio)
 	{
-		if (client_height < client_width)
-		{
-			const int new_width = static_cast<int>(static_cast<double>(client_height) * aspectRatio);
-			const int new_x = (client_width - new_width) / 2;
-			SetViewPort(new_x, 0, new_width, client_height);
-		}
-		else
-		{
-			const int new_height = static_cast<int>(static_cast<double>(client_width) / aspectRatio);
-			const int new_y = (client_height - new_height) / 2;
-			SetViewPort(0, new_y, client_width, new_height);
-		}
+		const int clc_width = static_cast<int>(static_cast<double>(client_vsize) * aspectRatio);
+		const int new_hs = std::min(clc_width, client_hsize);
+		const int new_vs = static_cast<int>(static_cast<double>(new_hs) / aspectRatio);
+
+		const int new_x = (client_hsize - new_hs) / 2;
+		const int new_y = (client_vsize - new_vs) / 2;
+		SetViewPort(new_x, new_y, new_hs, new_vs);
 	}
 	else
 	{
-		SetViewPort(0, 0, client_width, client_height);
+		SetViewPort(0, 0, client_hsize, client_vsize);
 	}
 }
 

@@ -58,7 +58,7 @@ export namespace gl
 		void SetViewPort(Rect&& size) noexcept;
 		void SetViewPort(int x, int y, int width, int height) noexcept;
 		[[nodiscard]] const Rect& GetViewPort() const noexcept;
-		void UpdateViewPort(int client_width, int client_height) noexcept;
+		void UpdateViewPort(int client_hsize, int client_vsize) noexcept;
 
 		void KeepAspectRatio(bool keep_ratio) noexcept;
 		[[nodiscard]] double GetAspectRatio() const noexcept;
