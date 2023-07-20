@@ -39,7 +39,7 @@ noexcept
 {}
 
 unsigned long
-_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
+_InitializePixelFormat(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept;
 
 unsigned long
@@ -55,7 +55,7 @@ noexcept
 		my_format.dwFlags |= PFD_DOUBLEBUFFER;
 	}
 
-	if (unsigned long error = _InitializeSystem(hdc, my_format, my_target); 0 != error)
+	if (unsigned long error = _InitializePixelFormat(hdc, my_format, my_target); 0 != error)
 	{
 		return error;
 	}
@@ -206,7 +206,7 @@ noexcept
 }
 
 unsigned long
-_InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
+_InitializePixelFormat(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept
 {
 	const int target = ::ChoosePixelFormat(hdc, &my_format);
