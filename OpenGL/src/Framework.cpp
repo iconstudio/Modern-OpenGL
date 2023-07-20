@@ -6,9 +6,8 @@ module;
 #undef CreateWindowEx
 
 module Glib.Framework;
-import <cstdio>;
 import <exception>;
-import <format>;
+import Utility.Print;
 import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
@@ -68,7 +67,7 @@ noexcept
 
 	if (awakenening != Success)
 	{
-		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
+		util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
 
 		std::rethrow_exception(myInstance->GetException());
 		return;
@@ -104,7 +103,7 @@ noexcept
 {
 	myInstance->SetRenderer(
 		[this, localRenderer = std::move(handler)](
-		ManagedWindow& window,
+		[[maybe_unused]] ManagedWindow& window,
 		GraphicDeviceContext& ctx) {
 
 		glSystem->Begin(ctx);
