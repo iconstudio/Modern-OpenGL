@@ -51,6 +51,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		unsigned int width = LOWORD(lparam);
 		unsigned int height = HIWORD(lparam);
 		glSystem->UpdateViewPort(width, height);
+		window.ClearWindow();
 	});
 
 	return ok;
