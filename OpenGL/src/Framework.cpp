@@ -44,6 +44,15 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		myInstance->SetPowerSave(setup.isPowersave);
 	});
 
+	SetRenderer(DefaultRenderer);
+
+	AddEventHandler(win32::EventID::Resize
+		, [this](win32::ManagedWindow& window, unsigned long long wparam, long long lparam) {
+		unsigned int width = LOWORD(lparam);
+		unsigned int height = HIWORD(lparam);
+		glSystem->UpdateViewPort(width, height);
+	});
+
 	return ok;
 }
 
@@ -57,8 +66,6 @@ void
 gl::Framework::Run()
 noexcept
 {
-	SetRenderer(DefaultRenderer);
-
 	using enum win32::managed_window::AwakeResult;
 	const auto awakenening = myInstance->Awake();
 
