@@ -136,7 +136,7 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 {
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
-		std::printf("Failed on selecting a pixel format. (code: %u)\n", ::GetLastError());
+		std::printf("Failed to begin rendering. (gl error code: %u)\n", ::glGetError());
 
 		return false;
 	}
