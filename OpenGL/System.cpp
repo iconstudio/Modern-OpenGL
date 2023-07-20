@@ -172,29 +172,6 @@ noexcept
 	return result;
 }
 
-void
-gl::System::KeepAspectRatio(bool keep_ratio)
-noexcept
-{
-	keepAspectRatio = keep_ratio;
-	if (keep_ratio)
-	{
-		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
-	}
-	else
-	{
-		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
-	}
-
-}
-
-double
-gl::System::GetAspectRatio()
-const noexcept
-{
-	return aspectRatio;
-}
-
 unsigned long
 _InitializeSystem(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
 noexcept
@@ -239,6 +216,57 @@ gl::DoublePainter(gl::win32::GraphicDeviceContext* const& context)
 noexcept
 {
 	context->Delegate(::SwapBuffers);
+}
+
+void
+gl::System::KeepAspectRatio(bool keep_ratio)
+noexcept
+{
+	keepAspectRatio = keep_ratio;
+	if (keep_ratio)
+	{
+		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
+	}
+	else
+	{
+		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
+	}
+
+}
+
+void gl::System::SetViewPosition(int x, int y) noexcept
+{
+	viewPort.x = x;
+	viewPort.y = y;
+}
+
+void
+gl::System::SetViewSize(int width, int height)
+noexcept
+{
+	viewPort.w = width;
+	viewPort.h = height;
+}
+
+void
+gl::System::SetViewPort(const gl::Rect& size)
+noexcept
+{
+	viewPort = size;
+}
+
+void
+gl::System::SetViewPort(gl::Rect&& size)
+noexcept
+{
+	viewPort = std::move(size);
+}
+
+double
+gl::System::GetAspectRatio()
+const noexcept
+{
+	return aspectRatio;
 }
 
 const gl::win32::Colour gl::System::DefaultColour = gl::win32::colors::Black;
