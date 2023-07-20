@@ -34,8 +34,7 @@ export namespace gl
 			{
 				.glDescriptor = gl::system::Descriptor
 				{
-					.viewCh = 800,
-					.viewCv = 600,
+					.viewPort = gl::Rect{ 0, 0, 800, 600 },
 				},
 				.title = L"FreeGLUT",
 				.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT

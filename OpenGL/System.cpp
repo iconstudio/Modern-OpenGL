@@ -94,7 +94,7 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 	nativeContext = std::addressof(painter);
 
 	myBlender->Apply();
-	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
+	::glViewport(mySettings.viewPort.x, mySettings.viewPort.y, mySettings.viewPort.w, mySettings.viewPort.h);
 	::glClear(GL_DEPTH_BUFFER_BIT);
 
 	::glMatrixMode(GL_PROJECTION);
@@ -146,7 +146,7 @@ noexcept
 
 	global::SetState(gl::State::Depth);
 
-	aspectRatio = static_cast<double>(mySettings.viewCh) / static_cast<double>(mySettings.viewCv);
+	aspectRatio = static_cast<double>(mySettings.viewPort.w) / static_cast<double>(mySettings.viewPort.h);
 
 	if (mySettings.vSync)
 	{
@@ -248,30 +248,30 @@ noexcept
 
 void gl::System::SetViewPosition(int x, int y) noexcept
 {
-	viewPort.x = x;
-	viewPort.y = y;
+	mySettings.viewPort.x = x;
+	mySettings.viewPort.y = y;
 }
 
 void
 gl::System::SetViewSize(int width, int height)
 noexcept
 {
-	viewPort.w = width;
-	viewPort.h = height;
+	mySettings.viewPort.w = width;
+	mySettings.viewPort.h = height;
 }
 
 void
 gl::System::SetViewPort(const gl::Rect& size)
 noexcept
 {
-	viewPort = size;
+	mySettings.viewPort = size;
 }
 
 void
 gl::System::SetViewPort(gl::Rect&& size)
 noexcept
 {
-	viewPort = std::move(size);
+	mySettings.viewPort = std::move(size);
 }
 
 void
@@ -285,7 +285,7 @@ const gl::Rect&
 gl::System::GetViewPort()
 const noexcept
 {
-	return viewPort;
+	return mySettings.viewPort;
 }
 
 void

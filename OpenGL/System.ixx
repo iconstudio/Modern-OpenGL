@@ -23,10 +23,11 @@ export namespace gl
 	{
 		struct [[nodiscard]] Descriptor
 		{
-			int viewCh, viewCv;
+			Rect viewPort{};
 			Colour backgroundColour = win32::colors::Azure;
 			Colour borderColour = win32::colors::Black;
 
+			bool staticView = false;
 			bool alphaBlend = false;
 			bool hiddenSurfaceRemoval = false;
 			bool cullingIsClockwise = false;
@@ -71,7 +72,6 @@ export namespace gl
 
 		system::Descriptor mySettings{};
 
-		Rect viewPort{};
 		int clientWidth = 0, clientHeight = 0;
 		double aspectRatio = 1.0;
 
