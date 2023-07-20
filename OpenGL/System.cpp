@@ -90,7 +90,7 @@ noexcept
 
 	if (descriptor.hiddenSurfaceRemoval)
 	{
-		//global::SetState(gl::State::Culling);
+		global::SetState(gl::State::Culling);
 		gl::Culling(gl::Face::Back);
 		gl::CullingDirection(descriptor.cullingIsClockwise);
 	}
