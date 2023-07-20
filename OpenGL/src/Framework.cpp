@@ -7,7 +7,6 @@ module;
 
 module Glib.Framework;
 import <exception>;
-import Utility.Print;
 import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
@@ -67,7 +66,7 @@ noexcept
 
 	if (awakenening != Success)
 	{
-		util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
+		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
 
 		std::rethrow_exception(myInstance->GetException());
 		return;
