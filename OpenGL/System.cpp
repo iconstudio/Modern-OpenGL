@@ -61,13 +61,6 @@ noexcept
 		return error;
 	}
 
-	if (0 == (my_format.dwFlags & PFD_SUPPORT_OPENGL))
-	{
-		unsigned long error = ::GetLastError();
-		std::printf("Failed on checking a pixel format %d. (code: %u)\n", my_target, error);
-		return error;
-	}
-
 	base1::operator=(hdc.Delegate(::wglCreateContext));
 	if (nullptr == *this)
 	{
@@ -85,44 +78,7 @@ noexcept
 		myPainter = gl::SinglePainter;
 	}
 
-	if (mySettings.alphaBlend)
-	{
-		myBlender = new gl::Blender{ gl::DefaultAlpha };
-	}
-
-	if (mySettings.hiddenSurfaceRemoval)
-	{
-		global::SetState(gl::State::Culling);
-		gl::Culling(gl::Face::Back);
-		gl::CullingDirection(mySettings.cullingIsClockwise);
-	}
-
-	global::SetState(gl::State::Depth, false);
-
-	aspectRatio = static_cast<double>(mySettings.viewCh) / static_cast<double>(mySettings.viewCv);
-
-	if (mySettings.vSync)
-	{
-		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
-		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
-
-		const char* extensions = (char*)glGetString(GL_EXTENSIONS);
-
-		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
-
-		// no glew, so use old way
-		if (wglSwapIntervalEXT)
-		{
-			wglSwapIntervalEXT(1);
-		}
-		//::wglSwapIntervalEXT(1);
-	}
-
-	viewPort.w = mySettings.viewCh;
-	viewPort.h = mySettings.viewCv;
-	//SetViewPort(0, 0, mySettings.viewCh, mySettings.viewCv);
-
-	return 0;
+	return _InitializeSystem();
 }
 
 bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
@@ -165,6 +121,50 @@ bool gl::System::End() noexcept
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
 }
 
+unsigned long
+gl::System::_InitializeSystem()
+noexcept
+{
+	if (mySettings.alphaBlend)
+	{
+		myBlender = new gl::Blender{ gl::DefaultAlpha };
+	}
+
+	if (mySettings.hiddenSurfaceRemoval)
+	{
+		global::SetState(gl::State::Culling);
+		gl::Culling(gl::Face::Back);
+		gl::CullingDirection(mySettings.cullingIsClockwise);
+	}
+
+	global::SetState(gl::State::Depth, false);
+
+	aspectRatio = static_cast<double>(mySettings.viewCh) / static_cast<double>(mySettings.viewCv);
+
+	if (mySettings.vSync)
+	{
+		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
+		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
+
+		const char* extensions = (char*)glGetString(GL_EXTENSIONS);
+
+		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
+
+		// no glew, so use old way
+		if (wglSwapIntervalEXT)
+		{
+			wglSwapIntervalEXT(1);
+		}
+		//::wglSwapIntervalEXT(1);
+	}
+
+	viewPort.w = mySettings.viewCh;
+	viewPort.h = mySettings.viewCv;
+	//SetViewPort(0, 0, mySettings.viewCh, mySettings.viewCv);
+
+	return 0;
+}
+
 gl::System::~System()
 noexcept
 {
@@ -182,8 +182,7 @@ noexcept
 {
 	auto result = std::make_shared<gl::System>();
 
-	if (0 != result->Initialize(hdc, setup)
-	)
+	if (0 != result->Initialize(hdc, setup))
 	{
 		return ::GetLastError();
 	}
@@ -197,8 +196,7 @@ noexcept
 {
 	auto result = std::make_shared<gl::System>();
 
-	if (0 != result->Initialize(hdc, std::move(setup))
-	)
+	if (0 != result->Initialize(hdc, std::move(setup)))
 	{
 		return ::GetLastError();
 	}
@@ -230,6 +228,13 @@ noexcept
 	{
 		unsigned long error = ::GetLastError();
 		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
+		return error;
+	}
+
+	if (0 == (my_format.dwFlags & PFD_SUPPORT_OPENGL))
+	{
+		unsigned long error = ::GetLastError();
+		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
 		return error;
 	}
 

@@ -67,7 +67,7 @@ export namespace gl
 		bool End() noexcept;
 
 	private:
-		void _InitializeSystem() noexcept;
+		unsigned long _InitializeSystem() noexcept;
 
 		system::Descriptor mySettings{};
 
