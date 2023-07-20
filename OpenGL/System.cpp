@@ -34,14 +34,14 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	0, 0, 0                // layer masks ignored
 };
 
+unsigned long
+_InitializePixelFormat(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
+noexcept;
+
 gl::System::System()
 noexcept
 	: base1(nullptr), base2()
 {}
-
-unsigned long
-_InitializePixelFormat(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
-noexcept;
 
 unsigned long
 gl::System::Initialize(const gl::win32::IContext& hdc, const gl::system::Descriptor& descriptor)
