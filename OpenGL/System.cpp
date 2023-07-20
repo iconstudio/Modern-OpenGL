@@ -281,6 +281,31 @@ const noexcept
 	return viewPort;
 }
 
+void
+gl::System::UpdateViewPort(int client_width, int client_height)
+noexcept
+{
+	if (keepAspectRatio)
+	{
+		if (client_height < client_width)
+		{
+			const int new_width = static_cast<int>(static_cast<double>(client_height) * aspectRatio);
+			const int new_x = (client_width - new_width) / 2;
+			SetViewPort(new_x, 0, new_width, client_height);
+		}
+		else
+		{
+			const int new_height = static_cast<int>(static_cast<double>(client_width) / aspectRatio);
+			const int new_y = (client_height - new_height) / 2;
+			SetViewPort(0, new_y, client_width, new_height);
+		}
+	}
+	else
+	{
+		SetViewPort(0, 0, client_width, client_height);
+	}
+}
+
 double
 gl::System::GetAspectRatio()
 const noexcept
