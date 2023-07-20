@@ -48,11 +48,6 @@ noexcept
 	myMode.srcOption = src;
 	myMode.dstOption = dest;
 	Apply();
-
-	if (!wasBlending)
-	{
-		global::SetState(gl::State::Blending, true);
-	}
 }
 
 gl::Blender::~Blender()
