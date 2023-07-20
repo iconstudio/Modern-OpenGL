@@ -7,6 +7,7 @@ module;
 
 module Glib.Framework;
 import <exception>;
+import Utility.Monad;
 import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
@@ -38,13 +39,24 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		[&](unsigned long&& code) noexcept {
 		std::printf("Pixel Formatting Error: %lu\n", code);
 		ok = framework::InitError::FailedOnSettingPixelFormat;
-	}).if_then<opengl_system_t>(
-		[&](opengl_system_t&& context) noexcept {
+	}).and_then<opengl_system_t>(
+		[&](opengl_system_t&& context) noexcept -> util::Monad<opengl_system_t> {
+		return std::move(context);
+	}).and_then([&](opengl_system_t&& context) noexcept -> util::Monad<unsigned long> {
 		glSystem = std::move(context);
-		myInstance->SetPowerSave(setup.isPowersave);
-	});
+		glSystem->UpdateViewPort(setup.ww, setup.wh);
 
-	glSystem->UpdateViewPort(setup.ww, setup.wh);
+		if (unsigned long check = glSystem->Initialize(myInstance->AcquireContext(), gl_descriptor); 0 != check)
+		{
+			return check;
+		}
+
+		myInstance->SetPowerSave(setup.isPowersave);
+		return util::nullopt;
+	}).if_then([&](unsigned long&& error_code) noexcept {
+		std::printf("Creating Window Error: %lu\n", error_code);
+		ok = framework::InitError::FailedOnCreatingWindow;
+	});
 
 	SetRenderer(DefaultRenderer);
 
