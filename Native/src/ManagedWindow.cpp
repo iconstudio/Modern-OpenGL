@@ -195,9 +195,9 @@ noexcept
 		}
 		break;
 
-		case event_id_t::SetKeyboardFocus:
+		case event_id_t::KeyboardFocus:
 		{
-			std::printf("[SetKeyboardFocus]\n");
+			std::printf("[KeyboardFocus]\n");
 		}
 		break;
 

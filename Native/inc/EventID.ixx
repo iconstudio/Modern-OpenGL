@@ -22,16 +22,18 @@ export namespace gl::win32
 
 		Timer = WM_TIMER,
 		Move = WM_MOVE,
-		Size = WM_SIZE,
+		Resize = WM_SIZE,
+		Sizing = WM_SIZING,
 		Activate = WM_ACTIVATE,
-		SetKeyboardFocus = WM_SETFOCUS,
+		KeyboardFocus = WM_SETFOCUS,
 		KillKeyboardFocus = WM_KILLFOCUS,
 		Enable = WM_ENABLE,
 		SetRedraw = WM_SETREDRAW,
-		SetText = WM_SETTEXT,
-		GetText = WM_GETTEXT,
+		SetCaption = WM_SETTEXT,
+		GetCaption = WM_GETTEXT,
 		GetTextLength = WM_GETTEXTLENGTH,
 		Power = WM_POWER,
+		SysCommand = WM_SYSCOMMAND,
 
 		/// <summary>
 		/// PaintFrame -> EraseBackground -> Paint
@@ -65,7 +67,6 @@ export namespace gl::win32
 		SysKeyUp = WM_SYSKEYUP,
 		SysChar = WM_SYSCHAR,
 		SysDeadChar = WM_SYSDEADCHAR,
-		SysCommand = WM_SYSCOMMAND,
 		KeyboardLast = WM_KEYLAST,
 
 		MouseFirst = WM_MOUSEFIRST, // 512
