@@ -44,6 +44,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		myInstance->SetPowerSave(setup.isPowersave);
 	});
 
+	glSystem->UpdateViewPort(setup.ww, setup.wh);
+
 	SetRenderer(DefaultRenderer);
 
 	AddEventHandler(win32::EventID::Resize

@@ -159,10 +159,6 @@ noexcept
 		//::wglSwapIntervalEXT(1);
 	}
 
-	viewPort.w = mySettings.viewCh;
-	viewPort.h = mySettings.viewCv;
-	//SetViewPort(0, 0, mySettings.viewCh, mySettings.viewCv);
-
 	return 0;
 }
 
