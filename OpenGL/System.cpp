@@ -100,8 +100,9 @@ noexcept
 
 	aspectRatio = static_cast<double>(descriptor.viewCv) / static_cast<double>(descriptor.viewCh);
 
+	SetViewPort(0, 0, descriptor.viewCh, descriptor.viewCv);
+
 	::glMatrixMode(GL_PROJECTION);
-	::glViewport(0, 0, descriptor.viewCh, descriptor.viewCv);
 	::glLoadIdentity();
 
 	return 0;
@@ -238,6 +239,7 @@ void gl::System::SetViewPosition(int x, int y) noexcept
 {
 	viewPort.x = x;
 	viewPort.y = y;
+	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -246,6 +248,7 @@ noexcept
 {
 	viewPort.w = width;
 	viewPort.h = height;
+	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -253,6 +256,7 @@ gl::System::SetViewPort(const gl::Rect& size)
 noexcept
 {
 	viewPort = size;
+	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
 }
 
 void
@@ -260,6 +264,21 @@ gl::System::SetViewPort(gl::Rect&& size)
 noexcept
 {
 	viewPort = std::move(size);
+	::glViewport(viewPort.x, viewPort.y, viewPort.w, viewPort.h);
+}
+
+void
+gl::System::SetViewPort(int x, int y, int width, int height)
+noexcept
+{
+	SetViewPort(gl::Rect{ x, y, width, height });
+}
+
+const gl::Rect&
+gl::System::GetViewPort()
+const noexcept
+{
+	return viewPort;
 }
 
 double
