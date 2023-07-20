@@ -100,6 +100,14 @@ noexcept
 
 	aspectRatio = static_cast<double>(descriptor.viewCv) / static_cast<double>(descriptor.viewCh);
 
+	::glMatrixMode(GL_PROJECTION);
+	::glPushMatrix();
+	::glLoadIdentity();
+	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	::glMatrixMode(GL_MODELVIEW);
+	::glLoadIdentity();
+	::glPushMatrix();
+
 	if (descriptor.vSync)
 	{
 		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
@@ -119,10 +127,7 @@ noexcept
 
 	viewPort.w = descriptor.viewCh;
 	viewPort.h = descriptor.viewCv;
-	//SetViewPort(0, 0, descriptor.viewCh, descriptor.viewCv);
-
-	::glMatrixMode(GL_PROJECTION);
-	::glLoadIdentity();
+	//SetViewPort(60, 100, 300, 200);
 
 	return 0;
 }
