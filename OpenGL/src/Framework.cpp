@@ -122,10 +122,16 @@ gl::Framework::DefaultRenderer()
 noexcept
 {
 	glBegin(GL_TRIANGLES);
-	glColor3f(0.1f, 0.2f, 0.3f);
-	glVertex3f(0, 0, 0);
+
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0, -1, 0);
+
+	glColor3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(1, 0, 0);
+
+	glColor3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(0, 1, 0);
+
 	glEnd();
 }
 
