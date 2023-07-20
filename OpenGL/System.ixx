@@ -31,7 +31,7 @@ export namespace gl
 			bool hiddenSurfaceRemoval = false;
 			bool cullingIsClockwise = false;
 			bool doubleBuffered = true;
-			bool keepRatioAspect = true;
+			bool keepAspectRatio = true;
 			bool vSync = false;
 		};
 	}
@@ -73,7 +73,6 @@ export namespace gl
 
 		Rect viewPort{};
 		int clientWidth = 0, clientHeight = 0;
-		bool keepAspectRatio = true;
 		double aspectRatio = 1.0;
 
 		Painter myPainter = nullptr;

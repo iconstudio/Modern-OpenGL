@@ -243,16 +243,7 @@ void
 gl::System::KeepAspectRatio(bool keep_ratio)
 noexcept
 {
-	keepAspectRatio = keep_ratio;
-	if (keep_ratio)
-	{
-		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
-	}
-	else
-	{
-		//gluPerspective(45.0f, 1.0f, 0.1f, 100.0f);
-	}
-
+	mySettings.keepAspectRatio = keep_ratio;
 }
 
 void gl::System::SetViewPosition(int x, int y) noexcept
@@ -304,7 +295,7 @@ noexcept
 	clientWidth = client_hsize;
 	clientHeight = std::max(1, client_vsize);
 
-	if (keepAspectRatio)
+	if (mySettings.keepAspectRatio)
 	{
 		const int clc_width = static_cast<int>(static_cast<double>(client_vsize) * aspectRatio);
 		const int new_hs = std::min(clc_width, client_hsize);

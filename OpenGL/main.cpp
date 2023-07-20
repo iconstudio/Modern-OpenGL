@@ -11,7 +11,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	gl::framework::Descriptor descriptor = gl::framework::MakeDefaultDescriptor();
 	descriptor.glDescriptor.alphaBlend = true;
 	descriptor.glDescriptor.doubleBuffered = true;
-	descriptor.glDescriptor.keepRatioAspect = true;
+	descriptor.glDescriptor.keepAspectRatio = true;
 	descriptor.glDescriptor.vSync = true;
 	framework->Initialize(std::move(descriptor));
 
