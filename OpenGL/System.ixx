@@ -83,7 +83,5 @@ export namespace gl
 	using SystemCreation = util::LooseMonad<std::shared_ptr<System>, unsigned long>;
 
 	[[nodiscard]]
-	SystemCreation CreateSystem(const win32::IContext& hdc, const system::Descriptor& setup) noexcept;
-	[[nodiscard]]
-	SystemCreation CreateSystem(const win32::IContext& hdc, system::Descriptor&& setup) noexcept;
+	SystemCreation CreateSystem() noexcept;
 }

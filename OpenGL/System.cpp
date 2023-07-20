@@ -179,31 +179,10 @@ noexcept
 }
 
 gl::SystemCreation
-gl::CreateSystem(const win32::IContext& hdc, const gl::system::Descriptor& setup)
+gl::CreateSystem()
 noexcept
 {
-	auto result = std::make_shared<gl::System>();
-
-	if (0 != result->Initialize(hdc, setup))
-	{
-		return ::GetLastError();
-	}
-
-	return result;
-}
-
-gl::SystemCreation
-gl::CreateSystem(const win32::IContext& hdc, gl::system::Descriptor&& setup)
-noexcept
-{
-	auto result = std::make_shared<gl::System>();
-
-	if (0 != result->Initialize(hdc, std::move(setup)))
-	{
-		return ::GetLastError();
-	}
-
-	return result;
+	return std::make_shared<gl::System>();
 }
 
 unsigned long

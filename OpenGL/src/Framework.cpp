@@ -34,7 +34,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	framework::InitError ok = framework::InitError::Success;
 
-	gl::CreateSystem(myInstance->AcquireContext(), gl_descriptor).if_then<unsigned long>(
+	gl::CreateSystem().if_then<unsigned long>(
 		[&](unsigned long&& code) noexcept {
 		std::printf("Pixel Formatting Error: %lu\n", code);
 		ok = framework::InitError::FailedOnSettingPixelFormat;
