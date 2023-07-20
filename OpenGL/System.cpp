@@ -95,18 +95,9 @@ noexcept
 		gl::CullingDirection(descriptor.cullingIsClockwise);
 	}
 
-	global::SetBackgroundColour(gl::System::DefaultColour);
-	global::SetState(gl::State::Depth);
+	global::SetState(gl::State::Depth, false);
 
 	aspectRatio = static_cast<double>(descriptor.viewCh) / static_cast<double>(descriptor.viewCv);
-
-	::glMatrixMode(GL_PROJECTION);
-	::glPushMatrix();
-	::glLoadIdentity();
-	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-	::glMatrixMode(GL_MODELVIEW);
-	::glLoadIdentity();
-	::glPushMatrix();
 
 	if (descriptor.vSync)
 	{
@@ -143,19 +134,32 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	nativeContext = std::addressof(painter);
 
-	//::glClearColor(float(viewPort.x % 255) / 255.0f, float(viewPort.y % 255) / 255.0f, float(viewPort.w % 255) / 255.0f, 1.0f);
-	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_VIEWPORT_BIT | GL_STENCIL_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_TRANSFORM_BIT);
+	::glMatrixMode(GL_PROJECTION);
+	::glPushMatrix();
+
+	::glLoadIdentity();
+	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	::glMatrixMode(GL_MODELVIEW);
+	::glPushMatrix();
+
+	::glLoadIdentity();
+	::glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	global::SetBackgroundColour(gl::System::DefaultColour);
+	myBlender->Apply();
 
 	return true;
 }
 
 bool gl::System::End() noexcept
 {
-	glFlush();
+	::glPopMatrix();
+
+	::glMatrixMode(GL_PROJECTION);
+	::glPopMatrix();
 
 	myPainter(nativeContext);
 
-	//::wglMakeCurrent(nativeContext, nullptr);
 	return 0 != ::wglMakeCurrent(nullptr, nullptr);
 }
 
