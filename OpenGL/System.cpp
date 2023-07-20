@@ -300,6 +300,9 @@ void
 gl::System::UpdateViewPort(int client_width, int client_height)
 noexcept
 {
+	clientWidth = client_width;
+	clientHeight = client_height;
+
 	if (keepAspectRatio)
 	{
 		if (client_height < client_width)

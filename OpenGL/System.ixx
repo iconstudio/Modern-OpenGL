@@ -72,6 +72,7 @@ export namespace gl
 		system::Descriptor mySettings{};
 
 		Rect viewPort{};
+		int clientWidth = 0, clientHeight = 0;
 		bool keepAspectRatio = true;
 		double aspectRatio = 1.0;
 
