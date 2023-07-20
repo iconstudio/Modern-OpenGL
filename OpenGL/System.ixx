@@ -30,6 +30,7 @@ export namespace gl
 			bool cullingIsClockwise = false;
 			bool doubleBuffered = true;
 			bool keepRatioAspect = true;
+			bool vSync = false;
 		};
 	}
 

@@ -100,6 +100,23 @@ noexcept
 
 	aspectRatio = static_cast<double>(descriptor.viewCv) / static_cast<double>(descriptor.viewCh);
 
+	if (descriptor.vSync)
+	{
+		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
+		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
+
+		const char* extensions = (char*)glGetString(GL_EXTENSIONS);
+
+		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
+
+		// no glew, so use old way
+		if (wglSwapIntervalEXT)
+		{
+			wglSwapIntervalEXT(1);
+		}
+		//::wglSwapIntervalEXT(1);
+	}
+
 	SetViewPort(0, 0, descriptor.viewCh, descriptor.viewCv);
 
 	::glMatrixMode(GL_PROJECTION);
