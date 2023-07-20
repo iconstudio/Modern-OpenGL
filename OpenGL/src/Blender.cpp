@@ -79,7 +79,12 @@ const noexcept
 {
 	if (BlendOption::Invalid != myMode.srcOption && BlendOption::Invalid != myMode.dstOption)
 	{
+		global::SetState(gl::State::Blending);
 		::glBlendFunc(static_cast<GLenum>(myMode.srcOption), static_cast<GLenum>(myMode.dstOption));
+	}
+	else
+	{
+		global::SetState(gl::State::Blending, isBlending);
 	}
 }
 
