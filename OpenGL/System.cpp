@@ -107,6 +107,9 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
 
+	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+
+
 	global::SetBackgroundColour(mySettings.backgroundColour);
 
 	::glMatrixMode(GL_MODELVIEW);
@@ -292,7 +295,7 @@ noexcept
 }
 
 const gl::Rect&
-gl::System::GetViewPort()
+gl::System::ViewPort()
 const noexcept
 {
 	return mySettings.viewPort;
@@ -380,7 +383,7 @@ noexcept
 }
 
 double
-gl::System::GetAspectRatio()
+gl::System::AspectRatio()
 const noexcept
 {
 	return aspectRatio;

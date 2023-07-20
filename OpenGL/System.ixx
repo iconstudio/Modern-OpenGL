@@ -65,7 +65,7 @@ export namespace gl
 		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
 		bool End() noexcept;
 
-		[[nodiscard]] const Rect& GetViewPort() const noexcept;
+		[[nodiscard]] const Rect& ViewPort() const noexcept;
 		[[nodiscard]] int& ViewX() noexcept;
 		[[nodiscard]] int& ViewY() noexcept;
 		[[nodiscard]] int& ViewWidth() noexcept;
@@ -74,7 +74,7 @@ export namespace gl
 		[[nodiscard]] const int& ViewY() const noexcept;
 		[[nodiscard]] const int& ViewWidth() const noexcept;
 		[[nodiscard]] const int& ViewHeight() const noexcept;
-		[[nodiscard]] double GetAspectRatio() const noexcept;
+		[[nodiscard]] double AspectRatio() const noexcept;
 
 	private:
 		unsigned long _InitializeSystem() noexcept;
