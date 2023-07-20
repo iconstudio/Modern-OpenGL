@@ -243,11 +243,15 @@ void
 gl::System::KeepAspectRatio(bool keep_ratio)
 noexcept
 {
+	if (mySettings.staticView) return;
+
 	mySettings.keepAspectRatio = keep_ratio;
 }
 
 void gl::System::SetViewPosition(int x, int y) noexcept
 {
+	if (mySettings.staticView) return;
+
 	mySettings.viewPort.x = x;
 	mySettings.viewPort.y = y;
 }
@@ -256,6 +260,8 @@ void
 gl::System::SetViewSize(int width, int height)
 noexcept
 {
+	if (mySettings.staticView) return;
+
 	mySettings.viewPort.w = width;
 	mySettings.viewPort.h = height;
 }
@@ -264,6 +270,8 @@ void
 gl::System::SetViewPort(const gl::Rect& size)
 noexcept
 {
+	if (mySettings.staticView) return;
+
 	mySettings.viewPort = size;
 }
 
@@ -271,6 +279,8 @@ void
 gl::System::SetViewPort(gl::Rect&& size)
 noexcept
 {
+	if (mySettings.staticView) return;
+
 	mySettings.viewPort = std::move(size);
 }
 
@@ -294,6 +304,8 @@ noexcept
 {
 	clientWidth = client_hsize;
 	clientHeight = std::max(1, client_vsize);
+
+	if (mySettings.staticView) return;
 
 	if (mySettings.keepAspectRatio)
 	{
