@@ -138,7 +138,7 @@ noexcept
 		gl::CullingDirection(mySettings.cullingIsClockwise);
 	}
 
-	global::SetState(gl::State::Depth, false);
+	global::SetState(gl::State::Depth);
 
 	aspectRatio = static_cast<double>(mySettings.viewCh) / static_cast<double>(mySettings.viewCv);
 
