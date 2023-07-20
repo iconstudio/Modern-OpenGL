@@ -14,7 +14,7 @@ export namespace gl::win32
 	inline constexpr RawWindowProperty DefaultWindowProperty = 
 	{
 		.cbSize = sizeof(RawWindowProperty),
-			.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC,
+			.style = CS_HREDRAW | CS_VREDRAW, // | CS_OWNDC,
 			.lpfnWndProc = nullptr,
 			.cbClsExtra = 0,
 			.cbWndExtra = sizeof(void*),
