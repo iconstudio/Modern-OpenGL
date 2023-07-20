@@ -47,10 +47,11 @@ gl::System::Initialize(const gl::win32::IContext& hdc, const gl::system::Descrip
 noexcept
 {
 	mySettings = descriptor;
+
 	::PIXELFORMATDESCRIPTOR my_format = opengl_format;
 	int my_target = 0;
 
-	if (descriptor.doubleBuffered)
+	if (mySettings.doubleBuffered)
 	{
 		my_format.dwFlags |= PFD_DOUBLEBUFFER;
 	}
@@ -84,23 +85,23 @@ noexcept
 		myPainter = gl::SinglePainter;
 	}
 
-	if (descriptor.alphaBlend)
+	if (mySettings.alphaBlend)
 	{
 		myBlender = new gl::Blender{ gl::DefaultAlpha };
 	}
 
-	if (descriptor.hiddenSurfaceRemoval)
+	if (mySettings.hiddenSurfaceRemoval)
 	{
 		global::SetState(gl::State::Culling);
 		gl::Culling(gl::Face::Back);
-		gl::CullingDirection(descriptor.cullingIsClockwise);
+		gl::CullingDirection(mySettings.cullingIsClockwise);
 	}
 
 	global::SetState(gl::State::Depth, false);
 
-	aspectRatio = static_cast<double>(descriptor.viewCh) / static_cast<double>(descriptor.viewCv);
+	aspectRatio = static_cast<double>(mySettings.viewCh) / static_cast<double>(mySettings.viewCv);
 
-	if (descriptor.vSync)
+	if (mySettings.vSync)
 	{
 		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
 		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
@@ -117,9 +118,9 @@ noexcept
 		//::wglSwapIntervalEXT(1);
 	}
 
-	viewPort.w = descriptor.viewCh;
-	viewPort.h = descriptor.viewCv;
-	//SetViewPort(60, 100, 300, 200);
+	viewPort.w = mySettings.viewCh;
+	viewPort.h = mySettings.viewCv;
+	//SetViewPort(0, 0, mySettings.viewCh, mySettings.viewCv);
 
 	return 0;
 }
