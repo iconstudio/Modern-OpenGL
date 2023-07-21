@@ -6,22 +6,22 @@ module Glib;
 import :TransformState;
 
 void
-gl::transform::Push()
+gl::transform::SetState(gl::TransformMode mode)
+noexcept
+{
+	glMatrixMode(static_cast<GLenum>(mode));
+}
+
+void
+gl::transform::PushState()
 noexcept
 {
 	glPushMatrix();
 }
 
 void
-gl::transform::Pop()
+gl::transform::PopState()
 noexcept
 {
 	glPopMatrix();
-}
-
-void
-gl::transform::SetMode(gl::TransformMode mode)
-noexcept
-{
-	glMatrixMode(static_cast<GLenum>(mode));
 }
