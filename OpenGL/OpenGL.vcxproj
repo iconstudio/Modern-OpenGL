@@ -220,6 +220,7 @@
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Framework.cpp" />
+    <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="Utility.ixx" />
     <ClCompile Include="Vertex.ixx" />
   </ItemGroup>
