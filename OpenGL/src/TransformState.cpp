@@ -23,5 +23,25 @@ void
 gl::transform::PopState()
 noexcept
 {
-	glPopMatrix();
+	::glPopMatrix();
+}
+
+gl::transform::Context::Context()
+noexcept
+{
+	::glPushMatrix();
+}
+
+gl::transform::Context::Context(gl::TransformMode mode)
+noexcept
+{
+	::glPushMatrix();
+	::glMatrixMode(static_cast<GLenum>(mode));
+	::glLoadIdentity();
+}
+
+gl::transform::Context::~Context()
+noexcept
+{
+	::glPopMatrix();
 }
