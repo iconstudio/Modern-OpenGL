@@ -13,6 +13,8 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.glDescriptor.doubleBuffered = true;
 	descriptor.glDescriptor.keepAspectRatio = true;
 	descriptor.glDescriptor.vSync = true;
+	descriptor.isResizable = false;
+
 	framework->Initialize(std::move(descriptor));
 
 	util::Println("== Program Started ==");

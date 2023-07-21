@@ -24,7 +24,14 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	try
 	{
-		myInstance = win32::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh);
+		win32::WindowStyle style = win32::styles::Default;
+
+		if (!setup.isResizable)
+		{
+			style = win32::styles::Plain;
+		}
+
+		myInstance = win32::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh, 4, style);
 	}
 	catch (const std::exception& e)
 	{
