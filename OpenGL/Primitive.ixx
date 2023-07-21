@@ -18,6 +18,17 @@ export namespace gl
 
 	namespace primitive
 	{
+		class [[nodiscard]] Context
+		{
+		public:
+			Context(Primitive mode) noexcept;
+			~Context() noexcept;
+
+			Context(const Context&) = delete;
+			Context& operator=(const Context&) = delete;
+			Context(Context&& other) = delete;
+			Context& operator=(Context&& other) = delete;
+		};
 
 	}
 }
