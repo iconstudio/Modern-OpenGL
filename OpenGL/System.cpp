@@ -100,14 +100,14 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 
 	myBlender->Apply();
 	::glViewport(view_x, view_y, view_w, view_h);
-	::glClear(GL_DEPTH_BUFFER_BIT);
+	global::Clear(Clearance::DepthStencil);
 
 	::glMatrixMode(GL_PROJECTION);
 	::glPushMatrix();
 	::glLoadIdentity();
 
 	global::SetBackgroundColour(mySettings.borderColour);
-	::glClear(GL_COLOR_BUFFER_BIT);
+	global::Clear(Clearance::Color);
 
 	::glPushMatrix();
 	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
