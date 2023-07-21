@@ -82,7 +82,9 @@ noexcept
 	return _InitializeSystem();
 }
 
-bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
+bool
+gl::System::Begin(win32::GraphicDeviceContext& painter)
+noexcept
 {
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
@@ -102,14 +104,15 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 	::glViewport(view_x, view_y, view_w, view_h);
 	global::Clear(Clearance::DepthStencil);
 
-	::glMatrixMode(GL_PROJECTION);
-	::glPushMatrix();
+	transform::SetState(TransformMode::Projection);
+	transform::PushState();
+
 	::glLoadIdentity();
 
 	global::SetBackgroundColour(mySettings.borderColour);
 	global::Clear(Clearance::Color);
 
-	::glPushMatrix();
+	transform::PushState();
 	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	::glLoadIdentity();
 
@@ -127,12 +130,14 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 	return true;
 }
 
-bool gl::System::End() noexcept
+bool
+gl::System::End()
+noexcept
 {
-	::glPopMatrix();
+	transform::PopState();
 
-	::glMatrixMode(GL_PROJECTION);
-	::glPopMatrix();
+	transform::SetState(TransformMode::Projection);
+	transform::PopState();
 
 	myPainter(nativeContext);
 
