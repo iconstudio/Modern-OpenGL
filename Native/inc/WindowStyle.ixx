@@ -96,15 +96,10 @@ export namespace gl::win32
 	}
 }
 
-namespace gl::win32::styles
+export namespace gl::win32::styles
 {
-	using enum ::gl::win32::WindowStyle;
-
-	export
-	{
-		inline constexpr WindowStyle Default = Normal;
-		inline constexpr WindowStyle Resizable = Default;
-		inline constexpr WindowStyle Versatile = WindowStyle::Versatile;
-		inline constexpr WindowStyle Plain = MinimizeBox;
-	}
+	inline constexpr WindowStyle Default = WindowStyle::Normal;
+	inline constexpr WindowStyle Resizable = Default;
+	inline constexpr WindowStyle Versatile = WindowStyle::Versatile;
+	inline constexpr WindowStyle Plain = WindowStyle::MinimizeBox;
 }
