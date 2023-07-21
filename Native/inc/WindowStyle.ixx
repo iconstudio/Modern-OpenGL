@@ -15,6 +15,7 @@ export namespace gl::win32
 		Caption = WS_CAPTION, // with Frame
 		NoCaption = WS_DLGFRAME,
 
+		Menu = WS_SYSMENU,
 		MaximizeBox = WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX,
 		MinimizeBox = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		HorizontalScroll = WS_HSCROLL,
