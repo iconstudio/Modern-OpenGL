@@ -80,4 +80,11 @@ export namespace gl
 		TEXTURE_GEN_S = 0x0C60,
 		TEXTURE_GEN_T = 0x0C61,
 	};
+
+	enum class [[nodiscard]] MatrixMode : unsigned int
+	{
+		ModelView = 0x1700,
+		Projection = 0x1701,
+		Texture = 0x1702,
+	};
 }
