@@ -17,6 +17,9 @@ export namespace gl
 			gl::system::Descriptor glDescriptor;
 			std::wstring_view title;
 			int wx, wy, ww, wh;
+
+			int minW = 60, minH = 60;
+			bool isResizable = true;
 			bool isPowersave = false;
 		};
 
