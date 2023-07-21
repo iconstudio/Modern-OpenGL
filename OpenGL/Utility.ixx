@@ -2,6 +2,7 @@ export module Glib:Utility;
 import <cstdint>;
 import Glib.Windows.Colour;
 export import :State;
+export import :ClearBits;
 
 export namespace gl
 {
@@ -22,6 +23,8 @@ export namespace gl::global
 	void SetBackgroundColour(const Colour& colour) noexcept;
 	void SetBackgroundColour(Colour&& colour) noexcept;
 	void SetBackgroundColour(const std::uint8_t& r, const std::uint8_t& g, const std::uint8_t& b, const std::uint8_t& a = 0xFFU) noexcept;
+
+	void Clear(Clearance target) noexcept;
 
 	[[nodiscard]] bool IsBlending() noexcept;
 	[[nodiscard]] bool IsCulling() noexcept;

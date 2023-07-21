@@ -110,6 +110,13 @@ noexcept
 	::glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
 }
 
+void
+gl::global::Clear(Clearance target)
+noexcept
+{
+	::glClear(static_cast<GLbitfield>(target));
+}
+
 bool
 gl::global::IsBlending()
 noexcept
