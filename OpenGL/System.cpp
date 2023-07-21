@@ -101,7 +101,7 @@ noexcept
 	nativeContext = std::addressof(painter);
 
 	myBlender->Apply();
-	::glViewport(view_x, view_y, view_w, view_h);
+	global::SetViewport(view_x, view_y, view_w, view_h);
 	global::Clear(Clearance::DepthStencil);
 
 	transform::SetState(TransformMode::Projection);
