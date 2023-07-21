@@ -5,3 +5,9 @@ module;
 module Glib;
 import :Transform;
 
+void
+gl::transform::LoadIdentity()
+noexcept
+{
+	::glLoadIdentity();
+}
