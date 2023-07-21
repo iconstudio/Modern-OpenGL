@@ -21,6 +21,9 @@ export namespace gl::win32
 		HorizontalScroll = WS_HSCROLL,
 		VerticalScroll = WS_VSCROLL,
 
+		Normal = WS_OVERLAPPEDWINDOW,
+		Versatile = WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_HSCROLL | WS_VSCROLL,
+
 		MaximizeAtFirst = WS_MAXIMIZE,
 		MinimizeAtFirst = WS_MINIMIZE,
 		Iconic = MinimizeAtFirst, // WS_ICONIC == WS_MINIMIZE
