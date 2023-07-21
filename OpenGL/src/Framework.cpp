@@ -69,7 +69,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	SetRenderer(DefaultRenderer);
 
 	AddEventHandler(win32::EventID::Resize
-		, [this](win32::ManagedWindow& window, unsigned long long wparam, long long lparam) {
+		, [this](win32::ManagedWindow& window, unsigned long long, long long lparam) {
 		unsigned int width = LOWORD(lparam);
 		unsigned int height = HIWORD(lparam);
 		glSystem->UpdateViewPort(width, height);
