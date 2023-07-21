@@ -12,6 +12,7 @@ import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
 import Glib.Windows.Context.Renderer;
+import Glib.Windows.Client;
 import Glib.Windows.Client.Factory;
 
 void ReadyDisplay() noexcept;
