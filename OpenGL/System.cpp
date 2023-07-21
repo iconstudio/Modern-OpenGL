@@ -116,13 +116,13 @@ noexcept
 	const auto& color = mySettings.backgroundColour;
 	const float border = 1.01f;
 
-	::glBegin(GL_TRIANGLE_FAN);
+	global::BeginPrimitives(Primitive::Quads);
 	::glColor3f(float(color.R) / 255.0f, float(color.G) / 255.0f, float(color.B) / 255.0f);
 	::glVertex3f(-border, -border, 0);
 	::glVertex3f(-border, border, 0);
 	::glVertex3f(border, border, 0);
 	::glVertex3f(border, -border, 0);
-	::glEnd();
+	global::EndPrimitives();
 
 	return true;
 }
