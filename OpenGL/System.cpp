@@ -106,15 +106,14 @@ noexcept
 
 	transform::SetState(TransformMode::Projection);
 	transform::PushState();
-
-	::glLoadIdentity();
+	transform::LoadIdentity();
 
 	global::SetBackgroundColour(mySettings.borderColour);
 	global::Clear(Clearance::Color);
 
 	transform::PushState();
 	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-	::glLoadIdentity();
+	transform::LoadIdentity();
 
 	const auto& color = mySettings.backgroundColour;
 	const float border = 1.01f;
