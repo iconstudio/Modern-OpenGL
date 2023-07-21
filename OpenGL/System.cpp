@@ -91,10 +91,15 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 		return false;
 	}
 
+	auto& view_x = ViewX();
+	auto& view_y = ViewY();
+	auto& view_w = ViewWidth();
+	auto& view_h = ViewHeight();
+
 	nativeContext = std::addressof(painter);
 
 	myBlender->Apply();
-	::glViewport(mySettings.viewPort.x, mySettings.viewPort.y, mySettings.viewPort.w, mySettings.viewPort.h);
+	::glViewport(view_x, view_y, view_w, view_h);
 	::glClear(GL_DEPTH_BUFFER_BIT);
 
 	::glMatrixMode(GL_PROJECTION);
@@ -104,17 +109,20 @@ bool gl::System::Begin(win32::GraphicDeviceContext& painter) noexcept
 	global::SetBackgroundColour(mySettings.borderColour);
 	::glClear(GL_COLOR_BUFFER_BIT);
 
-	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-
-
-	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-
-
-	global::SetBackgroundColour(mySettings.backgroundColour);
-
-	::glMatrixMode(GL_MODELVIEW);
 	::glPushMatrix();
+	::glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	::glLoadIdentity();
+
+	const auto& color = mySettings.backgroundColour;
+	const float border = 1.01f;
+
+	::glBegin(GL_TRIANGLE_FAN);
+	::glColor3f(float(color.R) / 255.0f, float(color.G) / 255.0f, float(color.B) / 255.0f);
+	::glVertex3f(-border, -border, 0);
+	::glVertex3f(-border, border, 0);
+	::glVertex3f(border, border, 0);
+	::glVertex3f(border, -border, 0);
+	::glEnd();
 
 	return true;
 }
