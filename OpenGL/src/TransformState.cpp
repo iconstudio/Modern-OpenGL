@@ -9,14 +9,15 @@ void
 gl::transform::SetState(gl::TransformMode mode)
 noexcept
 {
-	glMatrixMode(static_cast<GLenum>(mode));
+	::glMatrixMode(static_cast<GLenum>(mode));
 }
 
 void
 gl::transform::PushState()
 noexcept
 {
-	glPushMatrix();
+	::glPushMatrix();
+	::glLoadIdentity();
 }
 
 void
