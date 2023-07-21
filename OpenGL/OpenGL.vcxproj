@@ -212,6 +212,7 @@
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Culling.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="State.ixx" />
@@ -221,6 +222,7 @@
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Framework.cpp" />
+    <ClCompile Include="Transform.ixx" />
     <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="Utility.ixx" />
     <ClCompile Include="Vertex.ixx" />

@@ -102,5 +102,11 @@
     <ClCompile Include="src\TransformState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
