@@ -3,6 +3,7 @@ module;
 #include <gl\gl.h>
 
 module Glib;
+import <type_traits>;
 import :Utility;
 
 void
@@ -115,6 +116,20 @@ gl::global::Clear(Clearance target)
 noexcept
 {
 	::glClear(static_cast<GLbitfield>(target));
+}
+
+void
+gl::global::SetViewport(const std::int32_t& x, const std::int32_t& y, const std::uint32_t& width, const std::uint32_t& height)
+noexcept
+{
+	::glViewport(x, y, width, height);
+}
+
+void
+gl::global::SetViewport(std::int32_t&& x, std::int32_t&& y, std::uint32_t&& width, std::uint32_t&& height)
+noexcept
+{
+	::glViewport(std::move(x), std::move(y), std::move(width), std::move(height));
 }
 
 bool

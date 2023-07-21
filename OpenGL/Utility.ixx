@@ -26,6 +26,9 @@ export namespace gl::global
 
 	void Clear(Clearance target) noexcept;
 
+	void SetViewport(const std::int32_t& x, const std::int32_t& y, const std::uint32_t& width, const std::uint32_t& height) noexcept;
+	void SetViewport(std::int32_t&& x, std::int32_t&& y, std::uint32_t&& width, std::uint32_t&& height) noexcept;
+
 	[[nodiscard]] bool IsBlending() noexcept;
 	[[nodiscard]] bool IsCulling() noexcept;
 	[[nodiscard]] bool IsScissoring() noexcept;
