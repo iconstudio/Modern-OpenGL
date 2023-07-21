@@ -209,9 +209,11 @@
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Face.ixx" />
     <ClCompile Include="Framework.ixx" />
+    <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Culling.cpp" />
+    <ClCompile Include="src\Primitive.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
