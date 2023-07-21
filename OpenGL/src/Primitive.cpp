@@ -17,3 +17,16 @@ noexcept
 {
 	::glEnd();
 }
+void
+gl::global::BeginPrimitives(gl::Primitive mode)
+noexcept
+{
+	::glBegin(static_cast<GLenum>(mode));
+}
+
+void
+gl::global::EndPrimitives()
+noexcept
+{
+	::glEnd();
+}

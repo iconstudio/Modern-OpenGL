@@ -29,6 +29,11 @@ export namespace gl
 			Context(Context&& other) = delete;
 			Context& operator=(Context&& other) = delete;
 		};
+	}
 
+	namespace global
+	{
+		void BeginPrimitives(Primitive mode) noexcept;
+		void EndPrimitives() noexcept;
 	}
 }
