@@ -33,7 +33,7 @@ noexcept
 }
 
 void
-gl::primitive::Vertex(int x, int y, int z)
+gl::primitive::Vertex(std::int32_t x, std::int32_t y, std::int32_t z)
 noexcept
 {
 	::glVertex3i(x, y, z);
@@ -54,14 +54,14 @@ noexcept
 }
 
 void
-gl::primitive::Vertex(std::span<int, 3> list)
+gl::primitive::Vertex(std::span<std::int32_t, 3> list)
 noexcept
 {
 	::glVertex3iv(list.data());
 }
 
 void
-gl::primitive::Normal(int x, int y, int z)
+gl::primitive::Normal(std::int32_t x, std::int32_t y, std::int32_t z)
 noexcept
 {
 	::glNormal3i(x, y, z);
@@ -82,14 +82,14 @@ noexcept
 }
 
 void
-gl::primitive::Normal(std::span<int, 3> list)
+gl::primitive::Normal(std::span<std::int32_t, 3> list)
 noexcept
 {
 	::glNormal3iv(list.data());
 }
 
 void
-gl::primitive::TexCoord(int s, int t)
+gl::primitive::TexCoord(std::int32_t s, std::int32_t t)
 noexcept
 {
 	::glTexCoord2i(s, t);
@@ -110,7 +110,7 @@ noexcept
 }
 
 void
-gl::primitive::TexCoord(std::span<int, 2> list)
+gl::primitive::TexCoord(std::span<std::int32_t, 2> list)
 noexcept
 {
 	::glTexCoord2iv(list.data());
@@ -152,7 +152,7 @@ noexcept
 }
 
 void
-gl::primitive::SetColour(int r, int g, int b)
+gl::primitive::SetColour(std::int32_t r, std::int32_t g, std::int32_t b)
 noexcept
 {
 	::glColor3i(r, g, b);
@@ -173,7 +173,7 @@ noexcept
 }
 
 void
-gl::primitive::SetColour(int r, int g, int b, int a)
+gl::primitive::SetColour(std::int32_t r, std::int32_t g, std::int32_t b, std::int32_t a)
 noexcept
 {
 	::glColor4i(r, g, b, a);
