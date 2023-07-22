@@ -58,6 +58,13 @@ export namespace gl
 		void Normal(std::span<float, 3> list) noexcept;
 		void Normal(std::span<double, 3> list) noexcept;
 
+		void TexCoord(int s, int t) noexcept;
+		void TexCoord(float s, float t) noexcept;
+		void TexCoord(double s, double t) noexcept;
+		void TexCoord(std::span<int, 2> list) noexcept;
+		void TexCoord(std::span<float, 2> list) noexcept;
+		void TexCoord(std::span<double, 2> list) noexcept;
+
 		void SetColour(const Colour& color) noexcept;
 		void SetColour(Colour&& color) noexcept;
 		void SetColour(std::uint8_t r, std::uint8_t g, std::uint8_t b) noexcept;

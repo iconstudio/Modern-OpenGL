@@ -88,6 +88,48 @@ noexcept
 }
 
 void
+gl::draw::TexCoord(int s, int t)
+noexcept
+{
+	::glTexCoord2i(s, t);
+}
+
+void
+gl::draw::TexCoord(float s, float t)
+noexcept
+{
+	::glTexCoord2f(s, t);
+}
+
+void
+gl::draw::TexCoord(double s, double t)
+noexcept
+{
+	::glTexCoord2d(s, t);
+}
+
+void
+gl::draw::TexCoord(std::span<int, 2> list)
+noexcept
+{
+	::glTexCoord2iv(list.data());
+}
+
+void
+gl::draw::TexCoord(std::span<float, 2> list)
+noexcept
+{
+	::glTexCoord2fv(list.data());
+}
+
+void
+gl::draw::TexCoord(std::span<double, 2> list)
+noexcept
+{
+	::glTexCoord2dv(list.data());
+}
+
+void
 gl::draw::SetColour(const gl::Colour& color)
 noexcept
 {
