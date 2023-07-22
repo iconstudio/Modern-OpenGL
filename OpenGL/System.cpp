@@ -93,10 +93,10 @@ noexcept
 		return false;
 	}
 
-	auto& view_x = ViewX();
-	auto& view_y = ViewY();
-	auto& view_w = ViewWidth();
-	auto& view_h = ViewHeight();
+	const int& view_x = ViewX();
+	const int& view_y = ViewY();
+	const int& view_w = ViewWidth();
+	const int& view_h = ViewHeight();
 
 	nativeContext = std::addressof(painter);
 
@@ -117,11 +117,11 @@ noexcept
 	const float border = 1.01f;
 
 	primitive::Begin(Primitive::Quads);
-	::glColor3f(float(color.R) / 255.0f, float(color.G) / 255.0f, float(color.B) / 255.0f);
-	::glVertex3f(-border, -border, 0);
-	::glVertex3f(-border, border, 0);
-	::glVertex3f(border, border, 0);
-	::glVertex3f(border, -border, 0);
+	primitive::SetColour(color.R, color.G, color.B);
+	primitive::Vertex(-border, -border, 0.0f);
+	primitive::Vertex(-border, border, 0.0f);
+	primitive::Vertex(border, border, 0.0f);
+	primitive::Vertex(border, -border, 0.0f);
 	primitive::End();
 
 	return true;
