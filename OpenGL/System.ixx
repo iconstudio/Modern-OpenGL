@@ -1,6 +1,6 @@
 export module Glib:System;
-import <memory>;
 import Utility.Monad.Loosen;
+import <memory>;
 import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
