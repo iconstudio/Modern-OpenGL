@@ -134,14 +134,14 @@ void
 gl::primitive::SetColour(const gl::Colour& color)
 noexcept
 {
-	::glColor3ub(color.r, color.g, color.b);
+	::glColor4ub(color.R, color.G, color.B, color.A);
 }
 
 void
 gl::primitive::SetColour(gl::Colour&& color)
 noexcept
 {
-	::glColor3ub(color.r, color.g, color.b);
+	::glColor4ub(color.R, color.G, color.B, color.A);
 }
 
 void
