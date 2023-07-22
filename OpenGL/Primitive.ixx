@@ -21,6 +21,8 @@ export namespace gl
 
 	namespace primitive
 	{
+		using ::gl::win32::Colour;
+
 		class [[nodiscard]] Context
 		{
 		public:
@@ -32,17 +34,9 @@ export namespace gl
 			Context(Context&& other) = delete;
 			Context& operator=(Context&& other) = delete;
 		};
-	}
 
-	namespace global
-	{
-		void BeginPrimitives(Primitive mode) noexcept;
-		void EndPrimitives() noexcept;
-	}
-
-	namespace draw
-	{
-		using ::gl::win32::Colour;
+		void Begin(Primitive mode) noexcept;
+		void End() noexcept;
 
 		void Vertex(int x, int y, int z) noexcept;
 		void Vertex(float x, float y, float z) noexcept;
