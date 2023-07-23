@@ -204,7 +204,6 @@
     <ClCompile Include="Comparator.ixx" />
     <ClCompile Include="Culling.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
-    <ClCompile Include="Display.cpp" />
     <ClCompile Include="Display.ixx" />
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Face.ixx" />
@@ -213,14 +212,15 @@
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Culling.cpp" />
+    <ClCompile Include="src\Display.cpp" />
+    <ClCompile Include="src\OpenGL.cpp" />
     <ClCompile Include="src\Primitive.cpp" />
+    <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
     <ClCompile Include="State.ixx" />
-    <ClCompile Include="System.cpp" />
     <ClCompile Include="System.ixx" />
-    <ClCompile Include="OpenGL.cpp" />
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Framework.cpp" />

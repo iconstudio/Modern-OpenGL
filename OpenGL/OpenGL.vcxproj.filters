@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultProperty.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
@@ -33,9 +30,6 @@
     <ClCompile Include="Display.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Display.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Framework.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
@@ -44,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="System.ixx">
       <Filter>헤더 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Utility.ixx">
       <Filter>헤더 파일</Filter>
@@ -106,6 +97,21 @@
       <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Transform.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Primitive.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Display.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGL.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
