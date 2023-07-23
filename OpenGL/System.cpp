@@ -117,7 +117,7 @@ noexcept
 	const float border = 1.01f;
 
 	primitive::Begin(Primitive::Quads);
-	primitive::SetColour(color.R, color.G, color.B);
+	primitive::SetColour(color);
 	primitive::Vertex(-border, -border, 0.0f);
 	primitive::Vertex(-border, border, 0.0f);
 	primitive::Vertex(border, border, 0.0f);
