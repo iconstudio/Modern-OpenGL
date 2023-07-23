@@ -1,17 +1,18 @@
 export module Glib:Comparator;
+import <cstdint>;
 
 export namespace gl
 {
-	enum class [[nodiscard]] Comparator : unsigned int
+	enum class [[nodiscard]] Comparator : std::uint32_t
 	{
-		Never = 512,
-		Equal = 514,
-		NotEqual = 517,
-		Less = 513,
-		LessOrEqual = 515,
-		Greater = 516,
-		GreaterOrEqual = 518,
-		Always = 519,
+		Never = 512U,
+		Equal = 514U,
+		NotEqual = 517U,
+		Less = 513U,
+		LessOrEqual = 515U,
+		Greater = 516U,
+		GreaterOrEqual = 518U,
+		Always = 519U,
 	};
 
 	inline constexpr Comparator Never = Comparator::Never;

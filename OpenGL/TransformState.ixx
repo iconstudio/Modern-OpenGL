@@ -1,13 +1,14 @@
 export module Glib:TransformState;
+import <cstdint>;
 
 export namespace gl
 {
-	enum class [[nodiscard]] TransformMode : unsigned int
+	enum class [[nodiscard]] TransformMode : std::uint32_t
 	{
-		None = 0x0000,
-		ModelView = 0x1700,
-		Projection = 0x1701,
-		Texture = 0x1702,
+		None = 0x0000U,
+		ModelView = 0x1700U,
+		Projection = 0x1701U,
+		Texture = 0x1702U,
 	};
 
 	namespace transform

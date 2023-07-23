@@ -1,14 +1,15 @@
 export module Glib.Blender;
+import <cstdint>;
 import Utility.Monad;
 import :Option;
 import :Mode;
 
 export namespace gl
 {
-	enum class [[nodiscard]] BlendTarget : unsigned int
+	enum class [[nodiscard]] BlendTarget : std::uint32_t
 	{
-		Dest = 0x0BE0,
-		Source = 0x0BE1,
+		Dest = 0x0BE0U,
+		Source = 0x0BE1U,
 	};
 
 	class Blender
