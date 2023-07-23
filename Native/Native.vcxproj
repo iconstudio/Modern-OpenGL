@@ -78,21 +78,29 @@
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

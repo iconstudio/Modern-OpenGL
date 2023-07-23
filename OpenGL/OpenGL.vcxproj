@@ -74,15 +74,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
+    <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
+    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -86,6 +86,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <EnableModules>true</EnableModules>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,6 +107,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <EnableModules>true</EnableModules>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +128,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <EnableModules>true</EnableModules>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +149,7 @@
       <UseStandardPreprocessor>true</UseStandardPreprocessor>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <EnableModules>true</EnableModules>
+      <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

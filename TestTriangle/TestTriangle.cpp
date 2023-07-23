@@ -1,4 +1,6 @@
-﻿import Utility.Print;
+﻿import <memory>;
+import Utility.Print;
+import Glib;
 import Glib.Framework;
 
 int main()
