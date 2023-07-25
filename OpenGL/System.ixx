@@ -1,18 +1,10 @@
 export module Glib:System;
-import Utility.Monad.Loosen;
 import <memory>;
 import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
-
-namespace gl
-{
-	using Painter = void(*)(win32::GraphicDeviceContext* const&) noexcept;
-
-	void SinglePainter(win32::GraphicDeviceContext* const&) noexcept;
-	void DoublePainter(win32::GraphicDeviceContext* const&) noexcept;
-}
+import Utility.Monad.Loosen;
 
 export namespace gl
 {
@@ -47,6 +39,7 @@ export namespace gl
 	public:
 		using base1 = win32::IHandle<win32::native::NativeOGL>;
 		using base2 = std::enable_shared_from_this<System>;
+		using Painter = void(*)(win32::GraphicDeviceContext* const&) noexcept;
 
 		System() noexcept;
 		~System() noexcept;
