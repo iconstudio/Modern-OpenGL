@@ -29,9 +29,9 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.glDescriptor.keepAspectRatio = true;
 	descriptor.glDescriptor.vSync = true;
 	descriptor.isResizable = false;
-	framework->SetRenderer(DefaultRenderer);
 
 	framework->Initialize(std::move(descriptor));
+	framework->SetRenderer(DefaultRenderer);
 
 	util::Println("== Program Started ==");
 	framework->Run();
