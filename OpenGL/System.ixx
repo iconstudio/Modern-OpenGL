@@ -4,6 +4,7 @@ import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
+import Glib.Windows.Context.Renderer;
 import Utility.Monad.Loosen;
 
 export namespace gl
