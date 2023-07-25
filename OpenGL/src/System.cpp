@@ -7,7 +7,6 @@ module;
 module Glib;
 import <utility>;
 import <memory>;
-import Utility.Monad.Loosen;
 import Glib.Windows.Context.Renderer;
 import :System;
 import :Utility;
@@ -33,6 +32,9 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	0,                     // reserved
 	0, 0, 0                // layer masks ignored
 };
+
+void SinglePainter(gl::win32::GraphicDeviceContext* const&) noexcept;
+void DoublePainter(gl::win32::GraphicDeviceContext* const&) noexcept;
 
 unsigned long
 _InitializePixelFormat(const gl::win32::IContext& hdc, PIXELFORMATDESCRIPTOR& my_format, int& my_target)
@@ -72,11 +74,11 @@ noexcept
 
 	if (0 != (my_format.dwFlags & PFD_DOUBLEBUFFER))
 	{
-		myPainter = gl::DoublePainter;
+		myPainter = DoublePainter;
 	}
 	else
 	{
-		myPainter = gl::SinglePainter;
+		myPainter = SinglePainter;
 	}
 
 	return _InitializeSystem();
@@ -239,14 +241,14 @@ noexcept
 }
 
 void
-gl::SinglePainter(gl::win32::GraphicDeviceContext* const&)
+SinglePainter(gl::win32::GraphicDeviceContext* const&)
 noexcept
 {
 	::glFlush();
 }
 
 void
-gl::DoublePainter(gl::win32::GraphicDeviceContext* const& context)
+DoublePainter(gl::win32::GraphicDeviceContext* const& context)
 noexcept
 {
 	context->Delegate(::SwapBuffers);
