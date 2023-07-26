@@ -1,11 +1,8 @@
 export module Glib:Primitive;
 import <cstdint>;
-import Glib.Windows.Colour;
 
 export namespace gl
 {
-	using ::gl::win32::Colour;
-
 	enum class [[nodiscard]] Primitive : std::uint32_t
 	{
 		Points = 0x0000U,

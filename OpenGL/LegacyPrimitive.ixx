@@ -2,9 +2,12 @@ export module Glib.Legacy.Primitive;
 import <cstdint>;
 import <span>;
 import Glib;
+import Glib.Windows.Colour;
 
 export namespace gl::legacy
 {
+	using ::gl::win32::Colour;
+
 	namespace primitive
 	{
 		class [[nodiscard]] Context
