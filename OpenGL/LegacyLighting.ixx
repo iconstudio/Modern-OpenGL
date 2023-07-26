@@ -84,6 +84,11 @@ export namespace gl::legacy
 	private:
 		LightModel myType = LightModel::None;
 		std::uint32_t myIndex = 0U;
+
+		float cachedAmbient[4];
+		float cachedDiffuse[4];
+		float cachedSpecular[4];
+		float cachedEmission[4];
 	};
 }
 
