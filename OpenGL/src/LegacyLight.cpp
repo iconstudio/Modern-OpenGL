@@ -55,42 +55,62 @@ noexcept
 void
 gl::legacy::Caster::SetType(gl::legacy::LightModel type)
 noexcept
-{}
+{
+	myType = type;
+}
 
 void
 gl::legacy::Caster::SetShadeModel(gl::legacy::ShadeModel shade)
 noexcept
-{}
+{
+	::glLighti(myIndex, GL_SHADE_MODEL, static_cast<GLint>(shade));
+}
 
 void
 gl::legacy::Caster::SetOption(gl::legacy::LightOption option, bool value)
 noexcept
-{}
-
-void
-gl::legacy::Caster::SetColor(const gl::legacy::Colour& colour)
-noexcept
-{}
-
-void
-gl::legacy::Caster::SetColor(gl::legacy::Colour&& colour)
-noexcept
-{}
+{
+	::glLighti(myIndex, static_cast<GLenum>(option), static_cast <GLint>(value));
+}
 
 void
 gl::legacy::Caster::SetMaterial(const gl::legacy::Material& material)
 noexcept
-{}
+{
+	material.ambient.Extract(cachedAmbient);
+	material.diffuse.Extract(cachedDiffuse);
+	material.specular.Extract(cachedSpecular);
+	material.emission.Extract(cachedEmission);
+
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, cachedAmbient);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, cachedDiffuse);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cachedSpecular);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, cachedEmission);
+	::glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.shininess);
+}
 
 void
 gl::legacy::Caster::SetMaterial(gl::legacy::Material&& material)
 noexcept
-{}
+{
+	material.ambient.Extract(cachedAmbient);
+	material.diffuse.Extract(cachedDiffuse);
+	material.specular.Extract(cachedSpecular);
+	material.emission.Extract(cachedEmission);
+
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, cachedAmbient);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, cachedDiffuse);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cachedSpecular);
+	::glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, cachedEmission);
+	::glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.shininess);
+}
 
 void
 gl::legacy::Caster::Assign(const gl::legacy::Light& light)
 noexcept
-{}
+{
+
+}
 
 void
 gl::legacy::Caster::Assign(gl::legacy::Light&& light)
