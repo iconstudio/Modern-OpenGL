@@ -69,6 +69,9 @@ export namespace gl::legacy
 		void Assign(const Light& light) noexcept;
 		void Assign(Light&& light) noexcept;
 
+		void Enable() noexcept;
+		void Disable() noexcept;
+
 		[[nodiscard]] Light& GetLight() noexcept;
 		[[nodiscard]] const Light& GetLight() const noexcept;
 
@@ -76,14 +79,10 @@ export namespace gl::legacy
 		Caster(Caster&&) = delete;
 		Caster& operator=(const Caster&) = delete;
 		Caster& operator=(Caster&&) = delete;
+
+	private:
+		std::uint32_t myIndex;
 	};
-
-	void EnableLight() noexcept;
-	void EnableLight(bool flag) noexcept;
-	void DisableLight() noexcept;
-
-	[[nodiscard]] Light& AcquireLight(std::uint32_t index);
-	bool TryAcquireLight(std::uint32_t index, Light& light) noexcept;
 }
 
 export namespace gl
