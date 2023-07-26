@@ -91,7 +91,7 @@ export namespace gl::legacy
 
 export namespace gl
 {
-	//using LegacyMaterial = legacy::Material;
-	//using LegacyLight = legacy::Light;
-	//using LegacyCaster = legacy::Caster;
+	using LegacyMaterial = legacy::Material;
+	using LegacyLight = legacy::Light;
+	using LegacyCaster = legacy::Caster;
 }
