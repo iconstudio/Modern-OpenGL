@@ -86,7 +86,7 @@ noexcept
 }
 
 bool
-gl::System::Begin(win32::GraphicDeviceContext& painter)
+gl::System::Begin(gl::win32::GraphicDeviceContext& painter)
 noexcept
 {
 	using namespace gl::legacy;
