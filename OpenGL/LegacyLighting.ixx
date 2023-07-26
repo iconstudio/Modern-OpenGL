@@ -71,8 +71,8 @@ export namespace gl::legacy
 		void Enable() noexcept;
 		void Disable() noexcept;
 
-		[[nodiscard]] Light& GetLight() noexcept;
-		[[nodiscard]] const Light& GetLight() const noexcept;
+		[[nodiscard]] Light& GetLight() volatile noexcept;
+		[[nodiscard]] const Light& GetLight() const volatile noexcept;
 
 		Caster(const Caster&) = delete;
 		Caster(Caster&&) = delete;

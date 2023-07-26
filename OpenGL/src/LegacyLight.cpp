@@ -21,7 +21,8 @@ void EnableLight(bool flag) noexcept;
 void DisableLight() noexcept;
 
 [[nodiscard]] gl::legacy::Light& AcquireLight(std::uint32_t index);
-bool TryAcquireLight(std::uint32_t index, gl::legacy::Light& light) noexcept;
+bool TryAcquireLight(volatile std::uint32_t index, gl::legacy::Light& light) noexcept;
+void CastLight(volatile std::uint32_t index, const gl::legacy::Light& light) noexcept;
 
 gl::legacy::Caster::Caster()
 	: myIndex(nextLightIndex)
@@ -142,14 +143,14 @@ noexcept
 
 gl::legacy::Light&
 gl::legacy::Caster::GetLight()
-noexcept
+volatile noexcept
 {
 	return AcquireLight(myIndex - firstLightIndex);
 }
 
 const gl::legacy::Light&
 gl::legacy::Caster::GetLight()
-const noexcept
+const volatile noexcept
 {
 	return AcquireLight(myIndex - firstLightIndex);
 }
@@ -183,7 +184,7 @@ noexcept
 }
 
 gl::legacy::Light&
-AcquireLight(std::uint32_t index)
+AcquireLight(volatile std::uint32_t index)
 {
 	if (index < firstLightIndex || lastLightIndex <= index)
 	{
@@ -194,7 +195,7 @@ AcquireLight(std::uint32_t index)
 }
 
 bool
-TryAcquireLight(std::uint32_t index, gl::legacy::Light& light)
+TryAcquireLight(volatile std::uint32_t index, gl::legacy::Light& light)
 noexcept
 {
 	if (index < firstLightIndex || lastLightIndex <= index)
