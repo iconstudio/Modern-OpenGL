@@ -1,6 +1,5 @@
 export module Glib.Legacy.Lighting;
 import <cstdint>;
-import Glib;
 import Glib.Windows.Colour;
 
 export namespace gl::legacy
@@ -40,7 +39,7 @@ export namespace gl::legacy
 	struct [[nodiscard]] Light
 	{
 		Colour ambient{};
-		Colour diffuse{ 1.0, 1.0, 1.0 };
+		Colour diffuse{ 1.0f, 1.0f, 1.0f };
 		Colour specular{};
 		//Position position{};
 		//Direction direction{};
@@ -59,11 +58,10 @@ export namespace gl::legacy
 		Caster();
 		~Caster() noexcept;
 
-		void SetType(LightModel type) noexcept;
 		void SetShadeModel(ShadeModel shade) noexcept;
 		void SetOption(LightOption option, bool value) noexcept;
-		void SetColor(const Colour& colour) noexcept;
-		void SetColor(Colour&& colour) noexcept;
+		void SetAmbient(const Colour& colour) noexcept;
+		void SetAmbient(Colour&& colour) noexcept;
 		void SetMaterial(const Material& material) noexcept;
 		void SetMaterial(Material&& material) noexcept;
 
@@ -82,19 +80,18 @@ export namespace gl::legacy
 		Caster& operator=(Caster&&) = delete;
 
 	private:
-		LightModel myType = LightModel::None;
 		std::uint32_t myIndex = 0U;
 
-		float cachedAmbient[4];
-		float cachedDiffuse[4];
-		float cachedSpecular[4];
-		float cachedEmission[4];
+		float cachedAmbient[4]{};
+		float cachedDiffuse[4]{};
+		float cachedSpecular[4]{};
+		float cachedEmission[4]{};
 	};
 }
 
 export namespace gl
 {
-	using LegacyMaterial = ::gl::legacy::Material;
-	using LegacyLight = ::gl::legacy::Light;
-	using LegacyCaster = ::gl::legacy::Caster;
+	//using LegacyMaterial = legacy::Material;
+	//using LegacyLight = legacy::Light;
+	//using LegacyCaster = legacy::Caster;
 }

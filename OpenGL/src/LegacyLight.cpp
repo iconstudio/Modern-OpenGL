@@ -53,13 +53,6 @@ noexcept
 }
 
 void
-gl::legacy::Caster::SetType(gl::legacy::LightModel type)
-noexcept
-{
-	myType = type;
-}
-
-void
 gl::legacy::Caster::SetShadeModel(gl::legacy::ShadeModel shade)
 noexcept
 {
@@ -71,6 +64,22 @@ gl::legacy::Caster::SetOption(gl::legacy::LightOption option, bool value)
 noexcept
 {
 	::glLighti(myIndex, static_cast<GLenum>(option), static_cast <GLint>(value));
+}
+
+void
+gl::legacy::Caster::SetAmbient(const gl::legacy::Colour& colour)
+noexcept
+{
+	colour.Extract(cachedAmbient);
+	::glLightfv(myIndex, GL_AMBIENT, cachedAmbient);
+}
+
+void
+gl::legacy::Caster::SetAmbient(gl::legacy::Colour&& colour)
+noexcept
+{
+	colour.Extract(cachedAmbient);
+	::glLightfv(myIndex, GL_AMBIENT, cachedAmbient);
 }
 
 void
@@ -86,7 +95,7 @@ noexcept
 	::glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, cachedDiffuse);
 	::glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, cachedSpecular);
 	::glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, cachedEmission);
-	::glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material.shininess);
+	::glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, material.shininess);
 }
 
 void
@@ -129,6 +138,20 @@ gl::legacy::Caster::Disable()
 noexcept
 {
 	::glDisable(myIndex);
+}
+
+gl::legacy::Light&
+gl::legacy::Caster::GetLight()
+noexcept
+{
+	return AcquireLight(myIndex - firstLightIndex);
+}
+
+const gl::legacy::Light&
+gl::legacy::Caster::GetLight()
+const noexcept
+{
+	return AcquireLight(myIndex - firstLightIndex);
 }
 
 void
