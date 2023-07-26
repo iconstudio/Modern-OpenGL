@@ -5,6 +5,7 @@ module;
 module Glib;
 import <type_traits>;
 import :Utility;
+import Glib.Windows.Colour;
 
 void
 gl::global::SetState(const gl::State& state)
@@ -91,14 +92,14 @@ noexcept
 }
 
 void
-gl::global::SetBackgroundColour(const gl::Colour& colour)
+gl::global::SetBackgroundColour(const gl::win32::Colour& colour)
 noexcept
 {
 	::glClearColor(colour.R / 255.0f, colour.G / 255.0f, colour.B / 255.0f, colour.A / 255.0f);
 }
 
 void
-gl::global::SetBackgroundColour(gl::Colour&& colour)
+gl::global::SetBackgroundColour(gl::win32::Colour&& colour)
 noexcept
 {
 	::glClearColor(colour.R / 255.0f, colour.G / 255.0f, colour.B / 255.0f, colour.A / 255.0f);
