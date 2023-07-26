@@ -220,6 +220,9 @@
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Face.ixx" />
     <ClCompile Include="Framework.ixx" />
+    <ClCompile Include="LegacyFog.ixx" />
+    <ClCompile Include="LegacyLighting.ixx" />
+    <ClCompile Include="Lighting.ixx" />
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
