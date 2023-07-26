@@ -6,11 +6,11 @@ import <cstdint>;
 import <type_traits>;
 export import :Implement;
 
-export using NativeColor = winrt::Windows::UI::Color;
-
 export namespace gl::win32
 {
-	// A, R, G, B
+	using NativeColor = winrt::Windows::UI::Color;
+
+		// A, R, G, B
 	struct [[nodiscard]] Colour : public NativeColor
 	{
 		constexpr Colour() noexcept = default;
