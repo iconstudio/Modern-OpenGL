@@ -37,13 +37,13 @@ gl::legacy::Caster::Caster()
 	}
 
 	enabledLights.insert(nextLightIndex++);
-	Enable();
+	this->Enable();
 }
 
 gl::legacy::Caster::~Caster()
 noexcept
 {
-	Disable();
+	this->Disable();
 
 	enabledLights.erase(myIndex);
 	if (enabledLights.empty())
