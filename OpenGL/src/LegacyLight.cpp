@@ -17,8 +17,11 @@ static std::unordered_set<std::uint32_t> enabledLights{};
 static std::uint32_t nextLightIndex = GL_LIGHT0;
 
 void EnableLight() noexcept;
-void EnableLight(bool flag) noexcept;
 void DisableLight() noexcept;
+void EnableLight(bool flag) noexcept;
+void EnableNormal() noexcept;
+void DisableNormal() noexcept;
+void EnableNormal(bool flag) noexcept;
 
 [[nodiscard]] gl::legacy::Light& AcquireLight(std::uint32_t index);
 bool TryAcquireLight(volatile std::uint32_t index, gl::legacy::Light& light) noexcept;
@@ -35,6 +38,7 @@ gl::legacy::Caster::Caster()
 	if (enabledLights.empty())
 	{
 		EnableLight();
+		EnableNormal();
 	}
 
 	enabledLights.insert(nextLightIndex++);
@@ -49,6 +53,7 @@ noexcept
 	enabledLights.erase(myIndex);
 	if (enabledLights.empty())
 	{
+		DisableNormal();
 		DisableLight();
 	}
 }
@@ -169,6 +174,13 @@ noexcept
 }
 
 void
+DisableLight()
+noexcept
+{
+	EnableLight(false);
+}
+
+void
 EnableLight(bool flag)
 noexcept
 {
@@ -183,10 +195,31 @@ noexcept
 }
 
 void
-DisableLight()
+EnableNormal()
 noexcept
 {
-	EnableLight(false);
+	EnableNormal(true);
+}
+
+void
+DisableNormal()
+noexcept
+{
+	EnableNormal(false);
+}
+
+void
+EnableNormal(bool flag)
+noexcept
+{
+	if (flag)
+	{
+		glEnable(GL_NORMALIZE);
+	}
+	else
+	{
+		glDisable(GL_NORMALIZE);
+	}
 }
 
 gl::legacy::Light&
