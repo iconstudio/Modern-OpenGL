@@ -55,7 +55,7 @@ export namespace gl::legacy
 	class Caster
 	{
 	public:
-		Caster() noexcept;
+		Caster();
 		~Caster() noexcept;
 
 		void SetType(LightModel type) noexcept;
