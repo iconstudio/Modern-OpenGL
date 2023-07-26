@@ -119,13 +119,19 @@ void
 gl::legacy::Caster::Assign(const gl::legacy::Light& light)
 noexcept
 {
+	GetLight() = light;
 
+	CastLight(myIndex, GetLight());
 }
 
 void
 gl::legacy::Caster::Assign(gl::legacy::Light&& light)
 noexcept
-{}
+{
+	GetLight() = std::move(light);
+
+	CastLight(myIndex, GetLight());
+}
 
 void
 gl::legacy::Caster::Enable()
@@ -205,4 +211,31 @@ noexcept
 
 	light = everyLights[index - firstLightIndex];
 	return true;
+}
+
+void
+CastLight(std::uint32_t index, const gl::legacy::Light& light)
+noexcept
+{
+	float ambient[4]{};
+	float diffuse[4]{};
+	float specular[4]{};
+
+	light.ambient.Extract(ambient);
+	light.diffuse.Extract(diffuse);
+	light.specular.Extract(specular);
+
+	::glLightfv(index, GL_AMBIENT, ambient);
+	::glLightfv(index, GL_DIFFUSE, diffuse);
+	::glLightfv(index, GL_SPECULAR, specular);
+
+	::glLightfv(index, GL_POSITION, light.position);
+
+	::glLightf(index, GL_SPOT_EXPONENT, light.spotExponent);
+	::glLightf(index, GL_SPOT_CUTOFF, light.spotCutoff);
+	::glLightfv(index, GL_SPOT_DIRECTION, light.spotDirection);
+
+	::glLightf(index, GL_CONSTANT_ATTENUATION, light.constantAttenuation);
+	::glLightf(index, GL_LINEAR_ATTENUATION, light.linearAttenuation);
+	::glLightf(index, GL_QUADRATIC_ATTENUATION, light.quadraticAttenuation);
 }
