@@ -1,5 +1,5 @@
 export module Glib:Transform;
-import :TransformState;
+export import :TransformState;
 
 export namespace gl
 {
