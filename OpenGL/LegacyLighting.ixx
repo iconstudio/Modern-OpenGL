@@ -38,11 +38,11 @@ export namespace gl::legacy
 
 	struct [[nodiscard]] Light
 	{
-		Colour ambient;
-		Colour diffuse;
-		Colour specular;
-		//Position position;
-		//Direction direction;
+		Colour ambient{};
+		Colour diffuse{ 1.0, 1.0, 1.0 };
+		Colour specular{};
+		//Position position{};
+		//Direction direction{};
 
 		float spotExponent = 0.0f;
 		float spotCutoff = 180.0f;
