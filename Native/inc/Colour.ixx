@@ -48,7 +48,7 @@ export namespace gl::win32
 			: NativeColor(std::move(argb))
 		{}
 
-		constexpr void Extract(std::uint8_t(&buffer)[4]) noexcept
+		constexpr void Extract(std::uint8_t(&buffer)[4]) const noexcept
 		{
 			buffer[0] = R;
 			buffer[1] = G;
@@ -56,7 +56,7 @@ export namespace gl::win32
 			buffer[3] = A;
 		}
 
-		constexpr void Extract(float(&buffer)[4]) noexcept
+		constexpr void Extract(float(&buffer)[4]) const noexcept
 		{
 			buffer[0] = R / 255.0F;
 			buffer[1] = G / 255.0F;
@@ -64,7 +64,7 @@ export namespace gl::win32
 			buffer[3] = A / 255.0F;
 		}
 
-		constexpr void Extract(double(&buffer)[4]) noexcept
+		constexpr void Extract(double(&buffer)[4]) const noexcept
 		{
 			buffer[0] = R / 255.0;
 			buffer[1] = G / 255.0;
@@ -72,7 +72,7 @@ export namespace gl::win32
 			buffer[3] = A / 255.0;
 		}
 
-		constexpr void UnsafeExtract(float* const& buffer)
+		constexpr void UnsafeExtract(float* const& buffer) const
 		{
 			buffer[0] = R / 255.0F;
 			buffer[1] = G / 255.0F;
@@ -80,7 +80,7 @@ export namespace gl::win32
 			buffer[3] = A / 255.0F;
 		}
 
-		constexpr void UnsafeExtract(double* const& buffer)
+		constexpr void UnsafeExtract(double* const& buffer) const
 		{
 			buffer[0] = R / 255.0;
 			buffer[1] = G / 255.0;
