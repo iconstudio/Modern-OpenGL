@@ -52,7 +52,6 @@ export namespace gl
 
 	using gl::win32::FilePath;
 	using gl::win32::Colour;
-	using gl::win32::Event;
 	using gl::win32::EventID;
 	using gl::win32::GraphicDeviceContext;
 	using gl::win32::RenderEventHandler;
