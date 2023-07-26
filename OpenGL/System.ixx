@@ -4,12 +4,11 @@ import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
-import Glib.Windows.Context.Renderer;
+import Glib.Blender;
 
 export namespace gl
 {
 	using win32::Colour;
-	class Blender;
 
 	namespace system
 	{
