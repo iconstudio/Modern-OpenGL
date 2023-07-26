@@ -32,22 +32,24 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		}
 
 		myInstance = win32::CreateWindowEx<L"ManagedWindow">(setup.title, setup.wx, setup.wy, setup.ww, setup.wh, 4, style);
+		myInstance->SetPowerSave(setup.isPowersave);
 	}
 	catch (const std::exception& e)
 	{
 		std::printf("Creating Window Error: '%s'", e.what());
+
 		return framework::InitError::FailedOnCreatingWindow;
 	}
-
-	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 
 	glSystem = gl::CreateSystem();
 	if (!glSystem)
 	{
 		std::printf("Creating OpenGL System Error\n");
+
 		return framework::InitError::FailedOnCreatingSystem;
 	}
 
+	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 	if (unsigned long check = glSystem->Initialize(myInstance->AcquireContext(), gl_descriptor); 0 != check)
 	{
 		std::printf("Pixel Formatting Error: %lu\n", check);
@@ -56,7 +58,6 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}
 
 	glSystem->UpdateViewPort(setup.ww, setup.wh);
-	myInstance->SetPowerSave(setup.isPowersave);
 
 	AddEventHandler(win32::EventID::Resize
 		, [this](win32::ManagedWindow& window, unsigned long long, long long lparam) {
