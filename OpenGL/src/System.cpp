@@ -12,6 +12,7 @@ import :System;
 import :Utility;
 import Glib.Blender;
 import Glib.Culling;
+import Glib.Legacy.Primitive;
 
 static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 {
@@ -88,6 +89,8 @@ bool
 gl::System::Begin(win32::GraphicDeviceContext& painter)
 noexcept
 {
+	using namespace gl::legacy;
+
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
 		std::printf("Failed to begin rendering. (gl error code: %u)\n", ::glGetError());

@@ -2,19 +2,21 @@ import <type_traits>;
 import Utility.Print;
 import Glib;
 import Glib.Framework;
+import Glib.Legacy.Primitive;
 
 void DefaultRenderer() noexcept
 {
-	gl::primitive::Context ctx{ gl::Primitive::Triangles };
+	using namespace gl::legacy;
+	primitive::Context ctx{ gl::Primitive::Triangles };
 
-	gl::primitive::SetColour(1.0f, 0.0f, 0.0f);
-	gl::primitive::Vertex(0, -1, 0);
+	primitive::SetColour(1.0f, 0.0f, 0.0f);
+	primitive::Vertex(0, -1, 0);
 
-	gl::primitive::SetColour(0.0f, 1.0f, 0.0f);
-	gl::primitive::Vertex(1, 0, 0);
+	primitive::SetColour(0.0f, 1.0f, 0.0f);
+	primitive::Vertex(1, 0, 0);
 
-	gl::primitive::SetColour(0.0f, 0.0f, 1.0f);
-	gl::primitive::Vertex(0, 1, 0);
+	primitive::SetColour(0.0f, 0.0f, 1.0f);
+	primitive::Vertex(0, 1, 0);
 }
 
 int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
