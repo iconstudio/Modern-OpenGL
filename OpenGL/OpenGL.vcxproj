@@ -222,6 +222,7 @@
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="LegacyFog.ixx" />
     <ClCompile Include="LegacyLighting.ixx" />
+    <ClCompile Include="LegacyPrimitive.ixx" />
     <ClCompile Include="Lighting.ixx" />
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="src\Blender.cpp" />
