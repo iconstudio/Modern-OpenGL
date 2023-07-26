@@ -18,7 +18,7 @@ export namespace gl::legacy
 		TwoSide = 0x0B52,
 	};
 
-	enum [[nodiscard]] LightModel : std::uint32_t
+	enum [[nodiscard]] LightComponent : std::uint32_t
 	{
 		None = 0U,
 		Ambient = 0x1200U,
