@@ -7,7 +7,7 @@ export namespace gl::legacy
 {
 	using ::gl::win32::Colour;
 
-	enum [[nodiscard]] FogOperation
+	enum [[nodiscard]] FogOperation : std::int32_t
 	{
 		Linear = 0x2601,
 		Exp1 = 0x0800,
