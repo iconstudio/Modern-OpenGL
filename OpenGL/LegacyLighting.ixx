@@ -41,11 +41,11 @@ export namespace gl::legacy
 		Colour ambient{};
 		Colour diffuse{ 1.0f, 1.0f, 1.0f };
 		Colour specular{};
-		//Position position{};
-		//Direction direction{};
+		float position[3]{};
 
 		float spotExponent = 0.0f;
 		float spotCutoff = 180.0f;
+		float spotDirection[3]{};
 
 		float constantAttenuation = 1.0f;
 		float linearAttenuation = 0.0f;
