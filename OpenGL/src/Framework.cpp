@@ -35,36 +35,28 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}
 	catch (const std::exception& e)
 	{
-		std::printf("Exception: '%s'", e.what());
+		std::printf("Creating Window Error: '%s'", e.what());
 		return framework::InitError::FailedOnCreatingWindow;
 	}
 
 	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 
-	framework::InitError ok = framework::InitError::Success;
+	glSystem = gl::CreateSystem();
+	if (!glSystem)
+	{
+		std::printf("Creating OpenGL System Error\n");
+		return framework::InitError::FailedOnCreatingSystem;
+	}
 
-	gl::CreateSystem().if_then<unsigned long>(
-		[&](unsigned long&& code) noexcept {
-		std::printf("Pixel Formatting Error: %lu\n", code);
-		ok = framework::InitError::FailedOnSettingPixelFormat;
-	}).and_then<opengl_system_t>(
-		[&](opengl_system_t&& context) noexcept -> util::Monad<opengl_system_t> {
-		return std::move(context);
-	}).and_then([&](opengl_system_t&& context) noexcept -> util::Monad<unsigned long> {
-		glSystem = std::move(context);
-		glSystem->UpdateViewPort(setup.ww, setup.wh);
+	if (unsigned long check = glSystem->Initialize(myInstance->AcquireContext(), gl_descriptor); 0 != check)
+	{
+		std::printf("Pixel Formatting Error: %lu\n", check);
 
-		if (unsigned long check = glSystem->Initialize(myInstance->AcquireContext(), gl_descriptor); 0 != check)
-		{
-			return check;
-		}
+		return framework::InitError::FailedOnSettingPixelFormat;
+	}
 
-		myInstance->SetPowerSave(setup.isPowersave);
-		return util::nullopt;
-	}).if_then([&](unsigned long&& error_code) noexcept {
-		std::printf("Creating Window Error: %lu\n", error_code);
-		ok = framework::InitError::FailedOnCreatingWindow;
-	});
+	glSystem->UpdateViewPort(setup.ww, setup.wh);
+	myInstance->SetPowerSave(setup.isPowersave);
 
 	AddEventHandler(win32::EventID::Resize
 		, [this](win32::ManagedWindow& window, unsigned long long, long long lparam) {
@@ -74,7 +66,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		window.ClearWindow();
 	});
 
-	return ok;
+	return framework::InitError::Success;
 }
 
 gl::framework::InitError
