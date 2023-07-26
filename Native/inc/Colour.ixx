@@ -20,6 +20,26 @@ export namespace gl::win32
 			: NativeColor(a, r, g, b)
 		{}
 
+		constexpr Colour(const float& r, const float& g, const float& b, const float& a = 1.0f) noexcept
+			: NativeColor
+			(
+				static_cast<std::uint8_t>(a * 255.0F)
+				, static_cast<std::uint8_t>(r * 255.0F)
+				, static_cast<std::uint8_t>(g * 255.0F)
+				, static_cast<std::uint8_t>(b * 255.0F)
+			)
+		{}
+
+		constexpr Colour(const double& r, const double& g, const double& b, const double& a = 1.0) noexcept
+			: NativeColor
+			(
+				static_cast<std::uint8_t>(a * 255.0)
+				, static_cast<std::uint8_t>(r * 255.0)
+				, static_cast<std::uint8_t>(g * 255.0)
+				, static_cast<std::uint8_t>(b * 255.0)
+			)
+		{}
+
 		constexpr Colour(const NativeColor& argb) noexcept
 			: NativeColor(argb)
 		{}
