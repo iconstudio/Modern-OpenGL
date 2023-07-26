@@ -26,6 +26,7 @@ export namespace gl
 		enum class InitError
 		{
 			Success,
+			FailedOnCreatingSystem,
 			FailedOnCreatingWindow,
 			FailedOnSettingPixelFormat,
 		};
