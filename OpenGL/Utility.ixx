@@ -1,16 +1,13 @@
 export module Glib:Utility;
 import <cstdint>;
-import Glib.Windows.Colour;
 export import :State;
 export import :ClearBits;
-
-export namespace gl
-{
-	using win32::Colour;
-}
+import Glib.Windows.Colour;
 
 export namespace gl::global
 {
+	using ::gl::win32::Colour;
+
 	void SetState(const gl::State& state) noexcept;
 	void SetState(const volatile gl::State& state) noexcept;
 	void SetState(gl::State&& state) noexcept;
