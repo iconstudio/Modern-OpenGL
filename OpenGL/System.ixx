@@ -5,7 +5,6 @@ import Glib.Windows.Definitions;
 import Glib.Windows.IHandle;
 import Glib.Windows.Colour;
 import Glib.Windows.Context.Renderer;
-import Utility.Monad.Loosen;
 
 export namespace gl
 {
@@ -83,8 +82,6 @@ export namespace gl
 		const Blender* myBlender = nullptr;
 	};
 
-	using SystemCreation = util::LooseMonad<std::shared_ptr<System>, unsigned long>;
-
 	[[nodiscard]]
-	SystemCreation CreateSystem() noexcept;
+	std::shared_ptr<System> CreateSystem() noexcept;
 }

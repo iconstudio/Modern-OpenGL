@@ -197,7 +197,7 @@ noexcept
 	delete myBlender;
 }
 
-gl::SystemCreation
+std::shared_ptr<gl::System>
 gl::CreateSystem()
 noexcept
 {
