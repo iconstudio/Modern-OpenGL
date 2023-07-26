@@ -21,6 +21,7 @@ export namespace gl::legacy
 
 	enum [[nodiscard]] LightModel : std::uint32_t
 	{
+		None = 0U,
 		Ambient = 0x1200U,
 		Diffuse = 0x1201U,
 		Specular = 0x1202U,
@@ -81,7 +82,8 @@ export namespace gl::legacy
 		Caster& operator=(Caster&&) = delete;
 
 	private:
-		std::uint32_t myIndex;
+		LightModel myType = LightModel::None;
+		std::uint32_t myIndex = 0U;
 	};
 }
 
