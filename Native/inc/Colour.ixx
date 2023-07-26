@@ -89,6 +89,17 @@ export namespace gl::win32
 		}
 
 		[[nodiscard]]
+		constexpr std::uint8_t operator[](size_t index) const
+		{
+			if (3 < index)
+			{
+				throw std::out_of_range("Index out of range.");
+			}
+
+			return *(std::addressof(A) + index);
+		}
+
+		[[nodiscard]]
 		constexpr RawRGB ToRaw() const noexcept
 		{
 			return MakeRawColor(R, G, B);
