@@ -171,7 +171,7 @@ noexcept
 		typedef BOOL(APIENTRY* PFNWGLSWAPINTERVALPROC)(int);
 		PFNWGLSWAPINTERVALPROC wglSwapIntervalEXT = 0;
 
-		const char* extensions = (char*)glGetString(GL_EXTENSIONS);
+		//const char* extensions = (char*)glGetString(GL_EXTENSIONS);
 
 		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALPROC)wglGetProcAddress("wglSwapIntervalEXT");
 
