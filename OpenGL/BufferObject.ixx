@@ -8,12 +8,14 @@ export namespace gl
 		static inline constexpr std::uint32_t npos = static_cast<std::uint32_t>(-1);
 
 	public:
-		[[nodiscard]] constexpr std::uint32_t GetID() const noexcept
+		[[nodiscard]]
+		constexpr std::uint32_t GetID() const noexcept
 		{
 			return myID;
 		}
 
-		[[nodiscard]] constexpr bool IsValid() const noexcept
+		[[nodiscard]]
+		constexpr bool IsValid() const noexcept
 		{
 			return myID != npos;
 		}
