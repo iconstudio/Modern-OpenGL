@@ -42,7 +42,7 @@
     <ClCompile Include="Utility.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BufferObjects.ixx">
+    <ClCompile Include="BufferObject.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="Vertex.ixx">

@@ -7,7 +7,7 @@ export import :Comparator;
 export import :State;
 export import :Primitive;
 export import :Atom;
-export import :BufferObjects;
+export import :BufferObject;
 export import :Vertex;
 export import :System;
 
