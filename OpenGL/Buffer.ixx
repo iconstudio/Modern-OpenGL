@@ -4,15 +4,20 @@ import Glib;
 
 export namespace gl
 {
+	enum class BufferType : std::uint32_t
+	{
+		invalid = static_cast<std::uint32_t>(-1),
+	};
+
 	class [[nodiscard]] Buffer : public BufferObject
 	{
 	public:
 		Buffer() = default;
 		~Buffer() = default;
 
-		void SetData(const void* data, size_t size, std::uint32_t usage) const noexcept;
-		void SetSubData(const void* data, size_t size, size_t offset) const noexcept;
-		void ClearData(std::uint32_t internalformat, std::uint32_t format, std::uint32_t type, const void* data) const noexcept;
+		void SetData(const void* const& data, size_t size, BufferType usage) const noexcept;
+		void SetSubData(const void* const& data, size_t size, size_t offset) const noexcept;
+		void ClearData(std::uint32_t internalformat, std::uint32_t format, std::uint32_t type, const void* const& data) const noexcept;
 		void CopySubData(const Buffer& readBuffer, size_t readOffset, size_t writeOffset, size_t size);
 
 		void Bind() const noexcept;
@@ -31,5 +36,8 @@ export namespace gl
 		Buffer(Buffer&&) noexcept = default;
 		Buffer& operator=(const Buffer&) = delete;
 		Buffer& operator=(Buffer&&) noexcept = default;
+
+	private:
+		std::uint32_t myTarget{ GL_ARRAY_BUFFER };
 	};
 }
