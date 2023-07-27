@@ -135,5 +135,8 @@
     <ClCompile Include="Texture.ixx">
       <Filter>헤더 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Buffer.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
