@@ -242,6 +242,7 @@
     <ClCompile Include="OpenGL.ixx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Framework.cpp" />
+    <ClCompile Include="Texture.ixx" />
     <ClCompile Include="Transform.ixx" />
     <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="Utility.ixx" />

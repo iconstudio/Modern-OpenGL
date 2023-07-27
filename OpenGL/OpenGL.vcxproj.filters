@@ -132,5 +132,8 @@
     <ClCompile Include="src\LegacyLight.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.ixx">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
