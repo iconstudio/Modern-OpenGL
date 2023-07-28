@@ -38,6 +38,6 @@ export namespace gl
 		Buffer& operator=(Buffer&&) noexcept = default;
 
 	private:
-		std::uint32_t myTarget{ GL_ARRAY_BUFFER };
+		std::uint32_t myTarget{ 0 };
 	};
 }
