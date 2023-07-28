@@ -1,10 +1,7 @@
 export module Glib:Atom;
+import Utility.Atom;
 
 export namespace gl
 {
-	template<typename T>
-	struct [[nodiscard]] Atom
-	{
-		
-	};
+	using ::util::Atom;
 }
