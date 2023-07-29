@@ -1,14 +1,15 @@
 export module Glib.Windows.Coroutine;
+import <coroutine>;
 import Utility.Constraints;
 import Utility.FixedString;
 import Utility.Coroutine;
 
 export namespace gl::win32
 {
-	using util::coroutine::coroutine_handle;
+	using std::coroutine_handle;
+	using std::suspend_always;
+	using std::suspend_never;
 	using util::coroutine::awaitable;
-	using util::coroutine::suspend_always;
-	using util::coroutine::suspend_never;
 	using util::coroutine::Cowork;
 	using util::coroutine::coexecution;
 	using util::coroutine::default_sentinel_t;
@@ -34,7 +35,7 @@ export namespace gl::win32
 	{
 	public:
 		struct promise_type;
-		using handle_type = util::coroutine::coroutine_handle<promise_type>;
+		using handle_type = std::coroutine_handle<promise_type>;
 
 		struct promise_type
 		{
