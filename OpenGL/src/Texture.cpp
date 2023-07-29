@@ -1,4 +1,9 @@
 module;
 #include <Windows.h>
 #include <gl/GL.h>
-export module Glib.Texture;
+module Glib.Texture;
+
+gl::Texture::Texture(nullptr_t)
+noexcept
+	: base()
+{}
