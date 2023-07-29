@@ -15,17 +15,26 @@ noexcept
 	return Texture();
 }
 
+gl::Texture::Texture(const gl::FilePath& path
+	, texture::Type type
+	, texture::WrapMode hwrap, texture::WrapMode vwrap
+	, texture::FilterMode min, texture::FilterMode mag)
+	: base()
+{
+
+}
+
 gl::Texture
 gl::CreateEmptyTexture(std::uint32_t w, std::uint32_t h)
 noexcept
 {
-	return Texture();
+	return gl::Texture();
 }
 
 gl::Texture
 gl::LoadTexture(const gl::FilePath& path)
 {
-	return Texture();
+	return gl::Texture();
 }
 
 bool

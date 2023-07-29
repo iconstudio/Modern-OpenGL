@@ -88,6 +88,7 @@ export namespace gl
 
 	private:
 		Texture(const FilePath& path);
+		Texture(const FilePath& path, texture::Type type, texture::WrapMode hwrap, texture::WrapMode vwrap, texture::FilterMode min, texture::FilterMode mag);
 
 		Texture(const Texture&) noexcept = default;
 		Texture& operator=(const Texture&) noexcept = default;
