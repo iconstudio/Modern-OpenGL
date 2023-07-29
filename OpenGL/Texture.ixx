@@ -74,4 +74,8 @@ export namespace gl
 		texture::WrapMode hWrap = texture::WrapMode::Repeat, vWrap = texture::WrapMode::Repeat;
 		texture::FilterMode minFilter = texture::FilterMode::Linear, magFilter = texture::FilterMode::Linear;
 	};
+
+	[[nodiscard]] Texture CreateEmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
+	[[nodiscard]] Texture LoadTexture(const FilePath& path);
+	bool TryLoadTexture(const FilePath& path, Texture& output) noexcept;
 }
