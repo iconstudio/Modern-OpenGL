@@ -3,6 +3,7 @@ import Utility.Print;
 import Glib;
 import Glib.Framework;
 import Glib.Legacy.Primitive;
+import Glib.Texture;
 
 void DefaultRenderer() noexcept
 {
@@ -34,6 +35,8 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	framework->Initialize(std::move(descriptor));
 	framework->SetRenderer(DefaultRenderer);
+
+	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	util::Println("== Program Started ==");
 	framework->Run();
