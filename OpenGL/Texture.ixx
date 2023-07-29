@@ -3,7 +3,6 @@ import <cstdint>;
 import <string_view>;
 import <filesystem>;
 import <memory>;
-import Utility.Atom;
 import Utility.Atomic;
 import Glib;
 
@@ -49,6 +48,6 @@ export namespace gl
 		Texture(const FilePath& path);
 
 		std::unique_ptr<TextureBlob> myBlob = nullptr;
-		util::Atom<const std::uint32_t> hSize = 32U, vSize = 32U;
+		std::uint32_t hSize = 32U, vSize = 32U;
 	};
 }
