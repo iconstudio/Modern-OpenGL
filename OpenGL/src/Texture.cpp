@@ -47,6 +47,21 @@ bool
 gl::TryLoadTexture(const gl::FilePath& path, gl::Texture& output)
 noexcept
 {
+	if (path.empty())
+	{
+		return false;
+	}
+
+	if (not path.has_filename())
+	{
+		return false;
+	}
+
+	if (not path.has_extension())
+	{
+		return false;
+	}
+
 	return false;
 }
 
