@@ -220,6 +220,7 @@
     <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Face.ixx" />
     <ClCompile Include="Framework.ixx" />
+    <ClCompile Include="Image.ixx" />
     <ClCompile Include="LegacyFog.ixx" />
     <ClCompile Include="LegacyLighting.ixx" />
     <ClCompile Include="LegacyPrimitive.ixx" />
@@ -229,6 +230,7 @@
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Culling.cpp" />
     <ClCompile Include="src\Display.cpp" />
+    <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\LegacyFog.cpp" />
     <ClCompile Include="src\LegacyLight.cpp" />
     <ClCompile Include="src\LegacyPrimitive.cpp" />
