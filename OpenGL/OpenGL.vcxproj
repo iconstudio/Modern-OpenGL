@@ -207,7 +207,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Atom.ixx" />
     <ClCompile Include="Blender.ixx" />
     <ClCompile Include="BlendMode.ixx" />
     <ClCompile Include="BlendOption.ixx" />
