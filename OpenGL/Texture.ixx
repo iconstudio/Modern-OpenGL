@@ -17,8 +17,8 @@ export namespace gl
 		struct [[nodiscard]] TextureBlob
 		{
 			std::uint32_t width, height;
-			std::uint8_t* data;
-			util::atomic_size_t refCount;
+			std::uint8_t* data = nullptr;
+			util::atomic_size_t refCount = 1;
 		};
 
 	public:

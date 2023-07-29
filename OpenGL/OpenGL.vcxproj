@@ -234,6 +234,7 @@
     <ClCompile Include="src\LegacyPrimitive.cpp" />
     <ClCompile Include="src\Primitive.cpp" />
     <ClCompile Include="src\System.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
