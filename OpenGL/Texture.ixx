@@ -49,8 +49,14 @@ export namespace gl
 	private:
 		struct [[nodiscard]] TextureBlob
 		{
-			std::uint32_t width, height;
-			std::uint8_t* data = nullptr;
+			std::uint32_t width = 1U, height = 1U;
+			texture::Type texType = texture::Type::Tex2D;
+			texture::WrapMode hWrap = texture::WrapMode::Repeat;
+			texture::WrapMode vWrap = texture::WrapMode::Repeat;
+			texture::FilterMode minFilter = texture::FilterMode::Linear;
+			texture::FilterMode magFilter = texture::FilterMode::Linear;
+
+			void* data = nullptr;
 		};
 
 	public:
@@ -87,11 +93,6 @@ export namespace gl
 		Texture& operator=(const Texture&) noexcept = default;
 
 		std::shared_ptr<TextureBlob> myBlob = nullptr;
-		std::uint32_t hSize = 1U, vSize = 1U;
-
-		texture::Type myType = texture::Type::Tex2D;
-		texture::WrapMode hWrap = texture::WrapMode::Repeat, vWrap = texture::WrapMode::Repeat;
-		texture::FilterMode minFilter = texture::FilterMode::Linear, magFilter = texture::FilterMode::Linear;
 	};
 
 	[[nodiscard]] Texture CreateEmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
