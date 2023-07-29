@@ -9,6 +9,28 @@ export namespace gl
 {
 	using FilePath = std::filesystem::path;
 
+	namespace texture
+	{
+		enum class [[nodiscard]] WrapMode : std::uint32_t
+		{
+			Repeat = 0x2901,
+			MirroredRepeat = 0x8370,
+			ClampToEdge = 0x812F,
+			ClampToBorder = 0x812D,
+			MirrorClampToEdge = 0x8743
+		};
+
+		enum class [[nodiscard]] FilterMode : std::uint32_t
+		{
+			Nearest = 0x2600,
+			Linear = 0x2601,
+			NearestMipmapNearest = 0x2700,
+			LinearMipmapNearest = 0x2701,
+			NearestMipmapLinear = 0x2702,
+			LinearMipmapLinear = 0x2703
+		};
+	}
+
 	class [[nodiscard]] Texture : public gl::BufferObject
 	{
 	private:
@@ -47,5 +69,7 @@ export namespace gl
 
 		std::shared_ptr<TextureBlob> myBlob = nullptr;
 		std::uint32_t hSize = 32U, vSize = 32U;
+		texture::WrapMode hWrap = texture::WrapMode::Repeat, vWrap = texture::WrapMode::Repeat;
+		texture::FilterMode minFilter = texture::FilterMode::Linear, magFilter = texture::FilterMode::Linear;
 	};
 }
