@@ -43,9 +43,10 @@ export namespace gl
 	public:
 		using base = gl::BufferObject;
 
-		Texture() noexcept;
+		Texture() = default;
+		~Texture() = default;
+
 		Texture(nullptr_t) noexcept;
-		~Texture() noexcept;
 
 		void Bind() const noexcept;
 		void Use() const noexcept;
