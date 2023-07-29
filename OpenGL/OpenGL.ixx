@@ -6,7 +6,6 @@ export import :Transform;
 export import :Comparator;
 export import :State;
 export import :Primitive;
-export import :Atom;
 export import :BufferObject;
 export import :Vertex;
 export import :System;

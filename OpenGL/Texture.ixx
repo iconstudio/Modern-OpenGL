@@ -1,6 +1,8 @@
 export module Glib.Texture;
+import <cstdint>;
 import <string_view>;
 import <filesystem>;
+import Utility.Atom;
 import Glib;
 
 export namespace gl
@@ -27,5 +29,7 @@ export namespace gl
 
 	private:
 		Texture(const FilePath& path);
+
+		util::Atom<const std::uint32_t> hSize, vSize;
 	};
 }
