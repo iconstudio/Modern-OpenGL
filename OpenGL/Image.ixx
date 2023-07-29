@@ -3,5 +3,8 @@ import Glib;
 
 export namespace gl
 {
-
+	class [[nodiscard]] Image
+	{
+	public:
+	};
 }

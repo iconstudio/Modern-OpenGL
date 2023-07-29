@@ -67,6 +67,7 @@ export namespace gl
 		~Texture() = default;
 
 		Texture(nullptr_t) noexcept;
+		Texture(gl::Image&&) noexcept;
 
 		void Bind() const noexcept;
 		void Use() const noexcept;
