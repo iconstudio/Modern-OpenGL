@@ -63,6 +63,8 @@ export namespace gl
 
 		void Bind() const noexcept;
 		void Use() const noexcept;
+		[[nodiscard]] Texture Copy() const;
+		bool TryCopy(Texture& output) const noexcept;
 		void Destroy() noexcept;
 
 		[[nodiscard]] std::uint32_t GetWidth() const noexcept;
