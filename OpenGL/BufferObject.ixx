@@ -29,6 +29,5 @@ export namespace gl
 		{}
 
 		std::uint32_t myID = npos;
-		void* myData = nullptr;
 	};
 }
