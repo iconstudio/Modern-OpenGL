@@ -68,7 +68,7 @@ export namespace gl
 		Texture(const FilePath& path);
 
 		std::shared_ptr<TextureBlob> myBlob = nullptr;
-		std::uint32_t hSize = 32U, vSize = 32U;
+		std::uint32_t hSize = 1U, vSize = 1U;
 		texture::WrapMode hWrap = texture::WrapMode::Repeat, vWrap = texture::WrapMode::Repeat;
 		texture::FilterMode minFilter = texture::FilterMode::Linear, magFilter = texture::FilterMode::Linear;
 	};
