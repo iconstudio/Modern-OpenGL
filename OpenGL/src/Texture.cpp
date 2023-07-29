@@ -1,7 +1,9 @@
 module;
 #include <Windows.h>
 #include <gl/GL.h>
+
 module Glib.Texture;
+import <stdexcept>;
 
 gl::Texture::Texture(nullptr_t)
 noexcept
@@ -46,4 +48,41 @@ gl::TryLoadTexture(const gl::FilePath& path, gl::Texture& output)
 noexcept
 {
 	return false;
+}
+
+std::uint32_t
+gl::Texture::GetWidth()
+const
+noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->width;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+std::uint32_t
+gl::Texture::GetHeight()
+const
+noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->height;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+bool
+gl::Texture::IsEmpty()
+const noexcept
+{
+	return myBlob == nullptr;
 }
