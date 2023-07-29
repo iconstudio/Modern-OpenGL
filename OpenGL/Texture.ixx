@@ -24,10 +24,23 @@ export namespace gl
 		{
 			Nearest = 0x2600,
 			Linear = 0x2601,
-			NearestMipmapNearest = 0x2700,
-			LinearMipmapNearest = 0x2701,
-			NearestMipmapLinear = 0x2702,
-			LinearMipmapLinear = 0x2703
+			NearestMipmapNearest = 0x2702,
+			LinearMipmapNearest = 0x2703,
+			NearestMipmapLinear = 0x2704,
+			LinearMipmapLinear = 0x2705
+		};
+
+		enum class [[nodiscard]] Type : std::uint32_t
+		{
+			Tex1D = 0x0DE0,
+			Tex2D = 0x0DE1,
+			Tex3D = 0x806F,
+			Tex1DArray = 0x8C18,
+			Tex2DArray = 0x8C1A,
+			TexCubeMap = 0x8513,
+			TexCubeMapArray = 0x9009,
+			Tex2DMultisample = 0x9100,
+			Tex2DMultisampleArray = 0x9102
 		};
 	}
 
@@ -72,6 +85,8 @@ export namespace gl
 
 		std::shared_ptr<TextureBlob> myBlob = nullptr;
 		std::uint32_t hSize = 1U, vSize = 1U;
+
+		texture::Type myType = texture::Type::Tex2D;
 		texture::WrapMode hWrap = texture::WrapMode::Repeat, vWrap = texture::WrapMode::Repeat;
 		texture::FilterMode minFilter = texture::FilterMode::Linear, magFilter = texture::FilterMode::Linear;
 	};
