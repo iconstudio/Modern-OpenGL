@@ -8,8 +8,6 @@ export import :Image;
 
 export namespace gl
 {
-	using FilePath = std::filesystem::path;
-
 	namespace texture
 	{
 		enum class [[nodiscard]] WrapMode : std::uint32_t
