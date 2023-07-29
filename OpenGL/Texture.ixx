@@ -70,10 +70,8 @@ export namespace gl
 
 		[[nodiscard]] bool IsEmpty() const noexcept;
 
-		Texture(const Texture& other) noexcept;
-		Texture(Texture&& other) noexcept;
-		Texture& operator=(const Texture& other) noexcept;
-		Texture& operator=(Texture&& other) noexcept;
+		Texture(Texture&&) noexcept = default;
+		Texture& operator=(Texture&&) noexcept = default;
 
 		[[nodiscard]] static Texture EmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
 		[[nodiscard]] friend Texture CreateEmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
@@ -82,6 +80,9 @@ export namespace gl
 
 	private:
 		Texture(const FilePath& path);
+
+		Texture(const Texture&) noexcept = default;
+		Texture& operator=(const Texture&) noexcept = default;
 
 		std::shared_ptr<TextureBlob> myBlob = nullptr;
 		std::uint32_t hSize = 1U, vSize = 1U;
