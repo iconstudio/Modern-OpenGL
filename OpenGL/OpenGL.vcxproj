@@ -248,6 +248,7 @@
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
+    <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="State.ixx" />
     <ClCompile Include="System.ixx" />
     <ClCompile Include="OpenGL.ixx" />
