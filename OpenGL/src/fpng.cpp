@@ -3526,7 +3526,7 @@ do { \
 
 		fclose(pFile);
 
-		return fpng_decode_memory(buf.data(), (uint32_t)buf.size(), out, width, height, channels_in_file, desired_channels);
+		return fpng_decode_memory(buf.data(), buf.size(), out, width, height, channels_in_file, desired_channels);
 		}
 #endif
 
