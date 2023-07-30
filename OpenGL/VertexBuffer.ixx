@@ -6,6 +6,8 @@ export namespace gl
 	class [[nodiscard]] VertexBuffer : public BufferObject
 	{
 	public:
+		using base = BufferObject;
+
 		VertexBuffer() noexcept;
 		~VertexBuffer() noexcept;
 
