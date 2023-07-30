@@ -1,6 +1,7 @@
 export module Glib.Texture:Image;
 import <string_view>;
 import <filesystem>;
+import <mutex>;
 import Glib;
 
 export namespace gl
@@ -20,5 +21,8 @@ export namespace gl
 		Image(Image&&) noexcept = default;
 		Image& operator=(const Image&) = delete;
 		Image& operator=(Image&&) noexcept = default;
+
+	private:
+		static std::once_flag initFlag;
 	};
 }
