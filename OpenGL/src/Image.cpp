@@ -60,9 +60,7 @@ gl::Image::Image(std::string_view filepath)
 		fpng::fpng_init();
 	});
 
-	BindedAllocator myAlloc{};
-
-	std::vector<std::uint8_t, BindedAllocator> buffer{};
+	std::vector<std::uint8_t> buffer{};
 	if (!ExtractFile(filepath, buffer))
 	{
 		return;
