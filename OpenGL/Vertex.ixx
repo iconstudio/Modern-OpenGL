@@ -11,6 +11,7 @@ export namespace gl
 
 		void Bind() const noexcept;
 		void Unbind() const noexcept;
+		void Use() const noexcept;
 
 		void SetData(const void* data, size_t size, unsigned int usage) const noexcept;
 		void SetSubData(const void* data, size_t size, size_t offset) const noexcept;
