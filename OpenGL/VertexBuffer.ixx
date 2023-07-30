@@ -1,4 +1,4 @@
-export module Glib:Vertex;
+export module Glib:VertexBuffer;
 import :BufferObject;
 
 export namespace gl
