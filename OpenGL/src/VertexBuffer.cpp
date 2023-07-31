@@ -18,14 +18,15 @@ gl::VertexBuffer::~VertexBuffer()
 }
 
 void
-gl::VertexBuffer::SetData(const void* data, size_t size, unsigned int usage)
+gl::VertexBuffer::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
 const noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+	::glBufferData(GL_ARRAY_BUFFER, size, data, static_cast<GLenum>(usage));
 	::glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	mySize = size;
+	myType = usage;
 }
 
 void
