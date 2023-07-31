@@ -28,5 +28,9 @@ export namespace gl
 		VertexBuffer(VertexBuffer&&) noexcept = default;
 		VertexBuffer& operator=(const VertexBuffer&) = delete;
 		VertexBuffer& operator=(VertexBuffer&&) noexcept = default;
+
+	private:
+		//VertexLayout m_Layout;
+		size_t mySize = 0;
 	};
 }
