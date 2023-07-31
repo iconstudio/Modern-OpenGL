@@ -57,7 +57,7 @@ export namespace gl
 
 	private:
 		buffer::BufferType myType = buffer::BufferType::Vertex;
-		//VertexLayout m_Layout;
+		BufferLayout myLayout{};
 		size_t mySize = 0;
 	};
 }
