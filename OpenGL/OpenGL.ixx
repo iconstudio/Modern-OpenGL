@@ -8,6 +8,7 @@ export import :State;
 export import :Primitive;
 export import :Object;
 export import :BufferObject;
+export import :BufferLayout;
 export import :System;
 
 export namespace gl
