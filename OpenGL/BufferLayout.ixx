@@ -33,24 +33,38 @@ export namespace gl
 	class [[nodiscard]] BufferLayout
 	{
 	public:
-		BufferLayout() noexcept = default;
+		using element_t = std::tuple<int, int, bool, int, int>;
+
+		constexpr BufferLayout() noexcept = default;
 		~BufferLayout() noexcept = default;
 
 		template<typename T>
-		void AddElement(const int& count, const bool& normalized) noexcept
+		constexpr void AddElement(const int& count, const bool& normalized) noexcept
 		{
 			AddUnsafeElement<T>(count, normalized, count * sizeof(T), myStride);
 		}
 
 		template<typename T>
-		void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const int& offset) noexcept
+		constexpr void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const int& offset) noexcept
 		{
 			myElements.emplace_back(count, get_typeindex<T>(), normalized, stride, offset);
 			myStride += stride;
 		}
 
 		[[nodiscard]]
-		constexpr const std::vector<std::tuple<int, int, bool, int, int>>& GetElements() const noexcept
+		constexpr element_t& Get(const int& index) noexcept
+		{
+			return myElements[index];
+		}
+
+		[[nodiscard]]
+		constexpr const element_t& Get(const int& index) const noexcept
+		{
+			return myElements[index];
+		}
+
+		[[nodiscard]]
+		constexpr const std::vector<element_t>& GetElements() const noexcept
 		{
 			return myElements;
 		}
@@ -61,8 +75,13 @@ export namespace gl
 			return myStride;
 		}
 
+		constexpr BufferLayout(const BufferLayout&) noexcept = default;
+		constexpr BufferLayout(BufferLayout&&) noexcept = default;
+		constexpr BufferLayout& operator=(const BufferLayout&) noexcept = default;
+		constexpr BufferLayout& operator=(BufferLayout&&) noexcept = default;
+
 	private:
-		std::vector<std::tuple<int, int, bool, int, int>> myElements;
+		std::vector<element_t> myElements;
 		int myStride = 0;
 	};
 }
