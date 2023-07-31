@@ -72,6 +72,19 @@ noexcept
 	Bind();
 	::AttachElement(layout.GetElements());
 	Unbind();
+
+	myLayout = layout;
+}
+
+void
+gl::BufferObject::SetLayout(BufferLayout&& layout)
+noexcept
+{
+	myLayout = std::move(layout);
+
+	Bind();
+	::AttachElement(myLayout.GetElements());
+	Unbind();
 }
 
 void
