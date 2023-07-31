@@ -43,7 +43,7 @@ struct Binder
 	GLenum bftype;
 	std::uint32_t id;
 
-	Binder(const gl::buffer::BufferType& target, const std::uint32_t& id) noexcept
+	Binder(gl::buffer::BufferType target, const std::uint32_t& id) noexcept
 		: bftype(static_cast<GLenum>(target)), id(id)
 	{
 		::glBindBuffer(bftype, id);
@@ -59,7 +59,7 @@ void
 gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
 noexcept
 {
-	Binder binder(myType, myID);
+	Binder binder{ myType, myID };
 
 	::glBufferData(binder.bftype, size, data, static_cast<GLenum>(usage));
 
@@ -71,7 +71,7 @@ void
 gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
 noexcept
 {
-	Binder binder(myType, myID);
+	Binder binder{ myType, myID };
 
 	::glBufferSubData(binder.bftype, offset, size, src_data);
 
