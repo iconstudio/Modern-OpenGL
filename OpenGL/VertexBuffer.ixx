@@ -36,7 +36,7 @@ export namespace gl
 		VertexBuffer();
 		~VertexBuffer();
 
-		void SetData(const void* data, size_t size, unsigned int usage) const noexcept;
+		void SetData(const void* const& data, const size_t& size, buffer::BufferType usage) const noexcept;
 		void SetSubData(const void* const& src_data, const size_t& size, const size_t& offset) const noexcept;
 		void SetLayout(const int& layout) const noexcept;
 
