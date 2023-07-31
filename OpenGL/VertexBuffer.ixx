@@ -11,14 +11,16 @@ export namespace gl
 		VertexBuffer();
 		~VertexBuffer();
 
+		void SetData(const void* data, size_t size, unsigned int usage) const noexcept;
+		void SetSubData(const void* data, size_t size, size_t offset) const noexcept;
+		void SetLayout(const int& layout) const noexcept;
+
 		void Bind() const noexcept;
 		void Unbind() const noexcept;
 		void Use() const noexcept;
 
-		void SetData(const void* data, size_t size, unsigned int usage) const noexcept;
-		void SetSubData(const void* data, size_t size, size_t offset) const noexcept;
-		void SetLayout(const int& layout) const noexcept;
-		
+		void CopyTo(VertexBuffer& other, size_t size, size_t srcOffset, size_t dstOffset) const noexcept;
+
 		//const VertexLayout& GetLayout() const noexcept;
 		//static void UnbindAll() noexcept;
 
