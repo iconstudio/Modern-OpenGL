@@ -54,7 +54,7 @@ export namespace gl
 		BufferObject& operator=(BufferObject&&) noexcept = default;
 
 	private:
-		buffer::BufferType myType = buffer::BufferType::Array;
+		volatile buffer::BufferType myType = buffer::BufferType::Array;
 		BufferLayout myLayout{};
 		size_t mySize = 0;
 	};
