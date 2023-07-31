@@ -22,9 +22,11 @@ void
 gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
 noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glBufferData(GL_ARRAY_BUFFER, size, data, static_cast<GLenum>(usage));
-	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+	GLenum target = static_cast<GLenum>(myType);
+
+	::glBindBuffer(target, myID);
+	::glBufferData(target, size, data, static_cast<GLenum>(usage));
+	::glBindBuffer(target, 0);
 
 	mySize = size;
 	myType = usage;
@@ -34,9 +36,11 @@ void
 gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
 noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glBufferSubData(GL_ARRAY_BUFFER, offset, size, src_data);
-	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+	GLenum target = static_cast<GLenum>(myType);
+
+	::glBindBuffer(target, myID);
+	::glBufferSubData(target, offset, size, src_data);
+	::glBindBuffer(target, 0);
 
 	mySize = size;
 }
@@ -70,14 +74,14 @@ void
 gl::BufferObject::Bind()
 const noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+	::glBindBuffer(static_cast<GLenum>(myType), myID);
 }
 
 void
 gl::BufferObject::Unbind()
 const noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+	::glBindBuffer(static_cast<GLenum>(myType), 0);
 }
 
 void
