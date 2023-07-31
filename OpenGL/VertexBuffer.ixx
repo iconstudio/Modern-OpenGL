@@ -28,10 +28,10 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] VertexBuffer : public Object
+	class [[nodiscard]] VertexBuffer : public gl::Object
 	{
 	public:
-		using base = Object;
+		using base = gl::Object;
 
 		VertexBuffer();
 		~VertexBuffer();
