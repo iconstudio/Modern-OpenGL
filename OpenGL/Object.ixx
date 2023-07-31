@@ -1,9 +1,9 @@
-export module Glib:BufferObject;
+export module Glib:Object;
 import <cstdint>;
 
 export namespace gl
 {
-	class [[nodiscard]] BufferObject
+	class [[nodiscard]] Object
 	{
 		static inline constexpr std::uint32_t npos = static_cast<std::uint32_t>(-1);
 
@@ -21,10 +21,10 @@ export namespace gl
 		}
 
 	protected:
-		constexpr BufferObject() noexcept = default;
-		constexpr ~BufferObject() noexcept = default;
+		constexpr Object() noexcept = default;
+		constexpr ~Object() noexcept = default;
 
-		explicit constexpr BufferObject(std::uint32_t id) noexcept
+		explicit constexpr Object(std::uint32_t id) noexcept
 			: myID(id)
 		{}
 

@@ -43,7 +43,7 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] Texture : public gl::BufferObject
+	class [[nodiscard]] Texture : public gl::Object
 	{
 	private:
 		struct [[nodiscard]] TextureBlob
@@ -59,7 +59,7 @@ export namespace gl
 		};
 
 	public:
-		using base = gl::BufferObject;
+		using base = gl::Object;
 
 		Texture() = default;
 		~Texture() = default;

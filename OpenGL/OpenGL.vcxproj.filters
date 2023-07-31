@@ -42,7 +42,7 @@
     <ClCompile Include="Utility.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="BufferObject.ixx">
+    <ClCompile Include="Object.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Utility.cpp">

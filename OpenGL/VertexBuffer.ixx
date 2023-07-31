@@ -1,6 +1,6 @@
 export module Glib:VertexBuffer;
 import <cstdint>;
-import :BufferObject;
+import :Object;
 
 export namespace gl
 {
@@ -28,10 +28,10 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] VertexBuffer : public BufferObject
+	class [[nodiscard]] VertexBuffer : public Object
 	{
 	public:
-		using base = BufferObject;
+		using base = Object;
 
 		VertexBuffer();
 		~VertexBuffer();

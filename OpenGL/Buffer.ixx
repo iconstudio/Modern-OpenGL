@@ -9,7 +9,7 @@ export namespace gl
 		invalid = static_cast<std::uint32_t>(-1),
 	};
 
-	class [[nodiscard]] Buffer : public BufferObject
+	class [[nodiscard]] Buffer : public Object
 	{
 	public:
 		Buffer() = default;

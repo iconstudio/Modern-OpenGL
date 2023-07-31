@@ -215,7 +215,7 @@
     <ClCompile Include="BlendMode.ixx" />
     <ClCompile Include="BlendOption.ixx" />
     <ClCompile Include="Buffer.ixx" />
-    <ClCompile Include="BufferObject.ixx" />
+    <ClCompile Include="Object.ixx" />
     <ClCompile Include="ClearBits.ixx" />
     <ClCompile Include="Comparator.ixx" />
     <ClCompile Include="Culling.ixx" />
