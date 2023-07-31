@@ -2,5 +2,5 @@ module;
 #include <Windows.h>
 #include <GL/GL.h>
 
-export module Glib;
+module Glib;
 import :BufferLayout;
