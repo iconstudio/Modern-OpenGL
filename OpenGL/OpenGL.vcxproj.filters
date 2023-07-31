@@ -45,9 +45,6 @@
     <ClCompile Include="BufferObject.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.ixx">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -147,10 +144,19 @@
     <ClCompile Include="src\fpng.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
