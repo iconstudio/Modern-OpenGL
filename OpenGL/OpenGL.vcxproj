@@ -215,6 +215,7 @@
     <ClCompile Include="BlendMode.ixx" />
     <ClCompile Include="BlendOption.ixx" />
     <ClCompile Include="Buffer.ixx" />
+    <ClCompile Include="BufferLayout.ixx" />
     <ClCompile Include="Object.ixx" />
     <ClCompile Include="ClearBits.ixx" />
     <ClCompile Include="Comparator.ixx" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
+    <ClCompile Include="src\BufferLayout.cpp" />
     <ClCompile Include="src\Culling.cpp" />
     <ClCompile Include="src\Display.cpp" />
     <ClCompile Include="src\fpng.cpp">

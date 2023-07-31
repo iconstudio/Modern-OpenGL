@@ -1,8 +1,7 @@
 export module Glib:BufferObject;
 import <cstdint>;
-import <vector>;
-import <tuple>;
 import :Object;
+export import :BufferLayout;
 
 export namespace gl
 {

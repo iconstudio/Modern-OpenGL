@@ -150,6 +150,12 @@
     <ClCompile Include="BufferObject.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\BufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferLayout.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h">
