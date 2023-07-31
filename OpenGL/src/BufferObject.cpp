@@ -38,15 +38,30 @@ gl::BufferObject::~BufferObject()
 	::glDeleteBuffers(1, &myID);
 }
 
+struct Binder
+{
+	GLenum bftype;
+	std::uint32_t id;
+
+	Binder(const gl::buffer::BufferType& target, const std::uint32_t& id) noexcept
+		: bftype(static_cast<GLenum>(target)), id(id)
+	{
+		::glBindBuffer(bftype, id);
+	}
+
+	~Binder() noexcept
+	{
+		::glBindBuffer(bftype, 0);
+	}
+};
+
 void
 gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
 noexcept
 {
-	GLenum target = static_cast<GLenum>(myType);
+	Binder binder(myType, myID);
 
-	::glBindBuffer(target, myID);
-	::glBufferData(target, size, data, static_cast<GLenum>(usage));
-	::glBindBuffer(target, 0);
+	::glBufferData(binder.bftype, size, data, static_cast<GLenum>(usage));
 
 	mySize = size;
 	myType = usage;
@@ -56,11 +71,9 @@ void
 gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
 noexcept
 {
-	GLenum target = static_cast<GLenum>(myType);
+	Binder binder(myType, myID);
 
-	::glBindBuffer(target, myID);
-	::glBufferSubData(target, offset, size, src_data);
-	::glBindBuffer(target, 0);
+	::glBufferSubData(binder.bftype, offset, size, src_data);
 
 	mySize = size;
 }
