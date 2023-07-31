@@ -7,6 +7,26 @@ module Glib;
 import <tuple>;
 import :BufferObject;
 
+using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
+
+void
+AttachElement(const element_vector_t& elements)
+noexcept
+{
+	GLuint index = 0;
+	for (auto& item : elements)
+	{
+		const int& count = std::get<0>(item);
+		const int& type = std::get<1>(item);
+		const bool& normalized = std::get<2>(item);
+		const int& stride = std::get<3>(item);
+		const int& offset = std::get<4>(item);
+
+		::glVertexAttribPointer(index, count, type, normalized, stride, (void*)offset);
+		::glEnableVertexAttribArray(index++);
+	}
+}
+
 gl::BufferObject::BufferObject()
 	: base()
 {
@@ -50,23 +70,7 @@ gl::BufferObject::SetLayout(const gl::BufferLayout& layout)
 noexcept
 {
 	Bind();
-	{
-
-		const auto& elements = layout.GetElements();
-
-		GLuint index = 0;
-		for (auto& item : elements)
-		{
-			const int& count = std::get<0>(item);
-			const int& type = std::get<1>(item);
-			const bool& normalized = std::get<2>(item);
-			const int& stride = std::get<3>(item);
-			const int& offset = std::get<4>(item);
-
-			::glVertexAttribPointer(index, count, type, normalized, stride, (void*)offset);
-			::glEnableVertexAttribArray(index++);
-		}
-	}
+	::AttachElement(layout.GetElements());
 	Unbind();
 }
 
