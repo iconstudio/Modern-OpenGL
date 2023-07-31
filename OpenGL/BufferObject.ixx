@@ -48,16 +48,13 @@ export namespace gl
 
 		void CopyTo(BufferObject& other, size_t size, size_t srcOffset, size_t dstOffset) const noexcept;
 
-		//const VertexLayout& GetLayout() const noexcept;
-		//static void UnbindAll() noexcept;
-
 		BufferObject(const BufferObject&) = delete;
 		BufferObject(BufferObject&&) noexcept = default;
 		BufferObject& operator=(const BufferObject&) = delete;
 		BufferObject& operator=(BufferObject&&) noexcept = default;
 
 	private:
-		buffer::BufferType myType = buffer::BufferType::Vertex;
+		buffer::BufferType myType = buffer::BufferType::Array;
 		BufferLayout myLayout{};
 		size_t mySize = 0;
 	};
