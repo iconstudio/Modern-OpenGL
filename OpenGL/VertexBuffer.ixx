@@ -12,7 +12,7 @@ export namespace gl
 		~VertexBuffer();
 
 		void SetData(const void* data, size_t size, unsigned int usage) const noexcept;
-		void SetSubData(const void* data, size_t size, size_t offset) const noexcept;
+		void SetSubData(const void* const& src_data, const size_t& size, const size_t& offset) const noexcept;
 		void SetLayout(const int& layout) const noexcept;
 
 		void Bind() const noexcept;

@@ -29,11 +29,11 @@ const noexcept
 }
 
 void
-gl::VertexBuffer::SetSubData(const void* data, size_t size, size_t offset)
+gl::VertexBuffer::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
 const noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+	::glBufferSubData(GL_ARRAY_BUFFER, offset, size, src_data);
 	::glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	mySize = size;
