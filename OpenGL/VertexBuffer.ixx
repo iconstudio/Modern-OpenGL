@@ -8,8 +8,8 @@ export namespace gl
 	public:
 		using base = BufferObject;
 
-		VertexBuffer() noexcept;
-		~VertexBuffer() noexcept;
+		VertexBuffer();
+		~VertexBuffer();
 
 		void Bind() const noexcept;
 		void Unbind() const noexcept;

@@ -7,14 +7,12 @@ module Glib;
 import :VertexBuffer;
 
 gl::VertexBuffer::VertexBuffer()
-noexcept
 	: base()
 {
 	::glGenBuffers(1, &myID);
 }
 
 gl::VertexBuffer::~VertexBuffer()
-noexcept
 {
 	::glDeleteBuffers(1, &myID);
 }
