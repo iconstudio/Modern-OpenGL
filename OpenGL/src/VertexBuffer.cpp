@@ -19,7 +19,7 @@ gl::VertexBuffer::~VertexBuffer()
 
 void
 gl::VertexBuffer::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
-const noexcept
+noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
 	::glBufferData(GL_ARRAY_BUFFER, size, data, static_cast<GLenum>(usage));
@@ -31,7 +31,7 @@ const noexcept
 
 void
 gl::VertexBuffer::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
-const noexcept
+noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
 	::glBufferSubData(GL_ARRAY_BUFFER, offset, size, src_data);
@@ -42,7 +42,7 @@ const noexcept
 
 void
 gl::VertexBuffer::SetLayout(const int& layout)
-const noexcept
+noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
 	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, layout, (void*)0);
