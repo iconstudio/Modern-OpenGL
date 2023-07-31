@@ -10,6 +10,17 @@ struct typename_table
 
 #define MAKE_TABLE_ENTRY(type, index) template<> struct typename_table<type> { static inline constexpr int value = index; };
 
+MAKE_TABLE_ENTRY(std::int8_t, 0x1400); // GL_BYTE
+MAKE_TABLE_ENTRY(std::uint8_t, 0x1401); // GL_UNSIGNED_BYTE
+MAKE_TABLE_ENTRY(std::int16_t, 0x1402); // GL_SHORT
+MAKE_TABLE_ENTRY(std::uint16_t, 0x1403); // GL_UNSIGNED_SHORT
+MAKE_TABLE_ENTRY(std::int32_t, 0x1404); // GL_INT
+MAKE_TABLE_ENTRY(std::uint32_t, 0x1405); // GL_UNSIGNED_INT
+MAKE_TABLE_ENTRY(long, 0x1404); // GL_INT
+MAKE_TABLE_ENTRY(unsigned long, 0x1405); // GL_UNSIGNED_INT
+MAKE_TABLE_ENTRY(float, 0x1406); // GL_FLOAT
+MAKE_TABLE_ENTRY(double, 0x140A); // GL_DOUBLE
+
 template<typename T>
 [[nodiscard]]
 consteval int get_typeindex() noexcept
@@ -28,13 +39,13 @@ export namespace gl
 		template<typename T>
 		void AddElement(const int& count, const bool& normalized) noexcept
 		{
-			myElements.emplace_back(count, type, normalized, myStride, 0);
-			myStride += count * sizeof(type);
+			AddUnsafeElement<T>(count, normalized, count * sizeof(T), myStride);
 		}
 
-		void AddElement(const int& count, const int& type, const bool& normalized, const int& stride, const int& offset) noexcept
+		template<typename T>
+		void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const int& offset) noexcept
 		{
-			myElements.emplace_back(count, type, normalized, stride, offset);
+			myElements.emplace_back(count, get_typeindex<T>(), normalized, stride, offset);
 			myStride += stride;
 		}
 
