@@ -18,6 +18,36 @@ gl::VertexBuffer::~VertexBuffer()
 }
 
 void
+gl::VertexBuffer::SetData(const void* data, size_t size, unsigned int usage)
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+	::glBufferData(GL_ARRAY_BUFFER, size, data, usage);
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	mySize = size;
+}
+
+void
+gl::VertexBuffer::SetSubData(const void* data, size_t size, size_t offset)
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+	::glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	mySize = size;
+}
+
+void
+gl::VertexBuffer::SetLayout(const int& layout)
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, layout, (void*)0);
+	::glEnableVertexAttribArray(0);
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
 void
 gl::VertexBuffer::CopyTo(VertexBuffer& other, size_t size, size_t srcOffset, size_t dstOffset)
