@@ -52,13 +52,13 @@ export namespace gl
 		}
 
 		[[nodiscard]]
-		constexpr element_t& Get(const int& index) noexcept
+		constexpr element_t& Get(const size_t& index) noexcept
 		{
 			return myElements[index];
 		}
 
 		[[nodiscard]]
-		constexpr const element_t& Get(const int& index) const noexcept
+		constexpr const element_t& Get(const size_t& index) const noexcept
 		{
 			return myElements[index];
 		}
