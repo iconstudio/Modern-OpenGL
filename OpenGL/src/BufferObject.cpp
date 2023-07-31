@@ -4,6 +4,7 @@ module;
 #include <GL/GL.h>
 
 module Glib;
+import <tuple>;
 import :BufferObject;
 
 gl::BufferObject::BufferObject()
@@ -41,13 +42,28 @@ noexcept
 }
 
 void
-gl::BufferObject::SetLayout(const int& layout)
+gl::BufferObject::SetLayout(const gl::BufferLayout& layout)
 noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, layout, (void*)0);
-	::glEnableVertexAttribArray(0);
-	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+	Bind();
+	{
+
+		const auto& elements = layout.GetElements();
+
+		GLuint index = 0;
+		for (auto& item : elements)
+		{
+			const int& count = std::get<0>(item);
+			const int& type = std::get<1>(item);
+			const bool& normalized = std::get<2>(item);
+			const int& stride = std::get<3>(item);
+			const int& offset = std::get<4>(item);
+
+			::glVertexAttribPointer(index, count, type, normalized, stride, (void*)offset);
+			::glEnableVertexAttribArray(index++);
+		}
+	}
+	Unbind();
 }
 
 void
