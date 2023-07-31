@@ -81,7 +81,7 @@ export namespace gl
 		constexpr BufferLayout& operator=(BufferLayout&&) noexcept = default;
 
 	private:
-		std::vector<element_t> myElements;
+		std::vector<element_t> myElements{};
 		int myStride = 0;
 	};
 }
