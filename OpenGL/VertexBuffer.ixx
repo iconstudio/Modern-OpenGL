@@ -1,9 +1,10 @@
 export module Glib:VertexBuffer;
+import <cstdint>;
 import :BufferObject;
 
 export namespace gl
 {
-	enum class [[nodiscard]] BufferType
+	enum class [[nodiscard]] BufferType : std::uint32_t
 	{
 		Vertex = 0x8892,
 		Array = Vertex,
