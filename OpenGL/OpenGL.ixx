@@ -7,7 +7,7 @@ export import :Comparator;
 export import :State;
 export import :Primitive;
 export import :Object;
-export import :VertexBuffer;
+export import :BufferObject;
 export import :System;
 
 export namespace gl

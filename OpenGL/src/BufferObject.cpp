@@ -4,21 +4,21 @@ module;
 #include <GL/GL.h>
 
 module Glib;
-import :VertexBuffer;
+import :BufferObject;
 
-gl::VertexBuffer::VertexBuffer()
+gl::BufferObject::BufferObject()
 	: base()
 {
 	::glGenBuffers(1, &myID);
 }
 
-gl::VertexBuffer::~VertexBuffer()
+gl::BufferObject::~BufferObject()
 {
 	::glDeleteBuffers(1, &myID);
 }
 
 void
-gl::VertexBuffer::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
+gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
 noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
@@ -30,7 +30,7 @@ noexcept
 }
 
 void
-gl::VertexBuffer::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
+gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
 noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
@@ -41,7 +41,7 @@ noexcept
 }
 
 void
-gl::VertexBuffer::SetLayout(const int& layout)
+gl::BufferObject::SetLayout(const int& layout)
 noexcept
 {
 	::glBindBuffer(GL_ARRAY_BUFFER, myID);
@@ -51,7 +51,31 @@ noexcept
 }
 
 void
-gl::VertexBuffer::CopyTo(VertexBuffer& other, size_t size, size_t srcOffset, size_t dstOffset)
+gl::BufferObject::Bind()
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+}
+
+void
+gl::BufferObject::Unbind()
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void
+gl::BufferObject::Use()
+const noexcept
+{
+	::glBindBuffer(GL_ARRAY_BUFFER, myID);
+	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	::glEnableVertexAttribArray(0);
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void
+gl::BufferObject::CopyTo(BufferObject& other, size_t size, size_t srcOffset, size_t dstOffset)
 const noexcept
 {
 	::glBindBuffer(GL_COPY_READ_BUFFER, myID);

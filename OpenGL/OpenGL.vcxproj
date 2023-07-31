@@ -248,7 +248,7 @@
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\TransformState.cpp" />
     <ClCompile Include="src\Utility.cpp" />
-    <ClCompile Include="src\VertexBuffer.cpp" />
+    <ClCompile Include="src\BufferObject.cpp" />
     <ClCompile Include="State.ixx" />
     <ClCompile Include="System.ixx" />
     <ClCompile Include="OpenGL.ixx" />
@@ -258,7 +258,7 @@
     <ClCompile Include="Transform.ixx" />
     <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="Utility.ixx" />
-    <ClCompile Include="VertexBuffer.ixx" />
+    <ClCompile Include="BufferObject.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Native\Native.vcxproj">

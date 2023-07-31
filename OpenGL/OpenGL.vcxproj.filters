@@ -144,10 +144,10 @@
     <ClCompile Include="src\fpng.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VertexBuffer.cpp">
+    <ClCompile Include="src\BufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.ixx">
+    <ClCompile Include="BufferObject.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>

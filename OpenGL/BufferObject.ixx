@@ -1,5 +1,7 @@
-export module Glib:VertexBuffer;
+export module Glib:BufferObject;
 import <cstdint>;
+import <vector>;
+import <tuple>;
 import :Object;
 
 export namespace gl
@@ -28,13 +30,13 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] VertexBuffer : public gl::Object
+	class [[nodiscard]] BufferObject : public gl::Object
 	{
 	public:
 		using base = gl::Object;
 
-		VertexBuffer();
-		~VertexBuffer();
+		BufferObject();
+		~BufferObject();
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferType usage) noexcept;
 		void SetSubData(const void* const& src_data, const size_t& size, const size_t& offset) noexcept;
@@ -44,15 +46,15 @@ export namespace gl
 		void Unbind() const noexcept;
 		void Use() const noexcept;
 
-		void CopyTo(VertexBuffer& other, size_t size, size_t srcOffset, size_t dstOffset) const noexcept;
+		void CopyTo(BufferObject& other, size_t size, size_t srcOffset, size_t dstOffset) const noexcept;
 
 		//const VertexLayout& GetLayout() const noexcept;
 		//static void UnbindAll() noexcept;
 
-		VertexBuffer(const VertexBuffer&) = delete;
-		VertexBuffer(VertexBuffer&&) noexcept = default;
-		VertexBuffer& operator=(const VertexBuffer&) = delete;
-		VertexBuffer& operator=(VertexBuffer&&) noexcept = default;
+		BufferObject(const BufferObject&) = delete;
+		BufferObject(BufferObject&&) noexcept = default;
+		BufferObject& operator=(const BufferObject&) = delete;
+		BufferObject& operator=(BufferObject&&) noexcept = default;
 
 	private:
 		buffer::BufferType myType = buffer::BufferType::Vertex;
