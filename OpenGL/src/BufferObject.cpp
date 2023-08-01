@@ -126,7 +126,7 @@ const noexcept
 
 void
 gl::BufferObject::CopyTo(BufferObject& other
-	, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL
+	, const size_t& dest_size, const ptrdiff_t& dest_offset
 	, const ptrdiff_t& offset)
 const noexcept
 {
