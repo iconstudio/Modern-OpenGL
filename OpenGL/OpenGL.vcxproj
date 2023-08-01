@@ -244,6 +244,7 @@
     <ClCompile Include="src\LegacyFog.cpp" />
     <ClCompile Include="src\LegacyLight.cpp" />
     <ClCompile Include="src\LegacyPrimitive.cpp" />
+    <ClCompile Include="src\OpenGL.cpp" />
     <ClCompile Include="src\Primitive.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Texture.cpp" />
