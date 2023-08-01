@@ -48,6 +48,9 @@ export namespace gl
 
 		void CopyTo(BufferObject& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
 
+		[[nodiscard]] buffer::BufferType GetType() const noexcept;
+		[[nodiscard]] const BufferLayout& GetLayout() const noexcept;
+		[[nodiscard]] size_t GetSize() const noexcept;
 
 		BufferObject(const BufferObject&) = delete;
 		BufferObject(BufferObject&&) noexcept = default;

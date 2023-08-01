@@ -136,3 +136,24 @@ const noexcept
 	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
 }
+
+gl::buffer::BufferType
+gl::BufferObject::GetType()
+const noexcept
+{
+	return myType;
+}
+
+const
+gl::BufferLayout& gl::BufferObject::GetLayout()
+const noexcept
+{
+	return myLayout;
+}
+
+size_t
+gl::BufferObject::GetSize()
+const noexcept
+{
+	return mySize;
+}
