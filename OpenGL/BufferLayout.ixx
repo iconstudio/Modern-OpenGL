@@ -33,21 +33,21 @@ export namespace gl
 	class [[nodiscard]] BufferLayout
 	{
 	public:
-		using element_t = std::tuple<int, int, bool, int, ptrdiff_t>;
+		using element_t = std::tuple<int, int, int, ptrdiff_t, bool>;
 
 		constexpr BufferLayout() noexcept = default;
 		~BufferLayout() noexcept = default;
 
 		template<typename T>
-		constexpr void AddElement(const int& count, const bool& normalized)
+		constexpr void AddElement(const int& count, const bool& normalized = false)
 		{
-			AddUnsafeElement<T>(count, normalized, count * sizeof(T), myStride);
+			AddUnsafeElement<T>(count, count * sizeof(T), myStride, normalized);
 		}
 
 		template<typename T>
-		constexpr void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const ptrdiff_t& offset)
+		constexpr void AddUnsafeElement(const int& count, const int& stride, const ptrdiff_t& offset, const bool& normalized = false)
 		{
-			myElements.emplace_back(count, get_typeindex<T>(), normalized, stride, offset);
+			myElements.emplace_back(count, get_typeindex<T>(), stride, offset, normalized);
 			myStride += stride;
 		}
 
