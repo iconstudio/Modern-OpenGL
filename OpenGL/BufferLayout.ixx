@@ -10,6 +10,7 @@ struct typename_table
 
 #define MAKE_TABLE_ENTRY(type, index) template<> struct typename_table<type> { static inline constexpr int value = index; };
 
+MAKE_TABLE_ENTRY(bool, 0x1401); // GL_UNSIGNED_BYTE
 MAKE_TABLE_ENTRY(std::int8_t, 0x1400); // GL_BYTE
 MAKE_TABLE_ENTRY(std::uint8_t, 0x1401); // GL_UNSIGNED_BYTE
 MAKE_TABLE_ENTRY(std::int16_t, 0x1402); // GL_SHORT
