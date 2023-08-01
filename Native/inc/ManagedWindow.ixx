@@ -20,7 +20,7 @@ import Glib.Windows.Client;
 namespace gl::win32
 {
 	// TODO: std::function -> std::move_only_function
-	class ManagedWindow;
+	export class ManagedWindow;
 
 	export inline namespace managed_window
 	{
