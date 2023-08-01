@@ -13,7 +13,7 @@ export namespace gl
 
 	namespace transform
 	{
-		void SetState(TransformMode mode) noexcept;
+		void SetMode(TransformMode mode) noexcept;
 		void PushState() noexcept;
 		void PopState() noexcept;
 

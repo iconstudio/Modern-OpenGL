@@ -109,7 +109,7 @@ noexcept
 	global::SetViewport(view_x, view_y, view_w, view_h);
 	global::Clear(Clearance::DepthStencil);
 
-	transform::SetState(TransformMode::Projection);
+	transform::SetMode(TransformMode::Projection);
 	transform::PushState();
 
 	global::SetBackgroundColour(mySettings.borderColour);
@@ -138,7 +138,7 @@ noexcept
 {
 	transform::PopState();
 
-	transform::SetState(TransformMode::Projection);
+	transform::SetMode(TransformMode::Projection);
 	transform::PopState();
 
 	myPainter(nativeContext);

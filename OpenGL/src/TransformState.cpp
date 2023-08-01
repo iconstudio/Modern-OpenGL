@@ -6,7 +6,7 @@ module Glib;
 import :TransformState;
 
 void
-gl::transform::SetState(gl::TransformMode mode)
+gl::transform::SetMode(gl::TransformMode mode)
 noexcept
 {
 	::glMatrixMode(static_cast<GLenum>(mode));
