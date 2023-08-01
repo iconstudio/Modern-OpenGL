@@ -36,7 +36,23 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Initialize(std::move(descriptor));
 	framework->SetRenderer(DefaultRenderer);
 
+	util::Println("== Initializing OpenGL ==");
+	gl::Initialize();
+
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
+
+	gl::BufferLayout layout{};
+	layout.AddElement<float>(3);
+
+	constexpr float vertices[] =
+	{
+		-0.5f, -0.5f, 0.0f, // bottom left
+		0.5f, -0.5f, 0.0f, // bottom right
+		0.0f, 0.5f, 0.0f, // top
+	};
+
+	gl::BufferObject vbo{};
+	//vbo.SetData(vertices, sizeof(vertices), 0);
 
 	util::Println("== Program Started ==");
 	framework->Run();
