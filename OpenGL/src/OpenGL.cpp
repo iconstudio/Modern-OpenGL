@@ -13,6 +13,8 @@ namespace gl
 {
 	void Initialize()
 	{
+		//glMakeCurrentContext();
+
 		GLenum err = glewInit();
 		if (GLEW_OK != err)
 		{

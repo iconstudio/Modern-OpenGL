@@ -33,11 +33,11 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.glDescriptor.vSync = true;
 	descriptor.isResizable = false;
 
-	framework->Initialize(std::move(descriptor));
-	framework->SetRenderer(DefaultRenderer);
-
 	util::Println("== Initializing OpenGL ==");
 	gl::Initialize();
+
+	framework->Initialize(std::move(descriptor));
+	framework->SetRenderer(DefaultRenderer);
 
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
