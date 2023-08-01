@@ -68,7 +68,7 @@ noexcept
 }
 
 void
-gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const size_t& offset)
+gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset)
 noexcept
 {
 	Binder binder{ myType, myID };
@@ -125,12 +125,12 @@ const noexcept
 }
 
 void
-gl::BufferObject::CopyTo(BufferObject& other, size_t size, size_t srcOffset, size_t dstOffset)
+gl::BufferObject::CopyTo(BufferObject& other, size_t dest_size, ptrdiff_t dest_offset, ptrdiff_t offset)
 const noexcept
 {
 	::glBindBuffer(GL_COPY_READ_BUFFER, myID);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, other.myID);
-	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, srcOffset, dstOffset, size);
+	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, offset, dest_offset, dest_size);
 	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
 }

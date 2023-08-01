@@ -38,7 +38,7 @@ export namespace gl
 		~BufferObject();
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferType usage) noexcept;
-		void SetSubData(const void* const& src_data, const size_t& size, const size_t& offset) noexcept;
+		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
 		void SetLayout(const BufferLayout& layout) noexcept;
 		void SetLayout(BufferLayout&& layout) noexcept;
 
@@ -46,7 +46,7 @@ export namespace gl
 		void Unbind() const noexcept;
 		void Use() const noexcept;
 
-		void CopyTo(BufferObject& other, size_t size, size_t srcOffset, size_t dstOffset) const noexcept;
+		void CopyTo(BufferObject& other, size_t dest_size, ptrdiff_t dest_offset, ptrdiff_t offset) const noexcept;
 
 		BufferObject(const BufferObject&) = delete;
 		BufferObject(BufferObject&&) noexcept = default;
