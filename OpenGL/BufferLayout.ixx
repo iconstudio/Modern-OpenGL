@@ -39,13 +39,13 @@ export namespace gl
 		~BufferLayout() noexcept = default;
 
 		template<typename T>
-		constexpr void AddElement(const int& count, const bool& normalized) noexcept
+		constexpr void AddElement(const int& count, const bool& normalized)
 		{
 			AddUnsafeElement<T>(count, normalized, count * sizeof(T), myStride);
 		}
 
 		template<typename T>
-		constexpr void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const ptrdiff_t& offset) noexcept
+		constexpr void AddUnsafeElement(const int& count, const bool& normalized, const int& stride, const ptrdiff_t& offset)
 		{
 			myElements.emplace_back(count, get_typeindex<T>(), normalized, stride, offset);
 			myStride += stride;
