@@ -15,7 +15,8 @@ export namespace gl
 		~Image() noexcept = default;
 
 		Image(nullptr_t) noexcept;
-		Image(const FilePath& filepath);
+
+		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
 		Image(const Image&) = delete;
 		Image(Image&&) noexcept = default;
@@ -23,6 +24,8 @@ export namespace gl
 		Image& operator=(Image&&) noexcept = default;
 
 	private:
-		static std::once_flag initFlag;
+		Image(const FilePath& filepath);
 	};
+
+	[[nodiscard]] Image LoadImage(const FilePath& filepath);
 }
