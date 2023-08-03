@@ -21,12 +21,15 @@ export namespace gl
 
 	namespace framework
 	{
+		void DefaultRenderer() noexcept;
+
 		struct Descriptor
 		{
 			gl::system::Descriptor glDescriptor;
 			std::wstring_view title;
 			int wx, wy, ww, wh;
 
+			RenderDelegate renderer = DefaultRenderer;
 			int minW = 60, minH = 60;
 			bool isResizable = true;
 			bool isPowersave = false;
@@ -89,8 +92,6 @@ export namespace gl
 		[[nodiscard]] const handle_t& GetHandle() const noexcept;
 
 	private:
-		static void DefaultRenderer() noexcept;
-
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
 

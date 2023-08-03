@@ -67,6 +67,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		window.ClearWindow();
 	});
 
+	SetRenderer(setup.renderer);
+
 	using enum win32::managed_window::AwakeResult;
 	const auto awakenening = myInstance->Awake();
 
@@ -144,11 +146,6 @@ const noexcept
 	return *(myInstance.get());
 }
 
-void
-gl::Framework::DefaultRenderer()
-noexcept
-{}
-
 void ReadyDisplay() noexcept
 {
 	gl::display::dpi::SetDPIAware(true);
@@ -173,3 +170,8 @@ noexcept
 {
 	return std::make_shared<Framework>();
 }
+
+void
+gl::framework::DefaultRenderer()
+noexcept
+{}
