@@ -67,6 +67,17 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		window.ClearWindow();
 	});
 
+	using enum win32::managed_window::AwakeResult;
+	const auto awakenening = myInstance->Awake();
+
+	if (awakenening != Success)
+	{
+		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
+
+		std::rethrow_exception(myInstance->GetException());
+		return framework::InitError::FailedOnStartup;
+	}
+
 	return framework::InitError::Success;
 }
 
@@ -80,17 +91,6 @@ void
 gl::Framework::Run()
 noexcept
 {
-	using enum win32::managed_window::AwakeResult;
-	const auto awakenening = myInstance->Awake();
-
-	if (awakenening != Success)
-	{
-		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
-
-		std::rethrow_exception(myInstance->GetException());
-		return;
-	}
-
 	myInstance->Start();
 }
 
