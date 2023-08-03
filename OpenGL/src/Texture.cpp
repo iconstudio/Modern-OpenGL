@@ -11,7 +11,7 @@ gl::Texture::Texture(gl::Image&& image)
 {
 	myBlob = std::make_shared<Blob>(Blob
 	{
-		.imgBuffer = std::move(image),
+		.imgBuffer = std::move(image.GetBuffer()),
 		.width = image.GetWidth(),
 		.height = image.GetHeight(),
 	});
@@ -42,7 +42,7 @@ gl::Texture::Texture(const gl::FilePath& path
 
 	myBlob = std::make_shared<Blob>(Blob
 	{
-		.imgBuffer = std::move(img).GetBuffer(),
+		.imgBuffer = std::move(img.GetBuffer()),
 		.width = img.GetWidth(),
 		.height = img.GetHeight(),
 		.texType = type,
