@@ -11,12 +11,9 @@ gl::Texture::Texture(gl::Image&& image)
 {
 	myBlob = std::make_shared<texture::Blob>();
 
-	texture::Blob
-	{
-		.imgBuffer = std::move(image.GetBuffer()),
-		.width = image.GetWidth(),
-		.height = image.GetHeight(),
-	}.swap(*myBlob);
+	myBlob->imgBuffer = std::move(image.GetBuffer());
+	myBlob->width = image.GetWidth();
+	myBlob->height = image.GetHeight();
 }
 
 gl::Texture
@@ -43,18 +40,14 @@ gl::Texture::Texture(const gl::FilePath& path
 	}
 
 	myBlob = std::make_shared<texture::Blob>();
-
-	texture::Blob
-	{
-		.imgBuffer = std::move(img.GetBuffer()),
-		.width = img.GetWidth(),
-		.height = img.GetHeight(),
-		.texType = type,
-		.hWrap = hwrap,
-		.vWrap = vwrap,
-		.minFilter = min,
-		.magFilter = mag,
-	}.swap(*myBlob);
+	myBlob->imgBuffer = std::move(img.GetBuffer());
+	myBlob->width = img.GetWidth();
+	myBlob->height = img.GetHeight();
+	myBlob->texType = type;
+	myBlob->hWrap = hwrap;
+	myBlob->vWrap = vwrap;
+	myBlob->minFilter = min;
+	myBlob->magFilter = mag;
 }
 
 gl::Texture
