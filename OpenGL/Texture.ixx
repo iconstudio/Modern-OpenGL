@@ -48,7 +48,7 @@ export namespace gl
 	private:
 		struct [[nodiscard]] Blob
 		{
-			std::uint32_t width = 1U, height = 1U;
+			std::size_t width = 1U, height = 1U;
 			texture::Type texType = texture::Type::Tex2D;
 			texture::WrapMode hWrap = texture::WrapMode::Repeat;
 			texture::WrapMode vWrap = texture::WrapMode::Repeat;
