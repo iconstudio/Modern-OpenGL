@@ -49,6 +49,18 @@ export namespace gl
 	private:
 		struct [[nodiscard]] Blob : public std::enable_shared_from_this<Blob>
 		{
+			constexpr void swap(Blob& other) noexcept
+			{
+				imgBuffer.swap(other.imgBuffer);
+				std::swap(width, other.width);
+				std::swap(height, other.height);
+				std::swap(texType, other.texType);
+				std::swap(hWrap, other.hWrap);
+				std::swap(vWrap, other.vWrap);
+				std::swap(minFilter, other.minFilter);
+				std::swap(magFilter, other.magFilter);
+			}
+
 			std::unique_ptr<gl::BitmapPixel[]> imgBuffer = nullptr;
 			std::size_t width = 1U, height = 1U;
 			texture::Type texType = texture::Type::Tex2D;
