@@ -9,12 +9,14 @@ import <stdexcept>;
 gl::Texture::Texture(gl::Image&& image)
 	: base()
 {
-	myBlob = std::make_shared<Blob>(Blob
+	myBlob = std::make_shared<texture::Blob>();
+
+	texture::Blob
 	{
 		.imgBuffer = std::move(image.GetBuffer()),
 		.width = image.GetWidth(),
 		.height = image.GetHeight(),
-	});
+	}.swap(*myBlob);
 }
 
 gl::Texture
@@ -40,7 +42,9 @@ gl::Texture::Texture(const gl::FilePath& path
 		throw std::runtime_error("Failed to load image");
 	}
 
-	myBlob = std::make_shared<Blob>(Blob
+	myBlob = std::make_shared<texture::Blob>();
+
+	texture::Blob
 	{
 		.imgBuffer = std::move(img.GetBuffer()),
 		.width = img.GetWidth(),
@@ -50,7 +54,7 @@ gl::Texture::Texture(const gl::FilePath& path
 		.vWrap = vwrap,
 		.minFilter = min,
 		.magFilter = mag,
-	});
+	}.swap(*myBlob);
 }
 
 gl::Texture

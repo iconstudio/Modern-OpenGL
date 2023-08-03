@@ -41,12 +41,7 @@ export namespace gl
 			Tex2DMultisample = 0x9100,
 			Tex2DMultisampleArray = 0x9102
 		};
-	}
 
-	class [[nodiscard]] Texture
-		: public gl::Object
-	{
-	private:
 		struct [[nodiscard]] Blob : public std::enable_shared_from_this<Blob>
 		{
 			constexpr void swap(Blob& other) noexcept
@@ -69,7 +64,11 @@ export namespace gl
 			texture::FilterMode minFilter = texture::FilterMode::Linear;
 			texture::FilterMode magFilter = texture::FilterMode::Linear;
 		};
+	}
 
+	class [[nodiscard]] Texture
+		: public gl::Object
+	{
 	public:
 		using base = gl::Object;
 
@@ -110,7 +109,7 @@ export namespace gl
 		Texture(const Texture&) noexcept = default;
 		Texture& operator=(const Texture&) noexcept = default;
 
-		std::shared_ptr<Blob> myBlob = nullptr;
+		std::shared_ptr<texture::Blob> myBlob = nullptr;
 	};
 
 	[[nodiscard]] Texture CreateEmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
