@@ -60,7 +60,7 @@ export namespace gl
 	public:
 		using base = gl::Object;
 
-		Texture(gl::Image&& image) noexcept;
+		Texture(gl::Image&& image);
 
 		void Bind() const noexcept;
 		void Use() const noexcept;

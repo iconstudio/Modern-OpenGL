@@ -6,10 +6,14 @@ module Glib.Texture;
 import <stdexcept>;
 
 gl::Texture::Texture(gl::Image&& image)
-noexcept
 	: base()
 {
-
+	myBlob = std::make_shared<Blob>(Blob
+	{
+		.imgBuffer = std::move(image),
+		.width = image.GetWidth(),
+		.height = image.GetHeight(),
+	});
 }
 
 gl::Texture
