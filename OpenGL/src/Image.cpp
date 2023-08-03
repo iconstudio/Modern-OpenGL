@@ -78,3 +78,37 @@ gl::Image::Image(const gl::FilePath& filepath)
 	image.Destroy();
 }
 
+const gl::BitmapPixel*
+gl::Image::GetBuffer()
+const noexcept
+{
+	return imgBuffer.get();
+}
+
+size_t
+gl::Image::GetBufferSize()
+const noexcept
+{
+	return imgBufferSize;
+}
+
+size_t
+gl::Image::GetWidth()
+const noexcept
+{
+	return imgHSize;
+}
+
+size_t
+gl::Image::GetHeight()
+const noexcept
+{
+	return imgVSize;
+}
+
+size_t
+gl::Image::GetBytesPerPixel()
+const noexcept
+{
+	return bytesPerPixel;
+}

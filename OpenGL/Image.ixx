@@ -12,6 +12,12 @@ export namespace gl
 	public:
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
+		[[nodiscard]] const gl::BitmapPixel* GetBuffer() const noexcept;
+		[[nodiscard]] size_t GetBufferSize() const noexcept;
+		[[nodiscard]] size_t GetWidth() const noexcept;
+		[[nodiscard]] size_t GetHeight() const noexcept;
+		[[nodiscard]] size_t GetBytesPerPixel() const noexcept;
+
 		Image(const Image&) = delete;
 		Image(Image&&) noexcept = default;
 		Image& operator=(const Image&) = delete;
