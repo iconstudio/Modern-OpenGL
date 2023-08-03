@@ -1,4 +1,4 @@
-module;
+﻿module;
 #include <Windows.h>
 #include <atlimage.h>
 #undef LoadImage
@@ -54,7 +54,7 @@ gl::Image::Image(const gl::FilePath& filepath)
 
 	imgHSize = image.GetWidth();
 	imgVSize = image.GetHeight();
-	imgBufferSize = imgHSize * imgVSize;
+	imgBufferSize = imgHSize * imgVSize * 4;
 
 	const size_t stride = image.GetPitch();
 	const std::uint8_t* const& pt_buffer = static_cast<const std::uint8_t*>(buffer);
