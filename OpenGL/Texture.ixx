@@ -46,7 +46,7 @@ export namespace gl
 	class [[nodiscard]] Texture : public gl::Object
 	{
 	private:
-		struct [[nodiscard]] TextureBlob
+		struct [[nodiscard]] Blob
 		{
 			std::uint32_t width = 1U, height = 1U;
 			texture::Type texType = texture::Type::Tex2D;
@@ -65,7 +65,7 @@ export namespace gl
 		~Texture() = default;
 
 		Texture(nullptr_t) noexcept;
-		Texture(gl::Image&&) noexcept;
+		Texture(gl::Image&& image) noexcept;
 
 		void Bind() const noexcept;
 		void Use() const noexcept;
@@ -93,7 +93,7 @@ export namespace gl
 		Texture(const Texture&) noexcept = default;
 		Texture& operator=(const Texture&) noexcept = default;
 
-		std::shared_ptr<TextureBlob> myBlob = nullptr;
+		std::shared_ptr<Blob> myBlob = nullptr;
 	};
 
 	[[nodiscard]] Texture CreateEmptyTexture(std::uint32_t w, std::uint32_t h) noexcept;
