@@ -1,4 +1,4 @@
-export module Glib.Texture:Image;
+export module Glib.Image;
 import <string_view>;
 import <filesystem>;
 import <mutex>;
@@ -15,7 +15,7 @@ export namespace gl
 		~Image() noexcept = default;
 
 		Image(nullptr_t) noexcept;
-		Image(std::string_view filepath);
+		Image(const FilePath& filepath);
 
 		Image(const Image&) = delete;
 		Image(Image&&) noexcept = default;

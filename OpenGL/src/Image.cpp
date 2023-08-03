@@ -3,11 +3,10 @@ module;
 #include <gl/GL.h>
 #include "../fpng.h"
 
-module Glib.Texture;
+module Glib.Image;
 import <cstdint>;
 import <vector>;
 import <string_view>;
-import :Image;
 import Utility.IO.File;
 
 bool ExtractFile(const std::string_view& filepath, std::vector<std::uint8_t>& output);
@@ -54,7 +53,7 @@ noexcept
 	});
 }
 
-gl::Image::Image(std::string_view filepath)
+gl::Image::Image(const gl::FilePath& filepath)
 {
 	std::call_once(gl::Image::initFlag, []() noexcept {
 		fpng::fpng_init();
@@ -70,7 +69,7 @@ gl::Image::Image(std::string_view filepath)
 	size_t out_vsize = 0;
 	size_t out_channels = 0;
 
-	int result = fpng::fpng_decode_file(filepath.data(), buffer, out_hsize, out_vsize, out_channels, 4);
+	int result = fpng::fpng_decode_file(filepath.string(), buffer, out_hsize, out_vsize, out_channels, 4);
 
 	if (fpng::FPNG_DECODE_SUCCESS != result)
 	{

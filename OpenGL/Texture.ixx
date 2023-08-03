@@ -4,7 +4,7 @@ import <string_view>;
 import <filesystem>;
 import <memory>;
 import Glib;
-export import :Image;
+export import Glib.Image;
 
 export namespace gl
 {
