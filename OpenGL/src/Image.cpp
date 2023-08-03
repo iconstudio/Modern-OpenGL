@@ -1,48 +1,20 @@
 module;
 #include <Windows.h>
 #include <gl/GL.h>
+#include <atlimage.h>
 #include "../fpng.h"
 
 module Glib.Image;
 import <cstdint>;
 import <vector>;
 import <string_view>;
-import Utility.IO.File;
 
 bool ExtractFile(const std::string_view& filepath, std::vector<std::uint8_t>& output);
 
-class BindedAllocator
+namespace gl
 {
-public:
-	using value_type = std::uint8_t;
-	using size_type = size_t;
-	using difference_type = ptrdiff_t;
-
-	constexpr BindedAllocator() noexcept = default;
-	constexpr ~BindedAllocator() noexcept = default;
-
-	[[nodiscard]]
-	constexpr value_type* allocate(const size_type& count)
-	{
-		return target = internalAlloc.allocate(count);
-	}
-
-	constexpr void deallocate(value_type* const handle, const size_t count)
-	{
-		if (handle == target)
-		{
-			target = nullptr;
-		}
-
-		internalAlloc.deallocate(handle, count);
-	}
-
-	constexpr BindedAllocator(const BindedAllocator&) noexcept = default;
-	constexpr BindedAllocator(BindedAllocator&&) noexcept = default;
-
-	std::allocator<value_type> internalAlloc{};
-	value_type* target = nullptr;
-};
+	class Image;
+}
 
 gl::Image::Image(nullptr_t)
 noexcept
@@ -53,14 +25,14 @@ noexcept
 	});
 }
 
-gl::Image::Image(const gl::FilePath& filepath)
+gl::Image::Image(const std::filesystem::path& filepath)
 {
 	std::call_once(gl::Image::initFlag, []() noexcept {
 		fpng::fpng_init();
 	});
 
 	std::vector<std::uint8_t> buffer{};
-	if (!ExtractFile(filepath, buffer))
+	if (!ExtractFile(filepath.string().c_str(), buffer))
 	{
 		return;
 	}
@@ -69,7 +41,10 @@ gl::Image::Image(const gl::FilePath& filepath)
 	size_t out_vsize = 0;
 	size_t out_channels = 0;
 
-	int result = fpng::fpng_decode_file(filepath.string(), buffer, out_hsize, out_vsize, out_channels, 4);
+	int result = fpng::fpng_decode_file(filepath.string().c_str()
+		, buffer
+		, out_hsize, out_vsize, out_channels
+		, 4);
 
 	if (fpng::FPNG_DECODE_SUCCESS != result)
 	{
