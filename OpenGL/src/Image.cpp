@@ -71,8 +71,7 @@ gl::Image::Image(const gl::FilePath& filepath)
 		}
 	}
 
-	std::printf("Loaded image: %s\n", path);
-
+	std::wprintf(L"Loaded image: %s\n", filepath.c_str());
 	image.Destroy();
 }
 
