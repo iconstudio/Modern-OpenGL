@@ -82,10 +82,6 @@ void
 gl::BufferObject::SetLayout(const gl::BufferLayout& layout)
 noexcept
 {
-	Bind();
-	::AttachElement(layout.GetElements());
-	Unbind();
-
 	myLayout = layout;
 }
 
@@ -94,10 +90,6 @@ gl::BufferObject::SetLayout(BufferLayout&& layout)
 noexcept
 {
 	myLayout = std::move(layout);
-
-	Bind();
-	::AttachElement(myLayout.GetElements());
-	Unbind();
 }
 
 void
@@ -118,17 +110,16 @@ void
 gl::BufferObject::Use()
 const noexcept
 {
-	::glBindBuffer(GL_ARRAY_BUFFER, myID);
-	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-	::glEnableVertexAttribArray(0);
-	::glBindBuffer(GL_ARRAY_BUFFER, 0);
+	Bind();
+	::AttachElement(myLayout.GetElements());
+	Unbind();
 }
 
 void
 gl::BufferObject::CopyTo(BufferObject& other
 	, const size_t& dest_size, const ptrdiff_t& dest_offset
 	, const ptrdiff_t& offset)
-const noexcept
+	const noexcept
 {
 	::glBindBuffer(GL_COPY_READ_BUFFER, myID);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, other.myID);
