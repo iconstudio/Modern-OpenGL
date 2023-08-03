@@ -18,32 +18,30 @@ gl::Image::Image(const gl::FilePath& filepath)
 {
 	ATL::CImage image{};
 
-	const char* path = filepath.string().c_str();
-
 	HRESULT check = image.Load(filepath.c_str());
 	if (FAILED(check))
 	{
-		std::printf("Failed to load image: %s\n", path);
+		std::wprintf(L"Failed to load image: %s\n", filepath.c_str());
 		throw std::runtime_error{ "Failed to load image" };
 	}
 
 	if (HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND) == check)
 	{
-		std::printf("Failed to load image: %s\n", path);
+		std::wprintf(L"Failed to load image: %s\n", filepath.c_str());
 		throw std::runtime_error{ "Failed to load image" };
 	}
 
 	const void* buffer = image.GetBits();
 	if (nullptr == buffer)
 	{
-		std::printf("Failed to load image: %s\n", path);
+		std::wprintf(L"Failed to load image: %s\n", filepath.c_str());
 		throw std::runtime_error{ "Cannot acquire image buffer" };
 	}
 
 	bytesPerPixel = image.GetBPP();
 	if (32 != bytesPerPixel)
 	{
-		std::printf("Cannot use the image: %s\n", path);
+		std::wprintf(L"Cannot use the image: %s\n", filepath.c_str());
 		throw std::runtime_error{ "Unsupported image format" };
 	}
 
