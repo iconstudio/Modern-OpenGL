@@ -43,10 +43,11 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] Texture : public gl::Object
+	class [[nodiscard]] Texture
+		: public gl::Object
 	{
 	private:
-		struct [[nodiscard]] Blob
+		struct [[nodiscard]] Blob : public std::enable_shared_from_this<Blob>
 		{
 			std::unique_ptr<gl::BitmapPixel[]> imgBuffer = nullptr;
 			std::size_t width = 1U, height = 1U;
