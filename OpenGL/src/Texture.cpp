@@ -5,10 +5,12 @@ module;
 module Glib.Texture;
 import <stdexcept>;
 
-gl::Texture::Texture(nullptr_t)
+gl::Texture::Texture(gl::Image&& image)
 noexcept
 	: base()
-{}
+{
+
+}
 
 gl::Texture
 gl::Texture::EmptyTexture(std::uint32_t w, std::uint32_t h)
