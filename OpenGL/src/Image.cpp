@@ -1,82 +1,62 @@
 module;
 #include <Windows.h>
-#include <gl/GL.h>
 #include <atlimage.h>
-#include "../fpng.h"
+#undef LoadImage
 
 module Glib.Image;
 import <cstdint>;
-import <vector>;
-import <string_view>;
-
-bool ExtractFile(const std::string_view& filepath, std::vector<std::uint8_t>& output);
-
-namespace gl
-{
-	class Image;
-}
+import <cstdio>;
+import <stdexcept>;
+import <memory>;
 
 gl::Image::Image(nullptr_t)
 noexcept
 	: Image()
+{}
+
+gl::Image
+LoadImage(const gl::FilePath& filepath)
 {
-	std::call_once(gl::Image::initFlag, []() noexcept {
-		fpng::fpng_init();
-	});
+	return gl::Image{ filepath };
 }
 
 gl::Image::Image(const gl::FilePath& filepath)
 {
-	std::call_once(gl::Image::initFlag, []() noexcept {
-		fpng::fpng_init();
-	});
+	ATL::CImage image{};
 
-	std::vector<std::uint8_t> buffer{};
-	if (!ExtractFile(filepath.string().c_str(), buffer))
+	const char* const& path = filepath.string().c_str();
+
+	HRESULT check = image.Load(path);
+	if (FAILED(check))
 	{
-		return;
+		std::printf("Failed to load image: %s\n", path);
+		throw std::runtime_error{ "Failed to load image" };
 	}
 
-	size_t out_hsize = 0;
-	size_t out_vsize = 0;
-	size_t out_channels = 0;
-
-	int result = fpng::fpng_decode_file(filepath.string().c_str()
-		, buffer
-		, out_hsize, out_vsize, out_channels
-		, 4);
-
-	if (fpng::FPNG_DECODE_SUCCESS != result)
+	if (HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND) == check)
 	{
-		return;
+		std::printf("Failed to load image: %s\n", path);
+		throw std::runtime_error{ "Failed to load image" };
 	}
+
+	const void* buffer = image.GetBits();
+	if (buffer == nullptr)
+	{
+		std::printf("Failed to load image: %s\n", path);
+		throw std::runtime_error{ "Cannot acquire image buffer" };
+	}
+
+	imgHSize = image.GetWidth();
+	imgVSize = image.GetHeight();
+	bytesPerPixel = image.GetBPP();
+	imgBufferSize = imgHSize * imgVSize * bytesPerPixel / 8;
+
+	imgBuffer = new std::uint8_t[imgBufferSize];
+
+	std::memcpy(imgBuffer, buffer, imgBufferSize);
+
+	std::printf("Loaded image: %s\n", path);
+
+	image.Destroy();
 }
 
-bool
-ExtractFile(const std::string_view& filepath, std::vector<std::uint8_t>& output)
-{
-	using namespace util::io;
-
-	File file{ filepath, file::OpenModes::Read | file::OpenModes::Binary };
-	if (!file.IsOpen())
-	{
-		return false;
-	}
-
-	if (file.IsEndOfFile())
-	{
-		return false;
-	}
-
-	output.reserve(file.GetSize());
-
-	const size_t count = file.Read(output.data(), output.size());
-	if (count < output.size())
-	{
-		return false;
-	}
-
-	return true;
-}
-
-std::once_flag gl::Image::initFlag{};
