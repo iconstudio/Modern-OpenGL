@@ -88,7 +88,7 @@ noexcept
 	return false;
 }
 
-std::uint32_t
+const std::size_t&
 gl::Texture::GetWidth()
 const
 noexcept
@@ -103,7 +103,7 @@ noexcept
 	}
 }
 
-std::uint32_t
+const std::size_t&
 gl::Texture::GetHeight()
 const
 noexcept
