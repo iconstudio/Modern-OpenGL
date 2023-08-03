@@ -76,7 +76,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	{
 		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
 
-		std::rethrow_exception(myInstance->GetException());
+		//std::rethrow_exception(myInstance->GetException());
 		return framework::InitError::FailedOnStartup;
 	}
 
