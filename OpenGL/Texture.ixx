@@ -48,14 +48,13 @@ export namespace gl
 	private:
 		struct [[nodiscard]] Blob
 		{
+			std::unique_ptr<gl::BitmapPixel[]> imgBuffer = nullptr;
 			std::size_t width = 1U, height = 1U;
 			texture::Type texType = texture::Type::Tex2D;
 			texture::WrapMode hWrap = texture::WrapMode::Repeat;
 			texture::WrapMode vWrap = texture::WrapMode::Repeat;
 			texture::FilterMode minFilter = texture::FilterMode::Linear;
 			texture::FilterMode magFilter = texture::FilterMode::Linear;
-
-			void* data = nullptr;
 		};
 
 	public:
