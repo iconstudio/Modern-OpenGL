@@ -10,9 +10,6 @@ export namespace gl
 	class [[nodiscard]] Image
 	{
 	public:
-		Image() noexcept = default;
-		~Image() noexcept = default;
-
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
 		Image(const Image&) = delete;
@@ -21,6 +18,9 @@ export namespace gl
 		Image& operator=(Image&&) noexcept = default;
 
 	private:
+		Image() noexcept = default;
+		~Image() noexcept = default;
+
 		Image(const FilePath& filepath);
 
 		std::unique_ptr<gl::BitmapPixel[]> imgBuffer;
