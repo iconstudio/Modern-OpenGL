@@ -73,6 +73,8 @@ export namespace gl
 	public:
 		using base = gl::Object;
 
+		~Texture() = default;
+
 		Texture(gl::Image&& image);
 
 		void Bind() const noexcept;
@@ -101,7 +103,6 @@ export namespace gl
 
 	private:
 		Texture() = default;
-		~Texture() = default;
 
 		Texture(const FilePath& path);
 		Texture(const FilePath& path, texture::Type type, texture::WrapMode hwrap, texture::WrapMode vwrap, texture::FilterMode min, texture::FilterMode mag);

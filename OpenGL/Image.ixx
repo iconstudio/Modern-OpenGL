@@ -12,6 +12,8 @@ export namespace gl
 	public:
 		using buffer_t = std::unique_ptr<gl::BitmapPixel[]>;
 
+		~Image() noexcept = default;
+
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
 		[[nodiscard]] buffer_t& GetBuffer() & noexcept;
@@ -33,7 +35,6 @@ export namespace gl
 
 	private:
 		Image() noexcept = default;
-		~Image() noexcept = default;
 
 		Image(const FilePath& filepath);
 
