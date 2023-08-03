@@ -5,7 +5,7 @@ import Glib.Framework;
 import Glib.Legacy.Primitive;
 import Glib.Texture;
 
-void DefaultRenderer() noexcept
+void MyRenderer() noexcept
 {
 	using namespace gl::legacy;
 	primitive::Context ctx{ gl::Primitive::Triangles };
@@ -32,13 +32,12 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.glDescriptor.keepAspectRatio = true;
 	descriptor.glDescriptor.vSync = true;
 	descriptor.isResizable = false;
+	descriptor.renderer = MyRenderer;
+
+	framework->Initialize(std::move(descriptor));
 
 	util::Println("== Initializing OpenGL ==");
 	gl::Initialize(framework->GetHandle());
-
-	framework->Initialize(std::move(descriptor));
-	framework->SetRenderer(DefaultRenderer);
-
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::BufferLayout layout{};
