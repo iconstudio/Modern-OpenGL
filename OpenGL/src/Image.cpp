@@ -78,30 +78,16 @@ gl::Image::Image(const gl::FilePath& filepath)
 
 gl::Image::buffer_t&
 gl::Image::GetBuffer()
-& noexcept
+noexcept
 {
 	return imgBuffer;
 }
 
 const gl::Image::buffer_t&
 gl::Image::GetBuffer()
-const& noexcept
+const noexcept
 {
 	return imgBuffer;
-}
-
-gl::Image::buffer_t&&
-gl::Image::GetBuffer()
-&& noexcept
-{
-	return std::move(imgBuffer);
-}
-
-const gl::Image::buffer_t&&
-gl::Image::GetBuffer()
-const&& noexcept
-{
-	return std::move(imgBuffer);
 }
 
 std::size_t

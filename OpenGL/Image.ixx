@@ -16,10 +16,8 @@ export namespace gl
 
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
-		[[nodiscard]] buffer_t& GetBuffer() & noexcept;
-		[[nodiscard]] const buffer_t& GetBuffer() const& noexcept;
-		[[nodiscard]] buffer_t&& GetBuffer() && noexcept;
-		[[nodiscard]] const buffer_t&& GetBuffer() const&& noexcept;
+		[[nodiscard]] buffer_t& GetBuffer() noexcept;
+		[[nodiscard]] const buffer_t& GetBuffer() const noexcept;
 
 		[[nodiscard]] size_t GetBufferSize() const noexcept;
 		[[nodiscard]] size_t GetWidth() const noexcept;
