@@ -18,6 +18,8 @@ export namespace gl
 		[[nodiscard]] size_t GetHeight() const noexcept;
 		[[nodiscard]] size_t GetBytesPerPixel() const noexcept;
 
+		[[nodiscard]] bool IsEmpty() const noexcept;
+
 		Image(const Image&) = delete;
 		Image(Image&&) noexcept = default;
 		Image& operator=(const Image&) = delete;

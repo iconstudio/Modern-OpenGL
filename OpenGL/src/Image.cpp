@@ -112,3 +112,10 @@ const noexcept
 {
 	return bytesPerPixel;
 }
+
+bool
+gl::Image::IsEmpty()
+const noexcept
+{
+	return nullptr == imgBuffer;
+}

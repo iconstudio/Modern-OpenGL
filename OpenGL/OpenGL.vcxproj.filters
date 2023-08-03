@@ -160,7 +160,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pixel.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
