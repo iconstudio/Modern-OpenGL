@@ -121,6 +121,7 @@
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <DisableSpecificWarnings>4324;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +151,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <StringPooling>true</StringPooling>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <DisableSpecificWarnings>4324;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -176,6 +178,7 @@
       <AdditionalBMIDirectories>$(IntDir)Modules\;$(IntDir);%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <ModuleOutputFile>$(IntDir)Modules\%(Filename).ifc</ModuleOutputFile>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <DisableSpecificWarnings>4324;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -205,6 +208,7 @@
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <StringPooling>true</StringPooling>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <DisableSpecificWarnings>4324;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
