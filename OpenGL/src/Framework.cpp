@@ -116,7 +116,7 @@ noexcept
 }
 
 void
-gl::Framework::SetRenderer(render_t handler)
+gl::Framework::SetRenderer(gl::RenderDelegate handler)
 noexcept
 {
 	myInstance->SetRenderer(

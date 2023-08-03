@@ -10,6 +10,15 @@ export import Glib.Windows.Event;
 
 export namespace gl
 {
+	using gl::win32::FilePath;
+	using gl::win32::Colour;
+	using gl::win32::EventID;
+	using gl::win32::GraphicDeviceContext;
+	using gl::win32::RenderEventHandler;
+	using gl::win32::ManagedWindow;
+	// TODO: std::function -> std::copyable_function
+	using RenderDelegate = std::function<void()>;
+
 	namespace framework
 	{
 		struct Descriptor
@@ -52,13 +61,6 @@ export namespace gl
 		inline constexpr Descriptor DefaultDescriptor = MakeDefaultDescriptor();
 	}
 
-	using gl::win32::FilePath;
-	using gl::win32::Colour;
-	using gl::win32::EventID;
-	using gl::win32::GraphicDeviceContext;
-	using gl::win32::RenderEventHandler;
-	using gl::win32::ManagedWindow;
-
 	/// <summary>
 	/// Client Interface With OpenGL
 	/// </summary>
@@ -69,7 +71,6 @@ export namespace gl
 		using handle_t = gl::ManagedWindow;
 		using event_handler_t = handle_t::event_handler_t;
 		using opengl_system_t = std::shared_ptr<gl::System>;
-		using render_t = std::function<void()>;
 
 		constexpr Framework() noexcept = default;
 		~Framework() noexcept = default;
@@ -82,7 +83,7 @@ export namespace gl
 		void AddEventHandler(EventID id, event_handler_t&& procedure) noexcept;
 		void RemoveEventHandler(EventID id) noexcept;
 
-		void SetRenderer(render_t handler) noexcept;
+		void SetRenderer(RenderDelegate handler) noexcept;
 
 		[[nodiscard]] handle_t& GetHandle() noexcept;
 		[[nodiscard]] const handle_t& GetHandle() const noexcept;
