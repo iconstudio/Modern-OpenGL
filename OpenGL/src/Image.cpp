@@ -23,9 +23,9 @@ gl::Image::Image(const gl::FilePath& filepath)
 {
 	ATL::CImage image{};
 
-	const char* const& path = filepath.string().c_str();
+	const char* path = filepath.string().c_str();
 
-	HRESULT check = image.Load(path);
+	HRESULT check = image.Load(filepath.c_str());
 	if (FAILED(check))
 	{
 		std::printf("Failed to load image: %s\n", path);
