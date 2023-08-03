@@ -73,13 +73,13 @@ export namespace gl
 		bool TryCopy(Texture& output) const noexcept;
 		void Destroy() noexcept;
 
-		[[nodiscard]] texture::Type GetType() const noexcept;
-		[[nodiscard]] texture::WrapMode GetHorizontalWrapMode() const noexcept;
-		[[nodiscard]] texture::WrapMode GetVerticalWrapMode() const noexcept;
-		[[nodiscard]] texture::FilterMode GetMinFilter() const noexcept;
-		[[nodiscard]] texture::FilterMode GetMagFilter() const noexcept;
-		[[nodiscard]] std::uint32_t GetWidth() const noexcept;
-		[[nodiscard]] std::uint32_t GetHeight() const noexcept;
+		[[nodiscard]] const texture::Type& GetType() const noexcept;
+		[[nodiscard]] const texture::WrapMode& GetHorizontalWrapMode() const noexcept;
+		[[nodiscard]] const texture::WrapMode& GetVerticalWrapMode() const noexcept;
+		[[nodiscard]] const texture::FilterMode& GetMinFilter() const noexcept;
+		[[nodiscard]] const texture::FilterMode& GetMagFilter() const noexcept;
+		[[nodiscard]] const std::size_t& GetWidth() const noexcept;
+		[[nodiscard]] const std::size_t& GetHeight() const noexcept;
 
 		[[nodiscard]] bool IsEmpty() const noexcept;
 
