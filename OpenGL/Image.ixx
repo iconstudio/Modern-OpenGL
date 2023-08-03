@@ -1,5 +1,5 @@
 export module Glib.Image;
-import <filesystem>;
+import <memory>;
 import Glib;
 export import Utility.IO.File;
 
@@ -25,7 +25,7 @@ export namespace gl
 	private:
 		Image(const FilePath& filepath);
 
-		const void* imgBuffer;
+		std::unique_ptr<gl::BitmapPixel[]> imgBuffer;
 		size_t imgBufferSize;
 		size_t imgHSize, imgVSize;
 		size_t bytesPerPixel;
