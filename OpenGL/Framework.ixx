@@ -45,7 +45,7 @@ export namespace gl
 		};
 
 		[[nodiscard]]
-		consteval Descriptor MakeDefaultDescriptor() noexcept
+		Descriptor MakeDefaultDescriptor() noexcept
 		{
 			return Descriptor
 			{
@@ -60,8 +60,6 @@ export namespace gl
 				.wh = 600,
 			};
 		}
-
-		inline constexpr Descriptor DefaultDescriptor = MakeDefaultDescriptor();
 	}
 
 	/// <summary>
