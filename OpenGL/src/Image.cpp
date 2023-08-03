@@ -25,7 +25,7 @@ noexcept
 	});
 }
 
-gl::Image::Image(const std::filesystem::path& filepath)
+gl::Image::Image(const gl::FilePath& filepath)
 {
 	std::call_once(gl::Image::initFlag, []() noexcept {
 		fpng::fpng_init();

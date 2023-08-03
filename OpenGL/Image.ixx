@@ -1,12 +1,12 @@
 export module Glib.Image;
-import <string_view>;
 import <filesystem>;
 import <mutex>;
 import Glib;
+export import Utility.IO.File;
 
 export namespace gl
 {
-	using FilePath = std::filesystem::path;
+	using util::io::FilePath;
 
 	class [[nodiscard]] Image
 	{
