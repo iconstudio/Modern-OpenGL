@@ -130,6 +130,20 @@ noexcept
 	});
 }
 
+gl::Framework::handle_t&
+gl::Framework::GetHandle()
+noexcept
+{
+	return *(myInstance.get());
+}
+
+const gl::Framework::handle_t&
+gl::Framework::GetHandle()
+const noexcept
+{
+	return *(myInstance.get());
+}
+
 void
 gl::Framework::DefaultRenderer()
 noexcept

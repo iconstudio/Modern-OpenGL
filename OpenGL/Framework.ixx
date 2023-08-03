@@ -83,6 +83,9 @@ export namespace gl
 
 		void SetRenderer(render_t handler) noexcept;
 
+		[[nodiscard]] handle_t& GetHandle() noexcept;
+		[[nodiscard]] const handle_t& GetHandle() const noexcept;
+
 	private:
 		static void DefaultRenderer() noexcept;
 
