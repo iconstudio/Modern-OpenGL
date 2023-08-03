@@ -14,7 +14,7 @@ noexcept
 {}
 
 gl::Image
-LoadImage(const gl::FilePath& filepath)
+gl::LoadImage(const gl::FilePath& filepath)
 {
 	return gl::Image{ filepath };
 }
