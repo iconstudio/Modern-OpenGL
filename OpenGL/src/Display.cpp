@@ -1,4 +1,5 @@
 module;
+#include <Windows.h>
 #include <dwmapi.h>
 #include <winrt/windows.devices.display.h>
 #include <winrt/windows.ui.composition.h>
@@ -9,7 +10,6 @@ import Glib.Rect;
 import Glib.Windows.Colour;
 
 using namespace winrt::Windows::UI::ViewManagement;
-using namespace winrt::Windows::Devices::Display;
 
 namespace gl::display
 {
