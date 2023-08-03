@@ -31,7 +31,9 @@ consteval int get_typeindex() noexcept
 
 export namespace gl
 {
-	class [[nodiscard]] BufferLayout
+	class [[nodiscard]]
+		alignas(std::hardware_constructive_interference_size)
+		BufferLayout
 	{
 	public:
 		using element_t = std::tuple<int, int, int, ptrdiff_t, bool>;

@@ -29,7 +29,9 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] BufferObject : public gl::Object
+	class [[nodiscard]]
+		alignas(std::hardware_constructive_interference_size)
+		BufferObject : public gl::Object
 	{
 	public:
 		using base = gl::Object;
