@@ -1,6 +1,7 @@
 module;
 export module Glib;
 export import :Utility;
+export import :Pixel;
 export import :TransformState;
 export import :Transform;
 export import :Comparator;

@@ -234,6 +234,7 @@
     <ClCompile Include="LegacyLighting.ixx" />
     <ClCompile Include="LegacyPrimitive.ixx" />
     <ClCompile Include="Lighting.ixx" />
+    <ClCompile Include="Pixel.ixx" />
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
