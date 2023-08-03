@@ -8,11 +8,6 @@ import <cstdint>;
 import <cstdio>;
 import <stdexcept>;
 
-gl::Image::Image(nullptr_t)
-noexcept
-	: Image()
-{}
-
 gl::Image
 gl::LoadImage(const gl::FilePath& filepath)
 {

@@ -13,8 +13,6 @@ export namespace gl
 		Image() noexcept = default;
 		~Image() noexcept = default;
 
-		Image(nullptr_t) noexcept;
-
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
 		Image(const Image&) = delete;
