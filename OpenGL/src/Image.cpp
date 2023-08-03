@@ -78,13 +78,33 @@ gl::Image::Image(const gl::FilePath& filepath)
 	image.Destroy();
 }
 
-const gl::BitmapPixel*
+gl::Image::buffer_t&
 gl::Image::GetBuffer()
-const noexcept
+& noexcept
 {
-	return imgBuffer.get();
+	return imgBuffer;
 }
 
+const gl::Image::buffer_t&
+gl::Image::GetBuffer()
+const& noexcept
+{
+	return imgBuffer;
+}
+
+gl::Image::buffer_t&&
+gl::Image::GetBuffer()
+&& noexcept
+{
+	return std::move(imgBuffer);
+}
+
+const gl::Image::buffer_t&&
+gl::Image::GetBuffer()
+const&& noexcept
+{
+	return std::move(imgBuffer);
+}
 size_t
 gl::Image::GetBufferSize()
 const noexcept

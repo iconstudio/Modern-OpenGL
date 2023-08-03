@@ -10,9 +10,15 @@ export namespace gl
 	class [[nodiscard]] Image
 	{
 	public:
+		using buffer_t = std::unique_ptr<gl::BitmapPixel[]>;
+
 		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
-		[[nodiscard]] const gl::BitmapPixel* GetBuffer() const noexcept;
+		[[nodiscard]] buffer_t& GetBuffer() & noexcept;
+		[[nodiscard]] const buffer_t& GetBuffer() const& noexcept;
+		[[nodiscard]] buffer_t&& GetBuffer() && noexcept;
+		[[nodiscard]] const buffer_t&& GetBuffer() const&& noexcept;
+
 		[[nodiscard]] size_t GetBufferSize() const noexcept;
 		[[nodiscard]] size_t GetWidth() const noexcept;
 		[[nodiscard]] size_t GetHeight() const noexcept;
@@ -31,7 +37,7 @@ export namespace gl
 
 		Image(const FilePath& filepath);
 
-		std::unique_ptr<gl::BitmapPixel[]> imgBuffer;
+		buffer_t imgBuffer;
 		size_t imgBufferSize;
 		size_t imgHSize, imgVSize;
 		size_t bytesPerPixel;
