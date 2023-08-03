@@ -2,19 +2,12 @@ export module Glib.Windows.Coroutine;
 import <coroutine>;
 import Utility.Constraints;
 import Utility.FixedString;
-import Utility.Coroutine;
 
 export namespace gl::win32
 {
 	using std::coroutine_handle;
 	using std::suspend_always;
 	using std::suspend_never;
-	using util::coroutine::awaitable;
-	using util::coroutine::Cowork;
-	using util::coroutine::coexecution;
-	using util::coroutine::default_sentinel_t;
-	using util::coroutine::DeferredPromise;
-	using util::coroutine::RelaxedPromise;
 
 	struct [[nodiscard]] WaitForSeconds
 	{
