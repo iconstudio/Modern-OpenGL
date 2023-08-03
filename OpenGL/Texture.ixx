@@ -72,6 +72,7 @@ export namespace gl
 	public:
 		using base = gl::Object;
 
+		Texture() = default;
 		~Texture() = default;
 
 		Texture(gl::Image&& image);
@@ -101,8 +102,6 @@ export namespace gl
 		friend bool TryLoadTexture(const FilePath& path, Texture& output) noexcept;
 
 	private:
-		Texture() = default;
-
 		Texture(const FilePath& path);
 		Texture(const FilePath& path, texture::Type type, texture::WrapMode hwrap, texture::WrapMode vwrap, texture::FilterMode min, texture::FilterMode mag);
 
