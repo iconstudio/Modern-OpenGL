@@ -1,6 +1,7 @@
 module;
 #include <Windows.h>
 #include <gl/GL.h>
+#undef LoadImage
 
 module Glib.Texture;
 import <stdexcept>;
@@ -33,7 +34,23 @@ gl::Texture::Texture(const gl::FilePath& path
 	, texture::FilterMode min, texture::FilterMode mag)
 	: base()
 {
+	Image img = gl::LoadImage(path);
+	if (img.IsEmpty())
+	{
+		throw std::runtime_error("Failed to load image");
+	}
 
+	myBlob = std::make_shared<Blob>(Blob
+	{
+		.imgBuffer = std::move(img).GetBuffer(),
+		.width = img.GetWidth(),
+		.height = img.GetHeight(),
+		.texType = type,
+		.hWrap = hwrap,
+		.vWrap = vwrap,
+		.minFilter = min,
+		.magFilter = mag,
+	});
 }
 
 gl::Texture
