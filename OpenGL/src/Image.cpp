@@ -103,14 +103,15 @@ const&& noexcept
 {
 	return std::move(imgBuffer);
 }
-size_t
+
+std::size_t
 gl::Image::GetBufferSize()
 const noexcept
 {
 	return imgBufferSize;
 }
 
-size_t
+std::size_t
 gl::Image::GetWidth()
 const noexcept
 {
