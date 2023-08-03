@@ -10,8 +10,9 @@ export import :Object;
 export import :BufferObject;
 export import :BufferLayout;
 export import :System;
+import Glib.Windows.Definitions;
 
 export namespace gl
 {
-	void Initialize();
+	void Initialize(win32::ManagedWindow& client);
 }

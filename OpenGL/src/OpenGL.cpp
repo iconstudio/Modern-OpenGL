@@ -2,17 +2,23 @@ module;
 #include <Windows.h>
 #include <GL/glew.h>
 #include <GL/GL.h>
+#include <GL/GLu.h>
 module Glib;
 import <stdexcept>;
 import <cstdio>;
 import Utility.Print;
+import Glib.Windows.Context;
+import Glib.Windows.Client;
+import Glib.Windows.ManagedClient;
 
 constinit static const GLubyte* error_string = nullptr;
 
 namespace gl
 {
-	void Initialize()
+	void Initialize(win32::ManagedWindow& client)
 	{
+		win32::DeviceContext ctx = client.AcquireContext();
+
 		//glMakeCurrentContext();
 
 		GLenum err = glewInit();

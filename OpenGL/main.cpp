@@ -34,7 +34,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.isResizable = false;
 
 	util::Println("== Initializing OpenGL ==");
-	gl::Initialize();
+	gl::Initialize(framework->GetHandle());
 
 	framework->Initialize(std::move(descriptor));
 	framework->SetRenderer(DefaultRenderer);
