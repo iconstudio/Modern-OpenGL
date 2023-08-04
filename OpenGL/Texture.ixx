@@ -12,6 +12,7 @@ export namespace gl
 	{
 		enum class [[nodiscard]] WrapMode : std::uint32_t
 		{
+			None = 0,
 			Repeat = 0x2901,
 			MirroredRepeat = 0x8370,
 			ClampToEdge = 0x812F,
@@ -21,6 +22,7 @@ export namespace gl
 
 		enum class [[nodiscard]] FilterMode : std::uint32_t
 		{
+			None = 0,
 			Nearest = 0x2600,
 			Linear = 0x2601,
 			NearestMipmapNearest = 0x2702,
@@ -31,6 +33,7 @@ export namespace gl
 
 		enum class [[nodiscard]] Type : std::uint32_t
 		{
+			None = 0,
 			Tex1D = 0x0DE0,
 			Tex2D = 0x0DE1,
 			Tex3D = 0x806F,
