@@ -16,6 +16,43 @@ gl::Texture::Texture(gl::Image&& image)
 	myBlob->height = image.GetHeight();
 }
 
+void
+gl::Texture::Bind()
+const noexcept
+{
+	if (myBlob)
+	{
+		glBindTexture(GL_TEXTURE_2D, myID);
+	}
+}
+
+void
+gl::Texture::Unbind()
+const noexcept
+{
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+
+gl::Texture
+gl::Texture::Copy()
+const
+{
+	return gl::Texture(*this);
+}
+
+bool
+gl::Texture::TryCopy(Texture& output)
+const noexcept
+{
+	return false;
+}
+
+void
+gl::Texture::Destroy()
+noexcept
+{}
+
 gl::Texture
 gl::Texture::EmptyTexture(std::uint32_t w, std::uint32_t h)
 noexcept
