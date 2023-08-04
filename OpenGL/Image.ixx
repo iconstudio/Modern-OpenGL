@@ -14,17 +14,16 @@ export namespace gl
 
 		~Image() noexcept = default;
 
-		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
-
 		[[nodiscard]] buffer_t& GetBuffer() noexcept;
-		[[nodiscard]] const buffer_t& GetBuffer() const noexcept;
-
+		[[nodiscard]] const buffer_t& GetBuffer() const noexcept;\
 		[[nodiscard]] size_t GetBufferSize() const noexcept;
 		[[nodiscard]] size_t GetWidth() const noexcept;
 		[[nodiscard]] size_t GetHeight() const noexcept;
 		[[nodiscard]] size_t GetBytesPerPixel() const noexcept;
 
 		[[nodiscard]] bool IsEmpty() const noexcept;
+
+		[[nodiscard]] friend Image LoadImage(const FilePath& filepath);
 
 		Image(const Image&) = delete;
 		Image(Image&&) noexcept = default;
@@ -33,7 +32,6 @@ export namespace gl
 
 	private:
 		Image() noexcept = default;
-
 		Image(const FilePath& filepath);
 
 		buffer_t imgBuffer;
