@@ -43,15 +43,26 @@ const
 
 bool
 gl::Texture::TryCopy(Texture& output)
-const noexcept
+const
 {
-	return false;
+	if (myBlob)
+	{
+		output = Copy();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void
 gl::Texture::Destroy()
 noexcept
-{}
+{
+	myBlob = nullptr;
+	myID = 0;
+}
 
 gl::Texture
 gl::Texture::EmptyTexture(std::uint32_t w, std::uint32_t h)
@@ -97,7 +108,7 @@ noexcept
 gl::Texture
 gl::LoadTexture(const gl::FilePath& path)
 {
-	return gl::Texture();
+	return gl::Texture(path);
 }
 
 bool
@@ -119,7 +130,85 @@ noexcept
 		return false;
 	}
 
+	output.Destroy();
+
+	if (path.extension() == ".png")
+	{
+		output = gl::Texture(path);
+		return true;
+	}
+
 	return false;
+}
+
+const gl::texture::Type&
+gl::Texture::GetType()
+const noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->texType;
+	}
+	else
+	{
+		return texture::Type::None;
+	}
+}
+
+const gl::texture::WrapMode&
+gl::Texture::GetHorizontalWrapMode()
+const noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->hWrap;
+	}
+	else
+	{
+		return texture::WrapMode::None;
+	}
+}
+
+const gl::texture::WrapMode&
+gl::Texture::GetVerticalWrapMode()
+const noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->vWrap;
+	}
+	else
+	{
+		return texture::WrapMode::None;
+	}
+}
+
+const gl::texture::FilterMode&
+gl::Texture::GetMinFilter()
+const noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->minFilter;
+	}
+	else
+	{
+		return texture::FilterMode::None;
+	}
+}
+
+const gl::texture::FilterMode&
+gl::Texture::GetMagFilter()
+const noexcept
+{
+	if (myBlob)
+	{
+		return myBlob->magFilter;
+	}
+	else
+	{
+		return texture::FilterMode::None;
+	}
 }
 
 const std::size_t&
