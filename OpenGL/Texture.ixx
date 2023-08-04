@@ -78,7 +78,7 @@ export namespace gl
 		Texture(gl::Image&& image);
 
 		void Bind() const noexcept;
-		void Use() const noexcept;
+		void Unbind() const noexcept;
 		[[nodiscard]] Texture Copy() const;
 		bool TryCopy(Texture& output) const noexcept;
 		void Destroy() noexcept;
