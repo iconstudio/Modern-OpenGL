@@ -1,8 +1,9 @@
 module;
 #include <Windows.h>
-#include <GL/glew.h>
+#include "glew.h"
 #include <GL/GL.h>
 #include <GL/GLu.h>
+
 module Glib;
 import <stdexcept>;
 import <cstdio>;
@@ -21,15 +22,15 @@ namespace gl
 
 		//glMakeCurrentContext();
 
-		GLenum err = glewInit();
-		if (glewIsSupported("GL_VERSION_4_6"))
+		GLenum err = ::glewInit();
+		if (::glewIsSupported("GL_VERSION_4_6"))
 		{
 			std::printf("GL Version is 4.6\n");
 		}
 
 		if (GLEW_OK != err)
 		{
-			error_string = glewGetErrorString(err);
+			error_string = ::glewGetErrorString(err);
 			const char* temp_msg = reinterpret_cast<const char*>(error_string);
 
 			std::printf("GLEW Error: %s\n", temp_msg);
