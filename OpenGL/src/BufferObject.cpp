@@ -36,7 +36,9 @@ gl::BufferObject::BufferObject()
 gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
 	: base()
 	, myType(buffer_type)
-{}
+{
+	::glGenBuffers(1, &myID);
+}
 
 gl::BufferObject::~BufferObject()
 {
