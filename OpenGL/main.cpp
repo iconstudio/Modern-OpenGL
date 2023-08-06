@@ -51,7 +51,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	};
 
 	gl::BufferObject vbo{};
-	//vbo.SetData(vertices, sizeof(vertices), 0);
+	vbo.SetData(vertices, sizeof(vertices), gl::buffer::BufferUsage::StaticDraw);
 
 	util::Println("== Program Started ==");
 	framework->Run();
