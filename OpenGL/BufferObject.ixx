@@ -28,7 +28,7 @@ export namespace gl
 			Query = 0x9192
 		};
 
-		enum class [[nodiscard]] BufferUsage
+		enum class [[nodiscard]] BufferUsage : std::uint32_t
 		{
 			StaticDraw = 0x88E4,
 			StaticRead = 0x88E5,
@@ -50,6 +50,7 @@ export namespace gl
 		using base = gl::Object;
 
 		BufferObject();
+		BufferObject(buffer::BufferType buffer_type);
 		~BufferObject();
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;

@@ -33,6 +33,11 @@ gl::BufferObject::BufferObject()
 	::glGenBuffers(1, &myID);
 }
 
+gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
+	: base()
+	, myType(buffer_type)
+{}
+
 gl::BufferObject::~BufferObject()
 {
 	::glDeleteBuffers(1, &myID);
