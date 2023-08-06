@@ -27,6 +27,19 @@ export namespace gl
 			DispatchIndirect = 0x90EE,
 			Query = 0x9192
 		};
+
+		enum class [[nodiscard]] BufferUsage
+		{
+			StaticDraw = 0x88E4,
+			StaticRead = 0x88E5,
+			StaticCopy = 0x88E6,
+			DynamicDraw = 0x88E8,
+			DynamicRead = 0x88E9,
+			DynamicCopy = 0x88EA,
+			StreamDraw = 0x88E0,
+			StreamRead = 0x88E1,
+			StreamCopy = 0x88E2
+		};
 	}
 
 	class [[nodiscard]]
@@ -39,7 +52,7 @@ export namespace gl
 		BufferObject();
 		~BufferObject();
 
-		void SetData(const void* const& data, const size_t& size, buffer::BufferType usage) noexcept;
+		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
 		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
 		void SetLayout(const BufferLayout& layout) noexcept;
 		void SetLayout(BufferLayout&& layout) noexcept;
@@ -61,6 +74,7 @@ export namespace gl
 
 	private:
 		volatile buffer::BufferType myType = buffer::BufferType::Array;
+		volatile buffer::BufferUsage myUsage = buffer::BufferUsage::StaticDraw;
 		BufferLayout myLayout{};
 		size_t mySize = 0;
 	};

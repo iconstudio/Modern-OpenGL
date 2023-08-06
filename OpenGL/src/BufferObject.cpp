@@ -56,7 +56,7 @@ struct Binder
 };
 
 void
-gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferType usage)
+gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
 noexcept
 {
 	Binder binder{ myType, myID };
@@ -64,7 +64,7 @@ noexcept
 	::glBufferData(binder.bftype, size, data, static_cast<GLenum>(usage));
 
 	mySize = size;
-	myType = usage;
+	myUsage = usage;
 }
 
 void
