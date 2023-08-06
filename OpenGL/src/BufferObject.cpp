@@ -135,6 +135,13 @@ const noexcept
 	return myType;
 }
 
+gl::buffer::BufferUsage
+gl::BufferObject::GetUsage()
+const noexcept
+{
+	return myUsage;
+}
+
 const
 gl::BufferLayout& gl::BufferObject::GetLayout()
 const noexcept
