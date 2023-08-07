@@ -1,5 +1,4 @@
 module;
-
 module Glib;
 import <stdexcept>;
 
