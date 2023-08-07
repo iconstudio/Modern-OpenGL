@@ -30,14 +30,8 @@
     <ClCompile Include="System.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.ixx">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Object.ixx">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utility.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="State.ixx">
       <Filter>Header Files</Filter>

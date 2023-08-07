@@ -239,7 +239,6 @@
     <ClCompile Include="..\OpenGL\Texture.ixx" />
     <ClCompile Include="..\OpenGL\Transform.ixx" />
     <ClCompile Include="..\OpenGL\TransformState.ixx" />
-    <ClCompile Include="..\OpenGL\Utility.ixx" />
     <ClCompile Include="..\Utility\Utility\inc\Array.ixx" />
     <ClCompile Include="..\Utility\Utility\inc\Atom.ixx" />
     <ClCompile Include="..\Utility\Utility\inc\Atomic.ixx" />

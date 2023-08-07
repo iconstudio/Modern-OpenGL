@@ -1,8 +1,7 @@
 export module Glib;
 import <string>;
-import <cstdint>;
 import <string_view>;
-export import :Utility;
+import <cstdint>;
 export import :Pixel;
 export import :TransformState;
 export import :Transform;
