@@ -175,3 +175,20 @@ void
 gl::framework::DefaultRenderer()
 noexcept
 {}
+
+gl::framework::Descriptor
+gl::framework::MakeDefaultDescriptor() noexcept
+{
+	return Descriptor
+	{
+		.glDescriptor = gl::system::Descriptor
+		{
+			.viewPort = gl::Rect{ 0, 0, 800, 600 },
+		},
+		.title = L"FreeGLUT",
+		.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT
+		.wy = 0,
+		.ww = 800,
+		.wh = 600,
+	};
+}

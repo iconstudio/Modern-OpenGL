@@ -2,7 +2,6 @@ export module Glib.Framework;
 import <functional>;
 import <memory>;
 import <string_view>;
-import Glib;
 import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.ManagedClient;
@@ -45,21 +44,7 @@ export namespace gl
 		};
 
 		[[nodiscard]]
-		Descriptor MakeDefaultDescriptor() noexcept
-		{
-			return Descriptor
-			{
-				.glDescriptor = gl::system::Descriptor
-				{
-					.viewPort = gl::Rect{ 0, 0, 800, 600 },
-				},
-				.title = L"FreeGLUT",
-				.wx = static_cast<int>(0x80000000), // CW_USEDEFAULT
-				.wy = 0,
-				.ww = 800,
-				.wh = 600,
-			};
-		}
+		Descriptor MakeDefaultDescriptor() noexcept;
 	}
 
 	/// <summary>
