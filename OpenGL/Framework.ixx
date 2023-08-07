@@ -74,6 +74,8 @@ export namespace gl
 		[[nodiscard]] handle_t& GetHandle() noexcept;
 		[[nodiscard]] const handle_t& GetHandle() const noexcept;
 
+		[[nodiscard]] friend std::shared_ptr<Framework> CreateFramework() noexcept;
+
 	private:
 		std::unique_ptr<handle_t> myInstance{ nullptr };
 		gl::Rect window_rect{};
@@ -81,5 +83,5 @@ export namespace gl
 		opengl_system_t glSystem{ nullptr };
 	};
 
-	std::shared_ptr<Framework> CreateFramework() noexcept;
+	[[nodiscard]] std::shared_ptr<Framework> CreateFramework() noexcept;
 }
