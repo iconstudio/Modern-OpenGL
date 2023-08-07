@@ -1,4 +1,6 @@
 export module Glib;
+import <string>;
+import <string_view>;
 export import :Utility;
 export import :Pixel;
 export import :TransformState;
@@ -11,6 +13,20 @@ export import :BufferObject;
 export import :BufferLayout;
 export import :System;
 
-export namespace gl
+export namespace gl::info
 {
+	[[nodiscard]]
+	std::string_view GetVersion() noexcept;
+
+	[[nodiscard]]
+	std::string_view GetVendor() noexcept;
+
+	[[nodiscard]]
+	std::string_view GetRenderer() noexcept;
+
+	[[nodiscard]]
+	std::string_view GetExtensions() noexcept;
+
+	[[nodiscard]]
+	std::string_view GetShadingLanguageVersion() noexcept;
 }
