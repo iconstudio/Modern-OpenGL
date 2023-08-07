@@ -13,5 +13,4 @@ export import :System;
 
 export namespace gl
 {
-	void Initialize();
 }

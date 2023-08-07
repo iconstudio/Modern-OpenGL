@@ -4,7 +4,4 @@ import <stdexcept>;
 
 namespace gl
 {
-	void Initialize()
-	{
-	}
 }
