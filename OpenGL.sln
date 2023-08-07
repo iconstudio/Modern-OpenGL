@@ -75,8 +75,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Client\Client.vcxitems*{5fc16e5d-7939-465e-a815-b1bf9a1d33c7}*SharedItemsImports = 9
 		GLEW\GLEW.vcxitems*{79056d64-8b2f-4a97-968f-4c5ec34345f1}*SharedItemsImports = 9
-		Client\Client.vcxitems*{811e349d-e628-4b27-bd06-3c136b4d4dc8}*SharedItemsImports = 4
-		GLEW\GLEW.vcxitems*{811e349d-e628-4b27-bd06-3c136b4d4dc8}*SharedItemsImports = 4
 		GLEW\GLEW.vcxitems*{a5679619-db5b-4821-858d-c1df1cdc6b7a}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

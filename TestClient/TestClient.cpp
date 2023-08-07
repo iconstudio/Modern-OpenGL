@@ -1,5 +1,5 @@
-﻿import <type_traits>;
-import Utility.Print;
+﻿import <cstdio>;
+import <type_traits>;
 import Glib;
 import Glib.Client;
 import Glib.Legacy.Primitive;
@@ -22,10 +22,10 @@ void MyRenderer() noexcept
 
 int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
 {
-	util::Println("== Creating the Program ==");
+	std::puts("== Creating the Program ==");
 	auto framework = client::CreateFramework();
 
-	util::Println("== Program Initiated ==");
+	std::puts("== Program Initiated ==");
 	client::framework::Descriptor descriptor = client::framework::MakeDefaultDescriptor();
 	descriptor.glDescriptor.alphaBlend = true;
 	descriptor.glDescriptor.doubleBuffered = true;
@@ -34,10 +34,10 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.isResizable = false;
 	descriptor.renderer = MyRenderer;
 
-	util::Println("== Initializing OpenGL ==");
+	std::puts("== Initializing OpenGL ==");
 	framework->Initialize(std::move(descriptor));
 
-	util::Println("== Program Started ==");
+	std::puts("== Program Started ==");
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::BufferLayout layout{};
@@ -55,7 +55,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	framework->Run();
 
-	util::Println("== Program Ended ==");
+	std::puts("== Program Ended ==");
 
 	return 0;
 }
