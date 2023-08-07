@@ -34,10 +34,11 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.isResizable = false;
 	descriptor.renderer = MyRenderer;
 
-	framework->Initialize(std::move(descriptor));
-
 	util::Println("== Initializing OpenGL ==");
-	gl::Initialize(framework->GetHandle());
+	framework->Initialize(std::move(descriptor));
+	gl::Initialize();
+
+	util::Println("== Program Started ==");
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::BufferLayout layout{};
@@ -53,7 +54,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	gl::BufferObject vbo{};
 	vbo.SetData(vertices, sizeof(vertices), gl::buffer::BufferUsage::StaticDraw);
 
-	util::Println("== Program Started ==");
 	framework->Run();
 
 	util::Println("== Program Ended ==");

@@ -1,6 +1,5 @@
-module;
 export module Glib;
-export import :Utility;
+export import :Uility;
 export import :Pixel;
 export import :TransformState;
 export import :Transform;
@@ -15,5 +14,5 @@ import Glib.Windows.Definitions;
 
 export namespace gl
 {
-	void Initialize(win32::ManagedWindow& client);
+	void Initialize();
 }
