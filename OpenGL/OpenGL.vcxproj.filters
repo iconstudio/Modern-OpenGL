@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultProperty.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -29,12 +26,6 @@
     </ClCompile>
     <ClCompile Include="Display.ixx">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework.ixx">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Framework.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="System.ixx">
       <Filter>Header Files</Filter>
