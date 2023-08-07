@@ -22,7 +22,7 @@ export namespace gl
 	{
 		void DefaultRenderer() noexcept;
 
-		struct Descriptor
+		struct [[nodiscard]] Descriptor
 		{
 			gl::system::Descriptor glDescriptor;
 			std::wstring_view title;
@@ -34,7 +34,7 @@ export namespace gl
 			bool isPowersave = false;
 		};
 
-		enum class InitError
+		enum class [[nodiscard]] InitError
 		{
 			Success,
 			FailedOnCreatingSystem,
