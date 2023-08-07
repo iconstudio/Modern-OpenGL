@@ -38,8 +38,8 @@ gl::Image::Image(const gl::FilePath& filepath)
 		throw std::runtime_error{ "Cannot acquire image buffer" };
 	}
 
-	bytesPerPixel = image.GetBPP();
-	if (32 != bytesPerPixel)
+	bitsPerPixel = image.GetBPP();
+	if (32 != bitsPerPixel)
 	{
 		std::wprintf(L"Cannot use the image: %s\n", filepath.c_str());
 		throw std::runtime_error{ "Unsupported image format" };
@@ -59,7 +59,7 @@ gl::Image::Image(const gl::FilePath& filepath)
 
 		for (size_t j = 0; j < imgHSize; j++)
 		{
-			size_t hoffset = j * bytesPerPixel / 8; // must be 4 (32bit color)
+			size_t hoffset = j * bitsPerPixel / 8; // must be 4 (32bit color)
 			size_t offset = voffset + hoffset;
 
 			std::uint8_t alpha = pt_buffer[offset + 3];
@@ -114,7 +114,7 @@ size_t
 gl::Image::GetBytesPerPixel()
 const noexcept
 {
-	return bytesPerPixel;
+	return bitsPerPixel;
 }
 
 bool

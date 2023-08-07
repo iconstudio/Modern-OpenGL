@@ -37,7 +37,7 @@ export namespace gl
 		buffer_t imgBuffer;
 		size_t imgBufferSize;
 		size_t imgHSize, imgVSize;
-		size_t bytesPerPixel;
+		size_t bitsPerPixel;
 	};
 
 	[[nodiscard]] Image LoadImage(const FilePath& filepath);
