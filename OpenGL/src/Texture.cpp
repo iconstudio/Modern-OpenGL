@@ -141,7 +141,7 @@ noexcept
 	return false;
 }
 
-const gl::texture::Type&
+gl::texture::Type
 gl::Texture::GetType()
 const noexcept
 {
@@ -155,7 +155,7 @@ const noexcept
 	}
 }
 
-const gl::texture::WrapMode&
+gl::texture::WrapMode
 gl::Texture::GetHorizontalWrapMode()
 const noexcept
 {
@@ -169,7 +169,7 @@ const noexcept
 	}
 }
 
-const gl::texture::WrapMode&
+gl::texture::WrapMode
 gl::Texture::GetVerticalWrapMode()
 const noexcept
 {
@@ -183,7 +183,7 @@ const noexcept
 	}
 }
 
-const gl::texture::FilterMode&
+gl::texture::FilterMode
 gl::Texture::GetMinFilter()
 const noexcept
 {
@@ -197,7 +197,7 @@ const noexcept
 	}
 }
 
-const gl::texture::FilterMode&
+gl::texture::FilterMode
 gl::Texture::GetMagFilter()
 const noexcept
 {
@@ -211,7 +211,7 @@ const noexcept
 	}
 }
 
-const std::size_t&
+std::size_t
 gl::Texture::GetWidth()
 const
 noexcept
@@ -226,7 +226,7 @@ noexcept
 	}
 }
 
-const std::size_t&
+std::size_t
 gl::Texture::GetHeight()
 const
 noexcept
