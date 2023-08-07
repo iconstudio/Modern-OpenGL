@@ -15,8 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Client.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Client.ixx" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Framework.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)Framework.ixx" />
   </ItemGroup>
 </Project>

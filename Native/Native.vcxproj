@@ -77,18 +77,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
-    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <OutDir>$(SolutionDir)lib\</OutDir>
+    <PublicIncludeDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
     <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
-    <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
-    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <OutDir>$(SolutionDir)lib\</OutDir>
+    <PublicIncludeDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -98,6 +102,8 @@
     <OutDir>$(SolutionDir)lib\</OutDir>
     <PublicIncludeDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -107,6 +113,8 @@
     <OutDir>$(SolutionDir)lib\</OutDir>
     <PublicIncludeDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir)inc\;$(ProjectDir)</IncludePath>
+    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -263,12 +271,12 @@
     <ClCompile Include="src\WindowFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utility\src\Utility.vcxproj">
-      <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
-    </ProjectReference>
+    <None Include="inc\ImageLoader.inl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="inc\ImageLoader.inl" />
+    <ProjectReference Include="..\Utility\Utility\Utility.vcxproj">
+      <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
