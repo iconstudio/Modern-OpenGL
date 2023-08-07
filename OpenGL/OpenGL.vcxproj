@@ -128,7 +128,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32sd.lib</AdditionalDependencies>
+      <Version>0.8</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -161,6 +162,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
+      <Version>0.8</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -185,7 +187,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32sd.lib</AdditionalDependencies>
+      <Version>0.8</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -218,6 +221,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
+      <Version>0.8</Version>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
