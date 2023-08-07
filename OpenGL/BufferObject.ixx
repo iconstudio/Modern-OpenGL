@@ -42,6 +42,8 @@ export namespace gl
 		};
 	}
 
+#pragma warning(push)
+#pragma warning(disable: 4324)
 	class [[nodiscard]]
 		alignas(std::hardware_constructive_interference_size)
 		BufferObject : public gl::Object
@@ -80,4 +82,5 @@ export namespace gl
 		BufferLayout myLayout{};
 		size_t mySize = 0;
 	};
+#pragma warning(pop)
 }

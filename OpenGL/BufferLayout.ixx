@@ -31,6 +31,8 @@ consteval int get_typeindex() noexcept
 
 export namespace gl
 {
+#pragma warning(push)
+#pragma warning(disable: 4324)
 	class [[nodiscard]]
 		alignas(std::hardware_constructive_interference_size)
 		BufferLayout
@@ -87,4 +89,5 @@ export namespace gl
 		std::vector<element_t> myElements{};
 		int myStride = 0;
 	};
+#pragma warning(pop)
 }
