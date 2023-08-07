@@ -22,6 +22,9 @@
     <Filter Include="헤더 파일\Native">
       <UniqueIdentifier>{9e99b761-ccac-406e-9e0d-92417a57ce5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Utility">
+      <UniqueIdentifier>{1abb2cb0-d12d-4c69-91b1-9f2c9e05d0e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestClient.cpp">
@@ -243,6 +246,135 @@
     <ClCompile Include="..\Native\inc\WindowStyle.ixx">
       <Filter>헤더 파일\Native</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Array.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Atom.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Atomic.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Classifier.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\CoIterator.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\CoLogic.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Constraints.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\CoPromise.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Coroutine.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\CoTask.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\DataPacker.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\DataUnit.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Deserialization.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Enumerator.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Error.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Expected.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\File.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\FixedString.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Generator.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Identity.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Indexer.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Locks.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\LooseMonad.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Memory.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\MemoryWatcher.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Meta.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Monad.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Named.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Option.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Print.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Promise.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Reflection.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Serialization.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Singleton.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Spinlock.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\String.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Thread.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\ThreadUnit.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Time.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Traits.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Union.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Unique.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utility\Utility\inc\Utility.ixx">
+      <Filter>헤더 파일\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\OpenGL\fpng.h">
@@ -255,6 +387,9 @@
   <ItemGroup>
     <None Include="..\Native\inc\ImageLoader.inl">
       <Filter>헤더 파일\Native</Filter>
+    </None>
+    <None Include="..\Utility\Utility\inc\Serialization.inl">
+      <Filter>헤더 파일\Utility</Filter>
     </None>
   </ItemGroup>
 </Project>

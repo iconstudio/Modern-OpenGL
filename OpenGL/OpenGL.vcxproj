@@ -92,19 +92,21 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
-    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)lib\</OutDir>
+    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <AllProjectBMIsArePublic>true</AllProjectBMIsArePublic>
-    <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)lib\</OutDir>
+    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -290,9 +292,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Native\Native.vcxproj">
       <Project>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\src\Utility.vcxproj">
-      <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
