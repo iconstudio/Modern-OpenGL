@@ -36,7 +36,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	util::Println("== Initializing OpenGL ==");
 	framework->Initialize(std::move(descriptor));
-	gl::Initialize();
 
 	util::Println("== Program Started ==");
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
