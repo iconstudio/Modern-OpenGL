@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLEW", "GLEW\GLEW.vcxitems"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxitems", "{5FC16E5D-7939-465E-A815-B1BF9A1D33C7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\TestClient.vcxproj", "{811E349D-E628-4B27-BD06-3C136B4D4DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -55,6 +57,14 @@ Global
 		{99C88E72-359A-4F79-802D-898FB99C9107}.Release|x64.Build.0 = Release|x64
 		{99C88E72-359A-4F79-802D-898FB99C9107}.Release|x86.ActiveCfg = Release|Win32
 		{99C88E72-359A-4F79-802D-898FB99C9107}.Release|x86.Build.0 = Release|Win32
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Debug|x64.ActiveCfg = Debug|x64
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Debug|x64.Build.0 = Debug|x64
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Debug|x86.ActiveCfg = Debug|Win32
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Debug|x86.Build.0 = Debug|Win32
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Release|x64.ActiveCfg = Release|x64
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Release|x64.Build.0 = Release|x64
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Release|x86.ActiveCfg = Release|Win32
+		{811E349D-E628-4B27-BD06-3C136B4D4DC8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +75,8 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Client\Client.vcxitems*{5fc16e5d-7939-465e-a815-b1bf9a1d33c7}*SharedItemsImports = 9
 		GLEW\GLEW.vcxitems*{79056d64-8b2f-4a97-968f-4c5ec34345f1}*SharedItemsImports = 9
+		Client\Client.vcxitems*{811e349d-e628-4b27-bd06-3c136b4d4dc8}*SharedItemsImports = 4
+		GLEW\GLEW.vcxitems*{811e349d-e628-4b27-bd06-3c136b4d4dc8}*SharedItemsImports = 4
 		GLEW\GLEW.vcxitems*{a5679619-db5b-4821-858d-c1df1cdc6b7a}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
