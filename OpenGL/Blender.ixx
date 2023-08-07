@@ -1,6 +1,5 @@
 export module Glib.Blender;
 import <cstdint>;
-import Utility.Monad;
 import :Option;
 import :Mode;
 
@@ -24,10 +23,10 @@ export namespace gl
 		void Apply() const noexcept;
 
 		[[nodiscard]] bool IsBlending() const noexcept;
-		[[nodiscard]] util::Monad<BlendOption> GetSrcMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendOption> GetDstMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendOption> GetPrevSrcMode() const noexcept;
-		[[nodiscard]] util::Monad<BlendOption> GetPrevDstMode() const noexcept;
+		[[nodiscard]] BlendOption GetSrcMode() const noexcept;
+		[[nodiscard]] BlendOption GetDstMode() const noexcept;
+		[[nodiscard]] BlendOption GetPrevSrcMode() const noexcept;
+		[[nodiscard]] BlendOption GetPrevDstMode() const noexcept;
 
 		void swap(Blender& other) noexcept;
 

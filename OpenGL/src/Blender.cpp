@@ -90,60 +90,32 @@ const noexcept
 	return isBlending;
 }
 
-util::Monad<gl::BlendOption>
+gl::BlendOption
 gl::Blender::GetSrcMode()
 const noexcept
 {
-	if (BlendOption::Invalid != myMode.srcOption)
-	{
-		return myMode.srcOption;
-	}
-	else
-	{
-		return util::nullopt;
-	}
+	return myMode.srcOption;
 }
 
-util::Monad<gl::BlendOption>
+gl::BlendOption
 gl::Blender::GetDstMode()
 const noexcept
 {
-	if (BlendOption::Invalid != myMode.dstOption)
-	{
-		return myMode.dstOption;
-	}
-	else
-	{
-		return util::nullopt;
-	}
+	return myMode.dstOption;
 }
 
-util::Monad<gl::BlendOption>
+gl::BlendOption
 gl::Blender::GetPrevSrcMode()
 const noexcept
 {
-	if (BlendOption::Invalid != prevMove.srcOption)
-	{
-		return prevMove.srcOption;
-	}
-	else
-	{
-		return util::nullopt;
-	}
+	return prevMove.srcOption;
 }
 
-util::Monad<gl::BlendOption>
+gl::BlendOption
 gl::Blender::GetPrevDstMode()
 const noexcept
 {
-	if (BlendOption::Invalid != prevMove.dstOption)
-	{
-		return prevMove.dstOption;
-	}
-	else
-	{
-		return util::nullopt;
-	}
+	return prevMove.dstOption;
 }
 
 void
