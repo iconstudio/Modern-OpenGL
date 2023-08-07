@@ -8,7 +8,6 @@ module;
 module Glib.Framework;
 import <exception>;
 import Utility.Monad;
-import Glib;
 import Glib.Display;
 import Glib.Windows.Context;
 import Glib.Windows.Context.Renderer;

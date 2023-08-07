@@ -4,7 +4,6 @@ import <memory>;
 import <string_view>;
 import Glib;
 import Glib.Rect;
-import Glib.Windows.Definitions;
 import Glib.Windows.ManagedClient;
 export import Glib.Windows.Event;
 

@@ -1,3 +1,4 @@
+module;
 export module Glib;
 export import :Uility;
 export import :Pixel;
@@ -10,7 +11,6 @@ export import :Object;
 export import :BufferObject;
 export import :BufferLayout;
 export import :System;
-import Glib.Windows.Definitions;
 
 export namespace gl
 {
