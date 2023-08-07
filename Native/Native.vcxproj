@@ -80,6 +80,7 @@
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -87,6 +88,7 @@
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -94,6 +96,7 @@
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
@@ -101,6 +104,7 @@
     <IncludePath>$(ProjectDir)inc\;$(ProjectDir);$(IntDir);$(IncludePath)</IncludePath>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

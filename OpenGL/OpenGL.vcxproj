@@ -28,25 +28,25 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -77,6 +77,7 @@
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -85,6 +86,7 @@
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -93,6 +95,7 @@
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -101,6 +104,7 @@
     <PublicModuleDirectories>$(ProjectDir);$(ProjectDir)inc\;$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)lib\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,6 +131,9 @@
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32sd.lib</AdditionalDependencies>
       <Version>0.8</Version>
     </Link>
+    <Lib>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;gdi32.lib;shell32.lib;opengl32.lib;glu32.lib;glew32sd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -160,6 +167,9 @@
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
       <Version>0.8</Version>
     </Link>
+    <Lib>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;gdi32.lib;shell32.lib;opengl32.lib;glu32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -186,6 +196,9 @@
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32sd.lib</AdditionalDependencies>
       <Version>0.8</Version>
     </Link>
+    <Lib>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;gdi32.lib;shell32.lib;opengl32.lib;glu32.lib;glew32sd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -219,6 +232,9 @@
       <AdditionalDependencies>user32.lib;dwmapi.lib;opengl32.lib;glu32.lib;gdi32.lib;glew32s.lib</AdditionalDependencies>
       <Version>0.8</Version>
     </Link>
+    <Lib>
+      <AdditionalDependencies>user32.lib;dwmapi.lib;gdi32.lib;shell32.lib;opengl32.lib;glu32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blender.ixx" />
