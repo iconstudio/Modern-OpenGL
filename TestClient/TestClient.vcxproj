@@ -170,12 +170,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Client\Client.ixx">
-      <FileType>Document</FileType>
-    </ClCompile>
-    <ClCompile Include="..\Client\Framework.ixx">
-      <FileType>Document</FileType>
-    </ClCompile>
     <ClCompile Include="TestClient.cpp" />
   </ItemGroup>
   <ItemGroup>

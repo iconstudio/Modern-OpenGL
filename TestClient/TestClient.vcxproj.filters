@@ -18,11 +18,5 @@
     <ClCompile Include="TestClient.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\Client\Client.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Client\Framework.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
