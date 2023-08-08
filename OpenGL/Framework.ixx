@@ -1,9 +1,9 @@
-export module Glib.Client:Framework;
+export module Glib.Framework;
 import <memory>;
 import <functional>;
 import <string_view>;
-import Glib;
-import Glib.Rect;
+export import Glib;
+export import Glib.Rect;
 import Glib.Windows.Definitions;
 import Glib.Windows.ManagedClient;
 export import Glib.Windows.Event;

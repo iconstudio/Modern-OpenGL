@@ -12,8 +12,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLEW", "GLEW\GLEW.vcxitems", "{79056D64-8B2F-4A97-968F-4C5EC34345F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxitems", "{5FC16E5D-7939-465E-A815-B1BF9A1D33C7}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\TestClient.vcxproj", "{811E349D-E628-4B27-BD06-3C136B4D4DC8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8A21FBF7-759E-4AD4-AC28-78D3E4F7F491} = {8A21FBF7-759E-4AD4-AC28-78D3E4F7F491}
@@ -69,7 +67,6 @@ Global
 		SolutionGuid = {85BCDF47-A60F-4FD0-B718-5765801DD8D7}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Client\Client.vcxitems*{5fc16e5d-7939-465e-a815-b1bf9a1d33c7}*SharedItemsImports = 9
 		GLEW\GLEW.vcxitems*{79056d64-8b2f-4a97-968f-4c5ec34345f1}*SharedItemsImports = 9
 		GLEW\GLEW.vcxitems*{a5679619-db5b-4821-858d-c1df1cdc6b7a}*SharedItemsImports = 4
 	EndGlobalSection

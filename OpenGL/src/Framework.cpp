@@ -5,7 +5,7 @@ module;
 #undef CreateWindow
 #undef CreateWindowEx
 
-module Glib.Client;
+module Glib.Framework;
 import :Framework;
 import <exception>;
 import Utility.Monad;

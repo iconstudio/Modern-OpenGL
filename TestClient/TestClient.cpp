@@ -1,7 +1,7 @@
 ﻿import <cstdio>;
 import <type_traits>;
 import Glib;
-import Glib.Client;
+import Glib.Framework;
 import Glib.Legacy.Primitive;
 import Glib.Texture;
 

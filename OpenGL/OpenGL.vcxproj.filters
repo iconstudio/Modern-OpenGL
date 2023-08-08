@@ -147,6 +147,12 @@
     <ClCompile Include="Pixel.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Framework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h">

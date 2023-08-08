@@ -246,6 +246,7 @@
     <ClCompile Include="BlendOption.ixx" />
     <ClCompile Include="Buffer.ixx" />
     <ClCompile Include="BufferLayout.ixx" />
+    <ClCompile Include="Framework.ixx" />
     <ClCompile Include="Object.ixx" />
     <ClCompile Include="ClearBits.ixx" />
     <ClCompile Include="Comparator.ixx" />
@@ -270,6 +271,7 @@
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <EnableEnhancedInstructionSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">StreamingSIMDExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
+    <ClCompile Include="src\Framework.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\LegacyFog.cpp" />
     <ClCompile Include="src\LegacyLight.cpp" />

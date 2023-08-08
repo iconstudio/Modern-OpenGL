@@ -1,2 +1,0 @@
-module;
-module Glib.Client;
