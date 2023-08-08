@@ -77,7 +77,8 @@
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)lib\</OutDir>
+    <OutDir>$(SolutionDir)export\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -86,7 +87,8 @@
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)lib\</OutDir>
+    <OutDir>$(SolutionDir)export\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -95,8 +97,8 @@
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)lib\</OutDir>
-    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)export\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -105,8 +107,8 @@
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <PublicIncludeDirectories>$(ProjectDir)inc;$(ProjectDir);$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)lib\</OutDir>
-    <IntDir>$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)export\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
