@@ -1,4 +1,6 @@
 export module Glib:VertexBuffer;
+import <cstdint>;
+import <initializer_list>;
 import :BufferObject;
 
 export namespace gl
@@ -11,6 +13,9 @@ export namespace gl
 		VertexBuffer() noexcept;
 		~VertexBuffer() noexcept = default;
 
+		void Assign(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
+		void Assign(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
+		void Assign(std::initializer_list<float> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
 		void Assign(const void* const& data, const size_t& size, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
 		void SetLayout(const BufferLayout& layout) noexcept;
 		void SetLayout(BufferLayout&& layout) noexcept;
