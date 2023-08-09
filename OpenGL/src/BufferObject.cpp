@@ -31,7 +31,7 @@ gl::BufferObject::BufferObject()
 noexcept
 	: base()
 {
-	::glGenBuffers(1, &myID);
+	::glGenBuffers(1, std::addressof(myID));
 }
 
 gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
@@ -39,13 +39,13 @@ noexcept
 	: base()
 	, myType(buffer_type)
 {
-	::glGenBuffers(1, &myID);
+	::glGenBuffers(1, std::addressof(myID));
 }
 
 gl::BufferObject::~BufferObject()
 noexcept
 {
-	::glDeleteBuffers(1, &myID);
+	::glDeleteBuffers(1, std::addressof(myID));
 }
 
 struct Binder
