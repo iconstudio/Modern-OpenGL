@@ -8,34 +8,16 @@ import <tuple>;
 import :BufferObject;
 
 using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
+void AttachElement(const element_vector_t& elements) noexcept;
 
-void
-AttachElement(const element_vector_t& elements)
-noexcept
-{
-	GLuint index = 0;
-	for (auto& item : elements)
-	{
-		const int& count = std::get<0>(item);
-		const int& type = std::get<1>(item);
-		const int& stride = std::get<2>(item);
-		const ptrdiff_t& offset = std::get<3>(item);
-		const bool& normalized = std::get<4>(item);
-
-		::glVertexAttribPointer(index, count, type, normalized, stride, reinterpret_cast<const void*>(offset));
-		::glEnableVertexAttribArray(index++);
-	}
-}
-
-gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
+gl::detail::BufferImplement::BufferImplement()
 noexcept
 	: base()
-	, myType(buffer_type)
 {
 	::glGenBuffers(1, std::addressof(myID));
 }
 
-gl::BufferObject::~BufferObject()
+gl::detail::BufferImplement::~BufferImplement()
 noexcept
 {
 	::glDeleteBuffers(1, std::addressof(myID));
@@ -59,7 +41,7 @@ struct Binder
 };
 
 void
-gl::BufferObject::SetData(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
+gl::detail::BufferImplement::SetData(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
 noexcept
 {
 	Binder binder{ myType, myID };
@@ -71,7 +53,7 @@ noexcept
 }
 
 void
-gl::BufferObject::SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset)
+gl::detail::BufferImplement::SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset)
 noexcept
 {
 	Binder binder{ myType, myID };
@@ -82,21 +64,21 @@ noexcept
 }
 
 void
-gl::BufferObject::Bind()
+gl::detail::BufferImplement::Bind()
 const noexcept
 {
 	::glBindBuffer(static_cast<GLenum>(myType), myID);
 }
 
 void
-gl::BufferObject::Unbind()
+gl::detail::BufferImplement::Unbind()
 const noexcept
 {
 	::glBindBuffer(static_cast<GLenum>(myType), 0);
 }
 
 void
-gl::BufferObject::Use()
+gl::detail::BufferImplement::Use()
 const noexcept
 {
 	Bind();
@@ -105,7 +87,7 @@ const noexcept
 }
 
 void
-gl::BufferObject::CopyTo(BufferObject& other
+gl::detail::BufferImplement::CopyTo(gl::detail::BufferImplement& other
 	, const size_t& dest_size, const ptrdiff_t& dest_offset
 	, const ptrdiff_t& offset)
 	const noexcept
@@ -115,4 +97,22 @@ gl::BufferObject::CopyTo(BufferObject& other
 	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, offset, dest_offset, dest_size);
 	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
+}
+
+void
+AttachElement(const element_vector_t& elements)
+noexcept
+{
+	GLuint index = 0;
+	for (auto& item : elements)
+	{
+		const int& count = std::get<0>(item);
+		const int& type = std::get<1>(item);
+		const int& stride = std::get<2>(item);
+		const ptrdiff_t& offset = std::get<3>(item);
+		const bool& normalized = std::get<4>(item);
+
+		::glVertexAttribPointer(index, count, type, normalized, stride, reinterpret_cast<const void*>(offset));
+		::glEnableVertexAttribArray(index++);
+	}
 }
