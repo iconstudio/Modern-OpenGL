@@ -9,6 +9,20 @@ noexcept
 {}
 
 void
+gl::IndexBuffer::Assign(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage)
+noexcept
+{
+	this->Assign(list.begin(), list.size(), usage);
+}
+
+void
+gl::IndexBuffer::Assign(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage)
+noexcept
+{
+	this->Assign(list.begin(), list.size(), usage);
+}
+
+void
 gl::IndexBuffer::Assign(const void* const& data, const size_t& size, buffer::BufferUsage usage)
 noexcept
 {
