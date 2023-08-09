@@ -159,6 +159,9 @@
     <ClCompile Include="VertexBuffer.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h">
