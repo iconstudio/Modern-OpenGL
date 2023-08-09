@@ -6,7 +6,6 @@ module;
 #undef CreateWindowEx
 
 module Glib.Framework;
-import :Framework;
 import <exception>;
 import Utility.Monad;
 import Glib.Display;
