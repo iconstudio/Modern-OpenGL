@@ -137,15 +137,5 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]]
-		alignas(std::hardware_constructive_interference_size)
-			BufferObject : public gl::detail::BufferInterface<false>
-	{
-	public:
-		using base = gl::detail::BufferInterface<false>;
-
-		BufferObject(buffer::BufferType buffer_type = buffer::BufferType::Array) noexcept;
-		~BufferObject() noexcept;
-
-	};
+	using BufferObject = gl::detail::BufferInterface<false>;
 }
