@@ -9,6 +9,7 @@ export namespace gl
 	{
 		enum class [[nodiscard]] BufferType : std::uint32_t
 		{
+			None = 0,
 			Vertex = 0x8892,
 			Array = Vertex,
 			Index = 0x8893,
@@ -30,6 +31,7 @@ export namespace gl
 
 		enum class [[nodiscard]] BufferUsage : std::uint32_t
 		{
+			None = 0,
 			StaticDraw = 0x88E4,
 			StaticRead = 0x88E5,
 			StaticCopy = 0x88E6,
