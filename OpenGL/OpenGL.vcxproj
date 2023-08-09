@@ -155,8 +155,6 @@
     <ClCompile Include="Shader.ixx" />
     <ClCompile Include="SharedBufferObject.ixx" />
     <ClCompile Include="src\Blender.cpp" />
-    <ClCompile Include="src\BlendMode.cpp" />
-    <ClCompile Include="src\BufferLayout.cpp" />
     <ClCompile Include="src\Culling.cpp" />
     <ClCompile Include="src\Display.cpp" />
     <ClCompile Include="src\fpng.cpp">

@@ -1,3 +1,0 @@
-module;
-module Glib:Blender;
-
