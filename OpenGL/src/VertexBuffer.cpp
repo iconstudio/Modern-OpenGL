@@ -9,6 +9,13 @@ noexcept
 {}
 
 void
+gl::VertexBuffer::Assign(const void* const& data, const size_t& size, buffer::BufferUsage usage)
+noexcept
+{
+	myHandle.SetData(data, size, usage);
+}
+
+void
 gl::VertexBuffer::SetLayout(const BufferLayout& layout)
 noexcept
 {
