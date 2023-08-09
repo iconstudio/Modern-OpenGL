@@ -46,7 +46,9 @@ export namespace gl
 
 	namespace detail
 	{
-		class BufferImplement : public gl::Object
+		class
+			alignas(std::hardware_constructive_interference_size)
+			BufferImplement : public gl::Object
 		{
 		public:
 			using base = gl::Object;
