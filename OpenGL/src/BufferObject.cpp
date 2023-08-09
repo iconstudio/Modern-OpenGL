@@ -48,7 +48,7 @@ struct Binder
 };
 
 void
-gl::detail::BufferImplement::SetData(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
+gl::detail::BufferImplement::Create(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
 noexcept
 {
 	Binder binder{ myType, myID };

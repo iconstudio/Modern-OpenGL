@@ -9,22 +9,22 @@ noexcept
 {}
 
 void
-gl::VertexBuffer::Assign(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage)
+gl::VertexBuffer::Create(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage)
 noexcept
 {
-	base::SetData(list.begin(), list.size(), usage);
+	base::Create(list.begin(), list.size(), usage);
 }
 
 void
-gl::VertexBuffer::Assign(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage)
+gl::VertexBuffer::Create(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage)
 noexcept
 {
-	base::SetData(list.begin(), list.size(), usage);
+	base::Create(list.begin(), list.size(), usage);
 }
 
 void
-gl::VertexBuffer::Assign(std::initializer_list<float> list, buffer::BufferUsage usage)
+gl::VertexBuffer::Create(std::initializer_list<float> list, buffer::BufferUsage usage)
 noexcept
 {
-	base::SetData(list.begin(), list.size(), usage);
+	base::Create(list.begin(), list.size(), usage);
 }

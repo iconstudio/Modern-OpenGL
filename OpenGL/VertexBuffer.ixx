@@ -14,9 +14,9 @@ export namespace gl
 		VertexBuffer() noexcept;
 		~VertexBuffer() noexcept = default;
 
-		void Assign(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
-		void Assign(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
-		void Assign(std::initializer_list<float> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
+		void Create(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
+		void Create(std::initializer_list<std::uint32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
+		void Create(std::initializer_list<float> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
 
 		VertexBuffer(const VertexBuffer&) = delete;
 		VertexBuffer(VertexBuffer&&) noexcept = default;

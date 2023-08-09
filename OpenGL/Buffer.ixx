@@ -15,7 +15,7 @@ export namespace gl
 		Buffer() = default;
 		~Buffer() = default;
 
-		void SetData(const void* const& data, size_t size, BufferType usage) const noexcept;
+		void Create(const void* const& data, size_t size, BufferType usage) const noexcept;
 		void SetSubData(const void* const& data, size_t size, size_t offset) const noexcept;
 		void ClearData(std::uint32_t internalformat, std::uint32_t format, std::uint32_t type, const void* const& data) const noexcept;
 		void CopySubData(const Buffer& readBuffer, size_t readOffset, size_t writeOffset, size_t size);
