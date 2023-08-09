@@ -141,11 +141,5 @@ export namespace gl
 		BufferObject(BufferObject&&) noexcept = default;
 		BufferObject& operator=(const BufferObject&) = delete;
 		BufferObject& operator=(BufferObject&&) noexcept = default;
-
-	private:
-		volatile buffer::BufferType myType;
-		volatile buffer::BufferUsage myUsage;
-		BufferLayout myLayout;
-		size_t mySize;
 	};
 }
