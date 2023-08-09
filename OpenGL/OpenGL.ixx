@@ -10,8 +10,9 @@ export import :State;
 export import :ClearBits;
 export import :Primitive;
 export import :Object;
-export import :BufferObject;
 export import :BufferLayout;
+export import :BufferObject;
+export import :VertexBuffer;
 export import :System;
 export import Glib.Windows.Colour;
 
