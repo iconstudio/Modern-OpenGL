@@ -28,12 +28,14 @@ noexcept
 }
 
 gl::BufferObject::BufferObject()
+noexcept
 	: base()
 {
 	::glGenBuffers(1, &myID);
 }
 
 gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
+noexcept
 	: base()
 	, myType(buffer_type)
 {
@@ -41,6 +43,7 @@ gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
 }
 
 gl::BufferObject::~BufferObject()
+noexcept
 {
 	::glDeleteBuffers(1, &myID);
 }

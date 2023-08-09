@@ -53,9 +53,9 @@ export namespace gl
 	public:
 		using base = gl::Object;
 
-		BufferObject();
-		BufferObject(buffer::BufferType buffer_type);
-		~BufferObject();
+		BufferObject() noexcept;
+		BufferObject(buffer::BufferType buffer_type) noexcept;
+		~BufferObject() noexcept;
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
 		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
