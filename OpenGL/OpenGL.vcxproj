@@ -153,6 +153,7 @@
     <ClCompile Include="Pixel.ixx" />
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="Shader.ixx" />
+    <ClCompile Include="SharedBufferObject.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\BufferLayout.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Transform.ixx" />
     <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="BufferObject.ixx" />
+    <ClCompile Include="UniqueBufferObject.ixx" />
     <ClCompile Include="VertexBuffer.ixx" />
   </ItemGroup>
   <ItemGroup>
