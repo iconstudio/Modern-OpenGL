@@ -3,9 +3,9 @@ import <cstdint>;
 import :Object;
 export import :BufferLayout;
 
-export namespace gl
+namespace gl
 {
-	namespace buffer
+	export namespace buffer
 	{
 		enum class [[nodiscard]] BufferType : std::uint32_t
 		{
@@ -44,31 +44,98 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]]
+	namespace buffer
+	{
+		class BufferImplement : public gl::Object
+		{
+		public:
+			using base = gl::Object;
+
+			using base::base;
+
+			constexpr void SetLayout(const BufferLayout& layout) noexcept
+			{
+				myLayout = layout;
+			}
+
+			constexpr void SetLayout(BufferLayout&& layout) noexcept
+			{
+				myLayout = static_cast<BufferLayout&&>(layout);
+			}
+
+			[[nodiscard]] constexpr buffer::BufferType GetType() const noexcept
+			{
+				return myType;
+			}
+
+			[[nodiscard]] constexpr buffer::BufferUsage GetUsage() const noexcept
+			{
+				return myUsage;
+			}
+
+			[[nodiscard]] constexpr size_t GetSize() const noexcept
+			{
+				return mySize;
+			}
+
+			[[nodiscard]] constexpr const BufferLayout& GetLayout() const noexcept
+			{
+				return myLayout;
+			}
+
+		protected:
+			volatile buffer::BufferType myType;
+			volatile buffer::BufferUsage myUsage;
+
+			BufferLayout myLayout;
+			size_t mySize;
+		};
+
+		template<bool provide_modifiable_layout>
+		class BufferInterface;
+
+		template<>
+		class BufferInterface<true> : public BufferImplement
+		{
+		public:
+			using base = BufferImplement;
+
+			using base::base;
+
+			[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
+			{
+				return myLayout;
+			}
+		};
+
+		template<>
+		class BufferInterface<false> : public BufferImplement
+		{
+		public:
+			using base = BufferImplement;
+
+			using base::base;
+		};
+	}
+
+	export class [[nodiscard]]
 		alignas(std::hardware_constructive_interference_size)
-		BufferObject : public gl::Object
+			BufferObject : public gl::buffer::BufferInterface<false>
 	{
 	public:
-		using base = gl::Object;
+		using base = gl::buffer::BufferInterface<false>;
 
 		BufferObject(buffer::BufferType buffer_type = buffer::BufferType::Array) noexcept;
 		~BufferObject() noexcept;
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
 		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
-		void SetLayout(const BufferLayout& layout) noexcept;
-		void SetLayout(BufferLayout&& layout) noexcept;
 
 		void Bind() const noexcept;
 		void Unbind() const noexcept;
 		void Use() const noexcept;
 
 		void CopyTo(BufferObject& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
-
-		[[nodiscard]] buffer::BufferType GetType() const noexcept;
-		[[nodiscard]] buffer::BufferUsage GetUsage() const noexcept;
-		[[nodiscard]] const BufferLayout& GetLayout() const noexcept;
-		[[nodiscard]] size_t GetSize() const noexcept;
 
 		BufferObject(const BufferObject&) = delete;
 		BufferObject(BufferObject&&) noexcept = default;

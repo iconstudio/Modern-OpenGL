@@ -82,20 +82,6 @@ noexcept
 }
 
 void
-gl::BufferObject::SetLayout(const gl::BufferLayout& layout)
-noexcept
-{
-	myLayout = layout;
-}
-
-void
-gl::BufferObject::SetLayout(BufferLayout&& layout)
-noexcept
-{
-	myLayout = std::move(layout);
-}
-
-void
 gl::BufferObject::Bind()
 const noexcept
 {
@@ -129,32 +115,4 @@ gl::BufferObject::CopyTo(BufferObject& other
 	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, offset, dest_offset, dest_size);
 	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
 	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
-}
-
-gl::buffer::BufferType
-gl::BufferObject::GetType()
-const noexcept
-{
-	return myType;
-}
-
-gl::buffer::BufferUsage
-gl::BufferObject::GetUsage()
-const noexcept
-{
-	return myUsage;
-}
-
-const
-gl::BufferLayout& gl::BufferObject::GetLayout()
-const noexcept
-{
-	return myLayout;
-}
-
-size_t
-gl::BufferObject::GetSize()
-const noexcept
-{
-	return mySize;
 }
