@@ -3,9 +3,9 @@ import <cstdint>;
 import :Object;
 export import :BufferLayout;
 
-namespace gl
+export namespace gl
 {
-	export namespace buffer
+	namespace buffer
 	{
 		enum class [[nodiscard]] BufferType : std::uint32_t
 		{
@@ -44,7 +44,7 @@ namespace gl
 		};
 	}
 
-	namespace buffer
+	namespace detail
 	{
 		class BufferImplement : public gl::Object
 		{
@@ -63,12 +63,12 @@ namespace gl
 				myLayout = static_cast<BufferLayout&&>(layout);
 			}
 
-			[[nodiscard]] constexpr buffer::BufferType GetType() const noexcept
+			[[nodiscard]] constexpr gl::buffer::BufferType GetType() const noexcept
 			{
 				return myType;
 			}
 
-			[[nodiscard]] constexpr buffer::BufferUsage GetUsage() const noexcept
+			[[nodiscard]] constexpr gl::buffer::BufferUsage GetUsage() const noexcept
 			{
 				return myUsage;
 			}
@@ -84,8 +84,8 @@ namespace gl
 			}
 
 		protected:
-			volatile buffer::BufferType myType;
-			volatile buffer::BufferUsage myUsage;
+			volatile gl::buffer::BufferType myType;
+			volatile gl::buffer::BufferUsage myUsage;
 
 			BufferLayout myLayout;
 			size_t mySize;
@@ -118,12 +118,12 @@ namespace gl
 		};
 	}
 
-	export class [[nodiscard]]
+	class [[nodiscard]]
 		alignas(std::hardware_constructive_interference_size)
-			BufferObject : public gl::buffer::BufferInterface<false>
+			BufferObject : public gl::detail::BufferInterface<false>
 	{
 	public:
-		using base = gl::buffer::BufferInterface<false>;
+		using base = gl::detail::BufferInterface<false>;
 
 		BufferObject(buffer::BufferType buffer_type = buffer::BufferType::Array) noexcept;
 		~BufferObject() noexcept;
