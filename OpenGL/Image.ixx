@@ -15,7 +15,7 @@ export namespace gl
 		~Image() noexcept = default;
 
 		[[nodiscard]] buffer_t& GetBuffer() noexcept;
-		[[nodiscard]] const buffer_t& GetBuffer() const noexcept;\
+		[[nodiscard]] const buffer_t& GetBuffer() const noexcept;
 		[[nodiscard]] size_t GetBufferSize() const noexcept;
 		[[nodiscard]] size_t GetWidth() const noexcept;
 		[[nodiscard]] size_t GetHeight() const noexcept;
