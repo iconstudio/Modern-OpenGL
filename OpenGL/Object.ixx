@@ -28,6 +28,16 @@ export namespace gl
 			: myID(id)
 		{}
 
+		constexpr void SetID(const std::uint32_t& id) noexcept
+		{
+			myID = id;
+		}
+
+		constexpr void SetID(std::uint32_t&& id) noexcept
+		{
+			myID = static_cast<std::uint32_t&&>(id);
+		}
+
 		std::uint32_t myID = npos;
 	};
 }
