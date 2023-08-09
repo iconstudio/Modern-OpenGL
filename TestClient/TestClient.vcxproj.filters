@@ -27,353 +27,353 @@
     <ClCompile Include="TestClient.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Bitmap.ixx">
+    <ClCompile Include="inc\Native\Bitmap.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Colour.ixx">
+    <ClCompile Include="inc\Native\Colour.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\ColourBrush.ixx">
+    <ClCompile Include="inc\Native\ColourBrush.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\CompatibleBitmap.ixx">
+    <ClCompile Include="inc\Native\CompatibleBitmap.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\CompatibleContext.ixx">
+    <ClCompile Include="inc\Native\CompatibleContext.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\ComponentBrush.ixx">
+    <ClCompile Include="inc\Native\ComponentBrush.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Definitions.ixx">
+    <ClCompile Include="inc\Native\Definitions.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\DeviceContext.ixx">
+    <ClCompile Include="inc\Native\DeviceContext.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\DeviceHandle.ixx">
+    <ClCompile Include="inc\Native\DeviceHandle.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\DeviceIO.ixx">
+    <ClCompile Include="inc\Native\DeviceIO.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\DeviceUtil.ixx">
+    <ClCompile Include="inc\Native\DeviceUtil.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Event.ixx">
+    <ClCompile Include="inc\Native\Event.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\EventAPI.ixx">
+    <ClCompile Include="inc\Native\EventAPI.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\EventID.ixx">
+    <ClCompile Include="inc\Native\EventID.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\GraphicDeviceContext.ixx">
+    <ClCompile Include="inc\Native\GraphicDeviceContext.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Icon.ixx">
+    <ClCompile Include="inc\Native\Icon.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\IContext.ixx">
+    <ClCompile Include="inc\Native\IContext.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\IGraphics.ixx">
+    <ClCompile Include="inc\Native\IGraphics.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\IHandle.ixx">
+    <ClCompile Include="inc\Native\IHandle.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\IWindow.ixx">
+    <ClCompile Include="inc\Native\IWindow.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Keyboard.ixx">
+    <ClCompile Include="inc\Native\Keyboard.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\KeyboardFlags.ixx">
+    <ClCompile Include="inc\Native\KeyboardFlags.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Keycodes.ixx">
+    <ClCompile Include="inc\Native\Keycodes.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\KeyModifiers.ixx">
+    <ClCompile Include="inc\Native\KeyModifiers.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\ManagedWindow.ixx">
+    <ClCompile Include="inc\Native\ManagedWindow.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Mouse.ixx">
+    <ClCompile Include="inc\Native\Mouse.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\MouseButtons.ixx">
+    <ClCompile Include="inc\Native\MouseButtons.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\MouseUtils.ixx">
+    <ClCompile Include="inc\Native\MouseUtils.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Palette.ixx">
+    <ClCompile Include="inc\Native\Palette.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Pen.ixx">
+    <ClCompile Include="inc\Native\Pen.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\ProcessInstance.ixx">
+    <ClCompile Include="inc\Native\ProcessInstance.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\RawColour.ixx">
+    <ClCompile Include="inc\Native\RawColour.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Rect.ixx">
+    <ClCompile Include="inc\Native\Rect.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\SpecialEvent.ixx">
+    <ClCompile Include="inc\Native\SpecialEvent.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Window.ixx">
+    <ClCompile Include="inc\Native\Window.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowCoroutine.ixx">
+    <ClCompile Include="inc\Native\WindowCoroutine.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowFactory.ixx">
+    <ClCompile Include="inc\Native\WindowFactory.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowOption.ixx">
+    <ClCompile Include="inc\Native\WindowOption.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowProperty.ixx">
+    <ClCompile Include="inc\Native\WindowProperty.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowsPropertyFactory.ixx">
+    <ClCompile Include="inc\Native\WindowsPropertyFactory.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\WindowStyle.ixx">
+    <ClCompile Include="inc\Native\WindowStyle.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Blender.ixx">
+    <ClCompile Include="inc\Utility\Array.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Atom.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Atomic.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Classifier.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\CoIterator.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\CoLogic.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Constraints.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\CoPromise.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Coroutine.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\CoTask.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\DataPacker.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\DataUnit.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Deserialization.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Enumerator.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Error.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Expected.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\File.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\FixedString.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Generator.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Identity.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Indexer.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Locks.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\LooseMonad.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Memory.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\MemoryWatcher.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Meta.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Monad.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Named.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Option.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Print.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Promise.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Reflection.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Serialization.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Singleton.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Spinlock.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\String.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Thread.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\ThreadUnit.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Time.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Traits.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Union.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Unique.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\Utility\Utility.ixx">
+      <Filter>Includes\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="inc\OpenGL\Blender.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\BlendMode.ixx">
+    <ClCompile Include="inc\OpenGL\BlendMode.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\BlendOption.ixx">
+    <ClCompile Include="inc\OpenGL\BlendOption.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Buffer.ixx">
+    <ClCompile Include="inc\OpenGL\Buffer.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\BufferLayout.ixx">
+    <ClCompile Include="inc\OpenGL\BufferLayout.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\BufferObject.ixx">
+    <ClCompile Include="inc\OpenGL\BufferObject.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\ClearBits.ixx">
+    <ClCompile Include="inc\OpenGL\ClearBits.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Comparator.ixx">
+    <ClCompile Include="inc\OpenGL\Comparator.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Culling.ixx">
+    <ClCompile Include="inc\OpenGL\Culling.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\DefaultProperty.ixx">
+    <ClCompile Include="inc\OpenGL\DefaultProperty.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Display.ixx">
+    <ClCompile Include="inc\OpenGL\Display.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\DisplayModes.ixx">
+    <ClCompile Include="inc\OpenGL\DisplayModes.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Face.ixx">
+    <ClCompile Include="inc\OpenGL\Face.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Framework.ixx">
+    <ClCompile Include="inc\OpenGL\Framework.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Image.ixx">
+    <ClCompile Include="inc\OpenGL\Image.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\LegacyFog.ixx">
+    <ClCompile Include="inc\OpenGL\LegacyFog.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\LegacyLighting.ixx">
+    <ClCompile Include="inc\OpenGL\LegacyLighting.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\LegacyPrimitive.ixx">
+    <ClCompile Include="inc\OpenGL\LegacyPrimitive.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Lighting.ixx">
+    <ClCompile Include="inc\OpenGL\Lighting.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Object.ixx">
+    <ClCompile Include="inc\OpenGL\Object.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\OpenGL.ixx">
+    <ClCompile Include="inc\OpenGL\OpenGL.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Pixel.ixx">
+    <ClCompile Include="inc\OpenGL\Pixel.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Primitive.ixx">
+    <ClCompile Include="inc\OpenGL\Primitive.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\State.ixx">
+    <ClCompile Include="inc\OpenGL\State.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\System.ixx">
+    <ClCompile Include="inc\OpenGL\System.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Texture.ixx">
+    <ClCompile Include="inc\OpenGL\Texture.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\Transform.ixx">
+    <ClCompile Include="inc\OpenGL\Transform.ixx">
       <Filter>Includes\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="..\OpenGL\TransformState.ixx">
+    <ClCompile Include="inc\OpenGL\TransformState.ixx">
       <Filter>Includes\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Array.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Atom.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Atomic.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Classifier.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\CoIterator.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\CoLogic.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Constraints.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\CoPromise.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Coroutine.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\CoTask.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\DataPacker.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\DataUnit.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Deserialization.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Enumerator.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Error.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Expected.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\File.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\FixedString.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Generator.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Identity.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Indexer.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Locks.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\LooseMonad.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Memory.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\MemoryWatcher.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Meta.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Monad.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Named.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Option.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Print.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Promise.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Reflection.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Serialization.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Singleton.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Spinlock.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\String.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Thread.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\ThreadUnit.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Time.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Traits.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Union.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Unique.ixx">
-      <Filter>Includes\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Utility\inc\Utility.ixx">
-      <Filter>Includes\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Native\inc\ImageLoader.inl">
+    <None Include="inc\Native\ImageLoader.inl">
       <Filter>Includes\Native</Filter>
     </None>
-    <None Include="..\Utility\inc\Serialization.inl">
+    <None Include="inc\Utility\Serialization.inl">
       <Filter>Includes\Utility</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Native\inc\Internal.hpp">
+    <ClInclude Include="inc\Native\Internal.hpp">
       <Filter>Includes\Native</Filter>
     </ClInclude>
   </ItemGroup>
