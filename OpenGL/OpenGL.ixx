@@ -13,6 +13,9 @@ export import :Object;
 export import :BufferLayout;
 export import :BufferObject;
 export import :VertexBuffer;
+export import :IndexBuffer;
+export import :SharedBufferObject;
+export import :UniqueBufferObject;
 export import :System;
 export import Glib.Windows.Colour;
 
