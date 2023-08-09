@@ -167,11 +167,15 @@
     <ClCompile Include="TestClient.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="inc\Native\ImageLoader.inl" />
-    <None Include="inc\Utility\Serialization.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="inc\Native\Internal.hpp" />
+    <ProjectReference Include="..\Native\Native.vcxproj">
+      <Project>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenGL\OpenGL.vcxproj">
+      <Project>{a5679619-db5b-4821-858d-c1df1cdc6b7a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
