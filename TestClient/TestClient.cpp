@@ -54,7 +54,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 		0.0f, 0.5f, 0.0f, // top
 	};
 
-	gl::BufferObject vbo{};
+	gl::BufferObject vbo{ gl::buffer::BufferType::Array };
 	vbo.SetData(vertices, sizeof(vertices), gl::buffer::BufferUsage::StaticDraw);
 
 	framework->Run();
