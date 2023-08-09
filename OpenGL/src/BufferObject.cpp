@@ -27,13 +27,6 @@ noexcept
 	}
 }
 
-gl::BufferObject::BufferObject()
-noexcept
-	: base()
-{
-	::glGenBuffers(1, std::addressof(myID));
-}
-
 gl::BufferObject::BufferObject(buffer::BufferType buffer_type)
 noexcept
 	: base()

@@ -51,8 +51,7 @@ export namespace gl
 	public:
 		using base = gl::Object;
 
-		BufferObject() noexcept;
-		BufferObject(buffer::BufferType buffer_type) noexcept;
+		BufferObject(buffer::BufferType buffer_type = buffer::BufferType::Array) noexcept;
 		~BufferObject() noexcept;
 
 		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
