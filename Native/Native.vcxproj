@@ -136,7 +136,6 @@
     <ClCompile Include="inc\IContext.ixx" />
     <ClCompile Include="inc\IGraphics.ixx" />
     <ClCompile Include="inc\IHandle.ixx" />
-    <ClCompile Include="inc\Image.ixx" />
     <ClCompile Include="inc\IWindow.ixx" />
     <ClCompile Include="inc\Keyboard.ixx" />
     <ClCompile Include="inc\KeyboardFlags.ixx" />
@@ -170,7 +169,6 @@
     <ClCompile Include="src\Icon.cpp" />
     <ClCompile Include="src\IContext.cpp" />
     <ClCompile Include="src\IGraphics.cpp" />
-    <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\IWindow.cpp" />
     <ClCompile Include="src\GraphicDeviceContext.cpp" />
     <ClCompile Include="src\ManagedWindow.cpp" />

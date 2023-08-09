@@ -179,7 +179,6 @@
     <ClCompile Include="..\Native\inc\IContext.ixx" />
     <ClCompile Include="..\Native\inc\IGraphics.ixx" />
     <ClCompile Include="..\Native\inc\IHandle.ixx" />
-    <ClCompile Include="..\Native\inc\Image.ixx" />
     <ClCompile Include="..\Native\inc\IWindow.ixx" />
     <ClCompile Include="..\Native\inc\Keyboard.ixx" />
     <ClCompile Include="..\Native\inc\KeyboardFlags.ixx" />

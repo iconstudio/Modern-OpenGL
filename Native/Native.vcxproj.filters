@@ -53,9 +53,6 @@
     <ClCompile Include="src\EventAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>Header Files\Device\GDI</Filter>
     </ClCompile>
     <ClCompile Include="inc\IGraphics.ixx">
-      <Filter>Header Files\Device\GDI</Filter>
-    </ClCompile>
-    <ClCompile Include="inc\Image.ixx">
       <Filter>Header Files\Device\GDI</Filter>
     </ClCompile>
     <ClCompile Include="inc\Palette.ixx">

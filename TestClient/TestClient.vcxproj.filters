@@ -84,9 +84,6 @@
     <ClCompile Include="..\Native\inc\IHandle.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
-    <ClCompile Include="..\Native\inc\Image.ixx">
-      <Filter>Includes\Native</Filter>
-    </ClCompile>
     <ClCompile Include="..\Native\inc\IWindow.ixx">
       <Filter>Includes\Native</Filter>
     </ClCompile>
