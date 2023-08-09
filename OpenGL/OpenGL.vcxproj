@@ -136,6 +136,7 @@
     <ClCompile Include="Buffer.ixx" />
     <ClCompile Include="BufferLayout.ixx" />
     <ClCompile Include="Framework.ixx" />
+    <ClCompile Include="IndexBuffer.ixx" />
     <ClCompile Include="Object.ixx" />
     <ClCompile Include="ClearBits.ixx" />
     <ClCompile Include="Comparator.ixx" />
@@ -162,6 +163,7 @@
     </ClCompile>
     <ClCompile Include="src\Framework.cpp" />
     <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\IndexBuffer.cpp" />
     <ClCompile Include="src\LegacyFog.cpp" />
     <ClCompile Include="src\LegacyLight.cpp" />
     <ClCompile Include="src\LegacyPrimitive.cpp" />
