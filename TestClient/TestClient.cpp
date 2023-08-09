@@ -27,10 +27,10 @@ void MyRenderer() noexcept
 int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
 {
 	std::puts("== Creating the Program ==");
-	auto framework = client::CreateFramework();
+	auto framework = gl::CreateFramework();
 
 	std::puts("== Program Initiated ==");
-	client::framework::Descriptor descriptor = client::framework::MakeDefaultDescriptor();
+	gl::framework::Descriptor descriptor = gl::framework::MakeDefaultDescriptor();
 	descriptor.glDescriptor.alphaBlend = true;
 	descriptor.glDescriptor.doubleBuffered = true;
 	descriptor.glDescriptor.keepAspectRatio = true;
