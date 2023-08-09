@@ -8,11 +8,10 @@ export namespace gl
 		VertexBuffer
 	{
 	public:
-		VertexBuffer(buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw);
-		~VertexBuffer();
+		VertexBuffer() noexcept;
+		~VertexBuffer() noexcept = default;
 
-		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
-		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
+		void Assign(const void* const& data, const size_t& size, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
 		void SetLayout(const BufferLayout& layout) noexcept;
 		void SetLayout(BufferLayout&& layout) noexcept;
 
