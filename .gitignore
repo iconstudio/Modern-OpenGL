@@ -79,6 +79,7 @@ StyleCopReport.xml
 *.obj
 *.iobj
 *.pch
+*.idb
 *.pdb
 *.ipdb
 *.pgc
@@ -362,4 +363,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
 /lib
+/export
+*.lib

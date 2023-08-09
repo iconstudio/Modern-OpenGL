@@ -1,6 +1,9 @@
-﻿import <cstdio>;
+﻿#pragma comment(lib, "Native.lib")
+#pragma comment(lib, "OpenGL.lib")
+#pragma comment(lib, "Utility.lib")
+
+import <cstdio>;
 import <type_traits>;
-import Glib;
 import Glib.Framework;
 import Glib.Legacy.Primitive;
 import Glib.Texture;

@@ -59,9 +59,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared">
-    <Import Project="..\Client\Client.vcxitems" Label="Shared" />
-  </ImportGroup>
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -162,15 +160,127 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Native\inc\Bitmap.ixx" />
+    <ClCompile Include="..\Native\inc\Colour.ixx" />
+    <ClCompile Include="..\Native\inc\ColourBrush.ixx" />
+    <ClCompile Include="..\Native\inc\CompatibleBitmap.ixx" />
+    <ClCompile Include="..\Native\inc\CompatibleContext.ixx" />
+    <ClCompile Include="..\Native\inc\ComponentBrush.ixx" />
+    <ClCompile Include="..\Native\inc\Definitions.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceContext.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceHandle.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceIO.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceUtil.ixx" />
+    <ClCompile Include="..\Native\inc\Event.ixx" />
+    <ClCompile Include="..\Native\inc\EventAPI.ixx" />
+    <ClCompile Include="..\Native\inc\EventID.ixx" />
+    <ClCompile Include="..\Native\inc\GraphicDeviceContext.ixx" />
+    <ClCompile Include="..\Native\inc\Icon.ixx" />
+    <ClCompile Include="..\Native\inc\IContext.ixx" />
+    <ClCompile Include="..\Native\inc\IGraphics.ixx" />
+    <ClCompile Include="..\Native\inc\IHandle.ixx" />
+    <ClCompile Include="..\Native\inc\Image.ixx" />
+    <ClCompile Include="..\Native\inc\IWindow.ixx" />
+    <ClCompile Include="..\Native\inc\Keyboard.ixx" />
+    <ClCompile Include="..\Native\inc\KeyboardFlags.ixx" />
+    <ClCompile Include="..\Native\inc\Keycodes.ixx" />
+    <ClCompile Include="..\Native\inc\KeyModifiers.ixx" />
+    <ClCompile Include="..\Native\inc\ManagedWindow.ixx" />
+    <ClCompile Include="..\Native\inc\Mouse.ixx" />
+    <ClCompile Include="..\Native\inc\MouseButtons.ixx" />
+    <ClCompile Include="..\Native\inc\MouseUtils.ixx" />
+    <ClCompile Include="..\Native\inc\Palette.ixx" />
+    <ClCompile Include="..\Native\inc\Pen.ixx" />
+    <ClCompile Include="..\Native\inc\ProcessInstance.ixx" />
+    <ClCompile Include="..\Native\inc\RawColour.ixx" />
+    <ClCompile Include="..\Native\inc\Rect.ixx" />
+    <ClCompile Include="..\Native\inc\SpecialEvent.ixx" />
+    <ClCompile Include="..\Native\inc\Window.ixx" />
+    <ClCompile Include="..\Native\inc\WindowCoroutine.ixx" />
+    <ClCompile Include="..\Native\inc\WindowFactory.ixx" />
+    <ClCompile Include="..\Native\inc\WindowOption.ixx" />
+    <ClCompile Include="..\Native\inc\WindowProperty.ixx" />
+    <ClCompile Include="..\Native\inc\WindowsPropertyFactory.ixx" />
+    <ClCompile Include="..\Native\inc\WindowStyle.ixx" />
+    <ClCompile Include="..\OpenGL\Blender.ixx" />
+    <ClCompile Include="..\OpenGL\BlendMode.ixx" />
+    <ClCompile Include="..\OpenGL\BlendOption.ixx" />
+    <ClCompile Include="..\OpenGL\Buffer.ixx" />
+    <ClCompile Include="..\OpenGL\BufferLayout.ixx" />
+    <ClCompile Include="..\OpenGL\BufferObject.ixx" />
+    <ClCompile Include="..\OpenGL\ClearBits.ixx" />
+    <ClCompile Include="..\OpenGL\Comparator.ixx" />
+    <ClCompile Include="..\OpenGL\Culling.ixx" />
+    <ClCompile Include="..\OpenGL\DefaultProperty.ixx" />
+    <ClCompile Include="..\OpenGL\Display.ixx" />
+    <ClCompile Include="..\OpenGL\DisplayModes.ixx" />
+    <ClCompile Include="..\OpenGL\Face.ixx" />
+    <ClCompile Include="..\OpenGL\Framework.ixx" />
+    <ClCompile Include="..\OpenGL\Image.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyFog.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyLighting.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyPrimitive.ixx" />
+    <ClCompile Include="..\OpenGL\Lighting.ixx" />
+    <ClCompile Include="..\OpenGL\Object.ixx" />
+    <ClCompile Include="..\OpenGL\OpenGL.ixx" />
+    <ClCompile Include="..\OpenGL\Pixel.ixx" />
+    <ClCompile Include="..\OpenGL\Primitive.ixx" />
+    <ClCompile Include="..\OpenGL\State.ixx" />
+    <ClCompile Include="..\OpenGL\System.ixx" />
+    <ClCompile Include="..\OpenGL\Texture.ixx" />
+    <ClCompile Include="..\OpenGL\Transform.ixx" />
+    <ClCompile Include="..\OpenGL\TransformState.ixx" />
+    <ClCompile Include="..\Utility\inc\Array.ixx" />
+    <ClCompile Include="..\Utility\inc\Atom.ixx" />
+    <ClCompile Include="..\Utility\inc\Atomic.ixx" />
+    <ClCompile Include="..\Utility\inc\Classifier.ixx" />
+    <ClCompile Include="..\Utility\inc\CoIterator.ixx" />
+    <ClCompile Include="..\Utility\inc\CoLogic.ixx" />
+    <ClCompile Include="..\Utility\inc\Constraints.ixx" />
+    <ClCompile Include="..\Utility\inc\CoPromise.ixx" />
+    <ClCompile Include="..\Utility\inc\Coroutine.ixx" />
+    <ClCompile Include="..\Utility\inc\CoTask.ixx" />
+    <ClCompile Include="..\Utility\inc\DataPacker.ixx" />
+    <ClCompile Include="..\Utility\inc\DataUnit.ixx" />
+    <ClCompile Include="..\Utility\inc\Deserialization.ixx" />
+    <ClCompile Include="..\Utility\inc\Enumerator.ixx" />
+    <ClCompile Include="..\Utility\inc\Error.ixx" />
+    <ClCompile Include="..\Utility\inc\Expected.ixx" />
+    <ClCompile Include="..\Utility\inc\File.ixx" />
+    <ClCompile Include="..\Utility\inc\FixedString.ixx" />
+    <ClCompile Include="..\Utility\inc\Generator.ixx" />
+    <ClCompile Include="..\Utility\inc\Identity.ixx" />
+    <ClCompile Include="..\Utility\inc\Indexer.ixx" />
+    <ClCompile Include="..\Utility\inc\Locks.ixx" />
+    <ClCompile Include="..\Utility\inc\LooseMonad.ixx" />
+    <ClCompile Include="..\Utility\inc\Memory.ixx" />
+    <ClCompile Include="..\Utility\inc\MemoryWatcher.ixx" />
+    <ClCompile Include="..\Utility\inc\Meta.ixx" />
+    <ClCompile Include="..\Utility\inc\Monad.ixx" />
+    <ClCompile Include="..\Utility\inc\Named.ixx" />
+    <ClCompile Include="..\Utility\inc\Option.ixx" />
+    <ClCompile Include="..\Utility\inc\Print.ixx" />
+    <ClCompile Include="..\Utility\inc\Promise.ixx" />
+    <ClCompile Include="..\Utility\inc\Reflection.ixx" />
+    <ClCompile Include="..\Utility\inc\Serialization.ixx" />
+    <ClCompile Include="..\Utility\inc\Singleton.ixx" />
+    <ClCompile Include="..\Utility\inc\Spinlock.ixx" />
+    <ClCompile Include="..\Utility\inc\String.ixx" />
+    <ClCompile Include="..\Utility\inc\Thread.ixx" />
+    <ClCompile Include="..\Utility\inc\ThreadUnit.ixx" />
+    <ClCompile Include="..\Utility\inc\Time.ixx" />
+    <ClCompile Include="..\Utility\inc\Traits.ixx" />
+    <ClCompile Include="..\Utility\inc\Union.ixx" />
+    <ClCompile Include="..\Utility\inc\Unique.ixx" />
+    <ClCompile Include="..\Utility\inc\Utility.ixx" />
     <ClCompile Include="TestClient.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Native\Native.vcxproj">
-      <Project>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenGL\OpenGL.vcxproj">
-      <Project>{a5679619-db5b-4821-858d-c1df1cdc6b7a}</Project>
-    </ProjectReference>
+    <None Include="..\Native\inc\ImageLoader.inl" />
+    <None Include="..\Utility\inc\Serialization.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Native\inc\Internal.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
