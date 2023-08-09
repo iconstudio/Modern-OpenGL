@@ -179,6 +179,7 @@
     <ClCompile Include="Transform.ixx" />
     <ClCompile Include="TransformState.ixx" />
     <ClCompile Include="BufferObject.ixx" />
+    <ClCompile Include="VertexBuffer.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Native\Native.vcxproj">
