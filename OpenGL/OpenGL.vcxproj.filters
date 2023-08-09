@@ -169,9 +169,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SharedBufferObject.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="UniqueBufferObject.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SharedBufferObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UniqueBufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
