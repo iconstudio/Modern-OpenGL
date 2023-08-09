@@ -79,10 +79,10 @@ export namespace gl
 		BufferObject& operator=(BufferObject&&) noexcept = default;
 
 	private:
-		volatile buffer::BufferType myType = buffer::BufferType::Array;
-		volatile buffer::BufferUsage myUsage = buffer::BufferUsage::StaticDraw;
-		BufferLayout myLayout{};
-		size_t mySize = 0;
+		volatile buffer::BufferType myType;
+		volatile buffer::BufferUsage myUsage;
+		BufferLayout myLayout;
+		size_t mySize;
 	};
 #pragma warning(pop)
 }
