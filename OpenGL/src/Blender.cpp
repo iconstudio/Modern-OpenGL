@@ -3,9 +3,9 @@ module;
 #include <gl\gl.h>
 #include <gl\glu.h>
 
-module Glib.Blender;
+module Glib;
 import <utility>;
-import Glib;
+import :Blender;
 
 gl::Blender::Blender(bool enable)
 noexcept

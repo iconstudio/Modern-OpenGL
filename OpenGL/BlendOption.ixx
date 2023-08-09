@@ -1,4 +1,4 @@
-export module Glib.Blender:Option;
+export module Glib:BlendOption;
 import <cstdint>;
 
 export namespace gl

@@ -10,7 +10,7 @@ import <utility>;
 import <memory>;
 import Glib.Windows.Context.Renderer;
 import :System;
-import Glib.Blender;
+import :Blender;
 import Glib.Culling;
 import Glib.Legacy.Primitive;
 

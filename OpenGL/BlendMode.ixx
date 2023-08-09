@@ -1,5 +1,5 @@
-export module Glib.Blender:Mode;
-import :Option;
+export module Glib:BlendMode;
+import :BlendOption;
 
 export namespace gl
 {
