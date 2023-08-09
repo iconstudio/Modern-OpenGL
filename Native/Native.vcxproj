@@ -46,8 +46,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
-    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <OutDir>$(SolutionDir)export\</OutDir>
@@ -57,8 +55,6 @@
     <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
-    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
     <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
     <PublicModuleDirectories>$(ProjectDir)inc\;$(ProjectDir);$(PublicModuleDirectories)</PublicModuleDirectories>
     <OutDir>$(SolutionDir)export\</OutDir>
