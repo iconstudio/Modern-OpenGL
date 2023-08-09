@@ -53,8 +53,6 @@ export namespace gl
 		public:
 			using base = gl::Object;
 
-			BufferImplement() noexcept;
-			BufferImplement(gl::buffer::BufferType buffer_type) noexcept;
 			~BufferImplement() noexcept;
 
 			void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
@@ -102,7 +100,8 @@ export namespace gl
 			BufferImplement& operator=(BufferImplement&&) noexcept = default;
 
 		protected:
-			using base::base;
+			BufferImplement() noexcept;
+			BufferImplement(gl::buffer::BufferType buffer_type) noexcept;
 
 			volatile gl::buffer::BufferType myType;
 			volatile gl::buffer::BufferUsage myUsage;
