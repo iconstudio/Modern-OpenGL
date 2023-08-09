@@ -3,6 +3,7 @@ import <type_traits>;
 import <string_view>;
 import Glib.Rect;
 import Glib.Windows.Definitions;
+import Glib.Windows.ProcessInstance;
 import Glib.Windows.IWindow;
 import Glib.Windows.IO;
 import Glib.Windows.Event;
