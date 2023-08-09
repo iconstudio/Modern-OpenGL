@@ -10,9 +10,11 @@ import :BufferObject;
 using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
 void AttachElement(const element_vector_t& elements) noexcept;
 
-gl::detail::BufferImplement::BufferImplement()
+gl::detail::BufferImplement::BufferImplement(gl::buffer::BufferType buffer_type)
 noexcept
 	: base()
+	, myType(buffer_type), myUsage(buffer::BufferUsage::None)
+	, myLayout(), mySize(0)
 {
 	::glGenBuffers(1, std::addressof(myID));
 }

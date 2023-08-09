@@ -100,7 +100,6 @@ export namespace gl
 			BufferImplement& operator=(BufferImplement&&) noexcept = default;
 
 		protected:
-			BufferImplement() noexcept;
 			BufferImplement(gl::buffer::BufferType buffer_type) noexcept;
 
 			volatile gl::buffer::BufferType myType;
