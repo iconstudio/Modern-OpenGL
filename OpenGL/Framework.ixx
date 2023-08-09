@@ -8,7 +8,7 @@ import Glib.Windows.Definitions;
 import Glib.Windows.ManagedClient;
 export import Glib.Windows.Event;
 
-export namespace client
+export namespace gl
 {
 	using gl::win32::FilePath;
 	using gl::win32::Colour;

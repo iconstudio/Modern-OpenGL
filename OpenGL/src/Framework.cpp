@@ -16,8 +16,8 @@ import Glib.Windows.Client.Factory;
 
 void ReadyDisplay() noexcept;
 
-client::framework::InitError
-client::Framework::Initialize(const client::framework::Descriptor& setup)
+gl::framework::InitError
+gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 {
 	ReadyDisplay();
 
@@ -82,42 +82,42 @@ client::Framework::Initialize(const client::framework::Descriptor& setup)
 	return framework::InitError::Success;
 }
 
-client::framework::InitError
-client::Framework::Initialize()
+gl::framework::InitError
+gl::Framework::Initialize()
 {
 	return Initialize(framework::MakeDefaultDescriptor());
 }
 
 void
-client::Framework::Run()
+gl::Framework::Run()
 noexcept
 {
 	myInstance->Start();
 }
 
 void
-client::Framework::AddEventHandler(gl::win32::EventID id, const event_handler_t& procedure)
+gl::Framework::AddEventHandler(gl::win32::EventID id, const event_handler_t& procedure)
 noexcept
 {
 	myInstance->AddEventHandler(id, procedure);
 }
 
 void
-client::Framework::AddEventHandler(gl::win32::EventID id, event_handler_t&& procedure)
+gl::Framework::AddEventHandler(gl::win32::EventID id, event_handler_t&& procedure)
 noexcept
 {
 	myInstance->AddEventHandler(id, std::move(procedure));
 }
 
 void
-client::Framework::RemoveEventHandler(gl::win32::EventID id)
+gl::Framework::RemoveEventHandler(gl::win32::EventID id)
 noexcept
 {
 	myInstance->RemoveEventHandler(id);
 }
 
 void
-client::Framework::SetRenderer(client::RenderDelegate handler)
+gl::Framework::SetRenderer(gl::RenderDelegate handler)
 noexcept
 {
 	myInstance->SetRenderer(
@@ -131,15 +131,15 @@ noexcept
 	});
 }
 
-client::Framework::handle_t&
-client::Framework::GetHandle()
+gl::Framework::handle_t&
+gl::Framework::GetHandle()
 noexcept
 {
 	return *(myInstance.get());
 }
 
-const client::Framework::handle_t&
-client::Framework::GetHandle()
+const gl::Framework::handle_t&
+gl::Framework::GetHandle()
 const noexcept
 {
 	return *(myInstance.get());
@@ -163,20 +163,20 @@ void ReadyDisplay() noexcept
 	}
 }
 
-std::shared_ptr<client::Framework>
-client::CreateFramework()
+std::shared_ptr<gl::Framework>
+gl::CreateFramework()
 noexcept
 {
 	return std::make_shared<Framework>();
 }
 
 void
-client::framework::DefaultRenderer()
+gl::framework::DefaultRenderer()
 noexcept
 {}
 
-client::framework::Descriptor
-client::framework::MakeDefaultDescriptor() noexcept
+gl::framework::Descriptor
+gl::framework::MakeDefaultDescriptor() noexcept
 {
 	return Descriptor
 	{
