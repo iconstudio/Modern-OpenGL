@@ -57,6 +57,9 @@ export namespace gl
 			BufferImplement(gl::buffer::BufferType buffer_type) noexcept;
 			~BufferImplement() noexcept;
 
+			void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
+			void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
+
 			constexpr void SetLayout(const BufferLayout& layout) noexcept
 			{
 				myLayout = layout;
@@ -66,6 +69,12 @@ export namespace gl
 			{
 				myLayout = static_cast<BufferLayout&&>(layout);
 			}
+
+			void Bind() const noexcept;
+			void Unbind() const noexcept;
+			void Use() const noexcept;
+
+			void CopyTo(BufferImplement& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
 
 			[[nodiscard]] constexpr gl::buffer::BufferType GetType() const noexcept
 			{
@@ -139,13 +148,5 @@ export namespace gl
 		BufferObject(buffer::BufferType buffer_type = buffer::BufferType::Array) noexcept;
 		~BufferObject() noexcept;
 
-		void SetData(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
-		void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
-
-		void Bind() const noexcept;
-		void Unbind() const noexcept;
-		void Use() const noexcept;
-
-		void CopyTo(BufferObject& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
 	};
 }
