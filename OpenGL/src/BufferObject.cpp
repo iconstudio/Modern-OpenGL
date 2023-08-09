@@ -25,6 +25,11 @@ noexcept
 	::glDeleteBuffers(1, std::addressof(myID));
 }
 
+gl::BufferObject::BufferObject(gl::buffer::BufferType buffer_type)
+noexcept
+	: base(buffer_type)
+{}
+
 struct Binder
 {
 	GLenum bftype;

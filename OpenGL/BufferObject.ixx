@@ -136,5 +136,13 @@ export namespace gl
 		};
 	}
 
-	using BufferObject = gl::detail::BufferInterface<false>;
+	class [[nodiscard]] BufferObject
+		: public gl::detail::BufferInterface<false>
+	{
+	public:
+		using base = gl::detail::BufferInterface<false>;
+
+		BufferObject(gl::buffer::BufferType buffer_type) noexcept;
+		~BufferObject() noexcept = default;
+	};
 }
