@@ -143,7 +143,6 @@
     <ClCompile Include="Culling.ixx" />
     <ClCompile Include="DefaultProperty.ixx" />
     <ClCompile Include="Display.ixx" />
-    <ClCompile Include="DisplayModes.ixx" />
     <ClCompile Include="Face.ixx" />
     <ClCompile Include="Image.ixx" />
     <ClCompile Include="LegacyFog.ixx" />
