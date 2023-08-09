@@ -9,11 +9,12 @@ module Glib.Display;
 import Glib.Rect;
 import Glib.Windows.Colour;
 
-using namespace winrt::Windows::UI::ViewManagement;
+using namespace winrt;
+using namespace Windows::UI::ViewManagement;
 
 namespace gl::display
 {
-	using DisplayProperty = winrt::Windows::UI::ViewManagement::UISettings;
+	using DisplayProperty = Windows::UI::ViewManagement::UISettings;
 
 	[[nodiscard]]
 	DisplayProperty AcquireSettings() noexcept;
@@ -97,16 +98,16 @@ namespace gl::display
 		}
 	}
 
-	Rect GetActualDisplaySize() noexcept
+	gl::Rect GetActualDisplaySize() noexcept
 	{
-		return Rect{ 0, 0, ::GetSystemMetrics(SM_CXSCREEN), ::GetSystemMetrics(SM_CYSCREEN) };
+		return gl::Rect{ 0, 0, ::GetSystemMetrics(SM_CXSCREEN), ::GetSystemMetrics(SM_CYSCREEN) };
 	}
 
-	Rect GetDisplaySize() noexcept
+	gl::Rect GetDisplaySize() noexcept
 	{
 		const unsigned int dpi = dpi::GetDPI();
 
-		return Rect{ 0, 0, ::GetSystemMetricsForDpi(SM_CXSCREEN, dpi), ::GetSystemMetricsForDpi(SM_CYSCREEN, dpi) };
+		return gl::Rect{ 0, 0, ::GetSystemMetricsForDpi(SM_CXSCREEN, dpi), ::GetSystemMetricsForDpi(SM_CYSCREEN, dpi) };
 	}
 
 	bool IsDimmingMode()
@@ -119,10 +120,10 @@ namespace gl::display
 		//const win32::Colour col_a_4 = settings.GetColorValue(UIColorType::AccentLight1);
 		//const win32::Colour col_a_5 = settings.GetColorValue(UIColorType::AccentLight2);
 		//const win32::Colour col_a_6 = settings.GetColorValue(UIColorType::AccentLight3);
-		const win32::Colour col_fg = settings.GetColorValue(UIColorType::Foreground);
+		const gl::win32::Colour col_fg = settings.GetColorValue(UIColorType::Foreground);
 		//const win32::Colour col_bk = settings.GetColorValue(UIColorType::Background);
 
-		if (win32::IsColorBright(col_fg))
+		if (gl::win32::IsColorBright(col_fg))
 		{
 			return true;
 		}
