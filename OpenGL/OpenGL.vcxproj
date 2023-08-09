@@ -151,6 +151,7 @@
     <ClCompile Include="Lighting.ixx" />
     <ClCompile Include="Pixel.ixx" />
     <ClCompile Include="Primitive.ixx" />
+    <ClCompile Include="Shader.ixx" />
     <ClCompile Include="src\Blender.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\BufferLayout.cpp" />
