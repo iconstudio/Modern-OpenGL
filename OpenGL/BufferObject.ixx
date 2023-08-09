@@ -53,7 +53,9 @@ export namespace gl
 		public:
 			using base = gl::Object;
 
-			using base::base;
+			BufferImplement() noexcept;
+			BufferImplement(gl::buffer::BufferType buffer_type) noexcept;
+			~BufferImplement() noexcept;
 
 			constexpr void SetLayout(const BufferLayout& layout) noexcept
 			{
@@ -85,7 +87,14 @@ export namespace gl
 				return myLayout;
 			}
 
+			BufferImplement(const BufferImplement&) = delete;
+			BufferImplement(BufferImplement&&) noexcept = default;
+			BufferImplement& operator=(const BufferImplement&) = delete;
+			BufferImplement& operator=(BufferImplement&&) noexcept = default;
+
 		protected:
+			using base::base;
+
 			volatile gl::buffer::BufferType myType;
 			volatile gl::buffer::BufferUsage myUsage;
 
@@ -138,10 +147,5 @@ export namespace gl
 		void Use() const noexcept;
 
 		void CopyTo(BufferObject& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
-
-		BufferObject(const BufferObject&) = delete;
-		BufferObject(BufferObject&&) noexcept = default;
-		BufferObject& operator=(const BufferObject&) = delete;
-		BufferObject& operator=(BufferObject&&) noexcept = default;
 	};
 }
