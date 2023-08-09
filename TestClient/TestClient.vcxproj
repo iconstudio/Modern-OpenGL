@@ -74,19 +74,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)export;$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)inc;$(SolutionDir)inc\Utility;$(SolutionDir)inc\OpenGL;$(SolutionDir)inc\Native;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)export;$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)inc;$(SolutionDir)inc\Utility;$(SolutionDir)inc\OpenGL;$(SolutionDir)inc\Native;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)export;$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)inc;$(SolutionDir)inc\Utility;$(SolutionDir)inc\OpenGL;$(SolutionDir)inc\Native;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)export;$(SolutionDir)lib;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)inc;$(SolutionDir)inc\Utility;$(SolutionDir)inc\OpenGL;$(SolutionDir)inc\Native;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
