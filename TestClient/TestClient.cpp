@@ -2,7 +2,10 @@
 #pragma comment(lib, "OpenGL.lib")
 #pragma comment(lib, "Utility.lib")
 
-import <cstdio>;
+import <print>;
+import <experimental/string>;
+//import <mdspan>;
+
 import <type_traits>;
 import Glib;
 import Glib.Framework;
@@ -26,10 +29,10 @@ void MyRenderer() noexcept
 
 int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& argv)
 {
-	std::puts("== Creating the Program ==");
+	std::println("== Creating the Program ==");
 	auto framework = gl::CreateFramework();
 
-	std::puts("== Program Initiated ==");
+	std::println("== Program Initiated ==");
 	gl::framework::Descriptor descriptor = gl::framework::MakeDefaultDescriptor();
 	descriptor.glDescriptor.alphaBlend = true;
 	descriptor.glDescriptor.doubleBuffered = true;
@@ -38,10 +41,10 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.isResizable = false;
 	descriptor.renderer = MyRenderer;
 
-	std::puts("== Initializing OpenGL ==");
+	std::println("== Initializing OpenGL ==");
 	framework->Initialize(std::move(descriptor));
 
-	std::puts("== Program Started ==");
+	std::println("== Program Started ==");
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::BufferLayout layout{};
@@ -59,7 +62,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	framework->Run();
 
-	std::puts("== Program Ended ==");
+	std::println("== Program Ended ==");
 
 	return 0;
 }
