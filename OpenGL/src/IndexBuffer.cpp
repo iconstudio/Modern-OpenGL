@@ -16,54 +16,64 @@ noexcept
 }
 
 void
-gl::IndexBuffer::SetLayout(const BufferLayout & layout)
+gl::IndexBuffer::SetLayout(const BufferLayout& layout)
 noexcept
-{}
+{
+	myHandle.SetLayout(layout);
+}
 
 void
-gl::IndexBuffer::SetLayout(BufferLayout && layout)
+gl::IndexBuffer::SetLayout(BufferLayout&& layout)
 noexcept
-{}
+{
+	myHandle.SetLayout(std::move(layout));
+}
 
 void
 gl::IndexBuffer::Bind()
 const noexcept
-{}
+{
+	myHandle.Bind();
+}
 
 void
 gl::IndexBuffer::Unbind()
 const noexcept
-{}
+{
+	myHandle.Unbind();
+}
 
 void
 gl::IndexBuffer::Use()
 const noexcept
-{}
+{
+	myHandle.Unbind();
+}
 
 gl::buffer::BufferUsage
 gl::IndexBuffer::GetUsage()
 const noexcept
 {
-	return buffer::BufferUsage();
+	return myHandle.GetUsage();
 }
 
 size_t
 gl::IndexBuffer::GetSize()
 const noexcept
 {
-	return size_t();
+	return myHandle.GetSize();
 }
 
 gl::BufferObject&
 gl::IndexBuffer::GetHandle()
 noexcept
 {
-	// TODO: 여기에 return 문을 삽입합니다.
+	return myHandle;
 }
 
 const gl::BufferObject&
 gl::IndexBuffer::GetHandle()
 const noexcept
 {
-	// TODO: 여기에 return 문을 삽입합니다.
+	return myHandle;
 }
