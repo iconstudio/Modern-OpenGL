@@ -177,8 +177,8 @@
     <None Include="inc\ImageLoader.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utility\Utility\Utility.vcxproj">
-      <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{e65c94b5-51d4-4018-b6c1-247d8353f76a}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

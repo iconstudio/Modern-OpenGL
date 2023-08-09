@@ -12,12 +12,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLEW", "GLEW\GLEW.vcxitems", "{79056D64-8B2F-4A97-968F-4C5EC34345F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\TestClient.vcxproj", "{811E349D-E628-4B27-BD06-3C136B4D4DC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8A21FBF7-759E-4AD4-AC28-78D3E4F7F491} = {8A21FBF7-759E-4AD4-AC28-78D3E4F7F491}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utility", "Utility\Utility\Utility.vcxproj", "{8A21FBF7-759E-4AD4-AC28-78D3E4F7F491}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utility", "Utility\Utility.vcxproj", "{8A21FBF7-759E-4AD4-AC28-78D3E4F7F491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

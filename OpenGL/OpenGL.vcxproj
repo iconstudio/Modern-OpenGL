@@ -295,6 +295,9 @@
     <ProjectReference Include="..\Native\Native.vcxproj">
       <Project>{68d34652-0c5b-460b-b35d-a6c2b02796e0}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{e65c94b5-51d4-4018-b6c1-247d8353f76a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h" />
