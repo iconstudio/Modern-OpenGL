@@ -164,6 +164,75 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Native\inc\Bitmap.ixx" />
+    <ClCompile Include="..\Native\inc\Colour.ixx" />
+    <ClCompile Include="..\Native\inc\ColourBrush.ixx" />
+    <ClCompile Include="..\Native\inc\CompatibleBitmap.ixx" />
+    <ClCompile Include="..\Native\inc\CompatibleContext.ixx" />
+    <ClCompile Include="..\Native\inc\ComponentBrush.ixx" />
+    <ClCompile Include="..\Native\inc\Definitions.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceContext.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceHandle.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceIO.ixx" />
+    <ClCompile Include="..\Native\inc\DeviceUtil.ixx" />
+    <ClCompile Include="..\Native\inc\Event.ixx" />
+    <ClCompile Include="..\Native\inc\EventAPI.ixx" />
+    <ClCompile Include="..\Native\inc\EventID.ixx" />
+    <ClCompile Include="..\Native\inc\GraphicDeviceContext.ixx" />
+    <ClCompile Include="..\Native\inc\Icon.ixx" />
+    <ClCompile Include="..\Native\inc\IContext.ixx" />
+    <ClCompile Include="..\Native\inc\IGraphics.ixx" />
+    <ClCompile Include="..\Native\inc\IHandle.ixx" />
+    <ClCompile Include="..\Native\inc\IWindow.ixx" />
+    <ClCompile Include="..\Native\inc\Keyboard.ixx" />
+    <ClCompile Include="..\Native\inc\KeyboardFlags.ixx" />
+    <ClCompile Include="..\Native\inc\Keycodes.ixx" />
+    <ClCompile Include="..\Native\inc\KeyModifiers.ixx" />
+    <ClCompile Include="..\Native\inc\ManagedWindow.ixx" />
+    <ClCompile Include="..\Native\inc\Mouse.ixx" />
+    <ClCompile Include="..\Native\inc\MouseButtons.ixx" />
+    <ClCompile Include="..\Native\inc\MouseUtils.ixx" />
+    <ClCompile Include="..\Native\inc\Palette.ixx" />
+    <ClCompile Include="..\Native\inc\Pen.ixx" />
+    <ClCompile Include="..\Native\inc\ProcessInstance.ixx" />
+    <ClCompile Include="..\Native\inc\RawColour.ixx" />
+    <ClCompile Include="..\Native\inc\Rect.ixx" />
+    <ClCompile Include="..\Native\inc\SpecialEvent.ixx" />
+    <ClCompile Include="..\Native\inc\Window.ixx" />
+    <ClCompile Include="..\Native\inc\WindowCoroutine.ixx" />
+    <ClCompile Include="..\Native\inc\WindowFactory.ixx" />
+    <ClCompile Include="..\Native\inc\WindowOption.ixx" />
+    <ClCompile Include="..\Native\inc\WindowProperty.ixx" />
+    <ClCompile Include="..\Native\inc\WindowsPropertyFactory.ixx" />
+    <ClCompile Include="..\Native\inc\WindowStyle.ixx" />
+    <ClCompile Include="..\OpenGL\Blender.ixx" />
+    <ClCompile Include="..\OpenGL\BlendMode.ixx" />
+    <ClCompile Include="..\OpenGL\BlendOption.ixx" />
+    <ClCompile Include="..\OpenGL\Buffer.ixx" />
+    <ClCompile Include="..\OpenGL\BufferLayout.ixx" />
+    <ClCompile Include="..\OpenGL\BufferObject.ixx" />
+    <ClCompile Include="..\OpenGL\ClearBits.ixx" />
+    <ClCompile Include="..\OpenGL\Comparator.ixx" />
+    <ClCompile Include="..\OpenGL\Culling.ixx" />
+    <ClCompile Include="..\OpenGL\DefaultProperty.ixx" />
+    <ClCompile Include="..\OpenGL\Display.ixx" />
+    <ClCompile Include="..\OpenGL\DisplayModes.ixx" />
+    <ClCompile Include="..\OpenGL\Face.ixx" />
+    <ClCompile Include="..\OpenGL\Framework.ixx" />
+    <ClCompile Include="..\OpenGL\Image.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyFog.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyLighting.ixx" />
+    <ClCompile Include="..\OpenGL\LegacyPrimitive.ixx" />
+    <ClCompile Include="..\OpenGL\Lighting.ixx" />
+    <ClCompile Include="..\OpenGL\Object.ixx" />
+    <ClCompile Include="..\OpenGL\OpenGL.ixx" />
+    <ClCompile Include="..\OpenGL\Pixel.ixx" />
+    <ClCompile Include="..\OpenGL\Primitive.ixx" />
+    <ClCompile Include="..\OpenGL\State.ixx" />
+    <ClCompile Include="..\OpenGL\System.ixx" />
+    <ClCompile Include="..\OpenGL\Texture.ixx" />
+    <ClCompile Include="..\OpenGL\Transform.ixx" />
+    <ClCompile Include="..\OpenGL\TransformState.ixx" />
     <ClCompile Include="TestClient.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +245,12 @@
     <ProjectReference Include="..\Utility\Utility.vcxproj">
       <Project>{8a21fbf7-759e-4ad4-ac28-78d3e4f7f491}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Native\inc\ImageLoader.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Native\inc\Internal.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
