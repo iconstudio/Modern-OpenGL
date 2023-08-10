@@ -133,7 +133,6 @@
     <ClCompile Include="Blender.ixx" />
     <ClCompile Include="BlendMode.ixx" />
     <ClCompile Include="BlendOption.ixx" />
-    <ClCompile Include="Buffer.ixx" />
     <ClCompile Include="BufferLayout.ixx" />
     <ClCompile Include="Framework.ixx" />
     <ClCompile Include="IndexBuffer.ixx" />
