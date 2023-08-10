@@ -26,6 +26,14 @@ namespace gl
 
 			void CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
 			void CopyTo(BufferImplement& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
+		
+			constexpr void Swap(BufferImplement& other) noexcept
+			{
+				std::swap(myType, other.myType);
+				std::swap(myUsage, other.myUsage);
+				std::swap(myLayout, other.myLayout);
+				std::swap(mySize, other.mySize);
+			}
 
 			constexpr void SetLayout(const BufferLayout& layout) noexcept
 			{
