@@ -18,9 +18,6 @@
     <ClCompile Include="DefaultProperty.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayModes.ixx">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
@@ -50,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="BlendMode.ixx">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BlendMode.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BlendOption.ixx">
       <Filter>Header Files</Filter>
@@ -114,9 +108,6 @@
     <ClCompile Include="Texture.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Buffer.ixx">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -134,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="BufferObject.ixx">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BufferLayout.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BufferLayout.ixx">
       <Filter>Header Files</Filter>
@@ -179,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="src\UniqueBufferObject.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferType.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferUsage.ixx">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
