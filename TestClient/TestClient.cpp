@@ -39,7 +39,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	descriptor.glDescriptor.keepAspectRatio = true;
 	descriptor.glDescriptor.vSync = true;
 	descriptor.isResizable = false;
-	descriptor.renderer = MyRenderer;
+	//descriptor.renderer = MyRenderer;
 
 	std::println("== Initializing OpenGL ==");
 	framework->Initialize(std::move(descriptor));
@@ -57,8 +57,12 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 		0.0f, 0.5f, 0.0f, // top
 	};
 
-	gl::BufferObject vbo{ gl::buffer::BufferType::Array };
-	vbo.Create(vertices, sizeof(vertices), gl::buffer::BufferUsage::StaticDraw);
+	gl::BufferObject vbo{};
+	vbo.Create(gl::buffer::BufferType::Array, gl::buffer::BufferUsage::StaticDraw, vertices, sizeof(vertices));
+
+	framework->SetRenderer([&]() {
+		vbo.Use();
+	});
 
 	framework->Run();
 
