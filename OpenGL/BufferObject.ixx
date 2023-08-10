@@ -88,7 +88,6 @@ namespace gl
 	{
 	private:
 		using base = detail::BufferImplement;
-		operator BufferImplement() = delete;
 
 	public:
 		using base::base;
@@ -117,7 +116,6 @@ namespace gl
 	{
 	private:
 		using base = detail::BufferImplement;
-		operator BufferImplement() = delete;
 
 	public:
 		using base::base;
