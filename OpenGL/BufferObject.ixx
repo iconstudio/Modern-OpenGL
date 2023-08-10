@@ -167,9 +167,10 @@ export namespace gl
 	class [[nodiscard]] BufferObject
 		: public gl::detail::BufferInterface<false>
 	{
-	public:
+	private:
 		using base = gl::detail::BufferInterface<false>;
 
+	public:
 		BufferObject(gl::buffer::BufferType buffer_type) noexcept;
 		~BufferObject() noexcept = default;
 	};

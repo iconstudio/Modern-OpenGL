@@ -11,9 +11,10 @@ export namespace gl
 	class [[nodiscard]] IndexBuffer
 		: public gl::detail::BufferInterface<true>
 	{
-	public:
+	private:
 		using base = gl::detail::BufferInterface<true>;
 
+	public:
 		IndexBuffer() noexcept;
 		~IndexBuffer() noexcept = default;
 

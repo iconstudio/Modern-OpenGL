@@ -10,9 +10,10 @@ export namespace gl
 	class [[nodiscard]] VertexBuffer
 		: public gl::detail::BufferInterface<true>
 	{
-	public:
+	private:
 		using base = gl::detail::BufferInterface<true>;
 
+	public:
 		VertexBuffer() noexcept;
 		~VertexBuffer() noexcept = default;
 
