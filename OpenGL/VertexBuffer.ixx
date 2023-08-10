@@ -33,6 +33,6 @@ export namespace gl
 	{
 		static_assert(sizeof(std::ranges::range_value_t<R>) == sizeof(std::int32_t));
 
-		base::Create(buf.data(), buf.size(), usage);
+		base::Create(buffer::BufferType::Array, buf.data(), buf.size(), usage);
 	}
 }
