@@ -3,11 +3,6 @@ module Glib;
 import <type_traits>;
 import :IndexBuffer;
 
-gl::IndexBuffer::IndexBuffer()
-noexcept
-	: base(buffer::BufferType::ElementArray)
-{}
-
 void
 gl::IndexBuffer::Create(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage)
 noexcept

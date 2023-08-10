@@ -13,7 +13,7 @@ export namespace gl
 		using base = gl::BufferInterface<true>;
 
 	public:
-		IndexBuffer() noexcept;
+		constexpr IndexBuffer() noexcept = default;
 		~IndexBuffer() noexcept = default;
 
 		void Create(std::initializer_list<std::int32_t> list, buffer::BufferUsage usage = buffer::BufferUsage::StaticDraw) noexcept;
