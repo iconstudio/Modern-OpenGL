@@ -22,6 +22,7 @@ namespace gl
 			~BufferImplement() noexcept;
 
 			void Create(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
+			void Destroy();
 
 			void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
 

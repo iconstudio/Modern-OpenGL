@@ -22,7 +22,7 @@ noexcept
 gl::detail::BufferImplement::~BufferImplement()
 noexcept
 {
-	::glDeleteBuffers(1, std::addressof(myID));
+	Destroy();
 }
 
 gl::BufferObject::BufferObject(gl::buffer::BufferType buffer_type)
@@ -57,6 +57,11 @@ noexcept
 
 	mySize = size;
 	myUsage = usage;
+}
+void
+gl::detail::BufferImplement::Destroy()
+{
+	::glDeleteBuffers(1, std::addressof(myID));
 }
 
 void
