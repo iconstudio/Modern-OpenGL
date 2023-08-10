@@ -4,16 +4,17 @@ import :BufferObject;
 
 export namespace gl
 {
-	class [[nodiscard]] SharedBufferObject
-		: public gl::detail::BufferInterface<true>
+	class [[nodiscard]] SharedBufferObject : public gl::BufferInterface<true>
 	{
+	private:
+		using base = gl::BufferInterface<true>;
+
 	public:
-		using base = gl::detail::BufferInterface<true>;
 		using blob_t = std::shared_ptr<float[]>;
 
 		using base::base;
 
-		~SharedBufferObject() = default;
+		~SharedBufferObject() noexcept = default;
 
 		void Create(gl::buffer::BufferUsage usage, const size_t& bytes_size);
 
