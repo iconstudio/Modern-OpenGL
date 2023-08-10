@@ -95,7 +95,10 @@ namespace gl
 	public:
 		using base::base;
 		using base::Create;
+		using base::Destroy;
 		using base::CopyFrom;
+		using base::CopyTo;
+		using base::Swap;
 		using base::SetLayout;
 		using base::Bind;
 		using base::Unbind;
@@ -104,7 +107,6 @@ namespace gl
 		using base::GetUsage;
 		using base::GetLayout;
 		using base::GetSize;
-		using base::CopyTo;
 
 		[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
 		{
@@ -122,7 +124,10 @@ namespace gl
 	public:
 		using base::base;
 		using base::Create;
+		using base::Destroy;
 		using base::CopyFrom;
+		using base::CopyTo;
+		using base::Swap;
 		using base::SetLayout;
 		using base::Bind;
 		using base::Unbind;
@@ -131,7 +136,6 @@ namespace gl
 		using base::GetUsage;
 		using base::GetLayout;
 		using base::GetSize;
-		using base::CopyTo;
 	};
 
 	export class [[nodiscard]] BufferObject : public BufferInterface<false>
