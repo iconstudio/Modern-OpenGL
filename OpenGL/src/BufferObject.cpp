@@ -65,7 +65,7 @@ gl::detail::BufferImplement::Destroy()
 }
 
 void
-gl::detail::BufferImplement::SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset)
+gl::detail::BufferImplement::CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset)
 noexcept
 {
 	Binder binder{ myType, myID };

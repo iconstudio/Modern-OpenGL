@@ -24,7 +24,8 @@ namespace gl
 			void Create(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
 			void Destroy();
 
-			void SetSubData(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
+			void CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
+			void CopyTo(BufferImplement& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
 
 			constexpr void SetLayout(const BufferLayout& layout) noexcept
 			{
@@ -39,8 +40,6 @@ namespace gl
 			void Bind() const noexcept;
 			void Unbind() const noexcept;
 			void Use() const noexcept;
-
-			void CopyTo(BufferImplement& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
 
 			[[nodiscard]] constexpr buffer::BufferType GetType() const noexcept
 			{
@@ -88,7 +87,7 @@ namespace gl
 	public:
 		using base::base;
 		using base::Create;
-		using base::SetSubData;
+		using base::CopyFrom;
 		using base::SetLayout;
 		using base::Bind;
 		using base::Unbind;
@@ -115,7 +114,7 @@ namespace gl
 	public:
 		using base::base;
 		using base::Create;
-		using base::SetSubData;
+		using base::CopyFrom;
 		using base::SetLayout;
 		using base::Bind;
 		using base::Unbind;
