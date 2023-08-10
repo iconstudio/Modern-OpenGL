@@ -48,11 +48,12 @@ export namespace gl
 	{
 		class
 			alignas(std::hardware_constructive_interference_size)
-			BufferImplement : public gl::Object
+			BufferImplement : protected gl::Object
 		{
-		public:
+		private:
 			using base = gl::Object;
 
+		public:
 			~BufferImplement() noexcept;
 
 			void Create(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
@@ -114,12 +115,25 @@ export namespace gl
 		class BufferInterface;
 
 		template<>
-		class BufferInterface<true> : public BufferImplement
+		class BufferInterface<true> : protected BufferImplement
 		{
-		public:
+		private:
 			using base = BufferImplement;
+			operator BufferImplement() = delete;
 
+		public:
 			using base::base;
+			using base::Create;
+			using base::SetSubData;
+			using base::SetLayout;
+			using base::Bind;
+			using base::Unbind;
+			using base::Use;
+			using base::GetType;
+			using base::GetUsage;
+			using base::GetLayout;
+			using base::GetSize;
+			using base::CopyTo;
 
 			[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
 			{
@@ -128,12 +142,25 @@ export namespace gl
 		};
 
 		template<>
-		class BufferInterface<false> : public BufferImplement
+		class BufferInterface<false> : protected BufferImplement
 		{
-		public:
+		private:
 			using base = BufferImplement;
+			operator BufferImplement() = delete;
 
+		public:
 			using base::base;
+			using base::Create;
+			using base::SetSubData;
+			using base::SetLayout;
+			using base::Bind;
+			using base::Unbind;
+			using base::Use;
+			using base::GetType;
+			using base::GetUsage;
+			using base::GetLayout;
+			using base::GetSize;
+			using base::CopyTo;
 		};
 	}
 
