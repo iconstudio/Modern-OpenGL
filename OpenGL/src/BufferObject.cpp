@@ -10,25 +10,16 @@ import :BufferObject;
 using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
 void AttachElement(const element_vector_t& elements) noexcept;
 
-gl::detail::BufferImplement::BufferImplement(gl::buffer::BufferType buffer_type)
-noexcept
-	: base()
-	, myType(buffer_type), myUsage(buffer::BufferUsage::None)
-	, myLayout(), mySize(0)
-{
-	::glGenBuffers(1, std::addressof(myID));
-}
-
-gl::detail::BufferImplement::~BufferImplement()
-noexcept
-{
-	Destroy();
-}
-
 gl::BufferObject::BufferObject(gl::buffer::BufferType buffer_type)
 noexcept
 	: base(buffer_type)
 {}
+
+gl::BufferObject::~BufferObject()
+noexcept
+{
+	Destroy();
+}
 
 struct Binder
 {
@@ -48,9 +39,12 @@ struct Binder
 };
 
 void
-gl::detail::BufferImplement::Create(const void* const& data, const size_t& size, gl::buffer::BufferUsage usage)
+gl::detail::BufferImplement::Create(buffer::BufferType buffer_type, const void* data, const size_t& size, gl::buffer::BufferUsage usage)
 noexcept
 {
+	myType = buffer_type;
+	::glGenBuffers(1, std::addressof(myID));
+
 	Binder binder{ myType, myID };
 
 	::glBufferData(binder.bftype, size, data, static_cast<GLenum>(usage));

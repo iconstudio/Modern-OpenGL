@@ -1,5 +1,4 @@
 export module Glib:BufferObject;
-import <cstdint>;
 import :Object;
 export import :BufferType;
 export import :BufferUsage;
@@ -19,9 +18,10 @@ namespace gl
 			using base = gl::Object;
 
 		public:
-			~BufferImplement() noexcept;
+			constexpr BufferImplement() noexcept = default;
+			constexpr ~BufferImplement() noexcept = default;
 
-			void Create(const void* const& data, const size_t& size, buffer::BufferUsage usage) noexcept;
+			void Create(buffer::BufferType buffer_type, const void* data, const size_t& size, buffer::BufferUsage usage) noexcept;
 			void Destroy();
 
 			void CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
@@ -75,8 +75,6 @@ namespace gl
 			BufferImplement& operator=(BufferImplement&&) noexcept = default;
 
 		protected:
-			BufferImplement(buffer::BufferType buffer_type) noexcept;
-
 			volatile buffer::BufferType myType;
 			volatile buffer::BufferUsage myUsage;
 
@@ -145,6 +143,9 @@ namespace gl
 
 	public:
 		BufferObject(buffer::BufferType buffer_type) noexcept;
-		~BufferObject() noexcept = default;
+		~BufferObject() noexcept;
+
+	private:
+		bool isAvailable;
 	};
 }
