@@ -10,15 +10,27 @@ import :BufferObject;
 using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
 void AttachElement(const element_vector_t& elements) noexcept;
 
-gl::BufferObject::BufferObject(gl::buffer::BufferType buffer_type)
-noexcept
-	: base(buffer_type)
-{}
-
 gl::BufferObject::~BufferObject()
 noexcept
 {
-	Destroy();
+	if (isAvailable)
+	{
+		Destroy();
+	}
+}
+
+void
+gl::BufferObject::Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size)
+noexcept
+{
+	if (!isAvailable
+		&& buffer_type != buffer::BufferType::None
+		&& usage != buffer::BufferUsage::None
+		&& nullptr != data && 0 < size)
+	{
+		base::Create(buffer_type, data, size, usage);
+		isAvailable = true;
+	}
 }
 
 struct Binder
@@ -42,11 +54,10 @@ void
 gl::detail::BufferImplement::Create(buffer::BufferType buffer_type, const void* data, const size_t& size, gl::buffer::BufferUsage usage)
 noexcept
 {
-	myType = buffer_type;
 	::glGenBuffers(1, std::addressof(myID));
+	myType = buffer_type;
 
 	Binder binder{ myType, myID };
-
 	::glBufferData(binder.bftype, size, data, static_cast<GLenum>(usage));
 
 	mySize = size;
@@ -70,6 +81,19 @@ noexcept
 }
 
 void
+gl::detail::BufferImplement::CopyTo(gl::detail::BufferImplement& other
+	, const size_t& dest_size, const ptrdiff_t& dest_offset
+	, const ptrdiff_t& offset)
+	const noexcept
+{
+	::glBindBuffer(GL_COPY_READ_BUFFER, myID);
+	::glBindBuffer(GL_COPY_WRITE_BUFFER, other.myID);
+	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, offset, dest_offset, dest_size);
+	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
+	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
+}
+
+void
 gl::detail::BufferImplement::Bind()
 const noexcept
 {
@@ -90,19 +114,6 @@ const noexcept
 	Bind();
 	::AttachElement(myLayout.GetElements());
 	Unbind();
-}
-
-void
-gl::detail::BufferImplement::CopyTo(gl::detail::BufferImplement& other
-	, const size_t& dest_size, const ptrdiff_t& dest_offset
-	, const ptrdiff_t& offset)
-	const noexcept
-{
-	::glBindBuffer(GL_COPY_READ_BUFFER, myID);
-	::glBindBuffer(GL_COPY_WRITE_BUFFER, other.myID);
-	::glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, offset, dest_offset, dest_size);
-	::glBindBuffer(GL_COPY_READ_BUFFER, 0);
-	::glBindBuffer(GL_COPY_WRITE_BUFFER, 0);
 }
 
 void

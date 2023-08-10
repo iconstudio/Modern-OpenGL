@@ -142,10 +142,13 @@ namespace gl
 		using base = BufferInterface<false>;
 
 	public:
-		BufferObject(buffer::BufferType buffer_type) noexcept;
+		constexpr BufferObject() noexcept = default;
 		~BufferObject() noexcept;
 
+		void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept;
+
 	private:
-		bool isAvailable;
+
+		volatile bool isAvailable;
 	};
 }
