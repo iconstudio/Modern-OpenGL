@@ -13,6 +13,8 @@ export import :BlendMode;
 export import :BlendOption;
 export import :Blender;
 export import :Object;
+export import :BufferType;
+export import :BufferUsage;
 export import :BufferLayout;
 export import :BufferObject;
 export import :VertexBuffer;
