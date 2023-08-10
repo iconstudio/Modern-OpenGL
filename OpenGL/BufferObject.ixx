@@ -5,12 +5,14 @@ export import :BufferType;
 export import :BufferUsage;
 export import :BufferLayout;
 
-export namespace gl
+namespace gl
 {
+	export template<bool provide_modifiable_layout>
+		class BufferInterface;
+
 	namespace detail
 	{
-		class
-			alignas(std::hardware_constructive_interference_size)
+		class alignas(std::hardware_constructive_interference_size)
 			BufferImplement : protected gl::Object
 		{
 		private:
@@ -73,65 +75,61 @@ export namespace gl
 			BufferLayout myLayout;
 			size_t mySize;
 		};
-
-		template<bool provide_modifiable_layout>
-		class BufferInterface;
-
-		template<>
-		class BufferInterface<true> : protected BufferImplement
-		{
-		private:
-			using base = BufferImplement;
-			operator BufferImplement() = delete;
-
-		public:
-			using base::base;
-			using base::Create;
-			using base::SetSubData;
-			using base::SetLayout;
-			using base::Bind;
-			using base::Unbind;
-			using base::Use;
-			using base::GetType;
-			using base::GetUsage;
-			using base::GetLayout;
-			using base::GetSize;
-			using base::CopyTo;
-
-			[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
-			{
-				return myLayout;
-			}
-		};
-
-		template<>
-		class BufferInterface<false> : protected BufferImplement
-		{
-		private:
-			using base = BufferImplement;
-			operator BufferImplement() = delete;
-
-		public:
-			using base::base;
-			using base::Create;
-			using base::SetSubData;
-			using base::SetLayout;
-			using base::Bind;
-			using base::Unbind;
-			using base::Use;
-			using base::GetType;
-			using base::GetUsage;
-			using base::GetLayout;
-			using base::GetSize;
-			using base::CopyTo;
-		};
 	}
 
-	class [[nodiscard]] BufferObject
-		: public detail::BufferInterface<false>
+	template<>
+	class BufferInterface<true> : protected detail::BufferImplement
 	{
 	private:
-		using base = detail::BufferInterface<false>;
+		using base = detail::BufferImplement;
+		operator BufferImplement() = delete;
+
+	public:
+		using base::base;
+		using base::Create;
+		using base::SetSubData;
+		using base::SetLayout;
+		using base::Bind;
+		using base::Unbind;
+		using base::Use;
+		using base::GetType;
+		using base::GetUsage;
+		using base::GetLayout;
+		using base::GetSize;
+		using base::CopyTo;
+
+		[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
+		{
+			return myLayout;
+		}
+	};
+
+	template<>
+	class BufferInterface<false> : protected detail::BufferImplement
+	{
+	private:
+		using base = detail::BufferImplement;
+		operator BufferImplement() = delete;
+
+	public:
+		using base::base;
+		using base::Create;
+		using base::SetSubData;
+		using base::SetLayout;
+		using base::Bind;
+		using base::Unbind;
+		using base::Use;
+		using base::GetType;
+		using base::GetUsage;
+		using base::GetLayout;
+		using base::GetSize;
+		using base::CopyTo;
+	};
+
+	export class [[nodiscard]] BufferObject : public BufferInterface<false>
+	{
+	private:
+		using base = BufferInterface<false>;
 
 	public:
 		BufferObject(buffer::BufferType buffer_type) noexcept;
