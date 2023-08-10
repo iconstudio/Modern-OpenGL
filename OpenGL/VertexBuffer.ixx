@@ -7,11 +7,10 @@ import :BufferObject;
 
 export namespace gl
 {
-	class [[nodiscard]] VertexBuffer
-		: public gl::detail::BufferInterface<true>
+	class [[nodiscard]] VertexBuffer : public gl::BufferInterface<true>
 	{
 	private:
-		using base = gl::detail::BufferInterface<true>;
+		using base = gl::BufferInterface<true>;
 
 	public:
 		VertexBuffer() noexcept;

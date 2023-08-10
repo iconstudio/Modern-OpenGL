@@ -4,15 +4,13 @@ import <initializer_list>;
 import <concepts>;
 import <ranges>;
 import :BufferObject;
-import Utility.Constraints;
 
 export namespace gl
 {
-	class [[nodiscard]] IndexBuffer
-		: public gl::detail::BufferInterface<true>
+	class [[nodiscard]] IndexBuffer : public gl::BufferInterface<true>
 	{
 	private:
-		using base = gl::detail::BufferInterface<true>;
+		using base = gl::BufferInterface<true>;
 
 	public:
 		IndexBuffer() noexcept;
