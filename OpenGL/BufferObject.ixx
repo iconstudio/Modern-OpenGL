@@ -69,10 +69,10 @@ namespace gl
 				return myLayout;
 			}
 
-			BufferImplement(const BufferImplement&) = delete;
-			BufferImplement(BufferImplement&&) noexcept = default;
-			BufferImplement& operator=(const BufferImplement&) = delete;
-			BufferImplement& operator=(BufferImplement&&) noexcept = default;
+			constexpr BufferImplement(const BufferImplement&) noexcept = default;
+			constexpr BufferImplement(BufferImplement&&) noexcept = default;
+			constexpr BufferImplement& operator=(const BufferImplement&) noexcept = default;
+			constexpr BufferImplement& operator=(BufferImplement&&) noexcept = default;
 
 		protected:
 			volatile buffer::BufferType myType;
