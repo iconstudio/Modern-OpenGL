@@ -1,4 +1,4 @@
-export module Glib.Shader;
+export module Glib:Shader;
 
 export namespace gl
 {
