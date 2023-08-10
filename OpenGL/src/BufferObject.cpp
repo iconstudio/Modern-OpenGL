@@ -7,9 +7,6 @@ module Glib;
 import <tuple>;
 import :BufferObject;
 
-using element_vector_t = decltype(std::declval<gl::BufferLayout>().GetElements());
-void AttachElement(const element_vector_t& elements) noexcept;
-
 gl::BufferObject::~BufferObject()
 noexcept
 {
@@ -112,16 +109,8 @@ gl::detail::BufferImplement::Use()
 const noexcept
 {
 	Bind();
-	::AttachElement(myLayout.GetElements());
-	Unbind();
-}
-
-void
-AttachElement(const element_vector_t& elements)
-noexcept
-{
 	GLuint index = 0;
-	for (auto& item : elements)
+	for (auto& item : myLayout.GetElements())
 	{
 		const int& count = std::get<0>(item);
 		const int& type = std::get<1>(item);
@@ -132,4 +121,5 @@ noexcept
 		::glVertexAttribPointer(index, count, type, normalized, stride, reinterpret_cast<const void*>(offset));
 		::glEnableVertexAttribArray(index++);
 	}
+	Unbind();
 }
