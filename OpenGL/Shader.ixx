@@ -6,4 +6,9 @@ export namespace gl
 	{
 
 	}
+
+	class [[nodiscard]] Shader
+	{
+	public:
+	};
 }
