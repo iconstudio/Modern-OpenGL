@@ -2,6 +2,7 @@ export module Glib:Shader;
 import <cstdint>;
 import <string_view>;
 import <filesystem>;
+import :Object;
 
 export namespace gl
 {
@@ -15,6 +16,9 @@ export namespace gl
 
 	class [[nodiscard]] Shader
 	{
+	private:
+		using base = gl::Object;
+
 	public:
 		Shader(nullptr_t) noexcept;
 		~Shader() noexcept;
