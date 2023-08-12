@@ -39,6 +39,7 @@ export namespace gl
 		shader::ErrorCode Compile(std::string_view content) noexcept;
 
 		void Use(const unsigned int& program) noexcept;
+		void Destroy() noexcept;
 
 		[[nodiscard]] bool IsLoaded() const noexcept;
 		[[nodiscard]] bool IsUnloaded() const noexcept;
