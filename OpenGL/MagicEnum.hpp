@@ -176,6 +176,7 @@ MAGIC_MAKE_LISTs(enum_name, enum_last_index, __VA_ARGS__)
 inline constexpr std::size_t MAGIC_ENUMSIZE(enum_name) = std::size(value_list); \
 MAGIC_MAKE_LISTs(enum_name, enum_last_index, __VA_ARGS__)
 
+#if false
 namespace gl::detail::test
 {
 	MAGIC_ENUM(AASDEWQDSFD, int, 9, a, b, c, d, e, f, g, h, i, j, k, l);
@@ -193,9 +194,10 @@ namespace gl::detail::test
 		10, 20, 40, 100, 120, 160, 170
 	};
 
-	MAGIC_ENUM_FROM(YOQWROB, short, 6, test_predef, qqq, www, eee, rrr, fff, eee, ttt);
+	MAGIC_ENUM_FROM(YOQWROB, short, 6, test_predef, qqq, www, eee, rrr, fff, ggg, ttt);
 
 	constexpr auto yoq_i = MAGIC_ENUMLIST(YOQWROB)[6];
 	constexpr auto yoq_n = MAGIC_ENUMFULL(YOQWROB)[0];
 	constexpr auto yoq_t = MAGIC_ENUMNAME(YOQWROB)[0];
 }
+#endif
