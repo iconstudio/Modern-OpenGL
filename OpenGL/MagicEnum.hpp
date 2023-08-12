@@ -128,6 +128,42 @@ MAGIC_ASSIGN_VALUE_ALL_IMPL_4(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
 MAGIC_ASSIGN_VALUE(value_list, index, item), \
 MAGIC_ASSIGN_VALUE_ALL_IMPL_5(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
 
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_7(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_6(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_8(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_7(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_9(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_8(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_10(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_9(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_11(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_10(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_12(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_11(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_13(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_12(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_14(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_13(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
+#define MAGIC_ASSIGN_VALUE_ALL_IMPL_15(value_list, index, item, ...) \
+MAGIC_ASSIGN_VALUE(value_list, index, item), \
+MAGIC_ASSIGN_VALUE_ALL_IMPL_14(value_list, MAGIC_INDEXER(index), __VA_ARGS__)
+
 #define MAGIC_ASSIGN_VALUE_ALL(value_list, last_index, index, ...) \
 CAT(MAGIC_ASSIGN_VALUE_ALL_IMPL_, last_index)(value_list, index, __VA_ARGS__)
 
