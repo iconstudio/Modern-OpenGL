@@ -69,19 +69,19 @@ struct std::formatter<gl::shader::ShaderType>
 	template<class FormatContext>
 	auto format(const gl::shader::ShaderType& shtype, FormatContext& ctx) const
 	{
-		std::formatter<std::string> formatter;
+		constexpr auto& vallist = gl::shader::MAGIC_ENUMLIST(ShaderType);
+		constexpr auto& namelist = gl::shader::MAGIC_ENUMFULL(ShaderType);
+		constexpr auto& valsize = gl::shader::MAGIC_ENUMSIZE(ShaderType);
 
-		switch (shtype)
+		const auto& beg = vallist;
+		const auto& end = vallist + valsize;
+		const auto& it = std::find(beg, end, shtype);
+		if (end != it)
 		{
-			case gl::shader::ShaderType::None:
-			{
-				return formatter.format("", ctx);
-			}
+			ptrdiff_t index = it - beg;
+			return std::format_to(ctx.out(), "{}", namelist[index]);
 		}
-	}
 
-	constexpr auto parse(std::format_parse_context& ctx) noexcept
-	{
-		//return std::format_to(ctx.begin(), "{}", "asdsd");
+		return std::format_to(ctx.out(), "{}", "None Type");
 	}
 };
