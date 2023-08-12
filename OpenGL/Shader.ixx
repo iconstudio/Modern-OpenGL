@@ -12,6 +12,17 @@ export namespace gl
 		{
 			None = 0,
 		};
+
+		enum class [[nodiscard]] ShaderType : std::int32_t
+		{
+			None = 0,
+			Vertex = 0x8B31, // GL_VERTEX_SHADER
+			Fragment = 0x8B30, // GL_FRAGMENT_SHADER
+			Pixel = Fragment, // GL_FRAGMENT_SHADER
+			Geometry = 0x8DD9, // GL_GEOMETRY_SHADER
+			Tessellation = 0x8E88, // GL_TESS_CONTROL_SHADER
+			TessellEvaluation = 0x8E87, // GL_TESS_EVALUATION_SHADER
+		};
 	}
 
 	class [[nodiscard]] Shader
@@ -20,7 +31,7 @@ export namespace gl
 		using base = gl::Object;
 
 	public:
-		Shader(nullptr_t) noexcept;
+		Shader(shader::ShaderType) noexcept;
 		~Shader() noexcept;
 
 		bool Load(std::string_view content) noexcept;
@@ -40,5 +51,7 @@ export namespace gl
 
 	private:
 		Shader() noexcept;
+
+		shader::ShaderType myType = shader::ShaderType::None;
 	};
 }
