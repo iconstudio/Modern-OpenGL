@@ -26,7 +26,7 @@ export namespace gl
 		};
 	}
 
-	class [[nodiscard]] Shader
+	class [[nodiscard]] Shader : public gl::Object
 	{
 	private:
 		using base = gl::Object;
