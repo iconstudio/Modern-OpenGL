@@ -170,6 +170,7 @@
     <ClCompile Include="src\OpenGL.cpp" />
     <ClCompile Include="src\Pipeline.cpp" />
     <ClCompile Include="src\Primitive.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\SharedBufferObject.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Texture.cpp" />
