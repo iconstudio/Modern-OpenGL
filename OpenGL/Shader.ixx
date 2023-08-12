@@ -41,6 +41,7 @@ export namespace gl
 		void Use(const unsigned int& program) noexcept;
 		void Destroy() noexcept;
 
+		[[nodiscard]] shader::ShaderType GetType() const noexcept;
 		[[nodiscard]] bool IsLoaded() const noexcept;
 		[[nodiscard]] bool IsUnloaded() const noexcept;
 		[[nodiscard]] bool IsCompiled() const noexcept;
