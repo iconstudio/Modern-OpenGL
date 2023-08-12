@@ -17,8 +17,8 @@
 #define CAT(name, ...) PRIMITIVE_CAT(name, __VA_ARGS__)
 
 #define STRINGIFY(a) #a
-#define __PLA(enum_name, item) CAT(CAT(enum_name, ::), item)
-#define __STR(enum_name, item) STRINGIFY(enum_name::item)
+#define __PLA(enum_name, item) enum_name::item
+#define __STR(enum_name, item) #enum_name"::"#item
 #define __CAP(enum_name, item) STRINGIFY(item)
 
 #define MAGIC_ENUMLIST(enum_name) __magic_##enum_name##_list
