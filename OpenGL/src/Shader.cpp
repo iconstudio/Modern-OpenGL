@@ -4,6 +4,7 @@ module;
 #include <GL/GL.h>
 
 module Glib;
+import <cstdio>;
 import <type_traits>;
 import <string>;
 import <algorithm>;
@@ -55,15 +56,15 @@ noexcept
 
 	constexpr std::string_view ext_main{ "main" };
 
-	std::boyer_moore_horspool_searcher searcher{ ext_main.cbegin(), ext_main.cend() };
-	const auto it = std::search(contents.cbegin(), contents.cend(), searcher);
+	//std::boyer_moore_horspool_searcher searcher{ ext_main.cbegin(), ext_main.cend() };
+	//const auto it = std::search(contents.cbegin(), contents.cend(), searcher);
 
-	if (contents.cend() == it)
+	//if (contents.cend() == it)
 	{
-		return shader::ErrorCode::NotValidShader;
+	//	return shader::ErrorCode::NotValidShader;
 	}
 
-	return Complile(contents);
+	return Compile(contents);
 }
 
 gl::shader::ErrorCode
@@ -71,6 +72,12 @@ gl::Shader::Compile(std::string_view content)
 noexcept
 {
 	shader::ErrorCode result = shader::ErrorCode::Success;
+
+	unsigned int shid = ::glCreateShader(static_cast<GLenum>(myType));
+	if (NULL == shid)
+	{
+		fprintf(stderr, "Error creating shader type %d\n", myType);
+	}
 
 	return result;
 }
