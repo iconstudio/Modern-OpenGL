@@ -1,35 +1,34 @@
+module;
+#include "MagicEnum.hpp"
+
 export module Glib:Shader;
 import <cstdint>;
+import <string>;
 import <string_view>;
 import <filesystem>;
+import <format>;
 import :Object;
 
 export namespace gl
 {
 	namespace shader
 	{
-		enum class [[nodiscard]] ErrorCode : std::uint32_t
+		MAGIC_ENUM(
+			ErrorCode, std::uint32_t
+			, 7
+			, None, Success, EmptyFilePath, InvalidFilePath, FileDoesNotExists, EmptyFile, NotValidShader, CompileFailed
+		);
+
+		inline constexpr std::uint32_t type_values[] =
 		{
-			None = 0,
-			Success = 0,
-			EmptyFilePath,
-			InvalidFilePath,
-			FileDoesNotExists,
-			EmptyFile,
-			NotValidShader,
-			CompileFailed
+			0, 0x8B31, 0x8B30, 0x8B30, 0x8DD9, 0x8E88, 0x8E87
 		};
 
-		enum class [[nodiscard]] ShaderType : std::uint32_t
-		{
-			None = 0,
-			Vertex = 0x8B31, // GL_VERTEX_SHADER
-			Fragment = 0x8B30, // GL_FRAGMENT_SHADER
-			Pixel = Fragment, // GL_FRAGMENT_SHADER
-			Geometry = 0x8DD9, // GL_GEOMETRY_SHADER
-			Tessellation = 0x8E88, // GL_TESS_CONTROL_SHADER
-			TessellEvaluation = 0x8E87, // GL_TESS_EVALUATION_SHADER
-		};
+		MAGIC_ENUM_FROM(
+			ShaderType, std::uint32_t
+			, 6, type_values
+			, None, Vertex, Fragment, Pixel, Geometry, Tessellation, TessellEvaluation
+		);
 	}
 
 	class [[nodiscard]] Shader : public gl::Object
@@ -63,3 +62,26 @@ export namespace gl
 		bool isCompiled = false;
 	};
 }
+
+export template<>
+struct std::formatter<gl::shader::ShaderType>
+{
+	template<class FormatContext>
+	auto format(const gl::shader::ShaderType& shtype, FormatContext& ctx) const
+	{
+		std::formatter<std::string> formatter;
+
+		switch (shtype)
+		{
+			case gl::shader::ShaderType::None:
+			{
+				return formatter.format("", ctx);
+			}
+		}
+	}
+
+	constexpr auto parse(std::format_parse_context& ctx) noexcept
+	{
+		//return std::format_to(ctx.begin(), "{}", "asdsd");
+	}
+};
