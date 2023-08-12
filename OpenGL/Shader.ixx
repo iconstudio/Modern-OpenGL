@@ -31,7 +31,7 @@ export namespace gl
 		using base = gl::Object;
 
 	public:
-		Shader(shader::ShaderType) noexcept;
+		Shader(shader::ShaderType sh_type) noexcept;
 		~Shader() noexcept;
 
 		bool Load(std::string_view content) noexcept;
@@ -50,8 +50,6 @@ export namespace gl
 		friend class Pipeline;
 
 	private:
-		Shader() noexcept;
-
 		shader::ShaderType myType = shader::ShaderType::None;
 	};
 }
