@@ -54,14 +54,11 @@ noexcept
 		return shader::ErrorCode::EmptyFile;
 	}
 
-	constexpr std::string_view ext_main{ "main" };
-
-	//std::boyer_moore_horspool_searcher searcher{ ext_main.cbegin(), ext_main.cend() };
-	//const auto it = std::search(contents.cbegin(), contents.cend(), searcher);
-
-	//if (contents.cend() == it)
+	inline constexpr std::string_view ext_main{ "main" };
+	const size_t off = contents.find(ext_main, 0);
+	if (std::string::npos == off)
 	{
-	//	return shader::ErrorCode::NotValidShader;
+		return shader::ErrorCode::NotValidShader;
 	}
 
 	return Compile(contents);
