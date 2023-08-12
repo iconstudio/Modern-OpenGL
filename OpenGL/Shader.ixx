@@ -8,13 +8,13 @@ export namespace gl
 {
 	namespace shader
 	{
-		enum class [[nodiscard]] ErrorCode : std::int32_t
+		enum class [[nodiscard]] ErrorCode : std::uint32_t
 		{
 			None = 0,
 			Success = 0,
 		};
 
-		enum class [[nodiscard]] ShaderType : std::int32_t
+		enum class [[nodiscard]] ShaderType : std::uint32_t
 		{
 			None = 0,
 			Vertex = 0x8B31, // GL_VERTEX_SHADER
