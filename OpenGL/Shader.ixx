@@ -9,11 +9,11 @@ import <filesystem>;
 import <format>;
 import :Object;
 
-export namespace gl
+namespace gl
 {
 	namespace shader
 	{
-		MAGIC_ENUM(
+		export MAGIC_ENUM(
 			ErrorCode, std::uint32_t
 			, 7
 			, None, Success, EmptyFilePath, InvalidFilePath, FileDoesNotExists, EmptyFile, NotValidShader, CompileFailed
@@ -24,14 +24,14 @@ export namespace gl
 			0, 0x8B31, 0x8B30, 0x8B30, 0x8DD9, 0x8E88, 0x8E87
 		};
 
-		MAGIC_ENUM_FROM(
+		export MAGIC_ENUM_FROM(
 			ShaderType, std::uint32_t
 			, 6, type_values
 			, None, Vertex, Fragment, Pixel, Geometry, Tessellation, TessellEvaluation
 		);
 	}
 
-	class [[nodiscard]] Shader : public gl::Object
+	export class [[nodiscard]] Shader : public gl::Object
 	{
 	private:
 		using base = gl::Object;
