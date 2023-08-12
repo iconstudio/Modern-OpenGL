@@ -21,6 +21,8 @@ export import :VertexBuffer;
 export import :IndexBuffer;
 export import :SharedBufferObject;
 export import :UniqueBufferObject;
+export import :Shader;
+export import :Pipeline;
 export import :System;
 export import Glib.Windows.Colour;
 
