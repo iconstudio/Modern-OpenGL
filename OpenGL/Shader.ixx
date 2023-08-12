@@ -11,6 +11,7 @@ export namespace gl
 		enum class [[nodiscard]] ErrorCode : std::int32_t
 		{
 			None = 0,
+			Success = 0,
 		};
 
 		enum class [[nodiscard]] ShaderType : std::int32_t
@@ -34,10 +35,8 @@ export namespace gl
 		Shader(shader::ShaderType sh_type) noexcept;
 		~Shader() noexcept;
 
-		bool Load(std::string_view content) noexcept;
-		bool LoadFrom(const std::filesystem::path& filepath) noexcept;
-		bool Compile() noexcept;
-		bool TryCompile(shader::ErrorCode& error_code) noexcept;
+		shader::ErrorCode LoadFrom(const std::filesystem::path& filepath) noexcept;
+		shader::ErrorCode Compile(std::string_view content) noexcept;
 
 		void Use(const unsigned int& program) noexcept;
 
@@ -47,9 +46,12 @@ export namespace gl
 
 		bool operator==(const Shader& other) const noexcept = default;
 
+		[[nodiscard]] static std::string_view GetLastError() const noexcept;
+
 		friend class Pipeline;
 
 	private:
 		shader::ShaderType myType = shader::ShaderType::None;
+		bool isCompiled = false;
 	};
 }
