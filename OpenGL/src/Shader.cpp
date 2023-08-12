@@ -48,7 +48,7 @@ noexcept
 		return shader::ErrorCode::FileDoesNotExists;
 	}
 
-	std::string_view contents = shfile.Contents();
+	std::string contents = shfile.Contents();
 	if (!contents.empty())
 	{
 		return shader::ErrorCode::EmptyFile;
