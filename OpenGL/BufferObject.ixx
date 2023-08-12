@@ -19,9 +19,9 @@ namespace gl
 
 		public:
 			constexpr BufferImplement() noexcept = default;
-			constexpr ~BufferImplement() noexcept = default;
+			virtual constexpr ~BufferImplement() noexcept = default;
 
-			void Create(buffer::BufferType buffer_type, const void* data, const size_t& size, buffer::BufferUsage usage) noexcept;
+			virtual void Create(buffer::BufferType buffer_type, const void* data, const size_t& size, buffer::BufferUsage usage) noexcept;
 			void Destroy();
 
 			void CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
@@ -141,9 +141,9 @@ namespace gl
 
 	public:
 		constexpr BufferObject() noexcept = default;
-		~BufferObject() noexcept;
+		virtual ~BufferObject() noexcept;
 
-		void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept;
+		virtual void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept override;
 
 	private:
 
