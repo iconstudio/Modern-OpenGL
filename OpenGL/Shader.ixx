@@ -16,7 +16,7 @@ export namespace gl
 	class [[nodiscard]] Shader
 	{
 	public:
-		Shader() noexcept;
+		Shader(nullptr_t) noexcept;
 		~Shader() noexcept;
 
 		bool Load(std::string_view content) noexcept;
@@ -31,5 +31,10 @@ export namespace gl
 		[[nodiscard]] bool IsCompiled() const noexcept;
 
 		bool operator==(const Shader& other) const noexcept = default;
+
+		friend class Pipeline;
+
+	private:
+		Shader() noexcept;
 	};
 }
