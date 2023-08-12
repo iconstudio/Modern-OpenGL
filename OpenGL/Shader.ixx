@@ -47,7 +47,7 @@ export namespace gl
 
 		bool operator==(const Shader& other) const noexcept = default;
 
-		[[nodiscard]] static std::string_view GetLastError() const noexcept;
+		[[nodiscard]] static std::string_view GetLastError() noexcept;
 
 		friend class Pipeline;
 
