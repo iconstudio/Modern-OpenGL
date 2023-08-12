@@ -150,6 +150,7 @@
     <ClCompile Include="LegacyLighting.ixx" />
     <ClCompile Include="LegacyPrimitive.ixx" />
     <ClCompile Include="Lighting.ixx" />
+    <ClCompile Include="Pipeline.ixx" />
     <ClCompile Include="Pixel.ixx" />
     <ClCompile Include="Primitive.ixx" />
     <ClCompile Include="Shader.ixx" />
@@ -167,6 +168,7 @@
     <ClCompile Include="src\LegacyLight.cpp" />
     <ClCompile Include="src\LegacyPrimitive.cpp" />
     <ClCompile Include="src\OpenGL.cpp" />
+    <ClCompile Include="src\Pipeline.cpp" />
     <ClCompile Include="src\Primitive.cpp" />
     <ClCompile Include="src\SharedBufferObject.cpp" />
     <ClCompile Include="src\System.cpp" />
