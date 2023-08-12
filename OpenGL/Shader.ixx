@@ -12,6 +12,12 @@ export namespace gl
 		{
 			None = 0,
 			Success = 0,
+			EmptyFilePath,
+			InvalidFilePath,
+			FileDoesNotExists,
+			EmptyFile,
+			NotValidShader,
+			CompileFailed
 		};
 
 		enum class [[nodiscard]] ShaderType : std::uint32_t
