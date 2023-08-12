@@ -21,12 +21,12 @@ namespace gl
 			constexpr BufferImplement() noexcept = default;
 			virtual constexpr ~BufferImplement() noexcept = default;
 
-			virtual void Create(buffer::BufferType buffer_type, const void* data, const size_t& size, buffer::BufferUsage usage) noexcept;
+			virtual void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept;
 			void Destroy();
 
 			void CopyFrom(const void* const& src_data, const size_t& size, const ptrdiff_t& offset) noexcept;
 			void CopyTo(BufferImplement& other, const size_t& dest_size, const ptrdiff_t& dest_offset = 0LL, const ptrdiff_t& offset = 0LL) const noexcept;
-		
+
 			constexpr void Swap(BufferImplement& other) noexcept
 			{
 				std::swap(myType, other.myType);
@@ -143,7 +143,7 @@ namespace gl
 		constexpr BufferObject() noexcept = default;
 		virtual ~BufferObject() noexcept;
 
-		virtual void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept override;
+		void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept override;
 
 	private:
 

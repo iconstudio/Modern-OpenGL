@@ -25,7 +25,7 @@ noexcept
 		&& usage != buffer::BufferUsage::None
 		&& nullptr != data && 0 < size)
 	{
-		base::Create(buffer_type, data, size, usage);
+		base::Create(buffer_type, usage, data, size);
 		isAvailable = true;
 	}
 }
@@ -48,7 +48,7 @@ struct Binder
 };
 
 void
-gl::detail::BufferImplement::Create(buffer::BufferType buffer_type, const void* data, const size_t& size, gl::buffer::BufferUsage usage)
+gl::detail::BufferImplement::Create(buffer::BufferType buffer_type, gl::buffer::BufferUsage usage, const void* data, const size_t& size)
 noexcept
 {
 	::glGenBuffers(1, std::addressof(myID));
@@ -60,6 +60,7 @@ noexcept
 	mySize = size;
 	myUsage = usage;
 }
+
 void
 gl::detail::BufferImplement::Destroy()
 {
