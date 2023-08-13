@@ -60,6 +60,16 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	gl::BufferObject vbo{};
 	vbo.Create(gl::buffer::BufferType::Array, gl::buffer::BufferUsage::StaticDraw, vertices, sizeof(vertices));
 
+	gl::shader::ShaderType shty0 = gl::shader::ShaderType::None;
+	gl::shader::ShaderType shty1 = gl::shader::ShaderType::Vertex;
+	gl::shader::ShaderType shty2 = gl::shader::ShaderType::Fragment;
+	gl::shader::ShaderType shty3 = gl::shader::ShaderType::Pixel;
+	gl::shader::ShaderType shty4 = gl::shader::ShaderType::Tessellation;
+	gl::shader::ShaderType shty5 = gl::shader::ShaderType::TessellEvaluation;
+	gl::shader::ShaderType shty6 = gl::shader::ShaderType::Geometry;
+
+	std::println("{} {} {} {} {} {} {}", shty0, shty1, shty2, shty3, shty4, shty5, shty6);
+
 	framework->SetRenderer([&]() {
 		vbo.Use();
 	});
