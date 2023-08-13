@@ -67,7 +67,7 @@ export template<>
 struct std::formatter<gl::shader::ShaderType>
 {
 	template<class FormatContext>
-	auto format(const gl::shader::ShaderType& shtype, FormatContext& ctx) const
+	auto format(const gl::shader::ShaderType& shtype, FormatContext& ctx) const noexcept
 	{
 		constexpr auto& vallist = gl::shader::MAGIC_ENUMLIST(ShaderType);
 		constexpr auto& namelist = gl::shader::MAGIC_ENUMFULL(ShaderType);
@@ -83,6 +83,35 @@ struct std::formatter<gl::shader::ShaderType>
 		}
 
 		return std::format_to(ctx.out(), "{}", "None Type");
+	}
+
+	template<class FormatContext>
+	constexpr auto parse(FormatContext& ctx) const noexcept
+	{
+		return ctx.begin();
+	}
+};
+
+export template<>
+struct std::formatter<gl::shader::ErrorCode>
+{
+	template<class FormatContext>
+	auto format(const gl::shader::ErrorCode& shtype, FormatContext& ctx) const noexcept
+	{
+		constexpr auto& vallist = gl::shader::MAGIC_ENUMLIST(ErrorCode);
+		constexpr auto& namelist = gl::shader::MAGIC_ENUMFULL(ErrorCode);
+		constexpr auto& valsize = gl::shader::MAGIC_ENUMSIZE(ErrorCode);
+
+		const auto& beg = vallist;
+		const auto& end = vallist + valsize;
+		const auto& it = std::find(beg, end, shtype);
+		if (end != it)
+		{
+			ptrdiff_t index = it - beg;
+			return std::format_to(ctx.out(), "{}", namelist[index]);
+		}
+
+		return std::format_to(ctx.out(), "{}", "Nothing");
 	}
 
 	template<class FormatContext>
