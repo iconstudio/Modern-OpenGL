@@ -4,6 +4,7 @@ module;
 #include <GL/GL.h>
 
 module Glib;
+import <cstdint>;
 import <cstdio>;
 import <type_traits>;
 import <string>;
@@ -12,7 +13,8 @@ import <functional>;
 import Utility.IO.File;
 import :Shader;
 
-constinit static const GLchar* lastError = nullptr;
+constinit static const GLchar lastError[512]{};
+
 inline constexpr std::string_view noError = "No Error";
 
 gl::Shader::Shader(shader::ShaderType sh_type)
@@ -70,13 +72,28 @@ noexcept
 {
 	shader::ErrorCode result = shader::ErrorCode::Success;
 
-	unsigned int shid = ::glCreateShader(static_cast<GLenum>(myType));
+	const std::uint32_t shid = ::glCreateShader(static_cast<GLenum>(myType));
 	if (NULL == shid)
 	{
-		fprintf(stderr, "Error creating shader type %d\n", myType);
+		return shader::ErrorCode::NotValidShader;
 	}
 
-	return result;
+	const char* const& code = content.data();
+	constexpr GLint size = 1;
+	::glShaderSource(shid, 1, std::addressof(code), std::addressof(size));
+
+	::glCompileShader(shid);
+
+	int success{};
+	if (::glGetShaderiv(shid, GL_COMPILE_STATUS, &success); 0 == success)
+	{
+		::glGetShaderInfoLog(shid, sizeof(lastError), NULL, lastError);
+		return shader::ErrorCode::CompileFailed;
+	}
+
+	SetID(shid);
+
+	return shader::ErrorCode::Success;
 }
 
 void
