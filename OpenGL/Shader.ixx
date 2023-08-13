@@ -84,4 +84,10 @@ struct std::formatter<gl::shader::ShaderType>
 
 		return std::format_to(ctx.out(), "{}", "None Type");
 	}
+
+	template<class FormatContext>
+	constexpr auto parse(FormatContext& ctx) const noexcept
+	{
+		return ctx.begin();
+	}
 };
