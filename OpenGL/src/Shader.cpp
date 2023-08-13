@@ -54,7 +54,7 @@ noexcept
 		return shader::ErrorCode::EmptyFile;
 	}
 
-	inline constexpr std::string_view ext_main{ "main" };
+	constexpr std::string_view ext_main{ "main" };
 	const size_t off = contents.find(ext_main, 0);
 	if (std::string::npos == off)
 	{
