@@ -108,21 +108,14 @@ bool
 gl::Shader::IsLoaded()
 const noexcept
 {
-	return IsCompiled() && myType != gl::shader::ShaderType::None;
+	return myType != gl::shader::ShaderType::None;
 }
 
 bool
 gl::Shader::IsUnloaded()
 const noexcept
 {
-	return !IsCompiled() || myType == gl::shader::ShaderType::None;
-}
-
-bool
-gl::Shader::IsCompiled()
-const noexcept
-{
-	return isCompiled;
+	return myType == gl::shader::ShaderType::None;
 }
 
 std::string_view

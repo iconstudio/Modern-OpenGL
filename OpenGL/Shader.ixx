@@ -49,7 +49,6 @@ namespace gl
 		[[nodiscard]] shader::ShaderType GetType() const noexcept;
 		[[nodiscard]] bool IsLoaded() const noexcept;
 		[[nodiscard]] bool IsUnloaded() const noexcept;
-		[[nodiscard]] bool IsCompiled() const noexcept;
 
 		bool operator==(const Shader& other) const noexcept = default;
 
@@ -59,7 +58,6 @@ namespace gl
 
 	private:
 		shader::ShaderType myType = shader::ShaderType::None;
-		bool isCompiled = false;
 	};
 }
 
