@@ -70,6 +70,14 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	std::println("{} {} {} {} {} {} {}", shty0, shty1, shty2, shty3, shty4, shty5, shty6);
 
+	gl::Shader shader{ shty1 };
+	auto result = shader.Compile
+	(
+		""
+	);
+
+
+
 	framework->SetRenderer([&]() {
 		vbo.Use();
 	});
