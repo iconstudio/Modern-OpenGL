@@ -10,7 +10,7 @@ import <type_traits>;
 import Utility.IO.File;
 import :Shader;
 
-constinit static const GLchar lastError[512]{};
+constinit static GLchar lastError[512]{};
 
 inline constexpr std::string_view noError = "No Error";
 
@@ -110,7 +110,7 @@ noexcept
 	int success{};
 	if (::glGetShaderiv(id, GL_COMPILE_STATUS, &success); 0 == success)
 	{
-		::glGetShaderInfoLog(id, sizeof(lastError), NULL, (lastError));
+		::glGetShaderInfoLog(id, sizeof(lastError), NULL, lastError);
 		return false;
 	}
 
