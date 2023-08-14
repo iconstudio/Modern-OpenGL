@@ -53,6 +53,13 @@ noexcept
 		return shader::ErrorCode::EmptyFile;
 	}
 
+	return Compile(contents);
+}
+
+gl::shader::ErrorCode
+gl::Shader::Compile(std::string_view contents)
+noexcept
+{
 	constexpr std::string_view ext_main{ "main" };
 	const size_t off = contents.find(ext_main, 0);
 	if (std::string::npos == off)
@@ -60,22 +67,13 @@ noexcept
 		return shader::ErrorCode::NotValidShader;
 	}
 
-	return Compile(contents);
-}
-
-gl::shader::ErrorCode
-gl::Shader::Compile(std::string_view content)
-noexcept
-{
-	shader::ErrorCode result = shader::ErrorCode::Success;
-
 	const std::uint32_t shid = ::glCreateShader(static_cast<GLenum>(myType));
 	if (NULL == shid)
 	{
 		return shader::ErrorCode::NotValidShader;
 	}
 
-	const char* const& code = content.data();
+	const char* const& code = contents.data();
 	constexpr GLint size = 1;
 	::glShaderSource(shid, 1, std::addressof(code), std::addressof(size));
 
