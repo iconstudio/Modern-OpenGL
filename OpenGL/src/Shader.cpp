@@ -16,7 +16,7 @@ inline constexpr std::string_view noError = "No Error";
 
 gl::Shader::Shader(shader::ShaderType sh_type)
 noexcept
-	: base()
+	: base(NULL)
 	, myType(sh_type)
 {}
 
@@ -104,10 +104,10 @@ void
 gl::Shader::Destroy()
 noexcept
 {
-	if (IsLoaded() && IsCompiled())
+	if (IsLoaded())
 	{
 		::glDeleteShader(GetID());
-		SetID(0);
+		SetID(NULL);
 	}
 }
 
@@ -122,14 +122,14 @@ bool
 gl::Shader::IsLoaded()
 const noexcept
 {
-	return myType != gl::shader::ShaderType::None;
+	return myType != gl::shader::ShaderType::None && NULL != GetID();
 }
 
 bool
 gl::Shader::IsUnloaded()
 const noexcept
 {
-	return myType == gl::shader::ShaderType::None;
+	return myType == gl::shader::ShaderType::None || NULL == GetID();
 }
 
 std::string_view
