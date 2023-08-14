@@ -53,16 +53,17 @@ noexcept
 		return shader::ErrorCode::EmptyFile;
 	}
 
-	return Compile(contents);
+	return Compile(std::move(contents));
 }
 
+bool FindMainOnShader(std::string_view source) noexcept;
+bool CompileShader(std::uint32_t id, const char* const source) noexcept;
+
 gl::shader::ErrorCode
-gl::Shader::Compile(std::string_view contents)
+gl::Shader::Compile(std::string_view source)
 noexcept
 {
-	constexpr std::string_view ext_main{ "main" };
-	const size_t off = contents.find(ext_main, 0);
-	if (std::string::npos == off)
+	if (not FindMainOnShader(source))
 	{
 		return shader::ErrorCode::NotValidShader;
 	}
@@ -73,22 +74,47 @@ noexcept
 		return shader::ErrorCode::NotValidShader;
 	}
 
-	const char* const& code = contents.data();
-	constexpr GLint size = 1;
-	::glShaderSource(shid, 1, std::addressof(code), std::addressof(size));
-
-	::glCompileShader(shid);
-
-	int success{};
-	if (::glGetShaderiv(shid, GL_COMPILE_STATUS, &success); 0 == success)
+	if (not CompileShader(shid, source.data()))
 	{
-		::glGetShaderInfoLog(shid, sizeof(lastError), NULL, lastError);
 		return shader::ErrorCode::CompileFailed;
 	}
 
 	SetID(shid);
 
 	return shader::ErrorCode::Success;
+}
+
+bool
+FindMainOnShader(std::string_view source)
+noexcept
+{
+	constexpr std::string_view ext_main{ "main" };
+	const size_t off = source.find(ext_main, 0);
+	if (std::string::npos == off)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool
+CompileShader(std::uint32_t id, const char* const source)
+noexcept
+{
+	constexpr GLint size = 1;
+	::glShaderSource(id, 1, std::addressof(source), std::addressof(size));
+
+	::glCompileShader(id);
+
+	int success{};
+	if (::glGetShaderiv(id, GL_COMPILE_STATUS, &success); 0 == success)
+	{
+		::glGetShaderInfoLog(id, sizeof(lastError), NULL, (lastError));
+		return false;
+	}
+
+	return true;
 }
 
 void
