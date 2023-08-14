@@ -41,7 +41,7 @@ namespace gl
 		~Shader() noexcept;
 
 		shader::ErrorCode LoadFrom(const std::filesystem::path& filepath) noexcept;
-		shader::ErrorCode Compile(std::string_view content) noexcept;
+		shader::ErrorCode Compile(std::string_view source) noexcept;
 
 		void Use(const unsigned int& program) noexcept;
 		void Destroy() noexcept;
