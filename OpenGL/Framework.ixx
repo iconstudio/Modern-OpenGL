@@ -35,7 +35,7 @@ export namespace gl
 			bool isPowersave = false;
 		};
 
-		enum class [[nodiscard]] InitError
+		enum class InitError
 		{
 			Success,
 			FailedOnCreatingSystem,
