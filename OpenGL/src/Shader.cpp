@@ -7,9 +7,6 @@ module Glib;
 import <cstdint>;
 import <cstdio>;
 import <type_traits>;
-import <string>;
-import <algorithm>;
-import <functional>;
 import Utility.IO.File;
 import :Shader;
 
