@@ -54,6 +54,9 @@ export namespace gl
 
 		void KeepAspectRatio(bool keep_ratio) noexcept;
 
+		bool BeginOpenGLContext(win32::IContext& ctx) const noexcept;
+		bool BeginOpenGLContext(win32::IContext&& ctx) const noexcept;
+		bool EndOpenGLContext() const noexcept;
 		bool BeginRendering(win32::IContext& painter) noexcept;
 		bool EndRendering() noexcept;
 

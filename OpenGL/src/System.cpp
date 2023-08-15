@@ -113,6 +113,45 @@ noexcept
 	return _InitializeSystem();
 }
 
+HDC temp_context = nullptr;
+
+bool
+gl::System::BeginOpenGLContext(win32::IContext& ctx)
+const noexcept
+{
+	if (0 == ctx.Delegate(::wglMakeCurrent, GetHandle()))
+	{
+		std::println("Failed to begin rendering. (gl error code: %u)\n", ::glGetError());
+
+		return false;
+	}
+
+	//temp_context = ctx.GetHandle();
+	return true;
+}
+
+bool
+gl::System::BeginOpenGLContext(win32::IContext&& ctx)
+const noexcept
+{
+	if (0 == ctx.Delegate(::wglMakeCurrent, GetHandle()))
+	{
+		std::println("Failed to begin rendering. (gl error code: %u)\n", ::glGetError());
+
+		return false;
+	}
+
+	//temp_context = ctx.GetHandle();
+	return true;
+}
+
+bool
+gl::System::EndOpenGLContext()
+const noexcept
+{
+	return 0 != ::wglMakeCurrent(nullptr, nullptr);
+}
+
 bool
 gl::System::BeginRendering(gl::win32::IContext& painter)
 noexcept
