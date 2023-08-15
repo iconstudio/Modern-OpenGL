@@ -99,14 +99,14 @@ bool
 gl::Framework::BeginOpenGLContext()
 const noexcept
 {
-	return glSystem->BeginRendering(myInstance->AcquireContext());
+	return glSystem->BeginOpenGLContext(myInstance->AcquireContext());
 }
 
 bool
 gl::Framework::EndOpenGLContext()
 const noexcept
 {
-	return glSystem->EndRendering();
+	return glSystem->EndOpenGLContext();
 }
 
 void
