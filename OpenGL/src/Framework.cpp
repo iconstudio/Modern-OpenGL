@@ -78,6 +78,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 		//std::rethrow_exception(myInstance->GetException());
 		return framework::InitError::FailedOnStartup;
 	}
+	BeginOpenGLContext();
 
 	return framework::InitError::Success;
 }

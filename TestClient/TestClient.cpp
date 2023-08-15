@@ -47,8 +47,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Initialize(std::move(descriptor));
 
 	std::println("== Program Started ==");
-	framework->BeginOpenGLContext();
-
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::BufferLayout test_layout{};
@@ -114,7 +112,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Run();
 
 	std::println("== Program Ended ==");
-	framework->EndOpenGLContext();
 
 	return 0;
 }
