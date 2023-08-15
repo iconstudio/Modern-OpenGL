@@ -174,9 +174,21 @@
     <ClCompile Include="BufferUsage.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeline.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fpng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicEnum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
