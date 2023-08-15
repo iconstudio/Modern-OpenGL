@@ -12,6 +12,8 @@ import Glib.Framework;
 import Glib.Legacy.Primitive;
 import Glib.Texture;
 
+#define GLSL(code) #code
+
 void MyRenderer() noexcept
 {
 	using namespace gl::legacy;
@@ -45,10 +47,12 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Initialize(std::move(descriptor));
 
 	std::println("== Program Started ==");
+	framework->BeginOpenGLContext();
+
 	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
-	gl::BufferLayout layout{};
-	layout.AddElement<float>(3);
+	gl::BufferLayout test_layout{};
+	test_layout.AddElement<float>(3);
 
 	constexpr float vertices[] =
 	{
@@ -58,6 +62,8 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	};
 
 	gl::BufferObject vbo{};
+
+	vbo.SetLayout(test_layout);
 	vbo.Create(gl::buffer::BufferType::Array, gl::buffer::BufferUsage::StaticDraw, vertices, sizeof(vertices));
 
 	gl::shader::ShaderType shty0 = gl::shader::ShaderType::None;
@@ -71,12 +77,35 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	std::println("{} {} {} {} {} {} {}", shty0, shty1, shty2, shty3, shty4, shty5, shty6);
 
 	gl::Shader shader{ shty1 };
+
+	auto result = shader.Compile(GLSL
+	(
+		in vec3 aPos;
+		in vec3 aNormal;
+
+		void main()
+		{
+			gl_Position = vec4(aPos, 1.0);
+
+		}
+	));
+
+	/*
 	auto result = shader.Compile
 	(
-		""
-	);
+		"#version 330 core"
 
+		"layout(location = 0) in vec3 aPos;"
+		"layout(location = 1) in vec3 aNormal;"
 
+		"void main()"
+		"{"
+		"	gl_Position = vec4(aPos, 1.0);"
+		"}"
+	);*/
+
+	const auto sherr = shader.GetLastError();
+	std::println("{}", sherr);
 
 	framework->SetRenderer([&]() {
 		vbo.Use();
@@ -85,6 +114,7 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Run();
 
 	std::println("== Program Ended ==");
+	framework->EndOpenGLContext();
 
 	return 0;
 }
