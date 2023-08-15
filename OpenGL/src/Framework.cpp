@@ -99,14 +99,14 @@ bool
 gl::Framework::BeginOpenGLContext()
 const noexcept
 {
-	return glSystem->Begin(myInstance->AcquireContext());
+	return glSystem->BeginRendering(myInstance->AcquireContext());
 }
 
 bool
 gl::Framework::EndOpenGLContext()
 const noexcept
 {
-	return glSystem->End();
+	return glSystem->EndRendering();
 }
 
 void
@@ -139,9 +139,9 @@ noexcept
 		[[maybe_unused]] ManagedWindow& window,
 		gl::win32::IContext& ctx) {
 
-		glSystem->Begin(ctx);
+		glSystem->BeginRendering(ctx);
 		localRenderer();
-		glSystem->End();
+		glSystem->EndRendering();
 	});
 }
 

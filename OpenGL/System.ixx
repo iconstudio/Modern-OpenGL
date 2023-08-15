@@ -54,8 +54,8 @@ export namespace gl
 
 		void KeepAspectRatio(bool keep_ratio) noexcept;
 
-		bool Begin(win32::IContext& painter) noexcept;
-		bool End() noexcept;
+		bool BeginRendering(win32::IContext& painter) noexcept;
+		bool EndRendering() noexcept;
 
 		[[nodiscard]] const Rect& ViewPort() const noexcept;
 		[[nodiscard]] int& ViewX() noexcept;

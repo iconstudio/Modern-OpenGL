@@ -113,7 +113,7 @@ noexcept
 }
 
 bool
-gl::System::Begin(gl::win32::IContext& painter)
+gl::System::BeginRendering(gl::win32::IContext& painter)
 noexcept
 {
 	using namespace gl::legacy;
@@ -160,7 +160,7 @@ noexcept
 }
 
 bool
-gl::System::End()
+gl::System::EndRendering()
 noexcept
 {
 	transform::PopState();
