@@ -5,7 +5,7 @@ export namespace gl
 {
 	class [[nodiscard]] Object
 	{
-		static inline constexpr std::uint32_t npos = static_cast<std::uint32_t>(-1);
+		static inline constexpr std::uint32_t npos = 0; //static_cast<std::uint32_t>(-1);
 
 	public:
 		[[nodiscard]]
