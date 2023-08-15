@@ -95,6 +95,20 @@ noexcept
 	myInstance->Start();
 }
 
+bool
+gl::Framework::BeginOpenGLContext()
+const noexcept
+{
+	return glSystem->Begin(myInstance->AcquireContext());
+}
+
+bool
+gl::Framework::EndOpenGLContext()
+const noexcept
+{
+	return glSystem->End();
+}
+
 void
 gl::Framework::AddEventHandler(gl::win32::EventID id, const event_handler_t& procedure)
 noexcept

@@ -66,6 +66,9 @@ export namespace gl
 		framework::InitError Initialize();
 		void Run() noexcept;
 
+		bool BeginOpenGLContext() const noexcept;
+		bool EndOpenGLContext() const noexcept;
+
 		void AddEventHandler(EventID id, const event_handler_t& procedure) noexcept;
 		void AddEventHandler(EventID id, event_handler_t&& procedure) noexcept;
 		void RemoveEventHandler(EventID id) noexcept;
