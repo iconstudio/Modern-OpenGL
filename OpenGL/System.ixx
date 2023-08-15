@@ -38,7 +38,7 @@ export namespace gl
 	public:
 		using base1 = win32::IHandle<win32::native::NativeOGL>;
 		using base2 = std::enable_shared_from_this<System>;
-		using Painter = void(*)(win32::GraphicDeviceContext* const&) noexcept;
+		using Painter = void(*)(win32::IContext* const&) noexcept;
 
 		System() noexcept;
 		~System() noexcept;
@@ -54,7 +54,7 @@ export namespace gl
 
 		void KeepAspectRatio(bool keep_ratio) noexcept;
 
-		bool Begin(win32::GraphicDeviceContext& painter) noexcept;
+		bool Begin(win32::IContext& painter) noexcept;
 		bool End() noexcept;
 
 		[[nodiscard]] const Rect& ViewPort() const noexcept;
@@ -77,7 +77,7 @@ export namespace gl
 		double aspectRatio = 1.0;
 
 		Painter myPainter = nullptr;
-		win32::GraphicDeviceContext* nativeContext = nullptr;
+		win32::IContext* nativeContext = nullptr;
 		const Blender* myBlender = nullptr;
 	};
 

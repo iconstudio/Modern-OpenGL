@@ -123,7 +123,7 @@ noexcept
 	myInstance->SetRenderer(
 		[this, localRenderer = std::move(handler)](
 		[[maybe_unused]] ManagedWindow& window,
-		GraphicDeviceContext& ctx) {
+		gl::win32::IContext& ctx) {
 
 		glSystem->Begin(ctx);
 		localRenderer();

@@ -38,7 +38,7 @@ namespace gl::win32
 		using SysKeyUpEventHandler = std::function<void(ManagedWindow&, io::KeyCode)>;
 		using CharDownEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
 		using CharUpEventHandler = std::function<void(ManagedWindow&, char32_t, long long)>;
-		using RenderEventHandler = std::function<void(ManagedWindow&, GraphicDeviceContext&)>;
+		using RenderEventHandler = std::function<void(ManagedWindow&, IContext&)>;
 	}
 
 	export class [[nodiscard]] ManagedWindow
