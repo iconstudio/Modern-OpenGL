@@ -8,6 +8,7 @@ module;
 module Glib;
 import <utility>;
 import <memory>;
+import <print>;
 import Glib.Windows.Context;
 import Glib.Windows.Context.Renderer;
 import :System;
@@ -70,7 +71,7 @@ noexcept
 	if (nullptr == *this)
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on creating a opengl context. (code: %u)\n", error);
+		std::println("Failed on creating a opengl context. (code: {})", error);
 		return error;
 	}
 
@@ -93,8 +94,8 @@ noexcept
 		error_string = ::glewGetErrorString(err);
 		const char* temp_msg = reinterpret_cast<const char*>(error_string);
 
-		std::printf("Failed to initialize GLEW.\n");
-		std::printf("GLEW Error: %s\n", temp_msg);
+		std::println("Failed to initialize GLEW.");
+		std::println("GLEW Error: {}", temp_msg);
 
 		//util::Println("Error: {}", temp_msg));
 		//util::Println(std::format("Error: {}", temp_msg));
@@ -104,7 +105,7 @@ noexcept
 	}
 	else if (::glewIsSupported("GL_VERSION_4_6"))
 	{
-		std::printf("GL Version is 4.6\n");
+		std::println("GL Version is 4.6");
 	}
 
 	::wglMakeCurrent(nullptr, nullptr);
@@ -120,7 +121,7 @@ noexcept
 
 	if (0 == painter.Delegate(::wglMakeCurrent, GetHandle()))
 	{
-		std::printf("Failed to begin rendering. (gl error code: %u)\n", ::glGetError());
+		std::println("Failed to begin rendering. (gl error code: {})", ::glGetError());
 
 		return false;
 	}
@@ -239,7 +240,7 @@ noexcept
 	if (0 == target)
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on acquiring a pixel format. (code: %u)\n", error);
+		std::println("Failed on acquiring a pixel format. (code: {})", error);
 		return error;
 	}
 
@@ -247,21 +248,21 @@ noexcept
 	if (0 == check)
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on reading a pixel format %d. (code: %u)\n", target, error);
+		std::println("Failed on reading a pixel format %d. (code: {})", target, error);
 		return error;
 	}
 
 	if (0 == ::SetPixelFormat(hdc, target, &my_format))
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on setting pixel format %d. (code: %u)\n", target, error);
+		std::println("Failed on setting pixel format %d. (code: {})", target, error);
 		return error;
 	}
 
 	if (0 == (my_format.dwFlags & PFD_SUPPORT_OPENGL))
 	{
 		unsigned long error = ::GetLastError();
-		std::printf("Failed on checking a pixel format %d. (code: %u)\n", target, error);
+		std::println("Failed on checking a pixel format %d. (code: {})", target, error);
 		return error;
 	}
 
