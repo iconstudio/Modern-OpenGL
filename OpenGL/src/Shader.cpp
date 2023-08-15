@@ -69,10 +69,6 @@ noexcept
 	}
 
 	const std::uint32_t shid = ::glCreateShader(static_cast<GLenum>(myType));
-	if (NULL == shid)
-	{
-		return shader::ErrorCode::NotValidShader;
-	}
 
 	if (not CompileShader(shid, source.data()))
 	{
@@ -102,8 +98,7 @@ bool
 CompileShader(std::uint32_t id, const char* const source)
 noexcept
 {
-	constexpr GLint size = 1;
-	::glShaderSource(id, 1, std::addressof(source), std::addressof(size));
+	::glShaderSource(id, 1, std::addressof(source), nullptr);
 
 	::glCompileShader(id);
 
