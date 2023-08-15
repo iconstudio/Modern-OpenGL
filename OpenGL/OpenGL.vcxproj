@@ -201,6 +201,9 @@
     <ClInclude Include="fpng.h" />
     <ClInclude Include="MagicEnum.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="OpenGL.natvis" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
