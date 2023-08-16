@@ -1,3 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?> 
-<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010"> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+	<Type Name="gl::Object" Inheritable="false">
+		<Intrinsic Category="Property" Name="__AcqID" Expression="myID"/>
+		<Intrinsic Category="Property" Name="__IsInvalid" Expression="myID == 0"/>
+		
+		<DisplayString Condition="__IsInvalid()">Empty OpenGL Object</DisplayString>
+		<DisplayString Condition="!__IsInvalid()">Managed OpenGL Object ({myID})</DisplayString>
+
+		<Expand HideRawView="true">
+			<Item Name="[ID]" Condition="!__IsInvalid()">__AcqID()</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="gl::BufferObject">
+		<Intrinsic Category="Property" Name="__AcqTp" Expression="myType"/>
+		<Intrinsic Category="Property" Name="__AcqUs" Expression="myUsage"/>
+		<DisplayString Condition="__IsInvalid()">Empty OpenGL Buffer Object</DisplayString>
+		<DisplayString Condition="!__IsInvalid()">Managed OpenGL Buffer Object ({myID})</DisplayString>
+		
+		<Expand HideRawView="true">
+			<Item Name="[ID]" Condition="!__IsInvalid()">__AcqID()</Item>
+			<Item Name="[Type]" Condition="!__IsInvalid()">__AcqTp()</Item>
+			<Item Name="[Usage]" Condition="!__IsInvalid()">__AcqUs()</Item>
+			<Item Name="[Memory Layout]">myLayout</Item>
+			<Item Name="[Memory Size]">mySize</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="gl::Shader">
+		<Intrinsic Category="Property" Name="__AcqTp" Expression="myType"/>
+		
+		<Intrinsic Category="Property" Name="__IsNT" Expression="myType == gl::shader::ShaderType::None &amp;&amp; myID == 0"/>
+		
+		<Intrinsic Category="Property" Name="__IsNS" Expression="myType == gl::shader::ShaderType::None"/>
+		<Intrinsic Category="Property" Name="__IsVS" Expression="myType == gl::shader::ShaderType::Vertex"/>
+		<Intrinsic Category="Property" Name="__IsFS" Expression="myType == gl::shader::ShaderType::Fragment"/>
+		<Intrinsic Category="Property" Name="__IsGS" Expression="myType == gl::shader::ShaderType::Geometry"/>
+		<Intrinsic Category="Property" Name="__IsTS" Expression="myType == gl::shader::ShaderType::Tessellation"/>
+		<Intrinsic Category="Property" Name="__IsTE" Expression="myType == gl::shader::ShaderType::TessellEvaluation"/>
+
+		<DisplayString Condition="__IsInvalid() &amp;&amp; __IsVS()">Empty Vertex Shader</DisplayString>
+		<DisplayString Condition="__IsInvalid() &amp;&amp; __IsFS()">Empty Fragment Shader</DisplayString>
+		<DisplayString Condition="__IsInvalid() &amp;&amp; __IsGS()">Empty Geometry Shader</DisplayString>
+		<DisplayString Condition="__IsInvalid() &amp;&amp; __IsTS()">Empty Tessellation Shader</DisplayString>
+		<DisplayString Condition="__IsInvalid() &amp;&amp; __IsTE()">Empty Tessellation Evaluation Shader</DisplayString>
+		<DisplayString Condition="!__IsInvalid() &amp;&amp; __IsVS()">Vertex Shader ({myID})</DisplayString>
+		<DisplayString Condition="!__IsInvalid() &amp;&amp; __IsFS()">Fragment Shader ({myID})</DisplayString>
+		<DisplayString Condition="!__IsInvalid() &amp;&amp; __IsGS()">Geometry Shader ({myID})</DisplayString>
+		<DisplayString Condition="!__IsInvalid() &amp;&amp; __IsTS()">Tessellation Shader ({myID})</DisplayString>
+		<DisplayString Condition="!__IsInvalid() &amp;&amp; __IsTE()">Tessellation Evaluation Shader ({myID})</DisplayString>
+		<DisplayString Condition="__IsNT()">Empty OpenGL Shader</DisplayString>
+		
+		<Expand HideRawView="true">
+			<Item Name="[ID]" Condition="!__IsInvalid()">__AcqID()</Item>
+			<Item Name="[Type]" Condition="!__IsNS()">__AcqTp()</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="gl::Texture">
+		<DisplayString Condition="__IsInvalid()">Empty OpenGL Texture</DisplayString>
+		<DisplayString Condition="!__IsInvalid()">OpenGL Texture</DisplayString>
+		
+		<Expand HideRawView="true">
+			<Item Name="[ID]" Condition="!__IsInvalid()">__AcqID()</Item>
+			<Item Name="[Blob]" Condition="!__IsInvalid()">*myBlob</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="gl::system::Descriptor">
+		<DisplayString>Descriptor of Internal OpenGL System</DisplayString>
+	</Type>
+
+	<Type Name="gl::System">
+		<DisplayString>Internal OpenGL System</DisplayString>
+	</Type>
+
+	<Type Name="gl::framework::Descriptor">
+		<DisplayString>Descriptor of OpenGL Client Framework</DisplayString>
+	</Type>
+	
+	<Type Name="gl::Framework">
+		<DisplayString>OpenGL Client Framework</DisplayString>
+	</Type>
 </AutoVisualizer>
