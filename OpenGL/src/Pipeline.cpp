@@ -50,20 +50,28 @@ noexcept
 {
 	if (IsValid())
 	{
-		::glDeleteProgram(myID);
-		SetID(base::npos);
+		const std::uint32_t id = GetID();
+
+		for (shader_handle_t& shader : myShaders)
+		{
+			::glDetachShader(id, shader->GetID());
+		}
+		::glDeleteProgram(id);
+		SetID(NULL);
 	}
 }
 
 void
 gl::Pipeline::AddShader(shader_t&& shader)
 {
-	myShaders.emplace_back(std::move(shader));
+	AddShader(std::make_unique<shader_t>(std::move(shader)));
 }
 
 void
 gl::Pipeline::AddShader(shader_handle_t&& shader)
 {
+	::glAttachShader(myID, shader->GetID());
+
 	myShaders.push_back(std::move(shader));
 }
 
