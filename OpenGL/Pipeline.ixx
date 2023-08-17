@@ -16,7 +16,7 @@ export namespace gl
 		using shader_t = std::unique_ptr<gl::Shader>;
 		using renderer_t = std::move_only_function<void() noexcept>;
 
-		static inline constexpr size_t DefaultPreShaders = 8;
+		static inline constexpr size_t DefaultReservedShaders = 8;
 
 		Pipeline() noexcept;
 		~Pipeline() noexcept;
