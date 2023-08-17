@@ -47,8 +47,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	framework->Initialize(std::move(descriptor));
 
 	std::println("== Program Started ==");
-	gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
-
 	gl::BufferLayout test_layout{};
 	test_layout.AddElement<float>(3);
 
@@ -99,11 +97,16 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 		"	gl_Position = vec4(aPos, 1.0);"
 		"}"
 	);*/
+	//gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
+
+	gl::Pipeline pipeline{};
+	pipeline.AddShader(std::move(shader));
 
 	const auto sherr = shader.GetLastError();
 	std::println("{}", sherr);
 
 	framework->SetRenderer([&]() {
+		pipeline.Use();
 		vbo.Use();
 	});
 
