@@ -15,6 +15,8 @@ export namespace gl
 		};
 	}
 
+	inline constexpr pipeline::noopt_t noopt{};
+
 	class [[nodiscard]] Pipeline final : public gl::Object
 	{
 	private:
@@ -29,6 +31,12 @@ export namespace gl
 
 		Pipeline() noexcept;
 		~Pipeline() noexcept;
+
+		constexpr Pipeline(pipeline::noopt_t) noexcept
+			: myShaders{}
+		{
+			myShaders.reserve(DefaultReservedShaders);
+		}
 
 		void Awake() noexcept;
 		void Use() noexcept;

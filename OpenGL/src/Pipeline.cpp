@@ -9,12 +9,9 @@ import :Pipeline;
 
 gl::Pipeline::Pipeline()
 noexcept
-	: base()
-	, myShaders()
+	: Pipeline(gl::noopt)
 {
 	base::SetID(::glCreateProgram());
-
-	myShaders.reserve(DefaultPreShaders);
 }
 
 gl::Pipeline::~Pipeline()
