@@ -13,7 +13,7 @@ export namespace gl
 		using base = gl::Object;
 		
 	public:
-		using shader_t = std::unique_ptr<gl::Shader>;
+		using shader_t = gl::Shader;
 		using shader_handle_t = std::unique_ptr<shader_t>;
 		using renderer_t = std::move_only_function<void() noexcept>;
 
@@ -37,6 +37,6 @@ export namespace gl
 		Pipeline& operator=(Pipeline&&) noexcept = default;
 
 	private:
-		std::vector<shader_t> myShaders;
+		std::vector<shader_handle_t> myShaders;
 	};
 }
