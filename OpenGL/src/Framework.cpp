@@ -138,7 +138,7 @@ noexcept
 	myInstance->SetRenderer(
 		[this, localRenderer = std::move(handler)](
 		[[maybe_unused]] ManagedWindow& window,
-		gl::win32::IContext& ctx) {
+		gl::win32::IContext& ctx) noexcept {
 
 		glSystem->BeginRendering(ctx);
 		localRenderer();
