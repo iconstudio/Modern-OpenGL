@@ -75,7 +75,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	std::println("{} {} {} {} {} {} {}", shty0, shty1, shty2, shty3, shty4, shty5, shty6);
 
 	gl::Shader shader{ shty1 };
-
 	auto result = shader.Compile(GLSL
 	(
 		in vec3 aPos;
@@ -84,7 +83,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 		void main()
 		{
 			gl_Position = vec4(aPos, 1.0);
-
 		}
 	));
 
