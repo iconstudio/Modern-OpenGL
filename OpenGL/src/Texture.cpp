@@ -71,10 +71,6 @@ noexcept
 	return Texture();
 }
 
-gl::Texture::Texture(const gl::FilePath& path)
-	: base()
-{}
-
 gl::Texture::Texture(const gl::FilePath& path
 	, texture::Type type
 	, texture::WrapMode hwrap, texture::WrapMode vwrap

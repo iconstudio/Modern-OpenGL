@@ -105,8 +105,12 @@ export namespace gl
 		friend bool TryLoadTexture(const FilePath& path, Texture& output) noexcept;
 
 	private:
-		Texture(const FilePath& path);
-		Texture(const FilePath& path, texture::Type type, texture::WrapMode hwrap, texture::WrapMode vwrap, texture::FilterMode min, texture::FilterMode mag);
+		Texture(const FilePath& path
+			, texture::Type type = texture::Type::Tex2D
+			, texture::WrapMode hwrap = texture::WrapMode::Repeat
+			, texture::WrapMode vwrap = texture::WrapMode::Repeat
+			, texture::FilterMode min = texture::FilterMode::Linear
+			, texture::FilterMode mag = texture::FilterMode::Linear);
 
 		Texture(const Texture&) = default;
 		Texture& operator=(const Texture&) = default;
