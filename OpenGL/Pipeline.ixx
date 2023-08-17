@@ -7,6 +7,14 @@ import :Shader;
 
 export namespace gl
 {
+	namespace pipeline
+	{
+		struct [[nodiscard]] noopt_t
+		{
+			explicit noopt_t() noexcept = default;
+		};
+	}
+
 	class [[nodiscard]] Pipeline final : public gl::Object
 	{
 	private:
