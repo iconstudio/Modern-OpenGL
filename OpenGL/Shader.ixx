@@ -54,6 +54,11 @@ namespace gl
 
 		[[nodiscard]] static std::string_view GetLastError() noexcept;
 
+		Shader(const Shader&) = delete;
+		Shader(Shader&&) noexcept = default;
+		Shader& operator=(const Shader&) = delete;
+		Shader& operator=(Shader&&) noexcept = default;
+
 		friend class Pipeline;
 
 	private:
