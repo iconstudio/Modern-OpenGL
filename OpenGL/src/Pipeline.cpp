@@ -4,6 +4,7 @@ module;
 #include <GL/GL.h>
 
 module Glib;
+import <cstdint>;
 import <type_traits>;
 import :Pipeline;
 
@@ -11,7 +12,7 @@ gl::Pipeline::Pipeline()
 noexcept
 	: Pipeline(gl::noopt)
 {
-	base::SetID(::glCreateProgram());
+	(void)Awake();
 }
 
 gl::Pipeline::~Pipeline()
@@ -20,10 +21,21 @@ noexcept
 	Destroy();
 }
 
-void
+bool
 gl::Pipeline::Awake()
 noexcept
-{}
+{
+	const std::uint32_t id = ::glCreateProgram();
+	if (NULL == id)
+	{
+		return false;
+	}
+	else
+	{
+		base::SetID(id);
+		return true;
+	}
+}
 
 void
 gl::Pipeline::Use()

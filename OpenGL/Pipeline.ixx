@@ -38,7 +38,7 @@ export namespace gl
 			myShaders.reserve(DefaultReservedShaders);
 		}
 
-		void Awake() noexcept;
+		bool Awake() noexcept;
 		void Use() noexcept;
 		void Destroy() noexcept;
 
