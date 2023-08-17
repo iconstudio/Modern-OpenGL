@@ -75,11 +75,11 @@ namespace gl
 			constexpr BufferImplement& operator=(BufferImplement&&) noexcept = default;
 
 		protected:
-			volatile buffer::BufferType myType;
-			volatile buffer::BufferUsage myUsage;
+			volatile buffer::BufferType myType = buffer::BufferType::None;
+			volatile buffer::BufferUsage myUsage = buffer::BufferUsage::None;
 
-			BufferLayout myLayout;
-			size_t mySize;
+			BufferLayout myLayout{};
+			size_t mySize = 0;
 		};
 	}
 
