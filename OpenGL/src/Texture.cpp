@@ -98,6 +98,12 @@ gl::Texture
 gl::CreateEmptyTexture(std::uint32_t w, std::uint32_t h)
 noexcept
 {
+	gl::Texture result{};
+	result.myBlob = std::make_shared<gl::texture::Blob>();
+	result.myBlob->imgBuffer = nullptr;
+	result.myBlob->width = w;
+	result.myBlob->height = h;
+
 	return gl::Texture();
 }
 

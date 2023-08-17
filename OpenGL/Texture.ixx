@@ -67,11 +67,11 @@ export namespace gl
 
 			std::unique_ptr<gl::BitmapPixel[]> imgBuffer = nullptr;
 			std::size_t width = 1U, height = 1U;
-			texture::Type texType = texture::Type::Tex2D;
-			texture::WrapMode hWrap = texture::WrapMode::Repeat;
-			texture::WrapMode vWrap = texture::WrapMode::Repeat;
-			texture::FilterMode minFilter = texture::FilterMode::Linear;
-			texture::FilterMode magFilter = texture::FilterMode::Linear;
+			texture::Type texType = DefaultTexType;
+			texture::WrapMode hWrap = DefaultTexHWrap;
+			texture::WrapMode vWrap = DefaultTexVWrap;
+			texture::FilterMode minFilter = DefaultTexMinFt;
+			texture::FilterMode magFilter = DefaultTexMaxFt;
 		};
 	}
 
@@ -112,11 +112,11 @@ export namespace gl
 
 	private:
 		Texture(const FilePath& path
-			, texture::Type type = texture::Type::Tex2D
-			, texture::WrapMode hwrap = texture::WrapMode::Repeat
-			, texture::WrapMode vwrap = texture::WrapMode::Repeat
-			, texture::FilterMode min = texture::FilterMode::Linear
-			, texture::FilterMode mag = texture::FilterMode::Linear);
+			, texture::Type type = texture::DefaultTexType
+			, texture::WrapMode hwrap = texture::DefaultTexHWrap
+			, texture::WrapMode vwrap = texture::DefaultTexVWrap
+			, texture::FilterMode min = texture::DefaultTexMinFt
+			, texture::FilterMode mag = texture::DefaultTexMaxFt);
 
 		Texture(const Texture&) = default;
 		Texture& operator=(const Texture&) = default;
