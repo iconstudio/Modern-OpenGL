@@ -119,8 +119,11 @@ const noexcept
 		const ptrdiff_t& offset = std::get<3>(item);
 		const bool& normalized = std::get<4>(item);
 
+		::glEnableVertexAttribArray(index);
 		::glVertexAttribPointer(index, count, type, normalized, stride, reinterpret_cast<const void*>(offset));
-		::glEnableVertexAttribArray(index++);
+		::glDisableVertexAttribArray(index);
+
+		index++;
 	}
 	Unbind();
 }
