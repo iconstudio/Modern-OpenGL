@@ -45,6 +45,12 @@ export namespace gl
 			Tex2DMultisampleArray = 0x9102
 		};
 
+		inline constexpr texture::Type DefaultTexType = texture::Type::Tex2D;
+		inline constexpr texture::WrapMode DefaultTexHWrap = texture::WrapMode::Repeat;
+		inline constexpr texture::WrapMode DefaultTexVWrap = texture::WrapMode::Repeat;
+		inline constexpr texture::FilterMode DefaultTexMinFt = texture::FilterMode::Linear;
+		inline constexpr texture::FilterMode DefaultTexMaxFt = texture::FilterMode::Linear;
+
 		struct [[nodiscard]] Blob : public std::enable_shared_from_this<Blob>
 		{
 			constexpr void swap(Blob& other) noexcept
