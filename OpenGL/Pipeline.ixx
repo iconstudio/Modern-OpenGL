@@ -7,7 +7,7 @@ import :Shader;
 
 export namespace gl
 {
-	class [[nodiscard]] Pipeline : public gl::Object
+	class [[nodiscard]] Pipeline final : public gl::Object
 	{
 	private:
 		using base = gl::Object;
