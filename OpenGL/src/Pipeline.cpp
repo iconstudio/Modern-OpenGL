@@ -40,7 +40,9 @@ noexcept
 void
 gl::Pipeline::Use()
 noexcept
-{}
+{
+	::glUseProgram(myID);
+}
 
 void
 gl::Pipeline::Destroy()
@@ -69,5 +71,5 @@ size_t
 gl::Pipeline::GetNumberOfShaders()
 const noexcept
 {
-	return size_t();
+	return myShaders.size();
 }
