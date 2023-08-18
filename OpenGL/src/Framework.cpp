@@ -1,6 +1,7 @@
 module;
 module Glib.Framework;
 import <exception>;
+import <print>;
 import Utility.Monad;
 import Glib.Display;
 import Glib.Windows.Context;
@@ -29,7 +30,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	}
 	catch (const std::exception& e)
 	{
-		std::printf("Creating Window Error: '%s'", e.what());
+		std::println("Creating Window Error: '%s'", e.what());
 
 		return framework::InitError::FailedOnCreatingWindow;
 	}
@@ -37,7 +38,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	glSystem = gl::CreateSystem();
 	if (!glSystem)
 	{
-		std::printf("Creating OpenGL System Error\n");
+		std::println("Creating OpenGL System Error");
 
 		return framework::InitError::FailedOnCreatingSystem;
 	}
@@ -45,7 +46,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 	const gl::system::Descriptor& gl_descriptor = setup.glDescriptor;
 	if (unsigned long check = glSystem->Initialize(myInstance->AcquireContext(), gl_descriptor); 0 != check)
 	{
-		std::printf("Pixel Formatting Error: %lu\n", check);
+		std::println("Pixel Formatting Error: %lu", check);
 
 		return framework::InitError::FailedOnSettingPixelFormat;
 	}
@@ -67,7 +68,7 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	if (awakenening != Success)
 	{
-		//util::Println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
+		std::println("Failed on awakening. (code: {}).", static_cast<int>(awakenening));
 
 		//std::rethrow_exception(myInstance->GetException());
 		return framework::InitError::FailedOnStartup;
@@ -164,11 +165,11 @@ void ReadyDisplay() noexcept
 
 	if (gl::display::IsDimmingMode())
 	{
-		std::puts("Dark Mode");
+		std::println("Dark Mode");
 	}
 	else
 	{
-		std::puts("Light Mode");
+		std::println("Light Mode");
 	}
 }
 
