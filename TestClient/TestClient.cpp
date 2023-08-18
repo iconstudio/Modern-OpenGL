@@ -61,7 +61,6 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 	};
 
 	gl::BufferObject vbo{};
-
 	vbo.SetLayout(test_layout);
 	vbo.Create(gl::buffer::BufferType::Array, gl::buffer::BufferUsage::StaticDraw, vertices, sizeof(vertices));
 
@@ -107,8 +106,18 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	framework->SetRenderer([&]() {
 		pipeline.Use();
-		vbo.Use();
-		pipeline.Render(gl::Primitive::TriangleFan, 3);
+		//vbo.Use();
+		//pipeline.Render(gl::Primitive::TriangleFan, 3);
+
+		//vbo.Bind();
+		::glBindBuffer(GL_ARRAY_BUFFER, vbo.GetID());
+		::glEnableVertexAttribArray(0);
+		::glVertexAttribPointer(0, 3, GL_FLOAT, 0, 0, nullptr);
+		::glBindBuffer(GL_ARRAY_BUFFER, 0);
+		::glDisableVertexAttribArray(0);
+		//vbo.Unbind();
+
+		::glDrawArrays(GL_TRIANGLES, 0, 3);
 	});
 
 	framework->Run();
