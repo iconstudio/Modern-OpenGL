@@ -40,6 +40,7 @@ export namespace gl
 		}
 
 		bool Awake() noexcept;
+		bool Start() noexcept;
 		void Use() noexcept;
 		void Render(Primitive pr, const std::uint32_t& vertices_count) const noexcept;
 		void Destroy() noexcept;
