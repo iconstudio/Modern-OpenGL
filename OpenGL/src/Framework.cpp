@@ -4,6 +4,7 @@ import <exception>;
 import <print>;
 import Utility.Monad;
 import Glib.Display;
+import Glib.Windows.Utility;
 import Glib.Windows.Context;
 import Glib.Windows.Context.Renderer;
 import Glib.Windows.Client;
@@ -55,8 +56,8 @@ gl::Framework::Initialize(const gl::framework::Descriptor& setup)
 
 	AddEventHandler(gl::win32::EventID::Resize
 		, [this](gl::win32::ManagedWindow& window, unsigned long long, long long lparam) {
-		unsigned int width = LOWORD(lparam);
-		unsigned int height = HIWORD(lparam);
+		const int width = static_cast<int>(gl::win32::LOWORD(lparam));
+		const int height = static_cast<int>(gl::win32::HIWORD(lparam));
 		glSystem->UpdateViewPort(width, height);
 		window.ClearWindow();
 	});
