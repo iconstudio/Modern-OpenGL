@@ -43,17 +43,22 @@ export namespace gl
 		constexpr BufferLayout() noexcept = default;
 		~BufferLayout() noexcept = default;
 
+		constexpr void SetStride(const int& stride) noexcept
+		{
+			myStride = stride;
+		}
+
 		template<typename T>
 		constexpr void AddElement(const int& count, const bool& normalized = false)
 		{
-			AddUnsafeElement<T>(count, count * sizeof(T), myStride, normalized);
+			AddUnsafeElement<T>(count, myStride, myOffset, normalized);
+			myOffset += count * sizeof(T);
 		}
 
 		template<typename T>
 		constexpr void AddUnsafeElement(const int& count, const int& stride, const ptrdiff_t& offset, const bool& normalized = false)
 		{
 			myElements.emplace_back(count, get_typeindex<T>(), stride, offset, normalized);
-			myStride += stride;
 		}
 
 		[[nodiscard]]
@@ -88,6 +93,7 @@ export namespace gl
 	private:
 		std::vector<element_t> myElements{};
 		int myStride = 0;
+		int myOffset = 0;
 	};
 #pragma warning(pop)
 }
