@@ -15,7 +15,19 @@ export namespace gl
 		}
 
 		[[nodiscard]]
+		constexpr std::uint32_t GetID() const volatile noexcept
+		{
+			return myID;
+		}
+
+		[[nodiscard]]
 		constexpr bool IsValid() const noexcept
+		{
+			return myID != npos;
+		}
+
+		[[nodiscard]]
+		constexpr bool IsValid() const volatile noexcept
 		{
 			return myID != npos;
 		}
@@ -34,6 +46,16 @@ export namespace gl
 		}
 
 		constexpr void SetID(std::uint32_t&& id) noexcept
+		{
+			myID = static_cast<std::uint32_t&&>(id);
+		}
+
+		constexpr void SetID(const std::uint32_t& id) volatile noexcept
+		{
+			myID = id;
+		}
+
+		constexpr void SetID(std::uint32_t&& id) volatile noexcept
 		{
 			myID = static_cast<std::uint32_t&&>(id);
 		}
