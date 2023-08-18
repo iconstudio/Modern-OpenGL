@@ -1,10 +1,4 @@
 module;
-#include <Windows.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#undef CreateWindow
-#undef CreateWindowEx
-
 module Glib.Framework;
 import <exception>;
 import Utility.Monad;
