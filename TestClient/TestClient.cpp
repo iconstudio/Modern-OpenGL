@@ -72,11 +72,10 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 
 	std::println("{} {} {} {} {} {} {}", shty0, shty1, shty2, shty3, shty4, shty5, shty6);
 
-	gl::Shader shader{ shty1 };
-	auto result = shader.Compile(GLSL
+	gl::Shader vshader{ shty1 };
+	auto result = vshader.Compile(GLSL
 	(
 		in vec3 aPos;
-		in vec3 aNormal;
 
 		void main()
 		{
@@ -84,30 +83,29 @@ int main([[maybe_unused]] const int& argc, [[maybe_unused]] const char** const& 
 		}
 	));
 
-	/*
-	auto result = shader.Compile
+	gl::Shader fshader{ shty2 };
+	result = fshader.Compile
 	(
-		"#version 330 core"
-
-		"layout(location = 0) in vec3 aPos;"
-		"layout(location = 1) in vec3 aNormal;"
+		"out vec4 FragColor;"
 
 		"void main()"
 		"{"
-		"	gl_Position = vec4(aPos, 1.0);"
+		"	FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);"
 		"}"
-	);*/
+	);
 	//gl::Texture texture = gl::LoadTexture(L"testimg.jpg");
 
 	gl::Pipeline pipeline{};
-	pipeline.AddShader(std::move(shader));
+	pipeline.AddShader(std::move(vshader));
+	pipeline.AddShader(std::move(fshader));
 
-	const auto sherr = shader.GetLastError();
+	const auto sherr = vshader.GetLastError();
 	std::println("{}", sherr);
 
 	framework->SetRenderer([&]() {
 		pipeline.Use();
 		vbo.Use();
+		pipeline.Render(gl::Primitive::TriangleFan, 3);
 	});
 
 	framework->Run();
