@@ -16,4 +16,9 @@ export namespace gl
 		QuadStrip = 0x0008U,
 		Polygon = 0x0009U,
 	};
+
+	namespace global
+	{
+		void EmitPrimitives(Primitive type, std::int32_t begin, std::uint32_t number) noexcept;
+	}
 }
