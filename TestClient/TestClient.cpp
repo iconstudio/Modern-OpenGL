@@ -2,6 +2,9 @@
 #pragma comment(lib, "OpenGL.lib")
 #pragma comment(lib, "Utility.lib")
 
+#include <Windows.h>
+#include "../GLEW/glew.h"
+#include <GL/GL.h>
 import <print>;
 import <experimental/string>;
 //import <mdspan>;
