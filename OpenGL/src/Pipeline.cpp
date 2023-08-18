@@ -45,6 +45,13 @@ noexcept
 }
 
 void
+gl::Pipeline::Render(Primitive pr, const std::uint32_t& vertices_count)
+const noexcept
+{
+	global::EmitPrimitives(pr, 0, vertices_count);
+}
+
+void
 gl::Pipeline::Destroy()
 noexcept
 {

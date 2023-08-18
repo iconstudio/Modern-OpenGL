@@ -4,6 +4,7 @@ import <vector>;
 import <functional>;
 import :Object;
 import :Shader;
+import :Primitive;
 
 export namespace gl
 {
@@ -40,6 +41,7 @@ export namespace gl
 
 		bool Awake() noexcept;
 		void Use() noexcept;
+		void Render(Primitive pr, const std::uint32_t& vertices_count) const noexcept;
 		void Destroy() noexcept;
 
 		void AddShader(shader_t&& shader);
