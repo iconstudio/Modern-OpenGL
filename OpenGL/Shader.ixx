@@ -43,7 +43,6 @@ namespace gl
 		shader::ErrorCode LoadFrom(const std::filesystem::path& filepath) noexcept;
 		shader::ErrorCode Compile(std::string_view source) noexcept;
 
-		void Use(const unsigned int& program) noexcept;
 		void Destroy() noexcept;
 
 		[[nodiscard]] shader::ShaderType GetType() const noexcept;
@@ -58,8 +57,6 @@ namespace gl
 		Shader(Shader&&) noexcept = default;
 		Shader& operator=(const Shader&) = delete;
 		Shader& operator=(Shader&&) noexcept = default;
-
-		friend class Pipeline;
 
 	private:
 		shader::ShaderType myType = shader::ShaderType::None;

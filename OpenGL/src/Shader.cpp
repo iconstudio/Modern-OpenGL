@@ -113,13 +113,6 @@ noexcept
 }
 
 void
-gl::Shader::Use(const unsigned int& program)
-noexcept
-{
-	::glUseShaderProgramEXT(static_cast<GLenum>(myType), GetID());
-}
-
-void
 gl::Shader::Destroy()
 noexcept
 {
