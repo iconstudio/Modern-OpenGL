@@ -104,6 +104,8 @@ namespace gl
 		using base::GetUsage;
 		using base::GetLayout;
 		using base::GetSize;
+		using base::GetID;
+		using base::IsValid;
 
 		[[nodiscard]] constexpr BufferLayout& GetLayout() noexcept
 		{
@@ -132,6 +134,8 @@ namespace gl
 		using base::GetUsage;
 		using base::GetLayout;
 		using base::GetSize;
+		using base::GetID;
+		using base::IsValid;
 	};
 
 	export class [[nodiscard]] BufferObject : public BufferInterface<false>
