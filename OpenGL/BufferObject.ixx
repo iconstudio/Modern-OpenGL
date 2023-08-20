@@ -150,7 +150,6 @@ namespace gl
 		void Create(buffer::BufferType buffer_type, buffer::BufferUsage usage, const void* data, const size_t& size) noexcept override;
 
 	private:
-
-		volatile bool isAvailable;
+		volatile bool isAvailable = false;
 	};
 }
