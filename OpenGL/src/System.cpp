@@ -36,6 +36,16 @@ static inline constexpr ::PIXELFORMATDESCRIPTOR opengl_format =
 	0, 0, 0                // layer masks ignored
 };
 
+static inline constexpr float background_coords[] =
+{
+	+1.0f, +1.0f, 0.0f,
+	+1.0f, -1.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,
+	-1.0f, +1.0f, 0.0f,
+};
+
+GLuint background_color_buffer = 0;
+
 void SinglePainter(gl::win32::IContext* const&) noexcept;
 void DoublePainter(gl::win32::IContext* const&) noexcept;
 
@@ -107,6 +117,15 @@ noexcept
 	{
 		std::println("GL Version is 4.6");
 	}
+
+	// VBO 객체 생성
+	::glGenBuffers(1, &background_color_buffer);
+	// VBO 타입 바인딩
+	::glBindBuffer(GL_ARRAY_BUFFER, background_color_buffer);
+	// VBO에 위치 데이터 연결
+	::glBufferData(GL_ARRAY_BUFFER, sizeof(background_coords), background_coords, GL_STATIC_DRAW);
+	// 정점 속성 정의
+	::glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	::wglMakeCurrent(nullptr, nullptr);
 
@@ -188,13 +207,19 @@ noexcept
 	const auto& color = mySettings.backgroundColour;
 	const float border = 1.01f;
 
-	primitive::Begin(Primitive::Quads);
-	primitive::SetColour(color);
-	primitive::Vertex(-border, -border, 0.0f);
-	primitive::Vertex(-border, border, 0.0f);
-	primitive::Vertex(border, border, 0.0f);
-	primitive::Vertex(border, -border, 0.0f);
-	primitive::End();
+	// VBO 타입 바인딩
+	::glBindBuffer(GL_ARRAY_BUFFER, background_color_buffer);
+	// 정점 속성 활성화
+	::glEnableVertexAttribArray(0);
+	//primitive::Begin(Primitive::Quads);
+	//primitive::SetColour(color);
+	//primitive::Vertex(-border, -border, 0.0f);
+	//primitive::Vertex(-border, border, 0.0f);
+	//primitive::Vertex(border, border, 0.0f);
+	//primitive::Vertex(border, -border, 0.0f);
+	//primitive::End();
+	::glDrawArrays(GL_TRIANGLE_FAN, 0, 3);
+	::glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	return true;
 }
@@ -217,10 +242,7 @@ unsigned long
 gl::System::_InitializeSystem()
 noexcept
 {
-	if (mySettings.alphaBlend)
-	{
-		myBlender = new gl::Blender{ gl::DefaultAlpha };
-	}
+	myBlender = new gl::Blender{ gl::DefaultAlpha };
 
 	if (mySettings.hiddenSurfaceRemoval)
 	{
