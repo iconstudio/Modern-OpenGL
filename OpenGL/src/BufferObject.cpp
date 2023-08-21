@@ -121,9 +121,14 @@ const noexcept
 
 		::glEnableVertexAttribArray(index);
 		::glVertexAttribPointer(index, count, type, normalized, stride, reinterpret_cast<const void*>(offset));
-		::glDisableVertexAttribArray(index);
 
 		index++;
 	}
+
+	for (; 0 <= index; --index)
+	{
+		::glDisableVertexAttribArray(index);
+	}
+
 	Unbind();
 }
